@@ -21,7 +21,7 @@ public class MyGraphics extends JFrame {
 	static BufferedImage karte;
 	static Person persons[] = new Person[2];
 	static PaintJob fensterjob;
-	
+	//SG hab ich gemacht :) alles ab hier
   public static void main(String[] args) {
 	  try {
 		
