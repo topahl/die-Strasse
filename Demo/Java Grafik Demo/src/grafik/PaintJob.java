@@ -1,20 +1,17 @@
 package grafik;
 
 public class PaintJob extends Thread{
-	private MyGraphics fenster;
+	private Window fenster;
 
-	public PaintJob(MyGraphics fenster){
+	public PaintJob(Window fenster){
 		this.fenster = fenster;
 	}
-	public void run(){
+	public void run(){ 
+		long time;
 		while(true){
+			time = System.currentTimeMillis();
 			fenster.repaint();
-			try {
-				sleep(100);
-			} catch (InterruptedException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
+			while(System.currentTimeMillis()-time<5);
 		}
 	}
 
