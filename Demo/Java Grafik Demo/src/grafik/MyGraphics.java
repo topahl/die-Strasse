@@ -2,22 +2,16 @@ package grafik;
 
 import java.awt.Color;
 import java.awt.Graphics;
-import java.awt.Image;
-import java.awt.Insets;
-import java.awt.MouseInfo;
-import java.awt.Point;
-import java.awt.PointerInfo;
-import java.awt.event.MouseEvent;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 
 import javax.imageio.ImageIO;
 import javax.swing.JFrame;
-import javax.swing.SwingUtilities;
 
 public class MyGraphics extends JFrame {
 	
+	private static final long serialVersionUID = 1L;
 	static BufferedImage karte;
 	static Person persons[] = new Person[2];
 	static PaintJob fensterjob;
@@ -56,14 +50,6 @@ public class MyGraphics extends JFrame {
 
   @Override 
   public void paint(Graphics g) {
-	
-    Insets insets = getInsets();
-    int originX = insets.left;
-    int originY = insets.top;
-    int breite   = getSize().width  - insets.left - insets.right;
-    int hoehe   = getSize().height - insets.top  - insets.bottom;
-    
-   
     g.drawImage(karte, 0, 0, 1000, 700, Color.white,null);
     for(int i=0;i<persons.length;i++){
     	g.setColor(Color.red);
