@@ -43,7 +43,9 @@ public class Window extends JFrame{
 	    @Override
 	    public void mouseClicked(MouseEvent arg0) {
 	    	if((arg0.getX()/45)*45==1080 && (arg0.getY()/45)*45 == 0){
-	    		dispose();
+	    		
+	    		System.exit(0);
+	    		
 	    	}
 	        //System.out.println("Clicked: "+arg0.getX()+","+arg0.getY());
 	    	Person person = (Person)main.entitys.get(0);
