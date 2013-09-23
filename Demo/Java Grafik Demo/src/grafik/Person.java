@@ -27,6 +27,18 @@ public class Person extends Entity {
 		height=45;
 		width=45;
 	}
+	
+	public Person(int x, int y, BufferedImage sprite) {
+		this.posX=x;
+		this.wpX=x;
+		this.posY=y; 
+		this.wpY=y;
+		this.sprite = sprite;
+		height=45;
+		width=45;
+	}
+	
+	
 	public int getX() {
 		return posX;
 	}
