@@ -13,6 +13,7 @@ public class TestMain {
 	
 	public Map karte;
 	private Window fenster;
+	private Splash fenster1;
 	public ArrayList<Entity> entitys = new ArrayList<Entity>();
 	private PaintJob painter;
 	
@@ -23,6 +24,17 @@ public class TestMain {
 	}
 	public void run(){
 		karte = new Map("src\\grafik\\data\\map_demo_GUI.png");
+		fenster1 = new Splash();
+		try {
+			for(int i=0; i<1000;i++){
+				fenster1.repaint();
+				Thread.sleep(30);
+			}
+		} catch (InterruptedException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
+		fenster1.dispose();
 		fenster=new Window(this);
 		//TP Fenster update Thread
 		painter = new PaintJob(fenster);
