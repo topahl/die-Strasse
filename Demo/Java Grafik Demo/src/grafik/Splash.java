@@ -52,7 +52,7 @@ public class Splash extends JFrame{
 	    }
 	    else{
 	    	double i = Math.random();
-	    	if(i>0.8d)
+	    	if(i>0.9d)
 	    		inc*=-1;
 	    }
 	    pos+=inc;

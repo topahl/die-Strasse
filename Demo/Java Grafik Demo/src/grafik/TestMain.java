@@ -26,9 +26,9 @@ public class TestMain {
 		karte = new Map("src\\grafik\\data\\map_demo_GUI.png");
 		fenster1 = new Splash();
 		try {
-			for(int i=0; i<1000;i++){
+			for(int i=0; i<200;i++){
 				fenster1.repaint();
-				Thread.sleep(30);
+				Thread.sleep(50);
 			}
 		} catch (InterruptedException e1) {
 			// TODO Auto-generated catch block
