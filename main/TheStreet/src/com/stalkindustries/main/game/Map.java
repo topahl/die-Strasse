@@ -14,7 +14,7 @@ public class Map {
 	
 	public Map(String name){
 		try {
-			karte= ImageIO.read(new File("src\\com\\stalkindustries\\grafik\\"+name+".png"));
+			karte= ImageIO.read(new File("src\\com\\stalkindustries\\grafik\\"+name+"_map.png"));
 		} catch (IOException e) {
 			System.err.println("Could not find Map file:"+name+".png");
 			e.printStackTrace();
