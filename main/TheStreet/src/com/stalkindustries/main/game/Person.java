@@ -10,6 +10,7 @@ public class Person extends Mensch {
 	//private float bewegungsgeschwindigkeit;
 	private char geschlecht; //m=male, f=female
 	//private float zeitverzogerung;
+	private int haus_id;
 
 	
 	private void initialize_misstrauen(){
@@ -26,5 +27,13 @@ public class Person extends Mensch {
 	
 	public int get_location_id(){
 		return this.location_id;
+	}
+	
+	public int get_haus_id(){
+		return this.haus_id;
+	}
+	
+	public void set_haus_id(int haus_id){
+		this.haus_id = haus_id;
 	}
 }
