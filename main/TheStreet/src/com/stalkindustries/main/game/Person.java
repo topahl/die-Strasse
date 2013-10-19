@@ -11,14 +11,13 @@ public abstract class Person extends Mensch {
 	private int location_id;
 	protected int[] aussehen;
 	private String name;
-	// private Position position;
 	private float misstrauen; 	//-100=nicht misstrauisch, 100=ultra misstrauisch, 200=initial
 	//private float bewegungsgeschwindigkeit;
 	protected int geschlecht; //1=male, 2=female
 	//private float zeitverzogerung;
 	private int haus_id;
 	protected static BufferedImage adults; //adults slice to save RAM
-
+	
 	
 	static{
 		 try {
