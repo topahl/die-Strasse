@@ -1,25 +1,26 @@
 package com.stalkindustries.main.game;
+import java.util.ArrayList;
 
 public class Simulation {
 	
 	private int[][] beziehungsmatrix;
 	private int[] location_raster;
-	private Person[] people;
+	private ArrayList<Person> people;
 	
 	
 	//Beschwerden an Miri
 	void initialize_beziehungsmatrix(){
 		int tmp;
-		for(int i=0;i<this.people.length;i++)
-			for(int j=0;j<this.people.length;i++)
+		for(int i=0;i<this.people.size();i++)
+			for(int j=0;j<this.people.size();i++)
 				this.beziehungsmatrix[i][j] = 42;
 			
-		for(int i=0;i<this.people.length;i++){
-			for(int j=i+1;j<this.people.length;i++){
+		for(int i=0;i<this.people.size();i++){
+			for(int j=i+1;j<this.people.size();i++){
 				tmp = (int)Math.random()*(10);
 				this.beziehungsmatrix[i][j] = tmp;
 				this.beziehungsmatrix[j][i] = tmp;
-				if(this.people[i].get_haus_id() == this.people[j].get_haus_id()){ //Person in einem Haushalt sind besser miteinander befreundet
+				if(this.people.get(i).get_haus_id() == this.people.get(j).get_haus_id()){ //Person in einem Haushalt sind besser miteinander befreundet
 					if(this.beziehungsmatrix[i][j]<8){
 						this.beziehungsmatrix[i][j] += 3;
 						this.beziehungsmatrix[i][j] += 3;
@@ -32,8 +33,8 @@ public class Simulation {
 	
 	//Beschwerden an Miri
 	void initialize_location_raster(){
-		this.location_raster = new int[this.people.length];
-		for(int i=0;i<this.people.length;i++){
+		this.location_raster = new int[this.people.size()];
+		for(int i=0;i<this.people.size();i++){
 			this.location_raster[i] = 42;
 		}
 	}
@@ -51,16 +52,16 @@ public class Simulation {
 	
 	//Beschwerden an Miri
 	void calculate_misstrauen(){
-		float[] misstrauen = new float[people.length];
+		float[] misstrauen = new float[people.size()];
 		float faktor = 1/100; //kommt noch darauf an, wie häufig die Methode aufgerufen wird
-		for(int i=0;i<this.people.length;i++)
-			misstrauen[i] = this.people[i].get_misstrauen();
+		for(int i=0;i<this.people.size();i++)
+			misstrauen[i] = this.people.get(i).get_misstrauen();
 		
-		for(int i=0;i<this.people.length;i++){
-			if(this.people[i].get_location_id() != 42){	//wenn sich Person dort befindet, wo sie auch beeinflusst werden kann
-				for(int j=0;j<this.people.length;j++){
+		for(int i=0;i<this.people.size();i++){
+			if(this.people.get(i).get_location_id() != 42){	//wenn sich Person dort befindet, wo sie auch beeinflusst werden kann
+				for(int j=0;j<this.people.size();j++){
 					if(i!=j){
-						if(this.people[i].get_location_id() == this.people[j].get_location_id()){
+						if(this.people.get(i).get_location_id() == this.people.get(j).get_location_id()){
 							//zwischenspeichern in misstrauen[] erforderlich, sonst wird immer mit aktualisiertem Wert gerechnet
 							if(misstrauen[i]>=misstrauen[j] && misstrauen[j]>=0)
 								misstrauen[i] = misstrauen[i] - faktor*this.beziehungsmatrix[i][j]/10*misstrauen[j];
@@ -82,8 +83,8 @@ public class Simulation {
 		}
 		
 		//mapping der neuen Misstrauenswerte auf Person
-		for(int i=0;i<this.people.length;i++){
-			this.people[i].set_misstrauen(misstrauen[i]);
+		for(int i=0;i<this.people.size();i++){
+			this.people.get(i).set_misstrauen(misstrauen[i]);
 		}
 	}
 	
@@ -91,10 +92,10 @@ public class Simulation {
 	//Beschwerden an Miri
 	float calc_misstrauen_in_street(){
 		float misstrauen = 0;
-		for(int i=0;i<this.people.length;i++){
-			misstrauen += people[i].get_misstrauen();
+		for(int i=0;i<this.people.size();i++){
+			misstrauen += this.people.get(i).get_misstrauen();
 		}
-		misstrauen = misstrauen/this.people.length;
+		misstrauen = misstrauen/this.people.size();
 		
 		return misstrauen;
 	}
