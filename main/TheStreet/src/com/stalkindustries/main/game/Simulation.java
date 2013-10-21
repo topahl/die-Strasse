@@ -88,6 +88,13 @@ public class Simulation {
 		}
 	}
 	
+	//Support: Tobi
+		public void update_position(){
+			for(int i=0;i<people.size();i++){
+				people.get(i).step();
+			}
+			
+		}
 	
 	//Beschwerden an Miri
 	float calc_misstrauen_in_street(){
