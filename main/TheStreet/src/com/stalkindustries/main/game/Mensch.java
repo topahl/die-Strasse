@@ -1,19 +1,28 @@
 package com.stalkindustries.main.game;
 
 import java.awt.image.BufferedImage;
+import java.util.Stack;
 
 public abstract class Mensch {
 	protected BufferedImage sprite;
 	private int posX;
 	private int posY;
 	protected char currentMove = 'n'; //links, rechts, oben , unten, nichts
+	private Stack<Character> moves = new Stack<Character>();
+	
 	
 	abstract public BufferedImage paint();
-	
+	//Support: Tobi
 	public void step(){
 		
-		if(posX%45==0&&posY%45==0)
-			currentMove = 'n';  //TODO nächsten schritt vom stack holen
+		if(posX%45==0&&posY%45==0){
+			if(!moves.empty()){
+				currentMove=moves.pop();
+			}
+			else{
+				currentMove = 'n';
+			}
+		}
 		switch(currentMove){
 		case 'l':
 			posX--;
@@ -31,15 +40,15 @@ public abstract class Mensch {
 		
 		
 	}
-
+	//Support: Tobi
 	public int getPosX() {
 		return posX;
 	}
-
+	//Support: Tobi
 	public int getPosY() {
 		return posY;
 	}
-	
+	//Support: Tobi
 	protected void teleport(int x, int y){
 		posX=x;
 		posY=y;
