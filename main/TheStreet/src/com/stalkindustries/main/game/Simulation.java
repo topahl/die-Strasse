@@ -4,7 +4,7 @@ public class Simulation {
 	
 	private int[][] beziehungsmatrix;
 	private int[] location_raster;
-	private Person[] people;
+	private Person[] people; //TODO  umbauen zu einer ArrayList
 	
 	
 	//Beschwerden an Miri
@@ -85,6 +85,14 @@ public class Simulation {
 		for(int i=0;i<this.people.length;i++){
 			this.people[i].set_misstrauen(misstrauen[i]);
 		}
+	}
+	
+	//Support: Tobi
+	public void update_position(){
+		for(int i=0;i<people.length;i++){
+			people[i].step();
+		}
+		
 	}
 	
 	

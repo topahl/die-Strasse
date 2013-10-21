@@ -20,7 +20,9 @@ public class GUI extends JFrame{
 	//Test
 	private Erwachsene person[] = new Erwachsene[9];
 	//Test ende
-
+	
+	
+	//Support: Tobi
 	public GUI(){
 		screen = Toolkit.getDefaultToolkit().getScreenSize();	//Screen resolution
 		karte = new Map("Russland");										//initialisiere Karte
@@ -33,7 +35,9 @@ public class GUI extends JFrame{
         setSize((int)screen.getWidth(),(int)screen.getHeight());
         setBackground(Color.black);
         setVisible(true);
-	}	
+	}
+	
+	//Support: Tobi
 	public void paint(Graphics g){
 		//TP Double Frame Buffering to remove flickering
 		BufferedImage bufferedImage = new BufferedImage((int)screen.getWidth(), (int)screen.getHeight(), BufferedImage.TYPE_INT_ARGB);
