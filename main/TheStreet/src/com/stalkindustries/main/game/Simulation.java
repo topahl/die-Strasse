@@ -21,10 +21,9 @@ public class Simulation {
 				this.beziehungsmatrix[i][j] = tmp;
 				this.beziehungsmatrix[j][i] = tmp;
 				if(this.people.get(i).get_haus_id() == this.people.get(j).get_haus_id()){ //Person in einem Haushalt sind besser miteinander befreundet
-					if(this.beziehungsmatrix[i][j]<8){
-						this.beziehungsmatrix[i][j] += 3;
-						this.beziehungsmatrix[i][j] += 3;
-					}
+					tmp = (10-tmp)/2;
+					this.beziehungsmatrix[i][j] += tmp;
+					this.beziehungsmatrix[j][i] += tmp;
 				}
 			}
 		}
