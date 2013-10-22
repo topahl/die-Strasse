@@ -7,6 +7,7 @@ public abstract class Mensch {
 	protected BufferedImage sprite;
 	private int posX;
 	private int posY;
+	private int location_id;
 	protected char currentMove = 'n'; //links, rechts, oben , unten, nichts
 	private Stack<Character> moves = new Stack<Character>();
 	
@@ -52,5 +53,14 @@ public abstract class Mensch {
 	protected void teleport(int x, int y){
 		posX=x;
 		posY=y;
+	}
+	
+	
+	public void set_location_id(int id){
+		this.location_id = id;
+	}
+	
+	public int get_location_id(){
+		return this.location_id;
 	}
 }
