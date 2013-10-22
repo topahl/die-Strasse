@@ -5,7 +5,8 @@ public class Simulation {
 	
 	private int[][] beziehungsmatrix;
 	private int[] location_raster;
-	private ArrayList<Person> people;
+	private ArrayList<Person> people = new ArrayList();
+	private Agent agent;
 	
 	
 	//Beschwerden an Miri
@@ -17,7 +18,7 @@ public class Simulation {
 			
 		for(int i=0;i<this.people.size();i++){
 			for(int j=i+1;j<this.people.size();i++){
-				tmp = (int)Math.random()*(10);
+				tmp = (int)Math.random()*(11);
 				this.beziehungsmatrix[i][j] = tmp;
 				this.beziehungsmatrix[j][i] = tmp;
 				if(this.people.get(i).get_haus_id() == this.people.get(j).get_haus_id()){ //Person in einem Haushalt sind besser miteinander befreundet
@@ -109,6 +110,19 @@ public class Simulation {
 	//toDo
 	void calc_misstrauen_after_action(){
 		
+	}
+	
+	
+	public ArrayList<Person> get_people(){
+		return people;
+	}
+	
+	public void set_people(Person p){
+		people.add(p);
+	}
+	
+	public Agent get_agent(){
+		return agent;
 	}
 
 }

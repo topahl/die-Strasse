@@ -1,5 +1,6 @@
 package com.stalkindustries.main.game;
 
+import java.util.ArrayList;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Graphics;
@@ -14,7 +15,54 @@ public class GUI extends JFrame{
 	
 	private Dimension screen;  //Screen resolution
 	private Dimension zeropos; //Koordinatenverschiebung auf Bildschirms
+	private Simulation simulation = new Simulation();
 	private Map karte;
+	private ArrayList<Mensch> humans;
+	
+	
+	
+	//@Miri People von Simulation rüber holen (in ArrayList),aber vom Typ Mensch + Agent anhängen
+	void initialize_humans(){
+		int house_of_terrorist = (int)Math.random()*(8);
+		int people_per_house;
+		int number_of_adults;
+		int number_of_children;
+		for(int i=0;i<8;i++){ //für alle normalen Häuser
+			people_per_house = (int)Math.random()*(4)+1;
+			if(i == house_of_terrorist){
+				number_of_adults = 1 + (int)Math.random()*(people_per_house);
+				this.humans.add(new Terrorist(i));
+				for(int j=0;j<number_of_adults-1;j++){
+					this.humans.add(new Erwachsene(i));
+				}
+			}
+			else{
+				number_of_adults =  (int)Math.random()*(people_per_house)+1;
+				for(int j=0;j<number_of_adults;j++){
+					this.humans.add(new Erwachsene(i));
+				}
+			}
+			number_of_children = people_per_house - number_of_adults;
+			for(int j=0;j<number_of_children;j++){
+				this.humans.add(new Kinder(i));
+			}
+			
+			//Simulation die Personen geben(ohne Agent)
+			for(i=0;i<this.humans.size();i++){
+				simulation.set_people((Person)humans.get(i));
+			}
+			
+			//Agent hinzufügen
+			this.humans.add(new Agent());
+		}
+	}
+	
+	
+	void initialize_houses(){
+		
+	}
+	
+	
 	
 	
 	//Test
@@ -49,7 +97,7 @@ public class GUI extends JFrame{
 		
 		//Test
 		for(int i=0;i<9;i++){
-			person[i]=new Erwachsene();
+			person[i]=new Erwachsene(0);
 		}
 		g2d.drawImage(person[0].paint(),zeropos.width+0, zeropos.height+270, null);
 		g2d.drawImage(person[1].paint(),zeropos.width+90, zeropos.height+270, null);
