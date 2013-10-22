@@ -6,15 +6,18 @@ public class Haus {
 	private int posX;
 	private int posY;
 	private int hausnummer;
-	private ArrayList<String> ueberwachungsmodule;
-	private ArrayList<String> boese_events;
+	private ArrayList<String> ueberwachungsmodule = new ArrayList();
+	private ArrayList<String> boese_events = new ArrayList();
 	private boolean agentenhaus;
 	
 	
-	public void Haus(){
+	public Haus(int hausnr, boolean agentenhaus, int posX, int posY){
+		this.hausnummer = hausnr;
 		this.ueberwachungsstatus = 0;
-		
-		//TODO
+		this.posX = posX;
+		this.posY = posY;
+		this.agentenhaus = agentenhaus;
+		//TODO böse Events
 	}
 
 }
