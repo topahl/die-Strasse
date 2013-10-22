@@ -17,6 +17,28 @@ public abstract class Person extends Mensch {
 	private int haus_id;
 	protected static BufferedImage adults; //slice PNG to save RAM
 	protected static BufferedImage infants; //slice PNG to save RAM
+	static private int last_id=-1;
+	
+	public Person(){
+		
+	}
+	
+	
+	public Person(int house_id){
+		last_id++;
+		
+		this.id = last_id;
+		this.set_location_id(42);
+		//TODO: set_name
+		this.setPosX(0);
+		this.setPosY(0);
+		this.misstrauen = 0;
+		//TODO: set Bewegungsgeschwindigkeit
+		this.geschlecht = (int)Math.random()*(2)+1;
+		//TODO: Zeitverzögerung
+		this.haus_id = house_id;
+	}
+	
 	
 	
 	static{

@@ -1,5 +1,6 @@
 package com.stalkindustries.main.game;
 
+import java.util.ArrayList;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Graphics;
@@ -14,7 +15,63 @@ public class GUI extends JFrame{
 	
 	private Dimension screen;  //Screen resolution
 	private Dimension zeropos; //Koordinatenverschiebung auf Bildschirms
+	private Simulation simulation = new Simulation();
+	private Haus haus;
 	private Map karte;
+	private ArrayList<Mensch> humans;
+	
+	
+	
+	//Beschwerden an Miri
+	void initialize_humans(){
+		int house_of_terrorist = (int)Math.random()*(8);
+		int people_per_house;
+		int number_of_adults;
+		int number_of_children;
+		int agent_house_nr = (int)Math.random()*(9)+1;
+		for(int i=0;i<9;i++){ 
+			if(i!=agent_house_nr){
+				people_per_house = (int)Math.random()*(4)+1;
+				if(i == house_of_terrorist){
+					number_of_adults = 1 + (int)Math.random()*(people_per_house);
+					this.humans.add(new Terrorist(i));
+					for(int j=0;j<number_of_adults-1;j++){
+						this.humans.add(new Erwachsene(i));
+					}
+				}
+				else{
+					number_of_adults =  (int)Math.random()*(people_per_house)+1;
+					for(int j=0;j<number_of_adults;j++){
+						this.humans.add(new Erwachsene(i));
+					}
+				}
+				number_of_children = people_per_house - number_of_adults;
+				for(int j=0;j<number_of_children;j++){
+					this.humans.add(new Kinder(i));
+				}
+				this.initialize_house(i,false);
+			}	
+		}
+		//Simulation die Personen geben(ohne Agent)
+		for(int i=0;i<this.humans.size();i++){
+			simulation.set_people((Person)humans.get(i));
+		}
+		
+		//Agent hinzufügen
+		this.humans.add(new Agent());
+		this.initialize_house(agent_house_nr,true);
+	}
+	
+	
+	//Beschwerden an Miri
+	//wird von initialize_humans() aufgerufen
+	void initialize_house(int hausnr, boolean agentenhaus){
+		int x=0;
+		int y=0;
+		haus = new Haus(hausnr,agentenhaus,x,y);
+	}
+	
+	
 	
 	
 	//Test
@@ -49,7 +106,7 @@ public class GUI extends JFrame{
 		
 		//Test
 		for(int i=0;i<9;i++){
-			person[i]=new Erwachsene();
+			person[i]=new Erwachsene(0);
 		}
 		g2d.drawImage(person[0].paint(),zeropos.width+0, zeropos.height+270, null);
 		g2d.drawImage(person[1].paint(),zeropos.width+90, zeropos.height+270, null);
