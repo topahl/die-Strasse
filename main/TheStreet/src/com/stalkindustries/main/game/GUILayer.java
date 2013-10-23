@@ -161,8 +161,12 @@ public class GUILayer extends javax.swing.JFrame{
     }*/
     
 	public void step(){
+		
 		this.simulation.calculate_misstrauen();
 		this.simulation.calc_misstrauen_in_street();
+		for(int i=0;i<this.humans.size();i++){
+			this.humans.get(i).step();
+		}
 		System.out.println("pupsi");
 	}
 }
