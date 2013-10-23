@@ -99,4 +99,17 @@ public class GUILayer extends javax.swing.JFrame {
     private Map karte;
     private Person testperson;
     private javax.swing.JLayeredPane jLayeredPane1;
+    private boolean b = true;
+    private Simulation simulation = new Simulation();
+    
+    
+    //Beschwerden an Miri
+    //"MAIN"
+    public void start(){
+    	long tmp;
+    	while(this.b){
+    		tmp = System.currentTimeMillis();
+    		this.simulation.update_position();
+    	}
+    }
 }
