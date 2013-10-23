@@ -30,11 +30,12 @@ public class GUILayer extends javax.swing.JFrame{
 	private Simulation simulation = new Simulation();
 	private Dimension screen;  //Screen resolution
 	private Dimension zeropos; //Koordinatenverschiebung auf Bildschirms
-	private Haus haus;
+	private Haus haus;//wird später initialisiert
 	private ArrayList<Mensch> humans = new ArrayList<Mensch>();
 	
     public GUILayer() {
         initComponents();
+        this.simulation.initialize_beziehungsmatrix();
         setVisible(true);
         this.timer = new Timer(40,new OSTimer(this));
         timer.start();

@@ -12,26 +12,27 @@ public class Simulation {
 	private int[][] beziehungsmatrix;
 	//private int[] location_raster; nicht mehr benötigt
 	private ArrayList<Person> people = new ArrayList(); 
-	private Agent agent;
+	private Agent agent = new Agent();
 	private int spielTag;
 	private int spielStunde;
 	private int spielMinute;
 	
 	public Simulation(){
-		this.initialize_beziehungsmatrix();
+		
 	}
 	
 	
 	//Beschwerden an Miri
 	void initialize_beziehungsmatrix(){
 		int tmp;
+		this.beziehungsmatrix = new int[this.people.size()][this.people.size()];
 		for(int i=0;i<this.people.size();i++)
-			for(int j=0;j<this.people.size();i++)
+			for(int j=0;j<this.people.size();j++)
 				this.beziehungsmatrix[i][j] = 0;
 			
 		for(int i=0;i<this.people.size();i++){
 			for(int j=i+1;j<this.people.size();j++){
-				tmp = (int)Math.random()*(10)+1;
+				tmp = (int)(Math.random()*(10))+1;
 				this.beziehungsmatrix[i][j] = tmp;
 				this.beziehungsmatrix[j][i] = tmp;
 				if(this.people.get(i).get_haus_id() == this.people.get(j).get_haus_id()){ //Person in einem Haushalt sind besser miteinander befreundet
@@ -164,12 +165,12 @@ public class Simulation {
 					berechne_weg(this.people.get(i), (char)(this.people.get(i).get_haus_id()));
 				}
 				if (this.spielStunde >= 15 && this.spielStunde <=20 ){ // in den Park gehen
-					if ((int)Math.random()*20 == 3){
+					if ((int)(Math.random()*20) == 3){
 						berechne_weg(this.people.get(i), 'P');
 					}
 				}
 				if (this.people.get(i).get_location_id()=='P'){ //nach Hause gehen
-					if ((int)Math.random()*30 == 3){
+					if ((int)(Math.random()*30) == 3){
 						berechne_weg(this.people.get(i), (char)(this.people.get(i).get_haus_id())); 
 					}
 				}
@@ -186,7 +187,7 @@ public class Simulation {
 							berechne_weg(this.people.get(i), (char)(this.people.get(i).get_haus_id()));
 						}		
 						if (this.spielStunde >= 17 || this.spielStunde <=1){  // in den Park gehen
-							if ((int)Math.random()*30 == 3){
+							if ((int)(Math.random()*30) == 3){
 								berechne_weg(this.people.get(i), 'P');
 							}
 						}
@@ -201,13 +202,13 @@ public class Simulation {
 							berechne_weg(this.people.get(i), (char)(this.people.get(i).get_haus_id()));
 						}
 						if (this.spielStunde >=12 || this.spielStunde <=1){  // in den Park gehen
-							if ((int)Math.random()*30 == 3){
+							if ((int)(Math.random()*30) == 3){
 								berechne_weg(this.people.get(i), 'P');
 							}
 						}
 					}
 					if (this.people.get(i).get_location_id()=='P'){ //nach Hause gehen
-						if ((int)Math.random()*30 == 3){
+						if ((int)(Math.random()*30) == 3){
 							berechne_weg(this.people.get(i), (char)(this.people.get(i).get_haus_id())); 
 						}
 					}
