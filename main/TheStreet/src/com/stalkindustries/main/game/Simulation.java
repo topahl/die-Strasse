@@ -5,9 +5,7 @@ public class Simulation {
 	
 	private int[][] beziehungsmatrix;
 	private int[] location_raster;
-	private ArrayList<Person> people = new ArrayList(); // nicht mit dieser arraylist arbeiten
-	private ArrayList<Kinder> kinder = new ArrayList();
-	private ArrayList<Erwachsene> erwachsene = new ArrayList();
+	private ArrayList<Person> people = new ArrayList(); 
 	private Agent agent;
 	private int spielTag;
 	private int spielStunde;
@@ -157,77 +155,78 @@ public class Simulation {
 	//TODO Weg auf den Stack schreiben
 	//TODO Die Häufigkeit des "in den Park gehen" testen, evtl zu häufig
 	void tagesablauf(){
-		// i=0 oder i=1...?
-		for	(int i=0; i<this.kinder.size(); i++){
-			if (this.spielStunde==7 && (this.kinder.get(i).getZeitverzogerung() + this.spielMinute) == 60){ //
+		for	(int i=0; i<this.people.size(); i++){
+			if (this.people.get(i) instanceof Kinder){
+				if (this.spielStunde==7 && (this.people.get(i).getZeitverzogerung() + this.spielMinute) == 60){ //
 				
 				//gehe zur Schule
-			}	
-			if (this.spielStunde==14  && (this.kinder.get(i).getZeitverzogerung() + this.spielMinute) == 60){ 
+				}	
+				if (this.spielStunde==14  && (this.people.get(i).getZeitverzogerung() + this.spielMinute) == 60){ 
 				
 				//gehe nach Hause				
-			}	
-			if (this.spielStunde==20  && (this.kinder.get(i).getZeitverzogerung() + this.spielMinute) == 60){
+				}	
+				if (this.spielStunde==20  && (this.people.get(i).getZeitverzogerung() + this.spielMinute) == 60){
 					
 				//gehe nach Hause, falls location nicht zuhause ist
-			}
-			if (this.spielStunde >= 15 && this.spielStunde <=20 ){
-				if ((int)Math.random()*20 == 3){
-					//gehe in den Park
 				}
-			}
-			if (this.kinder.get(i).get_location_id()=='P'){
-				if ((int)Math.random()*30 == 3){
+				if (this.spielStunde >= 15 && this.spielStunde <=20 ){
+					if ((int)Math.random()*20 == 3){
+					//gehe in den Park
+					}
+				}
+				if (this.people.get(i).get_location_id()=='P'){
+					if ((int)Math.random()*30 == 3){
 					//gehe nach Hause
+					}
+				}
+			}else{
+				if (this.people.get(i) instanceof Erwachsene){
+					if (((Erwachsene)people.get(i)).isHat_arbeit()){
+						if (this.spielStunde==8 && (this.people.get(i).getZeitverzogerung() + this.spielMinute) == 60){
+							
+							//gehe zur Arbeit
+						}
+						if (this.spielStunde==16 && (this.people.get(i).getZeitverzogerung() + this.spielMinute) == 60){	
+						
+							//gehe nach Hause
+						}		
+						if (this.spielStunde==1 && (this.people.get(i).getZeitverzogerung() + this.spielMinute) == 60){
+								
+							//gehe nach Hause
+						}		
+						if (this.spielStunde >= 17 || this.spielStunde <=1){
+							if ((int)Math.random()*30 == 3){
+							//gehe in den Park
+							}
+						}
+					} else {
+						if (this.spielStunde == 9 && (this.people.get(i).getZeitverzogerung() + this.spielMinute) == 60){
+							
+							//gehe Einkaufen
+						}	
+						if (this.spielStunde == 11 && (this.people.get(i).getZeitverzogerung() + this.spielMinute) == 60){
+								
+							//gehe nach Hause
+						}
+						if (this.spielStunde == 1 && (this.people.get(i).getZeitverzogerung() + this.spielMinute) == 60){
+								
+							//gehe nach Hause
+						}
+						if (this.spielStunde >=12 || this.spielStunde <=1){
+							if ((int)Math.random()*30 == 3){
+								//gehe in den Park
+							}
+						}
+					}
+					if (this.people.get(i).get_location_id()=='P'){
+						if ((int)Math.random()*30 == 3){
+							//gehe nach Hause
+						}
+					}
 				}
 			}
 		}
-		for (int i=0; i<this.erwachsene.size(); i++){
-			if (this.erwachsene.get(i).isHat_arbeit()){ //hat arbeit
-				if (this.spielStunde==8 && (this.erwachsene.get(i).getZeitverzogerung() + this.spielMinute) == 60){
-					
-						//gehe zur Arbeit
-				}
-				if (this.spielStunde==16 && (this.erwachsene.get(i).getZeitverzogerung() + this.spielMinute) == 60){	
-					
-						//gehe nach Hause
-				}		
-				if (this.spielStunde==1 && (this.erwachsene.get(i).getZeitverzogerung() + this.spielMinute) == 60){
-							
-						//gehe nach Hause
-				}		
-				if (this.spielStunde >= 17 || this.spielStunde <=1){
-					if ((int)Math.random()*30 == 3){
-						//gehe in den Park
-					}
-				}
-			} else{
-				if (this.spielStunde == 9 && (this.erwachsene.get(i).getZeitverzogerung() + this.spielMinute) == 60){
-					
-					//gehe Einkaufen
-				}	
-				if (this.spielStunde == 11 && (this.erwachsene.get(i).getZeitverzogerung() + this.spielMinute) == 60){
-						
-					//gehe nach Hause
-				}
-				if (this.spielStunde == 1 && (this.erwachsene.get(i).getZeitverzogerung() + this.spielMinute) == 60){
-						
-					//gehe nach Hause
-				}
-				if (this.spielStunde >=12 || this.spielStunde <=1){
-					if ((int)Math.random()*30 == 3){
-						//gehe in den Park
-					}
-				}
-			}
-			if (this.erwachsene.get(i).get_location_id()=='P'){
-				if ((int)Math.random()*30 == 3){
-					//gehe nach Hause
-				}
-			}
-		} 
-	}
-	
+	} 	
 	
 	public ArrayList<Person> get_people(){
 		return people;
