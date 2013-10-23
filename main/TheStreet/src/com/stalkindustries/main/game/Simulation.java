@@ -4,7 +4,7 @@ import java.util.ArrayList;
 public class Simulation {
 	
 	private int[][] beziehungsmatrix;
-	private int[] location_raster;
+	//private int[] location_raster; nicht mehr benötigt
 	private ArrayList<Person> people = new ArrayList(); 
 	private Agent agent;
 	private int spielTag;
@@ -17,11 +17,11 @@ public class Simulation {
 		int tmp;
 		for(int i=0;i<this.people.size();i++)
 			for(int j=0;j<this.people.size();i++)
-				this.beziehungsmatrix[i][j] = 42;
+				this.beziehungsmatrix[i][j] = 0;
 			
 		for(int i=0;i<this.people.size();i++){
-			for(int j=i+1;j<this.people.size();i++){
-				tmp = (int)Math.random()*(11);
+			for(int j=i+1;j<this.people.size();j++){
+				tmp = (int)Math.random()*(10)+1;
 				this.beziehungsmatrix[i][j] = tmp;
 				this.beziehungsmatrix[j][i] = tmp;
 				if(this.people.get(i).get_haus_id() == this.people.get(j).get_haus_id()){ //Person in einem Haushalt sind besser miteinander befreundet
@@ -34,13 +34,13 @@ public class Simulation {
 	}
 	
 	
-	//Beschwerden an Miri
+	/*//Beschwerden an Miri
 	void initialize_location_raster(){
 		this.location_raster = new int[this.people.size()];
 		for(int i=0;i<this.people.size();i++){
 			this.location_raster[i] = 42;
 		}
-	}
+	}*/
 	
 	void update_location_raster(){
 		//TODO
@@ -53,28 +53,31 @@ public class Simulation {
 	}
 	
 	
-	//Beschwerden an Miri
+	//Beschwerden an Sven und Miri
 	void calculate_misstrauen(){
-		float[] misstrauen = new float[people.size()];
-		float faktor = 1/100; //kommt noch darauf an, wie häufig die Methode aufgerufen wird
+		int z=0;
+		boolean b;
+		if(this.people.get(z) instanceof Erwachsene){b = ((Erwachsene)people.get(z)).isHat_arbeit();}
+		
+		
+		double[] misstrauen = new double[people.size()];
+		double faktor = 0.01275; //kommt noch darauf an, wie häufig die Methode aufgerufen wird
 		for(int i=0;i<this.people.size();i++)
 			misstrauen[i] = this.people.get(i).get_misstrauen();
 		
 		for(int i=0;i<this.people.size();i++){
-			if(this.people.get(i).get_location_id() != 42){	//wenn sich Person dort befindet, wo sie auch beeinflusst werden kann
+			if(this.people.get(i).get_location_id() != 0 && this.people.get(i).get_location_id() != 'X' && this.people.get(i).get_location_id() != 'E'){	//wenn sich Person dort befindet, wo sie auch beeinflusst werden kann
 				for(int j=0;j<this.people.size();j++){
 					if(i!=j){
 						if(this.people.get(i).get_location_id() == this.people.get(j).get_location_id()){
 							//zwischenspeichern in misstrauen[] erforderlich, sonst wird immer mit aktualisiertem Wert gerechnet
-							if(misstrauen[i]>=misstrauen[j] && misstrauen[j]>=0)
-								misstrauen[i] = misstrauen[i] - faktor*this.beziehungsmatrix[i][j]/10*misstrauen[j];
-							else if(misstrauen[i]>=misstrauen[j] && misstrauen[j]<0)
-								misstrauen[i] = misstrauen[i] + faktor*this.beziehungsmatrix[i][j]/10*misstrauen[j];
-							else if(misstrauen[i]<misstrauen[j] && misstrauen[j]>=0)
-								misstrauen[i] = misstrauen[i] + faktor*this.beziehungsmatrix[i][j]/10*misstrauen[j];
-							else if(misstrauen[i]<misstrauen[j] && misstrauen[j]<0)
-								misstrauen[i] = misstrauen[i] - faktor*this.beziehungsmatrix[i][j]/10*misstrauen[j];
-							
+							if(this.people.get(i) instanceof Erwachsene && this.people.get(j) instanceof Kinder){	//Kind beeinflusst Erwachsenen weniger
+								misstrauen[i] = misstrauen[i] - faktor/2*this.beziehungsmatrix[i][j]*(this.people.get(i).get_misstrauen()-this.people.get(j).get_misstrauen());
+							}
+							else{
+								misstrauen[i] = misstrauen[i] - faktor*this.beziehungsmatrix[i][j]*(this.people.get(i).get_misstrauen()-this.people.get(j).get_misstrauen());
+							}
+
 							if(misstrauen[i]>100)//Rangecheck
 								misstrauen[i] = 100;
 							if(misstrauen[i]<-100)
@@ -234,6 +237,22 @@ public class Simulation {
 	
 	public void set_people(Person p){
 		people.add(p);
+	}
+	
+	public void set_kinder(Kinder k){
+		this.kinder.add(k);
+	}
+	
+	public ArrayList<Kinder> get_kinder(){
+		return this.kinder;
+	}
+	
+	public void set_erwachsene(Erwachsene e){
+		this.erwachsene.add(e);
+	}
+	
+	public ArrayList<Erwachsene> get_erwachsene(){
+		return this.erwachsene;
 	}
 	
 	public Agent get_agent(){

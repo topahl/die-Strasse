@@ -10,7 +10,7 @@ public abstract class Person extends Mensch {
 	private int id;
 	protected int[] aussehen;
 	private String name;
-	private float misstrauen; 	//-100=nicht misstrauisch, 100=ultra misstrauisch, 200=initial
+	private double misstrauen; 	//-100=nicht misstrauisch, 100=ultra misstrauisch, 200=initial
 	//private float bewegungsgeschwindigkeit;
 	protected int geschlecht; //1=male, 2=female
 	private int zeitverzogerung; // in Minuten
@@ -41,11 +41,11 @@ public abstract class Person extends Mensch {
 		this.misstrauen = 0;
 	}
 	
-	public float get_misstrauen(){
+	public double get_misstrauen(){
 		return this.misstrauen;
 	}
 	
-	public void set_misstrauen(float misstrauen){
+	public void set_misstrauen(double misstrauen){
 		this.misstrauen = misstrauen;
 	}
 	

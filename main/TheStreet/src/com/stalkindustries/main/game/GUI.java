@@ -35,26 +35,37 @@ public class GUI extends JFrame{
 				if(i == house_of_terrorist){
 					number_of_adults = 1 + (int)Math.random()*(people_per_house);
 					this.humans.add(new Terrorist(i));
+					//this.simulation.set_erwachsene(new Terrorist(i));
 					for(int j=0;j<number_of_adults-1;j++){
+						//this.simulation.set_erwachsene(new Erwachsene(i));
 						this.humans.add(new Erwachsene(i));
 					}
 				}
 				else{
 					number_of_adults =  (int)Math.random()*(people_per_house)+1;
 					for(int j=0;j<number_of_adults;j++){
+						//this.simulation.set_erwachsene(new Erwachsene(i));
 						this.humans.add(new Erwachsene(i));
 					}
 				}
 				number_of_children = people_per_house - number_of_adults;
 				for(int j=0;j<number_of_children;j++){
+					//this.simulation.set_kinder(new Kinder(i));
 					this.humans.add(new Kinder(i));
 				}
 				this.initialize_house(i,false);
 			}	
 		}
-		//Simulation die Personen geben(ohne Agent)
+		/*//humans befüllen mit Menschen, Kindern und Agenten
+		for(int i=0;i<this.simulation.get_erwachsene().size();i++){
+			this.humans.add(this.simulation.get_erwachsene().get(i));
+		}
+		for(int i=0;i<this.simulation.get_kinder().size();i++){
+			this.humans.add(this.simulation.get_kinder().get(i));
+		}*/
+		
 		for(int i=0;i<this.humans.size();i++){
-			simulation.set_people((Person)humans.get(i));
+			this.simulation.set_people((Person)this.humans.get(i));
 		}
 		
 		//Agent hinzufügen
