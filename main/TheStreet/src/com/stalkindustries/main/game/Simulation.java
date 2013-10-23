@@ -43,7 +43,7 @@ public class Simulation {
 	}
 	
 	void update_location_raster(){
-		//toDo
+		//TODO
 		//weißt Bewohnern eine Location-ID zu
 		//--> man weiß nun, wo sie sich grob befinden, d.h.
 		//wenn sich Person in bestimmtem Haus befindet, dann ist Location-Id = Haus-Id
@@ -110,7 +110,7 @@ public class Simulation {
 		return misstrauen;
 	}
 	
-	//toDo
+	//TODO
 	void calc_misstrauen_after_action(){
 		
 	}
@@ -125,7 +125,7 @@ public class Simulation {
 		long current_milis;
 		current_milis = System.currentTimeMillis();
 		
-		//todo -> es muss immer genau 500 oder 0 sein, das werden wir in unserer Abfrage selten hinbekommen... 
+		//TODO -> es muss immer genau 500 oder 0 sein, das werden wir in unserer Abfrage selten hinbekommen... 
 		// ausbaufähig, vorläufig steht was
 		if (current_milis == 500 || current_milis == 0){
 			setSpielMinute(getSpielMinute()+1);
