@@ -14,7 +14,7 @@ public abstract class Mensch extends JLabel {
 	private int posX;
 	private int posY;
 	private char location_id;
-	protected char currentMove = 'n'; //links, rechts, oben , unten, nichts
+	protected char currentMove = 'n'; //links, rechts, oben , unten, nichts -> Kleinbuchstaben
 	private Stack<Character> moves = new Stack<Character>();
 	protected static BufferedImage adults; //slice PNG to save RAM
 	protected static BufferedImage infants; //slice PNG to save RAM
@@ -107,7 +107,6 @@ public abstract class Mensch extends JLabel {
 		return posY;
 	}
 	
-	
 	public void set_location_id(char id){
 		this.location_id = id;
 	}
@@ -115,4 +114,12 @@ public abstract class Mensch extends JLabel {
 	public char get_location_id(){
 		return this.location_id;
 	}
+	
+	public void setMoves(Stack<Character> moves){
+		this.moves = moves;
+	}
+	
+//	public Stack<Character> getMoves(){
+//		return this.moves;
+//	}
 }
