@@ -155,77 +155,64 @@ public class Simulation {
 	
 	
 	//Support Tiki
-	//TODO einiges
+	//TODO Weg auf den Stack schreiben
 	void tagesablauf(){
 		// i=0 oder i=1...?
-		for	(int i=0; i<this.people.size(); i++){
-			
-			if (this.people.get(i) instanceof Kinder){
-				if (this.spielStunde==7 && (this.people.get(i).getZeitverzogerung() + this.spielMinute) == 60){ //
+		for	(int i=0; i<this.kinder.size(); i++){
+			if (this.spielStunde==7 && (this.kinder.get(i).getZeitverzogerung() + this.spielMinute) == 60){ //
 				
 				//gehe zur Schule
-				}
-				
-				if (this.spielStunde==14  && (this.people.get(i).getZeitverzogerung() + this.spielMinute) == 60){ 
+			}	
+			if (this.spielStunde==14  && (this.kinder.get(i).getZeitverzogerung() + this.spielMinute) == 60){ 
 				
 				//gehe nach Hause				
-				}
-				
-				if (this.spielStunde==20  && (this.people.get(i).getZeitverzogerung() + this.spielMinute) == 60){
+			}	
+			if (this.spielStunde==20  && (this.kinder.get(i).getZeitverzogerung() + this.spielMinute) == 60){
 					
 				//gehe nach Hause, falls location nicht zuhause ist
-				}
-				if (this.spielStunde >= 15 && this.spielStunde <=20 ){
+			}
+			if (this.spielStunde >= 15 && this.spielStunde <=20 ){
 					
 				// gehe Randommäßig in den Park
-				}
-			} else {
-					//if (this.people.get(i).){ //hat arbeit
-						if (this.spielStunde==8 && (this.people.get(i).getZeitverzogerung() + this.spielMinute) == 60){
+			}
+		}
+		for (int i=0; i<this.erwachsene.size(); i++){
+			if (this.erwachsene.get(i).isHat_arbeit()){ //hat arbeit
+				if (this.spielStunde==8 && (this.erwachsene.get(i).getZeitverzogerung() + this.spielMinute) == 60){
 					
 						//gehe zur Arbeit
-						}
-					
-						if (this.spielStunde==16 && (this.people.get(i).getZeitverzogerung() + this.spielMinute) == 60){	
+				}
+				if (this.spielStunde==16 && (this.erwachsene.get(i).getZeitverzogerung() + this.spielMinute) == 60){	
 					
 						//gehe nach Hause
-						}
-						
-						if (this.spielStunde==1 && (this.people.get(i).getZeitverzogerung() + this.spielMinute) == 60){
+				}		
+				if (this.spielStunde==1 && (this.erwachsene.get(i).getZeitverzogerung() + this.spielMinute) == 60){
 							
 						//gehe nach Hause
-						}
-						
-						if (this.spielStunde >= 17 || this.spielStunde <=1){
+				}		
+				if (this.spielStunde >= 17 || this.spielStunde <=1){
 							
 						//gehe randommäßig in den Park
-						}
+				}
+			} else{
+				if (this.spielStunde == 9 && (this.erwachsene.get(i).getZeitverzogerung() + this.spielMinute) == 60){
+					
+					//gehe Einkaufen
+				}	
+				if (this.spielStunde == 11 && (this.erwachsene.get(i).getZeitverzogerung() + this.spielMinute) == 60){
 						
-					//} else {
+					//gehe nach Hause
+				}
+				if (this.spielStunde == 1 && (this.erwachsene.get(i).getZeitverzogerung() + this.spielMinute) == 60){
 						
-							if (this.spielStunde == 9 && (this.people.get(i).getZeitverzogerung() + this.spielMinute) == 60){
-								
-							//gehe Einkaufen
-							}
-							
-							if (this.spielStunde == 11 && (this.people.get(i).getZeitverzogerung() + this.spielMinute) == 60){
-								
-							//gehe nach Hause
-							}
-							
-							if (this.spielStunde == 1 && (this.people.get(i).getZeitverzogerung() + this.spielMinute) == 60){
-								
-							//gehe nach Hause
-							}
-							
-							if (this.spielStunde >=12 || this.spielStunde <=1){
-								
-							//gehe randommäßig in den Park
-							}
+					//gehe nach Hause
+				}
+				if (this.spielStunde >=12 || this.spielStunde <=1){
 						
-					//}
-			}	
-		}
+					//gehe randommäßig in den Park
+				}
+			}
+		} 
 	}
 	
 	

@@ -5,6 +5,8 @@ import java.awt.image.BufferedImage;
 
 public class Erwachsene extends Person{
 	
+	private boolean hat_arbeit;
+	
 	public Erwachsene(){
 		
 	}
@@ -39,5 +41,13 @@ public class Erwachsene extends Person{
 			return sprite.getSubimage(0, 0, 45, 45);
 		}
 		return sprite.getSubimage(0, 0, 45, 45);
+	}
+
+	public boolean isHat_arbeit() {
+		return hat_arbeit;
+	}
+
+	public void setHat_arbeit(boolean hat_arbeit) {
+		this.hat_arbeit = hat_arbeit;
 	}
 }
