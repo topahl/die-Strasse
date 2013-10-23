@@ -1,5 +1,8 @@
 package com.stalkindustries.main.game;
 import java.util.ArrayList;
+import java.util.Stack;
+
+import com.stalkindustries.main.TheStreet;
 
 public class Simulation {
 	
@@ -220,6 +223,17 @@ public class Simulation {
 			}
 		}
 	} 	
+	
+	//Support Tiki
+	public void berechne_weg(Person person, char ziellocation){
+		ArrayList<ArrayList<String>> location_ids;
+		Stack<Character> neuer_weg = new Stack<Character>();
+		location_ids=TheStreet.read_from_csv("C:/Users/Martika/Desktop/Dropbox/Software Engineering/Grafikdesign/Fertig/russland_map.csv");
+		
+	
+	
+	}
+	
 	
 	public ArrayList<Person> get_people(){
 		return people;
