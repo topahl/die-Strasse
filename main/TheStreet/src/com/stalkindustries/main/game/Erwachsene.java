@@ -6,6 +6,12 @@ import java.awt.image.BufferedImage;
 public class Erwachsene extends Person{
 	
 	public Erwachsene(){
+		
+	}
+	
+	public Erwachsene(int house_id){
+		super(house_id);
+		
 		aussehen = new int[3];
 		aussehen[0]= (int)(Math.random()*4+1); //Körperbau
 		aussehen[1]= (int)(Math.random()*10+1); //Hautfarbe

@@ -5,7 +5,11 @@ public class Simulation {
 	
 	private int[][] beziehungsmatrix;
 	private int[] location_raster;
-	private ArrayList<Person> people;
+	private ArrayList<Person> people = new ArrayList();
+	private Agent agent;
+	private int spielTag;
+	private int spielStunde;
+	private int spielMinute;
 	
 	
 	//Beschwerden an Miri
@@ -17,14 +21,13 @@ public class Simulation {
 			
 		for(int i=0;i<this.people.size();i++){
 			for(int j=i+1;j<this.people.size();i++){
-				tmp = (int)Math.random()*(10);
+				tmp = (int)Math.random()*(11);
 				this.beziehungsmatrix[i][j] = tmp;
 				this.beziehungsmatrix[j][i] = tmp;
 				if(this.people.get(i).get_haus_id() == this.people.get(j).get_haus_id()){ //Person in einem Haushalt sind besser miteinander befreundet
-					if(this.beziehungsmatrix[i][j]<8){
-						this.beziehungsmatrix[i][j] += 3;
-						this.beziehungsmatrix[i][j] += 3;
-					}
+					tmp = (10-tmp)/2;
+					this.beziehungsmatrix[i][j] += tmp;
+					this.beziehungsmatrix[j][i] += tmp;
 				}
 			}
 		}
@@ -110,6 +113,77 @@ public class Simulation {
 	//toDo
 	void calc_misstrauen_after_action(){
 		
+	}
+	
+	
+	
+	void calc_spielzeit(){
+		// Vorausgesetzt, dass die Spilzeit initialisiert wurde, abfragen auf "null" nicht möglich da primitiver Datentyp
+		
+		//alle 500 ms wird eine Spielminute hochgezählt, dh 12 Minuten für einen Tagesablauf
+		
+		long current_milis;
+		current_milis = System.currentTimeMillis();
+		
+		//todo -> es muss immer genau 500 oder 0 sein, das werden wir in unserer Abfrage selten hinbekommen... 
+		// ausbaufähig, vorläufig steht was
+		if (current_milis == 500 || current_milis == 0){
+			setSpielMinute(getSpielMinute()+1);
+			if (getSpielMinute() == 60){
+				setSpielMinute(0);
+				setSpielStunde(getSpielStunde()+1);
+				if (getSpielStunde()==24){
+					setSpielStunde(0);
+					setSpielTag(getSpielTag()+1);
+				}
+			}
+		}
+		
+	}
+	
+	
+	
+	
+	public ArrayList<Person> get_people(){
+		return people;
+	}
+	
+	public void set_people(Person p){
+		people.add(p);
+	}
+	
+	public Agent get_agent(){
+		return agent;
+	}
+
+
+	public int getSpielTag() {
+		return spielTag;
+	}
+
+
+	public void setSpielTag(int spielTag) {
+		this.spielTag = spielTag;
+	}
+
+
+	public int getSpielStunde() {
+		return spielStunde;
+	}
+
+
+	public void setSpielStunde(int spielStunde) {
+		this.spielStunde = spielStunde;
+	}
+
+
+	public int getSpielMinute() {
+		return spielMinute;
+	}
+
+
+	public void setSpielMinute(int spielMinute) {
+		this.spielMinute = spielMinute;
 	}
 
 }
