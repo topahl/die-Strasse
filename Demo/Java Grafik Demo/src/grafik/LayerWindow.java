@@ -35,6 +35,7 @@ public class LayerWindow extends javax.swing.JFrame {
         jLayeredPane1 = new javax.swing.JLayeredPane();
         jButton1 = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
@@ -52,9 +53,18 @@ public class LayerWindow extends javax.swing.JFrame {
                 jButton1ActionPerformed(evt);
             }
         });
+        
+        
         jButton1.setBounds(370, 290, 370, 80);
         jLayeredPane1.add(jButton1, javax.swing.JLayeredPane.DEFAULT_LAYER);
-
+        
+        DEMOThread thr = new DEMOThread(jLabel2);
+        thr.start();
+        
+        jLabel2.setIcon(new javax.swing.ImageIcon("src\\grafik\\data\\demo_figur_ohneschein.png"));
+        jLabel2.setBounds(0, 0, 90, 90);
+        jLayeredPane1.add(jLabel2, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        
         jLabel1.setIcon(new javax.swing.ImageIcon("src\\grafik\\data\\map_demo_GUI.png")); // NOI18N
         jLabel1.setBounds(0, 0, 1125, 720);
         jLayeredPane1.add(jLabel1, javax.swing.JLayeredPane.DEFAULT_LAYER);
@@ -114,6 +124,7 @@ public class LayerWindow extends javax.swing.JFrame {
     // Variables declaration - do not modify
     private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JLayeredPane jLayeredPane1;
     // End of variables declaration
 }
