@@ -32,6 +32,7 @@ public class GUILayer extends javax.swing.JFrame{
 	private Dimension zeropos; //Koordinatenverschiebung auf Bildschirms
 	private Haus haus;//wird später initialisiert
 	private ArrayList<Mensch> humans = new ArrayList<Mensch>();
+	private static int misstrauens_counter = 0;
 	
     public GUILayer() {
         initComponents();
@@ -161,9 +162,13 @@ public class GUILayer extends javax.swing.JFrame{
     }*/
     
 	public void step(){
-		
-		this.simulation.calculate_misstrauen();
-		this.simulation.calc_misstrauen_in_street();
+		if(misstrauens_counter==25)
+			misstrauens_counter = 0;
+		if(misstrauens_counter==0){
+			simulation.calculate_misstrauen();
+			simulation.calc_misstrauen_in_street();
+		}
+		misstrauens_counter++;
 		for(int i=0;i<this.humans.size();i++){
 			this.humans.get(i).step();
 		}
