@@ -152,6 +152,79 @@ public class Simulation {
 	}
 	
 	
+	//Support Tiki
+	//TODO einiges
+	void tagesablauf(){
+		// i=0 oder i=1...?
+		for	(int i=0; i<this.people.size(); i++){
+			
+			//if (IST KIND){
+				if (this.spielStunde==7){ //&& (this.people.get(i).ZEITVERZÖGERUNG + this.spielMinute) == 60
+				
+				//gehe zur Schule
+				}
+				
+				if (this.spielStunde==14){ 
+				
+				//gehe nach Hause				
+				}
+				
+				if (this.spielStunde==20){
+					
+				//gehe nach Hause, falls location nicht zuhause ist
+				}
+				if (this.spielStunde >= 15 && this.spielStunde <=20){
+					
+				// gehe Randommäßig in den Park
+				}
+			//} else {
+					//if (HAT ARBEIT){
+						if (this.spielStunde==8){
+					
+						//gehe zur Arbeit
+						}
+					
+						if (this.spielStunde==16){	
+					
+						//gehe nach Hause
+						}
+						
+						if (this.spielStunde==1){
+							
+						//gehe nach Hause
+						}
+						
+						if (this.spielStunde >= 17 || this.spielStunde <=1){
+							
+						//gehe randommäßig in den Park
+						}
+						
+					//} else {
+						
+							if (this.spielStunde == 9){
+								
+							//gehe Einkaufen
+							}
+							
+							if (this.spielStunde == 11){
+								
+							//gehe nach Hause
+							}
+							
+							if (this.spielStunde == 1){
+								
+							//gehe nach Hause
+							}
+							
+							if (this.spielStunde >=12 || this.spielStunde <=1){
+								
+							//gehe randommäßig in den Park
+							}
+						
+					//}
+			//}	
+		}
+	}
 	
 	
 	public ArrayList<Person> get_people(){
