@@ -151,7 +151,6 @@ public class Simulation {
 	
 	
 	//Support Tiki
-	//TODO Weg auf den Stack schreiben
 	//TODO Die Häufigkeit des "in den Park gehen" testen, evtl zu häufig
 	void tagesablauf(){
 		for	(int i=0; i<this.people.size(); i++){
