@@ -116,7 +116,15 @@ public class Simulation {
 	}
 	
 	
+	//Support Tiki
+	void initialize_spielzeit(){
+		setSpielMinute(0);
+		setSpielStunde(7);
+		setSpielTag(1);
+	}
 	
+	
+	// Support Tiki
 	void calc_spielzeit(){
 		// Vorausgesetzt, dass die Spilzeit initialisiert wurde, abfragen auf "null" nicht möglich da primitiver Datentyp
 		
