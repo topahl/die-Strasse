@@ -17,6 +17,10 @@ public class Simulation {
 	private int spielStunde;
 	private int spielMinute;
 	
+	public Simulation(){
+		this.initialize_beziehungsmatrix();
+	}
+	
 	
 	//Beschwerden an Miri
 	void initialize_beziehungsmatrix(){
@@ -51,11 +55,6 @@ public class Simulation {
 	
 	//Beschwerden an Sven und Miri
 	void calculate_misstrauen(){
-		int z=0;
-		boolean b;
-		if(this.people.get(z) instanceof Erwachsene){b = ((Erwachsene)people.get(z)).isHat_arbeit();}
-		
-		
 		double[] misstrauen = new double[people.size()];
 		double faktor = 0.01275; //kommt noch darauf an, wie häufig die Methode aufgerufen wird
 		for(int i=0;i<this.people.size();i++)
@@ -327,6 +326,10 @@ public class Simulation {
 	
 	public Agent get_agent(){
 		return agent;
+	}
+	
+	public void set_agent(Agent agent){
+		this.agent = agent;
 	}
 
 

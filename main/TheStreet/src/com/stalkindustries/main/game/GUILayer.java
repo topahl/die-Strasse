@@ -56,6 +56,8 @@ public class GUILayer extends javax.swing.JFrame{
         setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         setResizable(false);
         
+        //this.initialize_humans();
+        
         testperson.setLocation(90, 90);
         layeredPane.add(testperson, javax.swing.JLayeredPane.DEFAULT_LAYER);
         
@@ -80,46 +82,52 @@ public class GUILayer extends javax.swing.JFrame{
    
     
 	//Beschwerden an Miri
-	public void initialize_humans(){  //TODO  private?????
-		int house_of_terrorist = (int)Math.random()*(8);
+	private void initialize_humans(){  
+		int house_of_terrorist = (int)(Math.random()*(9));
 		int people_per_house;
 		int number_of_adults;
 		int number_of_children;
-		int agent_house_nr = (int)Math.random()*(9)+1;
+		int agent_house_nr = (int)(Math.random()*(9));
+		Mensch mensch;
 		
 		for(int i=0;i<9;i++){ 
 			if(i!=agent_house_nr){
-				people_per_house = (int)Math.random()*(4)+1;
+				people_per_house = (int)(Math.random()*(4))+1;
 				if(i == house_of_terrorist){
-					number_of_adults = 1 + (int)Math.random()*(people_per_house);
-					this.humans.add(new Terrorist(i));
-					//this.simulation.set_erwachsene(new Terrorist(i));
+					number_of_adults = 1 + (int)(Math.random()*(people_per_house));
+					mensch = new Terrorist(i);
+					this.humans.add(mensch);
+					layeredPane.add(mensch, javax.swing.JLayeredPane.DEFAULT_LAYER);
+					//this.simulation.set_people(new Terrorist(i));
 					for(int j=0;j<number_of_adults-1;j++){
-						//this.simulation.set_erwachsene(new Erwachsene(i));
-						this.humans.add(new Erwachsene(i));
+						//this.simulation.set_people(new Erwachsene(i));
+						mensch = new Erwachsene(i);
+						this.humans.add(mensch);
+						layeredPane.add(mensch, javax.swing.JLayeredPane.DEFAULT_LAYER);
 					}
 				}
 				else{
-					number_of_adults =  (int)Math.random()*(people_per_house)+1;
+					number_of_adults =  (int)(Math.random()*(people_per_house))+1;
 					for(int j=0;j<number_of_adults;j++){
-						//this.simulation.set_erwachsene(new Erwachsene(i));
-						this.humans.add(new Erwachsene(i));
+						//this.simulation.set_people(new Erwachsene(i));
+						mensch = new Erwachsene(i);
+						this.humans.add(mensch);
+						layeredPane.add(mensch, javax.swing.JLayeredPane.DEFAULT_LAYER);
 					}
 				}
 				number_of_children = people_per_house - number_of_adults;
 				for(int j=0;j<number_of_children;j++){
-					//this.simulation.set_kinder(new Kinder(i));
-					this.humans.add(new Kinder(i));
+					//this.simulation.set_people(new Kinder(i));
+					mensch = new Kinder(i);
+					this.humans.add(mensch);
+					layeredPane.add(mensch, javax.swing.JLayeredPane.DEFAULT_LAYER);
 				}
 				this.initialize_house(i,false);
 			}	
 		}
 		/*//humans befüllen mit Menschen, Kindern und Agenten
-		for(int i=0;i<this.simulation.get_erwachsene().size();i++){
-			this.humans.add(this.simulation.get_erwachsene().get(i));
-		}
-		for(int i=0;i<this.simulation.get_kinder().size();i++){
-			this.humans.add(this.simulation.get_kinder().get(i));
+		for(int i=0;i<this.simulation.get_people().size();i++){
+			this.humans.add(this.simulation.get_people().get(i));
 		}*/
 		
 		for(int i=0;i<this.humans.size();i++){
@@ -127,12 +135,13 @@ public class GUILayer extends javax.swing.JFrame{
 		}
 		
 		//Agent hinzufügen
-		this.humans.add(new Agent());
+		this.simulation.set_agent(new Agent());
+		this.humans.add(this.simulation.get_agent());
 		this.initialize_house(agent_house_nr,true);
 	}
 	
 	
-	void initialize_house(int hausnr, boolean agentenhaus){
+	private void initialize_house(int hausnr, boolean agentenhaus){
 		int x=0;
 		int y=0;
 		haus = new Haus(hausnr,agentenhaus,x,y);
@@ -140,7 +149,7 @@ public class GUILayer extends javax.swing.JFrame{
     
     //Beschwerden an Miri
     //"MAIN"
-    public void start(){
+   /* public void start(){
     	 int delay = 40;
     	  Timer t = new Timer(delay, new ActionListener() {
     	    public void actionPerformed(ActionEvent e) {
@@ -148,9 +157,11 @@ public class GUILayer extends javax.swing.JFrame{
     	    }
     	  });
     	  t.start();
-    }
+    }*/
     
 	public void step(){
-		System.out.println("pups");
+		this.simulation.calculate_misstrauen();
+		this.simulation.calc_misstrauen_in_street();
+		System.out.println("pupsi");
 	}
 }
