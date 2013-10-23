@@ -219,70 +219,80 @@ public class Simulation {
 	
 	//Support Tiki
 	//TODO richtigen Dateipfad verwenden
-	//TODO Castingprobleme untersuchen
-	public void berechne_weg(Person person, char ziellocation){
+	public void berechne_weg(Person person, char zielloc){
 		
 		int counter;
+		String ziellocation = String.valueOf(zielloc);
 		int xPos_current, yPos_current;
 		ArrayList<ArrayList<String>> location_ids;
 		Stack<Character> neuer_weg = new Stack<Character>();
 		
 		counter = 1;
-		xPos_current = person.getPosX();
-		yPos_current = person.getPosY();
+		xPos_current = 0;
+		yPos_current = 0;
 		location_ids=TheStreet.read_from_csv("C:/Users/Martika/Desktop/Dropbox/Software Engineering/Grafikdesign/Fertig/russland_map.csv");
 		
 		for (int i=0; i<location_ids.size(); i++){
 			for (int j=0; j<location_ids.get(i).size(); j++){
-				if (location_ids.get(i).get(j).charAt(0) != 'X' && location_ids.get(i).get(j).charAt(0) != ziellocation){
+				if (location_ids.get(i).get(j).charAt(0) != 'X' && location_ids.get(i).get(j).charAt(0) != ziellocation.charAt(0)){
 					location_ids.get(i).set(j,"You shall not pass!") ;
+				}
+				if (location_ids.get(i).get(j).charAt(0) == ziellocation.charAt(0)){
+					location_ids.get(i).set(j,"Z") ;
 				}
 			}
 		}
+		ziellocation = "Z";
 		
 		location_ids.get(person.getPosX()).set(person.getPosY(),"0") ;
 		
-		for (int i=0; i<100; i++){
-			for (int j=0; j<location_ids.size(); j++){
-				for (int k=0; k<location_ids.get(i).size(); k++){
+goal:	for (int i=0; i<100; i++){
+			for (int j=0; j<16; j++){  	// J entspricht y-wert, K entspricht x-wert
+				for (int k=0; k<25; k++){
 					// Es werden Zahlen auf der Map gesucht
 					if (location_ids.get(j).get(k).equals(String.valueOf(i))){
 						// Es wird überprüft, ob das Ziel in direkter Nähe liegt
 						if (location_ids.get(j+1).get(k).equals(ziellocation)) {
-							location_ids.get(j+1).set(k,String.valueOf(i));
+							location_ids.get(j+1).set(k,String.valueOf(i+1));
 							counter = i;
-							xPos_current = j;
-							yPos_current = k;
-							break;
+							yPos_current = j+1;
+							xPos_current = k;
+							break goal;
 						}
 						if (location_ids.get(j).get(k+1).equals(ziellocation)) {
-							location_ids.get(j).set(k+1,String.valueOf(i));
+							location_ids.get(j).set(k+1,String.valueOf(i+1));
 							counter = i;
-							break;
+							yPos_current = j;
+							xPos_current = k+1;
+							break goal;
 						}
 						if (location_ids.get(j-1).get(k).equals(ziellocation)) {
-							location_ids.get(j-1).set(k,String.valueOf(i));
+							location_ids.get(j-1).set(k,String.valueOf(i+1));
 							counter = i;
-							break;
+							yPos_current = j-1;
+							xPos_current = k;
+							break goal;
 						}
 						if (location_ids.get(j).get(k-1).equals(ziellocation)) {
-							location_ids.get(j).set(k-1,String.valueOf(i));
+							location_ids.get(j).set(k-1,String.valueOf(i+1));
 							counter = i;
-							break;
+							yPos_current = j;
+							xPos_current = k-1;
+							break goal;
 						}
 						
 						// Es wird überprüft, ob ein Feld drüber/drunter/links oder rechts ebenfalls begehbar ist -> das wird markiert
 						if (location_ids.get(j+1).get(k).equals("X")) {			//Weg nach unten ist begehbar
-							location_ids.get(j+1).set(k,String.valueOf(i));
+							location_ids.get(j+1).set(k,String.valueOf(i+1));
 						}
 						if (location_ids.get(j).get(k+1).equals("X")) {			//Weg nach rechts ist begehbar
-							location_ids.get(j).set(k+1,String.valueOf(i));
+							location_ids.get(j).set(k+1,String.valueOf(i+1));
 						}
 						if (location_ids.get(j-1).get(k).equals("X")) {			// Weg nach oben ist begehbar
-							location_ids.get(j-1).set(k,String.valueOf(i));
+							location_ids.get(j-1).set(k,String.valueOf(i+1));
 						}
 						if (location_ids.get(j).get(k-1).equals("X")) {			//Weg nach links ist begehbar
-							location_ids.get(j).set(k-1,String.valueOf(i));
+							location_ids.get(j).set(k-1,String.valueOf(i+1));
 						}
 					}
 				}
@@ -290,24 +300,20 @@ public class Simulation {
 		}
 		
 		// Der Stack für die Bewegung wird mit den richtigen Werten gefüllt. Dafür hangelt man sich absteigend an der zahlenreihe entlang
-		for (int i = (counter-1); i>=0; i++){
-			if (location_ids.get(xPos_current+1).get(yPos_current).equals(counter)) {			//unten gehts weiter
-				location_ids.get(xPos_current+1).set(yPos_current,String.valueOf(i));
+		for (int i = counter; i>=0; i++){
+			if (location_ids.get(xPos_current+1).get(yPos_current).equals(String.valueOf(i))) {			//unten gehts weiter
 				xPos_current++;
 				neuer_weg.push('o');
 			}
-			if (location_ids.get(xPos_current).get(yPos_current+1).equals(counter)) {			//rechts gehts weiter
-				location_ids.get(xPos_current).set(yPos_current+1,String.valueOf(i));
+			if (location_ids.get(xPos_current).get(yPos_current+1).equals(String.valueOf(i))) {			//rechts gehts weiter
 				yPos_current++;
 				neuer_weg.push('l');
 			}
-			if (location_ids.get(xPos_current-1).get(yPos_current).equals(counter)) {			//oben gehts weiter
-				location_ids.get(xPos_current-1).set(yPos_current,String.valueOf(i));
+			if (location_ids.get(xPos_current-1).get(yPos_current).equals(String.valueOf(i))) {			//oben gehts weiter
 				xPos_current--;
 				neuer_weg.push('u');
 			}
-			if (location_ids.get(xPos_current).get(yPos_current-1).equals(counter)) {			//links gehts weiter
-				location_ids.get(xPos_current).set(yPos_current-1,String.valueOf(i));
+			if (location_ids.get(xPos_current).get(yPos_current-1).equals(String.valueOf(i))) {			//links gehts weiter
 				yPos_current--;
 				neuer_weg.push('r');
 			}
