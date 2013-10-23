@@ -118,6 +118,8 @@ public class Simulation {
 	
 	//Support Tiki
 	void initialize_spielzeit(){
+		//Tagesbeginn variabel
+		//TODO mit Gruppe besprechen wann wir anfangen sollen
 		setSpielMinute(0);
 		setSpielStunde(7);
 		setSpielTag(1);
