@@ -5,7 +5,9 @@ public class Simulation {
 	
 	private int[][] beziehungsmatrix;
 	private int[] location_raster;
-	private ArrayList<Person> people = new ArrayList();
+	private ArrayList<Person> people = new ArrayList(); // nicht mit dieser arraylist arbeiten
+	private ArrayList<Kinder> kinder = new ArrayList();
+	private ArrayList<Erwachsene> erwachsene = new ArrayList();
 	private Agent agent;
 	private int spielTag;
 	private int spielStunde;
