@@ -239,21 +239,6 @@ public class Simulation {
 		people.add(p);
 	}
 	
-	public void set_kinder(Kinder k){
-		this.kinder.add(k);
-	}
-	
-	public ArrayList<Kinder> get_kinder(){
-		return this.kinder;
-	}
-	
-	public void set_erwachsene(Erwachsene e){
-		this.erwachsene.add(e);
-	}
-	
-	public ArrayList<Erwachsene> get_erwachsene(){
-		return this.erwachsene;
-	}
 	
 	public Agent get_agent(){
 		return agent;
