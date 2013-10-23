@@ -5,8 +5,10 @@ import java.io.File;
 import java.io.IOException;
 
 import javax.imageio.ImageIO;
+import javax.swing.ImageIcon;
+import javax.swing.JLabel;
 
-public class Map {
+public class Map extends JLabel{
 	private int width;
 	private int height;
 	BufferedImage karte;
@@ -21,8 +23,12 @@ public class Map {
 		}
 		height=karte.getHeight();
 		width=karte.getWidth();
+		setIcon(new ImageIcon(karte));
+		setSize(height,width);
 		//TODO Hausnummern zeichnen
 	}
+	
+	
 	
 	public int getWidth() {
 		return width;

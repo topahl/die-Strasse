@@ -5,15 +5,11 @@ import java.awt.image.BufferedImage;
 
 public class Erwachsene extends Person{
 	
-	private boolean hat_arbeit;
-	
-	public Erwachsene(){
-		
-	}
-	
+	private boolean hat_arbeit;	
 	public Erwachsene(int house_id){
-		super(house_id);
 		
+		super(house_id);
+		setSize(45, 45);
 		aussehen = new int[3];
 		aussehen[0]= (int)(Math.random()*4+1); //Körperbau
 		aussehen[1]= (int)(Math.random()*10+1); //Hautfarbe
@@ -25,23 +21,10 @@ public class Erwachsene extends Person{
 		g2d.drawImage(adults.getSubimage(900, (aussehen[2]-1)*90, 90, 90),0,0, null); //Frisur
 		//TODO Geschlecht einbauen
 		//TODO arbeit oder nicht
+		
+		step();
 	}
-	
-	
-	@Override
-	public BufferedImage paint() {
-		switch(currentMove){
-		case 'l':
-			return sprite.getSubimage(45, 45, 45, 45);
-		case 'r':
-			return sprite.getSubimage(0, 45, 45, 45);
-		case 'o':
-			return sprite.getSubimage(45, 0, 45, 45);
-		case 'u':
-			return sprite.getSubimage(0, 0, 45, 45);
-		}
-		return sprite.getSubimage(0, 0, 45, 45);
-	}
+
 
 	public boolean isHat_arbeit() {
 		return hat_arbeit;

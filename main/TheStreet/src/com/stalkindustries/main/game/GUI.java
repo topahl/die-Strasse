@@ -104,21 +104,6 @@ public class GUI extends JFrame{
 		g2d.drawImage(karte.getImage(),(int)zeropos.getWidth(), (int)zeropos.getHeight(), karte.getWidth(), karte.getHeight(), Color.black,null);
 		
 		
-		//Test
-		for(int i=0;i<9;i++){
-			person[i]=new Erwachsene(0);
-		}
-		g2d.drawImage(person[0].paint(),zeropos.width+0, zeropos.height+270, null);
-		g2d.drawImage(person[1].paint(),zeropos.width+90, zeropos.height+270, null);
-		g2d.drawImage(person[2].paint(),zeropos.width+180, zeropos.height+270, null);
-		g2d.drawImage(person[3].paint(),zeropos.width+270, zeropos.height+270, null);
-		g2d.drawImage(person[4].paint(),zeropos.width+360, zeropos.height+270, null);
-		g2d.drawImage(person[5].paint(),zeropos.width+450, zeropos.height+270, null);
-		g2d.drawImage(person[6].paint(),zeropos.width+540, zeropos.height+270, null);
-		g2d.drawImage(person[7].paint(),zeropos.width+630, zeropos.height+270, null);
-		g2d.drawImage(person[8].paint(),zeropos.width+720, zeropos.height+270, null);
-	    //TEst ende
-		
 		Graphics2D g2dComponent = (Graphics2D) g;
 	    g2dComponent.drawImage(bufferedImage, null, 0, 0); 
 	  }

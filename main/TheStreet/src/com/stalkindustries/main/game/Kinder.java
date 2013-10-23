@@ -9,12 +9,4 @@ public class Kinder extends Person {
 		super(house_id);
 		//TODO: Kinder bauen
 	}
-	
-
-	@Override
-	public BufferedImage paint() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
 }

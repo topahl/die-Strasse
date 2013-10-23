@@ -1,6 +1,6 @@
 package com.stalkindustries.main;
 
-import com.stalkindustries.main.game.GUI;
+import com.stalkindustries.main.game.GUILayer;
 import java.util.ArrayList;
 import java.io.BufferedReader;
 import java.io.File;
@@ -9,7 +9,7 @@ import java.io.IOException;
 
 public class TheStreet {
 	public static void main(String[] args) {
-		GUI game = new GUI();
+		GUILayer game = new GUILayer();
 		
 		//CSV Test
 		/*ArrayList<ArrayList<String>> list_of_lists;
