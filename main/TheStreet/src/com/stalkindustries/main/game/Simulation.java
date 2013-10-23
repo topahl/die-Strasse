@@ -122,9 +122,9 @@ public class Simulation {
 	void initialize_spielzeit(){
 		//Tagesbeginn variabel
 		//TODO mit Gruppe besprechen wann wir anfangen sollen
-		setSpielMinute(0);
-		setSpielStunde(7);
-		setSpielTag(1);
+		this.spielMinute=0;
+		this.spielStunde=7;
+		this.spielTag=1;
 	}
 	
 	
@@ -140,13 +140,13 @@ public class Simulation {
 		//TODO -> es muss immer genau 500 oder 0 sein, das werden wir in unserer Abfrage selten hinbekommen... 
 		// ausbaufähig, vorläufig steht was
 		if (current_milis == 500 || current_milis == 0){
-			setSpielMinute(getSpielMinute()+1);
-			if (getSpielMinute() == 60){
-				setSpielMinute(0);
-				setSpielStunde(getSpielStunde()+1);
-				if (getSpielStunde()==24){
-					setSpielStunde(0);
-					setSpielTag(getSpielTag()+1);
+			this.spielMinute++;
+			if (this.spielMinute == 60){
+				this.spielMinute = 0;
+				this.spielStunde++;
+				if (this.spielStunde==24){
+					this.spielStunde=0;
+					this.spielStunde++;
 				}
 			}
 		}
