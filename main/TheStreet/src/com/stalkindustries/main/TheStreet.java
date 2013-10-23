@@ -11,6 +11,7 @@ public class TheStreet {
 	public static void main(String[] args) {
 		GUILayer game = new GUILayer();
 		
+		
 		//CSV Test
 		/*ArrayList<ArrayList<String>> list_of_lists;
 		list_of_lists = read_from_csv("C://Users/Miriam/Documents/Ausbildung/DHBW Mannheim/Semester/3.Semester_WS_2013_2014/Software Engineering I/Github/die-Strasse/main/TheStreet/src/com/stalkindustries/main/Quizfragen.csv");

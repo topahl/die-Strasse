@@ -4,25 +4,30 @@
  */
 package com.stalkindustries.main.game;
 
-
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import javax.swing.Timer;
 
 
 /**
  *
  * @author Tobias
  */
-public class GUILayer extends javax.swing.JFrame {
+public class GUILayer extends javax.swing.JFrame{
 
     /**
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
+	private Timer timer;
 	/**
      * Creates new form Start
      */
     public GUILayer() {
         initComponents();
         setVisible(true);
+        this.timer = new Timer(40,new OSTimer(this));
+        timer.start();
     }
 
     /**
@@ -106,10 +111,16 @@ public class GUILayer extends javax.swing.JFrame {
     //Beschwerden an Miri
     //"MAIN"
     public void start(){
-    	long tmp;
-    	while(this.b){
-    		tmp = System.currentTimeMillis();
-    		this.simulation.update_position();
-    	}
+    	 int delay = 40;
+    	  Timer t = new Timer(delay, new ActionListener() {
+    	    public void actionPerformed(ActionEvent e) {
+    	      //GUILayer.actionPerformed(e);
+    	    }
+    	  });
+    	  t.start();
     }
+    
+	public void step(){
+		System.out.println("pups");
+	}
 }
