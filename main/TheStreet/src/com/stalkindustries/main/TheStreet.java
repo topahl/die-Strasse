@@ -11,8 +11,16 @@ public class TheStreet {
 	public static void main(String[] args) {
 		GUI game = new GUI();
 		
-		//ArrayList<ArrayList<String>> list_of_lists;
-		//list_of_lists = read_from_csv();
+		//CSV Test
+		/*ArrayList<ArrayList<String>> list_of_lists;
+		list_of_lists = read_from_csv("C://Users/Miriam/Documents/Ausbildung/DHBW Mannheim/Semester/3.Semester_WS_2013_2014/Software Engineering I/Github/die-Strasse/main/TheStreet/src/com/stalkindustries/main/Quizfragen.csv");
+		System.out.print(list_of_lists.size());
+		for(int i=0;i<list_of_lists.size();i++){
+			for(int j=0;j<list_of_lists.get(i).size();j++){
+				System.out.print(list_of_lists.get(i).get(j));
+			}
+			System.out.print("\n");
+		}*/
 	}
 	
 	
@@ -22,17 +30,21 @@ public class TheStreet {
 		
 		//File vorhanden?
 		File file = new File(dateiName);
-        if (!file.canRead() || !file.isFile())
+        if (!file.canRead() || !file.isFile()){
+        	System.out.print("No file found.");
             System.exit(0);
+        }
         
         try {
             BufferedReader in = new BufferedReader(new FileReader(dateiName));
             String zeile = null;
+            ArrayList<String> tmp;
             while ((zeile = in.readLine()) != null) {
-            	list_of_lists.add(null);	//Zeile hinzufügen
+            	tmp = new ArrayList<String>();
             	for(int i=0;i<zeile.split(";").length;i++){
-            		list_of_lists.get(i).add(zeile.split(";")[i]);	//Spalte hinzufügen
+            		tmp.add(zeile.split(";")[i]);	//Spalte hinzufügen
             	}
+            	list_of_lists.add(tmp);	//Zeile hinzufügen
             }
             in.close();
         } catch (IOException e) {
