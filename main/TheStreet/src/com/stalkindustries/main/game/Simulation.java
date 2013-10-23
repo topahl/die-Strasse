@@ -158,38 +158,38 @@ public class Simulation {
 		// i=0 oder i=1...?
 		for	(int i=0; i<this.people.size(); i++){
 			
-			//if (IST KIND){
-				if (this.spielStunde==7){ //&& (this.people.get(i).ZEITVERZÖGERUNG + this.spielMinute) == 60
+			if (this.people.get(i) instanceof Kinder){
+				if (this.spielStunde==7 && (this.people.get(i).getZeitverzogerung() + this.spielMinute) == 60){ //
 				
 				//gehe zur Schule
 				}
 				
-				if (this.spielStunde==14){ 
+				if (this.spielStunde==14  && (this.people.get(i).getZeitverzogerung() + this.spielMinute) == 60){ 
 				
 				//gehe nach Hause				
 				}
 				
-				if (this.spielStunde==20){
+				if (this.spielStunde==20  && (this.people.get(i).getZeitverzogerung() + this.spielMinute) == 60){
 					
 				//gehe nach Hause, falls location nicht zuhause ist
 				}
-				if (this.spielStunde >= 15 && this.spielStunde <=20){
+				if (this.spielStunde >= 15 && this.spielStunde <=20 ){
 					
 				// gehe Randommäßig in den Park
 				}
-			//} else {
-					//if (HAT ARBEIT){
-						if (this.spielStunde==8){
+			} else {
+					//if (this.people.get(i).){ //hat arbeit
+						if (this.spielStunde==8 && (this.people.get(i).getZeitverzogerung() + this.spielMinute) == 60){
 					
 						//gehe zur Arbeit
 						}
 					
-						if (this.spielStunde==16){	
+						if (this.spielStunde==16 && (this.people.get(i).getZeitverzogerung() + this.spielMinute) == 60){	
 					
 						//gehe nach Hause
 						}
 						
-						if (this.spielStunde==1){
+						if (this.spielStunde==1 && (this.people.get(i).getZeitverzogerung() + this.spielMinute) == 60){
 							
 						//gehe nach Hause
 						}
@@ -201,17 +201,17 @@ public class Simulation {
 						
 					//} else {
 						
-							if (this.spielStunde == 9){
+							if (this.spielStunde == 9 && (this.people.get(i).getZeitverzogerung() + this.spielMinute) == 60){
 								
 							//gehe Einkaufen
 							}
 							
-							if (this.spielStunde == 11){
+							if (this.spielStunde == 11 && (this.people.get(i).getZeitverzogerung() + this.spielMinute) == 60){
 								
 							//gehe nach Hause
 							}
 							
-							if (this.spielStunde == 1){
+							if (this.spielStunde == 1 && (this.people.get(i).getZeitverzogerung() + this.spielMinute) == 60){
 								
 							//gehe nach Hause
 							}
@@ -222,7 +222,7 @@ public class Simulation {
 							}
 						
 					//}
-			//}	
+			}	
 		}
 	}
 	

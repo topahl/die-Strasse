@@ -13,7 +13,7 @@ public abstract class Person extends Mensch {
 	private float misstrauen; 	//-100=nicht misstrauisch, 100=ultra misstrauisch, 200=initial
 	//private float bewegungsgeschwindigkeit;
 	protected int geschlecht; //1=male, 2=female
-	//private float zeitverzogerung;
+	private int zeitverzogerung; // in Minuten
 	private int haus_id;
 	protected static BufferedImage adults; //slice PNG to save RAM
 	protected static BufferedImage infants; //slice PNG to save RAM
@@ -35,7 +35,7 @@ public abstract class Person extends Mensch {
 		this.misstrauen = 0;
 		//TODO: set Bewegungsgeschwindigkeit
 		this.geschlecht = (int)Math.random()*(2)+1;
-		//TODO: Zeitverzögerung
+		this.zeitverzogerung = (int)Math.random()*(60)+1;
 		this.haus_id = house_id;
 	}
 	
@@ -74,6 +74,16 @@ public abstract class Person extends Mensch {
 	
 	public void set_haus_id(int haus_id){
 		this.haus_id = haus_id;
+	}
+
+
+	public int getZeitverzogerung() {
+		return zeitverzogerung;
+	}
+
+
+	public void setZeitverzogerung(int zeitverzogerung) {
+		this.zeitverzogerung = zeitverzogerung;
 	}
 
 }
