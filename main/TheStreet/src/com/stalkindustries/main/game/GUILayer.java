@@ -31,7 +31,7 @@ public class GUILayer extends javax.swing.JFrame{
 	private Dimension screen;  //Screen resolution
 	private Dimension zeropos; //Koordinatenverschiebung auf Bildschirms
 	private Haus haus;
-	private ArrayList<Mensch> humans;
+	private ArrayList<Mensch> humans = new ArrayList<Mensch>();
 	
     public GUILayer() {
         initComponents();
@@ -56,7 +56,7 @@ public class GUILayer extends javax.swing.JFrame{
         setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         setResizable(false);
         
-        //this.initialize_humans();
+        this.initialize_humans();
         
         testperson.setLocation(90, 90);
         layeredPane.add(testperson, javax.swing.JLayeredPane.DEFAULT_LAYER);
