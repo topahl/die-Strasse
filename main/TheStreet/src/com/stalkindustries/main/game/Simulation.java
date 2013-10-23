@@ -150,12 +150,12 @@ public class Simulation {
 				}
 			}
 		}
-		
 	}
 	
 	
 	//Support Tiki
 	//TODO Weg auf den Stack schreiben
+	//TODO Die Häufigkeit des "in den Park gehen" testen, evtl zu häufig
 	void tagesablauf(){
 		// i=0 oder i=1...?
 		for	(int i=0; i<this.kinder.size(); i++){
@@ -172,8 +172,14 @@ public class Simulation {
 				//gehe nach Hause, falls location nicht zuhause ist
 			}
 			if (this.spielStunde >= 15 && this.spielStunde <=20 ){
-					
-				// gehe Randommäßig in den Park
+				if ((int)Math.random()*20 == 3){
+					//gehe in den Park
+				}
+			}
+			if (this.kinder.get(i).get_location_id()=='P'){
+				if ((int)Math.random()*30 == 3){
+					//gehe nach Hause
+				}
 			}
 		}
 		for (int i=0; i<this.erwachsene.size(); i++){
@@ -191,8 +197,9 @@ public class Simulation {
 						//gehe nach Hause
 				}		
 				if (this.spielStunde >= 17 || this.spielStunde <=1){
-							
-						//gehe randommäßig in den Park
+					if ((int)Math.random()*30 == 3){
+						//gehe in den Park
+					}
 				}
 			} else{
 				if (this.spielStunde == 9 && (this.erwachsene.get(i).getZeitverzogerung() + this.spielMinute) == 60){
@@ -208,8 +215,14 @@ public class Simulation {
 					//gehe nach Hause
 				}
 				if (this.spielStunde >=12 || this.spielStunde <=1){
-						
-					//gehe randommäßig in den Park
+					if ((int)Math.random()*30 == 3){
+						//gehe in den Park
+					}
+				}
+			}
+			if (this.erwachsene.get(i).get_location_id()=='P'){
+				if ((int)Math.random()*30 == 3){
+					//gehe nach Hause
 				}
 			}
 		} 

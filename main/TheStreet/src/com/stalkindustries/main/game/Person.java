@@ -28,7 +28,7 @@ public abstract class Person extends Mensch {
 		last_id++;
 		
 		this.id = last_id;
-		this.set_location_id(42);
+		this.set_location_id('0');
 		//TODO: set_name
 		this.setPosX(0);
 		this.setPosY(0);
