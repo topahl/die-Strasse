@@ -42,16 +42,6 @@ public class Simulation {
 		}
 	}*/
 	
-	void update_location_raster(){
-		//TODO
-		//weißt Bewohnern eine Location-ID zu
-		//--> man weiß nun, wo sie sich grob befinden, d.h.
-		//wenn sich Person in bestimmtem Haus befindet, dann ist Location-Id = Haus-Id
-		//Schule --> Location-ID = Schule-ID
-		//Park --> Location-Id = Park-ID
-		//einkaufen, arbeiten, ... --> Location-Id = 42
-	}
-	
 	
 	//Beschwerden an Sven und Miri
 	void calculate_misstrauen(){

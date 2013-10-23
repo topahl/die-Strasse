@@ -87,6 +87,17 @@ public abstract class Mensch extends JLabel {
 	}
 	
 	
+	void update_location_raster(){
+		//TODO
+		//weißt Bewohnern eine Location-ID zu
+		//--> man weiß nun, wo sie sich grob befinden, d.h.
+		//wenn sich Person in bestimmtem Haus befindet, dann ist Location-Id = Haus-Id
+		//Schule --> Location-ID = Schule-ID
+		//Park --> Location-Id = Park-ID
+		//einkaufen, arbeiten, ... --> Location-Id = 42
+	}
+	
+	
 	//Support: Tobi
 	public int getPosX() {
 		return posX;
