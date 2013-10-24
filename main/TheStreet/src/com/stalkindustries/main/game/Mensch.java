@@ -41,7 +41,7 @@ public abstract class Mensch extends JLabel {
 	//Support: Tobi
 	public void step(){
 		
-		if(posX%45==0&&posY%45==0){
+		if((posX-Ressources.ZEROPOS.width)%45==0&&(posY-Ressources.ZEROPOS.height)%45==0){
 			if(!moves.empty()){
 				currentMove=moves.pop();
 			}
