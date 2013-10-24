@@ -5,9 +5,7 @@
 package com.stalkindustries.main.game;
 
 import java.awt.Color;
-import java.awt.Dimension;
 import java.awt.Font;
-import java.awt.Toolkit;
 import java.util.ArrayList;
 
 import javax.swing.JLabel;
@@ -27,8 +25,6 @@ public class GUILayer extends javax.swing.JFrame{
 	private JLayeredPane layeredPane;
 	private boolean b = true; //TODO please rename  if needed
 	private Simulation simulation = new Simulation();
-	private Dimension screen;  //Screen resolution
-	private Dimension zeropos; //Koordinatenverschiebung auf Bildschirms
 	private Haus haus;//wird später initialisiert
 	private ArrayList<Mensch> humans = new ArrayList<Mensch>();
 	private static int misstrauens_counter = 0;
@@ -44,12 +40,8 @@ public class GUILayer extends javax.swing.JFrame{
     
     //Liebesbriefe an Tobi
     private void initComponents() {
-    	screen = Toolkit.getDefaultToolkit().getScreenSize();//Screen resolution
 		karte = new Map("Russland");//TODO Dynamic Map Load
-		
-		zeropos = new Dimension();	//zeropos berechnen -> Koordinatenverschiebung
-		zeropos.setSize((screen.getWidth()/2)-(karte.getWidth()/2),(screen.getHeight()/2)-(karte.getHeight()/2));
-    	
+  
         layeredPane = new javax.swing.JLayeredPane();
         
 
@@ -63,7 +55,7 @@ public class GUILayer extends javax.swing.JFrame{
         JLabel tag = new JLabel();
         String s = "Tag " + this.simulation.getSpiel_tag();
         tag.setText(s);
-        tag.setBounds(920+this.zeropos.width, 636+this.zeropos.height, 183, 37);
+        tag.setBounds(920+Ressources.ZEROPOS.width, 636+Ressources.ZEROPOS.height, 183, 37);
         tag.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         tag.setFont(new Font("Corbel",Font.BOLD,30));
         tag.setForeground(new java.awt.Color(255, 255, 255));
@@ -74,25 +66,25 @@ public class GUILayer extends javax.swing.JFrame{
         JLabel zeit = new JLabel();
         s = this.simulation.getSpielzeit_as_string();
         zeit.setText(s);
-        zeit.setBounds(920+this.zeropos.width, 669+this.zeropos.height, 183, 37);
+        zeit.setBounds(920+Ressources.ZEROPOS.width, 669+Ressources.ZEROPOS.height, 183, 37);
         zeit.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         zeit.setFont(new Font("Corbel",Font.BOLD,40));
         zeit.setForeground(new java.awt.Color(255, 255, 255));
         zeit.setVisible(true);
         layeredPane.add(zeit, javax.swing.JLayeredPane.DEFAULT_LAYER);
         
-        karte.setBounds(zeropos.width, zeropos.height, 1125, 720);
+        karte.setBounds(Ressources.ZEROPOS.width, Ressources.ZEROPOS.height, 1125, 720);
         layeredPane.add(karte, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(layeredPane, javax.swing.GroupLayout.DEFAULT_SIZE, screen.width, Short.MAX_VALUE)
+            .addComponent(layeredPane, javax.swing.GroupLayout.DEFAULT_SIZE, Ressources.ZEROPOS.width, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(layeredPane, javax.swing.GroupLayout.DEFAULT_SIZE, screen.height, Short.MAX_VALUE)
+            .addComponent(layeredPane, javax.swing.GroupLayout.DEFAULT_SIZE, Ressources.ZEROPOS.height, Short.MAX_VALUE)
         );
         
         setUndecorated(true);
@@ -129,8 +121,8 @@ public class GUILayer extends javax.swing.JFrame{
 			for(int i=0;i<location_raster.size();i++){	//y-Achse
 				for(int j=0;j<location_raster.get(i).size();j++){	//x-Achse
 					if(location_raster.get(i).get(j).charAt(0) ==("" + (haus+1)).charAt(0)){	
-						spornX[haus] =  j*Ressources.RASTERHEIGHT+this.zeropos.width-2*Ressources.RASTERHEIGHT;
-						spornY[haus] =  i*Ressources.RASTERHEIGHT+this.zeropos.height-2*Ressources.RASTERHEIGHT;
+						spornX[haus] =  j*Ressources.RASTERHEIGHT+Ressources.ZEROPOS.width-2*Ressources.RASTERHEIGHT;
+						spornY[haus] =  i*Ressources.RASTERHEIGHT+Ressources.ZEROPOS.height-2*Ressources.RASTERHEIGHT;
 					}
 						
 				}
@@ -249,8 +241,8 @@ public class GUILayer extends javax.swing.JFrame{
 		int x;
 		int y;
 		for(int i=0;i<this.humans.size();i++){
-			x = (this.humans.get(i).getPosX()+2*Ressources.RASTERHEIGHT-this.zeropos.width)/Ressources.RASTERHEIGHT - 2;
-			y = (this.humans.get(i).getPosY()+2*Ressources.RASTERHEIGHT-this.zeropos.height)/Ressources.RASTERHEIGHT - 2;
+			x = (this.humans.get(i).getPosX()+2*Ressources.RASTERHEIGHT-Ressources.ZEROPOS.width)/Ressources.RASTERHEIGHT - 2;
+			y = (this.humans.get(i).getPosY()+2*Ressources.RASTERHEIGHT-Ressources.ZEROPOS.height)/Ressources.RASTERHEIGHT - 2;
 			this.humans.get(i).set_location_id(location_raster.get(y).get(x).charAt(0));
 		}	
 		
@@ -271,7 +263,7 @@ public class GUILayer extends javax.swing.JFrame{
 			timer_counter=0;
 		if (timer_counter==0){
 			simulation.calc_spielzeit();
-//			simulation.tagesablauf();
+			simulation.tagesablauf();
 		}
 		timer_counter++;
 		

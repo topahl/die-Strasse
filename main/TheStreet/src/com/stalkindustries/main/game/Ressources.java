@@ -1,5 +1,7 @@
 package com.stalkindustries.main.game;
 
+import java.awt.Dimension;
+import java.awt.Toolkit;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
@@ -15,13 +17,19 @@ public class Ressources {
 	public static final int RASTERHEIGHT = 45; //Map Raster
 	public static final int TORSOCNT =4; //Anzahl verschiedener Torsos in Sprite Grafik
 	public static final int GAMESPEED = 40; // Zeitspanne in der eine Berechnung durchgefürt wird
+	public static final Dimension SCREEN;
+	public static final Dimension ZEROPOS;
+	public static final int MAPHEIGHT = 720;
+	public static final int MAPWIDTH = 1125;
 	
 	 
 	 
 	static{
 		//Initialisierung der location_ids
 		location_ids=read_from_csv("src\\com\\stalkindustries\\data\\russland_map.csv");
-		
+		SCREEN=Toolkit.getDefaultToolkit().getScreenSize();
+		ZEROPOS = new Dimension();	//zeropos berechnen -> Koordinatenverschiebung
+		ZEROPOS.setSize((SCREEN.getWidth()/2)-(MAPWIDTH/2),(SCREEN.getHeight()/2)-(MAPHEIGHT/2));
 	}
 	
 	
