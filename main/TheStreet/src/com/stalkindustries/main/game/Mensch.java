@@ -54,22 +54,22 @@ public abstract class Mensch extends JLabel {
 			posX++;
 			break;
 		case 'o':
-			posY++;
+			posY--;
 			break;
 		case 'u':
-			posX--;
+			posY++;
 			break;
 		}
 
 		switch(currentMove){
 		case 'l':
-			setIcon(new ImageIcon(sprite.getSubimage(45, 45, 45, 45)));
+			setIcon(new ImageIcon(sprite.getSubimage(45, 0, 45, 45)));
 			break;
 		case 'r':
-			setIcon(new ImageIcon(sprite.getSubimage(0, 45, 45, 45)));
+			setIcon(new ImageIcon(sprite.getSubimage(45, 45, 45, 45)));
 			break;
 		case 'o':
-			setIcon(new ImageIcon(sprite.getSubimage(45, 0, 45, 45)));
+			setIcon(new ImageIcon(sprite.getSubimage(0, 45, 45, 45)));
 			break;
 		case 'u':
 		default:
