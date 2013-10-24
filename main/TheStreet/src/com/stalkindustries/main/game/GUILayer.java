@@ -63,7 +63,7 @@ public class GUILayer extends javax.swing.JFrame{
         
         //Tag malen
         JLabel tag = new JLabel();
-        String s = "Tag ";// + this.simulation.;
+        String s = "Tag " + this.simulation.getSpiel_tag();
         tag.setText(s);
         tag.setBounds(920+this.zeropos.width, 636+this.zeropos.height, 183, 37);
         tag.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
@@ -74,7 +74,7 @@ public class GUILayer extends javax.swing.JFrame{
         
       	//Uhr malen
         JLabel zeit = new JLabel();
-       // s = "" + this.simulation.getSpielStunde() + this.simulation.getSpielMinute();
+        s = this.simulation.getSpielzeit_as_string();
         zeit.setText(s);
         zeit.setBounds(920+this.zeropos.width, 669+this.zeropos.height, 183, 37);
         zeit.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
