@@ -5,7 +5,9 @@
 package com.stalkindustries.main.game;
 
 import java.awt.Color;
+import java.awt.Dimension;
 import java.awt.Font;
+import java.awt.Toolkit;
 import java.util.ArrayList;
 
 import javax.swing.JLabel;
@@ -29,6 +31,9 @@ public class GUILayer extends javax.swing.JFrame{
 	private ArrayList<Mensch> humans = new ArrayList<Mensch>();
 	private static int misstrauens_counter = 0;
 	private static int timer_counter = 0;
+	private JLabel zeit = new JLabel();
+	private JLabel tag = new JLabel();
+	private JLabel misstrauen_in_street = new JLabel();
 	
     public GUILayer() {
         initComponents();
@@ -41,7 +46,6 @@ public class GUILayer extends javax.swing.JFrame{
     //Liebesbriefe an Tobi
     private void initComponents() {
 		karte = new Map("Russland");//TODO Dynamic Map Load
-  
         layeredPane = new javax.swing.JLayeredPane();
         
 
@@ -52,7 +56,6 @@ public class GUILayer extends javax.swing.JFrame{
         this.initialize_humans();
         
         //Tag malen
-        JLabel tag = new JLabel();
         String s = "Tag " + this.simulation.getSpiel_tag();
         tag.setText(s);
         tag.setBounds(920+Ressources.ZEROPOS.width, 636+Ressources.ZEROPOS.height, 183, 37);
@@ -63,7 +66,6 @@ public class GUILayer extends javax.swing.JFrame{
         layeredPane.add(tag, javax.swing.JLayeredPane.DEFAULT_LAYER);
         
       	//Uhr malen
-        JLabel zeit = new JLabel();
         s = this.simulation.getSpielzeit_as_string();
         zeit.setText(s);
         zeit.setBounds(920+Ressources.ZEROPOS.width, 669+Ressources.ZEROPOS.height, 183, 37);
@@ -72,6 +74,17 @@ public class GUILayer extends javax.swing.JFrame{
         zeit.setForeground(new java.awt.Color(255, 255, 255));
         zeit.setVisible(true);
         layeredPane.add(zeit, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        
+        //Debugging: Misstrauen in der Straﬂe
+        s = "0.0%";
+        misstrauen_in_street.setText(s);
+        misstrauen_in_street.setBounds(720+Ressources.ZEROPOS.width, 675+Ressources.ZEROPOS.height, 183, 37);
+        misstrauen_in_street.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        misstrauen_in_street.setFont(new Font("Corbel",Font.BOLD,40));
+        misstrauen_in_street.setForeground(new java.awt.Color(255, 255, 255));
+        misstrauen_in_street.setVisible(true);
+        layeredPane.add(misstrauen_in_street, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        
         
         karte.setBounds(Ressources.ZEROPOS.width, Ressources.ZEROPOS.height, 1125, 720);
         layeredPane.add(karte, javax.swing.JLayeredPane.DEFAULT_LAYER);
@@ -248,9 +261,26 @@ public class GUILayer extends javax.swing.JFrame{
 		
 	}
 	
+	
+	public void updateTime(){
+		//Tag malen
+        String s = "Tag " + this.simulation.getSpiel_tag();
+        tag.setText(s);
+        
+      	//Uhr malen
+        s = this.simulation.getSpielzeit_as_string();
+        zeit.setText(s);
+	}
+	
+	public void updateMisstrauen(){
+		String s = this.simulation.calc_misstrauen_in_street() + "%";
+        misstrauen_in_street.setText(s);
+	}
+	
     
 	public void step(){
 		this.update_location_id();
+		this.updateMisstrauen();
 		if(misstrauens_counter==25)
 			misstrauens_counter = 0;
 		if(misstrauens_counter==0){
@@ -263,6 +293,7 @@ public class GUILayer extends javax.swing.JFrame{
 			timer_counter=0;
 		if (timer_counter==0){
 			simulation.calc_spielzeit();
+			this.updateTime();
 			//simulation.tagesablauf();
 		}
 		timer_counter++;
