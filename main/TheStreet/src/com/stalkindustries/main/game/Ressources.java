@@ -21,7 +21,7 @@ public class Ressources {
 	static{
 		//Initialisierung der location_ids
 		//TODO richtigen Dateipfad später angeben
-		location_ids=read_from_csv("C:/Users/Martika/Desktop/Dropbox/Software Engineering/Grafikdesign/Fertig/russland_map.csv");
+		location_ids=read_from_csv("src\\com\\stalkindustries\\data\\russland_map.csv");
 		
 	}
 	
