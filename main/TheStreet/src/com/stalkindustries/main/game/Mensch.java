@@ -13,6 +13,8 @@ public abstract class Mensch extends JLabel {
 	protected BufferedImage sprite;
 	private int posX;
 	private int posY;
+	private int homeposX;
+	private int homeposY;
 	private char location_id;
 	protected char currentMove = 'n'; //links, rechts, oben , unten, nichts -> Kleinbuchstaben
 	private Stack<Character> moves = new Stack<Character>();
@@ -110,6 +112,22 @@ public abstract class Mensch extends JLabel {
 	//Support: Tobi
 	public int getPosY() {
 		return posY;
+	}
+	
+	public int getHomePosX(){
+		return this.homeposX;
+	}
+	
+	public int getHomePosY(){
+		return this.homeposY;
+	}
+	
+	public void setHomePosX(int x){
+		this.homeposX = x;
+	}
+	
+	public void setHomePosY(int y){
+		this.homeposY = y;
 	}
 	
 	public void set_location_id(char id){

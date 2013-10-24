@@ -126,11 +126,11 @@ public class GUILayer extends javax.swing.JFrame{
 		//Spornpunkte initialisieren
 		ArrayList<ArrayList<String>> location_raster = Ressources.getLocation_ids();
 		for(int haus=0;haus<9;haus++){
-			for(int i=0;i<location_raster.size();i++){
-				for(int j=0;j<location_raster.get(i).size();j++){	//y-Achse
-					if(location_raster.get(i).get(j).charAt(0) ==("" + (haus+1)).charAt(0)){	//x-Achse
-						spornX[haus] =  j*45+this.zeropos.width-2*45;
-						spornY[haus] =  i*45+this.zeropos.height-2*45;
+			for(int i=0;i<location_raster.size();i++){	//y-Achse
+				for(int j=0;j<location_raster.get(i).size();j++){	//x-Achse
+					if(location_raster.get(i).get(j).charAt(0) ==("" + (haus+1)).charAt(0)){	
+						spornX[haus] =  j*Ressources.RASTERHEIGHT+this.zeropos.width-2*Ressources.RASTERHEIGHT;
+						spornY[haus] =  i*Ressources.RASTERHEIGHT+this.zeropos.height-2*Ressources.RASTERHEIGHT;
 					}
 						
 				}
@@ -142,12 +142,12 @@ public class GUILayer extends javax.swing.JFrame{
 			//für ein Haus die Spornpunkte festlegen
 			spornx[0] = spornX[i];
 			sporny[0] = spornY[i];
-			spornx[1] = spornX[i] + 45;
+			spornx[1] = spornX[i] + Ressources.RASTERHEIGHT;
 			sporny[1] = spornY[i];
-			spornx[2] = spornX[i] + 2*45;
+			spornx[2] = spornX[i] + 2*Ressources.RASTERHEIGHT;
 			sporny[2] = spornY[i];
 			spornx[3] = spornX[i];
-			sporny[3] = spornY[i] + 45;
+			sporny[3] = spornY[i] + Ressources.RASTERHEIGHT;
 			
 			if(i!=agent_house_nr){
 				people_per_house = (int)(Math.random()*(4))+1;
@@ -157,6 +157,8 @@ public class GUILayer extends javax.swing.JFrame{
 					this.humans.add(mensch);
 					layeredPane.add(mensch, javax.swing.JLayeredPane.DEFAULT_LAYER);
 					this.humans.get(mensch_cnt).teleport(spornx[familien_cnt],sporny[familien_cnt]);
+					this.humans.get(mensch_cnt).setHomePosX(spornx[familien_cnt]);
+					this.humans.get(mensch_cnt).setHomePosY(sporny[familien_cnt]);
 					mensch_cnt++;
 					familien_cnt++;
 					//this.simulation.set_people(new Terrorist(i));
@@ -166,6 +168,8 @@ public class GUILayer extends javax.swing.JFrame{
 						this.humans.add(mensch);
 						layeredPane.add(mensch, javax.swing.JLayeredPane.DEFAULT_LAYER);
 						this.humans.get(mensch_cnt).teleport(spornx[familien_cnt],sporny[familien_cnt]);
+						this.humans.get(mensch_cnt).setHomePosX(spornx[familien_cnt]);
+						this.humans.get(mensch_cnt).setHomePosY(sporny[familien_cnt]);
 						mensch_cnt++;
 						familien_cnt++;
 					}
@@ -178,6 +182,8 @@ public class GUILayer extends javax.swing.JFrame{
 						this.humans.add(mensch);
 						layeredPane.add(mensch, javax.swing.JLayeredPane.DEFAULT_LAYER);
 						this.humans.get(mensch_cnt).teleport(spornx[familien_cnt],sporny[familien_cnt]);
+						this.humans.get(mensch_cnt).setHomePosX(spornx[familien_cnt]);
+						this.humans.get(mensch_cnt).setHomePosY(sporny[familien_cnt]);
 						mensch_cnt++;
 						familien_cnt++;
 					}
@@ -189,24 +195,31 @@ public class GUILayer extends javax.swing.JFrame{
 					this.humans.add(mensch);
 					layeredPane.add(mensch, javax.swing.JLayeredPane.DEFAULT_LAYER);
 					this.humans.get(mensch_cnt).teleport(spornx[familien_cnt],sporny[familien_cnt]);
+					this.humans.get(mensch_cnt).setHomePosX(spornx[familien_cnt]);
+					this.humans.get(mensch_cnt).setHomePosY(sporny[familien_cnt]);
 					mensch_cnt++;
 					familien_cnt++;
 				}
 				this.initialize_house(i,false);
 			}	
 		}
-		/*//humans befüllen mit Menschen, Kindern und Agenten
-		for(int i=0;i<this.simulation.get_people().size();i++){
-			this.humans.add(this.simulation.get_people().get(i));
-		}*/
 		
 		for(int i=0;i<this.humans.size();i++){
 			this.simulation.set_people((Person)this.humans.get(i));
 		}
 		
 		//Agent hinzufügen
-		this.simulation.set_agent(new Agent());
-		this.humans.add(this.simulation.get_agent());
+		spornx[0] = spornX[agent_house_nr];
+		sporny[0] = spornY[agent_house_nr];
+		mensch = new Agent();
+		this.humans.add(mensch);
+		layeredPane.add(mensch, javax.swing.JLayeredPane.DEFAULT_LAYER);
+		//this.simulation.set_agent(new Agent());
+		//this.humans.add(this.simulation.get_agent());
+		this.humans.get(mensch_cnt).teleport(spornx[0],sporny[0]);
+		this.humans.get(mensch_cnt).setHomePosX(spornx[0]);
+		this.humans.get(mensch_cnt).setHomePosY(sporny[0]);
+		this.simulation.set_agent((Agent)mensch);
 		this.initialize_house(agent_house_nr,true);
 	}
 	
@@ -228,8 +241,24 @@ public class GUILayer extends javax.swing.JFrame{
     	  });
     	  t.start();
     }*/
+	
+	
+	//Beschwerden an Miri
+	void update_location_id(){
+		ArrayList<ArrayList<String>> location_raster = Ressources.getLocation_ids();
+		int x;
+		int y;
+		for(int i=0;i<this.humans.size();i++){
+			x = (this.humans.get(i).getPosX()+2*Ressources.RASTERHEIGHT-this.zeropos.width)/Ressources.RASTERHEIGHT - 2;
+			y = (this.humans.get(i).getPosY()+2*Ressources.RASTERHEIGHT-this.zeropos.height)/Ressources.RASTERHEIGHT - 2;
+			this.humans.get(i).set_location_id(location_raster.get(y).get(x).charAt(0));
+		}	
+		
+	}
+	
     
 	public void step(){
+		this.update_location_id();
 		if(misstrauens_counter==25)
 			misstrauens_counter = 0;
 		if(misstrauens_counter==0){

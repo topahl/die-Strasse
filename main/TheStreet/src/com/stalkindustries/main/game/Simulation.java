@@ -46,14 +46,6 @@ public class Simulation {
 	}
 	
 	
-	/*//Beschwerden an Miri
-	void initialize_location_raster(){
-		this.location_raster = new int[this.people.size()];
-		for(int i=0;i<this.people.size();i++){
-			this.location_raster[i] = 42;
-		}
-	}*/
-	
 	
 	//Beschwerden an Sven und Miri
 	void calculate_misstrauen(){
