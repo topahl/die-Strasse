@@ -35,6 +35,7 @@ public class GUILayer extends javax.swing.JFrame{
 	private static int timer_counter = 0;
 	private JLabel zeit = new JLabel();
 	private JLabel tag = new JLabel();
+	private JLabel misstrauen_in_street = new JLabel();
 	
     public GUILayer() {
         initComponents();
@@ -80,6 +81,17 @@ public class GUILayer extends javax.swing.JFrame{
         zeit.setForeground(new java.awt.Color(255, 255, 255));
         zeit.setVisible(true);
         layeredPane.add(zeit, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        
+        //Debugging: Misstrauen in der Straﬂe
+        s = "0.0%";
+        misstrauen_in_street.setText(s);
+        misstrauen_in_street.setBounds(720+this.zeropos.width, 675+this.zeropos.height, 183, 37);
+        misstrauen_in_street.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        misstrauen_in_street.setFont(new Font("Corbel",Font.BOLD,40));
+        misstrauen_in_street.setForeground(new java.awt.Color(255, 255, 255));
+        misstrauen_in_street.setVisible(true);
+        layeredPane.add(misstrauen_in_street, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        
         
         karte.setBounds(zeropos.width, zeropos.height, 1125, 720);
         layeredPane.add(karte, javax.swing.JLayeredPane.DEFAULT_LAYER);
@@ -267,9 +279,15 @@ public class GUILayer extends javax.swing.JFrame{
         zeit.setText(s);
 	}
 	
+	public void updateMisstrauen(){
+		String s = this.simulation.calc_misstrauen_in_street() + "%";
+        misstrauen_in_street.setText(s);
+	}
+	
     
 	public void step(){
 		this.update_location_id();
+		this.updateMisstrauen();
 		if(misstrauens_counter==25)
 			misstrauens_counter = 0;
 		if(misstrauens_counter==0){
