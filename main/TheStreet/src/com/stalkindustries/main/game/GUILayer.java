@@ -24,7 +24,6 @@ public class GUILayer extends javax.swing.JFrame{
 	private static final long serialVersionUID = 1L;
 	private Timer timer;
 	private Map karte;
-	private Person testperson;
 	private JLayeredPane layeredPane;
 	private boolean b = true; //TODO please rename  if needed
 	private Simulation simulation = new Simulation();
@@ -52,7 +51,6 @@ public class GUILayer extends javax.swing.JFrame{
 		zeropos.setSize((screen.getWidth()/2)-(karte.getWidth()/2),(screen.getHeight()/2)-(karte.getHeight()/2));
     	
         layeredPane = new javax.swing.JLayeredPane();
-        testperson = new Erwachsene(1);
         
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -82,9 +80,6 @@ public class GUILayer extends javax.swing.JFrame{
         zeit.setForeground(new java.awt.Color(255, 255, 255));
         zeit.setVisible(true);
         layeredPane.add(zeit, javax.swing.JLayeredPane.DEFAULT_LAYER);
-        
-        testperson.setLocation(90, 90);
-        layeredPane.add(testperson, javax.swing.JLayeredPane.DEFAULT_LAYER);
         
         karte.setBounds(zeropos.width, zeropos.height, 1125, 720);
         layeredPane.add(karte, javax.swing.JLayeredPane.DEFAULT_LAYER);
@@ -254,6 +249,5 @@ public class GUILayer extends javax.swing.JFrame{
 		for(int i=0;i<this.humans.size();i++){
 			this.humans.get(i).step();
 		}
-		System.out.println("pupsi");
 	}
 }
