@@ -16,7 +16,7 @@ public class Ressources {
 	public static final int TORSOCNT =4; //Anzahl verschiedener Torsos in Sprite Grafik
 	public static final int GAMESPEED = 40; // Zeitspanne in der eine Berechnung durchgefürt wird
 	
-	
+	 
 	 
 	static{
 		//Initialisierung der location_ids

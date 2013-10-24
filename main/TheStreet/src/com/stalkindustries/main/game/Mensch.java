@@ -97,6 +97,11 @@ public abstract class Mensch extends JLabel {
 		//einkaufen, arbeiten, ... --> Location-Id = 42
 	}
 	
+	public void teleport(int x, int y){
+		this.posX = x;
+		this.posY = y;
+	}
+	
 	
 	//Support: Tobi
 	public int getPosX() {
@@ -114,6 +119,7 @@ public abstract class Mensch extends JLabel {
 	public char get_location_id(){
 		return this.location_id;
 	}
+	
 	
 	public void setMoves(Stack<Character> moves){
 		this.moves = moves;

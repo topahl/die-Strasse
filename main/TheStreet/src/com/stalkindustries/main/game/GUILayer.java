@@ -63,7 +63,7 @@ public class GUILayer extends javax.swing.JFrame{
         
         //Tag malen
         JLabel tag = new JLabel();
-        String s = "Tag "; //+ this.simulation.getSpielTag();
+        String s = "Tag ";// + this.simulation.;
         tag.setText(s);
         tag.setBounds(920+this.zeropos.width, 636+this.zeropos.height, 183, 37);
         tag.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
@@ -109,13 +109,51 @@ public class GUILayer extends javax.swing.JFrame{
 	//Beschwerden an Miri
 	private void initialize_humans(){  
 		int house_of_terrorist = (int)(Math.random()*(9));
+		int agent_house_nr = (int)(Math.random()*(9));
+		if(agent_house_nr == house_of_terrorist){
+			if(house_of_terrorist == 8)
+				house_of_terrorist--;
+			else
+				house_of_terrorist++;
+		}
+			
 		int people_per_house;
 		int number_of_adults;
 		int number_of_children;
-		int agent_house_nr = (int)(Math.random()*(9));
+		int spornX[] = new int[9];
+		int spornY[] = new int[9];
+		int spornx[] = new int[4];
+		int sporny[] = new int[4];
+		int familien_cnt = 0;
+		int mensch_cnt = 0;
 		Mensch mensch;
+
+		//Spornpunkte initialisieren
+		ArrayList<ArrayList<String>> location_raster = Ressources.getLocation_ids();
+		for(int haus=0;haus<9;haus++){
+			for(int i=0;i<location_raster.size();i++){
+				for(int j=0;j<location_raster.get(i).size();j++){	//y-Achse
+					if(location_raster.get(i).get(j).charAt(0) ==("" + (haus+1)).charAt(0)){	//x-Achse
+						spornX[haus] =  j*45+this.zeropos.width-2*45;
+						spornY[haus] =  i*45+this.zeropos.height-2*45;
+					}
+						
+				}
+			}
+		}
 		
 		for(int i=0;i<9;i++){ 
+			familien_cnt = 0;
+			//für ein Haus die Spornpunkte festlegen
+			spornx[0] = spornX[i];
+			sporny[0] = spornY[i];
+			spornx[1] = spornX[i] + 45;
+			sporny[1] = spornY[i];
+			spornx[2] = spornX[i] + 2*45;
+			sporny[2] = spornY[i];
+			spornx[3] = spornX[i];
+			sporny[3] = spornY[i] + 45;
+			
 			if(i!=agent_house_nr){
 				people_per_house = (int)(Math.random()*(4))+1;
 				if(i == house_of_terrorist){
@@ -123,12 +161,18 @@ public class GUILayer extends javax.swing.JFrame{
 					mensch = new Terrorist(i);
 					this.humans.add(mensch);
 					layeredPane.add(mensch, javax.swing.JLayeredPane.DEFAULT_LAYER);
+					this.humans.get(mensch_cnt).teleport(spornx[familien_cnt],sporny[familien_cnt]);
+					mensch_cnt++;
+					familien_cnt++;
 					//this.simulation.set_people(new Terrorist(i));
 					for(int j=0;j<number_of_adults-1;j++){
 						//this.simulation.set_people(new Erwachsene(i));
 						mensch = new Erwachsene(i);
 						this.humans.add(mensch);
 						layeredPane.add(mensch, javax.swing.JLayeredPane.DEFAULT_LAYER);
+						this.humans.get(mensch_cnt).teleport(spornx[familien_cnt],sporny[familien_cnt]);
+						mensch_cnt++;
+						familien_cnt++;
 					}
 				}
 				else{
@@ -138,6 +182,9 @@ public class GUILayer extends javax.swing.JFrame{
 						mensch = new Erwachsene(i);
 						this.humans.add(mensch);
 						layeredPane.add(mensch, javax.swing.JLayeredPane.DEFAULT_LAYER);
+						this.humans.get(mensch_cnt).teleport(spornx[familien_cnt],sporny[familien_cnt]);
+						mensch_cnt++;
+						familien_cnt++;
 					}
 				}
 				number_of_children = people_per_house - number_of_adults;
@@ -146,6 +193,9 @@ public class GUILayer extends javax.swing.JFrame{
 					mensch = new Kinder(i);
 					this.humans.add(mensch);
 					layeredPane.add(mensch, javax.swing.JLayeredPane.DEFAULT_LAYER);
+					this.humans.get(mensch_cnt).teleport(spornx[familien_cnt],sporny[familien_cnt]);
+					mensch_cnt++;
+					familien_cnt++;
 				}
 				this.initialize_house(i,false);
 			}	
@@ -197,7 +247,7 @@ public class GUILayer extends javax.swing.JFrame{
 			timer_counter=0;
 		if (timer_counter==0){
 			simulation.calc_spielzeit();
-			simulation.tagesablauf();
+			//simulation.tagesablauf();
 		}
 		timer_counter++;
 		
