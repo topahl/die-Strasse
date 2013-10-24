@@ -17,7 +17,6 @@ public abstract class Person extends Mensch {
 	protected int geschlecht; //1=male, 2=female
 	private int zeitverzogerung; // in Minuten
 	private int haus_id;
-	protected int bewegungsgeschwindigkeit;
 	
 	static private int last_id=-1;
 	
