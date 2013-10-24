@@ -1,5 +1,7 @@
 package com.stalkindustries.main.game;
 
+import java.awt.Color;
+import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
@@ -10,6 +12,7 @@ public abstract class Person extends Mensch {
 	private int id;
 	protected int[] aussehen;
 	private String name;
+	protected BufferedImage temp_sprite; //Sprite ohne Schatten
 	private double misstrauen; 	//-100=nicht misstrauisch, 100=ultra misstrauisch, 200=initial
 	//private float bewegungsgeschwindigkeit;
 	protected int geschlecht; //1=male, 2=female
@@ -20,8 +23,24 @@ public abstract class Person extends Mensch {
 	
 	public Person(){
 		
-	}
+	} //TODO erntfernen
 	
+	public void update_schatten(){
+		sprite = new BufferedImage(90, 90, BufferedImage.TYPE_INT_ARGB);
+		Graphics2D g2d = sprite.createGraphics();
+		if(misstrauen==0)
+			g2d.setColor(new Color(1f,1f,1f,0.2f));
+		else if(misstrauen>0)
+			g2d.setColor(new Color((float)(misstrauen/100),0f,0f,0.2f));
+		else
+			g2d.setColor(new Color(0f,(float)(misstrauen/(-100)),0f,0.2f));
+		
+		g2d.fillOval(0, 0, 45, 45);
+		g2d.fillOval(45, 0, 45, 45);
+		g2d.fillOval(0, 45, 45, 45);
+		g2d.fillOval(45, 45, 45, 45);
+		g2d.drawImage(temp_sprite, 0, 0,null);
+	}
 	
 	public Person(int house_id){
 		last_id++;
@@ -35,10 +54,6 @@ public abstract class Person extends Mensch {
 		this.geschlecht = (int)Math.random()*(2)+1;
 		this.zeitverzogerung = (int)Math.random()*(60)+1;
 		this.haus_id = house_id;
-	}
-	
-	private void initialize_misstrauen(){
-		this.misstrauen = 0;
 	}
 	
 	public double get_misstrauen(){
