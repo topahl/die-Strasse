@@ -121,9 +121,6 @@ public class Simulation {
 			this.spiel_stunde=0;
 			this.spiel_tag++;
 		}
-		if (this.spiel_stunde==8 && this.spiel_minute==59){
-			System.out.print("Arbeiten");
-		}
 	}
 	
 	
@@ -148,7 +145,6 @@ public class Simulation {
 				}
 				if (this.people.get(i).get_location_id()=='P'){ //nach Hause gehen
 					if ((int)(Math.random()*300) == 3){
-						System.out.println("In Park gehen");
 						berechne_weg(this.people.get(i), (char)(this.people.get(i).get_haus_id())); 
 					}
 				}
@@ -182,7 +178,6 @@ public class Simulation {
 						}
 						if (this.spiel_stunde >=12 || this.spiel_stunde <=1){  // in den Park gehen
 							if ((int)(Math.random()*300) == 3){
-								System.out.println("In Park gehen");
 								berechne_weg(this.people.get(i), 'P');
 							}
 						}
@@ -247,18 +242,13 @@ public class Simulation {
 			}
 		}
 		ziellocation = "Z";
-		System.out.println(person.getPosX() +"-"+ person.getPosY() +"-"+ (person.getPosX()/45) +"-"+ (person.getPosY()/45));
-		location_ids.get(person.getPosY()/45).set(person.getPosX()/45,"0") ;
-		
+		location_ids.get(person.getPosY()/45).set(person.getPosX()/45,"0") ;		
 		
 goal:	for (int i=0; i<100; i++){
 			for (int j=0; j<16; j++){  	// J entspricht y-wert, K entspricht x-wert
 				for (int k=0; k<25; k++){
 					// Es werden Zahlen auf der Map gesucht
 					if (location_ids.get(j).get(k).equals(String.valueOf(i))){
-						if (i==99){
-							System.out.print("Fehler");
-						}
 						// Es wird überprüft, ob das Ziel in direkter Nähe liegt
 						if (j < 15){
 							if (location_ids.get(j+1).get(k).equals(ziellocation)) {
@@ -323,9 +313,9 @@ goal:	for (int i=0; i<100; i++){
 				}
 			}
 		}
-		if (xPos_current==0 || yPos_current==0){
-			System.out.print("Fehler!");
-		}
+//		if (xPos_current==0 || yPos_current==0){
+//			System.out.print("Fehler!");
+//		}
 		// Der Stack für die Bewegung wird mit den richtigen Werten gefüllt. Dafür hangelt man sich absteigend an der zahlenreihe entlang
 		for (int i = counter; i>=0; i++){
 			if (location_ids.get(xPos_current+1).get(yPos_current).equals(String.valueOf(i))) {			//unten gehts weiter
