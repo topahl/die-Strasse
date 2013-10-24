@@ -14,7 +14,7 @@ public class Simulation {
 	private ArrayList<Person> people = new ArrayList<Person>(); 
 	private Agent agent = new Agent();
 	private int spiel_tag=1;
-	private int spiel_stunde=0;
+	private int spiel_stunde=7;
 	private int spiel_minute=0;
 	private ArrayList<Haus> houses = new ArrayList<Haus>();
 
@@ -259,7 +259,7 @@ public class Simulation {
 			}
 		}
 		ziellocation = "Z";
-		location_ids.get(person.getPosY()/45).set(person.getPosX()/45,"0") ;		
+		location_ids.get((person.getPosY()-Ressources.ZEROPOS.height)/45).set((person.getPosX()-Ressources.ZEROPOS.width)/45,"0") ;		
 		
 goal:	for (int i=0; i<100; i++){
 			for (int j=0; j<16; j++){  	// J entspricht y-wert, K entspricht x-wert
@@ -334,23 +334,32 @@ goal:	for (int i=0; i<100; i++){
 //			System.out.print("Fehler!");
 //		}
 		// Der Stack für die Bewegung wird mit den richtigen Werten gefüllt. Dafür hangelt man sich absteigend an der zahlenreihe entlang
-		for (int i = counter; i>=0; i++){
-			if (location_ids.get(xPos_current+1).get(yPos_current).equals(String.valueOf(i))) {			//unten gehts weiter
-				xPos_current++;
-				neuer_weg.push('o');
-			}
-			if (location_ids.get(xPos_current).get(yPos_current+1).equals(String.valueOf(i))) {			//rechts gehts weiter
+		for (int i = counter; i>=0; i--){
+			if (yPos_current<15){
+				if (location_ids.get(yPos_current+1).get(xPos_current).equals(String.valueOf(i))) {			//unten gehts weiter
 				yPos_current++;
+				neuer_weg.push('o');
+				}
+			}
+			if (xPos_current<24){
+				if (location_ids.get(yPos_current).get(xPos_current+1).equals(String.valueOf(i))) {			//rechts gehts weiter
+				xPos_current++;
 				neuer_weg.push('l');
+				}
 			}
-			if (location_ids.get(xPos_current-1).get(yPos_current).equals(String.valueOf(i))) {			//oben gehts weiter
-				xPos_current--;
-				neuer_weg.push('u');
-			}
-			if (location_ids.get(xPos_current).get(yPos_current-1).equals(String.valueOf(i))) {			//links gehts weiter
+			if (yPos_current>0){
+				if (location_ids.get(yPos_current-1).get(xPos_current).equals(String.valueOf(i))) {			//oben gehts weiter
 				yPos_current--;
-				neuer_weg.push('r');
+				neuer_weg.push('u');
+				}
 			}
+			if (xPos_current>0){
+				if (location_ids.get(yPos_current).get(xPos_current-1).equals(String.valueOf(i))) {			//links gehts weiter
+				xPos_current--;
+				neuer_weg.push('r');
+				}
+			}
+			
 		}
 		person.setMoves(neuer_weg);
 	}
