@@ -129,6 +129,9 @@ public class Simulation {
 			this.spiel_stunde=0;
 			this.spiel_tag++;
 		}
+		if (this.spiel_stunde==8 && this.spiel_minute==59){
+			System.out.print("Arbeiten");
+		}
 	}
 	
 	
@@ -153,6 +156,7 @@ public class Simulation {
 				}
 				if (this.people.get(i).get_location_id()=='P'){ //nach Hause gehen
 					if ((int)(Math.random()*30) == 3){
+						System.out.println("In Park gehen");
 						berechne_weg(this.people.get(i), (char)(this.people.get(i).get_haus_id())); 
 					}
 				}
@@ -170,6 +174,7 @@ public class Simulation {
 						}		
 						if (this.spiel_stunde >= 17 || this.spiel_stunde <=1){  // in den Park gehen
 							if ((int)(Math.random()*30) == 3){
+								System.out.println("In Park gehen");
 								berechne_weg(this.people.get(i), 'P');
 							}
 						}
@@ -185,6 +190,7 @@ public class Simulation {
 						}
 						if (this.spiel_stunde >=12 || this.spiel_stunde <=1){  // in den Park gehen
 							if ((int)(Math.random()*30) == 3){
+								System.out.println("In Park gehen");
 								berechne_weg(this.people.get(i), 'P');
 							}
 						}
@@ -245,8 +251,9 @@ public class Simulation {
 			}
 		}
 		ziellocation = "Z";
+		System.out.println(person.getPosX() +"-"+ person.getY() +"-"+ (person.getPosX()/45) +"-"+ (person.getY()/45));
+		location_ids.get(person.getPosX()/45).set(person.getPosY()/45,"0") ;
 		
-		location_ids.get(person.getPosX()).set(person.getPosY(),"0") ;
 		
 goal:	for (int i=0; i<100; i++){
 			for (int j=0; j<16; j++){  	// J entspricht y-wert, K entspricht x-wert
