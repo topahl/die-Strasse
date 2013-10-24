@@ -33,6 +33,8 @@ public class GUILayer extends javax.swing.JFrame{
 	private ArrayList<Mensch> humans = new ArrayList<Mensch>();
 	private static int misstrauens_counter = 0;
 	private static int timer_counter = 0;
+	private JLabel zeit = new JLabel();
+	private JLabel tag = new JLabel();
 	
     public GUILayer() {
         initComponents();
@@ -60,7 +62,6 @@ public class GUILayer extends javax.swing.JFrame{
         this.initialize_humans();
         
         //Tag malen
-        JLabel tag = new JLabel();
         String s = "Tag " + this.simulation.getSpiel_tag();
         tag.setText(s);
         tag.setBounds(920+this.zeropos.width, 636+this.zeropos.height, 183, 37);
@@ -71,7 +72,6 @@ public class GUILayer extends javax.swing.JFrame{
         layeredPane.add(tag, javax.swing.JLayeredPane.DEFAULT_LAYER);
         
       	//Uhr malen
-        JLabel zeit = new JLabel();
         s = this.simulation.getSpielzeit_as_string();
         zeit.setText(s);
         zeit.setBounds(920+this.zeropos.width, 669+this.zeropos.height, 183, 37);
@@ -256,6 +256,17 @@ public class GUILayer extends javax.swing.JFrame{
 		
 	}
 	
+	
+	public void updateTime(){
+		//Tag malen
+        String s = "Tag " + this.simulation.getSpiel_tag();
+        tag.setText(s);
+        
+      	//Uhr malen
+        s = this.simulation.getSpielzeit_as_string();
+        zeit.setText(s);
+	}
+	
     
 	public void step(){
 		this.update_location_id();
@@ -271,6 +282,7 @@ public class GUILayer extends javax.swing.JFrame{
 			timer_counter=0;
 		if (timer_counter==0){
 			simulation.calc_spielzeit();
+			this.updateTime();
 //			simulation.tagesablauf();
 		}
 		timer_counter++;
