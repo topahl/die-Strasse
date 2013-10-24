@@ -17,7 +17,7 @@ public class Kinder extends Person {
 		Graphics2D g2d = temp_sprite.createGraphics();
 		g2d.drawImage(infants.getSubimage(Ressources.RASTERHEIGHT*2*aussehen[0], 0, Ressources.RASTERHEIGHT*2, Ressources.RASTERHEIGHT*2) ,0,0 , null); //Körperbau
 		g2d.drawImage(infants.getSubimage(Ressources.RASTERHEIGHT*2*aussehen[0]+360, (aussehen[1]-1)*Ressources.RASTERHEIGHT*2, Ressources.RASTERHEIGHT*2, Ressources.RASTERHEIGHT*2),0,0, null); //Hautfarbe
-		g2d.drawImage(infants.getSubimage(900, (aussehen[2]-1)*Ressources.RASTERHEIGHT*2, Ressources.RASTERHEIGHT*2, Ressources.RASTERHEIGHT*2),0,0, null); //Frisur
+		g2d.drawImage(infants.getSubimage(720+geschlecht*Ressources.RASTERHEIGHT*2, (aussehen[2]-1)*Ressources.RASTERHEIGHT*2, Ressources.RASTERHEIGHT*2, Ressources.RASTERHEIGHT*2),0,0, null); //Frisur
 		//TODO Geschlecht einbauen
 		//TODO arbeit oder nicht
 		update_schatten();
