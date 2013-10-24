@@ -305,7 +305,7 @@ public class GUILayer extends javax.swing.JFrame{
 		}
 		misstrauens_counter++;
 		
-		if (timer_counter==2)
+		if (timer_counter==4)
 			timer_counter=0;
 		if (timer_counter==0){
 			simulation.calc_spielzeit();
