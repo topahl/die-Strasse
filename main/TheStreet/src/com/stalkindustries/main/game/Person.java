@@ -14,7 +14,6 @@ public abstract class Person extends Mensch {
 	private String name;
 	protected BufferedImage temp_sprite; //Sprite ohne Schatten
 	private double misstrauen; 	//-100=nicht misstrauisch, 100=ultra misstrauisch, 200=initial
-	//private float bewegungsgeschwindigkeit;
 	protected int geschlecht; //1=male, 2=female
 	private int zeitverzogerung; // in Minuten
 	private int haus_id;
@@ -50,9 +49,16 @@ public abstract class Person extends Mensch {
 		//TODO: set_name
 		this.setLocation(0, 0);
 		this.misstrauen = 0;
-		//TODO: set Bewegungsgeschwindigkeit
+		
+		//Bewegunsggeschwindigkeit
+		int zufall = (int)(Math.random()*(10))+1;
+		if(zufall > 8)
+			this.bewegungsgeschwindigkeit = 3;
+		else
+			this.bewegungsgeschwindigkeit = 1;
+		
 		this.geschlecht = (int)Math.random()*(2)+1;
-		this.zeitverzogerung = (int)Math.random()*(60)+1;
+		this.zeitverzogerung = (int)(Math.random()*(60))+1;
 		this.haus_id = house_id;
 	}
 	

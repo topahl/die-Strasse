@@ -20,6 +20,7 @@ public abstract class Mensch extends JLabel {
 	private Stack<Character> moves = new Stack<Character>();
 	protected static BufferedImage adults; //slice PNG to save RAM
 	protected static BufferedImage infants; //slice PNG to save RAM
+	protected int bewegungsgeschwindigkeit;
 	
 	static{
 		 try {

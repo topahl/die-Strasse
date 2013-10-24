@@ -121,9 +121,6 @@ public class Simulation {
 			this.spiel_stunde=0;
 			this.spiel_tag++;
 		}
-		if (this.spiel_stunde==8 && this.spiel_minute==59){
-			System.out.print("Arbeiten");
-		}
 	}
 	
 	
@@ -148,7 +145,6 @@ public class Simulation {
 				}
 				if (this.people.get(i).get_location_id()=='P'){ //nach Hause gehen
 					if ((int)(Math.random()*300) == 3){
-						System.out.println("In Park gehen");
 						berechne_weg(this.people.get(i), (char)(this.people.get(i).get_haus_id())); 
 					}
 				}
@@ -182,7 +178,6 @@ public class Simulation {
 						}
 						if (this.spiel_stunde >=12 || this.spiel_stunde <=1){  // in den Park gehen
 							if ((int)(Math.random()*300) == 3){
-								System.out.println("In Park gehen");
 								berechne_weg(this.people.get(i), 'P');
 							}
 						}
@@ -211,6 +206,7 @@ public class Simulation {
 		yPos_current = 0;
 		location_ids = Ressources.getLocation_ids();
 		
+		//Wenn die Person im Park ist, soll er eine Runde spazieren gehen
 		if (zielloc == person.get_location_id()){
 			neuer_weg.push('l');
 			neuer_weg.push('u');
@@ -231,7 +227,7 @@ public class Simulation {
 		
 		for (int i=0; i<location_ids.size(); i++){
 			for (int j=0; j<location_ids.get(i).size(); j++){
-				if (location_ids.get(i).get(j).charAt(0) != 'X' && location_ids.get(i).get(j).charAt(0) != ziellocation.charAt(0) && location_ids.get(i).get(j).charAt(0) != 'P'){
+				if (location_ids.get(i).get(j).charAt(0) != 'X' && location_ids.get(i).get(j).charAt(0) != ziellocation.charAt(0) && location_ids.get(i).get(j).charAt(0) != 'P' && location_ids.get(i).get(j).charAt(0) != person.get_location_id()){
 					location_ids.get(i).set(j,"You shall not pass!") ;
 				}
 				if (location_ids.get(i).get(j).charAt(0) == ziellocation.charAt(0)){
@@ -240,16 +236,13 @@ public class Simulation {
 				if (location_ids.get(i).get(j).charAt(0) == 'P'){
 					location_ids.get(i).set(j,"X") ;
 				}
+				if (location_ids.get(i).get(j).charAt(0) == person.get_location_id()){
+					location_ids.get(i).set(j,"X") ;
+				}
 			}
 		}
 		ziellocation = "Z";
-		System.out.println(person.getPosX() +"-"+ person.getPosY() +"-"+ (person.getPosX()/45) +"-"+ (person.getPosY()/45));
-		location_ids.get(person.getPosY()/45).set(person.getPosX()/45,"0") ;
-		
-		if (person.getPosX() == 0 || person.getPosY()==0){
-			System.out.println(person.getPosX() +"-"+ person.getPosY() +"-"+ (person.getPosX()/45) +"-"+ (person.getPosY()/45));
-		}
-		
+		location_ids.get(person.getPosY()/45).set(person.getPosX()/45,"0") ;		
 		
 goal:	for (int i=0; i<100; i++){
 			for (int j=0; j<16; j++){  	// J entspricht y-wert, K entspricht x-wert
@@ -257,53 +250,72 @@ goal:	for (int i=0; i<100; i++){
 					// Es werden Zahlen auf der Map gesucht
 					if (location_ids.get(j).get(k).equals(String.valueOf(i))){
 						// Es wird überprüft, ob das Ziel in direkter Nähe liegt
-						if (location_ids.get(j+1).get(k).equals(ziellocation)) {
+						if (j < 15){
+							if (location_ids.get(j+1).get(k).equals(ziellocation)) {
 							location_ids.get(j+1).set(k,String.valueOf(i+1));
 							counter = i;
 							yPos_current = j+1;
 							xPos_current = k;
 							break goal;
+							}
 						}
-						if (location_ids.get(j).get(k+1).equals(ziellocation)) {
+						if (k<24){
+							if (location_ids.get(j).get(k+1).equals(ziellocation)) {
 							location_ids.get(j).set(k+1,String.valueOf(i+1));
 							counter = i;
 							yPos_current = j;
 							xPos_current = k+1;
 							break goal;
+							}
 						}
-						if (location_ids.get(j-1).get(k).equals(ziellocation)) {
+						if (j>0){
+							if (location_ids.get(j-1).get(k).equals(ziellocation)) {
 							location_ids.get(j-1).set(k,String.valueOf(i+1));
 							counter = i;
 							yPos_current = j-1;
 							xPos_current = k;
 							break goal;
+							}
 						}
-						if (location_ids.get(j).get(k-1).equals(ziellocation)) {
+						if (k>0){
+							if (location_ids.get(j).get(k-1).equals(ziellocation)) {
 							location_ids.get(j).set(k-1,String.valueOf(i+1));
 							counter = i;
 							yPos_current = j;
 							xPos_current = k-1;
 							break goal;
+							}
 						}
 						
+						
 						// Es wird überprüft, ob ein Feld drüber/drunter/links oder rechts ebenfalls begehbar ist -> das wird markiert
-						if (location_ids.get(j+1).get(k).equals("X")) {			//Weg nach unten ist begehbar
+						if (j<15){
+							if (location_ids.get(j+1).get(k).equals("X")) {			//Weg nach unten ist begehbar
 							location_ids.get(j+1).set(k,String.valueOf(i+1));
+							}
 						}
-						if (location_ids.get(j).get(k+1).equals("X")) {			//Weg nach rechts ist begehbar
+						if (k<24){
+							if (location_ids.get(j).get(k+1).equals("X")) {			//Weg nach rechts ist begehbar
 							location_ids.get(j).set(k+1,String.valueOf(i+1));
+							}
 						}
-						if (location_ids.get(j-1).get(k).equals("X")) {			// Weg nach oben ist begehbar
+						if (j>0){
+							if (location_ids.get(j-1).get(k).equals("X")) {			// Weg nach oben ist begehbar
 							location_ids.get(j-1).set(k,String.valueOf(i+1));
+							}
 						}
-						if (location_ids.get(j).get(k-1).equals("X")) {			//Weg nach links ist begehbar
+						if (k>0){
+							if (location_ids.get(j).get(k-1).equals("X")) {			//Weg nach links ist begehbar
 							location_ids.get(j).set(k-1,String.valueOf(i+1));
+							}
 						}
 					}
 				}
 			}
 		}
-		
+//		if (xPos_current==0 || yPos_current==0){
+//			System.out.print("Fehler!");
+//		}
 		// Der Stack für die Bewegung wird mit den richtigen Werten gefüllt. Dafür hangelt man sich absteigend an der zahlenreihe entlang
 		for (int i = counter; i>=0; i++){
 			if (location_ids.get(xPos_current+1).get(yPos_current).equals(String.valueOf(i))) {			//unten gehts weiter
