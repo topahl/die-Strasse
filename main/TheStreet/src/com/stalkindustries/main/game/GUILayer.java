@@ -271,7 +271,7 @@ public class GUILayer extends javax.swing.JFrame{
 			timer_counter=0;
 		if (timer_counter==0){
 			simulation.calc_spielzeit();
-		//	simulation.tagesablauf();
+//			simulation.tagesablauf();
 		}
 		timer_counter++;
 		

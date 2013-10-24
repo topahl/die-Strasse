@@ -142,12 +142,12 @@ public class Simulation {
 					berechne_weg(this.people.get(i), (char)(this.people.get(i).get_haus_id()));
 				}
 				if (this.spiel_stunde >= 15 && this.spiel_stunde <=20 ){ // in den Park gehen
-					if ((int)(Math.random()*20) == 3){
+					if ((int)(Math.random()*200) == 3){
 						berechne_weg(this.people.get(i), 'P');
 					}
 				}
 				if (this.people.get(i).get_location_id()=='P'){ //nach Hause gehen
-					if ((int)(Math.random()*30) == 3){
+					if ((int)(Math.random()*300) == 3){
 						System.out.println("In Park gehen");
 						berechne_weg(this.people.get(i), (char)(this.people.get(i).get_haus_id())); 
 					}
@@ -165,7 +165,7 @@ public class Simulation {
 							berechne_weg(this.people.get(i), (char)(this.people.get(i).get_haus_id()));
 						}		
 						if (this.spiel_stunde >= 17 || this.spiel_stunde <=1){  // in den Park gehen
-							if ((int)(Math.random()*30) == 3){
+							if ((int)(Math.random()*300) == 3){
 								System.out.println("In Park gehen");
 								berechne_weg(this.people.get(i), 'P');
 							}
@@ -181,14 +181,14 @@ public class Simulation {
 							berechne_weg(this.people.get(i), (char)(this.people.get(i).get_haus_id()));
 						}
 						if (this.spiel_stunde >=12 || this.spiel_stunde <=1){  // in den Park gehen
-							if ((int)(Math.random()*30) == 3){
+							if ((int)(Math.random()*300) == 3){
 								System.out.println("In Park gehen");
 								berechne_weg(this.people.get(i), 'P');
 							}
 						}
 					}
 					if (this.people.get(i).get_location_id()=='P'){ //nach Hause gehen
-						if ((int)(Math.random()*30) == 3){
+						if ((int)(Math.random()*300) == 3){
 							berechne_weg(this.people.get(i), (char)(this.people.get(i).get_haus_id())); 
 						}
 					}
@@ -243,8 +243,12 @@ public class Simulation {
 			}
 		}
 		ziellocation = "Z";
-		System.out.println(person.getPosX() +"-"+ person.getY() +"-"+ (person.getPosX()/45) +"-"+ (person.getY()/45));
-		location_ids.get(person.getPosX()/45).set(person.getPosY()/45,"0") ;
+		System.out.println(person.getPosX() +"-"+ person.getPosY() +"-"+ (person.getPosX()/45) +"-"+ (person.getPosY()/45));
+		location_ids.get(person.getPosY()/45).set(person.getPosX()/45,"0") ;
+		
+		if (person.getPosX() == 0 || person.getPosY()==0){
+			System.out.println(person.getPosX() +"-"+ person.getPosY() +"-"+ (person.getPosX()/45) +"-"+ (person.getPosY()/45));
+		}
 		
 		
 goal:	for (int i=0; i<100; i++){
