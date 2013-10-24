@@ -221,13 +221,34 @@ public class Simulation {
 		yPos_current = 0;
 		location_ids = Ressources.getLocation_ids();
 		
+		if (zielloc == person.get_location_id()){
+			neuer_weg.push('l');
+			neuer_weg.push('u');
+			neuer_weg.push('u');
+			neuer_weg.push('r');
+			neuer_weg.push('r');
+			neuer_weg.push('r');
+			neuer_weg.push('r');
+			neuer_weg.push('o');
+			neuer_weg.push('o');
+			neuer_weg.push('l');
+			neuer_weg.push('l');
+			neuer_weg.push('l');
+			person.setMoves(neuer_weg);
+			return;
+		}
+		
+		
 		for (int i=0; i<location_ids.size(); i++){
 			for (int j=0; j<location_ids.get(i).size(); j++){
-				if (location_ids.get(i).get(j).charAt(0) != 'X' && location_ids.get(i).get(j).charAt(0) != ziellocation.charAt(0)){
+				if (location_ids.get(i).get(j).charAt(0) != 'X' && location_ids.get(i).get(j).charAt(0) != ziellocation.charAt(0) && location_ids.get(i).get(j).charAt(0) != 'P'){
 					location_ids.get(i).set(j,"You shall not pass!") ;
 				}
 				if (location_ids.get(i).get(j).charAt(0) == ziellocation.charAt(0)){
 					location_ids.get(i).set(j,"Z") ;
+				}
+				if (location_ids.get(i).get(j).charAt(0) == 'P'){
+					location_ids.get(i).set(j,"X") ;
 				}
 			}
 		}
