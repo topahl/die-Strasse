@@ -17,9 +17,7 @@ public class Ressources {
 		//TODO richtigen Dateipfad später angeben
 		location_ids=read_from_csv("C:/Users/Martika/Desktop/Dropbox/Software Engineering/Grafikdesign/Fertig/russland_map.csv");
 		
-		
 	}
-	
 	
 	
 	//Beschwerden an Sven und Miri
