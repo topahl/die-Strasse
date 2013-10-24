@@ -385,7 +385,7 @@ goal:	for (int i=0; i<100; i++){
 
 	public int getSpiel_tag() {
 		return spiel_tag;
-	}
+	} 
 
 
 	public int getSpiel_stunde() {
