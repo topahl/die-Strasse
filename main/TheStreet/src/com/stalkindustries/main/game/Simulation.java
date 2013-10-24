@@ -200,7 +200,6 @@ public class Simulation {
 	} 	
 	
 	//Support Tiki
-	//TODO richtigen Dateipfad verwenden
 	public void berechne_weg(Person person, char zielloc){
 		
 		int counter;
