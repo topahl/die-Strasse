@@ -259,7 +259,24 @@ public class Simulation {
 			}
 		}
 		ziellocation = "Z";
-		location_ids.get((person.getPosY()-Ressources.ZEROPOS.height)/45).set((person.getPosX()-Ressources.ZEROPOS.width)/45,"0") ;		
+		switch(person.getCurrentMove()){
+		
+			
+		
+		case 'r':
+			location_ids.get((person.getPosY()-Ressources.ZEROPOS.height)/45).set(((person.getPosX()-Ressources.ZEROPOS.width)/45)+1,"0");
+			break;
+		
+		case 'u':
+			location_ids.get(((person.getPosY()-Ressources.ZEROPOS.height)/45)+1).set((person.getPosX()-Ressources.ZEROPOS.width)/45,"0");
+			break;
+		case 'o':
+		case 'l':
+		default:
+			location_ids.get((person.getPosY()-Ressources.ZEROPOS.height)/45).set((person.getPosX()-Ressources.ZEROPOS.width)/45,"0");
+		}
+		
+				
 		
 goal:	for (int i=0; i<100; i++){
 			for (int j=0; j<16; j++){  	// J entspricht y-wert, K entspricht x-wert

@@ -144,6 +144,10 @@ public abstract class Mensch extends JLabel {
 		this.moves = moves;
 	}
 	
+	public char getCurrentMove(){
+		return currentMove;
+	} 
+	
 //	public Stack<Character> getMoves(){
 //		return this.moves;
 //	}
