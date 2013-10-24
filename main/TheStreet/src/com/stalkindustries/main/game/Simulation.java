@@ -163,6 +163,10 @@ public class Simulation {
 				if (this.people.get(i).get_location_id()=='P'){ //nach Hause gehen
 					if ((int)(Math.random()*300) == 3){
 						berechne_weg(this.people.get(i), (char)(this.people.get(i).get_haus_id())); 
+					} else{
+						if (this.spiel_minute==0){
+							berechne_weg(this.people.get(i), 'P');
+						}
 					}
 				}
 			}else{
@@ -179,7 +183,6 @@ public class Simulation {
 						}		
 						if (this.spiel_stunde >= 17 || this.spiel_stunde <=1){  // in den Park gehen
 							if ((int)(Math.random()*300) == 3){
-								System.out.println("In Park gehen");
 								berechne_weg(this.people.get(i), 'P');
 							}
 						}
@@ -202,6 +205,10 @@ public class Simulation {
 					if (this.people.get(i).get_location_id()=='P'){ //nach Hause gehen
 						if ((int)(Math.random()*300) == 3){
 							berechne_weg(this.people.get(i), (char)(this.people.get(i).get_haus_id())); 
+						} else{
+							if (this.spiel_minute==0){
+								berechne_weg(this.people.get(i), 'P');
+							}
 						}
 					}
 				}
@@ -224,7 +231,8 @@ public class Simulation {
 		location_ids = Ressources.getLocation_ids();
 		
 		//Wenn die Person im Park ist, soll er eine Runde spazieren gehen
-		if (zielloc == person.get_location_id()){
+		if (zielloc == person.get_location_id() && (person.getPosY()-Ressources.ZEROPOS.height)/45 == 3 && (person.getPosX()-Ressources.ZEROPOS.width)/45 == 13){
+			
 			neuer_weg.push('l');
 			neuer_weg.push('u');
 			neuer_weg.push('u');

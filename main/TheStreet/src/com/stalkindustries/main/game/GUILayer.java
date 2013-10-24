@@ -169,7 +169,7 @@ public class GUILayer extends javax.swing.JFrame{
 				people_per_house = (int)(Math.random()*(4))+1;
 				if(i == house_of_terrorist){
 					number_of_adults = 1 + (int)(Math.random()*(people_per_house));
-					mensch = new Terrorist(i);
+					mensch = new Terrorist(i+1);
 					this.humans.add(mensch);
 					layeredPane.add(mensch, javax.swing.JLayeredPane.DEFAULT_LAYER);
 					this.humans.get(mensch_cnt).teleport(spornPersonX[familien_cnt],spornPersonY[familien_cnt]);
@@ -180,7 +180,7 @@ public class GUILayer extends javax.swing.JFrame{
 					//this.simulation.set_people(new Terrorist(i));
 					for(int j=0;j<number_of_adults-1;j++){
 						//this.simulation.set_people(new Erwachsene(i));
-						mensch = new Erwachsene(i);
+						mensch = new Erwachsene(i+1);
 						this.humans.add(mensch);
 						layeredPane.add(mensch, javax.swing.JLayeredPane.DEFAULT_LAYER);
 						this.humans.get(mensch_cnt).teleport(spornPersonX[familien_cnt],spornPersonY[familien_cnt]);
@@ -194,7 +194,7 @@ public class GUILayer extends javax.swing.JFrame{
 					number_of_adults =  (int)(Math.random()*(people_per_house))+1;
 					for(int j=0;j<number_of_adults;j++){
 						//this.simulation.set_people(new Erwachsene(i));
-						mensch = new Erwachsene(i);
+						mensch = new Erwachsene(i+1);
 						this.humans.add(mensch);
 						layeredPane.add(mensch, javax.swing.JLayeredPane.DEFAULT_LAYER);
 						this.humans.get(mensch_cnt).teleport(spornPersonX[familien_cnt],spornPersonY[familien_cnt]);
@@ -207,7 +207,7 @@ public class GUILayer extends javax.swing.JFrame{
 				number_of_children = people_per_house - number_of_adults;
 				for(int j=0;j<number_of_children;j++){
 					//this.simulation.set_people(new Kinder(i));
-					mensch = new Kinder(i);
+					mensch = new Kinder(i+1);
 					this.humans.add(mensch);
 					layeredPane.add(mensch, javax.swing.JLayeredPane.DEFAULT_LAYER);
 					this.humans.get(mensch_cnt).teleport(spornPersonX[familien_cnt],spornPersonY[familien_cnt]);
