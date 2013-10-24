@@ -348,18 +348,8 @@ goal:	for (int i=0; i<100; i++){
 	}
 
 
-	public void setSpiel_tag(int spiel_tag) {
-		this.spiel_tag = spiel_tag;
-	}
-
-
 	public int getSpiel_stunde() {
 		return spiel_stunde;
-	}
-
-
-	public void setSpiel_stunde(int spiel_stunde) {
-		this.spiel_stunde = spiel_stunde;
 	}
 
 
@@ -367,10 +357,6 @@ goal:	for (int i=0; i<100; i++){
 		return spiel_minute;
 	}
 
-
-	public void setSpiel_minute(int spiel_minute) {
-		this.spiel_minute = spiel_minute;
-	}
 	
 	public String getSpielzeit_as_string() {
 		String zeit="";
