@@ -17,7 +17,7 @@ public class Ressources {
 	}
 	
 	
-
+	
 	public static ArrayList<ArrayList<String>> getLocation_ids() {
 		return location_ids;
 	}

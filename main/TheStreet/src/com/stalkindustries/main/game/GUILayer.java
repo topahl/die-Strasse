@@ -33,6 +33,7 @@ public class GUILayer extends javax.swing.JFrame{
 	private Haus haus;//wird später initialisiert
 	private ArrayList<Mensch> humans = new ArrayList<Mensch>();
 	private static int misstrauens_counter = 0;
+	private static int timer_counter = 0;
 	
     public GUILayer() {
         initComponents();
@@ -169,6 +170,14 @@ public class GUILayer extends javax.swing.JFrame{
 			simulation.calc_misstrauen_in_street();
 		}
 		misstrauens_counter++;
+		
+		if (timer_counter==2)
+			timer_counter=0;
+		if (timer_counter==0){
+			simulation.calc_spielzeit();
+		}
+		timer_counter++;
+		
 		for(int i=0;i<this.humans.size();i++){
 			this.humans.get(i).step();
 		}

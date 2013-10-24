@@ -127,24 +127,13 @@ public class Simulation {
 	
 	// Support Tiki
 	void calc_spielzeit(){
-		// Vorausgesetzt, dass die Spilzeit initialisiert wurde, abfragen auf "null" nicht möglich da primitiver Datentyp
-		
-		//alle 500 ms wird eine Spielminute hochgezählt, dh 12 Minuten für einen Tagesablauf
-		
-		long current_milis;
-		current_milis = System.currentTimeMillis();
-		
-		//TODO -> es muss immer genau 500 oder 0 sein, das werden wir in unserer Abfrage selten hinbekommen... 
-		// ausbaufähig, vorläufig steht was
-		if (current_milis == 500 || current_milis == 0){
-			this.spielMinute++;
-			if (this.spielMinute == 60){
-				this.spielMinute = 0;
+		this.spielMinute++;
+		if (this.spielMinute == 60){
+			this.spielMinute = 0;
+			this.spielStunde++;
+			if (this.spielStunde==24){
+				this.spielStunde=0;
 				this.spielStunde++;
-				if (this.spielStunde==24){
-					this.spielStunde=0;
-					this.spielStunde++;
-				}
 			}
 		}
 	}
