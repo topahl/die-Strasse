@@ -4,7 +4,6 @@ import java.util.Set;
 import java.util.Stack;
 import java.util.TreeMap;
 import java.util.TreeSet;
-import java.util.Date;
 
 import com.stalkindustries.main.TheStreet;
 
@@ -14,7 +13,10 @@ public class Simulation {
 	//private int[] location_raster; nicht mehr benötigt
 	private ArrayList<Person> people = new ArrayList(); 
 	private Agent agent = new Agent();
-	private Date spielzeit = new Date(0,0,1,7,0,0); //wird auf Tag 1 gesetzt, 7 Uhr morgens
+	private int spiel_tag=1;
+	private int spiel_stunde=0;
+	private int spiel_minute=0;
+
 	
 	public Simulation(){
 		
@@ -113,30 +115,19 @@ public class Simulation {
 		
 	}
 	
-	
-//	//Support Tiki
-//	void initialize_spielzeit(){
-////		this.spielMinute=0;
-////		this.spielStunde=7;
-////		this.spielTag=1;
-//		
-//		this.spielzeit.setDate(1);
-//		this.spielzeit.setHours(0);
-//		this.spielzeit.setMinutes(1);
-//		
-//	}
+
 	
 	
 	// Support Tiki
 	void calc_spielzeit(){
-		this.spielzeit.setMinutes(this.spielzeit.getMinutes()+1);
-		if (this.spielzeit.getMinutes() == 60){
-			this.spielzeit.setMinutes(0);
-			this.spielzeit.setHours(this.spielzeit.getHours()+1);
-			if (this.spielzeit.getHours()==24){
-				this.spielzeit.setHours(0);
-				this.spielzeit.setDate(this.spielzeit.getDate()+1);
-			}
+		this.spiel_minute++;
+		if (this.spiel_minute==60){
+			this.spiel_minute = 0;
+			this.spiel_stunde++;
+		}
+		if (this.spiel_stunde==24){
+			this.spiel_stunde=0;
+			this.spiel_tag++;
 		}
 	}
 	
@@ -146,16 +137,16 @@ public class Simulation {
 	void tagesablauf(){
 		for	(int i=0; i<this.people.size(); i++){
 			if (this.people.get(i) instanceof Kinder){
-				if (this.spielzeit.getHours()==7 && (this.people.get(i).getZeitverzogerung() + this.spielzeit.getMinutes()) == 60){ //zur Schule gehen
+				if (this.spiel_stunde==7 && (this.people.get(i).getZeitverzogerung() + this.spiel_minute) == 60){ //zur Schule gehen
 					berechne_weg(this.people.get(i), 'E');
 				}	
-				if (this.spielzeit.getHours()==14  && (this.people.get(i).getZeitverzogerung() + this.spielzeit.getMinutes()) == 60){ //nach Hause gehen
+				if (this.spiel_stunde==14  && (this.people.get(i).getZeitverzogerung() + this.spiel_minute) == 60){ //nach Hause gehen
 					berechne_weg(this.people.get(i), (char)(this.people.get(i).get_haus_id()));				
 				}	
-				if (this.spielzeit.getHours()==20  && (this.people.get(i).getZeitverzogerung() + this.spielzeit.getMinutes()) == 60){ //nach Hause gehen
+				if (this.spiel_stunde==20  && (this.people.get(i).getZeitverzogerung() + this.spiel_minute) == 60){ //nach Hause gehen
 					berechne_weg(this.people.get(i), (char)(this.people.get(i).get_haus_id()));
 				}
-				if (this.spielzeit.getHours() >= 15 && this.spielzeit.getHours() <=20 ){ // in den Park gehen
+				if (this.spiel_stunde >= 15 && this.spiel_stunde <=20 ){ // in den Park gehen
 					if ((int)(Math.random()*20) == 3){
 						berechne_weg(this.people.get(i), 'P');
 					}
@@ -168,31 +159,31 @@ public class Simulation {
 			}else{
 				if (this.people.get(i) instanceof Erwachsene){
 					if (((Erwachsene)people.get(i)).isHat_arbeit()){
-						if (this.spielzeit.getHours()==8 && (this.people.get(i).getZeitverzogerung() + this.spielzeit.getMinutes()) == 60){ // Zur Arbeit gehen
+						if (this.spiel_stunde==8 && (this.people.get(i).getZeitverzogerung() + this.spiel_minute) == 60){ // Zur Arbeit gehen
 							berechne_weg(this.people.get(i), 'E');
 						}
-						if (this.spielzeit.getHours()==16 && (this.people.get(i).getZeitverzogerung() + this.spielzeit.getMinutes()) == 60){ //nach Hause gehen
+						if (this.spiel_stunde==16 && (this.people.get(i).getZeitverzogerung() + this.spiel_minute) == 60){ //nach Hause gehen
 							berechne_weg(this.people.get(i), (char)(this.people.get(i).get_haus_id()));
 						}		
-						if (this.spielzeit.getHours()==1 && (this.people.get(i).getZeitverzogerung() + this.spielzeit.getMinutes()) == 60){ //nach Hause gehen
+						if (this.spiel_stunde==1 && (this.people.get(i).getZeitverzogerung() + this.spiel_minute) == 60){ //nach Hause gehen
 							berechne_weg(this.people.get(i), (char)(this.people.get(i).get_haus_id()));
 						}		
-						if (this.spielzeit.getHours() >= 17 || this.spielzeit.getHours() <=1){  // in den Park gehen
+						if (this.spiel_stunde >= 17 || this.spiel_stunde <=1){  // in den Park gehen
 							if ((int)(Math.random()*30) == 3){
 								berechne_weg(this.people.get(i), 'P');
 							}
 						}
 					} else {
-						if (this.spielzeit.getHours() == 9 && (this.people.get(i).getZeitverzogerung() + this.spielzeit.getMinutes()) == 60){ //zum Einkaufen gehen
+						if (this.spiel_stunde == 9 && (this.people.get(i).getZeitverzogerung() + this.spiel_minute) == 60){ //zum Einkaufen gehen
 							berechne_weg(this.people.get(i), 'E');
 						}	
-						if (this.spielzeit.getHours() == 11 && (this.people.get(i).getZeitverzogerung() + this.spielzeit.getMinutes()) == 60){ //nach Hause gehen
+						if (this.spiel_stunde == 11 && (this.people.get(i).getZeitverzogerung() + this.spiel_minute) == 60){ //nach Hause gehen
 							berechne_weg(this.people.get(i), (char)(this.people.get(i).get_haus_id()));
 						}
-						if (this.spielzeit.getHours() == 1 && (this.people.get(i).getZeitverzogerung() + this.spielzeit.getMinutes()) == 60){ //nach Hause gehen
+						if (this.spiel_stunde == 1 && (this.people.get(i).getZeitverzogerung() + this.spiel_minute) == 60){ //nach Hause gehen
 							berechne_weg(this.people.get(i), (char)(this.people.get(i).get_haus_id()));
 						}
-						if (this.spielzeit.getHours() >=12 || this.spielzeit.getHours() <=1){  // in den Park gehen
+						if (this.spiel_stunde >=12 || this.spiel_stunde <=1){  // in den Park gehen
 							if ((int)(Math.random()*30) == 3){
 								berechne_weg(this.people.get(i), 'P');
 							}
@@ -350,9 +341,50 @@ goal:	for (int i=0; i<100; i++){
 	public void set_agent(Agent agent){
 		this.agent = agent;
 	}
+
+
+	public int getSpiel_tag() {
+		return spiel_tag;
+	}
+
+
+	public void setSpiel_tag(int spiel_tag) {
+		this.spiel_tag = spiel_tag;
+	}
+
+
+	public int getSpiel_stunde() {
+		return spiel_stunde;
+	}
+
+
+	public void setSpiel_stunde(int spiel_stunde) {
+		this.spiel_stunde = spiel_stunde;
+	}
+
+
+	public int getSpiel_minute() {
+		return spiel_minute;
+	}
+
+
+	public void setSpiel_minute(int spiel_minute) {
+		this.spiel_minute = spiel_minute;
+	}
 	
-	public Date get_spielzeit(){
-		return spielzeit;
+	public String getSpielzeit_as_string() {
+		String zeit="";
+		zeit = String.valueOf(this.spiel_stunde);
+		if (this.spiel_stunde <=9){
+			zeit = "0" + zeit;
+		}
+		zeit = zeit + ":";
+		if (this.spiel_minute <=9){
+			zeit = zeit + "0";
+		}
+		zeit = zeit + String.valueOf(this.spiel_minute);
+		
+		return zeit;
 	}
 
 }
