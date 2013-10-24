@@ -11,11 +11,12 @@ public class Simulation {
 	
 	private int[][] beziehungsmatrix;
 	//private int[] location_raster; nicht mehr benötigt
-	private ArrayList<Person> people = new ArrayList(); 
+	private ArrayList<Person> people = new ArrayList<Person>(); 
 	private Agent agent = new Agent();
 	private int spiel_tag=1;
 	private int spiel_stunde=0;
 	private int spiel_minute=0;
+	private ArrayList<Haus> houses = new ArrayList<Haus>();
 
 	
 	public Simulation(){
@@ -105,6 +106,22 @@ public class Simulation {
 	//TODO
 	void calc_misstrauen_after_action(){
 		
+	}
+	
+	public void calc_ueberwachungsstatus(){
+		for(int i=0;i<this.houses.size();i++){
+			this.houses.get(i).setUeberwachungsstatus(this.houses.get(i).getUeberwachungsmodule().size()/Haus.MAXUBERWACHUNGSMODULE);
+		}
+	}
+	
+	public float calc_ueberwachung_in_street(){
+		float ueberwachung = 0;
+		for(int i=0;i<this.houses.size();i++){
+			ueberwachung += this.houses.get(i).getUeberwachungsstatus();
+		}
+		ueberwachung = ueberwachung/this.people.size();
+		
+		return ueberwachung;
 	}
 	
 
@@ -385,6 +402,14 @@ goal:	for (int i=0; i<100; i++){
 		zeit = zeit + String.valueOf(this.spiel_minute);
 		
 		return zeit;
+	}
+	
+	public ArrayList<Haus> getHouses(){
+		return this.houses;
+	}
+	
+	public void setHouses(Haus haus){
+		this.houses.add(haus);
 	}
 
 }

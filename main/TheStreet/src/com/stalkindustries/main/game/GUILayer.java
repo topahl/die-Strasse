@@ -34,6 +34,7 @@ public class GUILayer extends javax.swing.JFrame{
 	private JLabel zeit = new JLabel();
 	private JLabel tag = new JLabel();
 	private JLabel misstrauen_in_street = new JLabel();
+	private JLabel ueberwachung_in_street = new JLabel();
 	
     public GUILayer() {
         initComponents();
@@ -85,6 +86,16 @@ public class GUILayer extends javax.swing.JFrame{
         misstrauen_in_street.setVisible(true);
         layeredPane.add(misstrauen_in_street, javax.swing.JLayeredPane.DEFAULT_LAYER);
         
+        //Debugging: ‹berwachung in der Straﬂe
+        s = "0.0%";
+        ueberwachung_in_street.setText(s);
+        ueberwachung_in_street.setBounds(720+Ressources.ZEROPOS.width, 637+Ressources.ZEROPOS.height, 183, 37);
+        ueberwachung_in_street.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        ueberwachung_in_street.setFont(new Font("Corbel",Font.BOLD,40));
+        ueberwachung_in_street.setForeground(new java.awt.Color(255, 255, 255));
+        ueberwachung_in_street.setVisible(true);
+        layeredPane.add(ueberwachung_in_street, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        
         
         karte.setBounds(Ressources.ZEROPOS.width, Ressources.ZEROPOS.height, 1125, 720);
         layeredPane.add(karte, javax.swing.JLayeredPane.DEFAULT_LAYER);
@@ -120,10 +131,10 @@ public class GUILayer extends javax.swing.JFrame{
 		int people_per_house;
 		int number_of_adults;
 		int number_of_children;
-		int spornX[] = new int[9];
-		int spornY[] = new int[9];
-		int spornx[] = new int[4];
-		int sporny[] = new int[4];
+		int spornHausX[] = new int[9];
+		int spornHausY[] = new int[9];
+		int spornPersonX[] = new int[4];
+		int spornPersonY[] = new int[4];
 		int familien_cnt = 0;
 		int mensch_cnt = 0;
 		Mensch mensch;
@@ -134,8 +145,8 @@ public class GUILayer extends javax.swing.JFrame{
 			for(int i=0;i<location_raster.size();i++){	//y-Achse
 				for(int j=0;j<location_raster.get(i).size();j++){	//x-Achse
 					if(location_raster.get(i).get(j).charAt(0) ==("" + (haus+1)).charAt(0)){	
-						spornX[haus] =  j*Ressources.RASTERHEIGHT+Ressources.ZEROPOS.width-2*Ressources.RASTERHEIGHT;
-						spornY[haus] =  i*Ressources.RASTERHEIGHT+Ressources.ZEROPOS.height-2*Ressources.RASTERHEIGHT;
+						spornHausX[haus] =  j*Ressources.RASTERHEIGHT+Ressources.ZEROPOS.width-2*Ressources.RASTERHEIGHT;
+						spornHausY[haus] =  i*Ressources.RASTERHEIGHT+Ressources.ZEROPOS.height-2*Ressources.RASTERHEIGHT;
 					}
 						
 				}
@@ -145,14 +156,14 @@ public class GUILayer extends javax.swing.JFrame{
 		for(int i=0;i<9;i++){ 
 			familien_cnt = 0;
 			//f¸r ein Haus die Spornpunkte festlegen
-			spornx[0] = spornX[i];
-			sporny[0] = spornY[i];
-			spornx[1] = spornX[i] + Ressources.RASTERHEIGHT;
-			sporny[1] = spornY[i];
-			spornx[2] = spornX[i] + 2*Ressources.RASTERHEIGHT;
-			sporny[2] = spornY[i];
-			spornx[3] = spornX[i];
-			sporny[3] = spornY[i] + Ressources.RASTERHEIGHT;
+			spornPersonX[0] = spornHausX[i];
+			spornPersonY[0] = spornHausY[i];
+			spornPersonX[1] = spornHausX[i] + Ressources.RASTERHEIGHT;
+			spornPersonY[1] = spornHausY[i];
+			spornPersonX[2] = spornHausX[i] + 2*Ressources.RASTERHEIGHT;
+			spornPersonY[2] = spornHausY[i];
+			spornPersonX[3] = spornHausX[i];
+			spornPersonY[3] = spornHausY[i] + Ressources.RASTERHEIGHT;
 			
 			if(i!=agent_house_nr){
 				people_per_house = (int)(Math.random()*(4))+1;
@@ -161,9 +172,9 @@ public class GUILayer extends javax.swing.JFrame{
 					mensch = new Terrorist(i);
 					this.humans.add(mensch);
 					layeredPane.add(mensch, javax.swing.JLayeredPane.DEFAULT_LAYER);
-					this.humans.get(mensch_cnt).teleport(spornx[familien_cnt],sporny[familien_cnt]);
-					this.humans.get(mensch_cnt).setHomePosX(spornx[familien_cnt]);
-					this.humans.get(mensch_cnt).setHomePosY(sporny[familien_cnt]);
+					this.humans.get(mensch_cnt).teleport(spornPersonX[familien_cnt],spornPersonY[familien_cnt]);
+					this.humans.get(mensch_cnt).setHomePosX(spornPersonX[familien_cnt]);
+					this.humans.get(mensch_cnt).setHomePosY(spornPersonY[familien_cnt]);
 					mensch_cnt++;
 					familien_cnt++;
 					//this.simulation.set_people(new Terrorist(i));
@@ -172,9 +183,9 @@ public class GUILayer extends javax.swing.JFrame{
 						mensch = new Erwachsene(i);
 						this.humans.add(mensch);
 						layeredPane.add(mensch, javax.swing.JLayeredPane.DEFAULT_LAYER);
-						this.humans.get(mensch_cnt).teleport(spornx[familien_cnt],sporny[familien_cnt]);
-						this.humans.get(mensch_cnt).setHomePosX(spornx[familien_cnt]);
-						this.humans.get(mensch_cnt).setHomePosY(sporny[familien_cnt]);
+						this.humans.get(mensch_cnt).teleport(spornPersonX[familien_cnt],spornPersonY[familien_cnt]);
+						this.humans.get(mensch_cnt).setHomePosX(spornPersonX[familien_cnt]);
+						this.humans.get(mensch_cnt).setHomePosY(spornPersonY[familien_cnt]);
 						mensch_cnt++;
 						familien_cnt++;
 					}
@@ -186,9 +197,9 @@ public class GUILayer extends javax.swing.JFrame{
 						mensch = new Erwachsene(i);
 						this.humans.add(mensch);
 						layeredPane.add(mensch, javax.swing.JLayeredPane.DEFAULT_LAYER);
-						this.humans.get(mensch_cnt).teleport(spornx[familien_cnt],sporny[familien_cnt]);
-						this.humans.get(mensch_cnt).setHomePosX(spornx[familien_cnt]);
-						this.humans.get(mensch_cnt).setHomePosY(sporny[familien_cnt]);
+						this.humans.get(mensch_cnt).teleport(spornPersonX[familien_cnt],spornPersonY[familien_cnt]);
+						this.humans.get(mensch_cnt).setHomePosX(spornPersonX[familien_cnt]);
+						this.humans.get(mensch_cnt).setHomePosY(spornPersonY[familien_cnt]);
 						mensch_cnt++;
 						familien_cnt++;
 					}
@@ -199,13 +210,13 @@ public class GUILayer extends javax.swing.JFrame{
 					mensch = new Kinder(i);
 					this.humans.add(mensch);
 					layeredPane.add(mensch, javax.swing.JLayeredPane.DEFAULT_LAYER);
-					this.humans.get(mensch_cnt).teleport(spornx[familien_cnt],sporny[familien_cnt]);
-					this.humans.get(mensch_cnt).setHomePosX(spornx[familien_cnt]);
-					this.humans.get(mensch_cnt).setHomePosY(sporny[familien_cnt]);
+					this.humans.get(mensch_cnt).teleport(spornPersonX[familien_cnt],spornPersonY[familien_cnt]);
+					this.humans.get(mensch_cnt).setHomePosX(spornPersonX[familien_cnt]);
+					this.humans.get(mensch_cnt).setHomePosY(spornPersonY[familien_cnt]);
 					mensch_cnt++;
 					familien_cnt++;
 				}
-				this.initialize_house(i,false);
+				this.initialize_house(i,false,spornHausX[0],spornHausY[0]);
 			}	
 		}
 		
@@ -214,25 +225,24 @@ public class GUILayer extends javax.swing.JFrame{
 		}
 		
 		//Agent hinzuf¸gen
-		spornx[0] = spornX[agent_house_nr];
-		sporny[0] = spornY[agent_house_nr];
+		spornPersonX[0] = spornHausX[agent_house_nr];
+		spornPersonY[0] = spornHausY[agent_house_nr];
 		mensch = new Agent();
 		this.humans.add(mensch);
 		layeredPane.add(mensch, javax.swing.JLayeredPane.DEFAULT_LAYER);
 		//this.simulation.set_agent(new Agent());
 		//this.humans.add(this.simulation.get_agent());
-		this.humans.get(mensch_cnt).teleport(spornx[0],sporny[0]);
-		this.humans.get(mensch_cnt).setHomePosX(spornx[0]);
-		this.humans.get(mensch_cnt).setHomePosY(sporny[0]);
+		this.humans.get(mensch_cnt).teleport(spornPersonX[0],spornPersonY[0]);
+		this.humans.get(mensch_cnt).setHomePosX(spornPersonX[0]);
+		this.humans.get(mensch_cnt).setHomePosY(spornPersonY[0]);
 		this.simulation.set_agent((Agent)mensch);
-		this.initialize_house(agent_house_nr,true);
+		this.initialize_house(agent_house_nr,true,spornPersonX[0],spornPersonY[0]);
 	}
 	
 	
-	private void initialize_house(int hausnr, boolean agentenhaus){
-		int x=0;
-		int y=0;
+	private void initialize_house(int hausnr, boolean agentenhaus, int x, int y){
 		haus = new Haus(hausnr,agentenhaus,x,y);
+		this.simulation.setHouses(haus);
 	}
     
     //Beschwerden an Miri
@@ -277,10 +287,16 @@ public class GUILayer extends javax.swing.JFrame{
         misstrauen_in_street.setText(s);
 	}
 	
+	public void updateUeberwachung(){
+		String s = this.simulation.calc_ueberwachung_in_street() + "%";
+		ueberwachung_in_street.setText(s); 
+	}
+	
     
 	public void step(){
 		this.update_location_id();
 		this.updateMisstrauen();
+		this.updateUeberwachung();
 		if(misstrauens_counter==25)
 			misstrauens_counter = 0;
 		if(misstrauens_counter==0){

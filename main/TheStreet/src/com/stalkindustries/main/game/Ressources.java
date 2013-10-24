@@ -65,6 +65,17 @@ public class Ressources {
 	
 		
 	public static ArrayList<ArrayList<String>> getLocation_ids() {
+		/*ArrayList<ArrayList<String>> loc_ids = new ArrayList<ArrayList<String>>();
+		ArrayList<String>tmp = new ArrayList<String>();
+		
+		for(int i=0;i<location_ids.size();i++){
+			for(int j=0;j<location_ids.get(i).size();j++){
+				tmp.add(location_ids.get(i).get(j));
+			}
+			loc_ids.add(tmp);
+		}
+		
+		return loc_ids;*/
 		return location_ids;
 	}
 	
