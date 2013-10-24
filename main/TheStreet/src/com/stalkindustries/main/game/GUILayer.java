@@ -6,11 +6,11 @@ package com.stalkindustries.main.game;
 
 import java.awt.Color;
 import java.awt.Dimension;
+import java.awt.Font;
 import java.awt.Toolkit;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.util.ArrayList;
 
+import javax.swing.JLabel;
 import javax.swing.JLayeredPane;
 import javax.swing.Timer;
 
@@ -33,6 +33,7 @@ public class GUILayer extends javax.swing.JFrame{
 	private Haus haus;//wird später initialisiert
 	private ArrayList<Mensch> humans = new ArrayList<Mensch>();
 	private static int misstrauens_counter = 0;
+	private static int timer_counter = 0;
 	
     public GUILayer() {
         initComponents();
@@ -59,6 +60,28 @@ public class GUILayer extends javax.swing.JFrame{
         setResizable(false);
         
         this.initialize_humans();
+        
+        //Tag malen
+        JLabel tag = new JLabel();
+        String s = "Tag "; //+ this.simulation.getSpielTag();
+        tag.setText(s);
+        tag.setBounds(920+this.zeropos.width, 636+this.zeropos.height, 183, 37);
+        tag.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        tag.setFont(new Font("Corbel",Font.BOLD,30));
+        tag.setForeground(new java.awt.Color(255, 255, 255));
+        tag.setVisible(true);
+        layeredPane.add(tag, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        
+      	//Uhr malen
+        JLabel zeit = new JLabel();
+       // s = "" + this.simulation.getSpielStunde() + this.simulation.getSpielMinute();
+        zeit.setText(s);
+        zeit.setBounds(920+this.zeropos.width, 669+this.zeropos.height, 183, 37);
+        zeit.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        zeit.setFont(new Font("Corbel",Font.BOLD,40));
+        zeit.setForeground(new java.awt.Color(255, 255, 255));
+        zeit.setVisible(true);
+        layeredPane.add(zeit, javax.swing.JLayeredPane.DEFAULT_LAYER);
         
         testperson.setLocation(90, 90);
         layeredPane.add(testperson, javax.swing.JLayeredPane.DEFAULT_LAYER);
@@ -169,6 +192,15 @@ public class GUILayer extends javax.swing.JFrame{
 			simulation.calc_misstrauen_in_street();
 		}
 		misstrauens_counter++;
+		
+		if (timer_counter==2)
+			timer_counter=0;
+		if (timer_counter==0){
+			simulation.calc_spielzeit();
+			simulation.tagesablauf();
+		}
+		timer_counter++;
+		
 		for(int i=0;i<this.humans.size();i++){
 			this.humans.get(i).step();
 		}

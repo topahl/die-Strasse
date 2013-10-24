@@ -4,6 +4,7 @@ import java.util.Set;
 import java.util.Stack;
 import java.util.TreeMap;
 import java.util.TreeSet;
+import java.util.Date;
 
 import com.stalkindustries.main.TheStreet;
 
@@ -13,9 +14,7 @@ public class Simulation {
 	//private int[] location_raster; nicht mehr benötigt
 	private ArrayList<Person> people = new ArrayList(); 
 	private Agent agent = new Agent();
-	private int spielTag;
-	private int spielStunde;
-	private int spielMinute;
+	private Date spielzeit = new Date(0,0,1,7,0,0); //wird auf Tag 1 gesetzt, 7 Uhr morgens
 	
 	public Simulation(){
 		
@@ -115,36 +114,28 @@ public class Simulation {
 	}
 	
 	
-	//Support Tiki
-	void initialize_spielzeit(){
-		//Tagesbeginn variabel
-		//TODO mit Gruppe besprechen wann wir anfangen sollen
-		this.spielMinute=0;
-		this.spielStunde=7;
-		this.spielTag=1;
-	}
+//	//Support Tiki
+//	void initialize_spielzeit(){
+////		this.spielMinute=0;
+////		this.spielStunde=7;
+////		this.spielTag=1;
+//		
+//		this.spielzeit.setDate(1);
+//		this.spielzeit.setHours(0);
+//		this.spielzeit.setMinutes(1);
+//		
+//	}
 	
 	
 	// Support Tiki
 	void calc_spielzeit(){
-		// Vorausgesetzt, dass die Spilzeit initialisiert wurde, abfragen auf "null" nicht möglich da primitiver Datentyp
-		
-		//alle 500 ms wird eine Spielminute hochgezählt, dh 12 Minuten für einen Tagesablauf
-		
-		long current_milis;
-		current_milis = System.currentTimeMillis();
-		
-		//TODO -> es muss immer genau 500 oder 0 sein, das werden wir in unserer Abfrage selten hinbekommen... 
-		// ausbaufähig, vorläufig steht was
-		if (current_milis == 500 || current_milis == 0){
-			this.spielMinute++;
-			if (this.spielMinute == 60){
-				this.spielMinute = 0;
-				this.spielStunde++;
-				if (this.spielStunde==24){
-					this.spielStunde=0;
-					this.spielStunde++;
-				}
+		this.spielzeit.setMinutes(this.spielzeit.getMinutes()+1);
+		if (this.spielzeit.getMinutes() == 60){
+			this.spielzeit.setMinutes(0);
+			this.spielzeit.setHours(this.spielzeit.getHours()+1);
+			if (this.spielzeit.getHours()==24){
+				this.spielzeit.setHours(0);
+				this.spielzeit.setDate(this.spielzeit.getDate()+1);
 			}
 		}
 	}
@@ -155,16 +146,16 @@ public class Simulation {
 	void tagesablauf(){
 		for	(int i=0; i<this.people.size(); i++){
 			if (this.people.get(i) instanceof Kinder){
-				if (this.spielStunde==7 && (this.people.get(i).getZeitverzogerung() + this.spielMinute) == 60){ //zur Schule gehen
+				if (this.spielzeit.getHours()==7 && (this.people.get(i).getZeitverzogerung() + this.spielzeit.getMinutes()) == 60){ //zur Schule gehen
 					berechne_weg(this.people.get(i), 'E');
 				}	
-				if (this.spielStunde==14  && (this.people.get(i).getZeitverzogerung() + this.spielMinute) == 60){ //nach Hause gehen
+				if (this.spielzeit.getHours()==14  && (this.people.get(i).getZeitverzogerung() + this.spielzeit.getMinutes()) == 60){ //nach Hause gehen
 					berechne_weg(this.people.get(i), (char)(this.people.get(i).get_haus_id()));				
 				}	
-				if (this.spielStunde==20  && (this.people.get(i).getZeitverzogerung() + this.spielMinute) == 60){ //nach Hause gehen
+				if (this.spielzeit.getHours()==20  && (this.people.get(i).getZeitverzogerung() + this.spielzeit.getMinutes()) == 60){ //nach Hause gehen
 					berechne_weg(this.people.get(i), (char)(this.people.get(i).get_haus_id()));
 				}
-				if (this.spielStunde >= 15 && this.spielStunde <=20 ){ // in den Park gehen
+				if (this.spielzeit.getHours() >= 15 && this.spielzeit.getHours() <=20 ){ // in den Park gehen
 					if ((int)(Math.random()*20) == 3){
 						berechne_weg(this.people.get(i), 'P');
 					}
@@ -177,31 +168,31 @@ public class Simulation {
 			}else{
 				if (this.people.get(i) instanceof Erwachsene){
 					if (((Erwachsene)people.get(i)).isHat_arbeit()){
-						if (this.spielStunde==8 && (this.people.get(i).getZeitverzogerung() + this.spielMinute) == 60){ // Zur Arbeit gehen
+						if (this.spielzeit.getHours()==8 && (this.people.get(i).getZeitverzogerung() + this.spielzeit.getMinutes()) == 60){ // Zur Arbeit gehen
 							berechne_weg(this.people.get(i), 'E');
 						}
-						if (this.spielStunde==16 && (this.people.get(i).getZeitverzogerung() + this.spielMinute) == 60){ //nach Hause gehen
+						if (this.spielzeit.getHours()==16 && (this.people.get(i).getZeitverzogerung() + this.spielzeit.getMinutes()) == 60){ //nach Hause gehen
 							berechne_weg(this.people.get(i), (char)(this.people.get(i).get_haus_id()));
 						}		
-						if (this.spielStunde==1 && (this.people.get(i).getZeitverzogerung() + this.spielMinute) == 60){ //nach Hause gehen
+						if (this.spielzeit.getHours()==1 && (this.people.get(i).getZeitverzogerung() + this.spielzeit.getMinutes()) == 60){ //nach Hause gehen
 							berechne_weg(this.people.get(i), (char)(this.people.get(i).get_haus_id()));
 						}		
-						if (this.spielStunde >= 17 || this.spielStunde <=1){  // in den Park gehen
+						if (this.spielzeit.getHours() >= 17 || this.spielzeit.getHours() <=1){  // in den Park gehen
 							if ((int)(Math.random()*30) == 3){
 								berechne_weg(this.people.get(i), 'P');
 							}
 						}
 					} else {
-						if (this.spielStunde == 9 && (this.people.get(i).getZeitverzogerung() + this.spielMinute) == 60){ //zum Einkaufen gehen
+						if (this.spielzeit.getHours() == 9 && (this.people.get(i).getZeitverzogerung() + this.spielzeit.getMinutes()) == 60){ //zum Einkaufen gehen
 							berechne_weg(this.people.get(i), 'E');
 						}	
-						if (this.spielStunde == 11 && (this.people.get(i).getZeitverzogerung() + this.spielMinute) == 60){ //nach Hause gehen
+						if (this.spielzeit.getHours() == 11 && (this.people.get(i).getZeitverzogerung() + this.spielzeit.getMinutes()) == 60){ //nach Hause gehen
 							berechne_weg(this.people.get(i), (char)(this.people.get(i).get_haus_id()));
 						}
-						if (this.spielStunde == 1 && (this.people.get(i).getZeitverzogerung() + this.spielMinute) == 60){ //nach Hause gehen
+						if (this.spielzeit.getHours() == 1 && (this.people.get(i).getZeitverzogerung() + this.spielzeit.getMinutes()) == 60){ //nach Hause gehen
 							berechne_weg(this.people.get(i), (char)(this.people.get(i).get_haus_id()));
 						}
-						if (this.spielStunde >=12 || this.spielStunde <=1){  // in den Park gehen
+						if (this.spielzeit.getHours() >=12 || this.spielzeit.getHours() <=1){  // in den Park gehen
 							if ((int)(Math.random()*30) == 3){
 								berechne_weg(this.people.get(i), 'P');
 							}
@@ -230,15 +221,36 @@ public class Simulation {
 		counter = 1;
 		xPos_current = 0;
 		yPos_current = 0;
-		location_ids=TheStreet.read_from_csv("C:/Users/Martika/Desktop/Dropbox/Software Engineering/Grafikdesign/Fertig/russland_map.csv");
+		location_ids = Ressources.getLocation_ids();
+		
+		if (zielloc == person.get_location_id()){
+			neuer_weg.push('l');
+			neuer_weg.push('u');
+			neuer_weg.push('u');
+			neuer_weg.push('r');
+			neuer_weg.push('r');
+			neuer_weg.push('r');
+			neuer_weg.push('r');
+			neuer_weg.push('o');
+			neuer_weg.push('o');
+			neuer_weg.push('l');
+			neuer_weg.push('l');
+			neuer_weg.push('l');
+			person.setMoves(neuer_weg);
+			return;
+		}
+		
 		
 		for (int i=0; i<location_ids.size(); i++){
 			for (int j=0; j<location_ids.get(i).size(); j++){
-				if (location_ids.get(i).get(j).charAt(0) != 'X' && location_ids.get(i).get(j).charAt(0) != ziellocation.charAt(0)){
+				if (location_ids.get(i).get(j).charAt(0) != 'X' && location_ids.get(i).get(j).charAt(0) != ziellocation.charAt(0) && location_ids.get(i).get(j).charAt(0) != 'P'){
 					location_ids.get(i).set(j,"You shall not pass!") ;
 				}
 				if (location_ids.get(i).get(j).charAt(0) == ziellocation.charAt(0)){
 					location_ids.get(i).set(j,"Z") ;
+				}
+				if (location_ids.get(i).get(j).charAt(0) == 'P'){
+					location_ids.get(i).set(j,"X") ;
 				}
 			}
 		}
@@ -338,35 +350,9 @@ goal:	for (int i=0; i<100; i++){
 	public void set_agent(Agent agent){
 		this.agent = agent;
 	}
-
-
-	public int getSpielTag() {
-		return spielTag;
-	}
-
-
-	public void setSpielTag(int spielTag) {
-		this.spielTag = spielTag;
-	}
-
-
-	public int getSpielStunde() {
-		return spielStunde;
-	}
-
-
-	public void setSpielStunde(int spielStunde) {
-		this.spielStunde = spielStunde;
-	}
-
-
-	public int getSpielMinute() {
-		return spielMinute;
-	}
-
-
-	public void setSpielMinute(int spielMinute) {
-		this.spielMinute = spielMinute;
+	
+	public Date get_spielzeit(){
+		return spielzeit;
 	}
 
 }
