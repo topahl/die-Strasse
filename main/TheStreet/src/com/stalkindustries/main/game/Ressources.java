@@ -12,6 +12,12 @@ public class Ressources {
 	
 	private static ArrayList<ArrayList<String>> location_ids;
 	
+	public static final int RASTERHEIGHT = 45; //Map Raster
+	public static final int TORSOCNT =4; //Anzahl verschiedener Torsos in Sprite Grafik
+	public static final int GAMESPEED = 40; // Zeitspanne in der eine Berechnung durchgefürt wird
+	
+	
+	 
 	static{
 		//Initialisierung der location_ids
 		//TODO richtigen Dateipfad später angeben

@@ -63,17 +63,17 @@ public abstract class Mensch extends JLabel {
 
 		switch(currentMove){
 		case 'l':
-			setIcon(new ImageIcon(sprite.getSubimage(45, 0, 45, 45)));
+			setIcon(new ImageIcon(sprite.getSubimage(Ressources.RASTERHEIGHT, 0, Ressources.RASTERHEIGHT, Ressources.RASTERHEIGHT)));
 			break;
 		case 'r':
-			setIcon(new ImageIcon(sprite.getSubimage(45, 45, 45, 45)));
+			setIcon(new ImageIcon(sprite.getSubimage(Ressources.RASTERHEIGHT, Ressources.RASTERHEIGHT, Ressources.RASTERHEIGHT, Ressources.RASTERHEIGHT)));
 			break;
 		case 'o':
-			setIcon(new ImageIcon(sprite.getSubimage(0, 45, 45, 45)));
+			setIcon(new ImageIcon(sprite.getSubimage(0, Ressources.RASTERHEIGHT, Ressources.RASTERHEIGHT, Ressources.RASTERHEIGHT)));
 			break;
 		case 'u':
 		default:
-			setIcon(new ImageIcon(sprite.getSubimage(0, 0, 45, 45)));
+			setIcon(new ImageIcon(sprite.getSubimage(0, 0, Ressources.RASTERHEIGHT, Ressources.RASTERHEIGHT)));
 			break;
 		
 		}

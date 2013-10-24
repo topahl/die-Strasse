@@ -39,7 +39,7 @@ public class GUILayer extends javax.swing.JFrame{
         initComponents();
         this.simulation.initialize_beziehungsmatrix();
         setVisible(true);
-        this.timer = new Timer(40,new OSTimer(this));
+        this.timer = new Timer(Ressources.GAMESPEED,new OSTimer(this));
         timer.start();
     }
     

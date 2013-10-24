@@ -35,10 +35,10 @@ public abstract class Person extends Mensch {
 		else
 			g2d.setColor(new Color(0f,(float)(misstrauen/(-100)),0f,0.2f));
 		
-		g2d.fillOval(0, 0, 45, 45);
-		g2d.fillOval(45, 0, 45, 45);
-		g2d.fillOval(0, 45, 45, 45);
-		g2d.fillOval(45, 45, 45, 45);
+		g2d.fillOval(0, 0, Ressources.RASTERHEIGHT, Ressources.RASTERHEIGHT);
+		g2d.fillOval(Ressources.RASTERHEIGHT, 0, Ressources.RASTERHEIGHT, Ressources.RASTERHEIGHT);
+		g2d.fillOval(0, Ressources.RASTERHEIGHT, Ressources.RASTERHEIGHT, Ressources.RASTERHEIGHT);
+		g2d.fillOval(Ressources.RASTERHEIGHT, Ressources.RASTERHEIGHT, Ressources.RASTERHEIGHT, Ressources.RASTERHEIGHT);
 		g2d.drawImage(temp_sprite, 0, 0,null);
 	}
 	
