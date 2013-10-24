@@ -230,7 +230,7 @@ public class Simulation {
 		counter = 1;
 		xPos_current = 0;
 		yPos_current = 0;
-		location_ids=TheStreet.read_from_csv("C:/Users/Martika/Desktop/Dropbox/Software Engineering/Grafikdesign/Fertig/russland_map.csv");
+		location_ids = Ressources.getLocation_ids();
 		
 		for (int i=0; i<location_ids.size(); i++){
 			for (int j=0; j<location_ids.get(i).size(); j++){

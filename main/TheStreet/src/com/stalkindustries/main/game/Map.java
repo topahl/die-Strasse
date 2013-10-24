@@ -14,9 +14,7 @@ import com.stalkindustries.main.TheStreet;
 public class Map extends JLabel{
 	private int width;
 	private int height;
-	BufferedImage karte;
-	private ArrayList<ArrayList<String>> location_ids;
-	
+	BufferedImage karte;	
 	
 	public Map(String name){
 		try {
@@ -26,9 +24,6 @@ public class Map extends JLabel{
 			e.printStackTrace();
 		}
 		
-		//Initialisierung der location_ids
-		//TODO richtigen Dateipfad später angeben
-		location_ids=TheStreet.read_from_csv("C:/Users/Martika/Desktop/Dropbox/Software Engineering/Grafikdesign/Fertig/russland_map.csv");
 		height=karte.getHeight();
 		width=karte.getWidth();
 		setIcon(new ImageIcon(karte));
@@ -46,18 +41,6 @@ public class Map extends JLabel{
 	}
 	public BufferedImage getImage(){
 		return karte;
-	}
-
-
-
-	public ArrayList<ArrayList<String>> getLocation_ids() {
-		return location_ids;
-	}
-
-
-
-	public void setLocation_ids(ArrayList<ArrayList<String>> location_ids) {
-		this.location_ids = location_ids;
 	}
 	
 }
