@@ -330,9 +330,7 @@ goal:	for (int i=0; i<100; i++){
 				}
 			}
 		}
-//		if (xPos_current==0 || yPos_current==0){
-//			System.out.print("Fehler!");
-//		}
+
 		// Der Stack für die Bewegung wird mit den richtigen Werten gefüllt. Dafür hangelt man sich absteigend an der zahlenreihe entlang
 		for (int i = counter; i>=0; i--){
 			if (yPos_current<15){
