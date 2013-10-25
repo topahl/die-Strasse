@@ -155,12 +155,15 @@ public class Simulation {
 				if (this.spiel_stunde==20  && (this.people.get(i).getZeitverzogerung() + this.spiel_minute) >= 60 && this.people.get(i).getCurrentMove() == 'n' && (this.people.get(i).getHomePosX()!=this.people.get(i).getPosX() || this.people.get(i).getHomePosY()!=this.people.get(i).getPosY())){ //nach Hause gehen
 					berechne_weg(this.people.get(i), String.valueOf((this.people.get(i).get_haus_id())).charAt(0));
 				}
+				if (this.spiel_stunde>=20  && this.people.get(i).getCurrentMove() == 'n' && (this.people.get(i).getHomePosX()!=this.people.get(i).getPosX() || this.people.get(i).getHomePosY()!=this.people.get(i).getPosY())){ //nach Hause gehen
+					berechne_weg(this.people.get(i), String.valueOf((this.people.get(i).get_haus_id())).charAt(0));
+				}
 				if (this.spiel_stunde >= 15 && this.spiel_stunde <=20 && this.people.get(i).getCurrentMove() == 'n'){ // in den Park gehen
 					if ((int)(Math.random()*200) == 3){
 						berechne_weg(this.people.get(i), 'P');
 					}
 				}
-				if (this.people.get(i).get_location_id()=='P' && this.people.get(i).getCurrentMove() == 'n' && this.spiel_stunde < 19){ //nach Hause gehen
+				if (this.people.get(i).get_location_id()=='P' && this.people.get(i).getCurrentMove() == 'n' && this.spiel_stunde<=20){ //nach Hause gehen
 					if ((int)(Math.random()*300) == 3){
 						berechne_weg(this.people.get(i), String.valueOf((this.people.get(i).get_haus_id())).charAt(0)); 
 					} else{
@@ -199,7 +202,10 @@ public class Simulation {
 					if (this.spiel_stunde==1 && (this.people.get(i).getZeitverzogerung() + this.spiel_minute) >= 60 && this.people.get(i).getCurrentMove() == 'n' && (this.people.get(i).getHomePosX()!=this.people.get(i).getPosX() || this.people.get(i).getHomePosY()!=this.people.get(i).getPosY())){ //nach Hause gehen
 						berechne_weg(this.people.get(i), String.valueOf((this.people.get(i).get_haus_id())).charAt(0));
 					}
-					if (this.people.get(i).get_location_id()=='P' && this.people.get(i).getCurrentMove() == 'n' && (this.spiel_stunde < 1 || this.spiel_stunde > 17)){ //nach Hause gehen
+					if (this.spiel_stunde>=1 && this.spiel_stunde<3 && this.people.get(i).getCurrentMove() == 'n' && (this.people.get(i).getHomePosX()!=this.people.get(i).getPosX() || this.people.get(i).getHomePosY()!=this.people.get(i).getPosY())){ //nach Hause gehen
+						berechne_weg(this.people.get(i), String.valueOf((this.people.get(i).get_haus_id())).charAt(0));
+					}
+					if (this.people.get(i).get_location_id()=='P' && this.people.get(i).getCurrentMove() == 'n' && (this.spiel_stunde < 1 || this.spiel_stunde > 12)){ //nach Hause gehen
 						if ((int)(Math.random()*300) == 3){
 							berechne_weg(this.people.get(i), String.valueOf((this.people.get(i).get_haus_id())).charAt(0)); 
 						} else{
