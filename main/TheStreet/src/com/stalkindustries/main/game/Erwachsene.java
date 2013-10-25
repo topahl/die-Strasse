@@ -7,8 +7,15 @@ public class Erwachsene extends Person{
 	
 	private boolean hat_arbeit;	
 	public Erwachsene(int house_id){
-		
 		super(house_id);
+		
+		//hat Arbeit?
+		int tmp = (int)(Math.random()*3+1);
+		if(tmp == 3)
+			this.hat_arbeit = false;
+		else
+			this.hat_arbeit = true;
+		
 		setSize(Ressources.RASTERHEIGHT, Ressources.RASTERHEIGHT);
 		aussehen = new int[3];
 		aussehen[0]= (int)(Math.random()*Ressources.TORSOCNT+1); //Körperbau

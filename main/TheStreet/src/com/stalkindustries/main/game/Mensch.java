@@ -51,16 +51,16 @@ public abstract class Mensch extends JLabel {
 		}
 		switch(currentMove){
 		case 'l':
-			posX--;
+			posX-=this.bewegungsgeschwindigkeit;
 			break;
 		case 'r':
-			posX++;
+			posX+=this.bewegungsgeschwindigkeit;
 			break;
 		case 'o':
-			posY--;
+			posY-=this.bewegungsgeschwindigkeit;
 			break;
 		case 'u':
-			posY++;
+			posY+=this.bewegungsgeschwindigkeit;
 			break;
 		}
 

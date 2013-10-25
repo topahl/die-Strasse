@@ -302,6 +302,11 @@ public class GUILayer extends javax.swing.JFrame{
 		if(misstrauens_counter==0){
 			simulation.calculate_misstrauen();
 			simulation.calc_misstrauen_in_street();
+			for(int i=0;i<this.humans.size();i++){
+				if(this.humans.get(i) instanceof Person){
+					((Person)this.humans.get(i)).update_schatten();
+				}
+			}
 		}
 		misstrauens_counter++;
 		

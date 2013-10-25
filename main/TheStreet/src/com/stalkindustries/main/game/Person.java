@@ -52,7 +52,7 @@ public abstract class Person extends Mensch {
 		
 		//Bewegunsggeschwindigkeit
 		int zufall = (int)(Math.random()*(10))+1;
-		if(zufall > 8)
+		if(zufall > 7)
 			this.bewegungsgeschwindigkeit = 3;
 		else
 			this.bewegungsgeschwindigkeit = 1;
