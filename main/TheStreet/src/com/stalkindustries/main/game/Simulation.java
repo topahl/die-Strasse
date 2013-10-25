@@ -247,6 +247,8 @@ public class Simulation {
 		location_ids = Ressources.getLocation_ids();
 		
 		//Wenn die Person im Park ist, soll er eine Runde spazieren gehen
+		
+		//TODO ACHTUNG---der Park ist nicht immer an der selben stelle  vgTobi
 		if (zielloc == locid && (person.getPosY()-Ressources.ZEROPOS.height)/45 == 3 && (person.getPosX()-Ressources.ZEROPOS.width)/45 == 13){
 			if ((int)(Math.random()*2) == 1){
 				neuer_weg.push('l');
@@ -279,7 +281,7 @@ public class Simulation {
 			return;
 		}
 		
-		 
+		//Rasterkarte initialisieren 
 		for (int i=0; i<location_ids.size(); i++){
 			for (int j=0; j<location_ids.get(i).size(); j++){
 				if (location_ids.get(i).get(j).charAt(0) != 'X' && location_ids.get(i).get(j).charAt(0) != ziellocation.charAt(0) && location_ids.get(i).get(j).charAt(0) != 'P' && location_ids.get(i).get(j).charAt(0) != locid ){
@@ -297,6 +299,8 @@ public class Simulation {
 			}
 		}
 		ziellocation = "Z";
+		
+		//Tobi -> Aktuelle Position muss an das Raster angeglichen werdenn falls eine Person noch in einer Bewegung ist
 		switch(person.getCurrentMove()){	
 			case 'r':
 				location_ids.get((person.getPosY()-Ressources.ZEROPOS.height)/Ressources.RASTERHEIGHT).set(((person.getPosX()-Ressources.ZEROPOS.width)/Ressources.RASTERHEIGHT)+1,"0");
@@ -318,7 +322,7 @@ goal:	for (int i=0; i<100; i++){
 					// Es werden Zahlen auf der Map gesucht
 					if (location_ids.get(j).get(k).equals(String.valueOf(i))){
 						// Es wird überprüft, ob das Ziel in direkter Nähe liegt
-						if (j < 15){
+						if (j < 15){ //15 -> Rasterhöhe
 							if (location_ids.get(j+1).get(k).equals(ziellocation)) {
 							location_ids.get(j+1).set(k,String.valueOf(i+1));
 							counter = i;
@@ -327,7 +331,7 @@ goal:	for (int i=0; i<100; i++){
 							break goal;
 							}
 						}
-						if (k<24){
+						if (k<24){ //24 -> Rasterbreite
 							if (location_ids.get(j).get(k+1).equals(ziellocation)) {
 							location_ids.get(j).set(k+1,String.valueOf(i+1));
 							counter = i;
@@ -381,7 +385,9 @@ goal:	for (int i=0; i<100; i++){
 				}
 			}
 		}
-		if ((int)(zielloc)-48 <=9 && (int)(zielloc)-48 > 0){
+		
+		//Falls das Ziel ein Haus ist, soll die Person auf ihren startpunkt laufen.
+		if ((int)(zielloc)-48 <=9 && (int)(zielloc)-48 > 0){ //-48 für char umwandlung zu int
 			if (((person.getHomePosX()-Ressources.ZEROPOS.width)/Ressources.RASTERHEIGHT)+1 == xPos_current){
 				neuer_weg.push('l');
 			}
