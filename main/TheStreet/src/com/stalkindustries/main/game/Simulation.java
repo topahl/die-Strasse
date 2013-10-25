@@ -446,6 +446,24 @@ goal:	for (int i=0; i<100; i++){
 	}
 	
 	
+	//Belobigungen an Tiki
+	//TODO Gameover implementieren -> Das Event dafür
+	//TODO Gameover Werte berechnen
+	public void calc_gamoeover(){
+		if (calc_misstrauen_in_street()>=90.0){
+			//GAMEOVER!!!
+		}
+		for (int i = 0; i < this.people.size(); i++){
+			if (this.people.get(i) instanceof Terrorist){
+				if (this.people.get(i).get_misstrauen() >= 90.00){
+					// GAMEOVER!!!
+				}
+			} 
+		}		
+	}
+	
+	
+	
 	public ArrayList<Person> get_people(){
 		return people;
 	}
