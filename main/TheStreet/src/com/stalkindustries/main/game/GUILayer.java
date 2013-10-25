@@ -46,7 +46,7 @@ public class GUILayer extends javax.swing.JFrame{
     
     //Liebesbriefe an Tobi
     private void initComponents() {
-		karte = new Map("Russland");//TODO Dynamic Map Load
+		karte = new Map("russland");//TODO Dynamic Map Load
         layeredPane = new javax.swing.JLayeredPane();
         
 
