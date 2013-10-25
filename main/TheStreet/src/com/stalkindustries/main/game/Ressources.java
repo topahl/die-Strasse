@@ -14,6 +14,10 @@ import javax.imageio.ImageIO;
 public class Ressources {
 	
 	private static ArrayList<ArrayList<String>> location_ids;
+	private static ArrayList<ArrayList<String>> russian_names;
+	private static ArrayList<ArrayList<String>> arabian_names;
+	private static ArrayList<ArrayList<String>> russian_quiz;
+	private static ArrayList<ArrayList<String>> arabian_quiz;
 	
 	public static final int RASTERHEIGHT = 45; //Map Raster
 	public static final int TORSOCNT =4; //Anzahl verschiedener Torsos in Sprite Grafik
@@ -33,6 +37,11 @@ public class Ressources {
 	static{
 		//Initialisierung der location_ids
 		location_ids=read_from_csv("src\\com\\stalkindustries\\data\\russland_map.csv");
+		russian_names = read_from_csv("src\\com\\stalkindustries\\data\\russland_namen.csv");
+		arabian_names = read_from_csv("src\\com\\stalkindustries\\data\\saudiarabien_quizfragen.csv");
+		russian_quiz = read_from_csv("src\\com\\stalkindustries\\data\\russland_quizfragen.csv");
+		arabian_quiz = read_from_csv("src\\com\\stalkindustries\\data\\saudiarabien_quizfragen.csv");
+		
 		SCREEN=Toolkit.getDefaultToolkit().getScreenSize();
 		ZEROPOS = new Dimension();	//zeropos berechnen -> Koordinatenverschiebung
 		ZEROPOS.setSize((SCREEN.getWidth()/2)-(MAPWIDTH/2),(SCREEN.getHeight()/2)-(MAPHEIGHT/2));
@@ -93,7 +102,52 @@ public class Ressources {
 	
 		
 	public static ArrayList<ArrayList<String>> getLocation_ids() {
-		ArrayList<ArrayList<String>> loc_ids = new ArrayList<ArrayList<String>>();
+//		ArrayList<ArrayList<String>> loc_ids = new ArrayList<ArrayList<String>>();
+//		ArrayList<String>tmp;
+//		
+//		for(int i=0;i<location_ids.size();i++){
+//			tmp = new ArrayList<String>();
+//			for(int j=0;j<location_ids.get(i).size();j++){
+//				tmp.add(location_ids.get(i).get(j));
+//			}
+//			loc_ids.add(tmp);
+//		}
+		ArrayList<ArrayList<String>> loc_ids;
+		loc_ids = copy_csv(location_ids);
+		return loc_ids;
+	}
+	
+	
+	public static ArrayList<ArrayList<String>> getRussianNames() {
+		ArrayList<ArrayList<String>> rus_names;
+		rus_names = copy_csv(russian_names);
+		return rus_names;
+	}
+	
+	
+	public static ArrayList<ArrayList<String>> getArabianNames() {
+		ArrayList<ArrayList<String>> arab_names;
+		arab_names = copy_csv(arabian_names);
+		return arab_names;
+	}
+	
+	
+	public static ArrayList<ArrayList<String>> getRussianQuiz() {
+		ArrayList<ArrayList<String>> rus_quiz;
+		rus_quiz = copy_csv(russian_quiz);
+		return rus_quiz;
+	}
+	
+	
+	public static ArrayList<ArrayList<String>> getArabianQuiz() {
+		ArrayList<ArrayList<String>> arab_quiz;
+		arab_quiz = copy_csv(arabian_quiz);
+		return arab_quiz;
+	}
+	
+	
+	public static ArrayList<ArrayList<String>> copy_csv(ArrayList<ArrayList<String>> location_ids){
+		ArrayList<ArrayList<String>> new_csv = new ArrayList<ArrayList<String>>();
 		ArrayList<String>tmp;
 		
 		for(int i=0;i<location_ids.size();i++){
@@ -101,10 +155,9 @@ public class Ressources {
 			for(int j=0;j<location_ids.get(i).size();j++){
 				tmp.add(location_ids.get(i).get(j));
 			}
-			loc_ids.add(tmp);
-		}
-		
-		return loc_ids;
+			new_csv.add(tmp);
+		}	
+		return new_csv;
 	}
 	
 }
