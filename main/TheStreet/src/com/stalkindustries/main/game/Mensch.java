@@ -94,6 +94,7 @@ public abstract class Mensch extends JLabel {
 	}
 	
 	
+	
 	void update_location_raster(){
 		//TODO
 		//weiﬂt Bewohnern eine Location-ID zu
