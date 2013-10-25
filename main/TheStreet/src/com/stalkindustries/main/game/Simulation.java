@@ -150,10 +150,10 @@ public class Simulation {
 					berechne_weg(this.people.get(i), 'E');
 				}	
 				if (this.spiel_stunde==14  && (this.people.get(i).getZeitverzogerung() + this.spiel_minute) >= 60 && this.people.get(i).getCurrentMove() == 'n'){ //nach Hause gehen
-					berechne_weg(this.people.get(i), (char)(this.people.get(i).get_haus_id()));				
+					berechne_weg(this.people.get(i), String.valueOf((this.people.get(i).get_haus_id())).charAt(0));				
 				}	
 				if (this.spiel_stunde==20  && (this.people.get(i).getZeitverzogerung() + this.spiel_minute) >= 60 && this.people.get(i).getCurrentMove() == 'n'){ //nach Hause gehen
-					berechne_weg(this.people.get(i), (char)(this.people.get(i).get_haus_id()));
+					berechne_weg(this.people.get(i), String.valueOf((this.people.get(i).get_haus_id())).charAt(0));
 				}
 				if (this.spiel_stunde >= 15 && this.spiel_stunde <=20 && this.people.get(i).getCurrentMove() == 'n'){ // in den Park gehen
 					if ((int)(Math.random()*200) == 3){
@@ -162,7 +162,7 @@ public class Simulation {
 				}
 				if (this.people.get(i).get_location_id()=='P' && this.people.get(i).getCurrentMove() == 'n'){ //nach Hause gehen
 					if ((int)(Math.random()*300) == 3){
-						berechne_weg(this.people.get(i), (char)(this.people.get(i).get_haus_id())); 
+						berechne_weg(this.people.get(i), String.valueOf((this.people.get(i).get_haus_id())).charAt(0)); 
 					} else{
 						if (this.people.get(i).getCurrentMove() == 'n'){
 							berechne_weg(this.people.get(i), 'P');
@@ -176,10 +176,10 @@ public class Simulation {
 							berechne_weg(this.people.get(i), 'E');
 						}
 						if (this.spiel_stunde==16 && (this.people.get(i).getZeitverzogerung() + this.spiel_minute) >= 60 && this.people.get(i).getCurrentMove() == 'n'){ //nach Hause gehen
-							berechne_weg(this.people.get(i), (char)(this.people.get(i).get_haus_id()));
+							berechne_weg(this.people.get(i), String.valueOf((this.people.get(i).get_haus_id())).charAt(0));
 						}		
 						if (this.spiel_stunde==1 && (this.people.get(i).getZeitverzogerung() + this.spiel_minute) >= 60 && this.people.get(i).getCurrentMove() == 'n'){ //nach Hause gehen
-							berechne_weg(this.people.get(i), (char)(this.people.get(i).get_haus_id()));
+							berechne_weg(this.people.get(i), String.valueOf((this.people.get(i).get_haus_id())).charAt(0));
 						}		
 						if ((this.spiel_stunde >= 17 || this.spiel_stunde <=1) && this.people.get(i).getCurrentMove() == 'n'){  // in den Park gehen
 							if ((int)(Math.random()*300) == 3){
@@ -191,10 +191,10 @@ public class Simulation {
 							berechne_weg(this.people.get(i), 'E');
 						}	
 						if (this.spiel_stunde == 12 && (this.people.get(i).getZeitverzogerung() + this.spiel_minute) >= 60 && this.people.get(i).getCurrentMove() == 'n'){ //nach Hause gehen
-							berechne_weg(this.people.get(i), (char)(this.people.get(i).get_haus_id()));
+							berechne_weg(this.people.get(i), String.valueOf((this.people.get(i).get_haus_id())).charAt(0));
 						}
 						if (this.spiel_stunde == 1 && (this.people.get(i).getZeitverzogerung() + this.spiel_minute) >= 60 && this.people.get(i).getCurrentMove() == 'n'){ //nach Hause gehen
-							berechne_weg(this.people.get(i), (char)(this.people.get(i).get_haus_id()));
+							berechne_weg(this.people.get(i), String.valueOf((this.people.get(i).get_haus_id())).charAt(0));
 						}
 						if ((this.spiel_stunde >=14 || this.spiel_stunde <=1) && this.people.get(i).getCurrentMove() == 'n'){  // in den Park gehen
 							if ((int)(Math.random()*300) == 3){
@@ -204,7 +204,7 @@ public class Simulation {
 					}
 					if (this.people.get(i).get_location_id()=='P'){ //nach Hause gehen
 						if ((int)(Math.random()*300) == 3){
-							berechne_weg(this.people.get(i), (char)(this.people.get(i).get_haus_id())); 
+							berechne_weg(this.people.get(i), String.valueOf((this.people.get(i).get_haus_id())).charAt(0)); 
 						} else{
 							if (this.people.get(i).getCurrentMove() == 'n'){
 								berechne_weg(this.people.get(i), 'P');
@@ -224,6 +224,8 @@ public class Simulation {
 		int xPos_current, yPos_current;
 		ArrayList<ArrayList<String>> location_ids;
 		Stack<Character> neuer_weg = new Stack<Character>();
+		
+		System.out.print(zielloc);
 		
 		counter = 1;
 		xPos_current = 0;
@@ -266,6 +268,9 @@ public class Simulation {
 				}
 			}
 		}
+		if (zielloc <=9 && zielloc >0){
+			System.out.print("Weg nach Hause");
+		}
 		ziellocation = "Z";
 		switch(person.getCurrentMove()){
 		
@@ -284,7 +289,7 @@ public class Simulation {
 			location_ids.get((person.getPosY()-Ressources.ZEROPOS.height)/45).set((person.getPosX()-Ressources.ZEROPOS.width)/45,"0");
 		}
 		
-				
+		
 		
 goal:	for (int i=0; i<100; i++){
 			for (int j=0; j<16; j++){  	// J entspricht y-wert, K entspricht x-wert
@@ -383,6 +388,9 @@ goal:	for (int i=0; i<100; i++){
 				}
 			}
 			
+		}
+		if (zielloc <=9 && zielloc >0){
+			System.out.print("Weg nach Hause");
 		}
 		person.setMoves(neuer_weg);
 	}

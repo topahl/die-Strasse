@@ -53,9 +53,9 @@ public abstract class Person extends Mensch {
 		//Bewegunsggeschwindigkeit
 		int zufall = (int)(Math.random()*(10))+1;
 		if(zufall > 7)
-			this.bewegungsgeschwindigkeit = 3;
+			this.bewegungsgeschwindigkeit = 5;
 		else
-			this.bewegungsgeschwindigkeit = 1;
+			this.bewegungsgeschwindigkeit = 3;
 		
 		this.geschlecht = (int)(Math.random()*(2)+1);
 		System.out.println(geschlecht);
