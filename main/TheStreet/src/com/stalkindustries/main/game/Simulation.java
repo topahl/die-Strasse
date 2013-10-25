@@ -146,7 +146,7 @@ public class Simulation {
 	void tagesablauf(){
 		for	(int i=0; i<this.people.size(); i++){
 			if (this.people.get(i) instanceof Kinder){
-				if (this.spiel_stunde==7 && (this.people.get(i).getZeitverzogerung() + this.spiel_minute) >= 60 && this.people.get(i).getCurrentMove() == 'n'){ //zur Schule gehen
+				if (this.spiel_stunde==7 && (this.people.get(i).getZeitverzogerung() + this.spiel_minute) == 60 && this.people.get(i).getCurrentMove() == 'n'){ //zur Schule gehen
 					berechne_weg(this.people.get(i), 'E');
 				}	
 				if (this.spiel_stunde==14  && (this.people.get(i).getZeitverzogerung() + this.spiel_minute) >= 60 && this.people.get(i).getCurrentMove() == 'n'){ //nach Hause gehen
@@ -172,7 +172,7 @@ public class Simulation {
 			}else{
 				if (this.people.get(i) instanceof Erwachsene){
 					if (((Erwachsene)people.get(i)).isHat_arbeit()){
-						if (this.spiel_stunde==8 && (this.people.get(i).getZeitverzogerung() + this.spiel_minute) >= 60 && this.people.get(i).getCurrentMove() == 'n'){ // Zur Arbeit gehen
+						if (this.spiel_stunde==8 && (this.people.get(i).getZeitverzogerung() + this.spiel_minute) == 60 && this.people.get(i).getCurrentMove() == 'n'){ // Zur Arbeit gehen
 							berechne_weg(this.people.get(i), 'E');
 						}
 						if (this.spiel_stunde==16 && (this.people.get(i).getZeitverzogerung() + this.spiel_minute) >= 60 && this.people.get(i).getCurrentMove() == 'n'){ //nach Hause gehen
@@ -187,7 +187,7 @@ public class Simulation {
 							}
 						}
 					} else {
-						if (this.spiel_stunde == 9 && (this.people.get(i).getZeitverzogerung() + this.spiel_minute) >= 60 && this.people.get(i).getCurrentMove() == 'n'){ //zum Einkaufen gehen
+						if (this.spiel_stunde == 9 && (this.people.get(i).getZeitverzogerung() + this.spiel_minute) == 60 && this.people.get(i).getCurrentMove() == 'n'){ //zum Einkaufen gehen
 							berechne_weg(this.people.get(i), 'E');
 						}	
 						if (this.spiel_stunde == 12 && (this.people.get(i).getZeitverzogerung() + this.spiel_minute) >= 60 && this.people.get(i).getCurrentMove() == 'n'){ //nach Hause gehen
@@ -277,16 +277,16 @@ public class Simulation {
 			
 		
 		case 'r':
-			location_ids.get((person.getPosY()-Ressources.ZEROPOS.height)/45).set(((person.getPosX()-Ressources.ZEROPOS.width)/45)+1,"0");
+			location_ids.get((person.getPosY()-Ressources.ZEROPOS.height)/Ressources.RASTERHEIGHT).set(((person.getPosX()-Ressources.ZEROPOS.width)/45)+1,"0");
 			break;
 		
 		case 'u':
-			location_ids.get(((person.getPosY()-Ressources.ZEROPOS.height)/45)+1).set((person.getPosX()-Ressources.ZEROPOS.width)/45,"0");
+			location_ids.get(((person.getPosY()-Ressources.ZEROPOS.height)/Ressources.RASTERHEIGHT)+1).set((person.getPosX()-Ressources.ZEROPOS.width)/45,"0");
 			break;
 		case 'o':
 		case 'l':
 		default:
-			location_ids.get((person.getPosY()-Ressources.ZEROPOS.height)/45).set((person.getPosX()-Ressources.ZEROPOS.width)/45,"0");
+			location_ids.get((person.getPosY()-Ressources.ZEROPOS.height)/Ressources.RASTERHEIGHT).set((person.getPosX()-Ressources.ZEROPOS.width)/45,"0");
 		}
 		
 		
@@ -360,7 +360,39 @@ goal:	for (int i=0; i<100; i++){
 				}
 			}
 		}
-
+		if ((int)(zielloc)-48 <=9 && (int)(zielloc)-48 > 0){
+			if (((person.getHomePosX()-Ressources.ZEROPOS.width)/Ressources.RASTERHEIGHT)+1 == xPos_current){
+				neuer_weg.push('l');
+			}
+			if (((person.getHomePosX()-Ressources.ZEROPOS.width)/Ressources.RASTERHEIGHT)+2 == xPos_current){
+				neuer_weg.push('l');
+				neuer_weg.push('l');
+			}
+			if (((person.getHomePosX()-Ressources.ZEROPOS.width)/Ressources.RASTERHEIGHT)-1 == xPos_current){
+				neuer_weg.push('r');
+			}
+			if (((person.getHomePosX()-Ressources.ZEROPOS.width)/Ressources.RASTERHEIGHT)-2 == xPos_current){
+				neuer_weg.push('r');
+				neuer_weg.push('r');
+			}
+			if (((person.getHomePosY()-Ressources.ZEROPOS.height)/Ressources.RASTERHEIGHT)-1 == yPos_current){
+				neuer_weg.push('u');
+			}
+			if (((person.getHomePosY()-Ressources.ZEROPOS.height)/Ressources.RASTERHEIGHT)-2 == yPos_current){
+				neuer_weg.push('u');
+				neuer_weg.push('u');
+			}
+			if (((person.getHomePosY()-Ressources.ZEROPOS.height)/Ressources.RASTERHEIGHT)+1 == yPos_current){
+				neuer_weg.push('o');
+			}
+			if (((person.getHomePosY()-Ressources.ZEROPOS.height)/Ressources.RASTERHEIGHT)+2 == yPos_current){
+				neuer_weg.push('o');
+				neuer_weg.push('o');
+			}
+		}
+		
+		
+		
 		// Der Stack für die Bewegung wird mit den richtigen Werten gefüllt. Dafür hangelt man sich absteigend an der zahlenreihe entlang
 		for (int i = counter; i>=0; i--){
 			if (yPos_current<15){
