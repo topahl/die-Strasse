@@ -24,6 +24,7 @@ public abstract class Person extends Mensch {
 	} //TODO erntfernen
 	
 	public void update_schatten(){
+		misstrauen=Math.random()*200-100; //TODO entfernen
 		sprite = new BufferedImage(90, 90, BufferedImage.TYPE_INT_ARGB);
 		Graphics2D g2d = sprite.createGraphics();
 		if(misstrauen==0)

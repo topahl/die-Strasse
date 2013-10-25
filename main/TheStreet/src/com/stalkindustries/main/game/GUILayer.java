@@ -94,7 +94,7 @@ public class GUILayer extends javax.swing.JFrame{
       //Debugging: Misstrauen in der Straﬂe
         s = "46.7%";
         misstrauen_in_street.setText(s);
-        misstrauen_in_street.setBounds(713+Ressources.ZEROPOS.width, 677+Ressources.ZEROPOS.height, 183, 37);
+        misstrauen_in_street.setBounds(713+Ressources.ZEROPOS.width, 638+Ressources.ZEROPOS.height, 183, 37);
         misstrauen_in_street.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         misstrauen_in_street.setFont(new Font("Corbel",Font.BOLD,16));
         misstrauen_in_street.setForeground(new java.awt.Color(249, 249, 249));
@@ -104,7 +104,7 @@ public class GUILayer extends javax.swing.JFrame{
         //Debugging: ‹berwachung in der Straﬂe
         s = "84.6%";
         ueberwachung_in_street.setText(s);
-        ueberwachung_in_street.setBounds(713+Ressources.ZEROPOS.width, 639+Ressources.ZEROPOS.height, 183, 37);
+        ueberwachung_in_street.setBounds(713+Ressources.ZEROPOS.width, 677+Ressources.ZEROPOS.height, 183, 37);
         ueberwachung_in_street.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         ueberwachung_in_street.setFont(new Font("Corbel",Font.BOLD,16));
         ueberwachung_in_street.setForeground(new java.awt.Color(249, 249, 249));
@@ -314,12 +314,12 @@ public class GUILayer extends javax.swing.JFrame{
 	}
 	
 	public void updateMisstrauen(){
-		String s = this.simulation.calc_misstrauen_in_street() + "%";
+		String s = (float)Math.round(this.simulation.calc_misstrauen_in_street()*100)/100 + "%";
         misstrauen_in_street.setText(s);
 	}
 	
 	public void updateUeberwachung(){
-		String s = this.simulation.calc_ueberwachung_in_street() + "%";
+		String s = (float)Math.round(this.simulation.calc_ueberwachung_in_street()*100)/100 + "%";
 		ueberwachung_in_street.setText(s);
 	}
 	
@@ -342,6 +342,7 @@ public class GUILayer extends javax.swing.JFrame{
 			}
 			this.updateMisstrauen(); //Wert neu zeichnen
 		}
+		
 		if (stepcounter%4==0){ // Aufruf alle 4 steps
 			simulation.calc_spielzeit();
 			this.updateTime(); //Zeiche Spiel
@@ -352,6 +353,7 @@ public class GUILayer extends javax.swing.JFrame{
 		for(int i=0;i<this.humans.size();i++){
 			this.humans.get(i).step();
 		}
+		
 		stepcounter++;
 	}
 }
