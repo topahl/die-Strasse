@@ -21,6 +21,7 @@ public abstract class Mensch extends JLabel {
 	protected static BufferedImage adults; //slice PNG to save RAM
 	protected static BufferedImage infants; //slice PNG to save RAM
 	protected int bewegungsgeschwindigkeit;
+	protected int haus_id;
 	
 	static{
 		 try {
@@ -147,6 +148,14 @@ public abstract class Mensch extends JLabel {
 	public char getCurrentMove(){
 		return currentMove;
 	} 
+	
+	public int get_haus_id(){
+		return this.haus_id;
+	}
+	
+	public void set_haus_id(int haus_id){
+		this.haus_id = haus_id;
+	}
 	
 //	public Stack<Character> getMoves(){
 //		return this.moves;

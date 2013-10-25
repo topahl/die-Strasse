@@ -23,6 +23,8 @@ public class Ressources {
 	public static final int MAPHEIGHT = 720;
 	public static final int MAPWIDTH = 1125;
 	public static BufferedImage menubars;
+	public static BufferedImage zahlen;
+	public static final int NUMBERHOUSES = 9;
 	
 	 
 	 
@@ -35,6 +37,13 @@ public class Ressources {
 		
 		try {
 			menubars = ImageIO.read(new File("src\\com\\stalkindustries\\grafik\\gui_ingame_bars.png"));
+		} catch (IOException e) {
+			System.err.println("Could not find Image gui_ingame_bars.png");
+			e.printStackTrace();
+		}
+		
+		try {
+			zahlen = ImageIO.read(new File("src\\com\\stalkindustries\\grafik\\slice_digits.png"));
 		} catch (IOException e) {
 			System.err.println("Could not find Image gui_ingame_bars.png");
 			e.printStackTrace();
