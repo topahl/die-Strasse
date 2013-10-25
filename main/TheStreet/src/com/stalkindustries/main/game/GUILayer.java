@@ -46,6 +46,7 @@ public class GUILayer extends javax.swing.JFrame{
         this.simulation.initialize_beziehungsmatrix();
         setVisible(true);
         this.timer = new Timer(Ressources.GAMESPEED,new OSTimer(this));
+        timer.setCoalesce(false);
         timer.start();
     }
     
@@ -343,7 +344,7 @@ public class GUILayer extends javax.swing.JFrame{
 			this.updateMisstrauen(); //Wert neu zeichnen
 		}
 		
-		if (stepcounter%4==0){ // Aufruf alle 4 steps
+		if (stepcounter%5==0){ // Aufruf alle 4 steps
 			simulation.calc_spielzeit();
 			this.updateTime(); //Zeiche Spiel
 			simulation.tagesablauf();
