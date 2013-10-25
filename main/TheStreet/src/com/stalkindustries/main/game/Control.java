@@ -1,56 +1,62 @@
 package com.stalkindustries.main.game;
 
+import java.awt.event.ActionEvent;
+
 public class Control {
 
-	void Pauseclick(){
+	void Pauseclick(ActionEvent evt){
 		
 	}
 	
-	void Exitclick(){
+	void Exitclick(ActionEvent evt){
 		
 	}
 	
-	void Spionageaktionclick(){
+	void Spionageaktionclick(ActionEvent evt){
 		
 	}
 	
-	void Wanzenclick(){
+	void Wanzenclick(ActionEvent evt){
 		
 	}
 	
-	void Kameraclick(){
+	void Kameraclick(ActionEvent evt){
 		
 	}
 	
-	void Hackenclick(){
+	void Hackenclick(ActionEvent evt){
 		
 	}
 	
-	void Fernglassclick(){
+	void Fernglassclick(ActionEvent evt){
 		
 	}
 	
-	void Beschwichtigenaktionclick(){
+	void Beschwichtigenaktionclick(ActionEvent evt){
 		
 	}
 	
-	void Kuchenclick(){
+	void Kuchenclick(ActionEvent evt){
 		
 	}
 	
-	void Unterhaltenclick(){
+	void Unterhaltenclick(ActionEvent evt){
 		
 	}
 	
-	void Flirtenclick(){
+	void Flirtenclick(ActionEvent evt){
 		
 	}
 	
-	void Nachhauseclick(){
+	void Nachhauseclick(ActionEvent evt){
 		
 	}
 	
-	void Verhaftenclick(){
+	void Handclick(ActionEvent evt){
+		
+	}
+	
+	void Verhaftenclick(ActionEvent evt){
 		
 	}
 
