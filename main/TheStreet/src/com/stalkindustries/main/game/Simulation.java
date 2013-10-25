@@ -164,7 +164,7 @@ public class Simulation {
 					}
 				}
 				if (this.people.get(i).get_location_id()=='P' && this.people.get(i).getCurrentMove() == 'n' && this.spiel_stunde<=20){ //nach Hause gehen
-					if ((int)(Math.random()*300) == 3){
+					if ((int)(Math.random()*5) == 3){
 						berechne_weg(this.people.get(i), String.valueOf((this.people.get(i).get_haus_id())).charAt(0)); 
 					} else{
 						if (this.people.get(i).getCurrentMove() == 'n'){
@@ -188,8 +188,15 @@ public class Simulation {
 						}
 					} else {
 						if (this.spiel_stunde == 9 && (this.people.get(i).getZeitverzogerung() + this.spiel_minute) == 60 && this.people.get(i).getCurrentMove() == 'n'){ //zum Einkaufen gehen
-							berechne_weg(this.people.get(i), 'E');
+							if ((int)(Math.random()*3)+1 == 1){
+								berechne_weg(this.people.get(i), 'E');
+							}
 						}	
+						if (this.spiel_stunde >= 9 && this.spiel_stunde <=14 && this.people.get(i).getCurrentMove() == 'n' && this.people.get(i).get_haus_id()!='E'){ //zum Einkaufen gehen
+							if ((int)(Math.random()*300) == 3){
+								berechne_weg(this.people.get(i), 'P');
+							}
+						}
 						if (this.spiel_stunde == 12 && (this.people.get(i).getZeitverzogerung() + this.spiel_minute) >= 60 && this.people.get(i).getCurrentMove() == 'n'  && (this.people.get(i).getHomePosX()!=this.people.get(i).getPosX() || this.people.get(i).getHomePosY()!=this.people.get(i).getPosY())){ //nach Hause gehen
 							berechne_weg(this.people.get(i), String.valueOf((this.people.get(i).get_haus_id())).charAt(0));
 						}
@@ -205,8 +212,8 @@ public class Simulation {
 					if (this.spiel_stunde>=1 && this.spiel_stunde<3 && this.people.get(i).getCurrentMove() == 'n' && (this.people.get(i).getHomePosX()!=this.people.get(i).getPosX() || this.people.get(i).getHomePosY()!=this.people.get(i).getPosY())){ //nach Hause gehen
 						berechne_weg(this.people.get(i), String.valueOf((this.people.get(i).get_haus_id())).charAt(0));
 					}
-					if (this.people.get(i).get_location_id()=='P' && this.people.get(i).getCurrentMove() == 'n' && (this.spiel_stunde < 1 || this.spiel_stunde > 12)){ //nach Hause gehen
-						if ((int)(Math.random()*300) == 3){
+					if (this.people.get(i).get_location_id()=='P' && this.people.get(i).getCurrentMove() == 'n' && (this.spiel_stunde < 1 || this.spiel_stunde > 10)){ //nach Hause gehen
+						if ((int)(Math.random()*5) == 3){
 							berechne_weg(this.people.get(i), String.valueOf((this.people.get(i).get_haus_id())).charAt(0)); 
 						} else{
 							if (this.people.get(i).getCurrentMove() == 'n'){
@@ -237,19 +244,33 @@ public class Simulation {
 		
 		//Wenn die Person im Park ist, soll er eine Runde spazieren gehen
 		if (zielloc == person.get_location_id() && (person.getPosY()-Ressources.ZEROPOS.height)/45 == 3 && (person.getPosX()-Ressources.ZEROPOS.width)/45 == 13){
-			
-			neuer_weg.push('l');
-			neuer_weg.push('u');
-			neuer_weg.push('u');
-			neuer_weg.push('r');
-			neuer_weg.push('r');
-			neuer_weg.push('r');
-			neuer_weg.push('r');
-			neuer_weg.push('o');
-			neuer_weg.push('o');
-			neuer_weg.push('l');
-			neuer_weg.push('l');
-			neuer_weg.push('l');
+			if ((int)(Math.random()*2) == 1){
+				neuer_weg.push('l');
+				neuer_weg.push('u');
+				neuer_weg.push('u');
+				neuer_weg.push('r');
+				neuer_weg.push('r');
+				neuer_weg.push('r');
+				neuer_weg.push('r');
+				neuer_weg.push('o');
+				neuer_weg.push('o');
+				neuer_weg.push('l');
+				neuer_weg.push('l');
+				neuer_weg.push('l');
+			} else {
+				neuer_weg.push('r');
+				neuer_weg.push('r');
+				neuer_weg.push('r');
+				neuer_weg.push('u');
+				neuer_weg.push('u');
+				neuer_weg.push('l');
+				neuer_weg.push('l');
+				neuer_weg.push('l');
+				neuer_weg.push('l');
+				neuer_weg.push('o');
+				neuer_weg.push('o');
+				neuer_weg.push('r');
+			}
 			person.setMoves(neuer_weg);
 			return;
 		}
