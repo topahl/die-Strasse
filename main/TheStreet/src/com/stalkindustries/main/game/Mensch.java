@@ -86,7 +86,11 @@ public abstract class Mensch extends JLabel {
 		
 		setLocation(posX,posY); //no repaint needed
 		
-		
+		if(moves.empty() && location_id=='E'){
+			this.setVisible(false);
+		} else{
+			this.setVisible(true);
+		}
 	}
 	
 	
