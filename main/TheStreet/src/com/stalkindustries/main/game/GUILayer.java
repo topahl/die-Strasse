@@ -60,7 +60,7 @@ public class GUILayer extends javax.swing.JFrame{
       //Tag malen
         String s = "Tag " + this.simulation.getSpiel_tag();
         tag.setText(s);
-        tag.setBounds(920+Ressources.ZEROPOS.width, 636+Ressources.ZEROPOS.height, 183, 37);
+        tag.setBounds(1004+Ressources.ZEROPOS.width, 636+Ressources.ZEROPOS.height, 100, 37);
         tag.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         tag.setFont(new Font("Corbel",Font.BOLD,30));
         tag.setForeground(new java.awt.Color(255, 255, 255));
@@ -70,8 +70,8 @@ public class GUILayer extends javax.swing.JFrame{
       	//Uhr malen
         s = this.simulation.getSpielzeit_as_string();
         zeit.setText(s);
-        zeit.setBounds(920+Ressources.ZEROPOS.width, 669+Ressources.ZEROPOS.height, 183, 37);
-        zeit.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        zeit.setBounds(1004+Ressources.ZEROPOS.width, 669+Ressources.ZEROPOS.height, 100, 37);
+        zeit.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         zeit.setFont(new Font("Corbel",Font.BOLD,40));
         zeit.setForeground(new java.awt.Color(255, 255, 255));
         zeit.setVisible(true);
