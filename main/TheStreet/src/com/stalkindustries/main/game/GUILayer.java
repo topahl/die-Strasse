@@ -33,8 +33,8 @@ public class GUILayer extends javax.swing.JFrame{
 	private Control control = new Control();
 	private Haus haus;//wird später initialisiert
 	private ArrayList<Mensch> humans = new ArrayList<Mensch>();
-	private static int misstrauens_counter = 0;
-	private static int timer_counter = 0;
+	private int stepcounter=0;
+	
 	private JLabel zeit = new JLabel();
 	private JLabel tag = new JLabel();
 	private JLabel menubar = new JLabel();
@@ -321,14 +321,14 @@ public class GUILayer extends javax.swing.JFrame{
 		ueberwachung_in_street.setText(s); 
 	}
 	
-    
+    //Beschwerden an Miri
+	//adopted by Tobias
 	public void step(){
 		this.update_location_id();
 		this.updateMisstrauen();
 		this.updateUeberwachung();
-		if(misstrauens_counter==25)
-			misstrauens_counter = 0;
-		if(misstrauens_counter==0){
+
+		if(stepcounter%25==0){ //Aufruf alle 25 steps
 			simulation.calculate_misstrauen();
 			simulation.calc_misstrauen_in_street();
 			for(int i=0;i<this.humans.size();i++){
@@ -337,19 +337,16 @@ public class GUILayer extends javax.swing.JFrame{
 				}
 			}
 		}
-		misstrauens_counter++;
-		
-		if (timer_counter==4)
-			timer_counter=0;
-		if (timer_counter==0){
+		if (stepcounter%4==0){ // Aufruf alle 4 steps
 			simulation.calc_spielzeit();
 			this.updateTime();
 			simulation.tagesablauf();
 		}
-		timer_counter++;
 		
+		//Update Persons
 		for(int i=0;i<this.humans.size();i++){
 			this.humans.get(i).step();
 		}
+		stepcounter++;
 	}
 }
