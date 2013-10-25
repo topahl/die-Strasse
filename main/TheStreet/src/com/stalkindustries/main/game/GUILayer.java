@@ -124,8 +124,10 @@ public class GUILayer extends javax.swing.JFrame{
         
         
         
-        //Agent steht an letzter Stelle
-        karte = new Map("russland",this.humans.get(this.humans.size()-1).get_haus_id());//TODO Dynamic Map Load
+        //TODO Dynamic map load
+        
+        //Karte laden
+        karte = new Map("russland",this.humans.get(this.humans.size()-1).get_haus_id());//Agent steht an letzter Stelle
         karte.setBounds(Ressources.ZEROPOS.width, Ressources.ZEROPOS.height, 1125, 720);
         layeredPane.add(karte, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
@@ -325,7 +327,9 @@ public class GUILayer extends javax.swing.JFrame{
 	//adopted by Tobias
 	public void step(){
 		this.update_location_id();
-		this.updateMisstrauen();
+		
+
+		// zeichne neuen Überwachungswert
 		this.updateUeberwachung();
 
 		if(stepcounter%25==0){ //Aufruf alle 25 steps
@@ -336,10 +340,11 @@ public class GUILayer extends javax.swing.JFrame{
 					((Person)this.humans.get(i)).update_schatten();
 				}
 			}
+			this.updateMisstrauen(); //Wert neu zeichnen
 		}
 		if (stepcounter%4==0){ // Aufruf alle 4 steps
 			simulation.calc_spielzeit();
-			this.updateTime();
+			this.updateTime(); //Zeiche Spiel
 			simulation.tagesablauf();
 		}
 		
