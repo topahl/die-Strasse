@@ -15,6 +15,8 @@ import javax.swing.JLabel;
 import javax.swing.JLayeredPane;
 import javax.swing.Timer;
 
+import com.stalkindustries.main.Button;
+
 
 /**
  *
@@ -28,6 +30,7 @@ public class GUILayer extends javax.swing.JFrame{
 	private JLayeredPane layeredPane;
 	private boolean b = true; //TODO please rename  if needed
 	private Simulation simulation = new Simulation();
+	private Control control = new Control();
 	private Haus haus;//wird später initialisiert
 	private ArrayList<Mensch> humans = new ArrayList<Mensch>();
 	private static int misstrauens_counter = 0;
@@ -54,6 +57,18 @@ public class GUILayer extends javax.swing.JFrame{
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         setResizable(false);
+       
+      //Buttons  
+        Button button;
+        
+        button=new Button(control, Ressources.ingamebutton.getSubimage(750, 45, 45, 45), Ressources.ingamebutton.getSubimage(795, 45, 45, 45), Ressources.ingamebutton.getSubimage(840, 45, 45, 45), "close", Ressources.ZEROPOS.width+1080, Ressources.ZEROPOS.height);
+        layeredPane.add(button, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        
+        button=new Button(control, Ressources.ingamebutton.getSubimage(750, 0, 45, 45), Ressources.ingamebutton.getSubimage(795, 0, 45, 45), Ressources.ingamebutton.getSubimage(840, 0, 45, 45), "pause", Ressources.ZEROPOS.width+1035, Ressources.ZEROPOS.height);
+        layeredPane.add(button, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        
+      //Buttons ende
+        
         
         
       //Tag malen

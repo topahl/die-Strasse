@@ -28,6 +28,7 @@ public class Button extends JButton implements ActionListener{
         setPreferredSize(new Dimension(normal.getWidth(),normal.getHeight()));
         
         setBounds(x, y, normal.getWidth(),normal.getHeight());
+        this.controlunit=controlunit;
 	}
 
 	@Override
