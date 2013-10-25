@@ -2,13 +2,14 @@ package com.stalkindustries.main.game;
 
 import java.awt.Dimension;
 import java.awt.Toolkit;
+import java.awt.image.BufferedImage;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
 
-import com.stalkindustries.main.TheStreet;
+import javax.imageio.ImageIO;
 
 public class Ressources {
 	
@@ -21,6 +22,7 @@ public class Ressources {
 	public static final Dimension ZEROPOS;
 	public static final int MAPHEIGHT = 720;
 	public static final int MAPWIDTH = 1125;
+	public static BufferedImage menubars;
 	
 	 
 	 
@@ -30,6 +32,13 @@ public class Ressources {
 		SCREEN=Toolkit.getDefaultToolkit().getScreenSize();
 		ZEROPOS = new Dimension();	//zeropos berechnen -> Koordinatenverschiebung
 		ZEROPOS.setSize((SCREEN.getWidth()/2)-(MAPWIDTH/2),(SCREEN.getHeight()/2)-(MAPHEIGHT/2));
+		
+		try {
+			menubars = ImageIO.read(new File("src\\com\\stalkindustries\\grafik\\gui_ingame_bars.png"));
+		} catch (IOException e) {
+			System.err.println("Could not find Image gui_ingame_bars.png");
+			e.printStackTrace();
+		}
 	}
 	
 	

@@ -10,6 +10,7 @@ import java.awt.Font;
 import java.awt.Toolkit;
 import java.util.ArrayList;
 
+import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import javax.swing.JLayeredPane;
 import javax.swing.Timer;
@@ -33,6 +34,7 @@ public class GUILayer extends javax.swing.JFrame{
 	private static int timer_counter = 0;
 	private JLabel zeit = new JLabel();
 	private JLabel tag = new JLabel();
+	private JLabel menubar = new JLabel();
 	private JLabel misstrauen_in_street = new JLabel();
 	private JLabel ueberwachung_in_street = new JLabel();
 	
@@ -54,9 +56,8 @@ public class GUILayer extends javax.swing.JFrame{
         setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         setResizable(false);
         
-        this.initialize_humans();
         
-        //Tag malen
+      //Tag malen
         String s = "Tag " + this.simulation.getSpiel_tag();
         tag.setText(s);
         tag.setBounds(920+Ressources.ZEROPOS.width, 636+Ressources.ZEROPOS.height, 183, 37);
@@ -75,6 +76,19 @@ public class GUILayer extends javax.swing.JFrame{
         zeit.setForeground(new java.awt.Color(255, 255, 255));
         zeit.setVisible(true);
         layeredPane.add(zeit, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        
+        //Ingame Menübars
+        menubar.setIcon(new ImageIcon(Ressources.menubars));
+        menubar.setBounds(Ressources.ZEROPOS.width,Ressources.ZEROPOS.height,Ressources.MAPWIDTH,Ressources.MAPHEIGHT);
+        layeredPane.add(menubar, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        
+        
+        
+        
+        
+        this.initialize_humans();
+        
+        
         
         //Debugging: Misstrauen in der Straße
         s = "0.0%";
