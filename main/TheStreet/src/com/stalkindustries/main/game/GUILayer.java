@@ -9,6 +9,7 @@ import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.Toolkit;
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
@@ -24,6 +25,8 @@ import com.stalkindustries.main.Button;
  */
 public class GUILayer extends javax.swing.JFrame{
 
+	
+	private HashMap<String,Button> buttons = new HashMap<String,Button>();
 	private static final long serialVersionUID = 1L;
 	private Timer timer;
 	private Map karte;
@@ -64,9 +67,12 @@ public class GUILayer extends javax.swing.JFrame{
         
         button=new Button(control, Ressources.ingamebutton.getSubimage(750, 45, 45, 45), Ressources.ingamebutton.getSubimage(795, 45, 45, 45), Ressources.ingamebutton.getSubimage(840, 45, 45, 45),null, "close", Ressources.ZEROPOS.width+1080, Ressources.ZEROPOS.height);
         layeredPane.add(button, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        buttons.put("close", button);
+        
         
         button=new Button(control, Ressources.ingamebutton.getSubimage(750, 0, 45, 45), Ressources.ingamebutton.getSubimage(795, 0, 45, 45), Ressources.ingamebutton.getSubimage(840, 0, 45, 45),null, "pause", Ressources.ZEROPOS.width+1035, Ressources.ZEROPOS.height);
         layeredPane.add(button, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        buttons.put("pause", button);
         
       //Buttons ende
         
