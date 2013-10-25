@@ -22,6 +22,7 @@ public abstract class Mensch extends JLabel {
 	protected static BufferedImage infants; //slice PNG to save RAM
 	protected int bewegungsgeschwindigkeit;
 	protected int haus_id;
+	private boolean invisible_lefternside=false;
 	
 	static{
 		 try {
@@ -53,15 +54,19 @@ public abstract class Mensch extends JLabel {
 		switch(currentMove){
 		case 'l':
 			posX-=this.bewegungsgeschwindigkeit;
+			invisible_lefternside = true;
 			break;
 		case 'r':
 			posX+=this.bewegungsgeschwindigkeit;
+			invisible_lefternside = false;
 			break;
 		case 'o':
 			posY-=this.bewegungsgeschwindigkeit;
+			invisible_lefternside = false;
 			break;
 		case 'u':
 			posY+=this.bewegungsgeschwindigkeit;
+			invisible_lefternside = false;
 			break;
 		}
 
@@ -87,8 +92,13 @@ public abstract class Mensch extends JLabel {
 		
 		setLocation(posX,posY); //no repaint needed
 		
+		
 		if(moves.empty() && location_id=='E'){
-			this.setVisible(false);
+			if (invisible_lefternside==false){
+				this.setVisible(false);
+			} else{
+				invisible_lefternside=false;
+			}
 		} else{
 			this.setVisible(true);
 		}
