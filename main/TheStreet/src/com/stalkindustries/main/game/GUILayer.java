@@ -76,20 +76,7 @@ public class GUILayer extends javax.swing.JFrame{
         zeit.setVisible(true);
         layeredPane.add(zeit, javax.swing.JLayeredPane.DEFAULT_LAYER);
         
-        //Ingame Menübars
-        menubar.setIcon(new ImageIcon(Ressources.menubars));
-        menubar.setBounds(Ressources.ZEROPOS.width,Ressources.ZEROPOS.height,Ressources.MAPWIDTH,Ressources.MAPHEIGHT);
-        layeredPane.add(menubar, javax.swing.JLayeredPane.DEFAULT_LAYER);
-        
-        
-        
-        
-        
-        this.initialize_humans();
-        
-        
-        
-        //Debugging: Misstrauen in der Straße
+      //Debugging: Misstrauen in der Straße
         s = "0.0%";
         misstrauen_in_street.setText(s);
         misstrauen_in_street.setBounds(720+Ressources.ZEROPOS.width, 675+Ressources.ZEROPOS.height, 183, 37);
@@ -108,6 +95,19 @@ public class GUILayer extends javax.swing.JFrame{
         ueberwachung_in_street.setForeground(new java.awt.Color(255, 255, 255));
         ueberwachung_in_street.setVisible(true);
         layeredPane.add(ueberwachung_in_street, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        
+        //Ingame Menübars
+        menubar.setIcon(new ImageIcon(Ressources.menubars));
+        menubar.setBounds(Ressources.ZEROPOS.width,Ressources.ZEROPOS.height,Ressources.MAPWIDTH,Ressources.MAPHEIGHT);
+        layeredPane.add(menubar, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        
+        
+        
+        
+        
+        this.initialize_humans();
+        
+        
         
         //Agent steht an letzter Stelle
         karte = new Map("russland",this.humans.get(this.humans.size()-1).get_haus_id());//TODO Dynamic Map Load

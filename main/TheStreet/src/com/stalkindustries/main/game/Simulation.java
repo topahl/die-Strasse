@@ -56,10 +56,10 @@ public class Simulation {
 			misstrauen[i] = this.people.get(i).get_misstrauen();
 		
 		for(int i=0;i<this.people.size();i++){
-			if(this.people.get(i).get_location_id() != 0 && this.people.get(i).get_location_id() != 'X' && this.people.get(i).get_location_id() != 'E'){	//wenn sich Person dort befindet, wo sie auch beeinflusst werden kann
+			if((int)(this.people.get(i).get_location_id())-48+1 != 0 && (int)(this.people.get(i).get_location_id())-48+1 != 'X' && (int)(this.people.get(i).get_location_id())-48+1 != 'E'){	//wenn sich Person dort befindet, wo sie auch beeinflusst werden kann
 				for(int j=0;j<this.people.size();j++){
 					if(i!=j){
-						if(this.people.get(i).get_location_id() == this.people.get(j).get_location_id()){
+						if((int)(this.people.get(i).get_location_id())-48+1 == (int)(this.people.get(j).get_location_id())-48+1){
 							//zwischenspeichern in misstrauen[] erforderlich, sonst wird immer mit aktualisiertem Wert gerechnet
 							if(this.people.get(i) instanceof Erwachsene && this.people.get(j) instanceof Kinder){	//Kind beeinflusst Erwachsenen weniger
 								misstrauen[i] = misstrauen[i] - faktor/2*this.beziehungsmatrix[i][j]*(this.people.get(i).get_misstrauen()-this.people.get(j).get_misstrauen());
@@ -144,28 +144,33 @@ public class Simulation {
 	//Support Tiki
 	//TODO Die Häufigkeit des "in den Park gehen" testen, evtl zu häufig
 	void tagesablauf(){
+		char locid ='0';
+		int hausid = 0;
 		for	(int i=0; i<this.people.size(); i++){
+			locid = (char)((int)(this.people.get(i).get_location_id()));
+			hausid = this.people.get(i).get_haus_id()+1;
+			
 			if (this.people.get(i) instanceof Kinder){
 				if (this.spiel_stunde==7 && (this.people.get(i).getZeitverzogerung() + this.spiel_minute) == 60 && this.people.get(i).getCurrentMove() == 'n'){ //zur Schule gehen
 					berechne_weg(this.people.get(i), 'E');
 				}	
 				if (this.spiel_stunde==14  && (this.people.get(i).getZeitverzogerung() + this.spiel_minute) >= 60 && this.people.get(i).getCurrentMove() == 'n'  && (this.people.get(i).getHomePosX()!=this.people.get(i).getPosX() || this.people.get(i).getHomePosY()!=this.people.get(i).getPosY())){ //nach Hause gehen
-					berechne_weg(this.people.get(i), String.valueOf((this.people.get(i).get_haus_id())).charAt(0));				
+					berechne_weg(this.people.get(i), String.valueOf(hausid).charAt(0));				
 				}	
 				if (this.spiel_stunde==20  && (this.people.get(i).getZeitverzogerung() + this.spiel_minute) >= 60 && this.people.get(i).getCurrentMove() == 'n' && (this.people.get(i).getHomePosX()!=this.people.get(i).getPosX() || this.people.get(i).getHomePosY()!=this.people.get(i).getPosY())){ //nach Hause gehen
-					berechne_weg(this.people.get(i), String.valueOf((this.people.get(i).get_haus_id())).charAt(0));
+					berechne_weg(this.people.get(i), String.valueOf(hausid).charAt(0));
 				}
 				if (this.spiel_stunde>=20  && this.people.get(i).getCurrentMove() == 'n' && (this.people.get(i).getHomePosX()!=this.people.get(i).getPosX() || this.people.get(i).getHomePosY()!=this.people.get(i).getPosY())){ //nach Hause gehen
-					berechne_weg(this.people.get(i), String.valueOf((this.people.get(i).get_haus_id())).charAt(0));
+					berechne_weg(this.people.get(i), String.valueOf(hausid).charAt(0));
 				}
 				if (this.spiel_stunde >= 15 && this.spiel_stunde <=20 && this.people.get(i).getCurrentMove() == 'n'){ // in den Park gehen
 					if ((int)(Math.random()*200) == 3){
 						berechne_weg(this.people.get(i), 'P');
 					}
 				}
-				if (this.people.get(i).get_location_id()=='P' && this.people.get(i).getCurrentMove() == 'n' && this.spiel_stunde<=20){ //nach Hause gehen
+				if (locid =='P' && this.people.get(i).getCurrentMove() == 'n' && this.spiel_stunde<=20){ //nach Hause gehen
 					if ((int)(Math.random()*5) == 3){
-						berechne_weg(this.people.get(i), String.valueOf((this.people.get(i).get_haus_id())).charAt(0)); 
+						berechne_weg(this.people.get(i), String.valueOf(hausid).charAt(0)); 
 					} else{
 						if (this.people.get(i).getCurrentMove() == 'n'){
 							berechne_weg(this.people.get(i), 'P');
@@ -179,7 +184,7 @@ public class Simulation {
 							berechne_weg(this.people.get(i), 'E');
 						}
 						if (this.spiel_stunde==16 && (this.people.get(i).getZeitverzogerung() + this.spiel_minute) >= 60 && this.people.get(i).getCurrentMove() == 'n'  && (this.people.get(i).getHomePosX()!=this.people.get(i).getPosX() || this.people.get(i).getHomePosY()!=this.people.get(i).getPosY())){ //nach Hause gehen
-							berechne_weg(this.people.get(i), String.valueOf((this.people.get(i).get_haus_id())).charAt(0));
+							berechne_weg(this.people.get(i), String.valueOf(hausid).charAt(0));
 						}				
 						if ((this.spiel_stunde >= 17 || this.spiel_stunde <=0) && this.people.get(i).getCurrentMove() == 'n'){  // in den Park gehen
 							if ((int)(Math.random()*300) == 3){
@@ -192,13 +197,13 @@ public class Simulation {
 								berechne_weg(this.people.get(i), 'E');
 							}
 						}	
-						if (this.spiel_stunde >= 9 && this.spiel_stunde <=14 && this.people.get(i).getCurrentMove() == 'n' && this.people.get(i).get_haus_id()!='E'){ //zum Einkaufen gehen
+						if (this.spiel_stunde >= 9 && this.spiel_stunde <=14 && this.people.get(i).getCurrentMove() == 'n' && hausid!='E'){ //zum Einkaufen gehen
 							if ((int)(Math.random()*300) == 3){
 								berechne_weg(this.people.get(i), 'P');
 							}
 						}
 						if (this.spiel_stunde == 12 && (this.people.get(i).getZeitverzogerung() + this.spiel_minute) >= 60 && this.people.get(i).getCurrentMove() == 'n'  && (this.people.get(i).getHomePosX()!=this.people.get(i).getPosX() || this.people.get(i).getHomePosY()!=this.people.get(i).getPosY())){ //nach Hause gehen
-							berechne_weg(this.people.get(i), String.valueOf((this.people.get(i).get_haus_id())).charAt(0));
+							berechne_weg(this.people.get(i), String.valueOf(hausid).charAt(0));
 						}
 						if ((this.spiel_stunde >=14 || this.spiel_stunde <=1) && this.people.get(i).getCurrentMove() == 'n'){  // in den Park gehen
 							if ((int)(Math.random()*300) == 3){
@@ -207,14 +212,14 @@ public class Simulation {
 						}
 					}
 					if (this.spiel_stunde==1 && (this.people.get(i).getZeitverzogerung() + this.spiel_minute) >= 60 && this.people.get(i).getCurrentMove() == 'n' && (this.people.get(i).getHomePosX()!=this.people.get(i).getPosX() || this.people.get(i).getHomePosY()!=this.people.get(i).getPosY())){ //nach Hause gehen
-						berechne_weg(this.people.get(i), String.valueOf((this.people.get(i).get_haus_id())).charAt(0));
+						berechne_weg(this.people.get(i), String.valueOf(hausid).charAt(0));
 					}
 					if (this.spiel_stunde>=1 && this.spiel_stunde<3 && this.people.get(i).getCurrentMove() == 'n' && (this.people.get(i).getHomePosX()!=this.people.get(i).getPosX() || this.people.get(i).getHomePosY()!=this.people.get(i).getPosY())){ //nach Hause gehen
-						berechne_weg(this.people.get(i), String.valueOf((this.people.get(i).get_haus_id())).charAt(0));
+						berechne_weg(this.people.get(i), String.valueOf(hausid).charAt(0));
 					}
-					if (this.people.get(i).get_location_id()=='P' && this.people.get(i).getCurrentMove() == 'n' && (this.spiel_stunde < 1 || this.spiel_stunde > 10)){ //nach Hause gehen
+					if (locid =='P' && this.people.get(i).getCurrentMove() == 'n' && (this.spiel_stunde < 1 || this.spiel_stunde > 10)){ //nach Hause gehen
 						if ((int)(Math.random()*5) == 3){
-							berechne_weg(this.people.get(i), String.valueOf((this.people.get(i).get_haus_id())).charAt(0)); 
+							berechne_weg(this.people.get(i), String.valueOf(hausid).charAt(0)); 
 						} else{
 							if (this.people.get(i).getCurrentMove() == 'n'){
 								berechne_weg(this.people.get(i), 'P');
@@ -232,6 +237,7 @@ public class Simulation {
 		int counter;
 		String ziellocation = String.valueOf(zielloc);
 		int xPos_current, yPos_current;
+		char locid = (char)((int)(person.get_location_id()));
 		ArrayList<ArrayList<String>> location_ids;
 		Stack<Character> neuer_weg = new Stack<Character>();
 		
@@ -241,7 +247,7 @@ public class Simulation {
 		location_ids = Ressources.getLocation_ids();
 		
 		//Wenn die Person im Park ist, soll er eine Runde spazieren gehen
-		if (zielloc == person.get_location_id() && (person.getPosY()-Ressources.ZEROPOS.height)/45 == 3 && (person.getPosX()-Ressources.ZEROPOS.width)/45 == 13){
+		if (zielloc == locid && (person.getPosY()-Ressources.ZEROPOS.height)/45 == 3 && (person.getPosX()-Ressources.ZEROPOS.width)/45 == 13){
 			if ((int)(Math.random()*2) == 1){
 				neuer_weg.push('l');
 				neuer_weg.push('u');
@@ -276,7 +282,7 @@ public class Simulation {
 		 
 		for (int i=0; i<location_ids.size(); i++){
 			for (int j=0; j<location_ids.get(i).size(); j++){
-				if (location_ids.get(i).get(j).charAt(0) != 'X' && location_ids.get(i).get(j).charAt(0) != ziellocation.charAt(0) && location_ids.get(i).get(j).charAt(0) != 'P' && location_ids.get(i).get(j).charAt(0) != person.get_location_id()){
+				if (location_ids.get(i).get(j).charAt(0) != 'X' && location_ids.get(i).get(j).charAt(0) != ziellocation.charAt(0) && location_ids.get(i).get(j).charAt(0) != 'P' && location_ids.get(i).get(j).charAt(0) != locid ){
 					location_ids.get(i).set(j,"You shall not pass!") ;
 				}
 				if (location_ids.get(i).get(j).charAt(0) == ziellocation.charAt(0)){
@@ -285,7 +291,7 @@ public class Simulation {
 				if (location_ids.get(i).get(j).charAt(0) == 'P'){
 					location_ids.get(i).set(j,"X") ;
 				}
-				if (location_ids.get(i).get(j).charAt(0) == person.get_location_id()){
+				if (location_ids.get(i).get(j).charAt(0) == locid ){
 					location_ids.get(i).set(j,"X") ;
 				}
 			}
@@ -293,15 +299,15 @@ public class Simulation {
 		ziellocation = "Z";
 		switch(person.getCurrentMove()){	
 			case 'r':
-				location_ids.get((person.getPosY()-Ressources.ZEROPOS.height)/Ressources.RASTERHEIGHT).set(((person.getPosX()-Ressources.ZEROPOS.width)/45)+1,"0");
+				location_ids.get((person.getPosY()-Ressources.ZEROPOS.height)/Ressources.RASTERHEIGHT).set(((person.getPosX()-Ressources.ZEROPOS.width)/Ressources.RASTERHEIGHT)+1,"0");
 				break;
 			case 'u':
-				location_ids.get(((person.getPosY()-Ressources.ZEROPOS.height)/Ressources.RASTERHEIGHT)+1).set((person.getPosX()-Ressources.ZEROPOS.width)/45,"0");
+				location_ids.get(((person.getPosY()-Ressources.ZEROPOS.height)/Ressources.RASTERHEIGHT)+1).set((person.getPosX()-Ressources.ZEROPOS.width)/Ressources.RASTERHEIGHT,"0");
 				break;
 			case 'o':
 			case 'l':
 			default:
-				location_ids.get((person.getPosY()-Ressources.ZEROPOS.height)/Ressources.RASTERHEIGHT).set((person.getPosX()-Ressources.ZEROPOS.width)/45,"0");
+				location_ids.get((person.getPosY()-Ressources.ZEROPOS.height)/Ressources.RASTERHEIGHT).set((person.getPosX()-Ressources.ZEROPOS.width)/Ressources.RASTERHEIGHT,"0");
 		}
 		
 		
