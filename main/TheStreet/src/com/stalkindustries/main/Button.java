@@ -14,15 +14,16 @@ public class Button extends JButton implements ActionListener{
 	
 	private String ok_code;
 	private Control controlunit;
-	
-	public Button(Control controlunit, BufferedImage normal,BufferedImage hover, BufferedImage clicked,BufferedImage diabled, String funktionsname, int x, int y){
+	 
+	public Button(Control controlunit, BufferedImage normal,BufferedImage hover, BufferedImage clicked,BufferedImage disabled, String funktionsname, int x, int y){
 		this.ok_code = funktionsname;
 		addActionListener(this);
 		
 		setIcon(new ImageIcon(normal));
 		setRolloverIcon(new ImageIcon(hover));
         setPressedIcon(new ImageIcon(clicked));
-        setDisabledIcon(new ImageIcon(diabled));
+        if(disabled != null) // es ist möglich kein disabled icon zu setzen
+        	setDisabledIcon(new ImageIcon(disabled));
         
         setBorder(null);
         setBorderPainted(false);
