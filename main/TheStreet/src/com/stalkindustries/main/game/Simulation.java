@@ -235,8 +235,6 @@ public class Simulation {
 		ArrayList<ArrayList<String>> location_ids;
 		Stack<Character> neuer_weg = new Stack<Character>();
 		
-		System.out.print(zielloc);
-		
 		counter = 1;
 		xPos_current = 0;
 		yPos_current = 0;
@@ -292,25 +290,18 @@ public class Simulation {
 				}
 			}
 		}
-		if (zielloc <=9 && zielloc >0){
-			System.out.print("Weg nach Hause");
-		}
 		ziellocation = "Z";
-		switch(person.getCurrentMove()){
-		
-			
-		
-		case 'r':
-			location_ids.get((person.getPosY()-Ressources.ZEROPOS.height)/Ressources.RASTERHEIGHT).set(((person.getPosX()-Ressources.ZEROPOS.width)/45)+1,"0");
-			break;
-		
-		case 'u':
-			location_ids.get(((person.getPosY()-Ressources.ZEROPOS.height)/Ressources.RASTERHEIGHT)+1).set((person.getPosX()-Ressources.ZEROPOS.width)/45,"0");
-			break;
-		case 'o':
-		case 'l':
-		default:
-			location_ids.get((person.getPosY()-Ressources.ZEROPOS.height)/Ressources.RASTERHEIGHT).set((person.getPosX()-Ressources.ZEROPOS.width)/45,"0");
+		switch(person.getCurrentMove()){	
+			case 'r':
+				location_ids.get((person.getPosY()-Ressources.ZEROPOS.height)/Ressources.RASTERHEIGHT).set(((person.getPosX()-Ressources.ZEROPOS.width)/45)+1,"0");
+				break;
+			case 'u':
+				location_ids.get(((person.getPosY()-Ressources.ZEROPOS.height)/Ressources.RASTERHEIGHT)+1).set((person.getPosX()-Ressources.ZEROPOS.width)/45,"0");
+				break;
+			case 'o':
+			case 'l':
+			default:
+				location_ids.get((person.getPosY()-Ressources.ZEROPOS.height)/Ressources.RASTERHEIGHT).set((person.getPosX()-Ressources.ZEROPOS.width)/45,"0");
 		}
 		
 		
@@ -444,9 +435,6 @@ goal:	for (int i=0; i<100; i++){
 				}
 			}
 			
-		}
-		if (zielloc <=9 && zielloc >0){
-			System.out.print("Weg nach Hause");
 		}
 		person.setMoves(neuer_weg);
 	}
