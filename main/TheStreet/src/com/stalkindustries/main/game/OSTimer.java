@@ -13,8 +13,14 @@ public class OSTimer implements ActionListener {
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		// TODO Auto-generated method stub
+		
+		//Code to track performance
+		//long time = System.currentTimeMillis();
+		
 		this.guilayer.step();
+		
+		//if(System.currentTimeMillis()-time>40)
+		//	System.out.println("Possible Frame drop");
 	}
 
 }

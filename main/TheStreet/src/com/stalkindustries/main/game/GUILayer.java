@@ -61,10 +61,10 @@ public class GUILayer extends javax.swing.JFrame{
       //Buttons  
         Button button;
         
-        button=new Button(control, Ressources.ingamebutton.getSubimage(750, 45, 45, 45), Ressources.ingamebutton.getSubimage(795, 45, 45, 45), Ressources.ingamebutton.getSubimage(840, 45, 45, 45), "close", Ressources.ZEROPOS.width+1080, Ressources.ZEROPOS.height);
+        button=new Button(control, Ressources.ingamebutton.getSubimage(750, 45, 45, 45), Ressources.ingamebutton.getSubimage(795, 45, 45, 45), Ressources.ingamebutton.getSubimage(840, 45, 45, 45),null, "close", Ressources.ZEROPOS.width+1080, Ressources.ZEROPOS.height);
         layeredPane.add(button, javax.swing.JLayeredPane.DEFAULT_LAYER);
         
-        button=new Button(control, Ressources.ingamebutton.getSubimage(750, 0, 45, 45), Ressources.ingamebutton.getSubimage(795, 0, 45, 45), Ressources.ingamebutton.getSubimage(840, 0, 45, 45), "pause", Ressources.ZEROPOS.width+1035, Ressources.ZEROPOS.height);
+        button=new Button(control, Ressources.ingamebutton.getSubimage(750, 0, 45, 45), Ressources.ingamebutton.getSubimage(795, 0, 45, 45), Ressources.ingamebutton.getSubimage(840, 0, 45, 45),null, "pause", Ressources.ZEROPOS.width+1035, Ressources.ZEROPOS.height);
         layeredPane.add(button, javax.swing.JLayeredPane.DEFAULT_LAYER);
         
       //Buttons ende
