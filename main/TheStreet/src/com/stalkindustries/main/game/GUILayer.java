@@ -313,12 +313,12 @@ public class GUILayer extends javax.swing.JFrame{
 	
 	public void updateMisstrauen(){
 		String s = this.simulation.calc_misstrauen_in_street() + "%";
-//        misstrauen_in_street.setText(s);//TODO comm weg
+        misstrauen_in_street.setText(s);
 	}
 	
 	public void updateUeberwachung(){
 		String s = this.simulation.calc_ueberwachung_in_street() + "%";
-//		ueberwachung_in_street.setText(s);//TODO comm weg 
+		ueberwachung_in_street.setText(s);
 	}
 	
     //Beschwerden an Miri
