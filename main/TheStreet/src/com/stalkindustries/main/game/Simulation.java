@@ -217,7 +217,7 @@ public class Simulation {
 					if (this.spiel_stunde>=1 && this.spiel_stunde<3 && this.people.get(i).getCurrentMove() == 'n' && (this.people.get(i).getHomePosX()!=this.people.get(i).getPosX() || this.people.get(i).getHomePosY()!=this.people.get(i).getPosY())){ //nach Hause gehen
 						berechne_weg(this.people.get(i), String.valueOf(hausid).charAt(0));
 					}
-					if (locid =='P' && this.people.get(i).getCurrentMove() == 'n' && (this.spiel_stunde < 1 || this.spiel_stunde > 10)){ //nach Hause gehen
+					if (locid =='P' && this.people.get(i).getCurrentMove() == 'n' && (this.spiel_stunde < 1 || this.spiel_stunde >= 9)){ //nach Hause gehen
 						if ((int)(Math.random()*5) == 3){
 							berechne_weg(this.people.get(i), String.valueOf(hausid).charAt(0)); 
 						} else{
