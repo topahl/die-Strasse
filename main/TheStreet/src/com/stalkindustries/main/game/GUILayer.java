@@ -77,37 +77,37 @@ public class GUILayer extends javax.swing.JFrame{
         tag.setBounds(1004+Ressources.ZEROPOS.width, 636+Ressources.ZEROPOS.height, 100, 37);
         tag.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         tag.setFont(new Font("Corbel",Font.BOLD,30));
-        tag.setForeground(new java.awt.Color(255, 255, 255));
+        tag.setForeground(new java.awt.Color(249, 249, 249));
         tag.setVisible(true);
         layeredPane.add(tag, javax.swing.JLayeredPane.DEFAULT_LAYER);
         
       	//Uhr malen
         s = this.simulation.getSpielzeit_as_string();
         zeit.setText(s);
-        zeit.setBounds(1004+Ressources.ZEROPOS.width, 669+Ressources.ZEROPOS.height, 100, 37);
+        zeit.setBounds(1010+Ressources.ZEROPOS.width, 669+Ressources.ZEROPOS.height, 100, 37);
         zeit.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         zeit.setFont(new Font("Corbel",Font.BOLD,40));
-        zeit.setForeground(new java.awt.Color(255, 255, 255));
+        zeit.setForeground(new java.awt.Color(249, 249, 249));
         zeit.setVisible(true);
         layeredPane.add(zeit, javax.swing.JLayeredPane.DEFAULT_LAYER);
         
       //Debugging: Misstrauen in der Straﬂe
-        s = "0.0%";
+        s = "46.7%";
         misstrauen_in_street.setText(s);
-        misstrauen_in_street.setBounds(720+Ressources.ZEROPOS.width, 675+Ressources.ZEROPOS.height, 183, 37);
+        misstrauen_in_street.setBounds(713+Ressources.ZEROPOS.width, 677+Ressources.ZEROPOS.height, 183, 37);
         misstrauen_in_street.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
-        misstrauen_in_street.setFont(new Font("Corbel",Font.BOLD,40));
-        misstrauen_in_street.setForeground(new java.awt.Color(255, 255, 255));
+        misstrauen_in_street.setFont(new Font("Corbel",Font.BOLD,16));
+        misstrauen_in_street.setForeground(new java.awt.Color(249, 249, 249));
         misstrauen_in_street.setVisible(true);
         layeredPane.add(misstrauen_in_street, javax.swing.JLayeredPane.DEFAULT_LAYER);
         
         //Debugging: ‹berwachung in der Straﬂe
-        s = "0.0%";
+        s = "84.6%";
         ueberwachung_in_street.setText(s);
-        ueberwachung_in_street.setBounds(720+Ressources.ZEROPOS.width, 637+Ressources.ZEROPOS.height, 183, 37);
+        ueberwachung_in_street.setBounds(713+Ressources.ZEROPOS.width, 639+Ressources.ZEROPOS.height, 183, 37);
         ueberwachung_in_street.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
-        ueberwachung_in_street.setFont(new Font("Corbel",Font.BOLD,40));
-        ueberwachung_in_street.setForeground(new java.awt.Color(255, 255, 255));
+        ueberwachung_in_street.setFont(new Font("Corbel",Font.BOLD,16));
+        ueberwachung_in_street.setForeground(new java.awt.Color(249, 249, 249));
         ueberwachung_in_street.setVisible(true);
         layeredPane.add(ueberwachung_in_street, javax.swing.JLayeredPane.DEFAULT_LAYER);
         
@@ -313,12 +313,12 @@ public class GUILayer extends javax.swing.JFrame{
 	
 	public void updateMisstrauen(){
 		String s = this.simulation.calc_misstrauen_in_street() + "%";
-        misstrauen_in_street.setText(s);
+//        misstrauen_in_street.setText(s);//TODO comm weg
 	}
 	
 	public void updateUeberwachung(){
 		String s = this.simulation.calc_ueberwachung_in_street() + "%";
-		ueberwachung_in_street.setText(s); 
+//		ueberwachung_in_street.setText(s);//TODO comm weg 
 	}
 	
     //Beschwerden an Miri
