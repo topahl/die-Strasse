@@ -12,7 +12,7 @@ public class Simulation {
 	private int[][] beziehungsmatrix;
 	//private int[] location_raster; nicht mehr benötigt
 	private ArrayList<Person> people = new ArrayList<Person>(); 
-	private Agent agent = new Agent();
+	private Agent agent = new Agent(0);
 	private int spiel_tag=1;
 	private int spiel_stunde=7;
 	private int spiel_minute=0;

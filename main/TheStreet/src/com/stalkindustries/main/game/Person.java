@@ -16,7 +16,6 @@ public abstract class Person extends Mensch {
 	private double misstrauen; 	//-100=nicht misstrauisch, 100=ultra misstrauisch, 200=initial
 	protected int geschlecht; //1=male, 2=female
 	private int zeitverzogerung; // in Minuten
-	private int haus_id;
 	
 	static private int last_id=-1;
 	
@@ -69,14 +68,6 @@ public abstract class Person extends Mensch {
 	
 	public void set_misstrauen(double misstrauen){
 		this.misstrauen = misstrauen;
-	}
-	
-	public int get_haus_id(){
-		return this.haus_id;
-	}
-	
-	public void set_haus_id(int haus_id){
-		this.haus_id = haus_id;
 	}
 
 
