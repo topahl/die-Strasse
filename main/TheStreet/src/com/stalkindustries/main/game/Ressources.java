@@ -24,6 +24,8 @@ public class Ressources {
 	public static final int MAPWIDTH = 1125;
 	public static BufferedImage menubars;
 	public static BufferedImage zahlen;
+	public static BufferedImage ingamebutton;
+	
 	public static final int NUMBERHOUSES = 9;
 	
 	 
@@ -45,9 +47,17 @@ public class Ressources {
 		try {
 			zahlen = ImageIO.read(new File("src\\com\\stalkindustries\\grafik\\slice_digits.png"));
 		} catch (IOException e) {
-			System.err.println("Could not find Image gui_ingame_bars.png");
+			System.err.println("Could not find Image slice_digits.png");  
 			e.printStackTrace();
 		}
+		
+		try {
+			ingamebutton = ImageIO.read(new File("src\\com\\stalkindustries\\grafik\\slice_buttons_ingame.png"));
+		} catch (IOException e) {
+			System.err.println("Could not find Image slice_buttons_ingame.png");
+			e.printStackTrace();
+		}
+		
 	}
 	
 	
