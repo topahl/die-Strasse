@@ -153,21 +153,32 @@ public class Menu extends JFrame implements MouseMotionListener{
         	if(i>3)
         		break;
         	try {
+        		
     			BufferedImage loader = ImageIO.read(new File("res\\level\\"+levels[i]+"\\"+levels[i]+"_slice_menu.png"));
     			BufferedImage iconnormal = new BufferedImage(312,134, BufferedImage.TYPE_INT_ARGB);
     			BufferedImage iconhover = new BufferedImage(312,134, BufferedImage.TYPE_INT_ARGB);
     			Graphics2D g2d = iconhover.createGraphics();
     			g2d.drawImage(loader.getSubimage(0, 0, 312, 134), 0, 0, null);
     			g2d.drawImage(Ressources.menubutton.getSubimage(0, 405, 312, 135), 0, 0, null);
+    			g2d.dispose();
     			
-    			Graphics2D g2d2 = iconnormal.createGraphics();
-    			g2d2.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 0.5f));
-    			g2d2.drawImage(loader.getSubimage(0, 0, 312, 134), 0, 0, null);
-    			g2d2.drawImage(Ressources.menubutton.getSubimage(0, 405, 312, 135), 0, 0, null);
+    			g2d = iconnormal.createGraphics();
+    			g2d.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 0.5f));
+    			g2d.drawImage(loader.getSubimage(0, 0, 312, 134), 0, 0, null);
+    			g2d.drawImage(Ressources.menubutton.getSubimage(0, 405, 312, 135), 0, 0, null);
+    			g2d.dispose();
     			
     			Button button = new Button(control,iconnormal,iconhover,iconnormal,iconnormal,levels[i], 45+((i/2)*360),180+((i%2)*200), this);
     			mapselect.add(button, javax.swing.JLayeredPane.DEFAULT_LAYER);
     			buttons.put(levels[i], button);
+    			
+    			JLabel label= new JLabel();
+    			BufferedImage textlabel = loader.getSubimage(315, 10, loader.getWidth()-315, 24);
+    			g2d = textlabel.createGraphics();
+    			g2d.drawImage(Ressources.menubutton.getSubimage(315, 415, 36, 24), 0, 0, null);
+    			label.setIcon(new ImageIcon(textlabel));
+    			label.setBounds(45+((i/2)*360),145+((i%2)*200), loader.getWidth()-315, 24);
+    			mapselect.add(label, javax.swing.JLayeredPane.DEFAULT_LAYER);
     			
     			
     		} catch (IOException e) {
