@@ -101,6 +101,9 @@ public class GUILayer extends JFrame{
         // --------
        
         
+        //Sven
+        initHouseButtons();
+        
         //Pause + Exit Button
         int buttonSliceX = 948;
         int buttonSize = Ressources.RASTERHEIGHT;
@@ -172,12 +175,16 @@ public class GUILayer extends JFrame{
         }
         
         
+        //Kleine Buttons
+        buttonSize = 39;
+        
+        
         // --------
         //Buttons Ende
         // --------
         
         
-      //Tag malen
+        //Tag malen
         String s = "Tag " + this.simulation.getSpiel_tag();
         tag.setText(s);
         tag.setBounds(1004+Ressources.ZEROPOS.width, 636+Ressources.ZEROPOS.height, 100, 37);
@@ -197,8 +204,8 @@ public class GUILayer extends JFrame{
         zeit.setVisible(true);
         layeredPane.add(zeit, javax.swing.JLayeredPane.DEFAULT_LAYER);
         
-      //Debugging: Misstrauen in der Straﬂe
-        s = "46.7%";
+        //Misstrauensanzeige in der Straﬂe
+        s = "0.0%";
         misstrauen_in_street.setText(s);
         misstrauen_in_street.setBounds(713+Ressources.ZEROPOS.width, 638+Ressources.ZEROPOS.height, 183, 37);
         misstrauen_in_street.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
@@ -207,8 +214,8 @@ public class GUILayer extends JFrame{
         misstrauen_in_street.setVisible(true);
         layeredPane.add(misstrauen_in_street, javax.swing.JLayeredPane.DEFAULT_LAYER);
         
-        //Debugging: ‹berwachung in der Straﬂe
-        s = "84.6%";
+        //‹berwachungsanzeige in der Straﬂe
+        s = "0.0%";
         ueberwachung_in_street.setText(s);
         ueberwachung_in_street.setBounds(713+Ressources.ZEROPOS.width, 677+Ressources.ZEROPOS.height, 183, 37);
         ueberwachung_in_street.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
@@ -235,12 +242,7 @@ public class GUILayer extends JFrame{
         //Karte laden
         karte = new Map("russland",this.humans.get(this.humans.size()-1).get_haus_id());//Agent steht an letzter Stelle
         karte.setBounds(Ressources.ZEROPOS.width, Ressources.ZEROPOS.height, 1125, 720);
-        layeredPane.add(karte, javax.swing.JLayeredPane.DEFAULT_LAYER);
-
-        
-        
-        //Sven
-        InitHousebuttons();        
+        layeredPane.add(karte, javax.swing.JLayeredPane.DEFAULT_LAYER);   
         
         
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -489,7 +491,7 @@ public class GUILayer extends JFrame{
 		else
 			timer.start();
 	}
-	private void InitHousebuttons() { //Sven Housbuttons invisible Nummeriert von 1-9 
+	private void initHouseButtons() { //Sven Housbuttons invisible Nummeriert von 1-9 
 		Button button;
 		Integer i;
 		Integer j;
