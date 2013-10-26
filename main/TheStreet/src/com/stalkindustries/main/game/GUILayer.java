@@ -49,7 +49,11 @@ public class GUILayer extends JFrame implements MouseMotionListener {
 	private JLabel menubar = new JLabel();
 	private JLabel misstrauen_in_street = new JLabel();
 	private JLabel ueberwachung_in_street = new JLabel();
+<<<<<<< OURS
 	private JLabel mousefollower = new JLabel();
+=======
+	private JLabel tag_nacht = new JLabel();
+>>>>>>> THEIRS
 	
     public GUILayer() {
         initComponents();
@@ -219,6 +223,15 @@ public class GUILayer extends JFrame implements MouseMotionListener {
         zeit.setForeground(new java.awt.Color(249, 249, 249));
         zeit.setVisible(true);
         layeredPane.add(zeit, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        
+        
+        //Tag-Nacht-Modus
+        tag_nacht.setBounds(Ressources.ZEROPOS.width, Ressources.ZEROPOS.height, 1125, 720);
+        tag_nacht.setBackground(new Color(0,0,1f,0.2f));
+        tag_nacht.setOpaque(true);	
+        tag_nacht.setVisible(false);	
+        layeredPane.add(tag_nacht, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        
         
         //Misstrauensanzeige in der Straﬂe
         s = "0.0%";
@@ -462,6 +475,8 @@ public class GUILayer extends JFrame implements MouseMotionListener {
 		ueberwachung_in_street.setText(s);
 	}
 	
+	
+	
     //Beschwerden an Miri
 	//adopted by Tobias
 	public void step(){
@@ -470,6 +485,14 @@ public class GUILayer extends JFrame implements MouseMotionListener {
 
 		// zeichne neuen ‹berwachungswert
 		this.updateUeberwachung();
+		
+		
+		//Tag-Nacht-Modus
+		if(this.simulation.getSpiel_stunde() == 20)
+			this.tag_nacht.setVisible(true);
+		if(this.simulation.getSpiel_stunde() == 6)
+			this.tag_nacht.setVisible(false);
+		
 
 		if(stepcounter%25==0){ //Aufruf alle 25 steps
 			simulation.calculate_misstrauen();
