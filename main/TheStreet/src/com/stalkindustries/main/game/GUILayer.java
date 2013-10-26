@@ -49,11 +49,8 @@ public class GUILayer extends JFrame implements MouseMotionListener {
 	private JLabel menubar = new JLabel();
 	private JLabel misstrauen_in_street = new JLabel();
 	private JLabel ueberwachung_in_street = new JLabel();
-<<<<<<< OURS
 	private JLabel mousefollower = new JLabel();
-=======
 	private JLabel tag_nacht = new JLabel();
->>>>>>> THEIRS
 	
     public GUILayer() {
         initComponents();
@@ -94,7 +91,7 @@ public class GUILayer extends JFrame implements MouseMotionListener {
         fensterBeschwichtigen.setBounds(Ressources.ZEROPOS.width+10, Ressources.ZEROPOS.height+390,248, 232);
         layeredPane.add(fensterBeschwichtigen, javax.swing.JLayeredPane.DEFAULT_LAYER);
         
-        button=new Button(control, Ressources.ingamebutton.getSubimage(948, 90, 27,27), Ressources.ingamebutton.getSubimage(975, 90, 27,27),Ressources.ingamebutton.getSubimage(1002, 90, 27,27),Ressources.ingamebutton.getSubimage(1029, 90, 27,27),"closeBeschwichtigen",205,13);
+        button=new Button(control, Ressources.ingamebutton.getSubimage(948, 90, 27,27), Ressources.ingamebutton.getSubimage(975, 90, 27,27),Ressources.ingamebutton.getSubimage(1002, 90, 27,27),Ressources.ingamebutton.getSubimage(1029, 90, 27,27),"closeBeschwichtigen",205,13, this);
         buttons.put("closeBeschwichtigen", button);
         fensterBeschwichtigen.add(button, javax.swing.JLayeredPane.DEFAULT_LAYER);
         
@@ -588,6 +585,8 @@ public class GUILayer extends JFrame implements MouseMotionListener {
 	public JLayeredPane getWindow(String window){
 		if(window.equals("spionage"))
 			return fensterSpionage;
+		if(window.equals("beschwichtigen"))
+			return fensterBeschwichtigen;
 		return null;
 	}
 	

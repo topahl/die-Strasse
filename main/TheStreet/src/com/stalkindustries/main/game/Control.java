@@ -28,15 +28,14 @@ public class Control implements IControl {
 			clickPause();
 		if(funktion == "close")
 			clickExit();
-		
-	
-		//Handling für Mousefollower Icons 
-	if(funktion == "closeSpionage")
-		closeSpionageMenu();
-	if(funktion == "aktionenSpionage")
-		clickAktionSpionage();
-		
-		
+		if(funktion == "closeSpionage")
+			closeSpionageMenu();
+		if(funktion == "aktionenSpionage")
+			clickAktionSpionage();
+		if(funktion == "closeBeschwichtigen")
+			closeBeschwichtigenMenu();
+		if(funktion == "aktionenBeschwichtigen")
+			clickAktionBeschwichtigen();
 		if (funktion.equals("aktionKuchen")){
 			guilayer.getMousefollower().setIcon(new ImageIcon (Ressources.ingamebutton.getSubimage(0, (39)*6, 39, 39)));
 			guilayer.getMousefollower().setVisible(true);
@@ -81,6 +80,13 @@ public class Control implements IControl {
 
 	
 	
+	private void closeBeschwichtigenMenu() {
+		JLayeredPane frame = guilayer.getWindow("beschwichtigen");
+		frame.setVisible(false);
+		frame.setEnabled(false);
+		
+	}
+
 	private void clickPause() {
 		//pause-Funktion von GUILayer aufrufen
 		guilayer.updateTimerStatus();
@@ -129,7 +135,9 @@ public class Control implements IControl {
 	}
 	
 	private void clickAktionBeschwichtigen() {
-		
+		JLayeredPane frame = guilayer.getWindow("beschwichtigen");
+		frame.setEnabled(true);
+		frame.setVisible(true);
 	}
 	
 	private void clickKuchen() {
