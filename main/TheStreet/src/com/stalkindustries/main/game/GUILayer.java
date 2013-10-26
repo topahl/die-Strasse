@@ -233,6 +233,12 @@ public class GUILayer extends JFrame{
         karte.setBounds(Ressources.ZEROPOS.width, Ressources.ZEROPOS.height, 1125, 720);
         layeredPane.add(karte, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
+        
+        
+        //Sven
+        InitHousebuttons();        
+        
+        
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -479,6 +485,39 @@ public class GUILayer extends JFrame{
 		else
 			timer.start();
 	}
+	private void InitHousebuttons() { //Sven
+		Button button;
+		Integer i;
+		Integer j;
+		Integer x;
+		Integer b;
+		b=0;
+		for (x=1; x <= 9;x++ ){
+			b=0;
+			if (b==0){
+			for (j=0; j<Ressources.getLocation_ids().size();j++){
+				if(b==0){
+				for (i=0; i<Ressources.getLocation_ids().get(0).size();i++){
+					if ((Ressources.getLocation_ids().get(j).get(i).equals(String.valueOf(x))&&(b==0))){
+						b=1;
+						button = new Button(control , Ressources.RASTERHEIGHT*3, Ressources.RASTERHEIGHT*3, "Haus"+String.valueOf(x), Ressources.ZEROPOS.width+i*Ressources.RASTERHEIGHT, Ressources.ZEROPOS.height+j*Ressources.RASTERHEIGHT);
+						layeredPane.add(button, javax.swing.JLayeredPane.DEFAULT_LAYER);
+						buttons.put("Haus"+String.valueOf(x), button);
+			        
+					}
+				}
+				
+			}
+			}
+			}
+		}
+		//for (i=0, i< Ressources.getLocation.)
+		//Ressources.getLocation_ids().get(i).get(j);
+		//invis Buttons
+	//	button = new Button(control , Ressources.RASTERHEIGHT*3, Ressources.RASTERHEIGHT*3, "Haus1", Ressources.ZEROPOS.width+Ressources.RASTERHEIGHT, Ressources.ZEROPOS.height+Ressources.RASTERHEIGHT);
+		
+		
 	
+	}
 	
 }
