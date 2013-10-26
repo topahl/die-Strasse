@@ -130,10 +130,14 @@ public class Control implements IControl {
 	}
 	
 	private void clickAktionSpionage() {
+		closeBeschwichtigenMenu();
 		JLayeredPane frame = guilayer.getWindow("spionage");
-		frame.setEnabled(true);
-		frame.setVisible(true);
-		
+		if(frame.isVisible())
+			closeSpionageMenu();
+		else{
+			frame.setEnabled(true);
+			frame.setVisible(true);
+		}
 	}
 	
 	private void clickWanzen() {
@@ -157,9 +161,14 @@ public class Control implements IControl {
 	}
 	
 	private void clickAktionBeschwichtigen() {
+		closeSpionageMenu();
 		JLayeredPane frame = guilayer.getWindow("beschwichtigen");
-		frame.setEnabled(true);
-		frame.setVisible(true);
+		if(frame.isVisible())
+			closeBeschwichtigenMenu();
+		else{
+			frame.setEnabled(true);
+			frame.setVisible(true);
+		}
 	}
 	
 	private void clickKuchen() {
