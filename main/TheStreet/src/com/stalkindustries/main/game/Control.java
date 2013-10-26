@@ -106,7 +106,8 @@ public class Control implements IControl {
 			guilayer.getButtonsMap().get("aktionenSpionage").setEnabled(true);
 		}
 		// von Pause unabhängig?
-		
+		closeBeschwichtigenMenu();
+		closeSpionageMenu();
 //		if (guilayer.getButtonsMap().get("aktionNachhause").isEnabled()){
 //			guilayer.getButtonsMap().get("aktionNachhause").setEnabled(false);
 //		} else {
