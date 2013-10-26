@@ -24,22 +24,20 @@ public class Control implements IControl {
 	
 		//aus irgendeinem schwachsinnigen Grund haben wir Java 1.6 (steht auch im Pflichtenheft)
 		//Switch-case mit Strings erst ab 1.7, schade.
-		if(funktion == "pause")
+		if(funktion.equals("pause"))
 			clickPause();
-		if(funktion == "close")
+		if(funktion.equals("close"))
 			clickExit();
-		if(funktion == "closeSpionage")
+		if(funktion.equals("closeSpionage"))
 			closeSpionageMenu();
-		if(funktion == "aktionenSpionage")
+		if(funktion.equals("aktionenSpionage"))
 			clickAktionSpionage();
-		if(funktion == "closeBeschwichtigen")
+		if(funktion.equals("closeBeschwichtigen"))
 			closeBeschwichtigenMenu();
-		if(funktion == "aktionenBeschwichtigen")
+		if(funktion.equals("aktionenBeschwichtigen"))
 			clickAktionBeschwichtigen();
-		if (funktion.equals("aktionKuchen")){
-			guilayer.getMousefollower().setIcon(new ImageIcon (Ressources.ingamebutton.getSubimage(0, (39)*6, 39, 39)));
-			guilayer.getMousefollower().setVisible(true);
-		}
+		if (funktion.equals("aktionKuchen"))
+			clickKuchen();
 		if (funktion.equals("aktionUnterhalten")){
 			guilayer.getMousefollower().setIcon(new ImageIcon (Ressources.ingamebutton.getSubimage(0, (39)*7, 39, 39)));
 			guilayer.getMousefollower().setVisible(true);
@@ -175,7 +173,8 @@ public class Control implements IControl {
 	}
 	
 	private void clickKuchen() {
-		
+		guilayer.getMousefollower().setIcon(new ImageIcon (Ressources.ingamebutton.getSubimage(0, (39)*6, 39, 39)));
+		guilayer.getMousefollower().setVisible(true);
 	}
 	
 	private void clickUnterhalten() {
