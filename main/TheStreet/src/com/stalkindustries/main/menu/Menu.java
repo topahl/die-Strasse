@@ -148,7 +148,7 @@ public class Menu extends JFrame implements MouseMotionListener{
         mapselect.add(beschreibung, javax.swing.JLayeredPane.DEFAULT_LAYER);
         
         
-        String[] levels={"russland","saudiarabien","saudiarabien","russland"};
+        String[] levels={"russland","saudiarabien"};
         for(int i=0;i<levels.length;i++){
         	if(i>3)
         		break;
@@ -173,11 +173,11 @@ public class Menu extends JFrame implements MouseMotionListener{
     			buttons.put(levels[i], button);
     			
     			JLabel label= new JLabel();
-    			BufferedImage textlabel = loader.getSubimage(315, 10, loader.getWidth()-315, 24);
+    			BufferedImage textlabel = loader.getSubimage(315, 10, loader.getWidth()-315, 25);
     			g2d = textlabel.createGraphics();
-    			g2d.drawImage(Ressources.menubutton.getSubimage(315, 415, 36, 24), 0, 0, null);
+    			g2d.drawImage(Ressources.menubutton.getSubimage(315, 415, 36, 25), 0, 0, null);
     			label.setIcon(new ImageIcon(textlabel));
-    			label.setBounds(45+((i/2)*360),145+((i%2)*200), loader.getWidth()-315, 24);
+    			label.setBounds(45+((i/2)*360),145+((i%2)*200), loader.getWidth()-315, 25);
     			mapselect.add(label, javax.swing.JLayeredPane.DEFAULT_LAYER);
     			
     			
