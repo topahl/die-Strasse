@@ -95,28 +95,77 @@ public class GUILayer extends JFrame{
         layeredPane.add(button, javax.swing.JLayeredPane.DEFAULT_LAYER);
         buttons.put("pause", button);
 
-      //Groﬂe Buttons Beschwichtigen
+        //Groﬂe Buttons
         int buttonSize = 66;
+        
+        //Buttons Beschwichtigen
+        //Hauptbutton unten
         button = new Button(control,
-        		Ressources.ingamebutton.getSubimage(156, buttonSize, buttonSize, buttonSize),
-        		Ressources.ingamebutton.getSubimage(156+buttonSize, buttonSize, buttonSize, buttonSize),
-        		Ressources.ingamebutton.getSubimage(156+2*buttonSize, buttonSize, buttonSize, buttonSize),
-        		Ressources.ingamebutton.getSubimage(156+3*buttonSize, buttonSize, buttonSize, buttonSize),
+        		Ressources.ingamebutton.getSubimage(156, 0, buttonSize, buttonSize),
+        		Ressources.ingamebutton.getSubimage(156+buttonSize, 0, buttonSize, buttonSize),
+        		Ressources.ingamebutton.getSubimage(156+2*buttonSize, 0, buttonSize, buttonSize),
+        		Ressources.ingamebutton.getSubimage(156+3*buttonSize, 0, buttonSize, buttonSize),
         		"aktionenBeschwichtigen", Ressources.ZEROPOS.width+12, Ressources.ZEROPOS.height+642);
         layeredPane.add(button, javax.swing.JLayeredPane.DEFAULT_LAYER);
         buttons.put("aktionenBeschwichtigen", button);
         
-        String[] buttonNames = { "aktionKuchen", "aktionUnterhalten", "aktionFlirten", "aktionHand", "aktionParkBeschwichtigen" };
-        for(int i = 0; i < buttonNames.length; i++) {
+        //Aktionsbuttons
+        String[] buttonNamesBeschwichtigen = { "aktionKuchen", "aktionUnterhalten", "aktionFlirten", "aktionHand", "aktionParkBeschwichtigen" };
+        for(int i = 0; i < buttonNamesBeschwichtigen.length; i++) {
 	        button = new Button(control,
 	        		Ressources.ingamebutton.getSubimage(156, (i+1)*buttonSize, buttonSize, buttonSize),
 	        		Ressources.ingamebutton.getSubimage(156+buttonSize, (i+1)*buttonSize, buttonSize, buttonSize),
 	        		Ressources.ingamebutton.getSubimage(156+2*buttonSize, (i+1)*buttonSize, buttonSize, buttonSize),
 	        		Ressources.ingamebutton.getSubimage(156+3*buttonSize, (i+1)*buttonSize, buttonSize, buttonSize),
-	        		buttonNames[i], Ressources.ZEROPOS.width+12+i*90, Ressources.ZEROPOS.height);
+	        		buttonNamesBeschwichtigen[i], Ressources.ZEROPOS.width+12+i*90, Ressources.ZEROPOS.height-66);
 	        layeredPane.add(button, javax.swing.JLayeredPane.DEFAULT_LAYER);
-	        buttons.put(buttonNames[i], button);
+	        buttons.put(buttonNamesBeschwichtigen[i], button);
         }
+        
+        //Buttons Spionage
+        //Hauptbutton unten
+        button = new Button(control,
+        		Ressources.ingamebutton.getSubimage(420, 0, buttonSize, buttonSize),
+        		Ressources.ingamebutton.getSubimage(420+buttonSize, 0, buttonSize, buttonSize),
+        		Ressources.ingamebutton.getSubimage(420+2*buttonSize, 0, buttonSize, buttonSize),
+        		Ressources.ingamebutton.getSubimage(420+3*buttonSize, 0, buttonSize, buttonSize),
+        		"aktionenSpionage", Ressources.ZEROPOS.width+102, Ressources.ZEROPOS.height+642);
+        layeredPane.add(button, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        buttons.put("aktionenSpionage", button);
+        
+        //Aktionsbuttons
+        String[] buttonNamesSpionage = { "aktionWanze", "aktionKamera", "aktionHacken", "aktionFernglas", "aktionParkSpionage" };
+        for(int i = 0; i < buttonNamesSpionage.length; i++) {
+	        button = new Button(control,
+	        		Ressources.ingamebutton.getSubimage(420, (i+1)*buttonSize, buttonSize, buttonSize),
+	        		Ressources.ingamebutton.getSubimage(420+buttonSize, (i+1)*buttonSize, buttonSize, buttonSize),
+	        		Ressources.ingamebutton.getSubimage(420+2*buttonSize, (i+1)*buttonSize, buttonSize, buttonSize),
+	        		Ressources.ingamebutton.getSubimage(420+3*buttonSize, (i+1)*buttonSize, buttonSize, buttonSize),
+	        		buttonNamesSpionage[i], Ressources.ZEROPOS.width+12+i*90, Ressources.ZEROPOS.height+720);
+	        layeredPane.add(button, javax.swing.JLayeredPane.DEFAULT_LAYER);
+	        buttons.put(buttonNamesSpionage[i], button);
+        }
+        
+        //Nach Hause Button
+        button = new Button(control,
+        		Ressources.ingamebutton.getSubimage(684, 0, buttonSize, buttonSize),
+        		Ressources.ingamebutton.getSubimage(684+buttonSize, 0, buttonSize, buttonSize),
+        		Ressources.ingamebutton.getSubimage(684+2*buttonSize, 0, buttonSize, buttonSize),
+        		Ressources.ingamebutton.getSubimage(684+3*buttonSize, 0, buttonSize, buttonSize),
+        		"aktionNachhause", Ressources.ZEROPOS.width+192, Ressources.ZEROPOS.height+642);
+        layeredPane.add(button, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        buttons.put("aktionNachhause", button);
+        
+        //Nach Hause Button
+        button = new Button(control,
+        		Ressources.ingamebutton.getSubimage(684, buttonSize, buttonSize, buttonSize),
+        		Ressources.ingamebutton.getSubimage(684+buttonSize, buttonSize, buttonSize, buttonSize),
+        		Ressources.ingamebutton.getSubimage(684+2*buttonSize, buttonSize, buttonSize, buttonSize),
+        		Ressources.ingamebutton.getSubimage(684+3*buttonSize,  buttonSize, buttonSize, buttonSize),
+        		"aktionNachhause", Ressources.ZEROPOS.width+282, Ressources.ZEROPOS.height+642);
+        layeredPane.add(button, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        buttons.put("aktionNachhause", button);
+        
         // --------
         //Buttons Ende
         // --------

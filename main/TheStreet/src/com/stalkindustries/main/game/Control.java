@@ -50,7 +50,7 @@ public class Control implements IControl {
 		
 	}
 	
-	private void clickHaken() {
+	private void clickHacken() {
 		
 	}
 	
