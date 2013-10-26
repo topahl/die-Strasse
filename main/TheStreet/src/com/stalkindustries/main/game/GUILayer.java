@@ -149,13 +149,6 @@ public class GUILayer extends JFrame implements MouseMotionListener {
 		this.anzeigeZeit.setVisible(true);
 		this.baseLayer.add(this.anzeigeZeit, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
-		// Tag-Nacht-Modus
-		this.overlayNacht.setBounds(Ressources.ZEROPOS.width, Ressources.ZEROPOS.height, Ressources.MAPWIDTH, Ressources.MAPHEIGHT);
-		this.overlayNacht.setBackground(new Color(0, 0, 1f, 0.2f));
-		this.overlayNacht.setOpaque(true);
-		this.overlayNacht.setVisible(false);
-		this.baseLayer.add(this.overlayNacht, javax.swing.JLayeredPane.DEFAULT_LAYER);
-
 		// Misstrauensanzeige in der Straﬂe
 		s = "0.0%";
 		this.anzeigeStatusMisstrauen.setText(s);
@@ -179,6 +172,13 @@ public class GUILayer extends JFrame implements MouseMotionListener {
 		this.overlayMenubar.setIcon(new ImageIcon(Ressources.menubars));
 		this.overlayMenubar.setBounds(Ressources.ZEROPOS.width, Ressources.ZEROPOS.height, Ressources.MAPWIDTH, Ressources.MAPHEIGHT);
 		this.baseLayer.add(this.overlayMenubar, javax.swing.JLayeredPane.DEFAULT_LAYER);
+
+		// Tag-Nacht-Modus
+		this.overlayNacht.setBounds(Ressources.ZEROPOS.width, Ressources.ZEROPOS.height, Ressources.MAPWIDTH, Ressources.MAPHEIGHT);
+		this.overlayNacht.setBackground(new Color(0, 0, 1f, 0.2f));
+		this.overlayNacht.setOpaque(true);
+		this.overlayNacht.setVisible(false);
+		this.baseLayer.add(this.overlayNacht, javax.swing.JLayeredPane.DEFAULT_LAYER);
 	}
 	
 	
