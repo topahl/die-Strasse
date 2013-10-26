@@ -13,7 +13,7 @@ import javax.imageio.ImageIO;
 
 public class Ressources {
 	
-	private static ArrayList<ArrayList<String>> location_ids;
+	private static ArrayList<ArrayList<String>> location_ids; 
 	private static ArrayList<ArrayList<String>> russian_names;
 	private static ArrayList<ArrayList<String>> arabian_names;
 	private static ArrayList<ArrayList<String>> russian_quiz;
@@ -26,11 +26,13 @@ public class Ressources {
 	public static final Dimension ZEROPOS;
 	public static final int MAPHEIGHT = 720;
 	public static final int MAPWIDTH = 1125;
+	public static String LEVELNAME;
 	public static BufferedImage menubars;
 	public static BufferedImage zahlen;
 	public static BufferedImage ingamebutton;
 	public static BufferedImage mainmenu;
 	public static BufferedImage menubutton;
+	public static BufferedImage ingameframe;
 	
 	public static final int NUMBERHOUSES = 9;
 	public static final int NUMBERBESCHWICHTIGENACTIONS = 4; // Zahl ist grad nur Dummywert
@@ -82,6 +84,13 @@ public class Ressources {
 			menubutton = ImageIO.read(new File("src\\com\\stalkindustries\\grafik\\slice_buttons_menu.png"));
 		} catch (IOException e) {
 			System.err.println("Could not find Image slice_buttons_menu.png");
+			e.printStackTrace();
+		}
+		
+		try {
+			ingameframe = ImageIO.read(new File("src\\com\\stalkindustries\\grafik\\slice_fenster.png"));
+		} catch (IOException e) {
+			System.err.println("Could not find Image slice_fenster.png,");
 			e.printStackTrace();
 		}
 		
@@ -176,6 +185,10 @@ public class Ressources {
 			new_csv.add(tmp);
 		}	
 		return new_csv;
+	}
+	
+	public void loadLevelFiles(String levelname){
+		LEVELNAME = levelname;
 	}
 	
 }

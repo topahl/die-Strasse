@@ -6,8 +6,6 @@ package com.stalkindustries.main.game;
 
 import java.awt.Color;
 import java.awt.Font;
-import java.awt.Graphics2D;
-import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -63,19 +61,45 @@ public class GUILayer extends JFrame{
     
     //Liebesbriefe an Tobi
     private void initComponents() {
-        layeredPane = new javax.swing.JLayeredPane();
-        
+        layeredPane = new JLayeredPane();
+        JLabel label;//dummy zum erstellen von buttons und labels
+        Button button;
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         setResizable(false);
         
         
+        //Overlayfenster
+        JLayeredPane spionage= new JLayeredPane();
+        spionage.setBounds(Ressources.ZEROPOS.width+90, Ressources.ZEROPOS.height+390,248, 232);
+        layeredPane.add(spionage, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        
+        button=new Button(control, Ressources.ingamebutton.getSubimage(948, 90, 27,27), Ressources.ingamebutton.getSubimage(975, 90, 27,27),Ressources.ingamebutton.getSubimage(1002, 90, 27,27),Ressources.ingamebutton.getSubimage(1029, 90, 27,27),"closeSpionage",205,13);
+        buttons.put("closeSpionage", button);
+        spionage.add(button, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        
+        label = new JLabel();
+        label.setText("Spionage");
+        label.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        label.setFont(new Font("Corbel",Font.BOLD,25));
+        label.setForeground(new java.awt.Color(0x1f, 0x1f, 0x1f));
+        label.setBounds(20, 12, 200, 30);
+        spionage.add(label, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        
+        
+        label= new JLabel();
+        label.setIcon(new ImageIcon(Ressources.ingameframe.getSubimage(0, 0, 248, 232)));
+        label.setBounds(0, 0, 248, 232);
+        spionage.add(label, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        
+        //Overlayfenster ende
+        
         // --------
         // Alle Buttons erzeugen und hinzufügen
         // Grüße von Stephan
         // --------
-        Button button;
+       
         
         //Pause + Exit Button
         int buttonSliceX = 948;
@@ -143,7 +167,7 @@ public class GUILayer extends JFrame{
 	        		Ressources.ingamebutton.getSubimage(buttonSliceX+2*buttonSize, i*buttonSize, buttonSize, buttonSize),
 	        		Ressources.ingamebutton.getSubimage(buttonSliceX+3*buttonSize, i*buttonSize, buttonSize, buttonSize),
 	        		buttonNamesSpionage[i], Ressources.ZEROPOS.width+12+i*90, Ressources.ZEROPOS.height+720);
-	        layeredPane.add(button, javax.swing.JLayeredPane.DEFAULT_LAYER);
+	        spionage.add(button, javax.swing.JLayeredPane.DEFAULT_LAYER);
 	        buttons.put(buttonNamesSpionage[i], button);
         }
         
