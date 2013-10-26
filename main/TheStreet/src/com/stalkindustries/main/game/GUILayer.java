@@ -95,22 +95,31 @@ public class GUILayer extends JFrame{
         layeredPane.add(button, javax.swing.JLayeredPane.DEFAULT_LAYER);
         buttons.put("pause", button);
 
-        //Groﬂe Buttons
+      //Groﬂe Buttons Beschwichtigen
         int buttonSize = 66;
-        String[] buttonNames = { "aktionenBeschwichtigen", "aktionKuchen", "aktionUnterhalten", "aktionFlirten", "aktionHand", "aktionParkBeschwichtigen" };
-        for(int i = 0; i < 6; i++) {
+        button = new Button(control,
+        		Ressources.ingamebutton.getSubimage(156, buttonSize, buttonSize, buttonSize),
+        		Ressources.ingamebutton.getSubimage(156+buttonSize, buttonSize, buttonSize, buttonSize),
+        		Ressources.ingamebutton.getSubimage(156+2*buttonSize, buttonSize, buttonSize, buttonSize),
+        		Ressources.ingamebutton.getSubimage(156+3*buttonSize, buttonSize, buttonSize, buttonSize),
+        		"aktionenBeschwichtigen", Ressources.ZEROPOS.width+12, Ressources.ZEROPOS.height+642);
+        layeredPane.add(button, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        buttons.put("aktionenBeschwichtigen", button);
+        
+        String[] buttonNames = { "aktionKuchen", "aktionUnterhalten", "aktionFlirten", "aktionHand", "aktionParkBeschwichtigen" };
+        for(int i = 0; i < buttonNames.length; i++) {
 	        button = new Button(control,
-	        		Ressources.ingamebutton.getSubimage(156, i*buttonSize, buttonSize, buttonSize),
-	        		Ressources.ingamebutton.getSubimage(156+buttonSize, i*buttonSize, buttonSize, buttonSize),
-	        		Ressources.ingamebutton.getSubimage(156+2*buttonSize, i*buttonSize, buttonSize, buttonSize),
-	        		Ressources.ingamebutton.getSubimage(156+3*buttonSize, i*buttonSize, buttonSize, buttonSize),
-	        		buttonNames[i], Ressources.ZEROPOS.width+12+i*90, Ressources.ZEROPOS.height+642);
+	        		Ressources.ingamebutton.getSubimage(156, (i+1)*buttonSize, buttonSize, buttonSize),
+	        		Ressources.ingamebutton.getSubimage(156+buttonSize, (i+1)*buttonSize, buttonSize, buttonSize),
+	        		Ressources.ingamebutton.getSubimage(156+2*buttonSize, (i+1)*buttonSize, buttonSize, buttonSize),
+	        		Ressources.ingamebutton.getSubimage(156+3*buttonSize, (i+1)*buttonSize, buttonSize, buttonSize),
+	        		buttonNames[i], Ressources.ZEROPOS.width+12+i*90, Ressources.ZEROPOS.height);
 	        layeredPane.add(button, javax.swing.JLayeredPane.DEFAULT_LAYER);
 	        buttons.put(buttonNames[i], button);
         }
         // --------
         //Buttons Ende
-        // --------  
+        // --------
         
         
       //Tag malen
