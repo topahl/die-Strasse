@@ -14,7 +14,22 @@ public class Button extends JButton implements ActionListener{
 	
 	private String ok_code;
 	private IControl controlunit;
-	 
+	
+	
+	//invisible Button
+	public Button(IControl controlunit, int width, int height,String funktionsname, int x, int y){
+		this.ok_code = funktionsname;
+		addActionListener(this);
+		setBorder(null);
+        setBorderPainted(false);
+        setContentAreaFilled(false);
+        setPreferredSize(new Dimension(width,height));
+        
+        setBounds(x, y, width,height);
+        this.controlunit=controlunit;
+	}
+	
+	//visible Button
 	public Button(IControl controlunit, BufferedImage normal,BufferedImage hover, BufferedImage clicked,BufferedImage disabled, String funktionsname, int x, int y){
 		this.ok_code = funktionsname;
 		addActionListener(this);
