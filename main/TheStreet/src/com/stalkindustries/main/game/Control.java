@@ -1,15 +1,7 @@
 package com.stalkindustries.main.game;
 
 import javax.swing.ImageIcon;
-
-
-
-
-
-
-
-
-
+import javax.swing.JLayeredPane;
 //Kreiert vom unglaublichen Stephan
 //auf Basis von Tobias unglaublicher Arbeit
 import com.stalkindustries.main.IControl;
@@ -39,6 +31,11 @@ public class Control implements IControl {
 		
 	
 		//Handling für Mousefollower Icons 
+	if(funktion == "closeSpionage")
+		closeSpionageMenu();
+	if(funktion == "aktionenSpionage")
+		clickAktionSpionage();
+		
 		
 		if (funktion.equals("aktionKuchen")){
 			guilayer.getMousefollower().setIcon(new ImageIcon (Ressources.ingamebutton.getSubimage(0, (39)*6, 39, 39)));
@@ -94,11 +91,20 @@ public class Control implements IControl {
 		//TODO: weitere Aktionen (buttons disablen, "Pause"-Fenster anzeigen etc.) bei Pause einfügen
 	}
 	
+	private void closeSpionageMenu(){
+		JLayeredPane frame = guilayer.getWindow("spionage");
+		frame.setVisible(false);
+		frame.setEnabled(false);
+	}
+	
 	private void clickExit() {
 		guilayer.endGame();
 	}
 	
 	private void clickAktionSpionage() {
+		JLayeredPane frame = guilayer.getWindow("spionage");
+		frame.setEnabled(true);
+		frame.setVisible(true);
 		
 	}
 	

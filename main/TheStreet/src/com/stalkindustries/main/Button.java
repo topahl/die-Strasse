@@ -38,7 +38,6 @@ public class Button extends JButton implements ActionListener{
 		addMouseMotionListener(ml);
 		this.ok_code = funktionsname;
 		addActionListener(this);
-		
 		setIcon(new ImageIcon(normal));
 		setRolloverIcon(new ImageIcon(hover));
         setPressedIcon(new ImageIcon(clicked));

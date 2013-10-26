@@ -36,6 +36,7 @@ public class GUILayer extends JFrame implements MouseMotionListener {
 	private Map karte;
 	private JLayeredPane layeredPane;
 	private JLayeredPane fensterSpionage;
+	private JLayeredPane fensterBeschwichtigen;
 	private boolean b = true; //TODO please rename  if needed
 	private Simulation simulation = new Simulation();
 	private Control control = new Control(this);
@@ -87,6 +88,26 @@ public class GUILayer extends JFrame implements MouseMotionListener {
     	mousefollower.setVisible(false);
     	mousefollower.setIcon(new ImageIcon (Ressources.ingamebutton.getSubimage(0, 0, 39, 39)));
         layeredPane.add(mousefollower, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        
+        
+        fensterBeschwichtigen = new JLayeredPane();
+        fensterBeschwichtigen.setBounds(Ressources.ZEROPOS.width+10, Ressources.ZEROPOS.height+390,248, 232);
+        layeredPane.add(fensterBeschwichtigen, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        
+        button=new Button(control, Ressources.ingamebutton.getSubimage(948, 90, 27,27), Ressources.ingamebutton.getSubimage(975, 90, 27,27),Ressources.ingamebutton.getSubimage(1002, 90, 27,27),Ressources.ingamebutton.getSubimage(1029, 90, 27,27),"closeBeschwichtigen",205,13);
+        buttons.put("closeBeschwichtigen", button);
+        fensterBeschwichtigen.add(button, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        
+        label = new JLabel();
+        label.setText("Sozialleben");
+        label.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        label.setFont(new Font("Corbel",Font.BOLD,25));
+        label.setForeground(new java.awt.Color(0x1f, 0x1f, 0x1f));
+        label.setBounds(20, 12, 200, 30);
+        fensterBeschwichtigen.add(label, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        
+        
+        
         
         
         //Overlayfenster
@@ -563,6 +584,11 @@ public class GUILayer extends JFrame implements MouseMotionListener {
 	//gibt die HashMap der Buttons zurück
 	public HashMap<String,Button> getButtonsMap() {
 		return buttons;
+	}
+	public JLayeredPane getWindow(String window){
+		if(window.equals("spionage"))
+			return fensterSpionage;
+		return null;
 	}
 	
 	//Support Tiki
