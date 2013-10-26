@@ -25,6 +25,7 @@ public class Map extends JLabel{
 		height=karte.getHeight();
 		width=karte.getWidth();
 		
+		//Beschwerden Miri
 		//Hausnummern zeichnen
 		Graphics2D g2d = this.karte.createGraphics();
 		for(int i=0;i<Ressources.NUMBERHOUSES;i++){

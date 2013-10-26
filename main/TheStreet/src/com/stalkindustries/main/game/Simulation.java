@@ -50,25 +50,34 @@ public class Simulation {
 	
 	//Beschwerden an Sven und Miri
 	void calculate_misstrauen(){
+		//misstrauen[] ist eine Hilfvariable, die später die später die neuen Werte enthält und sie wird benötigt, dass nicht die echten Werte verändert werden, bevor alle berechnet wurden
 		double[] misstrauen = new double[people.size()];
-		double faktor = 0.01275; //kommt noch darauf an, wie häufig die Methode aufgerufen wird
+		
+		double faktor = 0.01275; //Faktor, der regelt, wie stark sich Personen bei einem Methodenaufruf beeinflussen --> abhängig von Häufigkeit des Methodenaufrufs
+		
+		//misstrauen[] mit den alten Misstrauenswerten initialisieren
 		for(int i=0;i<this.people.size();i++)
 			misstrauen[i] = this.people.get(i).get_misstrauen();
 		
+		//jede Person kann theoretisch wieder von jeder anderen beeinflusst werden
 		for(int i=0;i<this.people.size();i++){
-			if((int)(this.people.get(i).get_location_id())-48+1 != 0 && (int)(this.people.get(i).get_location_id())-48+1 != 'X' && (int)(this.people.get(i).get_location_id())-48+1 != 'E'){	//wenn sich Person dort befindet, wo sie auch beeinflusst werden kann
+			//wenn sich Person dort befindet, wo sie auch beeinflusst werden kann
+			if((int)(this.people.get(i).get_location_id())-48+1 != 0 && (int)(this.people.get(i).get_location_id())-48+1 != 'X' && (int)(this.people.get(i).get_location_id())-48+1 != 'E'){
 				for(int j=0;j<this.people.size();j++){
+					//eine Person kann sich nicht selbst beeinflussen
 					if(i!=j){
+						//wenn sich die beiden Personen am selben Ort befinden
 						if((int)(this.people.get(i).get_location_id())-48+1 == (int)(this.people.get(j).get_location_id())-48+1){
-							//zwischenspeichern in misstrauen[] erforderlich, sonst wird immer mit aktualisiertem Wert gerechnet
+							//Ausnahme in der Berechnung: Kinder beeinflussen Erwachsene weniger
 							if(this.people.get(i) instanceof Erwachsene && this.people.get(j) instanceof Kinder){	//Kind beeinflusst Erwachsenen weniger
 								misstrauen[i] = misstrauen[i] - faktor/2*this.beziehungsmatrix[i][j]*(this.people.get(i).get_misstrauen()-this.people.get(j).get_misstrauen());
 							}
 							else{
 								misstrauen[i] = misstrauen[i] - faktor*this.beziehungsmatrix[i][j]*(this.people.get(i).get_misstrauen()-this.people.get(j).get_misstrauen());
 							}
-
-							if(misstrauen[i]>100)//Rangecheck
+							
+							//sorgt dafür, dass sich das Misstrauen zwischen -100 und 100 bewegt
+							if(misstrauen[i]>100)
 								misstrauen[i] = 100;
 							if(misstrauen[i]<-100)
 								misstrauen[i] = -100;
@@ -78,7 +87,7 @@ public class Simulation {
 			}
 		}
 		
-		//mapping der neuen Misstrauenswerte auf Person
+		//Mapping der neuen Misstrauenswerte auf Person
 		for(int i=0;i<this.people.size();i++){
 			this.people.get(i).set_misstrauen(misstrauen[i]);
 		}
@@ -93,6 +102,7 @@ public class Simulation {
 		}
 	
 	//Beschwerden an Miri
+	//Mittelwert des Misstrauens der einzelnen Personen
 	float calc_misstrauen_in_street(){
 		float misstrauen = 0;
 		for(int i=0;i<this.people.size();i++){
@@ -103,23 +113,75 @@ public class Simulation {
 		return misstrauen;
 	}
 	
+	
+	//Beschwerden an Miri
+	public void calc_misstrauen_after_beschwichtigen_action(int action_id, int personen_id){
+		int zufall=0;
+		int risiko;
+		double misstrauen = this.people.get(personen_id).get_misstrauen();
+		
+		//Risiko einer Beschwichtigenaktion steigt, je häufiger man sie ausführt
+		risiko = this.people.get(personen_id).get_durchgefuehrteBeschwichtigungen(action_id);
+		
+		//Fehlschlagen der Aktionen ist zudem abhängig vom Misstrauensstatus
+		//Personen sind misstrauisch
+		if(misstrauen >= 0)
+			zufall = (int)(Math.random()*(risiko+misstrauen/10));
+		//Personen sind weniger misstrauisch
+		else{
+			if(risiko+misstrauen/10 < 0)
+				zufall = -(int)(Math.random()*(-(risiko+misstrauen/10)));
+			else
+				zufall = (int)(Math.random()*(risiko+misstrauen/10));
+		}
+		
+		//TODO Testen, ob die Werte passen
+		//wie sich das Misstrauen verändern soll
+		if(zufall < -5)
+			misstrauen -= 20;
+		else if(zufall < 0)
+			misstrauen -= 10;
+		else if(zufall < 5)
+			misstrauen -= 5;
+		else if(zufall > 8)
+			misstrauen += 10;
+		
+		
+		//sorgt dafür, dass sich das Misstrauen zwischen -100 und 100 bewegt
+		if(misstrauen>100)
+			misstrauen = 100;
+		if(misstrauen<-100)
+			misstrauen = -100;
+		
+		//Misstrauen der Person setzen
+		this.people.get(personen_id).set_misstrauen(misstrauen);
+		
+		//Bei Person die Anzahl der Beschwichtigenaktionen erhöhen
+		this.people.get(personen_id).set_durchgefuehrteBeschwichtigungen(action_id);
+	}
+	
+	
 	//TODO
-	void calc_misstrauen_after_action(){
+	public void calc_misstrauen_after_ueberwachungs_action(int action_id){
 		
 	}
 	
+	//Beschwerden Miri
+	//Allen Häusern den Überwachungsstatus updaten
 	public void calc_ueberwachungsstatus(){
 		for(int i=0;i<this.houses.size();i++){
 			this.houses.get(i).setUeberwachungsstatus(this.houses.get(i).getUeberwachungsmodule().size()/Haus.MAXUBERWACHUNGSMODULE);
 		}
 	}
 	
+	//Beschwerden Miri
+	//Mittelwert der Überwachungsstati der einzelnen Häuser
 	public float calc_ueberwachung_in_street(){
 		float ueberwachung = 0;
 		for(int i=0;i<this.houses.size();i++){
 			ueberwachung += this.houses.get(i).getUeberwachungsstatus();
 		}
-		ueberwachung = ueberwachung/this.people.size();
+		ueberwachung = ueberwachung/this.houses.size();
 		
 		return ueberwachung;
 	}

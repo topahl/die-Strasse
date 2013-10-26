@@ -28,7 +28,6 @@ public class Erwachsene extends Person{
 		g2d.drawImage(adults.getSubimage(720+geschlecht*Ressources.RASTERHEIGHT*2, (aussehen[2]-1)*Ressources.RASTERHEIGHT*2, Ressources.RASTERHEIGHT*2, Ressources.RASTERHEIGHT*2),0,0, null); //Frisur
 		if(hat_arbeit)
 			g2d.drawImage(adults.getSubimage(Ressources.RASTERHEIGHT*2*11, (geschlecht-1)*Ressources.RASTERHEIGHT*2, Ressources.RASTERHEIGHT*2, Ressources.RASTERHEIGHT*2),0,0, null); //Krawate
-		//TODO arbeit oder nicht
 		
 		update_schatten();
 		step();

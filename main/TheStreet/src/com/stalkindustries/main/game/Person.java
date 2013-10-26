@@ -16,6 +16,7 @@ public abstract class Person extends Mensch {
 	private double misstrauen; 	//-100=nicht misstrauisch, 100=ultra misstrauisch, 200=initial
 	protected int geschlecht; //1=male, 2=female
 	private int zeitverzogerung; // in Minuten
+	private int durchgefuehrteBeschwichtigungen[] = new int[Ressources.NUMBERBESCHWICHTIGENACTIONS];//zum Mitzählen, weil 20 Kuchen am Tag, doch wieder misstrauisch machen
 	
 	static private int last_id=-1;
 	
@@ -46,7 +47,6 @@ public abstract class Person extends Mensch {
 		
 		this.id = last_id;
 		this.set_location_id('0');
-		//TODO: set_name
 		this.setLocation(0, 0);
 		this.misstrauen = 0;
 		
@@ -61,6 +61,10 @@ public abstract class Person extends Mensch {
 		System.out.println(geschlecht);
 		this.zeitverzogerung = (int)(Math.random()*(60))+1;
 		this.haus_id = house_id;
+				
+		//TODO
+		//Person einen Namen geben
+		
 	}
 	
 	public double get_misstrauen(){
@@ -79,6 +83,14 @@ public abstract class Person extends Mensch {
 
 	public void setZeitverzogerung(int zeitverzogerung) {
 		this.zeitverzogerung = zeitverzogerung;
+	}
+	
+	public int get_durchgefuehrteBeschwichtigungen(int index){
+		return this.durchgefuehrteBeschwichtigungen[index];
+	}
+	
+	public void set_durchgefuehrteBeschwichtigungen(int index){
+		this.durchgefuehrteBeschwichtigungen[index]++;
 	}
 
 }

@@ -9,7 +9,7 @@ public class Haus {
 	private ArrayList<String> ueberwachungsmodule = new ArrayList();
 	private ArrayList<String> boese_events = new ArrayList();
 	private boolean agentenhaus;
-	public static final int MAXUBERWACHUNGSMODULE = 2;
+	public static final int MAXUBERWACHUNGSMODULE = 6;
 	
 	
 	public Haus(int hausnr, boolean agentenhaus, int posX, int posY){

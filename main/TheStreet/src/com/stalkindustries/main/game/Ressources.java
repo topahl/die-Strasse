@@ -33,6 +33,7 @@ public class Ressources {
 	public static BufferedImage menubutton;
 	
 	public static final int NUMBERHOUSES = 9;
+	public static final int NUMBERBESCHWICHTIGENACTIONS = 4; // Zahl ist grad nur Dummywert
 	
 	 
 	 
