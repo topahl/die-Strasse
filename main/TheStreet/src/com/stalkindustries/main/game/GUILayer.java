@@ -129,17 +129,18 @@ public class GUILayer extends JFrame implements MouseMotionListener {
         
         
         initButtonsFensterSpionage();
-        
+        initButtonsFensterBeschwichtigen();
+
         label= new JLabel();
         label.setIcon(new ImageIcon(Ressources.ingameframe.getSubimage(0, 0, 248, 235)));
         label.setBounds(0, 0, 248, 232);
         fensterSpionage.add(label, javax.swing.JLayeredPane.DEFAULT_LAYER);
-        
+
         label= new JLabel();
         label.setIcon(new ImageIcon(Ressources.ingameframe.getSubimage(0, 0, 248, 235)));
         label.setBounds(0, 0, 248, 232);
         fensterBeschwichtigen.add(label, javax.swing.JLayeredPane.DEFAULT_LAYER);
-        
+
         //Overlayfenster ende
         
         // --------
@@ -192,11 +193,11 @@ public class GUILayer extends JFrame implements MouseMotionListener {
 	        layeredPane.add(button, javax.swing.JLayeredPane.DEFAULT_LAYER);
 	        buttons.put(buttonNamesAktionsleiste[i], button);
         }
-        
+
         //Aktionsbuttons Beschwichtigen
         buttonSliceX = 156;
-        
-        String[] buttonNamesBeschwichtigen = { "aktionKuchen", "aktionUnterhalten", "aktionFlirten", "aktionHand", "aktionParkBeschwichtigen" };
+
+       /* String[] buttonNamesBeschwichtigen = { "aktionKuchen", "aktionUnterhalten", "aktionFlirten", "aktionHand", "aktionParkBeschwichtigen" };
         for(int i = 0; i < buttonNamesBeschwichtigen.length; i++) {
 	        button = new Button(control,
 	        		Ressources.ingamebutton.getSubimage(buttonSliceX, i*buttonSliceY, buttonSize, buttonSize),
@@ -206,7 +207,8 @@ public class GUILayer extends JFrame implements MouseMotionListener {
 	        		buttonNamesBeschwichtigen[i], Ressources.ZEROPOS.width+12+i*90, Ressources.ZEROPOS.height-66, this);
 	        layeredPane.add(button, javax.swing.JLayeredPane.DEFAULT_LAYER);
 	        buttons.put(buttonNamesBeschwichtigen[i], button);
-        }
+        }*/
+
         
         
         //Kleine Buttons
@@ -336,6 +338,32 @@ public class GUILayer extends JFrame implements MouseMotionListener {
 	        		buttonNamesSpionage[i], 15+buttonPosX*75, buttonPosY,this);
 	        fensterSpionage.add(button, javax.swing.JLayeredPane.DEFAULT_LAYER);
 	        buttons.put(buttonNamesSpionage[i], button);
+	        
+	        buttonPosX++;
+	        if((i+1) % 3 == 0) {
+	        	buttonPosX = 0;
+	        	buttonPosY += 75;
+	        }
+        }
+    }
+    
+    private void initButtonsFensterBeschwichtigen() {
+    	int buttonSize = 66;
+    	int buttonSliceX = 156;
+        int buttonSliceY = buttonSize;
+        int buttonPosX = 0;
+        int buttonPosY = 76;
+
+        String[] buttonNamesBeschwichtigen = { "aktionKuchen", "aktionUnterhalten", "aktionFlirten", "aktionHand", "aktionParkBeschwichtigen", "aktion6Beschwichtigen" };
+        for(int i = 0; i < buttonNamesBeschwichtigen.length; i++) {
+	        Button button = new Button(control,
+	        		Ressources.ingamebutton.getSubimage(buttonSliceX, i*buttonSliceY, buttonSize, buttonSize),
+	        		Ressources.ingamebutton.getSubimage(buttonSliceX+buttonSize, i*buttonSliceY, buttonSize, buttonSize),
+	        		Ressources.ingamebutton.getSubimage(buttonSliceX+2*buttonSliceY, i*buttonSize, buttonSize, buttonSize),
+	        		Ressources.ingamebutton.getSubimage(buttonSliceX+3*buttonSliceY, i*buttonSize, buttonSize, buttonSize),
+	        		buttonNamesBeschwichtigen[i], 15+buttonPosX*75, buttonPosY,this);
+	        fensterBeschwichtigen.add(button, javax.swing.JLayeredPane.DEFAULT_LAYER);
+	        buttons.put(buttonNamesBeschwichtigen[i], button);
 	        
 	        buttonPosX++;
 	        if((i+1) % 3 == 0) {
