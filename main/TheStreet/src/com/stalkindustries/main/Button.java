@@ -13,9 +13,9 @@ import com.stalkindustries.main.game.Control;
 public class Button extends JButton implements ActionListener{
 	
 	private String ok_code;
-	private Control controlunit;
+	private IControl controlunit;
 	 
-	public Button(Control controlunit, BufferedImage normal,BufferedImage hover, BufferedImage clicked,BufferedImage disabled, String funktionsname, int x, int y){
+	public Button(IControl controlunit, BufferedImage normal,BufferedImage hover, BufferedImage clicked,BufferedImage disabled, String funktionsname, int x, int y){
 		this.ok_code = funktionsname;
 		addActionListener(this);
 		

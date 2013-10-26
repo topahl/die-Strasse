@@ -1,15 +1,13 @@
 package com.stalkindustries.main;
 
 import com.stalkindustries.main.game.GUILayer;
-import java.util.ArrayList;
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileReader;
-import java.io.IOException;
+import com.stalkindustries.main.menu.Menu;
 
 public class TheStreet {
 	public static void main(String[] args) {
-		GUILayer game = new GUILayer();
+		
+		Menu menu = new Menu();
+		
 		
 		
 		//CSV Test
@@ -22,5 +20,8 @@ public class TheStreet {
 			}
 			System.out.print("\n");
 		}*/
+	}
+	public static void loadLeve(String Levelname){
+		GUILayer game = new GUILayer();
 	}
 }

@@ -5,13 +5,12 @@
 package com.stalkindustries.main.game;
 
 import java.awt.Color;
-import java.awt.Dimension;
 import java.awt.Font;
-import java.awt.Toolkit;
 import java.util.ArrayList;
 import java.util.HashMap;
 
 import javax.swing.ImageIcon;
+import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JLayeredPane;
 import javax.swing.Timer;
@@ -23,7 +22,7 @@ import com.stalkindustries.main.Button;
  *
  * @author Tobias
  */
-public class GUILayer extends javax.swing.JFrame{
+public class GUILayer extends JFrame{
 
 	
 	private HashMap<String,Button> buttons = new HashMap<String,Button>();
@@ -379,7 +378,7 @@ public class GUILayer extends javax.swing.JFrame{
 			this.updateMisstrauen(); //Wert neu zeichnen
 		}
 		
-		if (stepcounter%5==0){ // Aufruf alle 4 steps
+		if (stepcounter%10==0){ // Aufruf alle 4 steps
 			simulation.calc_spielzeit();
 			this.updateTime(); //Zeiche Spiel
 			simulation.tagesablauf();

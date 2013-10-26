@@ -29,6 +29,8 @@ public class Ressources {
 	public static BufferedImage menubars;
 	public static BufferedImage zahlen;
 	public static BufferedImage ingamebutton;
+	public static BufferedImage mainmenu;
+	public static BufferedImage menubutton;
 	
 	public static final int NUMBERHOUSES = 9;
 	
@@ -64,6 +66,20 @@ public class Ressources {
 			ingamebutton = ImageIO.read(new File("src\\com\\stalkindustries\\grafik\\slice_buttons_ingame.png"));
 		} catch (IOException e) {
 			System.err.println("Could not find Image slice_buttons_ingame.png");
+			e.printStackTrace();
+		}
+		
+		try {
+			mainmenu = ImageIO.read(new File("src\\com\\stalkindustries\\grafik\\gui_menu_main.png"));
+		} catch (IOException e) {
+			System.err.println("Could not find Image gui_menu_main.png");
+			e.printStackTrace();
+		}
+		
+		try {
+			menubutton = ImageIO.read(new File("src\\com\\stalkindustries\\grafik\\slice_buttons_menu.png"));
+		} catch (IOException e) {
+			System.err.println("Could not find Image slice_buttons_menu.png");
 			e.printStackTrace();
 		}
 		

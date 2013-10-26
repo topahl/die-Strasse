@@ -1,7 +1,9 @@
 package com.stalkindustries.main.game;
 
 //Kreiert vom unglaublichen Stephan
-public class Control {
+import com.stalkindustries.main.IControl;
+
+public class Control implements IControl {
 	
 	//Laden des Spielfenster-Objektes, um auf Funktionen davon zugreifen zu können
 	GUILayer guilayer;
