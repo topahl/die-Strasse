@@ -35,6 +35,7 @@ public class Button extends JButton implements ActionListener, MouseListener{
         this.controlunit=controlunit;
 	}
 	
+	
 	//visible Button
 	public Button(IControl controlunit, BufferedImage normal,BufferedImage hover, BufferedImage clicked,BufferedImage disabled, String funktionsname, int x, int y,MouseMotionListener ml){
 		addMouseMotionListener(ml);
@@ -45,8 +46,7 @@ public class Button extends JButton implements ActionListener, MouseListener{
 		setIcon(new ImageIcon(normal));
 		setRolloverIcon(new ImageIcon(hover));
         setPressedIcon(new ImageIcon(clicked));
-        if(disabled != null) // es ist möglich kein disabled icon zu setzen
-        	setDisabledIcon(new ImageIcon(disabled));
+        setDisabledIcon(new ImageIcon(disabled));
         
         setBorder(null);
         setBorderPainted(false);

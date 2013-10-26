@@ -16,7 +16,7 @@ public class Map extends JLabel{
 	
 	public Map(String name, int agentenhaus){
 		try {
-			karte= ImageIO.read(new File("src\\com\\stalkindustries\\grafik\\"+name+"_map.png"));
+			karte= ImageIO.read(new File("res\\level\\"+name+"\\"+name+"_map.png"));
 		} catch (IOException e) {
 			System.err.println("Could not find Map file:"+name+".png");
 			e.printStackTrace();

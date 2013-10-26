@@ -1,5 +1,7 @@
 package com.stalkindustries.main.menu;
 
+import javax.swing.JLayeredPane;
+
 import com.stalkindustries.main.IControl;
 import com.stalkindustries.main.TheStreet;
 
@@ -17,10 +19,12 @@ public class ControlMenu implements IControl{
 	}
 	
 	public void call(String funktion){
-		if(funktion == "start")
+		if(funktion == "russland")
 			beginGame();
 		if(funktion == "beenden")
 			exitMenu();
+		if(funktion == "start")
+			showLevelSel();
 			
 	}
 	
@@ -38,5 +42,21 @@ public class ControlMenu implements IControl{
 		// TODO do nothing
 		
 	}
+	
+	private void showLevelSel(){
+		JLayeredPane pane = mainmenu.getMenuLayer("levelsel");
+		pane.setVisible(true);
+		pane.setEnabled(true);
+		closeMenuLayer("mainmenu");
+	}
+	
+	
+	private void closeMenuLayer(String layer){
+		JLayeredPane pane = mainmenu.getMenuLayer(layer);
+		pane.setVisible(false);
+		pane.setEnabled(false);
+	}
+	
+	
 	
 }

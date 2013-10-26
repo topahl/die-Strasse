@@ -1,11 +1,18 @@
 package com.stalkindustries.main.menu;
 
+import java.awt.AlphaComposite;
 import java.awt.Color;
 import java.awt.Font;
+import java.awt.Graphics2D;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseMotionListener;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
 import java.util.HashMap;
+import java.util.logging.Level;
 
+import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -43,7 +50,8 @@ public class Menu extends JFrame implements MouseMotionListener{
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         
-        //initLevelSelect();
+        initLevelSelect();
+        
         initMainMenu();
         
         
@@ -60,6 +68,8 @@ public class Menu extends JFrame implements MouseMotionListener{
         setUndecorated(true);
         setBackground(Color.black);
         
+		
+		
 		
         
         
@@ -138,6 +148,37 @@ public class Menu extends JFrame implements MouseMotionListener{
         mapselect.add(beschreibung, javax.swing.JLayeredPane.DEFAULT_LAYER);
         
         
+        String[] levels={"russland","saudiarabien","saudiarabien","russland"};
+        for(int i=0;i<levels.length;i++){
+        	if(i>3)
+        		break;
+        	try {
+    			BufferedImage loader = ImageIO.read(new File("res\\level\\"+levels[i]+"\\"+levels[i]+"_slice_menu.png"));
+    			BufferedImage iconnormal = new BufferedImage(312,134, BufferedImage.TYPE_INT_ARGB);
+    			BufferedImage iconhover = new BufferedImage(312,134, BufferedImage.TYPE_INT_ARGB);
+    			Graphics2D g2d = iconhover.createGraphics();
+    			g2d.drawImage(loader.getSubimage(0, 0, 312, 134), 0, 0, null);
+    			g2d.drawImage(Ressources.menubutton.getSubimage(0, 405, 312, 135), 0, 0, null);
+    			
+    			Graphics2D g2d2 = iconnormal.createGraphics();
+    			g2d2.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 0.5f));
+    			g2d2.drawImage(loader.getSubimage(0, 0, 312, 134), 0, 0, null);
+    			g2d2.drawImage(Ressources.menubutton.getSubimage(0, 405, 312, 135), 0, 0, null);
+    			
+    			Button button = new Button(control,iconnormal,iconhover,iconnormal,iconnormal,levels[i], 45+((i/2)*360),180+((i%2)*200), this);
+    			mapselect.add(button, javax.swing.JLayeredPane.DEFAULT_LAYER);
+    			buttons.put(levels[i], button);
+    			
+    			
+    		} catch (IOException e) {
+    			System.err.println("Could not find Image "+levels[i]+"_slice_menu.png");
+    			e.printStackTrace();
+    		}
+			
+			
+		}
+        
+        
         JLabel background = new JLabel();
         background.setIcon(new ImageIcon(Ressources.mainmenusub));
         background.setBounds(0, 0, Ressources.MAPWIDTH, Ressources.MAPHEIGHT);
@@ -145,6 +186,10 @@ public class Menu extends JFrame implements MouseMotionListener{
         
         mapselect.setBounds(Ressources.ZEROPOS.width,Ressources.ZEROPOS.height , Ressources.MAPWIDTH, Ressources.MAPWIDTH);
         window.add(mapselect, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        
+        
+        mapselect.setVisible(false);
+        mapselect.setEnabled(false);
 	}
 	
 	
@@ -153,5 +198,12 @@ public class Menu extends JFrame implements MouseMotionListener{
 		//mousefollower.setLocation(e.getX()-15, e.getY()-15);
 	}
     public void mouseDragged(MouseEvent e) {} //do nothing, notwendig für implements MouseMotion
-
+    
+    public JLayeredPane getMenuLayer(String menulayer){
+    	if(menulayer.equals("levelsel"))
+    		return mapselect;
+    	if(menulayer.equals("mainmenu"))
+    		return mainmenu;
+    	return null;
+    }
 }
