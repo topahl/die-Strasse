@@ -26,7 +26,6 @@ public class Ressources {
 	public static final Dimension ZEROPOS;
 	public static final int MAPHEIGHT = 720;
 	public static final int MAPWIDTH = 1125;
-	public static String LEVELNAME;
 	public static BufferedImage menubars;
 	public static BufferedImage zahlen;
 	public static BufferedImage ingamebutton;
@@ -40,10 +39,14 @@ public class Ressources {
 	public static int AUSGEWAEHLTESLAND = 1; //TODO dynamisch ausgewähltes Land reinschreiben
 	
 	 
-	 
+	public static void loadLevelInfomration(String levelname){
+		location_ids=read_from_csv("res\\level\\"+levelname+"\\"+levelname+"_map.csv");
+	}
+	
+	
 	static{
 		//Initialisierung der location_ids
-		location_ids=read_from_csv("src\\com\\stalkindustries\\data\\russland_map.csv");
+		
 		russian_names = read_from_csv("src\\com\\stalkindustries\\data\\russland_namen.csv");
 		arabian_names = read_from_csv("src\\com\\stalkindustries\\data\\saudiarabien_quizfragen.csv");
 		russian_quiz = read_from_csv("src\\com\\stalkindustries\\data\\russland_quizfragen.csv");
@@ -192,10 +195,6 @@ public class Ressources {
 			new_csv.add(tmp);
 		}	
 		return new_csv;
-	}
-	
-	public void loadLevelFiles(String levelname){
-		LEVELNAME = levelname;
 	}
 	
 }

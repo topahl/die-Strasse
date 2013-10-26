@@ -24,19 +24,21 @@ public abstract class Mensch extends JLabel {
 	protected int haus_id;
 	private boolean invisible_lefternside=false;
 	
-	static{
+	
+	public static void loadImages(String levelname){
 		 try {
-			adults = ImageIO.read(new File("src\\com\\stalkindustries\\grafik\\Russland_adult.png"));
-		} catch (IOException e) {
-			System.err.println("Could not find adult.png");
-			e.printStackTrace();
-		}
-		 try {
-			infants = ImageIO.read(new File("src\\com\\stalkindustries\\grafik\\Russland_child.png"));
-		} catch (IOException e) {
-			System.err.println("Could not find child.png");
-			e.printStackTrace();
-		}
+				adults = ImageIO.read(new File("src\\com\\stalkindustries\\grafik\\Russland_adult.png"));
+			} catch (IOException e) {
+				System.err.println("Could not find adult.png");
+				e.printStackTrace();
+			}
+			 try {
+				infants = ImageIO.read(new File("src\\com\\stalkindustries\\grafik\\Russland_child.png"));
+			} catch (IOException e) {
+				System.err.println("Could not find child.png");
+				e.printStackTrace();
+			}
+		
 	}
 		
 

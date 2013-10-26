@@ -30,7 +30,7 @@ public class GUILayer extends JFrame implements MouseMotionListener {
 	private JLayeredPane baseLayer;
 	private JLayeredPane fensterSpionage;
 	private JLayeredPane fensterBeschwichtigen;
-	private Simulation simulation = new Simulation();
+	private Simulation simulation;
 	private Control control = new Control(this);
 	private Haus haus;
 	private ArrayList<Mensch> humans = new ArrayList<Mensch>();
@@ -51,8 +51,14 @@ public class GUILayer extends JFrame implements MouseMotionListener {
 	/**
 	 * Konstruktor - steuert die Initialisierung aller GUI-Elemente
 	 */
-	public GUILayer() {
-		this.initComponents();
+	public GUILayer(String levelname) {
+		
+		Mensch.loadImages(levelname);
+		Ressources.loadLevelInfomration(levelname);
+		
+		simulation = new Simulation();
+		
+		this.initComponents(levelname);
 		this.simulation.initialize_beziehungsmatrix();
 		this.setVisible(true);
 		this.timer = new Timer(Ressources.GAMESPEED, new OSTimer(this));
@@ -76,7 +82,7 @@ public class GUILayer extends JFrame implements MouseMotionListener {
 	/**
 	 * Liebesbriefe an Tobi
 	 */
-	private void initComponents() {
+	private void initComponents(String levelname) {
 		
 		//Einstellungen zum Basisfenster
 		this.baseLayer = new JLayeredPane();
@@ -104,7 +110,7 @@ public class GUILayer extends JFrame implements MouseMotionListener {
 		this.initHumans();
 
 		//Levelkarte laden
-		this.initMap();
+		this.initMap(levelname);
 
 		//Letzte Einstellungen zum Fenster
 		javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this.getContentPane());
@@ -186,11 +192,11 @@ public class GUILayer extends JFrame implements MouseMotionListener {
 	/**
 	 * Levelkarte laden und einfügen
 	 */
-	private void initMap() {
+	private void initMap(String levelname) {
 		// TODO Dynamic map load
 	
 		// Karte laden
-		this.karte = new Map("russland", this.humans.get(this.humans.size() - 1).get_haus_id());
+		this.karte = new Map(levelname, this.humans.get(this.humans.size() - 1).get_haus_id());
 		// Agent steht an letzter Stelle
 		this.karte.setBounds(Ressources.ZEROPOS.width, Ressources.ZEROPOS.height, 1125, 720);
 		this.baseLayer.add(this.karte, javax.swing.JLayeredPane.DEFAULT_LAYER);

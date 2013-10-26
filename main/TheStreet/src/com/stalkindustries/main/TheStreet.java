@@ -21,8 +21,8 @@ public class TheStreet {
 			System.out.print("\n");
 		}*/
 	}
-	public static void loadLeve(String Levelname){
-		GUILayer game = new GUILayer();
+	public static void loadLeve(String levelname){
+		GUILayer game = new GUILayer(levelname);
 	}
 	
 	public static void loadMenu(){

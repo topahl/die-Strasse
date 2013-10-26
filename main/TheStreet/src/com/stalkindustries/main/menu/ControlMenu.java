@@ -20,7 +20,9 @@ public class ControlMenu implements IControl{
 	
 	public void call(String funktion){
 		if(funktion == "russland")
-			beginGame();
+			beginGame(funktion);
+		if(funktion=="saudiarabien")
+			beginGame(funktion);
 		if(funktion == "beenden")
 			exitMenu();
 		if(funktion == "start")
@@ -28,8 +30,8 @@ public class ControlMenu implements IControl{
 			
 	}
 	
-	private void beginGame(){
-		TheStreet.loadLeve("russland");
+	private void beginGame(String levelname){
+		TheStreet.loadLeve(levelname);
 		exitMenu();
 	}
 	
