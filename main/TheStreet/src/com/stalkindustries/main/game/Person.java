@@ -54,7 +54,6 @@ public abstract class Person extends Mensch {
 			this.bewegungsgeschwindigkeit = 3;
 		
 		this.geschlecht = (int)(Math.random()*(2)+1);
-		System.out.println(geschlecht);
 		this.zeitverzogerung = (int)(Math.random()*(60))+1;
 		this.haus_id = house_id;
 				
