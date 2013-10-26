@@ -76,6 +76,11 @@ public class Control implements IControl {
 //			guilayer.getMousefollower().setIcon(new ImageIcon (Ressources.ingamebutton.getSubimage(0, 0, 39, 39)));
 //			guilayer.getMousefollower().setVisible(true);
 		}
+		
+		if (funktion.equals("pause") || funktion.equals("close") || funktion.equals("aktionenBeschwichtigen") || funktion.equals("aktionenSpionage")){
+			guilayer.getMousefollower().setVisible(false);
+		}
+		
 	}
 
 	
@@ -90,10 +95,27 @@ public class Control implements IControl {
 	private void clickPause() {
 		//pause-Funktion von GUILayer aufrufen
 		guilayer.updateTimerStatus();
-		guilayer.getButtonsMap().get("aktionenBeschwichtigen").setEnabled(false);
-		guilayer.getButtonsMap().get("aktionenSpionage").setEnabled(false);
-		guilayer.getButtonsMap().get("aktionNachhause").setEnabled(false);
-		guilayer.getButtonsMap().get("aktionRazzia").setEnabled(false);
+		if (guilayer.getButtonsMap().get("aktionenBeschwichtigen").isEnabled()){
+			guilayer.getButtonsMap().get("aktionenBeschwichtigen").setEnabled(false);
+		} else {
+			guilayer.getButtonsMap().get("aktionenBeschwichtigen").setEnabled(true);
+		}
+		if (guilayer.getButtonsMap().get("aktionenSpionage").isEnabled()){
+			guilayer.getButtonsMap().get("aktionenSpionage").setEnabled(false);
+		} else {
+			guilayer.getButtonsMap().get("aktionenSpionage").setEnabled(true);
+		}
+		if (guilayer.getButtonsMap().get("aktionNachhause").isEnabled()){
+			guilayer.getButtonsMap().get("aktionNachhause").setEnabled(false);
+		} else {
+			guilayer.getButtonsMap().get("aktionNachhause").setEnabled(true);
+		}
+		if (guilayer.getButtonsMap().get("aktionRazzia").isEnabled()){
+			guilayer.getButtonsMap().get("aktionRazzia").setEnabled(false);
+		} else {
+			guilayer.getButtonsMap().get("aktionRazzia").setEnabled(false);
+		}
+		
 		//TODO: weitere Aktionen (buttons disablen, "Pause"-Fenster anzeigen etc.) bei Pause einfügen
 	}
 	

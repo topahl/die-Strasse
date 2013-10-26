@@ -529,7 +529,7 @@ public class GUILayer extends JFrame implements MouseMotionListener {
 			this.updateMisstrauen(); //Wert neu zeichnen
 		}
 		
-		if (stepcounter%10==0){ // Aufruf alle 4 steps
+		if (stepcounter%4==0){ // Aufruf alle 4 steps
 			simulation.calc_spielzeit();
 			this.updateTime(); //Zeiche Spiel
 			simulation.tagesablauf();
@@ -572,6 +572,7 @@ public class GUILayer extends JFrame implements MouseMotionListener {
 			        
 					}
 				}
+	
 				
 			}
 			}
