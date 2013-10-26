@@ -6,6 +6,11 @@ import javax.swing.JLayeredPane;
 //auf Basis von Tobias unglaublicher Arbeit
 import com.stalkindustries.main.IControl;
 
+/**
+ * 
+ * @author Tobias
+ *
+ */
 public class Control implements IControl {
 	
 	//Laden des Spielfenster-Objektes, um auf Funktionen davon zugreifen zu können
@@ -40,32 +45,64 @@ public class Control implements IControl {
 			closeBeschwichtigenMenu();
 		if(funktion.equals("aktionenBeschwichtigen"))
 			clickAktionBeschwichtigen();
-		if (funktion.equals("aktionKuchen"))
+		if(funktion.equals("aktionKuchen"))
 			clickKuchen();
-		if (funktion.equals("aktionUnterhalten"))
+		if(funktion.equals("aktionUnterhalten"))
 			clickUnterhalten();
-		if (funktion.equals("aktionFlirten"))
+		if(funktion.equals("aktionFlirten"))
 			clickFlirten();
-		if (funktion.equals("aktionHand"))
+		if(funktion.equals("aktionHand"))
 			clickHand();
-		if (funktion.equals("aktionParkBeschwichtigen"))
+		if(funktion.equals("aktionParkBeschwichtigen"))
 			clickParkBeschwichtigen();
-		if (funktion.equals("aktionWanze"))
+		if(funktion.equals("aktionWanze"))
 			clickWanzen();
-		if (funktion.equals("aktionKamera"))
+		if(funktion.equals("aktionKamera"))
 			clickKamera();
-		if (funktion.equals("aktionHacken"))
+		if(funktion.equals("aktionHacken"))
 			clickHacken();
-		if (funktion.equals("aktionFernglas"))
+		if(funktion.equals("aktionFernglas"))
 			clickFernglas();
-		if (funktion.equals("aktionParkSpionage"))
+		if(funktion.equals("aktionParkSpionage"))
 			clickParkSpionage();		
-		if (funktion.equals("pause") || funktion.equals("close") || funktion.equals("aktionenBeschwichtigen") || funktion.equals("aktionenSpionage")){
+		if(funktion.equals("pause") || funktion.equals("close") || funktion.equals("aktionenBeschwichtigen") || funktion.equals("aktionenSpionage")){
 			guilayer.getMousefollower().setVisible(false);
 		}
 		
 	}
-
+	
+	@Override
+	public void mousePresent(String funktion, boolean isPresent) {
+//		if(isPresent)
+//			System.out.println("You entered:"+funktion);
+//		else
+//			System.out.println("You leved:"+funktion);
+		
+		if(funktion.equals("aktionWanze"))
+			spionagelabelBeschr(isPresent, "Wanzen anbringen");
+		if(funktion.equals("aktionKamera"))
+			spionagelabelBeschr(isPresent, "Kameras anbringen");
+		if(funktion.equals("aktionHacken"))
+			spionagelabelBeschr(isPresent, "Laptop hacken");
+		if(funktion.equals("aktionFernglas"))
+			spionagelabelBeschr(isPresent, "ausspionieren");
+		if(funktion.equals("aktionParkSpionage"))
+			spionagelabelBeschr(isPresent, "im Park spionieren");
+		if(funktion.equals("aktion6Spionage"))
+			spionagelabelBeschr(isPresent, "Aufgabe 6");
+		if(funktion.equals("aktionKuchen"))
+			beschwichtigenlabelBeschr(isPresent, "Kuchen vorbeibringen");
+		if(funktion.equals("aktionUnterhalten"))
+			beschwichtigenlabelBeschr(isPresent, "sich Unterhalten");
+		if(funktion.equals("aktionFlirten"))
+			beschwichtigenlabelBeschr(isPresent, "Flirten");
+		if(funktion.equals("aktionHand"))
+			beschwichtigenlabelBeschr(isPresent, "Helfen");
+		if(funktion.equals("aktionParkBeschwichtigen"))
+			beschwichtigenlabelBeschr(isPresent, "im Park Unterhalten");
+		if(funktion.equals("aktion6Beschwichtigen"))
+			beschwichtigenlabelBeschr(isPresent, "Aktion 6");
+	}
 	
 	
 	private void closeBeschwichtigenMenu() {
@@ -192,5 +229,18 @@ public class Control implements IControl {
 	private void clickRazzia() {
 		
 	}
+	
+	private void spionagelabelBeschr(boolean isPresent, String Text){
+		if(isPresent){
+			System.out.println(Text);
+			
+		}
+	}
+	private void beschwichtigenlabelBeschr(boolean isPresent, String Text){
+		if(isPresent){
+			System.out.println(Text);
+		}
+	}
+	
 
 }

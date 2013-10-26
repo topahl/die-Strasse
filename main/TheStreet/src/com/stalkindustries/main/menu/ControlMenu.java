@@ -2,7 +2,12 @@ package com.stalkindustries.main.menu;
 
 import com.stalkindustries.main.IControl;
 import com.stalkindustries.main.TheStreet;
-	
+
+/**
+ * 
+ * @author Tobias
+ *
+ */
 public class ControlMenu implements IControl{
 	
 	private Menu mainmenu;
@@ -26,6 +31,12 @@ public class ControlMenu implements IControl{
 	
 	private void exitMenu(){
 		mainmenu.dispose();
+	}
+
+	@Override
+	public void mousePresent(String funktion, boolean isPresent) {
+		// TODO do nothing
+		
 	}
 	
 }
