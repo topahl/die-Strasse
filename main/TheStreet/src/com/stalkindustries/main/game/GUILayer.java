@@ -86,7 +86,7 @@ public class GUILayer extends JFrame implements MouseMotionListener {
     	mousefollower.setIcon(new ImageIcon (Ressources.ingamebutton.getSubimage(0, 0, 39, 39)));
         layeredPane.add(mousefollower, javax.swing.JLayeredPane.DEFAULT_LAYER);
         
-        
+        //Overlayfenster        
         fensterBeschwichtigen = new JLayeredPane();
         fensterBeschwichtigen.setBounds(Ressources.ZEROPOS.width+10, Ressources.ZEROPOS.height+390,248, 232);
         layeredPane.add(fensterBeschwichtigen, javax.swing.JLayeredPane.DEFAULT_LAYER);
@@ -102,12 +102,13 @@ public class GUILayer extends JFrame implements MouseMotionListener {
         label.setForeground(new java.awt.Color(0x1f, 0x1f, 0x1f));
         label.setBounds(20, 12, 200, 30);
         fensterBeschwichtigen.add(label, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        fensterBeschwichtigen.setEnabled(false);
+        fensterBeschwichtigen.setVisible(false);
         
         
         
         
-        
-        //Overlayfenster
+
         fensterSpionage = new JLayeredPane();
         fensterSpionage.setBounds(Ressources.ZEROPOS.width+90, Ressources.ZEROPOS.height+390,248, 232);
         layeredPane.add(fensterSpionage, javax.swing.JLayeredPane.DEFAULT_LAYER);
@@ -123,12 +124,18 @@ public class GUILayer extends JFrame implements MouseMotionListener {
         label.setForeground(new java.awt.Color(0x1f, 0x1f, 0x1f));
         label.setBounds(20, 12, 200, 30);
         fensterSpionage.add(label, javax.swing.JLayeredPane.DEFAULT_LAYER);
-        
+        fensterSpionage.setEnabled(false);
+        fensterSpionage.setVisible(false);
         
         label= new JLabel();
         label.setIcon(new ImageIcon(Ressources.ingameframe.getSubimage(0, 0, 248, 232)));
         label.setBounds(0, 0, 248, 232);
         fensterSpionage.add(label, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        
+        label= new JLabel();
+        label.setIcon(new ImageIcon(Ressources.ingameframe.getSubimage(0, 0, 248, 232)));
+        label.setBounds(0, 0, 248, 232);
+        fensterBeschwichtigen.add(label, javax.swing.JLayeredPane.DEFAULT_LAYER);
         
         //Overlayfenster ende
         
