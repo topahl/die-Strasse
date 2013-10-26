@@ -32,49 +32,34 @@ public class Control implements IControl {
 			closeSpionageMenu();
 		if(funktion.equals("aktionenSpionage"))
 			clickAktionSpionage();
+		if(funktion.equals("aktionNachhause"))
+			clickNachhause();
+		if(funktion.equals("aktionRazzia"))
+			clickRazzia();
 		if(funktion.equals("closeBeschwichtigen"))
 			closeBeschwichtigenMenu();
 		if(funktion.equals("aktionenBeschwichtigen"))
 			clickAktionBeschwichtigen();
 		if (funktion.equals("aktionKuchen"))
 			clickKuchen();
-		if (funktion.equals("aktionUnterhalten")){
-			guilayer.getMousefollower().setIcon(new ImageIcon (Ressources.ingamebutton.getSubimage(0, (39)*7, 39, 39)));
-			guilayer.getMousefollower().setVisible(true);
-		}
-		if (funktion.equals("aktionFlirten")){
-			guilayer.getMousefollower().setIcon(new ImageIcon (Ressources.ingamebutton.getSubimage(0, (39)*8, 39, 39)));
-			guilayer.getMousefollower().setVisible(true);
-		}
-		if (funktion.equals("aktionHand")){
-			guilayer.getMousefollower().setIcon(new ImageIcon (Ressources.ingamebutton.getSubimage(0, (39)*9, 39, 39)));
-			guilayer.getMousefollower().setVisible(true);
-		}
-		if (funktion.equals("aktionParkBeschwichtigen")){
-//			guilayer.getMousefollower().setIcon(new ImageIcon (Ressources.ingamebutton.getSubimage(0, 0, 39, 39)));
-//			guilayer.getMousefollower().setVisible(true);
-		}
-		if (funktion.equals("aktionWanze")){
-			guilayer.getMousefollower().setIcon(new ImageIcon (Ressources.ingamebutton.getSubimage(0, 0, 39, 39)));
-			guilayer.getMousefollower().setVisible(true);
-		}
-		if (funktion.equals("aktionKamera")){
-			guilayer.getMousefollower().setIcon(new ImageIcon (Ressources.ingamebutton.getSubimage(0, 39, 39, 39)));
-			guilayer.getMousefollower().setVisible(true);
-		}
-		if (funktion.equals("aktionHacken")){
-			guilayer.getMousefollower().setIcon(new ImageIcon (Ressources.ingamebutton.getSubimage(0, (39)*2, 39, 39)));
-			guilayer.getMousefollower().setVisible(true);
-		}
-		if (funktion.equals("aktionFernglas")){
-			guilayer.getMousefollower().setIcon(new ImageIcon (Ressources.ingamebutton.getSubimage(0, (39)*3, 39, 39)));
-			guilayer.getMousefollower().setVisible(true);
-		}
-		if (funktion.equals("aktionParkSpionage")){
-//			guilayer.getMousefollower().setIcon(new ImageIcon (Ressources.ingamebutton.getSubimage(0, 0, 39, 39)));
-//			guilayer.getMousefollower().setVisible(true);
-		}
-		
+		if (funktion.equals("aktionUnterhalten"))
+			clickUnterhalten();
+		if (funktion.equals("aktionFlirten"))
+			clickFlirten();
+		if (funktion.equals("aktionHand"))
+			clickHand();
+		if (funktion.equals("aktionParkBeschwichtigen"))
+			clickParkBeschwichtigen();
+		if (funktion.equals("aktionWanze"))
+			clickWanzen();
+		if (funktion.equals("aktionKamera"))
+			clickKamera();
+		if (funktion.equals("aktionHacken"))
+			clickHacken();
+		if (funktion.equals("aktionFernglas"))
+			clickFernglas();
+		if (funktion.equals("aktionParkSpionage"))
+			clickParkSpionage();		
 		if (funktion.equals("pause") || funktion.equals("close") || funktion.equals("aktionenBeschwichtigen") || funktion.equals("aktionenSpionage")){
 			guilayer.getMousefollower().setVisible(false);
 		}
@@ -142,19 +127,23 @@ public class Control implements IControl {
 	}
 	
 	private void clickWanzen() {
-		
+		guilayer.getMousefollower().setIcon(new ImageIcon (Ressources.ingamebutton.getSubimage(0, 0, 39, 39)));
+		guilayer.getMousefollower().setVisible(true);
 	}
 	
 	private void clickKamera() {
-		
+		guilayer.getMousefollower().setIcon(new ImageIcon (Ressources.ingamebutton.getSubimage(0, 39, 39, 39)));
+		guilayer.getMousefollower().setVisible(true);
 	}
 	
 	private void clickHacken() {
-		
+		guilayer.getMousefollower().setIcon(new ImageIcon (Ressources.ingamebutton.getSubimage(0, (39)*2, 39, 39)));
+		guilayer.getMousefollower().setVisible(true);
 	}
 	
 	private void clickFernglas() {
-		
+		guilayer.getMousefollower().setIcon(new ImageIcon (Ressources.ingamebutton.getSubimage(0, (39)*3, 39, 39)));
+		guilayer.getMousefollower().setVisible(true);
 	}
 	
 	private void clickParkSpionage() {
@@ -178,11 +167,13 @@ public class Control implements IControl {
 	}
 	
 	private void clickUnterhalten() {
-		
+		guilayer.getMousefollower().setIcon(new ImageIcon (Ressources.ingamebutton.getSubimage(0, (39)*7, 39, 39)));
+		guilayer.getMousefollower().setVisible(true);
 	}
 	
 	private void clickFlirten() {
-		
+		guilayer.getMousefollower().setIcon(new ImageIcon (Ressources.ingamebutton.getSubimage(0, (39)*8, 39, 39)));
+		guilayer.getMousefollower().setVisible(true);
 	}
 	
 	private void clickNachhause() {
@@ -190,7 +181,8 @@ public class Control implements IControl {
 	}
 	
 	private void clickHand() {
-		
+		guilayer.getMousefollower().setIcon(new ImageIcon (Ressources.ingamebutton.getSubimage(0, (39)*9, 39, 39)));
+		guilayer.getMousefollower().setVisible(true);
 	}
 	
 	private void clickParkBeschwichtigen() {
