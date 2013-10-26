@@ -33,7 +33,7 @@ public class GUILayer extends javax.swing.JFrame{
 	private JLayeredPane layeredPane;
 	private boolean b = true; //TODO please rename  if needed
 	private Simulation simulation = new Simulation();
-	private Control control = new Control();
+	private Control control = new Control(this);
 	private Haus haus;//wird später initialisiert
 	private ArrayList<Mensch> humans = new ArrayList<Mensch>();
 	private int stepcounter=0;
@@ -62,20 +62,49 @@ public class GUILayer extends javax.swing.JFrame{
         setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         setResizable(false);
         
-      //Buttons  
+        
+        // --------
+        // alle Buttons erzeugen und hinzufügen
+        // Grüße von Stephan
+        // --------
         Button button;
         
-        button=new Button(control, Ressources.ingamebutton.getSubimage(750, 45, 45, 45), Ressources.ingamebutton.getSubimage(795, 45, 45, 45), Ressources.ingamebutton.getSubimage(840, 45, 45, 45),null, "close", Ressources.ZEROPOS.width+1080, Ressources.ZEROPOS.height);
+        //Exit
+        button = new Button(control,
+        		Ressources.ingamebutton.getSubimage(948, Ressources.RASTERHEIGHT, Ressources.RASTERHEIGHT, Ressources.RASTERHEIGHT),
+        		Ressources.ingamebutton.getSubimage(948+Ressources.RASTERHEIGHT, Ressources.RASTERHEIGHT, Ressources.RASTERHEIGHT, Ressources.RASTERHEIGHT),
+        		Ressources.ingamebutton.getSubimage(948+2*Ressources.RASTERHEIGHT, Ressources.RASTERHEIGHT, Ressources.RASTERHEIGHT, Ressources.RASTERHEIGHT),
+        		Ressources.ingamebutton.getSubimage(948+3*Ressources.RASTERHEIGHT, Ressources.RASTERHEIGHT, Ressources.RASTERHEIGHT, Ressources.RASTERHEIGHT),
+        		"close", Ressources.ZEROPOS.width+24*Ressources.RASTERHEIGHT, Ressources.ZEROPOS.height);
         layeredPane.add(button, javax.swing.JLayeredPane.DEFAULT_LAYER);
         buttons.put("close", button);
         
-        
-        button=new Button(control, Ressources.ingamebutton.getSubimage(750, 0, 45, 45), Ressources.ingamebutton.getSubimage(795, 0, 45, 45), Ressources.ingamebutton.getSubimage(840, 0, 45, 45),null, "pause", Ressources.ZEROPOS.width+1035, Ressources.ZEROPOS.height);
+        //Pause
+        button = new Button(control,
+        		Ressources.ingamebutton.getSubimage(948, 0, Ressources.RASTERHEIGHT, Ressources.RASTERHEIGHT),
+        		Ressources.ingamebutton.getSubimage(948+Ressources.RASTERHEIGHT, 0, Ressources.RASTERHEIGHT, Ressources.RASTERHEIGHT),
+        		Ressources.ingamebutton.getSubimage(948+2*Ressources.RASTERHEIGHT, 0, Ressources.RASTERHEIGHT, Ressources.RASTERHEIGHT),
+        		Ressources.ingamebutton.getSubimage(948+3*Ressources.RASTERHEIGHT, 0, Ressources.RASTERHEIGHT, Ressources.RASTERHEIGHT),
+        		"pause", Ressources.ZEROPOS.width+23*Ressources.RASTERHEIGHT, Ressources.ZEROPOS.height);
         layeredPane.add(button, javax.swing.JLayeredPane.DEFAULT_LAYER);
         buttons.put("pause", button);
-        
-      //Buttons ende
-        
+
+        //Große Buttons
+        int buttonSize = 66;
+        String[] buttonNames = { "aktionenBeschwichtigen", "aktionKuchen", "aktionUnterhalten", "aktionFlirten", "aktionHand", "aktionParkBeschwichtigen" };
+        for(int i = 0; i < 6; i++) {
+	        button = new Button(control,
+	        		Ressources.ingamebutton.getSubimage(156, i*buttonSize, buttonSize, buttonSize),
+	        		Ressources.ingamebutton.getSubimage(156+buttonSize, i*buttonSize, buttonSize, buttonSize),
+	        		Ressources.ingamebutton.getSubimage(156+2*buttonSize, i*buttonSize, buttonSize, buttonSize),
+	        		Ressources.ingamebutton.getSubimage(156+3*buttonSize, i*buttonSize, buttonSize, buttonSize),
+	        		buttonNames[i], Ressources.ZEROPOS.width+12+i*90, Ressources.ZEROPOS.height+642);
+	        layeredPane.add(button, javax.swing.JLayeredPane.DEFAULT_LAYER);
+	        buttons.put(buttonNames[i], button);
+        }
+        // --------
+        //Buttons Ende
+        // --------  
         
         
       //Tag malen
@@ -362,5 +391,14 @@ public class GUILayer extends javax.swing.JFrame{
 		}
 		
 		stepcounter++;
+	}
+	
+	//kreiert vom unglaublichen Stephan
+	//Pausiert das Spiel oder setzt es fort
+	public void updateTimerStatus() {
+		if(timer.isRunning())
+			timer.stop();
+		else
+			timer.start();
 	}
 }

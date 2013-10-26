@@ -1,68 +1,95 @@
 package com.stalkindustries.main.game;
 
-import java.awt.event.ActionEvent;
-
+//Kreiert vom unglaublichen Stephan
 public class Control {
 	
-	public void call(String funktion){ //TODO implement
+	//Laden des Spielfenster-Objektes, um auf Funktionen davon zugreifen zu können
+	GUILayer guilayer;
+	
+	public Control(GUILayer guilayer){
+		this.guilayer = guilayer;
+	}
+	
+	//Call wird von Button bei Klick aufgerufen
+	//Anhand des "Namens" entsprechende Funktion aufrufen
+	public void call(String funktion) { //TODO implement
 		System.out.println("You pressed:"+funktion);
+	
+	//aus irgendeinem schwachsinnigen Grund haben wir Java 1.6 (steht auch im Pflichtenheft)
+	//Switch-case mit Strings erst ab 1.7, schade.
+	if(funktion == "pause")
+		clickPause();
+	if(funktion == "close")
+		clickExit();
+		
 	}
 
 	
 	
-	void Pauseclick(ActionEvent evt){
+	private void clickPause() {
+		//pause-Funktion von GUILayer aufrufen
+		guilayer.updateTimerStatus();
+		//TODO: weitere Aktionen (buttons disablen, "Pause"-Fenster anzeigen etc.) bei Pause einfügen
+	}
+	
+	private void clickExit() {
+		//guilayer.dispose();
+		//TODO: Programm wird nicht richtig beendet mit dispose (evtl nicht nötig durch Hauptmenü) 
+	}
+	
+	private void clickAktionSpionage() {
 		
 	}
 	
-	void Exitclick(ActionEvent evt){
+	private void clickWanzen() {
 		
 	}
 	
-	void Spionageaktionclick(ActionEvent evt){
+	private void clickKamera() {
 		
 	}
 	
-	void Wanzenclick(ActionEvent evt){
+	private void clickHaken() {
 		
 	}
 	
-	void Kameraclick(ActionEvent evt){
+	private void clickFernglas() {
 		
 	}
 	
-	void Hackenclick(ActionEvent evt){
+	private void clickParkSpionage() {
 		
 	}
 	
-	void Fernglassclick(ActionEvent evt){
+	private void clickAktionBeschwichtigen() {
 		
 	}
 	
-	void Beschwichtigenaktionclick(ActionEvent evt){
+	private void clickKuchen() {
 		
 	}
 	
-	void Kuchenclick(ActionEvent evt){
+	private void clickUnterhalten() {
 		
 	}
 	
-	void Unterhaltenclick(ActionEvent evt){
+	private void clickFlirten() {
 		
 	}
 	
-	void Flirtenclick(ActionEvent evt){
+	private void clickNachhause() {
 		
 	}
 	
-	void Nachhauseclick(ActionEvent evt){
+	private void clickHand() {
 		
 	}
 	
-	void Handclick(ActionEvent evt){
+	private void clickParkBeschwichtigen() {
 		
 	}
 	
-	void Verhaftenclick(ActionEvent evt){
+	private void clickRazzia() {
 		
 	}
 
