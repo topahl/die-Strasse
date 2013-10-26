@@ -19,11 +19,7 @@ public abstract class Person extends Mensch {
 	private int durchgefuehrteBeschwichtigungen[] = new int[Ressources.NUMBERBESCHWICHTIGENACTIONS];//zum Mitzählen, weil 20 Kuchen am Tag, doch wieder misstrauisch machen
 	
 	static private int last_id=-1;
-	
-	public Person(){
 		
-	} //TODO erntfernen
-	
 	public void update_schatten(){
 		misstrauen=Math.random()*200-100; //TODO entfernen
 		sprite = new BufferedImage(90, 90, BufferedImage.TYPE_INT_ARGB);
@@ -31,14 +27,14 @@ public abstract class Person extends Mensch {
 		if(misstrauen==0)
 			g2d.setColor(new Color(1f,1f,1f,0.2f));
 		else if(misstrauen>0)
-			g2d.setColor(new Color((float)(misstrauen/100),0f,0f,0.2f));
+			g2d.setColor(new Color(1f,(float)(1-(misstrauen/(100))),(float)(1-(misstrauen/(100))),0.2f));
 		else
-			g2d.setColor(new Color(0f,(float)(misstrauen/(-100)),0f,0.2f));
+			g2d.setColor(new Color((float)(1-(misstrauen/(-100))),1f,(float)(1-(misstrauen/(-100))),0.2f));
 		
-		g2d.fillOval(0, 0, Ressources.RASTERHEIGHT, Ressources.RASTERHEIGHT);
-		g2d.fillOval(Ressources.RASTERHEIGHT, 0, Ressources.RASTERHEIGHT, Ressources.RASTERHEIGHT);
-		g2d.fillOval(0, Ressources.RASTERHEIGHT, Ressources.RASTERHEIGHT, Ressources.RASTERHEIGHT);
-		g2d.fillOval(Ressources.RASTERHEIGHT, Ressources.RASTERHEIGHT, Ressources.RASTERHEIGHT, Ressources.RASTERHEIGHT);
+		g2d.fillOval(3, 3, Ressources.RASTERHEIGHT-6, Ressources.RASTERHEIGHT-6);
+		g2d.fillOval(3+Ressources.RASTERHEIGHT, 3, Ressources.RASTERHEIGHT-6, Ressources.RASTERHEIGHT-6);
+		g2d.fillOval(3, 3+Ressources.RASTERHEIGHT, Ressources.RASTERHEIGHT-6, Ressources.RASTERHEIGHT-6);
+		g2d.fillOval(3+Ressources.RASTERHEIGHT,3+Ressources.RASTERHEIGHT, Ressources.RASTERHEIGHT-6, Ressources.RASTERHEIGHT-6);
 		g2d.drawImage(temp_sprite, 0, 0,null);
 	}
 	
