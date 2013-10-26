@@ -110,7 +110,7 @@ public class GUILayer extends JFrame implements MouseMotionListener {
         
 
         fensterSpionage = new JLayeredPane();
-        fensterSpionage.setBounds(Ressources.ZEROPOS.width+90, Ressources.ZEROPOS.height+390,248, 232);
+        fensterSpionage.setBounds(Ressources.ZEROPOS.width+90, Ressources.ZEROPOS.height+390, 248, 235);
         layeredPane.add(fensterSpionage, javax.swing.JLayeredPane.DEFAULT_LAYER);
         
         button=new Button(control, Ressources.ingamebutton.getSubimage(948, 90, 27,27), Ressources.ingamebutton.getSubimage(975, 90, 27,27),Ressources.ingamebutton.getSubimage(1002, 90, 27,27),Ressources.ingamebutton.getSubimage(1029, 90, 27,27),"closeSpionage",205,13, this);
@@ -127,13 +127,16 @@ public class GUILayer extends JFrame implements MouseMotionListener {
         fensterSpionage.setEnabled(false);
         fensterSpionage.setVisible(false);
         
+        
+        initButtonsFensterSpionage();
+        
         label= new JLabel();
-        label.setIcon(new ImageIcon(Ressources.ingameframe.getSubimage(0, 0, 248, 232)));
+        label.setIcon(new ImageIcon(Ressources.ingameframe.getSubimage(0, 0, 248, 235)));
         label.setBounds(0, 0, 248, 232);
         fensterSpionage.add(label, javax.swing.JLayeredPane.DEFAULT_LAYER);
         
         label= new JLabel();
-        label.setIcon(new ImageIcon(Ressources.ingameframe.getSubimage(0, 0, 248, 232)));
+        label.setIcon(new ImageIcon(Ressources.ingameframe.getSubimage(0, 0, 248, 235)));
         label.setBounds(0, 0, 248, 232);
         fensterBeschwichtigen.add(label, javax.swing.JLayeredPane.DEFAULT_LAYER);
         
@@ -149,16 +152,17 @@ public class GUILayer extends JFrame implements MouseMotionListener {
         initHouseButtons();
         
         //Pause + Exit Button
-        int buttonSliceX = 948;
         int buttonSize = Ressources.RASTERHEIGHT;
+        int buttonSliceX = 948;
+        int buttonSliceY = buttonSize;
         
         String[] buttonNamesPauseExit = { "pause", "close" };
         for(int i = 0; i < buttonNamesPauseExit.length; i++) {
 	        button = new Button(control,
-	        		Ressources.ingamebutton.getSubimage(buttonSliceX, i*buttonSize, buttonSize, buttonSize),
-	        		Ressources.ingamebutton.getSubimage(buttonSliceX+buttonSize, i*buttonSize, buttonSize, buttonSize),
-	        		Ressources.ingamebutton.getSubimage(buttonSliceX+2*buttonSize, i*buttonSize, buttonSize, buttonSize),
-	        		Ressources.ingamebutton.getSubimage(buttonSliceX+3*buttonSize, i*buttonSize, buttonSize, buttonSize),
+	        		Ressources.ingamebutton.getSubimage(buttonSliceX, i*buttonSliceY, buttonSize, buttonSize),
+	        		Ressources.ingamebutton.getSubimage(buttonSliceX+buttonSize, i*buttonSliceY, buttonSize, buttonSize),
+	        		Ressources.ingamebutton.getSubimage(buttonSliceX+2*buttonSize, i*buttonSliceY, buttonSize, buttonSize),
+	        		Ressources.ingamebutton.getSubimage(buttonSliceX+3*buttonSize, i*buttonSliceY, buttonSize, buttonSize),
 	        		buttonNamesPauseExit[i], Ressources.ZEROPOS.width+(23+i)*Ressources.RASTERHEIGHT, Ressources.ZEROPOS.height, this);
 	        //Nach Hause und Razzia disabled am Anfang
 	        if(i > 1)
@@ -172,14 +176,15 @@ public class GUILayer extends JFrame implements MouseMotionListener {
         
         //Buttons Aktionsleiste
         buttonSliceX = 684;
+        buttonSliceY = buttonSize;
         
         String[] buttonNamesAktionsleiste = { "aktionenBeschwichtigen", "aktionenSpionage", "aktionNachhause", "aktionRazzia" };
         for(int i = 0; i < buttonNamesAktionsleiste.length; i++) {
 	        button = new Button(control,
-	        		Ressources.ingamebutton.getSubimage(buttonSliceX, i*buttonSize, buttonSize, buttonSize),
-	        		Ressources.ingamebutton.getSubimage(buttonSliceX+buttonSize, i*buttonSize, buttonSize, buttonSize),
-	        		Ressources.ingamebutton.getSubimage(buttonSliceX+2*buttonSize, i*buttonSize, buttonSize, buttonSize),
-	        		Ressources.ingamebutton.getSubimage(buttonSliceX+3*buttonSize, i*buttonSize, buttonSize, buttonSize),
+	        		Ressources.ingamebutton.getSubimage(buttonSliceX, i*buttonSliceY, buttonSize, buttonSize),
+	        		Ressources.ingamebutton.getSubimage(buttonSliceX+buttonSize, i*buttonSliceY, buttonSize, buttonSize),
+	        		Ressources.ingamebutton.getSubimage(buttonSliceX+2*buttonSize, i*buttonSliceY, buttonSize, buttonSize),
+	        		Ressources.ingamebutton.getSubimage(buttonSliceX+3*buttonSize, i*buttonSliceY, buttonSize, buttonSize),
 	        		buttonNamesAktionsleiste[i], Ressources.ZEROPOS.width+12+i*90, Ressources.ZEROPOS.height+642, this);
 	        //Nach Hause und Razzia disabled
 	        if(i > 1)
@@ -194,34 +199,34 @@ public class GUILayer extends JFrame implements MouseMotionListener {
         String[] buttonNamesBeschwichtigen = { "aktionKuchen", "aktionUnterhalten", "aktionFlirten", "aktionHand", "aktionParkBeschwichtigen" };
         for(int i = 0; i < buttonNamesBeschwichtigen.length; i++) {
 	        button = new Button(control,
-	        		Ressources.ingamebutton.getSubimage(buttonSliceX, i*buttonSize, buttonSize, buttonSize),
-	        		Ressources.ingamebutton.getSubimage(buttonSliceX+buttonSize, i*buttonSize, buttonSize, buttonSize),
-	        		Ressources.ingamebutton.getSubimage(buttonSliceX+2*buttonSize, i*buttonSize, buttonSize, buttonSize),
-	        		Ressources.ingamebutton.getSubimage(buttonSliceX+3*buttonSize, i*buttonSize, buttonSize, buttonSize),
+	        		Ressources.ingamebutton.getSubimage(buttonSliceX, i*buttonSliceY, buttonSize, buttonSize),
+	        		Ressources.ingamebutton.getSubimage(buttonSliceX+buttonSize, i*buttonSliceY, buttonSize, buttonSize),
+	        		Ressources.ingamebutton.getSubimage(buttonSliceX+2*buttonSize, i*buttonSliceY, buttonSize, buttonSize),
+	        		Ressources.ingamebutton.getSubimage(buttonSliceX+3*buttonSize, i*buttonSliceY, buttonSize, buttonSize),
 	        		buttonNamesBeschwichtigen[i], Ressources.ZEROPOS.width+12+i*90, Ressources.ZEROPOS.height-66, this);
 	        layeredPane.add(button, javax.swing.JLayeredPane.DEFAULT_LAYER);
 	        buttons.put(buttonNamesBeschwichtigen[i], button);
         }
         
-        //Aktionsbuttons Spionage
-        buttonSliceX = 420;
-        
-        String[] buttonNamesSpionage = { "aktionWanze", "aktionKamera", "aktionHacken", "aktionFernglas", "aktionParkSpionage" };
-        for(int i = 0; i < buttonNamesSpionage.length; i++) {
-	        button = new Button(control,
-	        		Ressources.ingamebutton.getSubimage(buttonSliceX, i*buttonSize, buttonSize, buttonSize),
-	        		Ressources.ingamebutton.getSubimage(buttonSliceX+buttonSize, i*buttonSize, buttonSize, buttonSize),
-	        		Ressources.ingamebutton.getSubimage(buttonSliceX+2*buttonSize, i*buttonSize, buttonSize, buttonSize),
-	        		Ressources.ingamebutton.getSubimage(buttonSliceX+3*buttonSize, i*buttonSize, buttonSize, buttonSize),
-	        		buttonNamesSpionage[i], Ressources.ZEROPOS.width+12+i*90, Ressources.ZEROPOS.height+720, this);
-	        fensterSpionage.add(button, javax.swing.JLayeredPane.DEFAULT_LAYER);
-	        buttons.put(buttonNamesSpionage[i], button);
-        }
-        
         
         //Kleine Buttons
         buttonSize = 39;
-        
+        buttonSliceX = 0;
+        buttonSliceY = buttonSize;
+
+        String[] buttonNamesSmall = { "smallWanze", "smallKamera", "smallHacken", "smallFernglas", "smallParkSpionage", "small6Spionage",
+        						"smallKuchen", "smallUnterhalten", "smallFlirten", "smallHand", "smallParkBeschwichtigen", "small6Beschwichtigen",
+        						"smallQuizA", "smallQuizB", "smallQuizC"};
+         for(int i = 0; i < buttonNamesSmall.length; i++) {
+	        button = new Button(control,
+	        		Ressources.ingamebutton.getSubimage(buttonSliceX, i*buttonSliceY, buttonSize, buttonSize),
+	        		Ressources.ingamebutton.getSubimage(buttonSliceX+buttonSliceY, i*buttonSize, buttonSize, buttonSize),
+	        		Ressources.ingamebutton.getSubimage(buttonSliceX+2*buttonSliceY, i*buttonSize, buttonSize, buttonSize),
+	        		Ressources.ingamebutton.getSubimage(buttonSliceX+3*buttonSliceY, i*buttonSize, buttonSize, buttonSize),
+	        		buttonNamesSmall[i], Ressources.ZEROPOS.width-39, 0+i*buttonSize,this);
+	        layeredPane.add(button, javax.swing.JLayeredPane.DEFAULT_LAYER);
+	        buttons.put(buttonNamesSmall[i], button);
+        }
         
         // --------
         //Buttons Ende
@@ -310,8 +315,36 @@ public class GUILayer extends JFrame implements MouseMotionListener {
         setBackground(Color.black);
         pack();
     }
-   
-    
+
+
+    //kreiert von Stephan
+    private void initButtonsFensterSpionage() {
+        //Aktionsbuttons Spionage
+    	int buttonSize = 66;
+        int buttonSliceX = 420;
+        int buttonSliceY = buttonSize;
+        int buttonPosX = 0;
+        int buttonPosY = 76;
+        
+        String[] buttonNamesSpionage = { "aktionWanze", "aktionKamera", "aktionHacken", "aktionFernglas", "aktionParkSpionage", "aktion6Spionage" };
+        for(int i = 0; i < buttonNamesSpionage.length; i++) {
+	        Button button = new Button(control,
+	        		Ressources.ingamebutton.getSubimage(buttonSliceX, i*buttonSliceY, buttonSize, buttonSize),
+	        		Ressources.ingamebutton.getSubimage(buttonSliceX+buttonSize, i*buttonSliceY, buttonSize, buttonSize),
+	        		Ressources.ingamebutton.getSubimage(buttonSliceX+2*buttonSliceY, i*buttonSize, buttonSize, buttonSize),
+	        		Ressources.ingamebutton.getSubimage(buttonSliceX+3*buttonSliceY, i*buttonSize, buttonSize, buttonSize),
+	        		buttonNamesSpionage[i], 15+buttonPosX*75, buttonPosY,this);
+	        fensterSpionage.add(button, javax.swing.JLayeredPane.DEFAULT_LAYER);
+	        buttons.put(buttonNamesSpionage[i], button);
+	        
+	        buttonPosX++;
+	        if((i+1) % 3 == 0) {
+	        	buttonPosX = 0;
+	        	buttonPosY += 75;
+	        }
+        }
+    }
+
 	//Beschwerden an Miri
 	private void initialize_humans(){  
 		//jeweils dem Agenten und dem Terroristen eine Hausnummer generieren
