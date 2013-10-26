@@ -16,14 +16,14 @@ import com.stalkindustries.main.game.Ressources;
 public class Menu extends JFrame{
 	private JLayeredPane mainmenu;
 	private JLayeredPane mapselect;
-	private Control control;
+	private ControlMenu control;
 	//TODO add more screens
 	
 	private HashMap<String,Button> buttons = new HashMap<String,Button>();
 	
 	
 	public Menu() {
-		control = new Control(this);
+		control = new ControlMenu(this);
         initComponents();
         setVisible(true);
 

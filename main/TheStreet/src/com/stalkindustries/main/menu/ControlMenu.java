@@ -3,11 +3,11 @@ package com.stalkindustries.main.menu;
 import com.stalkindustries.main.IControl;
 import com.stalkindustries.main.TheStreet;
 	
-public class Control implements IControl{
+public class ControlMenu implements IControl{
 	
 	private Menu mainmenu;
 	
-	public Control(Menu mainmenu){
+	public ControlMenu(Menu mainmenu){
 		this.mainmenu=mainmenu;
 	}
 	
