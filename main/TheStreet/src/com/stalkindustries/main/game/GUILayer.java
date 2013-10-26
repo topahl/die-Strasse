@@ -156,15 +156,15 @@ public class GUILayer extends JFrame{
         layeredPane.add(button, javax.swing.JLayeredPane.DEFAULT_LAYER);
         buttons.put("aktionNachhause", button);
         
-        //Nach Hause Button
+        //Nach Razzia Button
         button = new Button(control,
         		Ressources.ingamebutton.getSubimage(684, buttonSize, buttonSize, buttonSize),
         		Ressources.ingamebutton.getSubimage(684+buttonSize, buttonSize, buttonSize, buttonSize),
         		Ressources.ingamebutton.getSubimage(684+2*buttonSize, buttonSize, buttonSize, buttonSize),
         		Ressources.ingamebutton.getSubimage(684+3*buttonSize,  buttonSize, buttonSize, buttonSize),
-        		"aktionNachhause", Ressources.ZEROPOS.width+282, Ressources.ZEROPOS.height+642);
+        		"aktionRazzia", Ressources.ZEROPOS.width+282, Ressources.ZEROPOS.height+642);
         layeredPane.add(button, javax.swing.JLayeredPane.DEFAULT_LAYER);
-        buttons.put("aktionNachhause", button);
+        buttons.put("aktionRazzia", button);
         
         // --------
         //Buttons Ende
