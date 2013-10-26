@@ -62,8 +62,15 @@ public abstract class Person extends Mensch {
 		this.zeitverzogerung = (int)(Math.random()*(60))+1;
 		this.haus_id = house_id;
 				
-		//TODO
+
 		//Person einen Namen geben
+		if(Ressources.AUSGEWAEHLTESLAND == 1){	//Russland
+			this.name = Ressources.getRussianNames().get((int)(Math.random()*Ressources.getRussianNames().size())).get(this.geschlecht-1);
+		}
+		else if(Ressources.AUSGEWAEHLTESLAND == 2){ 	//SaudiArabien
+			this.name = Ressources.getArabianNames().get((int)(Math.random()*Ressources.getArabianNames().size())).get(this.geschlecht-1);
+		}
+			
 		
 	}
 	

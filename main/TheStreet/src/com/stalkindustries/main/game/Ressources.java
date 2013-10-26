@@ -34,6 +34,7 @@ public class Ressources {
 	
 	public static final int NUMBERHOUSES = 9;
 	public static final int NUMBERBESCHWICHTIGENACTIONS = 4; // Zahl ist grad nur Dummywert
+	public static int AUSGEWAEHLTESLAND = 1; //TODO dynamisch ausgewähltes Land reinschreiben
 	
 	 
 	 
