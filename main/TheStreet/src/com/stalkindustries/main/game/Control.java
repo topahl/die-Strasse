@@ -69,7 +69,7 @@ public class Control implements IControl {
 			guilayer.getMousefollower().setVisible(true);
 		}
 		if (funktion.equals("aktionFernglas")){
-			guilayer.getMousefollower().setIcon(new ImageIcon (Ressources.ingamebutton.getSubimage(0, (39+1)*3, 39, 39)));
+			guilayer.getMousefollower().setIcon(new ImageIcon (Ressources.ingamebutton.getSubimage(0, (39)*3, 39, 39)));
 			guilayer.getMousefollower().setVisible(true);
 		}
 		if (funktion.equals("aktionParkSpionage")){
@@ -105,16 +105,18 @@ public class Control implements IControl {
 		} else {
 			guilayer.getButtonsMap().get("aktionenSpionage").setEnabled(true);
 		}
-		if (guilayer.getButtonsMap().get("aktionNachhause").isEnabled()){
-			guilayer.getButtonsMap().get("aktionNachhause").setEnabled(false);
-		} else {
-			guilayer.getButtonsMap().get("aktionNachhause").setEnabled(true);
-		}
-		if (guilayer.getButtonsMap().get("aktionRazzia").isEnabled()){
-			guilayer.getButtonsMap().get("aktionRazzia").setEnabled(false);
-		} else {
-			guilayer.getButtonsMap().get("aktionRazzia").setEnabled(false);
-		}
+		// von Pause unabhängig?
+		
+//		if (guilayer.getButtonsMap().get("aktionNachhause").isEnabled()){
+//			guilayer.getButtonsMap().get("aktionNachhause").setEnabled(false);
+//		} else {
+//			guilayer.getButtonsMap().get("aktionNachhause").setEnabled(true);
+//		}
+//		if (guilayer.getButtonsMap().get("aktionRazzia").isEnabled()){
+//			guilayer.getButtonsMap().get("aktionRazzia").setEnabled(false);
+//		} else {
+//			guilayer.getButtonsMap().get("aktionRazzia").setEnabled(false);
+//		}
 		
 		//TODO: weitere Aktionen (buttons disablen, "Pause"-Fenster anzeigen etc.) bei Pause einfügen
 	}
