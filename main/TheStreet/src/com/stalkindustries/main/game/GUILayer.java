@@ -485,7 +485,7 @@ public class GUILayer extends JFrame{
 		else
 			timer.start();
 	}
-	private void InitHousebuttons() { //Sven
+	private void InitHousebuttons() { //Sven Housbuttons invisible Nummeriert von 1-9 
 		Button button;
 		Integer i;
 		Integer j;
