@@ -26,7 +26,26 @@ public class Control implements IControl {
 		clickPause();
 	if(funktion == "close")
 		clickExit();
+	
+	
+	//Handling für Mousefollower Icons 
+	
+	if (funktion.equals("aktionKuchen")){
 		
+	}
+	if (funktion.equals("aktionUnterhalten")){
+		
+	}
+	if (funktion.equals("aktionFlirten")){
+		
+	}
+	if (funktion.equals("aktionHand")){
+		
+	}
+	if (funktion.equals("aktionParkBeschwichtigen")){
+		
+	}
+	
 	}
 
 	

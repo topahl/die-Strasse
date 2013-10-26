@@ -6,6 +6,11 @@ package com.stalkindustries.main.game;
 
 import java.awt.Color;
 import java.awt.Font;
+
+import java.awt.Graphics2D;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseMotionListener;
+import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -23,7 +28,7 @@ import com.stalkindustries.main.TheStreet;
  *
  * @author Tobias
  */
-public class GUILayer extends JFrame{
+public class GUILayer extends JFrame implements MouseMotionListener {
 
 	
 	private HashMap<String,Button> buttons = new HashMap<String,Button>();
@@ -44,6 +49,7 @@ public class GUILayer extends JFrame{
 	private JLabel menubar = new JLabel();
 	private JLabel misstrauen_in_street = new JLabel();
 	private JLabel ueberwachung_in_street = new JLabel();
+	private JLabel mousefollower = new JLabel();
 	
     public GUILayer() {
         initComponents();
@@ -65,10 +71,19 @@ public class GUILayer extends JFrame{
         layeredPane = new JLayeredPane();
         JLabel label;//dummy zum erstellen von buttons und labels
         Button button;
-
+        //MouseMotionListener für die kleinen Icons die die Maus verfolgen
+        this.addMouseMotionListener(this);
+ 
+        
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         setResizable(false);
+        
+        //MousefollowerIcon wenn man eine Aktion tätigt :)
+        mousefollower.setBounds(15, 225, 39, 39);
+    	mousefollower.setVisible(true);
+    	mousefollower.setIcon(new ImageIcon (Ressources.ingamebutton.getSubimage(0, 0, 39, 39)));
+        layeredPane.add(mousefollower, javax.swing.JLayeredPane.DEFAULT_LAYER);
         
         
         //Overlayfenster
@@ -229,10 +244,7 @@ public class GUILayer extends JFrame{
         menubar.setIcon(new ImageIcon(Ressources.menubars));
         menubar.setBounds(Ressources.ZEROPOS.width,Ressources.ZEROPOS.height,Ressources.MAPWIDTH,Ressources.MAPHEIGHT);
         layeredPane.add(menubar, javax.swing.JLayeredPane.DEFAULT_LAYER);
-        
-        
-        
-        
+
         
         this.initialize_humans();
         
@@ -530,5 +542,12 @@ public class GUILayer extends JFrame{
 	public HashMap<String,Button> getButtonsMap() {
 		return buttons;
 	}
+	
+	//Support Tiki
+	public void mouseMoved(MouseEvent e) {	
+		mousefollower.setLocation(e.getX()-15, e.getY()-15);
+	}
+    public void mouseDragged(MouseEvent e) {} //do nothing, notwendig für implements MouseMotion
+	
 	
 }
