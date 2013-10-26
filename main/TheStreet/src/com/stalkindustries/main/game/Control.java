@@ -166,24 +166,29 @@ public class Control implements IControl {
 	private void clickWanzen() {
 		guilayer.getMousefollower().setIcon(new ImageIcon (Ressources.ingamebutton.getSubimage(0, 0, 39, 39)));
 		guilayer.getMousefollower().setVisible(true);
+		closeSpionageMenu();
 	}
 	
 	private void clickKamera() {
 		guilayer.getMousefollower().setIcon(new ImageIcon (Ressources.ingamebutton.getSubimage(0, 39, 39, 39)));
 		guilayer.getMousefollower().setVisible(true);
+		closeSpionageMenu();
 	}
 	
 	private void clickHacken() {
 		guilayer.getMousefollower().setIcon(new ImageIcon (Ressources.ingamebutton.getSubimage(0, (39)*2, 39, 39)));
 		guilayer.getMousefollower().setVisible(true);
+		closeSpionageMenu();
 	}
 	
 	private void clickFernglas() {
 		guilayer.getMousefollower().setIcon(new ImageIcon (Ressources.ingamebutton.getSubimage(0, (39)*3, 39, 39)));
 		guilayer.getMousefollower().setVisible(true);
+		closeSpionageMenu();
 	}
 	
 	private void clickParkSpionage() {
+		closeSpionageMenu();
 		
 	}
 	
@@ -201,16 +206,19 @@ public class Control implements IControl {
 	private void clickKuchen() {
 		guilayer.getMousefollower().setIcon(new ImageIcon (Ressources.ingamebutton.getSubimage(0, (39)*6, 39, 39)));
 		guilayer.getMousefollower().setVisible(true);
+		closeBeschwichtigenMenu();
 	}
 	
 	private void clickUnterhalten() {
 		guilayer.getMousefollower().setIcon(new ImageIcon (Ressources.ingamebutton.getSubimage(0, (39)*7, 39, 39)));
 		guilayer.getMousefollower().setVisible(true);
+		closeBeschwichtigenMenu();
 	}
 	
 	private void clickFlirten() {
 		guilayer.getMousefollower().setIcon(new ImageIcon (Ressources.ingamebutton.getSubimage(0, (39)*8, 39, 39)));
 		guilayer.getMousefollower().setVisible(true);
+		closeBeschwichtigenMenu();
 	}
 	
 	private void clickNachhause() {
@@ -220,10 +228,11 @@ public class Control implements IControl {
 	private void clickHand() {
 		guilayer.getMousefollower().setIcon(new ImageIcon (Ressources.ingamebutton.getSubimage(0, (39)*9, 39, 39)));
 		guilayer.getMousefollower().setVisible(true);
+		closeBeschwichtigenMenu();
 	}
 	
 	private void clickParkBeschwichtigen() {
-		
+		closeBeschwichtigenMenu();
 	}
 	
 	private void clickRazzia() {
