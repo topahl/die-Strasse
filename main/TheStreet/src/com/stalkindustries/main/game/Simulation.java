@@ -337,34 +337,189 @@ public class Simulation {
 		
 		//TODO ACHTUNG---der Park ist nicht immer an der selben stelle  vgTobi
 		if (zielloc == locid && (person.getPosY()-Ressources.ZEROPOS.height)/45 == 3 && (person.getPosX()-Ressources.ZEROPOS.width)/45 == 13){
-			if ((int)(Math.random()*2) == 1){
-				neuer_weg.push('l');
-				neuer_weg.push('u');
-				neuer_weg.push('u');
-				neuer_weg.push('r');
-				neuer_weg.push('r');
-				neuer_weg.push('r');
-				neuer_weg.push('r');
-				neuer_weg.push('o');
-				neuer_weg.push('o');
-				neuer_weg.push('l');
-				neuer_weg.push('l');
-				neuer_weg.push('l');
-			} else {
-				neuer_weg.push('r');
-				neuer_weg.push('r');
-				neuer_weg.push('r');
-				neuer_weg.push('u');
-				neuer_weg.push('u');
-				neuer_weg.push('l');
-				neuer_weg.push('l');
-				neuer_weg.push('l');
-				neuer_weg.push('l');
-				neuer_weg.push('o');
-				neuer_weg.push('o');
-				neuer_weg.push('r');
+			
+			for (int i=0; i<location_ids.size(); i++){
+				for (int j=0; j<location_ids.get(i).size(); j++){
+					if (location_ids.get(i).get(j).charAt(0) != 'X' && location_ids.get(i).get(j).charAt(0) != ziellocation.charAt(0) && location_ids.get(i).get(j).charAt(0) != 'P' && location_ids.get(i).get(j).charAt(0) != locid ){
+						location_ids.get(i).set(j,"You shall not pass!") ;
+					}
+					if (location_ids.get(i).get(j).charAt(0) == 'P'){
+						location_ids.get(i).set(j,"X") ;
+					}
+				}
 			}
-			person.setMoves(neuer_weg);
+			location_ids.get(3).set(13,"0");
+			
+	goalp:	for (int i=0; i<100; i++){
+				for (int j=0; j<16; j++){  	// J entspricht y-wert, K entspricht x-wert
+					for (int k=0; k<25; k++){
+						// Es werden Zahlen auf der Map gesucht
+						if (location_ids.get(j).get(k).equals(String.valueOf(i))){
+							// Es wird überprüft, ob das Ziel in direkter Nähe liegt
+							if (i>2){
+								if (j < 15){ //15 -> Rasterhöhe
+									if (location_ids.get(j+1).get(k).equals("0")) {
+//										location_ids.get(j+1).set(k,String.valueOf(i+1));
+										counter = i;
+										yPos_current = j+1;
+										xPos_current = k;
+										break goalp;
+									}
+								}
+								if (k<24){ //24 -> Rasterbreite
+									if (location_ids.get(j).get(k+1).equals("0")) {
+//										location_ids.get(j).set(k+1,String.valueOf(i+1));
+										counter = i;
+										yPos_current = j;
+										xPos_current = k+1;
+										break goalp;
+									}
+								}
+								if (j>0){
+									if (location_ids.get(j-1).get(k).equals("0")) {
+//										location_ids.get(j-1).set(k,String.valueOf(i+1));
+										counter = i;
+										yPos_current = j-1;
+										xPos_current = k;
+										break goalp;
+									}
+								}
+								if (k>0){
+									if (location_ids.get(j).get(k-1).equals("0")) {
+//										location_ids.get(j).set(k-1,String.valueOf(i+1));
+										counter = i;
+										yPos_current = j;
+										xPos_current = k-1;
+										break goalp;
+									}
+								}
+							}
+							// Es wird überprüft, ob ein Feld drüber/drunter/links oder rechts ebenfalls begehbar ist -> das wird markiert
+							if (i>0){
+								if (j<15){
+									if (location_ids.get(j+1).get(k).equals("X")) {			//Weg nach unten ist begehbar
+										location_ids.get(j+1).set(k,String.valueOf(i+1));
+									}
+								}
+								if (k<24){
+									if (location_ids.get(j).get(k+1).equals("X")) {			//Weg nach rechts ist begehbar
+										location_ids.get(j).set(k+1,String.valueOf(i+1));
+									}
+								}
+								if (j>0){
+									if (location_ids.get(j-1).get(k).equals("X")) {			// Weg nach oben ist begehbar
+										location_ids.get(j-1).set(k,String.valueOf(i+1));
+									}
+								}
+								if (k>0){
+									if (location_ids.get(j).get(k-1).equals("X")) {			//Weg nach links ist begehbar
+										location_ids.get(j).set(k-1,String.valueOf(i+1));
+									}
+								}
+							} else {
+								if (j>0){
+									if (location_ids.get(j-1).get(k).equals("X")) {			// Weg nach oben ist begehbar
+										location_ids.get(j-1).set(k,String.valueOf(i+1));
+									}
+								}
+								if (k>0){
+									if (location_ids.get(j).get(k-1).equals("X")) {			//Weg nach links ist begehbar
+										location_ids.get(j).set(k-1,String.valueOf(i+1));
+									}
+								}
+							}
+							
+						}
+					}
+				}
+			}
+			if ((int)(Math.random()*2) == 1){
+			// Der Stack für die Bewegung wird mit den richtigen Werten gefüllt. Dafür hangelt man sich absteigend an der zahlenreihe entlang
+			for (int i = counter; i>=0; i--){
+				if (yPos_current<15){
+					if (location_ids.get(yPos_current+1).get(xPos_current).equals(String.valueOf(i))) {			//unten gehts weiter
+					yPos_current++;
+					neuer_weg.push('o');
+					}
+				}
+				if (xPos_current<24){
+					if (location_ids.get(yPos_current).get(xPos_current+1).equals(String.valueOf(i))) {			//rechts gehts weiter
+					xPos_current++;
+					neuer_weg.push('l');
+					}
+				}
+				if (yPos_current>0){
+					if (location_ids.get(yPos_current-1).get(xPos_current).equals(String.valueOf(i))) {			//oben gehts weiter
+					yPos_current--;
+					neuer_weg.push('u');
+					}
+				}
+				if (xPos_current>0){
+					if (location_ids.get(yPos_current).get(xPos_current-1).equals(String.valueOf(i))) {			//links gehts weiter
+					xPos_current--;
+					neuer_weg.push('r');
+					}
+				}
+				
+			}
+			} else {
+			for (int i = 1; i<=counter+1; i++){
+				if (i==counter+1){
+					if (yPos_current<15){
+						if (location_ids.get(yPos_current+1).get(xPos_current).equals("0")) {			//unten gehts weiter
+						yPos_current++;
+						neuer_weg.push('o');
+						}
+					}
+					if (xPos_current<24){
+						if (location_ids.get(yPos_current).get(xPos_current+1).equals("0")) {			//rechts gehts weiter
+						xPos_current++;
+						neuer_weg.push('l');
+						}
+					}
+					if (yPos_current>0){
+						if (location_ids.get(yPos_current-1).get(xPos_current).equals("0")) {			//oben gehts weiter
+						yPos_current--;
+						neuer_weg.push('u');
+						}
+					}
+					if (xPos_current>0){
+						if (location_ids.get(yPos_current).get(xPos_current-1).equals("0")) {			//links gehts weiter
+						xPos_current--;
+						neuer_weg.push('r');
+						}
+					} 
+				} else{
+					if (yPos_current<15){
+						if (location_ids.get(yPos_current+1).get(xPos_current).equals(String.valueOf(i))) {			//unten gehts weiter
+						yPos_current++;
+						neuer_weg.push('o');
+						}
+					}
+					if (xPos_current<24){
+						if (location_ids.get(yPos_current).get(xPos_current+1).equals(String.valueOf(i))) {			//rechts gehts weiter
+						xPos_current++;
+						neuer_weg.push('l');
+						}
+					}
+					if (yPos_current>0){
+						if (location_ids.get(yPos_current-1).get(xPos_current).equals(String.valueOf(i))) {			//oben gehts weiter
+						yPos_current--;
+						neuer_weg.push('u');
+						}
+					}
+					if (xPos_current>0){
+						if (location_ids.get(yPos_current).get(xPos_current-1).equals(String.valueOf(i))) {			//links gehts weiter
+						xPos_current--;
+						neuer_weg.push('r');
+						}
+					}
+				}
+				
+			}
+			
+			}
+		person.setMoves(neuer_weg);
 			return;
 		}
 		
@@ -411,38 +566,38 @@ goal:	for (int i=0; i<100; i++){
 						// Es wird überprüft, ob das Ziel in direkter Nähe liegt
 						if (j < 15){ //15 -> Rasterhöhe
 							if (location_ids.get(j+1).get(k).equals(ziellocation)) {
-							location_ids.get(j+1).set(k,String.valueOf(i+1));
-							counter = i;
-							yPos_current = j+1;
-							xPos_current = k;
-							break goal;
+								location_ids.get(j+1).set(k,String.valueOf(i+1));
+								counter = i;
+								yPos_current = j+1;
+								xPos_current = k;
+								break goal;
 							}
 						}
 						if (k<24){ //24 -> Rasterbreite
 							if (location_ids.get(j).get(k+1).equals(ziellocation)) {
-							location_ids.get(j).set(k+1,String.valueOf(i+1));
-							counter = i;
-							yPos_current = j;
-							xPos_current = k+1;
-							break goal;
+								location_ids.get(j).set(k+1,String.valueOf(i+1));
+								counter = i;
+								yPos_current = j;
+								xPos_current = k+1;
+								break goal;
 							}
 						}
 						if (j>0){
 							if (location_ids.get(j-1).get(k).equals(ziellocation)) {
-							location_ids.get(j-1).set(k,String.valueOf(i+1));
-							counter = i;
-							yPos_current = j-1;
-							xPos_current = k;
-							break goal;
+								location_ids.get(j-1).set(k,String.valueOf(i+1));
+								counter = i;
+								yPos_current = j-1;
+								xPos_current = k;
+								break goal;
 							}
 						}
 						if (k>0){
 							if (location_ids.get(j).get(k-1).equals(ziellocation)) {
-							location_ids.get(j).set(k-1,String.valueOf(i+1));
-							counter = i;
-							yPos_current = j;
-							xPos_current = k-1;
-							break goal;
+								location_ids.get(j).set(k-1,String.valueOf(i+1));
+								counter = i;
+								yPos_current = j;
+								xPos_current = k-1;
+								break goal;
 							}
 						}
 						
