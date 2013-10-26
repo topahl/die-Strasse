@@ -1,5 +1,6 @@
 package com.stalkindustries.main;
 
+import java.awt.Cursor;
 import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -24,6 +25,7 @@ public class Button extends JButton implements ActionListener{
         setBorderPainted(false);
         setContentAreaFilled(false);
         setPreferredSize(new Dimension(width,height));
+        setCursor(new Cursor(Cursor.HAND_CURSOR));
         
         setBounds(x, y, width,height);
         this.controlunit=controlunit;
@@ -44,6 +46,7 @@ public class Button extends JButton implements ActionListener{
         setBorderPainted(false);
         setContentAreaFilled(false);
         setPreferredSize(new Dimension(normal.getWidth(),normal.getHeight()));
+        setCursor(new Cursor(Cursor.HAND_CURSOR));
         
         setBounds(x, y, normal.getWidth(),normal.getHeight());
         this.controlunit=controlunit;
