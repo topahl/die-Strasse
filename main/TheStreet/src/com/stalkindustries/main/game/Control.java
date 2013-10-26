@@ -35,8 +35,7 @@ public class Control implements IControl {
 	}
 	
 	private void clickExit() {
-		//guilayer.dispose();
-		//TODO: Programm wird nicht richtig beendet mit dispose (evtl nicht nötig durch Hauptmenü) 
+		guilayer.endGame();
 	}
 	
 	private void clickAktionSpionage() {

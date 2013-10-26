@@ -24,4 +24,8 @@ public class TheStreet {
 	public static void loadLeve(String Levelname){
 		GUILayer game = new GUILayer();
 	}
+	
+	public static void loadMenu(){
+		Menu menu = new Menu();
+	}
 }

@@ -16,6 +16,7 @@ import javax.swing.JLayeredPane;
 import javax.swing.Timer;
 
 import com.stalkindustries.main.Button;
+import com.stalkindustries.main.TheStreet;
 
 
 /**
@@ -50,6 +51,12 @@ public class GUILayer extends JFrame{
         this.timer = new Timer(Ressources.GAMESPEED,new OSTimer(this));
         timer.setCoalesce(false);
         timer.start();
+    }
+    
+    public void endGame(){
+    	TheStreet.loadMenu();
+    	timer.stop();
+    	this.dispose();
     }
     
     //Liebesbriefe an Tobi
