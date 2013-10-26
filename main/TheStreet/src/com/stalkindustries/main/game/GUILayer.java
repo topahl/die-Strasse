@@ -43,6 +43,8 @@ public class GUILayer extends JFrame implements MouseMotionListener {
 	private JLabel anzeigeStatusUeberwachung = new JLabel();
 	private JLabel overlayMousefollower = new JLabel();
 	private JLabel overlayNacht = new JLabel();
+	private JLabel spionageBeschr = new JLabel();
+	private JLabel beschwichtigenBeschr = new JLabel();
 
 	
 	
@@ -246,6 +248,12 @@ public class GUILayer extends JFrame implements MouseMotionListener {
 		label.setForeground(new java.awt.Color(0x1f, 0x1f, 0x1f));
 		label.setBounds(20, 12, 200, 30);
 		this.fensterBeschwichtigen.add(label, javax.swing.JLayeredPane.DEFAULT_LAYER);
+		beschwichtigenBeschr.setText("");
+		beschwichtigenBeschr.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+		beschwichtigenBeschr.setFont(new Font("Corbel", Font.BOLD, 20));
+		beschwichtigenBeschr.setForeground(new java.awt.Color(0xf9, 0xf9, 0xf9));
+		beschwichtigenBeschr.setBounds(20, 50, 200, 30);
+		this.fensterBeschwichtigen.add(beschwichtigenBeschr, javax.swing.JLayeredPane.DEFAULT_LAYER);		
 		this.fensterBeschwichtigen.setEnabled(false);
 		this.fensterBeschwichtigen.setVisible(false);
 
@@ -273,6 +281,12 @@ public class GUILayer extends JFrame implements MouseMotionListener {
 		label.setForeground(new java.awt.Color(0x1f, 0x1f, 0x1f));
 		label.setBounds(20, 12, 200, 30);
 		this.fensterSpionage.add(label, javax.swing.JLayeredPane.DEFAULT_LAYER);
+		spionageBeschr.setText("");
+		spionageBeschr.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+		spionageBeschr.setFont(new Font("Corbel", Font.BOLD, 20));
+		spionageBeschr.setForeground(new java.awt.Color(0xf9, 0xf9, 0xf9));
+		spionageBeschr.setBounds(20, 50, 200, 30);
+		this.fensterSpionage.add(spionageBeschr, javax.swing.JLayeredPane.DEFAULT_LAYER);
 		this.fensterSpionage.setEnabled(false);
 		this.fensterSpionage.setVisible(false);
 
@@ -788,7 +802,13 @@ public class GUILayer extends JFrame implements MouseMotionListener {
 		return null;
 	}
 
-	
+	public JLabel getBeschreibung(String window){
+		if (window.equals("spionage"))
+			return this.spionageBeschr;
+		if (window.equals("beschwichtigen"))
+			return this.beschwichtigenBeschr;
+		return null;
+	}
 
 	/**
 	 * Gibt Mousefollower zurück
@@ -810,7 +830,6 @@ public class GUILayer extends JFrame implements MouseMotionListener {
 		this.overlayMousefollower.setLocation(e.getXOnScreen() - 15,
 				e.getYOnScreen() - 15);
 	}
-
 	
 	
 	/**
