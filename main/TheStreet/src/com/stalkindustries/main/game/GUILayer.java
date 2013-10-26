@@ -31,6 +31,7 @@ public class GUILayer extends JFrame{
 	private Timer timer;
 	private Map karte;
 	private JLayeredPane layeredPane;
+	private JLayeredPane fensterSpionage;
 	private boolean b = true; //TODO please rename  if needed
 	private Simulation simulation = new Simulation();
 	private Control control = new Control(this);
@@ -71,13 +72,13 @@ public class GUILayer extends JFrame{
         
         
         //Overlayfenster
-        JLayeredPane spionage= new JLayeredPane();
-        spionage.setBounds(Ressources.ZEROPOS.width+90, Ressources.ZEROPOS.height+390,248, 232);
-        layeredPane.add(spionage, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        fensterSpionage = new JLayeredPane();
+        fensterSpionage.setBounds(Ressources.ZEROPOS.width+90, Ressources.ZEROPOS.height+390,248, 232);
+        layeredPane.add(fensterSpionage, javax.swing.JLayeredPane.DEFAULT_LAYER);
         
         button=new Button(control, Ressources.ingamebutton.getSubimage(948, 90, 27,27), Ressources.ingamebutton.getSubimage(975, 90, 27,27),Ressources.ingamebutton.getSubimage(1002, 90, 27,27),Ressources.ingamebutton.getSubimage(1029, 90, 27,27),"closeSpionage",205,13);
         buttons.put("closeSpionage", button);
-        spionage.add(button, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        fensterSpionage.add(button, javax.swing.JLayeredPane.DEFAULT_LAYER);
         
         label = new JLabel();
         label.setText("Spionage");
@@ -85,13 +86,13 @@ public class GUILayer extends JFrame{
         label.setFont(new Font("Corbel",Font.BOLD,25));
         label.setForeground(new java.awt.Color(0x1f, 0x1f, 0x1f));
         label.setBounds(20, 12, 200, 30);
-        spionage.add(label, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        fensterSpionage.add(label, javax.swing.JLayeredPane.DEFAULT_LAYER);
         
         
         label= new JLabel();
         label.setIcon(new ImageIcon(Ressources.ingameframe.getSubimage(0, 0, 248, 232)));
         label.setBounds(0, 0, 248, 232);
-        spionage.add(label, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        fensterSpionage.add(label, javax.swing.JLayeredPane.DEFAULT_LAYER);
         
         //Overlayfenster ende
         
@@ -170,7 +171,7 @@ public class GUILayer extends JFrame{
 	        		Ressources.ingamebutton.getSubimage(buttonSliceX+2*buttonSize, i*buttonSize, buttonSize, buttonSize),
 	        		Ressources.ingamebutton.getSubimage(buttonSliceX+3*buttonSize, i*buttonSize, buttonSize, buttonSize),
 	        		buttonNamesSpionage[i], Ressources.ZEROPOS.width+12+i*90, Ressources.ZEROPOS.height+720);
-	        spionage.add(button, javax.swing.JLayeredPane.DEFAULT_LAYER);
+	        fensterSpionage.add(button, javax.swing.JLayeredPane.DEFAULT_LAYER);
 	        buttons.put(buttonNamesSpionage[i], button);
         }
         
