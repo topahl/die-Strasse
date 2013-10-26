@@ -2,6 +2,8 @@ package com.stalkindustries.main.menu;
 
 import java.awt.Color;
 import java.awt.Font;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseMotionListener;
 import java.util.HashMap;
 
 import javax.swing.ImageIcon;
@@ -13,7 +15,7 @@ import com.stalkindustries.main.Button;
 import com.stalkindustries.main.TheStreet;
 import com.stalkindustries.main.game.Ressources;
 
-public class Menu extends JFrame{
+public class Menu extends JFrame implements MouseMotionListener{
 	private JLayeredPane mainmenu;
 	private JLayeredPane mapselect;
 	private ControlMenu control;
@@ -31,6 +33,7 @@ public class Menu extends JFrame{
 
 	private void initComponents(){
 		mainmenu = new javax.swing.JLayeredPane();
+		this.addMouseMotionListener(this);
 		
 		JLabel currentscreentext = new JLabel();
         currentscreentext.setText("Hauptmenü");
@@ -42,23 +45,23 @@ public class Menu extends JFrame{
 		
         Button button;
         
-        button=new Button(control, Ressources.menubutton.getSubimage(0, 0, 370, 80), Ressources.menubutton.getSubimage(370, 0, 370, 80), Ressources.menubutton.getSubimage(740, 0, 370, 80), Ressources.menubutton.getSubimage(1110, 0, 370, 80), "start", Ressources.ZEROPOS.width+70, Ressources.ZEROPOS.height+140);
+        button=new Button(control, Ressources.menubutton.getSubimage(0, 0, 370, 80), Ressources.menubutton.getSubimage(370, 0, 370, 80), Ressources.menubutton.getSubimage(740, 0, 370, 80), Ressources.menubutton.getSubimage(1110, 0, 370, 80), "start", Ressources.ZEROPOS.width+70, Ressources.ZEROPOS.height+140, this);
         mainmenu.add(button, javax.swing.JLayeredPane.DEFAULT_LAYER);
         buttons.put("start", button);
         
-        button=new Button(control, Ressources.menubutton.getSubimage(0, 80, 370, 80), Ressources.menubutton.getSubimage(370, 80, 370, 80), Ressources.menubutton.getSubimage(740, 80, 370, 80), Ressources.menubutton.getSubimage(1110, 80, 370, 80), "tutorial", Ressources.ZEROPOS.width+70, Ressources.ZEROPOS.height+230);
+        button=new Button(control, Ressources.menubutton.getSubimage(0, 80, 370, 80), Ressources.menubutton.getSubimage(370, 80, 370, 80), Ressources.menubutton.getSubimage(740, 80, 370, 80), Ressources.menubutton.getSubimage(1110, 80, 370, 80), "tutorial", Ressources.ZEROPOS.width+70, Ressources.ZEROPOS.height+230, this);
         mainmenu.add(button, javax.swing.JLayeredPane.DEFAULT_LAYER);
         buttons.put("tutorial", button);
         
-        button=new Button(control, Ressources.menubutton.getSubimage(0, 160, 370, 80), Ressources.menubutton.getSubimage(370, 160, 370, 80), Ressources.menubutton.getSubimage(740, 160, 370, 80), Ressources.menubutton.getSubimage(1110, 160, 370, 80), "profil", Ressources.ZEROPOS.width+70, Ressources.ZEROPOS.height+320);
+        button=new Button(control, Ressources.menubutton.getSubimage(0, 160, 370, 80), Ressources.menubutton.getSubimage(370, 160, 370, 80), Ressources.menubutton.getSubimage(740, 160, 370, 80), Ressources.menubutton.getSubimage(1110, 160, 370, 80), "profil", Ressources.ZEROPOS.width+70, Ressources.ZEROPOS.height+320, this);
         mainmenu.add(button, javax.swing.JLayeredPane.DEFAULT_LAYER);
         buttons.put("profil", button);
         
-        button=new Button(control, Ressources.menubutton.getSubimage(0, 240, 370, 80), Ressources.menubutton.getSubimage(370, 240, 370, 80), Ressources.menubutton.getSubimage(740, 240, 370, 80), Ressources.menubutton.getSubimage(1110, 240, 370, 80), "highscore", Ressources.ZEROPOS.width+70, Ressources.ZEROPOS.height+410);
+        button=new Button(control, Ressources.menubutton.getSubimage(0, 240, 370, 80), Ressources.menubutton.getSubimage(370, 240, 370, 80), Ressources.menubutton.getSubimage(740, 240, 370, 80), Ressources.menubutton.getSubimage(1110, 240, 370, 80), "highscore", Ressources.ZEROPOS.width+70, Ressources.ZEROPOS.height+410, this);
         mainmenu.add(button, javax.swing.JLayeredPane.DEFAULT_LAYER);
         buttons.put("Highscore", button);
         
-        button=new Button(control, Ressources.menubutton.getSubimage(0, 320, 370, 80), Ressources.menubutton.getSubimage(370, 320, 370, 80), Ressources.menubutton.getSubimage(740, 320, 370, 80), Ressources.menubutton.getSubimage(1110, 320, 370, 80), "beenden", Ressources.ZEROPOS.width+70, Ressources.ZEROPOS.height+500);
+        button=new Button(control, Ressources.menubutton.getSubimage(0, 320, 370, 80), Ressources.menubutton.getSubimage(370, 320, 370, 80), Ressources.menubutton.getSubimage(740, 320, 370, 80), Ressources.menubutton.getSubimage(1110, 320, 370, 80), "beenden", Ressources.ZEROPOS.width+70, Ressources.ZEROPOS.height+500, this);
         mainmenu.add(button, javax.swing.JLayeredPane.DEFAULT_LAYER);
         buttons.put("Beenden", button);
         
@@ -94,5 +97,14 @@ public class Menu extends JFrame{
         
         
         pack();
+        
+      
+    }
+	
+	//Support Tiki
+	public void mouseMoved(MouseEvent e) {	
+		//mousefollower.setLocation(e.getX()-15, e.getY()-15);
 	}
+    public void mouseDragged(MouseEvent e) {} //do nothing, notwendig für implements MouseMotion
+
 }

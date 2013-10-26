@@ -4,6 +4,7 @@ import java.awt.Cursor;
 import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseMotionListener;
 import java.awt.image.BufferedImage;
 
 import javax.swing.ImageIcon;
@@ -18,7 +19,8 @@ public class Button extends JButton implements ActionListener{
 	
 	
 	//invisible Button
-	public Button(IControl controlunit, int width, int height,String funktionsname, int x, int y){
+	public Button(IControl controlunit, int width, int height,String funktionsname, int x, int y, MouseMotionListener ml){
+		addMouseMotionListener(ml);
 		this.ok_code = funktionsname;
 		addActionListener(this);
 		setBorder(null);
@@ -32,7 +34,8 @@ public class Button extends JButton implements ActionListener{
 	}
 	
 	//visible Button
-	public Button(IControl controlunit, BufferedImage normal,BufferedImage hover, BufferedImage clicked,BufferedImage disabled, String funktionsname, int x, int y){
+	public Button(IControl controlunit, BufferedImage normal,BufferedImage hover, BufferedImage clicked,BufferedImage disabled, String funktionsname, int x, int y,MouseMotionListener ml){
+		addMouseMotionListener(ml);
 		this.ok_code = funktionsname;
 		addActionListener(this);
 		

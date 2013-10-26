@@ -1,5 +1,15 @@
 package com.stalkindustries.main.game;
 
+import javax.swing.ImageIcon;
+
+
+
+
+
+
+
+
+
 //Kreiert vom unglaublichen Stephan
 //auf Basis von Tobias unglaublicher Arbeit
 import com.stalkindustries.main.IControl;
@@ -20,32 +30,56 @@ public class Control implements IControl {
 		System.out.println("You pressed:"+funktion);
 		currentButton = funktion;
 	
-	//aus irgendeinem schwachsinnigen Grund haben wir Java 1.6 (steht auch im Pflichtenheft)
-	//Switch-case mit Strings erst ab 1.7, schade.
-	if(funktion == "pause")
-		clickPause();
-	if(funktion == "close")
-		clickExit();
+		//aus irgendeinem schwachsinnigen Grund haben wir Java 1.6 (steht auch im Pflichtenheft)
+		//Switch-case mit Strings erst ab 1.7, schade.
+		if(funktion == "pause")
+			clickPause();
+		if(funktion == "close")
+			clickExit();
+		
 	
-	
-	//Handling für Mousefollower Icons 
-	
-	if (funktion.equals("aktionKuchen")){
+		//Handling für Mousefollower Icons 
 		
-	}
-	if (funktion.equals("aktionUnterhalten")){
-		
-	}
-	if (funktion.equals("aktionFlirten")){
-		
-	}
-	if (funktion.equals("aktionHand")){
-		
-	}
-	if (funktion.equals("aktionParkBeschwichtigen")){
-		
-	}
-	
+		if (funktion.equals("aktionKuchen")){
+			guilayer.getMousefollower().setIcon(new ImageIcon (Ressources.ingamebutton.getSubimage(0, (39)*6, 39, 39)));
+			guilayer.getMousefollower().setVisible(true);
+		}
+		if (funktion.equals("aktionUnterhalten")){
+			guilayer.getMousefollower().setIcon(new ImageIcon (Ressources.ingamebutton.getSubimage(0, (39)*7, 39, 39)));
+			guilayer.getMousefollower().setVisible(true);
+		}
+		if (funktion.equals("aktionFlirten")){
+			guilayer.getMousefollower().setIcon(new ImageIcon (Ressources.ingamebutton.getSubimage(0, (39)*8, 39, 39)));
+			guilayer.getMousefollower().setVisible(true);
+		}
+		if (funktion.equals("aktionHand")){
+			guilayer.getMousefollower().setIcon(new ImageIcon (Ressources.ingamebutton.getSubimage(0, (39)*9, 39, 39)));
+			guilayer.getMousefollower().setVisible(true);
+		}
+		if (funktion.equals("aktionParkBeschwichtigen")){
+//			guilayer.getMousefollower().setIcon(new ImageIcon (Ressources.ingamebutton.getSubimage(0, 0, 39, 39)));
+//			guilayer.getMousefollower().setVisible(true);
+		}
+		if (funktion.equals("aktionWanze")){
+			guilayer.getMousefollower().setIcon(new ImageIcon (Ressources.ingamebutton.getSubimage(0, 0, 39, 39)));
+			guilayer.getMousefollower().setVisible(true);
+		}
+		if (funktion.equals("aktionKamera")){
+			guilayer.getMousefollower().setIcon(new ImageIcon (Ressources.ingamebutton.getSubimage(0, 39, 39, 39)));
+			guilayer.getMousefollower().setVisible(true);
+		}
+		if (funktion.equals("aktionHacken")){
+			guilayer.getMousefollower().setIcon(new ImageIcon (Ressources.ingamebutton.getSubimage(0, (39)*2, 39, 39)));
+			guilayer.getMousefollower().setVisible(true);
+		}
+		if (funktion.equals("aktionFernglas")){
+			guilayer.getMousefollower().setIcon(new ImageIcon (Ressources.ingamebutton.getSubimage(0, (39+1)*3, 39, 39)));
+			guilayer.getMousefollower().setVisible(true);
+		}
+		if (funktion.equals("aktionParkSpionage")){
+//			guilayer.getMousefollower().setIcon(new ImageIcon (Ressources.ingamebutton.getSubimage(0, 0, 39, 39)));
+//			guilayer.getMousefollower().setVisible(true);
+		}
 	}
 
 	

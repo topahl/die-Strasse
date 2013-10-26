@@ -6,7 +6,6 @@ package com.stalkindustries.main.game;
 
 import java.awt.Color;
 import java.awt.Font;
-
 import java.awt.Graphics2D;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseMotionListener;
@@ -85,7 +84,7 @@ public class GUILayer extends JFrame implements MouseMotionListener {
         
         //MousefollowerIcon wenn man eine Aktion tätigt :)
         mousefollower.setBounds(15, 225, 39, 39);
-    	mousefollower.setVisible(true);
+    	mousefollower.setVisible(false);
     	mousefollower.setIcon(new ImageIcon (Ressources.ingamebutton.getSubimage(0, 0, 39, 39)));
         layeredPane.add(mousefollower, javax.swing.JLayeredPane.DEFAULT_LAYER);
         
@@ -95,7 +94,7 @@ public class GUILayer extends JFrame implements MouseMotionListener {
         fensterSpionage.setBounds(Ressources.ZEROPOS.width+90, Ressources.ZEROPOS.height+390,248, 232);
         layeredPane.add(fensterSpionage, javax.swing.JLayeredPane.DEFAULT_LAYER);
         
-        button=new Button(control, Ressources.ingamebutton.getSubimage(948, 90, 27,27), Ressources.ingamebutton.getSubimage(975, 90, 27,27),Ressources.ingamebutton.getSubimage(1002, 90, 27,27),Ressources.ingamebutton.getSubimage(1029, 90, 27,27),"closeSpionage",205,13);
+        button=new Button(control, Ressources.ingamebutton.getSubimage(948, 90, 27,27), Ressources.ingamebutton.getSubimage(975, 90, 27,27),Ressources.ingamebutton.getSubimage(1002, 90, 27,27),Ressources.ingamebutton.getSubimage(1029, 90, 27,27),"closeSpionage",205,13, this);
         buttons.put("closeSpionage", button);
         fensterSpionage.add(button, javax.swing.JLayeredPane.DEFAULT_LAYER);
         
@@ -135,7 +134,7 @@ public class GUILayer extends JFrame implements MouseMotionListener {
 	        		Ressources.ingamebutton.getSubimage(buttonSliceX+buttonSize, i*buttonSize, buttonSize, buttonSize),
 	        		Ressources.ingamebutton.getSubimage(buttonSliceX+2*buttonSize, i*buttonSize, buttonSize, buttonSize),
 	        		Ressources.ingamebutton.getSubimage(buttonSliceX+3*buttonSize, i*buttonSize, buttonSize, buttonSize),
-	        		buttonNamesPauseExit[i], Ressources.ZEROPOS.width+(23+i)*Ressources.RASTERHEIGHT, Ressources.ZEROPOS.height);
+	        		buttonNamesPauseExit[i], Ressources.ZEROPOS.width+(23+i)*Ressources.RASTERHEIGHT, Ressources.ZEROPOS.height, this);
 	        //Nach Hause und Razzia disabled am Anfang
 	        if(i > 1)
 	        	button.setEnabled(false);
@@ -156,7 +155,7 @@ public class GUILayer extends JFrame implements MouseMotionListener {
 	        		Ressources.ingamebutton.getSubimage(buttonSliceX+buttonSize, i*buttonSize, buttonSize, buttonSize),
 	        		Ressources.ingamebutton.getSubimage(buttonSliceX+2*buttonSize, i*buttonSize, buttonSize, buttonSize),
 	        		Ressources.ingamebutton.getSubimage(buttonSliceX+3*buttonSize, i*buttonSize, buttonSize, buttonSize),
-	        		buttonNamesAktionsleiste[i], Ressources.ZEROPOS.width+12+i*90, Ressources.ZEROPOS.height+642);
+	        		buttonNamesAktionsleiste[i], Ressources.ZEROPOS.width+12+i*90, Ressources.ZEROPOS.height+642, this);
 	        //Nach Hause und Razzia disabled
 	        if(i > 1)
 	        	button.setEnabled(false);
@@ -174,7 +173,7 @@ public class GUILayer extends JFrame implements MouseMotionListener {
 	        		Ressources.ingamebutton.getSubimage(buttonSliceX+buttonSize, i*buttonSize, buttonSize, buttonSize),
 	        		Ressources.ingamebutton.getSubimage(buttonSliceX+2*buttonSize, i*buttonSize, buttonSize, buttonSize),
 	        		Ressources.ingamebutton.getSubimage(buttonSliceX+3*buttonSize, i*buttonSize, buttonSize, buttonSize),
-	        		buttonNamesBeschwichtigen[i], Ressources.ZEROPOS.width+12+i*90, Ressources.ZEROPOS.height-66);
+	        		buttonNamesBeschwichtigen[i], Ressources.ZEROPOS.width+12+i*90, Ressources.ZEROPOS.height-66, this);
 	        layeredPane.add(button, javax.swing.JLayeredPane.DEFAULT_LAYER);
 	        buttons.put(buttonNamesBeschwichtigen[i], button);
         }
@@ -189,7 +188,7 @@ public class GUILayer extends JFrame implements MouseMotionListener {
 	        		Ressources.ingamebutton.getSubimage(buttonSliceX+buttonSize, i*buttonSize, buttonSize, buttonSize),
 	        		Ressources.ingamebutton.getSubimage(buttonSliceX+2*buttonSize, i*buttonSize, buttonSize, buttonSize),
 	        		Ressources.ingamebutton.getSubimage(buttonSliceX+3*buttonSize, i*buttonSize, buttonSize, buttonSize),
-	        		buttonNamesSpionage[i], Ressources.ZEROPOS.width+12+i*90, Ressources.ZEROPOS.height+720);
+	        		buttonNamesSpionage[i], Ressources.ZEROPOS.width+12+i*90, Ressources.ZEROPOS.height+720, this);
 	        fensterSpionage.add(button, javax.swing.JLayeredPane.DEFAULT_LAYER);
 	        buttons.put(buttonNamesSpionage[i], button);
         }
@@ -542,7 +541,7 @@ public class GUILayer extends JFrame implements MouseMotionListener {
 				for (i=0; i<Ressources.getLocation_ids().get(0).size();i++){
 					if ((Ressources.getLocation_ids().get(j).get(i).equals(String.valueOf(x))&&(b==0))){
 						b=1;
-						button = new Button(control , Ressources.RASTERHEIGHT*3, Ressources.RASTERHEIGHT*3, "Haus"+String.valueOf(x), Ressources.ZEROPOS.width+i*Ressources.RASTERHEIGHT, Ressources.ZEROPOS.height+j*Ressources.RASTERHEIGHT);
+						button = new Button(control , Ressources.RASTERHEIGHT*3, Ressources.RASTERHEIGHT*3, "Haus"+String.valueOf(x), Ressources.ZEROPOS.width+i*Ressources.RASTERHEIGHT, Ressources.ZEROPOS.height+j*Ressources.RASTERHEIGHT, this);
 						layeredPane.add(button, javax.swing.JLayeredPane.DEFAULT_LAYER);
 						buttons.put("Haus"+String.valueOf(x), button);
 			        
@@ -568,9 +567,16 @@ public class GUILayer extends JFrame implements MouseMotionListener {
 	
 	//Support Tiki
 	public void mouseMoved(MouseEvent e) {	
-		mousefollower.setLocation(e.getX()-15, e.getY()-15);
+		mousefollower.setLocation(e.getXOnScreen()-15, e.getYOnScreen()-15);
 	}
     public void mouseDragged(MouseEvent e) {} //do nothing, notwendig für implements MouseMotion
 	
 	
+    
+    //private JLabel mousefollower = new JLabel();
+    public JLabel getMousefollower(){
+		return this.mousefollower;
+	}
+    
+    
 }
