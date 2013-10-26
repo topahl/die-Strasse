@@ -97,7 +97,7 @@ public class Control implements IControl {
 		if(funktion.equals("aktionFlirten"))
 			beschwichtigenlabelBeschr(isPresent, "Flirten");
 		if(funktion.equals("aktionHand"))
-			beschwichtigenlabelBeschr(isPresent, "Helfen");
+			beschwichtigenlabelBeschr(isPresent, "helfen");
 		if(funktion.equals("aktionParkBeschwichtigen"))
 			beschwichtigenlabelBeschr(isPresent, "im Park Unterhalten");
 		if(funktion.equals("aktion6Beschwichtigen"))
@@ -230,16 +230,17 @@ public class Control implements IControl {
 		
 	}
 	
-	private void spionagelabelBeschr(boolean isPresent, String Text){
-		if(isPresent){
-			System.out.println(Text);
-			
-		}
+	private void spionagelabelBeschr(boolean isPresent, String text){
+		if(isPresent)
+			guilayer.getBeschreibung("spionage").setText(text);
+		else
+			guilayer.getBeschreibung("spionage").setText("");
 	}
-	private void beschwichtigenlabelBeschr(boolean isPresent, String Text){
-		if(isPresent){
-			System.out.println(Text);
-		}
+	private void beschwichtigenlabelBeschr(boolean isPresent, String text){
+		if(isPresent)
+			guilayer.getBeschreibung("beschwichtigen").setText(text);
+		else
+			guilayer.getBeschreibung("beschwichtigen").setText("");
 	}
 	
 
