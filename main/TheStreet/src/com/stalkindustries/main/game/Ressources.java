@@ -31,6 +31,7 @@ public class Ressources {
 	public static BufferedImage zahlen;
 	public static BufferedImage ingamebutton;
 	public static BufferedImage mainmenu;
+	public static BufferedImage mainmenusub;
 	public static BufferedImage menubutton;
 	public static BufferedImage ingameframe;
 	
@@ -94,6 +95,12 @@ public class Ressources {
 			e.printStackTrace();
 		}
 		
+		try {
+			mainmenusub = ImageIO.read(new File("src\\com\\stalkindustries\\grafik\\gui_menu_sub.png"));
+		} catch (IOException e) {
+			System.err.println("Could not find Image gui_menu_sub.png,");
+			e.printStackTrace();
+		}
 	}
 	
 	
