@@ -59,49 +59,49 @@ public class Ressources {
 		ZEROPOS.setSize((SCREEN.getWidth()/2)-(MAPWIDTH/2),(SCREEN.getHeight()/2)-(MAPHEIGHT/2));
 		
 		try {
-			menubars = ImageIO.read(new File("src\\com\\stalkindustries\\grafik\\gui_ingame_bars.png"));
+			menubars = ImageIO.read(new File("res\\game\\gui_ingame_bars.png"));
 		} catch (IOException e) {
 			System.err.println("Could not find Image gui_ingame_bars.png");
 			e.printStackTrace();
 		}
 		
 		try {
-			zahlen = ImageIO.read(new File("src\\com\\stalkindustries\\grafik\\slice_digits.png"));
+			zahlen = ImageIO.read(new File("res\\game\\slice_digits.png"));
 		} catch (IOException e) {
 			System.err.println("Could not find Image slice_digits.png");  
 			e.printStackTrace();
 		}
 		
 		try {
-			ingamebutton = ImageIO.read(new File("src\\com\\stalkindustries\\grafik\\slice_buttons_ingame.png"));
+			ingamebutton = ImageIO.read(new File("res\\game\\slice_buttons_ingame.png"));
 		} catch (IOException e) {
 			System.err.println("Could not find Image slice_buttons_ingame.png");
 			e.printStackTrace();
 		}
 		
 		try {
-			mainmenu = ImageIO.read(new File("src\\com\\stalkindustries\\grafik\\gui_menu_main.png"));
+			mainmenu = ImageIO.read(new File("res\\game\\gui_menu_main.png"));
 		} catch (IOException e) {
 			System.err.println("Could not find Image gui_menu_main.png");
 			e.printStackTrace();
 		}
 		
 		try {
-			menubutton = ImageIO.read(new File("src\\com\\stalkindustries\\grafik\\slice_buttons_menu.png"));
+			menubutton = ImageIO.read(new File("res\\game\\slice_buttons_menu.png"));
 		} catch (IOException e) {
 			System.err.println("Could not find Image slice_buttons_menu.png");
 			e.printStackTrace();
 		}
 		
 		try {
-			ingameframe = ImageIO.read(new File("src\\com\\stalkindustries\\grafik\\slice_fenster.png"));
+			ingameframe = ImageIO.read(new File("res\\game\\slice_fenster.png"));
 		} catch (IOException e) {
 			System.err.println("Could not find Image slice_fenster.png,");
 			e.printStackTrace();
 		}
 		
 		try {
-			mainmenusub = ImageIO.read(new File("src\\com\\stalkindustries\\grafik\\gui_menu_sub.png"));
+			mainmenusub = ImageIO.read(new File("res\\game\\gui_menu_sub.png"));
 		} catch (IOException e) {
 			System.err.println("Could not find Image gui_menu_sub.png,");
 			e.printStackTrace();
