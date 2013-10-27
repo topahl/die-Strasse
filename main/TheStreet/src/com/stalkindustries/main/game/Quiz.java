@@ -79,9 +79,9 @@ public class Quiz {
 	
 	
 	public void analyzeAntwort(String antwort){
-		int antwortnr = (int)antwort.charAt(0)-64;
-		//int richtigkeit = Integer.parseInt(this.quizfragen.get(this.quizstart).get(antwortnr));
-		//this.beantwortet.add(richtigkeit);
+		int antwortnr = (int)antwort.charAt(0)-61;
+		int richtigkeit = Integer.parseInt(this.quizfragen.get(this.quizstart).get(antwortnr));
+		this.beantwortet.add(richtigkeit);
 		this.quizstart = (this.quizstart + this.quizstep)%this.quizfragen.size();
 	}
 	
