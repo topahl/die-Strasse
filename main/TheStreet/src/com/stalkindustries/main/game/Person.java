@@ -59,14 +59,8 @@ public abstract class Person extends Mensch {
 				
 
 		//Person einen Namen geben
-		if(Ressources.AUSGEWAEHLTESLAND == 1){	//Russland
-			this.name = Ressources.getRussianNames().get((int)(Math.random()*Ressources.getRussianNames().size())).get(this.geschlecht-1);
-		}
-		else if(Ressources.AUSGEWAEHLTESLAND == 2){ 	//SaudiArabien
-			this.name = Ressources.getArabianNames().get((int)(Math.random()*Ressources.getArabianNames().size())).get(this.geschlecht-1);
-		}
-			
-		
+		this.name = Ressources.getNames().get((int)(Math.random()*Ressources.getNames().size())).get(this.geschlecht-1);
+		//System.out.println(this.name);
 	}
 	
 	public double get_misstrauen(){

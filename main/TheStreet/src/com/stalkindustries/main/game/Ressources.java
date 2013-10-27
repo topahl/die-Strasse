@@ -14,10 +14,10 @@ import javax.imageio.ImageIO;
 public class Ressources {
 	
 	private static ArrayList<ArrayList<String>> location_ids; 
-	private static ArrayList<ArrayList<String>> russian_names;
-	private static ArrayList<ArrayList<String>> arabian_names;
-	private static ArrayList<ArrayList<String>> russian_quiz;
-	private static ArrayList<ArrayList<String>> arabian_quiz;
+	private static ArrayList<ArrayList<String>> names;
+	//private static ArrayList<ArrayList<String>> arabian_names;	TODO: entfernen
+	private static ArrayList<ArrayList<String>> quizfragen;
+	//private static ArrayList<ArrayList<String>> arabian_quiz;		TODO: entfernen
 	
 	public static final int RASTERHEIGHT = 45; //Map Raster
 	public static final int TORSOCNT =4; //Anzahl verschiedener Torsos in Sprite Grafik
@@ -41,16 +41,18 @@ public class Ressources {
 	 
 	public static void loadLevelInfomration(String levelname){
 		location_ids=read_from_csv("res\\level\\"+levelname+"\\"+levelname+"_map.csv");
+		names = read_from_csv("res\\level\\"+levelname+"\\"+levelname+"_namen.csv");
+		quizfragen = read_from_csv("res\\level\\"+levelname+"\\"+levelname+"_quizfragen.csv");
 	}
 	
 	
 	static{
 		//Initialisierung der location_ids
 		
-		russian_names = read_from_csv("src\\com\\stalkindustries\\data\\russland_namen.csv");
-		arabian_names = read_from_csv("src\\com\\stalkindustries\\data\\saudiarabien_quizfragen.csv");
-		russian_quiz = read_from_csv("src\\com\\stalkindustries\\data\\russland_quizfragen.csv");
-		arabian_quiz = read_from_csv("src\\com\\stalkindustries\\data\\saudiarabien_quizfragen.csv");
+//		russian_names = read_from_csv("src\\com\\stalkindustries\\data\\russland_namen.csv");
+//		arabian_names = read_from_csv("src\\com\\stalkindustries\\data\\saudiarabien_quizfragen.csv");
+//		russian_quiz = read_from_csv("src\\com\\stalkindustries\\data\\russland_quizfragen.csv");
+//		arabian_quiz = read_from_csv("src\\com\\stalkindustries\\data\\saudiarabien_quizfragen.csv");
 		
 		SCREEN=Toolkit.getDefaultToolkit().getScreenSize();
 		ZEROPOS = new Dimension();	//zeropos berechnen -> Koordinatenverschiebung
@@ -155,32 +157,32 @@ public class Ressources {
 	}
 	
 	
-	public static ArrayList<ArrayList<String>> getRussianNames() {
-		ArrayList<ArrayList<String>> rus_names;
-		rus_names = copy_csv(russian_names);
-		return rus_names;
+	public static ArrayList<ArrayList<String>> getNames() {
+		ArrayList<ArrayList<String>> namen;
+		namen = copy_csv(names);
+		return namen;
 	}
 	
+//	TODO: entfernen
+//	public static ArrayList<ArrayList<String>> getArabianNames() {
+//		ArrayList<ArrayList<String>> arab_names;
+//		arab_names = copy_csv(arabian_names);
+//		return arab_names;
+//	}
 	
-	public static ArrayList<ArrayList<String>> getArabianNames() {
-		ArrayList<ArrayList<String>> arab_names;
-		arab_names = copy_csv(arabian_names);
-		return arab_names;
+	
+	public static ArrayList<ArrayList<String>> getQuiz() {
+		ArrayList<ArrayList<String>> quiz;
+		quiz = copy_csv(quizfragen);
+		return quiz;
 	}
 	
-	
-	public static ArrayList<ArrayList<String>> getRussianQuiz() {
-		ArrayList<ArrayList<String>> rus_quiz;
-		rus_quiz = copy_csv(russian_quiz);
-		return rus_quiz;
-	}
-	
-	
-	public static ArrayList<ArrayList<String>> getArabianQuiz() {
-		ArrayList<ArrayList<String>> arab_quiz;
-		arab_quiz = copy_csv(arabian_quiz);
-		return arab_quiz;
-	}
+//	TODO: entfernen
+//	public static ArrayList<ArrayList<String>> getArabianQuiz() {
+//		ArrayList<ArrayList<String>> arab_quiz;
+//		arab_quiz = copy_csv(arabian_quiz);
+//		return arab_quiz;
+//	}
 	
 	
 	public static ArrayList<ArrayList<String>> copy_csv(ArrayList<ArrayList<String>> location_ids){
