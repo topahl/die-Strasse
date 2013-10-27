@@ -341,7 +341,7 @@ public class Simulation {
 			
 			for (int i=0; i<location_ids.size(); i++){
 				for (int j=0; j<location_ids.get(i).size(); j++){
-					if (location_ids.get(i).get(j).charAt(0) != 'X' && location_ids.get(i).get(j).charAt(0) != ziellocation.charAt(0) && location_ids.get(i).get(j).charAt(0) != 'P' && location_ids.get(i).get(j).charAt(0) != locid ){
+					if (location_ids.get(i).get(j).charAt(0) == 'X' || (location_ids.get(i).get(j).charAt(0) != ziellocation.charAt(0) && location_ids.get(i).get(j).charAt(0) != 'P' && location_ids.get(i).get(j).charAt(0) != locid )){
 						location_ids.get(i).set(j,"You shall not pass!") ;
 					}
 					if (location_ids.get(i).get(j).charAt(0) == 'P'){
