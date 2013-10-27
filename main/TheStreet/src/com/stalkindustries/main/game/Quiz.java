@@ -16,6 +16,7 @@ public class Quiz {
 	private JTextArea frage = new JTextArea();
 	private int quizstart = 0;
 	private int quizstep = 1;
+	private JLabel label[] = new JLabel[3];
 
 	public Quiz(GUILayer gui){
 		this.gui = gui;
@@ -25,20 +26,23 @@ public class Quiz {
 	}
 	
 	public void starteQuiz(){
-		String my_frage = this.quizfragen.get(this.quizstart).get(0);
-		this.quizstart = (this.quizstart + this.quizstep)%this.quizfragen.size();
+		//Frage setzen
+		this.frage.setText(this.quizfragen.get(this.quizstart).get(0));
 		
-		this.frage.setText(my_frage);
+		//Antworten setzen
+		for(int i=0;i<3;i++){
+			label[i].setText(this.quizfragen.get(this.quizstart).get(i+1));
+		}
 		
 		this.quizwindow.setVisible(true);
 		this.quizwindow.setEnabled(true);
+		this.quizstart = (this.quizstart + this.quizstep)%this.quizfragen.size();
 	}
 	
 	public void initQuizWindow(Control control){
 		this.quizwindow = this.gui.getWindow("quizfenster");
 		//Inhalt des Quiz Fensters
 				Button button;
-				JLabel label;
 				int buttonSize = 39;
 				int buttonSliceX = 0;
 				int buttonSliceY = buttonSize;
@@ -51,13 +55,13 @@ public class Quiz {
 							Ressources.ingamebutton.getSubimage(buttonSliceX + 2 * buttonSize, i * buttonSliceY, buttonSize, buttonSize),
 							Ressources.ingamebutton.getSubimage(buttonSliceX + 3 * buttonSize, i * buttonSliceY, buttonSize, buttonSize),
 							buttonNamesSmall[i-14], 45, 140+(i-14)*45 , this.gui );
-					label = new JLabel();
-					label.setText("Antwort");
-					label.setForeground(new java.awt.Color(0xf9, 0xf9, 0xf9));
-					label.setBounds(100, 140+(i-14)*45, 300, 39);
-					label.setFont(new Font("Corbel", Font.BOLD, 20));
+					label[i-14] = new JLabel();
+					label[i-14].setText("Antwort");
+					label[i-14].setForeground(new java.awt.Color(0xf9, 0xf9, 0xf9));
+					label[i-14].setBounds(100, 140+(i-14)*45, 300, 39);
+					label[i-14].setFont(new Font("Corbel", Font.BOLD, 20));
 					
-					this.quizwindow.add(label, javax.swing.JLayeredPane.DEFAULT_LAYER);
+					this.quizwindow.add(label[i-14], javax.swing.JLayeredPane.DEFAULT_LAYER);
 					this.quizwindow.add(button, javax.swing.JLayeredPane.DEFAULT_LAYER);
 				}
 				//Textfeld für die Frage des Quizes
