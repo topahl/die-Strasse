@@ -339,16 +339,18 @@ public class Simulation {
 		
 		if ((person.getPosY()-Ressources.ZEROPOS.height)/45 == (int)(parkeingang.getX()) && (person.getPosX()-Ressources.ZEROPOS.width)/45 == (int)(parkeingang.getY())){
 			
-			for (int i=0; i<location_ids.size(); i++){
-				for (int j=0; j<location_ids.get(i).size(); j++){
-					if (location_ids.get(i).get(j).charAt(0) == 'X' || (location_ids.get(i).get(j).charAt(0) != ziellocation.charAt(0) && location_ids.get(i).get(j).charAt(0) != 'P' && location_ids.get(i).get(j).charAt(0) != locid )){
-						location_ids.get(i).set(j,"You shall not pass!") ;
-					}
-					if (location_ids.get(i).get(j).charAt(0) == 'P'){
-						location_ids.get(i).set(j,"X") ;
-					}
-				}
-			}
+			
+			location_ids = wegberechnung_parkrundlauf_rasterkarte_initialisierung(location_ids, ziellocation, locid);
+//			for (int i=0; i<location_ids.size(); i++){
+//				for (int j=0; j<location_ids.get(i).size(); j++){
+//					if (location_ids.get(i).get(j).charAt(0) == 'X' || (location_ids.get(i).get(j).charAt(0) != ziellocation.charAt(0) && location_ids.get(i).get(j).charAt(0) != 'P' && location_ids.get(i).get(j).charAt(0) != locid )){
+//						location_ids.get(i).set(j,"You shall not pass!") ;
+//					}
+//					if (location_ids.get(i).get(j).charAt(0) == 'P'){
+//						location_ids.get(i).set(j,"X") ;
+//					}
+//				}
+//			}
 			location_ids.get((int)(parkeingang.getX())).set((int)(parkeingang.getY()),"0");
 			
 	goalp:	for (int i=0; i<100; i++){
@@ -525,7 +527,25 @@ public class Simulation {
 		}
 	}
 	
-	public Point berechne_Parkeingang(ArrayList<ArrayList<String>> location_ids){
+	
+	private ArrayList<ArrayList<String>> wegberechnung_parkrundlauf_rasterkarte_initialisierung(ArrayList<ArrayList<String>> location_ids, String ziellocation, char locid) {
+		for (int i=0; i<location_ids.size(); i++){
+			for (int j=0; j<location_ids.get(i).size(); j++){
+				if (location_ids.get(i).get(j).charAt(0) == 'X' || (location_ids.get(i).get(j).charAt(0) != ziellocation.charAt(0) && location_ids.get(i).get(j).charAt(0) != 'P' && location_ids.get(i).get(j).charAt(0) != locid )){
+					location_ids.get(i).set(j,"You shall not pass!") ;
+				}
+				if (location_ids.get(i).get(j).charAt(0) == 'P'){
+					location_ids.get(i).set(j,"X") ;
+				}
+			}
+		}
+		return location_ids;
+		
+	}
+	
+	
+	
+	private Point berechne_Parkeingang(ArrayList<ArrayList<String>> location_ids){
 		int parkcounter=0;
 		
 		// Der Park darf sich niemals ganz am Rand befinden (sieht auch doof aus)
@@ -551,10 +571,7 @@ public class Simulation {
 					parkcounter=0;
 				}
 			}
-		}
-		
-		
-		
+		}		
 		return null;
 	}
 	
