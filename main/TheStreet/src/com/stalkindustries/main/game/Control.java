@@ -13,6 +13,7 @@ import com.stalkindustries.main.IControl;
  */
 public class Control implements IControl {
 	
+	String lastFunktioncode = "";
 	//Laden des Spielfenster-Objektes, um auf Funktionen davon zugreifen zu können
 	private GUILayer guilayer;
 
@@ -86,24 +87,9 @@ public class Control implements IControl {
 			quizAntwort(funktion.substring(4));
 		
 		//Buttons Häuser (invisible)
-		if(funktion.equals("Haus1"))
-			clickHaus1();		
-		if(funktion.equals("Haus2"))
-			clickHaus2();
-		if(funktion.equals("Haus3"))
-			clickHaus3();
-		if(funktion.equals("Haus4"))
-			clickHaus4();
-		if(funktion.equals("Haus5"))
-			clickHaus5();
-		if(funktion.equals("Haus6"))
-			clickHaus6();
-		if(funktion.equals("Haus7"))
-			clickHaus7();
-		if(funktion.equals("Haus8"))
-			clickHaus8();
-		if(funktion.equals("Haus9"))
-			clickHaus9();
+		if(funktion.substring(0,4).equals("Haus"))
+			//Die Methode clickHaus wird mit der Nummer des Hauses das gedrückt wurde aufgerufen 
+			clickHaus((int)((funktion.substring(4,5)).charAt(0)-48));		
 
 		//Mousefollower abschalten bei bestimmten Buttons
 		if(funktion.equals("pause") || funktion.equals("close")
@@ -111,6 +97,7 @@ public class Control implements IControl {
 			guilayer.getMousefollower().setVisible(false);
 		}
 		
+		lastFunktioncode = funktion;
 	}
 
 	
@@ -121,39 +108,32 @@ public class Control implements IControl {
 	/**
 	 * Klicks auf Häuser abfangen
 	 */
-	private void clickHaus9() {
-		guilayer.getMousefollower().setVisible(false);
-	}
 
-	private void clickHaus8() {
-		guilayer.getMousefollower().setVisible(false);
-	}
+	private void clickHaus(int hausid) {
+//	    "aktion6Beschwichtigen"  && 	"aktion6Spionage"  werden nicht abgefragt
+		if(lastFunktioncode.equals("aktionKuchen"))
+			clickKuchen();
+		if(lastFunktioncode.equals("aktionUnterhalten"))
+			clickUnterhalten();
+		if(lastFunktioncode.equals("aktionFlirten"))
+			clickFlirten();
+		if(lastFunktioncode.equals("aktionHand"))
+			clickHand();
+		if(lastFunktioncode.equals("aktionParkBeschwichtigen"))
+			clickParkBeschwichtigen();
+		
 
-	private void clickHaus7() {
-		guilayer.getMousefollower().setVisible(false);
-	}
-
-	private void clickHaus6() {
-		guilayer.getMousefollower().setVisible(false);
-	}
-
-	private void clickHaus5() {
-		guilayer.getMousefollower().setVisible(false);
-	}
-
-	private void clickHaus4() {
-		guilayer.getMousefollower().setVisible(false);
-	}
-
-	private void clickHaus3() {
-		guilayer.getMousefollower().setVisible(false);
-	}
-
-	private void clickHaus2() {
-		guilayer.getMousefollower().setVisible(false);
-	}
-
-	private void clickHaus1() {
+		if(lastFunktioncode.equals("aktionWanze"))
+			clickWanzen();
+		if(lastFunktioncode.equals("aktionKamera"))
+			clickKamera();
+		if(lastFunktioncode.equals("aktionHacken"))
+			clickHacken();
+		if(lastFunktioncode.equals("aktionFernglas"))
+			clickFernglas();
+		if(lastFunktioncode.equals("aktionParkSpionage"))
+			clickParkSpionage();
+		
 		guilayer.getMousefollower().setVisible(false);
 	}
 
