@@ -111,28 +111,29 @@ public class Control implements IControl {
 
 	private void clickHaus(int hausid) {
 //	    "aktion6Beschwichtigen"  && 	"aktion6Spionage"  werden nicht abgefragt
-		if(lastFunktioncode.equals("aktionKuchen"))
-			clickKuchen();
-		if(lastFunktioncode.equals("aktionUnterhalten"))
-			clickUnterhalten();
-		if(lastFunktioncode.equals("aktionFlirten"))
-			clickFlirten();
-		if(lastFunktioncode.equals("aktionHand"))
-			clickHand();
-		if(lastFunktioncode.equals("aktionParkBeschwichtigen"))
-			clickParkBeschwichtigen();
-		
-
+//		if(lastFunktioncode.equals("aktionKuchen"))
+//			
+//		if(lastFunktioncode.equals("aktionUnterhalten"))
+//			
+//		if(lastFunktioncode.equals("aktionFlirten"))
+//			
+//		if(lastFunktioncode.equals("aktionHand"))
+//			
+//		if(lastFunktioncode.equals("aktionParkBeschwichtigen"))
+//			
+//		
+//
 		if(lastFunktioncode.equals("aktionWanze"))
-			clickWanzen();
-		if(lastFunktioncode.equals("aktionKamera"))
-			clickKamera();
-		if(lastFunktioncode.equals("aktionHacken"))
-			clickHacken();
-		if(lastFunktioncode.equals("aktionFernglas"))
-			clickFernglas();
-		if(lastFunktioncode.equals("aktionParkSpionage"))
-			clickParkSpionage();
+			//guilayer.bewegungAgentWanze(hausid);
+//			
+//		if(lastFunktioncode.equals("aktionKamera"))
+//			
+//		if(lastFunktioncode.equals("aktionHacken"))
+//			
+//		if(lastFunktioncode.equals("aktionFernglas"))
+//			
+//		if(lastFunktioncode.equals("aktionParkSpionage"))
+			
 		
 		guilayer.getMousefollower().setVisible(false);
 	}
