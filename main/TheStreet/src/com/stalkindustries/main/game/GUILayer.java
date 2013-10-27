@@ -893,7 +893,10 @@ public class GUILayer extends JFrame implements MouseMotionListener {
 	public JLabel getMousefollower() {
 		return this.overlayMousefollower;
 	}
-
+	
+	public Simulation getSimulation(){
+		return this.simulation;
+	}
 	
 	
 	/**

@@ -364,6 +364,7 @@ public class Simulation {
 		}
 	} 	
 	
+	//Support Tiki
 	public void berechne_rundlauf_park (Person person){
 		//Wenn die Person im Park ist, soll er eine Runde spazieren gehen
 		
@@ -480,7 +481,7 @@ public class Simulation {
 		}
 	}
 	
-	
+	//Support Tiki
 	private Stack<Character> wegberechnung_parkrechts_fuelle_stack(ArrayList<ArrayList<String>> location_ids, int counter, int xPos_current, int yPos_current) {
 		Stack<Character> neuer_weg = new Stack<Character>();
 		
@@ -540,7 +541,7 @@ public class Simulation {
 		return neuer_weg;
 	}
 
-
+	//Support Tiki
 	private Stack<Character> wegberechnung_parklinks_fuelle_stack(ArrayList<ArrayList<String>> location_ids, int counter, int xPos_current, int yPos_current) {
 		Stack<Character> neuer_weg = new Stack<Character>();
 		for (int i = counter; i>=0; i--){
@@ -573,7 +574,7 @@ public class Simulation {
 		return neuer_weg;
 	}	
 		
-		
+	//Support Tiki
 	private ArrayList<ArrayList<String>> wegberechnung_parkrundlauf_rasterkarte_initialisierung(ArrayList<ArrayList<String>> location_ids, String ziellocation, char locid) {
 		for (int i=0; i<location_ids.size(); i++){
 			for (int j=0; j<location_ids.get(i).size(); j++){
@@ -590,7 +591,7 @@ public class Simulation {
 	}
 	
 	
-	
+	//Support Tiki
 	private Point berechne_Parkeingang(ArrayList<ArrayList<String>> location_ids){
 		int parkcounter=0;
 		
@@ -728,7 +729,7 @@ goal:	for (int i=0; i<100; i++){
 	}
 	
 	
-	
+	//Support Tiki
 	private Stack<Character> wegberechnung_fuelle_stack(Character zielloc, Person person, ArrayList<ArrayList<String>> location_ids, int counter, int xPos_current, int yPos_current) {
 		Stack<Character> neuer_weg = new Stack<Character>();
 		
@@ -767,7 +768,7 @@ goal:	for (int i=0; i<100; i++){
 		return neuer_weg;
 	}
 
-
+	//Support Tiki
 	private Stack<Character> wegberechnung_homeposition(Person person, int xPos_current, int yPos_current) {
 		Stack<Character> neuer_weg = new Stack<Character>();
 		
@@ -802,7 +803,8 @@ goal:	for (int i=0; i<100; i++){
 		return neuer_weg;
 	}
 
-
+	
+	//Support Tiki
 	private ArrayList<ArrayList<String>> wegberechnung_rasterkarte_initialisierung(ArrayList<ArrayList<String>> location_ids, String ziellocation, char locid) {
 		for (int i=0; i<location_ids.size(); i++){
 			for (int j=0; j<location_ids.get(i).size(); j++){
@@ -821,11 +823,16 @@ goal:	for (int i=0; i<100; i++){
 			}
 		}
 		return location_ids;
+	}
+	
+	//Support Tiki
+	public void bewegungAgentWanze (int zielhaus){
 		
 	}
+	
+	
 
-
-	//Belobigungen an Tiki
+	//Support Tiki
 	//TODO Gameover implementieren -> Das Event dafür
 	//TODO Gameover Werte berechnen
 	public void calc_gamoeover(){

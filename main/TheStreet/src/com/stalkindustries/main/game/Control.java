@@ -124,7 +124,7 @@ public class Control implements IControl {
 //		
 //
 		if(lastFunktioncode.equals("aktionWanze"))
-			//guilayer.bewegungAgentWanze(hausid);
+			guilayer.getSimulation().bewegungAgentWanze(hausid);
 //			
 //		if(lastFunktioncode.equals("aktionKamera"))
 //			
