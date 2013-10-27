@@ -362,7 +362,7 @@ public class GUILayer extends JFrame implements MouseMotionListener {
 					Ressources.ingamebutton.getSubimage(buttonSliceX + buttonSize, i * buttonSliceY, buttonSize, buttonSize),
 					Ressources.ingamebutton.getSubimage(buttonSliceX + 2 * buttonSize, i * buttonSliceY, buttonSize, buttonSize),
 					Ressources.ingamebutton.getSubimage(buttonSliceX + 3 * buttonSize, i * buttonSliceY, buttonSize, buttonSize),
-					buttonNamesAktionsleiste[i], Ressources.ZEROPOS.width + 12 + i * 90, Ressources.ZEROPOS.height + 642, this);
+					buttonNamesAktionsleiste[i], Ressources.ZEROPOS.width + 12 + i * 2*Ressources.RASTERHEIGHT, Ressources.ZEROPOS.height + 642, this);
 			// Nach Hause und Razzia disabled
 			if (i > 1) {
 				button.setEnabled(false);
@@ -408,7 +408,7 @@ public class GUILayer extends JFrame implements MouseMotionListener {
 		Integer x;
 		Integer b;
 		b = 0;
-		for (x = 1; x <= 9; x++) {
+		for (x = 1; x <= Ressources.NUMBERHOUSES; x++) {
 			b = 0;
 			if (b == 0) {
 				for (j = 0; j < Ressources.getLocation_ids().size(); j++) {

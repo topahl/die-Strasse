@@ -163,9 +163,12 @@ public class Simulation {
 	
 	
 	//TODO
-	public void calc_misstrauen_after_ueberwachungs_action(int action_id){
-		
-	}
+	//Beschwerden an Miri
+//	public void calc_misstrauen_after_ueberwachungs_action(int action_id){
+//		//Checken, ob sich noch jemand in dem Haus befindet
+//		for(int i=0;i<this.people.size();i)
+//		
+//	}
 	
 	//Beschwerden Miri
 	//Allen Häusern den Überwachungsstatus updaten

@@ -34,7 +34,7 @@ public class Ressources {
 	public static BufferedImage menubutton;
 	public static BufferedImage ingameframe;
 	
-	public static final int NUMBERHOUSES = 9;
+	public static int NUMBERHOUSES = 9;
 	public static final int NUMBERBESCHWICHTIGENACTIONS = 4; // Zahl ist grad nur Dummywert
 	public static int AUSGEWAEHLTESLAND = 1; //TODO dynamisch ausgewähltes Land reinschreiben
 	
@@ -43,6 +43,7 @@ public class Ressources {
 		location_ids=read_from_csv("res\\level\\"+levelname+"\\"+levelname+"_map.csv");
 		names = read_from_csv("res\\level\\"+levelname+"\\"+levelname+"_namen.csv");
 		quizfragen = read_from_csv("res\\level\\"+levelname+"\\"+levelname+"_quizfragen.csv");
+		setNumberOfHouses();
 	}
 	
 	
@@ -138,6 +139,22 @@ public class Ressources {
 			
 			return list_of_lists;
 		}
+		
+		
+	private static void setNumberOfHouses(){
+		int houses=0;
+		
+		for(int i=0;i<location_ids.size();i++){
+			for(int j=0;j<location_ids.get(i).size();j++){
+				//maximum der Zahlen aus location_ids bestimmen und kontrollieren, dass keine Buchstaben genommen werden
+				if((int)location_ids.get(i).get(j).charAt(0)-48 > houses && (int)location_ids.get(i).get(j).charAt(0)<58){
+					houses = (int)location_ids.get(i).get(j).charAt(0)-48;
+				}
+			}
+		}
+		
+		NUMBERHOUSES = houses;
+	}
 	
 		
 	public static ArrayList<ArrayList<String>> getLocation_ids() {
