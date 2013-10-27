@@ -341,16 +341,6 @@ public class Simulation {
 			
 			
 			location_ids = wegberechnung_parkrundlauf_rasterkarte_initialisierung(location_ids, ziellocation, locid);
-//			for (int i=0; i<location_ids.size(); i++){
-//				for (int j=0; j<location_ids.get(i).size(); j++){
-//					if (location_ids.get(i).get(j).charAt(0) == 'X' || (location_ids.get(i).get(j).charAt(0) != ziellocation.charAt(0) && location_ids.get(i).get(j).charAt(0) != 'P' && location_ids.get(i).get(j).charAt(0) != locid )){
-//						location_ids.get(i).set(j,"You shall not pass!") ;
-//					}
-//					if (location_ids.get(i).get(j).charAt(0) == 'P'){
-//						location_ids.get(i).set(j,"X") ;
-//					}
-//				}
-//			}
 			location_ids.get((int)(parkeingang.getX())).set((int)(parkeingang.getY()),"0");
 			
 	goalp:	for (int i=0; i<100; i++){
@@ -362,7 +352,6 @@ public class Simulation {
 							if (i>2){
 								if (j < 15){ //15 -> Rasterhöhe
 									if (location_ids.get(j+1).get(k).equals("0")) {
-//										location_ids.get(j+1).set(k,String.valueOf(i+1));
 										counter = i;
 										yPos_current = j+1;
 										xPos_current = k;
@@ -371,7 +360,6 @@ public class Simulation {
 								}
 								if (k<24){ //24 -> Rasterbreite
 									if (location_ids.get(j).get(k+1).equals("0")) {
-//										location_ids.get(j).set(k+1,String.valueOf(i+1));
 										counter = i;
 										yPos_current = j;
 										xPos_current = k+1;
@@ -380,7 +368,6 @@ public class Simulation {
 								}
 								if (j>0){
 									if (location_ids.get(j-1).get(k).equals("0")) {
-//										location_ids.get(j-1).set(k,String.valueOf(i+1));
 										counter = i;
 										yPos_current = j-1;
 										xPos_current = k;
@@ -389,7 +376,6 @@ public class Simulation {
 								}
 								if (k>0){
 									if (location_ids.get(j).get(k-1).equals("0")) {
-//										location_ids.get(j).set(k-1,String.valueOf(i+1));
 										counter = i;
 										yPos_current = j;
 										xPos_current = k-1;
@@ -437,8 +423,48 @@ public class Simulation {
 				}
 			}
 			if ((int)(Math.random()*2) == 1){
-			// Der Stack für die Bewegung wird mit den richtigen Werten gefüllt. Dafür hangelt man sich absteigend an der zahlenreihe entlang
-			for (int i = counter; i>=0; i--){
+				neuer_weg= wegberechnung_parklinks_fuelle_stack(location_ids, counter, xPos_current, yPos_current);
+			} else {
+				neuer_weg= wegberechnung_parkrechts_fuelle_stack(location_ids, counter, xPos_current, yPos_current);
+
+			}
+			
+			person.setMoves(neuer_weg);
+			return;
+		}
+	}
+	
+	
+	private Stack<Character> wegberechnung_parkrechts_fuelle_stack(ArrayList<ArrayList<String>> location_ids, int counter, int xPos_current, int yPos_current) {
+		Stack<Character> neuer_weg = new Stack<Character>();
+		
+		for (int i = 1; i<=counter+1; i++){
+			if (i==counter+1){
+				if (yPos_current<15){
+					if (location_ids.get(yPos_current+1).get(xPos_current).equals("0")) {			//unten gehts weiter
+					yPos_current++;
+					neuer_weg.push('o');
+					}
+				}
+				if (xPos_current<24){
+					if (location_ids.get(yPos_current).get(xPos_current+1).equals("0")) {			//rechts gehts weiter
+					xPos_current++;
+					neuer_weg.push('l');
+					}
+				}
+				if (yPos_current>0){
+					if (location_ids.get(yPos_current-1).get(xPos_current).equals("0")) {			//oben gehts weiter
+					yPos_current--;
+					neuer_weg.push('u');
+					}
+				}
+				if (xPos_current>0){
+					if (location_ids.get(yPos_current).get(xPos_current-1).equals("0")) {			//links gehts weiter
+					xPos_current--;
+					neuer_weg.push('r');
+					}
+				} 
+			} else{
 				if (yPos_current<15){
 					if (location_ids.get(yPos_current+1).get(xPos_current).equals(String.valueOf(i))) {			//unten gehts weiter
 					yPos_current++;
@@ -463,71 +489,45 @@ public class Simulation {
 					neuer_weg.push('r');
 					}
 				}
-				
 			}
-			} else {
-			for (int i = 1; i<=counter+1; i++){
-				if (i==counter+1){
-					if (yPos_current<15){
-						if (location_ids.get(yPos_current+1).get(xPos_current).equals("0")) {			//unten gehts weiter
-						yPos_current++;
-						neuer_weg.push('o');
-						}
-					}
-					if (xPos_current<24){
-						if (location_ids.get(yPos_current).get(xPos_current+1).equals("0")) {			//rechts gehts weiter
-						xPos_current++;
-						neuer_weg.push('l');
-						}
-					}
-					if (yPos_current>0){
-						if (location_ids.get(yPos_current-1).get(xPos_current).equals("0")) {			//oben gehts weiter
-						yPos_current--;
-						neuer_weg.push('u');
-						}
-					}
-					if (xPos_current>0){
-						if (location_ids.get(yPos_current).get(xPos_current-1).equals("0")) {			//links gehts weiter
-						xPos_current--;
-						neuer_weg.push('r');
-						}
-					} 
-				} else{
-					if (yPos_current<15){
-						if (location_ids.get(yPos_current+1).get(xPos_current).equals(String.valueOf(i))) {			//unten gehts weiter
-						yPos_current++;
-						neuer_weg.push('o');
-						}
-					}
-					if (xPos_current<24){
-						if (location_ids.get(yPos_current).get(xPos_current+1).equals(String.valueOf(i))) {			//rechts gehts weiter
-						xPos_current++;
-						neuer_weg.push('l');
-						}
-					}
-					if (yPos_current>0){
-						if (location_ids.get(yPos_current-1).get(xPos_current).equals(String.valueOf(i))) {			//oben gehts weiter
-						yPos_current--;
-						neuer_weg.push('u');
-						}
-					}
-					if (xPos_current>0){
-						if (location_ids.get(yPos_current).get(xPos_current-1).equals(String.valueOf(i))) {			//links gehts weiter
-						xPos_current--;
-						neuer_weg.push('r');
-						}
-					}
-				}
-				
-			}
-			
-			}
-		person.setMoves(neuer_weg);
-			return;
 		}
+		return neuer_weg;
 	}
-	
-	
+
+
+	private Stack<Character> wegberechnung_parklinks_fuelle_stack(ArrayList<ArrayList<String>> location_ids, int counter, int xPos_current, int yPos_current) {
+		Stack<Character> neuer_weg = new Stack<Character>();
+		for (int i = counter; i>=0; i--){
+			if (yPos_current<15){
+				if (location_ids.get(yPos_current+1).get(xPos_current).equals(String.valueOf(i))) {			//unten gehts weiter
+				yPos_current++;
+				neuer_weg.push('o');
+				}
+			}
+			if (xPos_current<24){
+				if (location_ids.get(yPos_current).get(xPos_current+1).equals(String.valueOf(i))) {			//rechts gehts weiter
+				xPos_current++;
+				neuer_weg.push('l');
+				}
+			}
+			if (yPos_current>0){
+				if (location_ids.get(yPos_current-1).get(xPos_current).equals(String.valueOf(i))) {			//oben gehts weiter
+				yPos_current--;
+				neuer_weg.push('u');
+				}
+			}
+			if (xPos_current>0){
+				if (location_ids.get(yPos_current).get(xPos_current-1).equals(String.valueOf(i))) {			//links gehts weiter
+				xPos_current--;
+				neuer_weg.push('r');
+				}
+			}
+		}
+		
+		return neuer_weg;
+	}	
+		
+		
 	private ArrayList<ArrayList<String>> wegberechnung_parkrundlauf_rasterkarte_initialisierung(ArrayList<ArrayList<String>> location_ids, String ziellocation, char locid) {
 		for (int i=0; i<location_ids.size(); i++){
 			for (int j=0; j<location_ids.get(i).size(); j++){
@@ -674,13 +674,8 @@ goal:	for (int i=0; i<100; i++){
 			}
 		}
 		
-		//Falls das Ziel ein Haus ist, soll die Person auf ihren startpunkt laufen.
-		if ((int)(zielloc)-48 <=9 && (int)(zielloc)-48 > 0){ //-48 für char umwandlung zu int
-			neuer_weg = wegberechnung_homeposition(person, xPos_current, yPos_current);
-		}
-		
 		// Der Stack für die Bewegung wird mit den richtigen Werten gefüllt. Dafür hangelt man sich absteigend an der zahlenreihe entlang
-		neuer_weg = wegberechnung_fuelle_stack(location_ids, counter, xPos_current, yPos_current);
+		neuer_weg = wegberechnung_fuelle_stack(zielloc, person, location_ids, counter, xPos_current, yPos_current);
 		
 		//Stack zur Bewegung freigeben
 		person.setMoves(neuer_weg);
@@ -688,8 +683,13 @@ goal:	for (int i=0; i<100; i++){
 	
 	
 	
-	private Stack<Character> wegberechnung_fuelle_stack(ArrayList<ArrayList<String>> location_ids, int counter, int xPos_current, int yPos_current) {
+	private Stack<Character> wegberechnung_fuelle_stack(Character zielloc, Person person, ArrayList<ArrayList<String>> location_ids, int counter, int xPos_current, int yPos_current) {
 		Stack<Character> neuer_weg = new Stack<Character>();
+		
+		//Falls das Ziel ein Haus ist, soll die Person auf ihren startpunkt laufen.
+		if ((int)(zielloc)-48 <=9 && (int)(zielloc)-48 > 0){ //-48 für char umwandlung zu int
+			neuer_weg = wegberechnung_homeposition(person, xPos_current, yPos_current);
+		}
 		
 		for (int i = counter; i>=0; i--){
 			if (yPos_current<15){
@@ -753,7 +753,7 @@ goal:	for (int i=0; i<100; i++){
 			neuer_weg.push('o');
 			neuer_weg.push('o');
 		}
-		return null;
+		return neuer_weg;
 	}
 
 
