@@ -9,5 +9,6 @@ public class Agent extends Mensch {
 		setSize(Ressources.RASTERHEIGHT, Ressources.RASTERHEIGHT);
 		sprite=adults.getSubimage(0, 0, Ressources.RASTERHEIGHT*2, Ressources.RASTERHEIGHT*2);
 		step();
+		bewegungsgeschwindigkeit=5;
 	}
 }
