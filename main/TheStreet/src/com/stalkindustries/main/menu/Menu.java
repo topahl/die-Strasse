@@ -27,6 +27,9 @@ public class Menu extends JFrame implements MouseMotionListener{
 	private JLayeredPane mainmenu;
 	private JLayeredPane mapselect;
 	private ControlMenu control;
+	
+	public static final int MENULAYER = 1;
+	public static final int LEVELSELECT = 2;
 	//TODO add more screens
 	
 	private HashMap<String,Button> buttons = new HashMap<String,Button>();
@@ -50,6 +53,8 @@ public class Menu extends JFrame implements MouseMotionListener{
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         
+        
+        
         initLevelSelect();
         
         initMainMenu();
@@ -71,7 +76,7 @@ public class Menu extends JFrame implements MouseMotionListener{
 		
 		
 		
-        
+        showLayer(MENULAYER);
         
         
         pack();
@@ -132,6 +137,15 @@ public class Menu extends JFrame implements MouseMotionListener{
         mapselect.add(currentscreentext, javax.swing.JLayeredPane.DEFAULT_LAYER);
         
         
+        Button back = new Button(this.control,
+				Ressources.ingamebutton.getSubimage(948, Ressources.RASTERHEIGHT, Ressources.RASTERHEIGHT, Ressources.RASTERHEIGHT),
+				Ressources.ingamebutton.getSubimage(948 + Ressources.RASTERHEIGHT, Ressources.RASTERHEIGHT, Ressources.RASTERHEIGHT, Ressources.RASTERHEIGHT),
+				Ressources.ingamebutton.getSubimage(948 + 2 * Ressources.RASTERHEIGHT, Ressources.RASTERHEIGHT, Ressources.RASTERHEIGHT, Ressources.RASTERHEIGHT),
+				Ressources.ingamebutton.getSubimage(948 + 3 * Ressources.RASTERHEIGHT, Ressources.RASTERHEIGHT, Ressources.RASTERHEIGHT, Ressources.RASTERHEIGHT),
+				"back", Ressources.MAPWIDTH-Ressources.RASTERHEIGHT, 0, this);
+        mapselect.add(back, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        
+        
         JTextArea beschreibung = new JTextArea();
         beschreibung.setColumns(20);
         beschreibung.setLineWrap(true);
@@ -168,7 +182,7 @@ public class Menu extends JFrame implements MouseMotionListener{
     			g2d.drawImage(Ressources.menubutton.getSubimage(0, 405, 312, 135), 0, 0, null);
     			g2d.dispose();
     			
-    			Button button = new Button(control,iconnormal,iconhover,iconnormal,iconnormal,levels.get(i), 45+((i/2)*360),180+((i%2)*200), this);
+    			Button button = new Button(control,iconnormal,iconhover,iconnormal,iconnormal,"level:"+levels.get(i), 45+((i/2)*360),180+((i%2)*200), this);
     			mapselect.add(button, javax.swing.JLayeredPane.DEFAULT_LAYER);
     			buttons.put(levels.get(i), button);
     			
@@ -197,11 +211,7 @@ public class Menu extends JFrame implements MouseMotionListener{
         
         mapselect.setBounds(Ressources.ZEROPOS.width,Ressources.ZEROPOS.height , Ressources.MAPWIDTH, Ressources.MAPWIDTH);
         window.add(mapselect, javax.swing.JLayeredPane.DEFAULT_LAYER);
-        
-        
-        mapselect.setVisible(false);
-        mapselect.setEnabled(false);
-	}
+    }
 	
 	
 	//Support Tiki
@@ -210,16 +220,26 @@ public class Menu extends JFrame implements MouseMotionListener{
 	}
     public void mouseDragged(MouseEvent e) {} //do nothing, notwendig für implements MouseMotion
     
-    public JLayeredPane getMenuLayer(String menulayer){
-    	if(menulayer.equals("levelsel"))
-    		return mapselect;
-    	if(menulayer.equals("mainmenu"))
-    		return mainmenu;
-    	return null;
+    
+    
+    /**
+     * Blendet den ausgewälten layer ein und alle anderen aus
+     * @param layernummer Nummer des layers der angezeigt werden soll
+     */
+    public void showLayer(int layernummer){
+    	mainmenu.setVisible(layernummer==MENULAYER?true:false);
+    	mainmenu.setEnabled(layernummer==MENULAYER?true:false);
+    	mapselect.setVisible(layernummer==LEVELSELECT?true:false);
+    	mapselect.setEnabled(layernummer==LEVELSELECT?true:false);
     }
     
     
-    //by Tobi
+    /**
+     * Überprüft ob alle daten für ein Level vorhanden sind
+     * 
+     * @param folder ein Ordner welcher ein level beinhalten soll
+     * @return true = Level ist ok 
+     */
     private boolean isValidLevel(File folder){
     	int found=0;
     	String foldername=folder.getName().trim();
@@ -248,7 +268,12 @@ public class Menu extends JFrame implements MouseMotionListener{
     	return false;
     }
     
-    //by Tobi
+    /**
+     * Ließt alle verfügbaren levels ein und überprüft sie auf richtigkeit
+     * 
+     * @author Tobias
+     * @return Liste aller validen Levelfiles
+     */
     private ArrayList<String> readAvaidableLevel(){
     	File folder = new File("res\\level");
     	ArrayList<String> levels = new ArrayList<String>();

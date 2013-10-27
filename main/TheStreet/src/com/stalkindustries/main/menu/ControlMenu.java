@@ -20,19 +20,19 @@ public class ControlMenu implements IControl{
 	
 	public void call(String funktion){
 		System.out.println("You pressed: "+funktion);
-		if(funktion.equals("russland"))
-			beginGame(funktion);
-		if(funktion.equals("saudiarabien"))
+		if(funktion.startsWith("level:"))
 			beginGame(funktion);
 		if(funktion.equals("beenden"))
 			exitMenu();
 		if(funktion.equals("start"))
-			showLevelSel();
+			mainmenu.showLayer(Menu.LEVELSELECT);
+		if(funktion.equals("back"))
+			mainmenu.showLayer(Menu.MENULAYER);
 			
 	}
 	
 	private void beginGame(String levelname){
-		TheStreet.loadLeve(levelname);
+		TheStreet.loadLeve(levelname.substring(6));
 		exitMenu();
 	}
 	
@@ -46,19 +46,6 @@ public class ControlMenu implements IControl{
 		
 	}
 	
-	private void showLevelSel(){
-		JLayeredPane pane = mainmenu.getMenuLayer("levelsel");
-		pane.setVisible(true);
-		pane.setEnabled(true);
-		closeMenuLayer("mainmenu");
-	}
-	
-	
-	private void closeMenuLayer(String layer){
-		JLayeredPane pane = mainmenu.getMenuLayer(layer);
-		pane.setVisible(false);
-		pane.setEnabled(false);
-	}
 	
 	
 	
