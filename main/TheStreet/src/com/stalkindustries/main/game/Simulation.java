@@ -827,10 +827,192 @@ goal:	for (int i=0; i<100; i++){
 	
 	//Support Tiki
 	public void bewegungAgentWanze (int zielhaus){
+		int counter;
+		String ziellocation = String.valueOf(zielhaus);
+		int xPos_current, yPos_current;
+		char locid = (char)((int)(agent.get_location_id()));
+		ArrayList<ArrayList<String>> location_ids;
+		Stack<Character> neuer_weg = new Stack<Character>();
+//		
+		counter = 1;
+		xPos_current = 0;
+		yPos_current = 0;
+		location_ids = Ressources.getLocation_ids();
 		
+		
+		//Rasterkarte initialisieren 
+		location_ids = wegberechnung_rasterkarte_initialisierung(location_ids, ziellocation, locid);
+		
+		//Aktuelle Position des Männchens wird auf 0 gesetzt
+		location_ids.get((this.agent.getPosY()-Ressources.ZEROPOS.height)/Ressources.RASTERHEIGHT).set((this.agent.getPosX()-Ressources.ZEROPOS.width)/Ressources.RASTERHEIGHT,"0");
+
+		ziellocation = "Z";
+		
+		neuer_weg = agentRumwuseln(location_ids);
+		
+		
+goala:	for (int i=0; i<100; i++){
+			for (int j=0; j<16; j++){  	// J entspricht y-wert, K entspricht x-wert
+				for (int k=0; k<25; k++){
+					// Es werden Zahlen auf der Map gesucht
+					if (location_ids.get(j).get(k).equals(String.valueOf(i))){
+						// Es wird überprüft, ob das Ziel in direkter Nähe liegt
+						if (j < 15){ //15 -> Rasterhöhe
+							if (location_ids.get(j+1).get(k).equals(ziellocation)) {
+								location_ids.get(j+1).set(k,String.valueOf(i+1));
+								counter = i;
+								yPos_current = j+1;
+								xPos_current = k;
+								break goala;
+							}
+						}
+						if (k<24){ //24 -> Rasterbreite
+							if (location_ids.get(j).get(k+1).equals(ziellocation)) {
+								location_ids.get(j).set(k+1,String.valueOf(i+1));
+								counter = i;
+								yPos_current = j;
+								xPos_current = k+1;
+								break goala;
+							}
+						}
+						if (j>0){
+							if (location_ids.get(j-1).get(k).equals(ziellocation)) {
+								location_ids.get(j-1).set(k,String.valueOf(i+1));
+								counter = i;
+								yPos_current = j-1;
+								xPos_current = k;
+								break goala;
+							}
+						}
+						if (k>0){
+							if (location_ids.get(j).get(k-1).equals(ziellocation)) {
+								location_ids.get(j).set(k-1,String.valueOf(i+1));
+								counter = i;
+								yPos_current = j;
+								xPos_current = k-1;
+								break goala;
+							}
+						}
+						
+						
+						// Es wird überprüft, ob ein Feld drüber/drunter/links oder rechts ebenfalls begehbar ist -> das wird markiert
+						if (j<15){
+							if (location_ids.get(j+1).get(k).equals("X")) {			//Weg nach unten ist begehbar
+							location_ids.get(j+1).set(k,String.valueOf(i+1));
+							}
+						}
+						if (k<24){
+							if (location_ids.get(j).get(k+1).equals("X")) {			//Weg nach rechts ist begehbar
+							location_ids.get(j).set(k+1,String.valueOf(i+1));
+							}
+						}
+						if (j>0){
+							if (location_ids.get(j-1).get(k).equals("X")) {			// Weg nach oben ist begehbar
+							location_ids.get(j-1).set(k,String.valueOf(i+1));
+							}
+						}
+						if (k>0){
+							if (location_ids.get(j).get(k-1).equals("X")) {			//Weg nach links ist begehbar
+							location_ids.get(j).set(k-1,String.valueOf(i+1));
+							}
+						}
+					}
+				}
+			}
+		}
+		
+		for (int i = counter; i>=0; i--){
+			if (yPos_current<15){
+				if (location_ids.get(yPos_current+1).get(xPos_current).equals(String.valueOf(i))) {			//unten gehts weiter
+				yPos_current++;
+				neuer_weg.push('o');
+				}
+			}
+			if (xPos_current<24){
+				if (location_ids.get(yPos_current).get(xPos_current+1).equals(String.valueOf(i))) {			//rechts gehts weiter
+				xPos_current++;
+				neuer_weg.push('l');
+				}
+			}
+			if (yPos_current>0){
+				if (location_ids.get(yPos_current-1).get(xPos_current).equals(String.valueOf(i))) {			//oben gehts weiter
+				yPos_current--;
+				neuer_weg.push('u');
+				}
+			}
+			if (xPos_current>0){
+				if (location_ids.get(yPos_current).get(xPos_current-1).equals(String.valueOf(i))) {			//links gehts weiter
+				xPos_current--;
+				neuer_weg.push('r');
+				}
+			}
+			
+		}
+		//Stack zur Bewegung freigeben
+		this.agent.setMoves(neuer_weg);
 	}
 	
 	
+	//Support Tiki
+	private Stack<Character> agentRumwuseln(ArrayList<ArrayList<String>> location_ids) {
+		Stack<Character> neuer_weg = new Stack<Character>();
+		
+		for (int i=0; i<15; i++){
+			for (int j=0; j<24; j++){
+				if (location_ids.get(i).get(j)=="Z" && location_ids.get(i+1).get(j)=="Z" && location_ids.get(i-1).get(j)=="Z" && location_ids.get(i).get(j+1)=="Z" && location_ids.get(i).get(j-1)=="Z"){
+					
+					//Der Agent wird zum Mittelpunkt des Hauses geleitet
+					if (location_ids.get(i-2).get(j-1)=="X" || location_ids.get(i-1).get(j-2)=="X"){
+						neuer_weg.push('u');
+						neuer_weg.push('r');
+					}
+					if (location_ids.get(i-2).get(j)=="X"){
+						neuer_weg.push('u');
+					}
+					if (location_ids.get(i-2).get(j+1)=="X" || location_ids.get(i-1).get(j+2)=="X"){
+						neuer_weg.push('u');
+						neuer_weg.push('l');
+					}
+					if (location_ids.get(i).get(j+2)=="X"){
+						neuer_weg.push('l');
+					}
+					if (location_ids.get(i+1).get(j+2)=="X" || location_ids.get(i+2).get(j+1)=="X"){
+						neuer_weg.push('o');
+						neuer_weg.push('l');
+					}
+					if (location_ids.get(i+2).get(j)=="X"){
+						neuer_weg.push('o');
+					}
+					if (location_ids.get(i+2).get(j-1)=="X" || location_ids.get(i+1).get(j-2)=="X" ){
+						neuer_weg.push('o');
+						neuer_weg.push('r');
+					}
+					if (location_ids.get(i).get(j-2)=="X"){
+						neuer_weg.push('r');
+					}
+					
+					
+					//Nun läuft der Agent lustig hin und her
+					neuer_weg.push('r');
+					neuer_weg.push('o');
+					neuer_weg.push('l');
+					neuer_weg.push('u');
+					neuer_weg.push('r');
+					neuer_weg.push('u');
+					neuer_weg.push('l');
+					neuer_weg.push('o');
+					neuer_weg.push('o');
+					neuer_weg.push('l');
+					neuer_weg.push('u');
+					neuer_weg.push('u');
+					neuer_weg.push('r');
+					neuer_weg.push('o');
+				}
+			}
+		}	
+		return neuer_weg;
+	}
+
 
 	//Support Tiki
 	//TODO Gameover implementieren -> Das Event dafür
