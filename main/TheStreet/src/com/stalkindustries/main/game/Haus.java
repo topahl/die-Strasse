@@ -32,5 +32,13 @@ public class Haus {
 	public ArrayList<String> getUeberwachungsmodule(){
 		return this.ueberwachungsmodule;
 	}
+	
+	public int getPosX(){
+		return this.posX;
+	}
+	
+	public int getPosY(){
+		return this.posY;
+	}
 
 }
