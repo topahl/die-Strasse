@@ -92,48 +92,39 @@ public class Control implements IControl {
 	}
 	
 	private void clickHaus9() {
-		// TODO Auto-generated method stub
-		
+		guilayer.getMousefollower().setVisible(false);
 	}
 
 	private void clickHaus8() {
-		// TODO Auto-generated method stub
-		
+		guilayer.getMousefollower().setVisible(false);
 	}
 
 	private void clickHaus7() {
-		// TODO Auto-generated method stub
-		
+		guilayer.getMousefollower().setVisible(false);
 	}
 
 	private void clickHaus6() {
-		// TODO Auto-generated method stub
-		
+		guilayer.getMousefollower().setVisible(false);
 	}
 
 	private void clickHaus5() {
-		// TODO Auto-generated method stub
-		
+		guilayer.getMousefollower().setVisible(false);
 	}
 
 	private void clickHaus4() {
-		// TODO Auto-generated method stub
-		
+		guilayer.getMousefollower().setVisible(false);
 	}
 
 	private void clickHaus3() {
-		// TODO Auto-generated method stub
-		
+		guilayer.getMousefollower().setVisible(false);
 	}
 
 	private void clickHaus2() {
-		// TODO Auto-generated method stub
-		
+		guilayer.getMousefollower().setVisible(false);
 	}
 
 	private void clickHaus1() {
-		// TODO Auto-generated method stub
-		
+		guilayer.getMousefollower().setVisible(false);
 	}
 
 	@Override
