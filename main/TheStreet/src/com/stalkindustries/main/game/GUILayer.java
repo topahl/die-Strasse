@@ -38,6 +38,7 @@ public class GUILayer extends JFrame implements MouseMotionListener {
 	private Haus haus;
 	private ArrayList<Mensch> humans = new ArrayList<Mensch>();
 	private int stepcounter = 0;
+	private Quiz quiz;
 
 	private JLabel anzeigeZeit = new JLabel();
 	private JLabel anzeigeTag = new JLabel();
@@ -61,6 +62,7 @@ public class GUILayer extends JFrame implements MouseMotionListener {
 		
 		simulation = new Simulation();
 		
+		this.quiz = new Quiz(this);
 		this.initComponents(levelname);
 		this.simulation.initialize_beziehungsmatrix();
 		this.setVisible(true);
@@ -339,42 +341,44 @@ public class GUILayer extends JFrame implements MouseMotionListener {
 			}
 		}
 		
-		//Inhal des Quiz Fensters
-		int buttonSize = 39;
-		int buttonSliceX = 0;
-		int buttonSliceY = buttonSize;
-
-		String[] buttonNamesSmall = { "QuizA", "QuizB","QuizC" };
-		for (int i = 14; i < buttonNamesSmall.length+14; i++) {
-			button = new Button(this.control,
-					Ressources.ingamebutton.getSubimage(buttonSliceX, i * buttonSliceY, buttonSize, buttonSize),
-					Ressources.ingamebutton.getSubimage(buttonSliceX + buttonSize, i * buttonSliceY, buttonSize, buttonSize),
-					Ressources.ingamebutton.getSubimage(buttonSliceX + 2 * buttonSize, i * buttonSliceY, buttonSize, buttonSize),
-					Ressources.ingamebutton.getSubimage(buttonSliceX + 3 * buttonSize, i * buttonSliceY, buttonSize, buttonSize),
-					buttonNamesSmall[i-14], 45, 140+(i-14)*45 , this);
-			label = new JLabel();
-			label.setText("Antwort");
-			label.setForeground(new java.awt.Color(0xf9, 0xf9, 0xf9));
-			label.setBounds(100, 140+(i-14)*45, 300, 39);
-			label.setFont(new Font("Corbel", Font.BOLD, 20));
-			
-			this.fensterQuiz.add(label, javax.swing.JLayeredPane.DEFAULT_LAYER);
-			this.fensterQuiz.add(button, javax.swing.JLayeredPane.DEFAULT_LAYER);
-			this.buttons.put(buttonNamesSmall[i-14], button);
-		}
-		//Textfeld für die Frage des Quizes
-		JTextArea frage = new JTextArea();
-        frage.setLineWrap(true);
-        frage.setText("Frage bla bla bla..");
-        frage.setWrapStyleWord(true);
-        frage.setFocusCycleRoot(true);
-        frage.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
-        frage.setFocusable(false);
-        frage.setOpaque(false);
-        frage.setFont(new Font("Corbel",Font.BOLD,20));
-        frage.setForeground(new java.awt.Color(0xf9, 0xf9, 0xf9));
-        frage.setBounds(45,60, 500, 75);
-        this.fensterQuiz.add(frage, javax.swing.JLayeredPane.DEFAULT_LAYER);
+		this.quiz.initQuizWindow(this.control);
+		
+//		//Inhal des Quiz Fensters
+//		int buttonSize = 39;
+//		int buttonSliceX = 0;
+//		int buttonSliceY = buttonSize;
+//
+//		String[] buttonNamesSmall = { "QuizA", "QuizB","QuizC" };
+//		for (int i = 14; i < buttonNamesSmall.length+14; i++) {
+//			button = new Button(this.control,
+//					Ressources.ingamebutton.getSubimage(buttonSliceX, i * buttonSliceY, buttonSize, buttonSize),
+//					Ressources.ingamebutton.getSubimage(buttonSliceX + buttonSize, i * buttonSliceY, buttonSize, buttonSize),
+//					Ressources.ingamebutton.getSubimage(buttonSliceX + 2 * buttonSize, i * buttonSliceY, buttonSize, buttonSize),
+//					Ressources.ingamebutton.getSubimage(buttonSliceX + 3 * buttonSize, i * buttonSliceY, buttonSize, buttonSize),
+//					buttonNamesSmall[i-14], 45, 140+(i-14)*45 , this);
+//			label = new JLabel();
+//			label.setText("Antwort");
+//			label.setForeground(new java.awt.Color(0xf9, 0xf9, 0xf9));
+//			label.setBounds(100, 140+(i-14)*45, 300, 39);
+//			label.setFont(new Font("Corbel", Font.BOLD, 20));
+//			
+//			this.fensterQuiz.add(label, javax.swing.JLayeredPane.DEFAULT_LAYER);
+//			this.fensterQuiz.add(button, javax.swing.JLayeredPane.DEFAULT_LAYER);
+//			this.buttons.put(buttonNamesSmall[i-14], button);
+//		}
+//		//Textfeld für die Frage des Quizes
+//		JTextArea frage = new JTextArea();
+//        frage.setLineWrap(true);
+//        frage.setText("Frage bla bla bla..");
+//        frage.setWrapStyleWord(true);
+//        frage.setFocusCycleRoot(true);
+//        frage.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+//        frage.setFocusable(false);
+//        frage.setOpaque(false);
+//        frage.setFont(new Font("Corbel",Font.BOLD,20));
+//        frage.setForeground(new java.awt.Color(0xf9, 0xf9, 0xf9));
+//        frage.setBounds(45,60, 500, 75);
+//        this.fensterQuiz.add(frage, javax.swing.JLayeredPane.DEFAULT_LAYER);
         
         
         
@@ -882,6 +886,14 @@ public class GUILayer extends JFrame implements MouseMotionListener {
 
 		// zeichne neuen Überwachungswert
 		this.updateUeberwachung();
+		
+		
+		//Quizaufruf
+		int zeitpunkt =(int) (Math.random()*3000);
+		if(this.stepcounter%(3000+zeitpunkt) == 0){
+			quiz.starteQuiz();
+		}
+		
 
 		// Tag-Nacht-Modus
 		if (this.simulation.getSpiel_stunde() == 20) {

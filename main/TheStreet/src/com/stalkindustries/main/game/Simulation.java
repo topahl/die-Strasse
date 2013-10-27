@@ -191,7 +191,7 @@ public class Simulation {
 //			//-->Mittelpunkt vom Haus bestimmen
 //			else{
 				// wenn sich eine Person in der Epsilon-Umgebung befindet
-				if(this.people.get(i).getPosX() >= mittelpunktX-epsilon && this.people.get(i).getPosX() <= mittelpunktX+epsilon && this.people.get(i).getPosY() >= mittelpunktY-epsilon && this.people.get(i).getPosY() <= mittelpunktY+epsilon){
+				if(this.people.get(i).getPosX() >= mittelpunktX-epsilon && this.people.get(i).getPosX() <= mittelpunktX+epsilon && this.people.get(i).getPosY() >= mittelpunktY-epsilon && this.people.get(i).getPosY() <= mittelpunktY+epsilon && this.people.get(i).get_location_id()!='E'){
 					//wenn das per Zufall eine Person ist, die in dem Haus wohnt und z.B. auf dem Heimweg ist
 					//hier ist das Misstrauen natürlich größer
 					if(this.people.get(i).get_haus_id()+1 == house_location){
