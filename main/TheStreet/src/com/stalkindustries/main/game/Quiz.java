@@ -9,7 +9,7 @@ import javax.swing.JTextArea;
 import com.stalkindustries.main.Button;
 
 public class Quiz {
-	private ArrayList<Integer> beantwortet;
+	private ArrayList<Integer> beantwortet = new ArrayList<Integer>();
 	private ArrayList<ArrayList<String>> quizfragen; 
 	private GUILayer gui;
 	private JLayeredPane quizwindow;
@@ -36,7 +36,6 @@ public class Quiz {
 		
 		this.quizwindow.setVisible(true);
 		this.quizwindow.setEnabled(true);
-		this.quizstart = (this.quizstart + this.quizstep)%this.quizfragen.size();
 	}
 	
 	public void initQuizWindow(Control control){
@@ -58,7 +57,7 @@ public class Quiz {
 					label[i-14] = new JLabel();
 					label[i-14].setText("Antwort");
 					label[i-14].setForeground(new java.awt.Color(0xf9, 0xf9, 0xf9));
-					label[i-14].setBounds(100, 140+(i-14)*45, 300, 39);
+					label[i-14].setBounds(100, 140+(i-14)*45, 500, 39);
 					label[i-14].setFont(new Font("Corbel", Font.BOLD, 20));
 					
 					this.quizwindow.add(label[i-14], javax.swing.JLayeredPane.DEFAULT_LAYER);
@@ -76,5 +75,13 @@ public class Quiz {
 		        frage.setForeground(new java.awt.Color(0xf9, 0xf9, 0xf9));
 		        frage.setBounds(45,60, 500, 75);
 		        this.quizwindow.add(frage, javax.swing.JLayeredPane.DEFAULT_LAYER);
+	}
+	
+	
+	public void analyzeAntwort(String antwort){
+		int antwortnr = (int)antwort.charAt(0)-64;
+		int richtigkeit = Integer.parseInt(this.quizfragen.get(this.quizstart).get(antwortnr));
+		this.beantwortet.add(richtigkeit);
+		this.quizstart = (this.quizstart + this.quizstep)%this.quizfragen.size();
 	}
 }

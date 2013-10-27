@@ -34,7 +34,7 @@ public class GUILayer extends JFrame implements MouseMotionListener {
 	private JLayeredPane fensterQuiz;
 	private JLayeredPane fensterHaus;
 	private Simulation simulation;
-	private Control control = new Control(this);
+	private Control control;
 	private Haus haus;
 	private ArrayList<Mensch> humans = new ArrayList<Mensch>();
 	private int stepcounter = 0;
@@ -63,6 +63,7 @@ public class GUILayer extends JFrame implements MouseMotionListener {
 		simulation = new Simulation();
 		
 		this.quiz = new Quiz(this);
+		this.control = new Control(this,this.quiz);
 		this.initComponents(levelname);
 		this.simulation.initialize_beziehungsmatrix();
 		this.setVisible(true);

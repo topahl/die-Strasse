@@ -16,6 +16,7 @@ public class Control implements IControl {
 	String lastFunktioncode = "";
 	//Laden des Spielfenster-Objektes, um auf Funktionen davon zugreifen zu können
 	private GUILayer guilayer;
+	private Quiz quiz;
 
 	
 	
@@ -23,8 +24,9 @@ public class Control implements IControl {
 	 * Konstruktor lädt Ingamefenster-Objekt
 	 * @param guilayer Objekt des Ingamefensters
 	 */
-	public Control(GUILayer guilayer) {
+	public Control(GUILayer guilayer, Quiz quiz) {
 		this.guilayer = guilayer;
+		this.quiz = quiz;
 	}
 
 	
@@ -104,7 +106,8 @@ public class Control implements IControl {
 	}
 
 	
-	private void quizAntwort(String antwort){
+	private void quizAntwort(String antwort){ //antwort=A || B || C
+		this.quiz.analyzeAntwort(antwort);
 		closeWindow("quizfenster");
 	}
 	
