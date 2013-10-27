@@ -65,12 +65,77 @@ public class Control implements IControl {
 			clickFernglas();
 		if(funktion.equals("aktionParkSpionage"))
 			clickParkSpionage();		
+		if(funktion.equals("Haus1"))
+			clickHaus1();		
+		if(funktion.equals("Haus2"))
+			clickHaus2();
+		if(funktion.equals("Haus3"))
+			clickHaus3();
+		if(funktion.equals("Haus4"))
+			clickHaus4();
+		if(funktion.equals("Haus5"))
+			clickHaus5();
+		if(funktion.equals("Haus6"))
+			clickHaus6();
+		if(funktion.equals("Haus7"))
+			clickHaus7();
+		if(funktion.equals("Haus8"))
+			clickHaus8();
+		if(funktion.equals("Haus9"))
+			clickHaus9();
+		
+		
 		if(funktion.equals("pause") || funktion.equals("close") || funktion.equals("aktionenBeschwichtigen") || funktion.equals("aktionenSpionage")){
 			guilayer.getMousefollower().setVisible(false);
 		}
 		
 	}
 	
+	private void clickHaus9() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	private void clickHaus8() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	private void clickHaus7() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	private void clickHaus6() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	private void clickHaus5() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	private void clickHaus4() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	private void clickHaus3() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	private void clickHaus2() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	private void clickHaus1() {
+		// TODO Auto-generated method stub
+		
+	}
+
 	@Override
 	public void mousePresent(String funktion, boolean isPresent) {
 //		if(isPresent)
@@ -100,7 +165,7 @@ public class Control implements IControl {
 			beschwichtigenlabelBeschr(isPresent, "helfen");
 		if(funktion.equals("aktionParkBeschwichtigen"))
 			beschwichtigenlabelBeschr(isPresent, "im Park Unterhalten");
-		if(funktion.equals("aktion6Beschwichtigen"))
+		if(funktion.equals("aktionBeschwichtigen"))
 			beschwichtigenlabelBeschr(isPresent, "Aktion 6");
 	}
 	
