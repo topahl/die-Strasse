@@ -738,7 +738,7 @@ public class GUILayer extends JFrame implements MouseMotionListener {
 	
 	/**
 	 * Step steuert den zeitlichen Ablauf des Spieles und triggert die Simulation und Updates im Spielfenster
-	 * @author Miri, Tobias
+	 * @author Miri, Tobias, Tiki
 	 */
 	public void step() {
 		this.updateLocationID();

@@ -64,7 +64,7 @@ public abstract class Mensch extends JLabel {
 			break;
 		case 'o':
 			posY-=this.bewegungsgeschwindigkeit;
-			invisible_lefternside = false;
+			invisible_lefternside = true;
 			break;
 		case 'u':
 			posY+=this.bewegungsgeschwindigkeit;
