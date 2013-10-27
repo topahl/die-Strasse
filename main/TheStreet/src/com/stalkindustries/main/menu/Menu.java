@@ -9,8 +9,8 @@ import java.awt.event.MouseMotionListener;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.logging.Level;
 
 import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
@@ -148,13 +148,13 @@ public class Menu extends JFrame implements MouseMotionListener{
         mapselect.add(beschreibung, javax.swing.JLayeredPane.DEFAULT_LAYER);
         
         
-        String[] levels={"russland","saudiarabien"};
-        for(int i=0;i<levels.length;i++){
+        ArrayList<String> levels=readAvaidableLevel();
+        for(int i=0;i<levels.size();i++){
         	if(i>3)
         		break;
         	try {
         		
-    			BufferedImage loader = ImageIO.read(new File("res\\level\\"+levels[i]+"\\"+levels[i]+"_slice_menu.png"));
+    			BufferedImage loader = ImageIO.read(new File("res\\level\\"+levels.get(i)+"\\"+levels.get(i)+"_slice_menu.png"));
     			BufferedImage iconnormal = new BufferedImage(312,134, BufferedImage.TYPE_INT_ARGB);
     			BufferedImage iconhover = new BufferedImage(312,134, BufferedImage.TYPE_INT_ARGB);
     			Graphics2D g2d = iconhover.createGraphics();
@@ -168,9 +168,9 @@ public class Menu extends JFrame implements MouseMotionListener{
     			g2d.drawImage(Ressources.menubutton.getSubimage(0, 405, 312, 135), 0, 0, null);
     			g2d.dispose();
     			
-    			Button button = new Button(control,iconnormal,iconhover,iconnormal,iconnormal,levels[i], 45+((i/2)*360),180+((i%2)*200), this);
+    			Button button = new Button(control,iconnormal,iconhover,iconnormal,iconnormal,levels.get(i), 45+((i/2)*360),180+((i%2)*200), this);
     			mapselect.add(button, javax.swing.JLayeredPane.DEFAULT_LAYER);
-    			buttons.put(levels[i], button);
+    			buttons.put(levels.get(i), button);
     			
     			JLabel label= new JLabel();
     			BufferedImage textlabel = loader.getSubimage(315, 10, loader.getWidth()-315, 25);
@@ -182,7 +182,7 @@ public class Menu extends JFrame implements MouseMotionListener{
     			
     			
     		} catch (IOException e) {
-    			System.err.println("Could not find Image "+levels[i]+"_slice_menu.png");
+    			System.err.println("Could not find Image "+levels.get(i)+"_slice_menu.png");
     			e.printStackTrace();
     		}
 			
@@ -217,4 +217,48 @@ public class Menu extends JFrame implements MouseMotionListener{
     		return mainmenu;
     	return null;
     }
+    
+    
+    //by Tobi
+    private boolean isValidLevel(File folder){
+    	int found=0;
+    	String foldername=folder.getName().trim();
+    	for (File fileEntry : folder.listFiles()) {
+    		if(fileEntry.isFile()){
+    			String name = fileEntry.getName().trim();
+    			if(name.equals(foldername+"_map.csv"))
+    				found++;
+    			else if(name.equals(foldername+"_map.png"))
+    				found++;
+    			else if(name.equals(foldername+"_namen.csv"))
+    				found++;
+    			else if(name.equals(foldername+"_quizfragen.csv"))
+    				found++;
+    			else if(name.equals(foldername+"_slice_menu.png"))
+    				found++;
+    			else if(name.equals(foldername+"_slice_person_adult.png"))
+    				found++;
+    			else if(name.equals(foldername+"_slice_person_child.png"))
+    				found++;
+    		}
+    	}
+    	if(found==7)
+    		return true;
+    	System.err.println("levelfolder "+foldername+" is not valid!");
+    	return false;
+    }
+    
+    //by Tobi
+    private ArrayList<String> readAvaidableLevel(){
+    	File folder = new File("res\\level");
+    	ArrayList<String> levels = new ArrayList<String>();
+    	for (File fileEntry : folder.listFiles()) {
+            if (fileEntry.isDirectory() && isValidLevel(fileEntry)) {
+                levels.add(fileEntry.getName().trim());
+                System.out.println(fileEntry.getName());
+            } 
+    	}
+    	return levels;
+    }
+    
 }

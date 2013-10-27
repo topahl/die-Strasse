@@ -19,13 +19,14 @@ public class ControlMenu implements IControl{
 	}
 	
 	public void call(String funktion){
-		if(funktion == "russland")
+		System.out.println("You pressed: "+funktion);
+		if(funktion.equals("russland"))
 			beginGame(funktion);
-		if(funktion=="saudiarabien")
+		if(funktion.equals("saudiarabien"))
 			beginGame(funktion);
-		if(funktion == "beenden")
+		if(funktion.equals("beenden"))
 			exitMenu();
-		if(funktion == "start")
+		if(funktion.equals("start"))
 			showLevelSel();
 			
 	}
