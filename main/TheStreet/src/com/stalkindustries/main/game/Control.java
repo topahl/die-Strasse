@@ -69,7 +69,7 @@ public class Control implements IControl {
 		if(funktion.equals("aktionParkBeschwichtigen"))
 			clickParkBeschwichtigen();
 		
-		//Buttons Aktionsfenster Beschwichtigen
+		//Buttons Aktionsfenster Beschwichtigen 
 		if(funktion.equals("closeBeschwichtigen"))
 			closeWindow("beschwichtigen");
 		if(funktion.equals("aktionWanze"))
@@ -82,6 +82,9 @@ public class Control implements IControl {
 			clickFernglas();
 		if(funktion.equals("aktionParkSpionage"))
 			clickParkSpionage();		
+		if(funktion.equals("closeHaus"))
+			closeWindow("fensterhaus");
+		
 		if(funktion.startsWith("Quiz"))
 			quizAntwort(funktion.substring(4));
 		

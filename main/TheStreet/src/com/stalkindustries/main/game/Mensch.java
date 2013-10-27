@@ -174,6 +174,10 @@ public abstract class Mensch extends JLabel {
 		this.haus_id = haus_id;
 	}
 	
+	public BufferedImage getSprite(){
+		return sprite;
+	}
+	
 //	public Stack<Character> getMoves(){
 //		return this.moves;
 //	}

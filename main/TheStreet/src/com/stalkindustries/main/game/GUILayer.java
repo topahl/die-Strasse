@@ -32,6 +32,7 @@ public class GUILayer extends JFrame implements MouseMotionListener {
 	private JLayeredPane fensterSpionage;
 	private JLayeredPane fensterBeschwichtigen;
 	private JLayeredPane fensterQuiz;
+	private JLayeredPane fensterHaus;
 	private Simulation simulation;
 	private Control control = new Control(this);
 	private Haus haus;
@@ -238,7 +239,10 @@ public class GUILayer extends JFrame implements MouseMotionListener {
 		this.fensterQuiz.setBounds(Ressources.ZEROPOS.width+(Ressources.MAPWIDTH-598)/2, Ressources.ZEROPOS.height+(Ressources.MAPHEIGHT-327)/2,598, 327);
 		this.baseLayer.add(this.fensterQuiz, javax.swing.JLayeredPane.DEFAULT_LAYER);
 		
-		
+		//Fenster: Haus
+		this.fensterHaus = new JLayeredPane();
+		this.fensterHaus.setBounds(Ressources.ZEROPOS.width+(Ressources.MAPWIDTH-460)/2, Ressources.ZEROPOS.height+(Ressources.MAPHEIGHT-327)/2,460, 327);
+		this.baseLayer.add(this.fensterHaus, javax.swing.JLayeredPane.DEFAULT_LAYER);
 		
 		// Fenster: Beschwichtigen Aktionsfenster
 		this.fensterBeschwichtigen = new JLayeredPane();
@@ -280,6 +284,60 @@ public class GUILayer extends JFrame implements MouseMotionListener {
 		label.setForeground(new java.awt.Color(0x1f, 0x1f, 0x1f));
 		label.setBounds(20, 12, 200, 30);
 		this.fensterQuiz.add(label, javax.swing.JLayeredPane.DEFAULT_LAYER);
+		
+		//Titel Hausinfo
+		label = new JLabel();
+		label.setText("Haus1");
+		label.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+		label.setFont(new Font("Corbel", Font.BOLD, 25));
+		label.setForeground(new java.awt.Color(0x1f, 0x1f, 0x1f));
+		label.setBounds(20, 12, 200, 30);
+		this.fensterHaus.add(label, javax.swing.JLayeredPane.DEFAULT_LAYER);
+		
+		//Inhalt der Hausinfo
+		label = new JLabel();
+		label.setText("Bewohner");
+		label.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+		label.setFont(new Font("Corbel", Font.BOLD, 25));
+		label.setForeground(new java.awt.Color(0xf9, 0xf9, 0xf9));
+		label.setBounds(20, 60, 150, 30);
+		this.fensterHaus.add(label, javax.swing.JLayeredPane.DEFAULT_LAYER);
+		
+		label = new JLabel();
+		label.setText("Überwachung");
+		label.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+		label.setFont(new Font("Corbel", Font.BOLD, 25));
+		label.setForeground(new java.awt.Color(0xf9, 0xf9, 0xf9));
+		label.setBounds(230, 60, 200, 30);
+		this.fensterHaus.add(label, javax.swing.JLayeredPane.DEFAULT_LAYER);
+		
+		label = new JLabel();
+		label.setText("Status");
+		label.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+		label.setFont(new Font("Corbel", Font.BOLD, 20));
+		label.setForeground(new java.awt.Color(0xf9, 0xf9, 0xf9));
+		label.setBounds(230, 100, 200, 30);
+		this.fensterHaus.add(label, javax.swing.JLayeredPane.DEFAULT_LAYER);
+		
+		label = new JLabel();
+		label.setText("Installierte Wergzeuge");
+		label.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+		label.setFont(new Font("Corbel", Font.BOLD, 20));
+		label.setForeground(new java.awt.Color(0xf9, 0xf9, 0xf9));
+		label.setBounds(230, 170, 200, 30);
+		this.fensterHaus.add(label, javax.swing.JLayeredPane.DEFAULT_LAYER);
+		
+		//Personen im Hauscounter
+		int numberpers=0;
+		for(int i=0;i<humans.size();i++){
+			if(humans.get(i).get_haus_id()==1){
+				label = new JLabel();
+				label.setIcon(new ImageIcon(humans.get(i).getSprite()));
+				label.setBounds(45, 150+45*numberpers, 45, 45);
+				this.fensterHaus.add(label, javax.swing.JLayeredPane.DEFAULT_LAYER);
+				numberpers++;
+			}
+		}
 		
 		//Inhal des Quiz Fensters
 		int buttonSize = 39;
@@ -336,6 +394,17 @@ public class GUILayer extends JFrame implements MouseMotionListener {
 		this.buttons.put("closeSpionage", button);
 		this.fensterSpionage.add(button, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
+		
+		//Schließen-Button Hausinfo
+			button = new Button(this.control,
+					Ressources.ingamebutton.getSubimage(948, 90, 27, 27),
+					Ressources.ingamebutton.getSubimage(975, 90, 27, 27),
+					Ressources.ingamebutton.getSubimage(1002, 90, 27, 27),
+					Ressources.ingamebutton.getSubimage(1029, 90, 27, 27),
+					"closeHaus", 415, 15, this);
+			this.buttons.put("closeHaus", button);
+			this.fensterHaus.add(button, javax.swing.JLayeredPane.DEFAULT_LAYER);
+		
 		// Inhalt des Spionage Fensters
 		label = new JLabel();
 		label.setText("Spionage");
@@ -372,12 +441,17 @@ public class GUILayer extends JFrame implements MouseMotionListener {
 		label.setBounds(0, 0, 248, 232);
 		this.fensterSpionage.add(label, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
-		
 		//Hintergrundbild Beschwichtigen-Aktionsfenster
 		label = new JLabel();
 		label.setIcon(new ImageIcon(Ressources.ingameframe.getSubimage(0, 0, 248, 235)));
 		label.setBounds(0, 0, 248, 232);
 		this.fensterBeschwichtigen.add(label, javax.swing.JLayeredPane.DEFAULT_LAYER);
+		
+		//Hintergrundbild HausFenster
+		label = new JLabel();
+		label.setIcon(new ImageIcon(Ressources.ingameframe.getSubimage(270, 0, 460, 327)));
+		label.setBounds(0, 0, 460, 327);
+		this.fensterHaus.add(label, javax.swing.JLayeredPane.DEFAULT_LAYER);
 		
 		//Hintergund Quiz Fenster
 		label = new JLabel();
@@ -870,6 +944,8 @@ public class GUILayer extends JFrame implements MouseMotionListener {
 			return this.fensterBeschwichtigen;
 		if (window.equals("quizfenster"))
 			return this.fensterQuiz;
+		if (window.equals("fensterhaus"))
+			return this.fensterHaus;
 		return null;
 	}
 
