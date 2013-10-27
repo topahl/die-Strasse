@@ -380,8 +380,8 @@ public class GUILayer extends JFrame implements MouseMotionListener {
 				"smallHacken", "smallFernglas", "smallParkSpionage",
 				"small6Spionage", "smallKuchen", "smallUnterhalten",
 				"smallFlirten", "smallHand", "smallParkBeschwichtigen",
-				"small6Beschwichtigen", "smallQuizA", "smallQuizB",
-				"smallQuizC" };
+				"small6Beschwichtigen", "smallNachhause", "smallRazzia",
+				"smallQuizA", "smallQuizB", "smallQuizC" };
 		for (int i = 0; i < buttonNamesSmall.length; i++) {
 			button = new Button(this.control,
 					Ressources.ingamebutton.getSubimage(buttonSliceX, i * buttonSliceY, buttonSize, buttonSize),
