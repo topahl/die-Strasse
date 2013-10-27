@@ -2,49 +2,62 @@ package com.stalkindustries.main.game;
 
 import javax.swing.ImageIcon;
 import javax.swing.JLayeredPane;
-//Kreiert vom unglaublichen Stephan
-//auf Basis von Tobias unglaublicher Arbeit
 import com.stalkindustries.main.IControl;
 
+//Kreiert vom unglaublichen Stephan
+//auf Basis von Tobias unglaublicher Arbeit
 /**
  * 
- * @author Tobias
+ * @author Tobias, Stephan, Tiki
  *
  */
 public class Control implements IControl {
 	
 	//Laden des Spielfenster-Objektes, um auf Funktionen davon zugreifen zu können
 	private GUILayer guilayer;
-	private String currentButton;
+
 	
-	public Control(GUILayer guilayer){
+	
+	/**
+	 * Konstruktor lädt Ingamefenster-Objekt
+	 * @param guilayer Objekt des Ingamefensters
+	 */
+	public Control(GUILayer guilayer) {
 		this.guilayer = guilayer;
 	}
+
 	
-	//Call wird von Button bei Klick aufgerufen
-	//Anhand des "Namens" entsprechende Funktion aufrufen
-	public void call(String funktion) { //TODO implement
+	
+	/**
+	 * Call wird von Button bei Klick aufgerufen
+	 * Anhand des "Namens" entsprechende Funktion aufrufen
+	 * TODO Funktionalität komplett testen
+	 */
+	public void call(String funktion) {
 		System.out.println("You pressed:"+funktion);
-		currentButton = funktion;
 	
 		//aus irgendeinem schwachsinnigen Grund haben wir Java 1.6 (steht auch im Pflichtenheft)
 		//Switch-case mit Strings erst ab 1.7, schade.
+		
+		//GUI Ingame Buttons
 		if(funktion.equals("pause"))
 			clickPause();
 		if(funktion.equals("close"))
 			clickExit();
-		if(funktion.equals("closeSpionage"))
-			closeSpionageMenu();
+		
+		//Buttons Menüleiste
 		if(funktion.equals("aktionenSpionage"))
-			clickAktionSpionage();
+			clickAktionenSpionage();
+		if(funktion.equals("aktionenBeschwichtigen"))
+			clickAktionenBeschwichtigen();
 		if(funktion.equals("aktionNachhause"))
 			clickNachhause();
 		if(funktion.equals("aktionRazzia"))
 			clickRazzia();
-		if(funktion.equals("closeBeschwichtigen"))
-			closeBeschwichtigenMenu();
-		if(funktion.equals("aktionenBeschwichtigen"))
-			clickAktionBeschwichtigen();
+		
+		//Buttons Aktionsfenster Spionage
+		if(funktion.equals("closeSpionage"))
+			closeWindow("spionage");
 		if(funktion.equals("aktionKuchen"))
 			clickKuchen();
 		if(funktion.equals("aktionUnterhalten"))
@@ -55,6 +68,10 @@ public class Control implements IControl {
 			clickHand();
 		if(funktion.equals("aktionParkBeschwichtigen"))
 			clickParkBeschwichtigen();
+		
+		//Buttons Aktionsfenster Beschwichtigen
+		if(funktion.equals("closeBeschwichtigen"))
+			closeWindow("beschwichtigen");
 		if(funktion.equals("aktionWanze"))
 			clickWanzen();
 		if(funktion.equals("aktionKamera"))
@@ -65,6 +82,8 @@ public class Control implements IControl {
 			clickFernglas();
 		if(funktion.equals("aktionParkSpionage"))
 			clickParkSpionage();		
+
+		//Buttons Häuser (invisible)
 		if(funktion.equals("Haus1"))
 			clickHaus1();		
 		if(funktion.equals("Haus2"))
@@ -83,14 +102,20 @@ public class Control implements IControl {
 			clickHaus8();
 		if(funktion.equals("Haus9"))
 			clickHaus9();
-		
-		
-		if(funktion.equals("pause") || funktion.equals("close") || funktion.equals("aktionenBeschwichtigen") || funktion.equals("aktionenSpionage")){
+
+		//Mousefollower abschalten bei bestimmten Buttons
+		if(funktion.equals("pause") || funktion.equals("close")
+				|| funktion.equals("aktionenBeschwichtigen") || funktion.equals("aktionenSpionage")) {
 			guilayer.getMousefollower().setVisible(false);
 		}
 		
 	}
+
 	
+	
+	/**
+	 * Klicks auf Häuser abfangen
+	 */
 	private void clickHaus9() {
 		guilayer.getMousefollower().setVisible(false);
 	}
@@ -127,13 +152,20 @@ public class Control implements IControl {
 		guilayer.getMousefollower().setVisible(false);
 	}
 
+	
+	
+	/**
+	 * Mousefollower updaten
+	 * @author Tiki
+	 */
 	@Override
 	public void mousePresent(String funktion, boolean isPresent) {
-//		if(isPresent)
+//		if(isPresent)//TODO entfernen
 //			System.out.println("You entered:"+funktion);
 //		else
-//			System.out.println("You leved:"+funktion);
+//			System.out.println("You leaved:"+funktion);
 		
+		//Aktionen Spionage
 		if(funktion.equals("aktionWanze"))
 			spionagelabelBeschr(isPresent, "Wanzen anbringen");
 		if(funktion.equals("aktionKamera"))
@@ -146,6 +178,8 @@ public class Control implements IControl {
 			spionagelabelBeschr(isPresent, "im Park spionieren");
 		if(funktion.equals("aktion6Spionage"))
 			spionagelabelBeschr(isPresent, "Aufgabe 6");
+		
+		//Aktionen Beschwichtigen
 		if(funktion.equals("aktionKuchen"))
 			beschwichtigenlabelBeschr(isPresent, "Kuchen vorbeibringen");
 		if(funktion.equals("aktionUnterhalten"))
@@ -156,21 +190,21 @@ public class Control implements IControl {
 			beschwichtigenlabelBeschr(isPresent, "helfen");
 		if(funktion.equals("aktionParkBeschwichtigen"))
 			beschwichtigenlabelBeschr(isPresent, "im Park Unterhalten");
-		if(funktion.equals("aktionBeschwichtigen"))
+		if(funktion.equals("aktion6Beschwichtigen"))
 			beschwichtigenlabelBeschr(isPresent, "Aktion 6");
 	}
 	
 	
-	private void closeBeschwichtigenMenu() {
-		JLayeredPane frame = guilayer.getWindow("beschwichtigen");
-		frame.setVisible(false);
-		frame.setEnabled(false);
-		
-	}
-
+	
+	/**
+	 * Spiel pausieren
+	 */
 	private void clickPause() {
-		//pause-Funktion von GUILayer aufrufen
+		//Pause-Funktion von GUILayer aufrufen
 		guilayer.updateTimerStatus();
+		
+		//TODO: funktioniert das auch später noch im Spiel?
+		//z.B. Menübuttons sind nicht immer disabled im spielverlauf ... vg Stephan
 		if (guilayer.getButtonsMap().get("aktionenBeschwichtigen").isEnabled()){
 			guilayer.getButtonsMap().get("aktionenBeschwichtigen").setEnabled(false);
 		} else {
@@ -182,8 +216,8 @@ public class Control implements IControl {
 			guilayer.getButtonsMap().get("aktionenSpionage").setEnabled(true);
 		}
 		// von Pause unabhängig?
-		closeBeschwichtigenMenu();
-		closeSpionageMenu();
+		closeWindow("spionage");
+		closeWindow("beschwichtigen");
 //		if (guilayer.getButtonsMap().get("aktionNachhause").isEnabled()){
 //			guilayer.getButtonsMap().get("aktionNachhause").setEnabled(false);
 //		} else {
@@ -197,104 +231,134 @@ public class Control implements IControl {
 		
 		//TODO: weitere Aktionen (buttons disablen, "Pause"-Fenster anzeigen etc.) bei Pause einfügen
 	}
+
 	
-	private void closeSpionageMenu(){
-		JLayeredPane frame = guilayer.getWindow("spionage");
+	
+	/**
+	 * Ingame-Fenster schließen
+	 */
+	private void closeWindow(String fensterName) {
+		JLayeredPane frame = guilayer.getWindow(fensterName);
 		frame.setVisible(false);
 		frame.setEnabled(false);
 	}
 	
+	
+	
+	/**
+	 * Spiel beenden
+	 */
 	private void clickExit() {
 		guilayer.endGame();
 	}
 	
-	private void clickAktionSpionage() {
-		closeBeschwichtigenMenu();
+	
+	/**
+	 * Klicks auf Buttons in Menüleiste
+	 */
+	private void clickAktionenSpionage() {
+		closeWindow("beschwichtigen");
 		JLayeredPane frame = guilayer.getWindow("spionage");
 		if(frame.isVisible())
-			closeSpionageMenu();
+			closeWindow("spionage");
 		else{
 			frame.setEnabled(true);
 			frame.setVisible(true);
 		}
 	}
 	
+	private void clickAktionenBeschwichtigen() {
+		closeWindow("spionage");
+		JLayeredPane frame = guilayer.getWindow("beschwichtigen");
+		if(frame.isVisible())
+			closeWindow("beschwichtigen");
+		else{
+			frame.setEnabled(true);
+			frame.setVisible(true);
+		}
+	}
+
+	private void clickNachhause() {
+		guilayer.getButtonsMap().get("aktionNachhause").setEnabled(false);
+	}
+	
+	private void clickRazzia() {
+		guilayer.getMousefollower().setIcon(new ImageIcon (Ressources.ingamebutton.getSubimage(0, (39)*12, 39, 39)));
+		guilayer.getMousefollower().setVisible(true);
+		closeWindow("beschwichtigen");
+		closeWindow("spionage");
+	}
+
+	
+	
+	/**
+	 * Klicks auf Aktionen
+	 */
 	private void clickWanzen() {
 		guilayer.getMousefollower().setIcon(new ImageIcon (Ressources.ingamebutton.getSubimage(0, 0, 39, 39)));
 		guilayer.getMousefollower().setVisible(true);
-		closeSpionageMenu();
+		closeWindow("spionage");
 	}
 	
 	private void clickKamera() {
 		guilayer.getMousefollower().setIcon(new ImageIcon (Ressources.ingamebutton.getSubimage(0, 39, 39, 39)));
 		guilayer.getMousefollower().setVisible(true);
-		closeSpionageMenu();
+		closeWindow("spionage");
 	}
 	
 	private void clickHacken() {
 		guilayer.getMousefollower().setIcon(new ImageIcon (Ressources.ingamebutton.getSubimage(0, (39)*2, 39, 39)));
 		guilayer.getMousefollower().setVisible(true);
-		closeSpionageMenu();
+		closeWindow("spionage");
 	}
 	
 	private void clickFernglas() {
 		guilayer.getMousefollower().setIcon(new ImageIcon (Ressources.ingamebutton.getSubimage(0, (39)*3, 39, 39)));
 		guilayer.getMousefollower().setVisible(true);
-		closeSpionageMenu();
+		closeWindow("spionage");
 	}
 	
 	private void clickParkSpionage() {
-		closeSpionageMenu();
-		
-	}
-	
-	private void clickAktionBeschwichtigen() {
-		closeSpionageMenu();
-		JLayeredPane frame = guilayer.getWindow("beschwichtigen");
-		if(frame.isVisible())
-			closeBeschwichtigenMenu();
-		else{
-			frame.setEnabled(true);
-			frame.setVisible(true);
-		}
+		//kein Icon, da Einsatzort (Park) vorgegeben
+		closeWindow("spionage");
 	}
 	
 	private void clickKuchen() {
 		guilayer.getMousefollower().setIcon(new ImageIcon (Ressources.ingamebutton.getSubimage(0, (39)*6, 39, 39)));
 		guilayer.getMousefollower().setVisible(true);
-		closeBeschwichtigenMenu();
+		closeWindow("beschwichtigen");
 	}
 	
 	private void clickUnterhalten() {
 		guilayer.getMousefollower().setIcon(new ImageIcon (Ressources.ingamebutton.getSubimage(0, (39)*7, 39, 39)));
 		guilayer.getMousefollower().setVisible(true);
-		closeBeschwichtigenMenu();
+		closeWindow("beschwichtigen");
 	}
 	
 	private void clickFlirten() {
 		guilayer.getMousefollower().setIcon(new ImageIcon (Ressources.ingamebutton.getSubimage(0, (39)*8, 39, 39)));
 		guilayer.getMousefollower().setVisible(true);
-		closeBeschwichtigenMenu();
+		closeWindow("beschwichtigen");
 	}
-	
-	private void clickNachhause() {
-		
-	}
-	
+
 	private void clickHand() {
 		guilayer.getMousefollower().setIcon(new ImageIcon (Ressources.ingamebutton.getSubimage(0, (39)*9, 39, 39)));
 		guilayer.getMousefollower().setVisible(true);
-		closeBeschwichtigenMenu();
+		closeWindow("beschwichtigen");
 	}
-	
+
 	private void clickParkBeschwichtigen() {
-		closeBeschwichtigenMenu();
+		//kein Icon, da Einsatzort (Park) vorgegeben
+		closeWindow("beschwichtigen");
 	}
 	
-	private void clickRazzia() {
-		
-	}
+
 	
+	/**
+	 * Beschreibungstext im Aktionenfenster setzen
+	 * @param isPresent
+	 * @param text
+	 */
 	private void spionagelabelBeschr(boolean isPresent, String text){
 		if(isPresent)
 			guilayer.getBeschreibung("spionage").setText(text);
