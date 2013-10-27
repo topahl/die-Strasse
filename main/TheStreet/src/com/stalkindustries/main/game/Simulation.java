@@ -1,4 +1,5 @@
 package com.stalkindustries.main.game;
+import java.awt.Point;
 import java.util.ArrayList;
 import java.util.Set;
 import java.util.Stack;
@@ -204,7 +205,6 @@ public class Simulation {
 	
 	
 	//Support Tiki
-	//TODO Die Häufigkeit des "in den Park gehen" testen, evtl zu häufig
 	void tagesablauf(){
 		char locid ='0';
 		int hausid = 0;
@@ -253,7 +253,7 @@ public class Simulation {
 								berechne_weg(this.people.get(i), String.valueOf(hausid).charAt(0)); 
 							} else{
 								if (this.people.get(i).getCurrentMove() == 'n'){
-									berechne_weg(this.people.get(i), 'P');
+									berechne_rundlauf_park(this.people.get(i));
 								}
 							}
 						}
@@ -307,7 +307,7 @@ public class Simulation {
 								berechne_weg(this.people.get(i), String.valueOf(hausid).charAt(0)); 
 							} else{
 								if (this.people.get(i).getCurrentMove() == 'n'){
-									berechne_weg(this.people.get(i), 'P');
+									berechne_rundlauf_park(this.people.get(i));
 								}
 							}
 						}
@@ -318,25 +318,26 @@ public class Simulation {
 		}
 	} 	
 	
-	//Support Tiki
-	public void berechne_weg(Person person, char zielloc){
+	public void berechne_rundlauf_park (Person person){
+		//Wenn die Person im Park ist, soll er eine Runde spazieren gehen
 		
 		int counter;
-		String ziellocation = String.valueOf(zielloc);
+		String ziellocation = "P";
 		int xPos_current, yPos_current;
 		char locid = (char)((int)(person.get_location_id()));
 		ArrayList<ArrayList<String>> location_ids;
 		Stack<Character> neuer_weg = new Stack<Character>();
+		Point parkeingang = new Point();
 		
 		counter = 1;
 		xPos_current = 0;
 		yPos_current = 0;
 		location_ids = Ressources.getLocation_ids();
 		
-		//Wenn die Person im Park ist, soll er eine Runde spazieren gehen
+		parkeingang= berechne_Parkeingang(location_ids);
 		
-		//TODO ACHTUNG---der Park ist nicht immer an der selben stelle  vgTobi
-		if (zielloc == locid && (person.getPosY()-Ressources.ZEROPOS.height)/45 == 3 && (person.getPosX()-Ressources.ZEROPOS.width)/45 == 13){
+		
+		if ((person.getPosY()-Ressources.ZEROPOS.height)/45 == (int)(parkeingang.getX()) && (person.getPosX()-Ressources.ZEROPOS.width)/45 == (int)(parkeingang.getY())){
 			
 			for (int i=0; i<location_ids.size(); i++){
 				for (int j=0; j<location_ids.get(i).size(); j++){
@@ -348,7 +349,7 @@ public class Simulation {
 					}
 				}
 			}
-			location_ids.get(3).set(13,"0");
+			location_ids.get((int)(parkeingang.getX())).set((int)(parkeingang.getY()),"0");
 			
 	goalp:	for (int i=0; i<100; i++){
 				for (int j=0; j<16; j++){  	// J entspricht y-wert, K entspricht x-wert
@@ -522,39 +523,67 @@ public class Simulation {
 		person.setMoves(neuer_weg);
 			return;
 		}
+	}
+	
+	public Point berechne_Parkeingang(ArrayList<ArrayList<String>> location_ids){
+		int parkcounter=0;
 		
-		//Rasterkarte initialisieren 
-		for (int i=0; i<location_ids.size(); i++){
-			for (int j=0; j<location_ids.get(i).size(); j++){
-				if (location_ids.get(i).get(j).charAt(0) != 'X' && location_ids.get(i).get(j).charAt(0) != ziellocation.charAt(0) && location_ids.get(i).get(j).charAt(0) != 'P' && location_ids.get(i).get(j).charAt(0) != locid ){
-					location_ids.get(i).set(j,"You shall not pass!") ;
+		// Der Park darf sich niemals ganz am Rand befinden (sieht auch doof aus)
+		for (int i = 1; i<14; i++){
+			for (int j = 1; j<23; j++){
+				if (location_ids.get(i).get(j).equals("P")){
+					if (location_ids.get(i+1).get(j).equals("P") || location_ids.get(i+1).get(j).equals("X")){
+						parkcounter++;
+					}
+					if (location_ids.get(i-1).get(j).equals("P") || location_ids.get(i-1).get(j).equals("X")){
+						parkcounter++;
+					}
+					if (location_ids.get(i).get(j+1).equals("P") || location_ids.get(i).get(j+1).equals("X")){
+						parkcounter++;
+					}
+					if (location_ids.get(i).get(j-1).equals("P") || location_ids.get(i).get(j-1).equals("X")){
+						parkcounter++;
+					}
 				}
-				if (location_ids.get(i).get(j).charAt(0) == ziellocation.charAt(0)){
-					location_ids.get(i).set(j,"Z") ;
-				}
-				if (location_ids.get(i).get(j).charAt(0) == 'P'){
-					location_ids.get(i).set(j,"X") ;
-				}
-				if (location_ids.get(i).get(j).charAt(0) == locid ){
-					location_ids.get(i).set(j,"X") ;
+				if (parkcounter == 3){
+					return new Point (i,j);
+				} else{
+					parkcounter=0;
 				}
 			}
 		}
+		
+		
+		
+		return null;
+	}
+	
+	
+	
+	//Support Tiki
+	public void berechne_weg(Person person, char zielloc){
+		
+		int counter;
+		String ziellocation = String.valueOf(zielloc);
+		int xPos_current, yPos_current;
+		char locid = (char)((int)(person.get_location_id()));
+		ArrayList<ArrayList<String>> location_ids;
+		Stack<Character> neuer_weg = new Stack<Character>();
+		
+		counter = 1;
+		xPos_current = 0;
+		yPos_current = 0;
+		location_ids = Ressources.getLocation_ids();
+		
+		
+		//Rasterkarte initialisieren 
+		location_ids = wegberechnung_rasterkarte_initialisierung(location_ids, ziellocation, locid);
+		
 		ziellocation = "Z";
 		
-		//Tobi -> Aktuelle Position muss an das Raster angeglichen werdenn falls eine Person noch in einer Bewegung ist
-		switch(person.getCurrentMove()){	
-			case 'r':
-				location_ids.get((person.getPosY()-Ressources.ZEROPOS.height)/Ressources.RASTERHEIGHT).set(((person.getPosX()-Ressources.ZEROPOS.width)/Ressources.RASTERHEIGHT)+1,"0");
-				break;
-			case 'u':
-				location_ids.get(((person.getPosY()-Ressources.ZEROPOS.height)/Ressources.RASTERHEIGHT)+1).set((person.getPosX()-Ressources.ZEROPOS.width)/Ressources.RASTERHEIGHT,"0");
-				break;
-			case 'o':
-			case 'l':
-			default:
-				location_ids.get((person.getPosY()-Ressources.ZEROPOS.height)/Ressources.RASTERHEIGHT).set((person.getPosX()-Ressources.ZEROPOS.width)/Ressources.RASTERHEIGHT,"0");
-		}
+		//Aktuelle Position des Männchens wird auf 0 gesetzt
+		location_ids.get((person.getPosY()-Ressources.ZEROPOS.height)/Ressources.RASTERHEIGHT).set((person.getPosX()-Ressources.ZEROPOS.width)/Ressources.RASTERHEIGHT,"0");
+				
 		
 		
 		
@@ -630,39 +659,21 @@ goal:	for (int i=0; i<100; i++){
 		
 		//Falls das Ziel ein Haus ist, soll die Person auf ihren startpunkt laufen.
 		if ((int)(zielloc)-48 <=9 && (int)(zielloc)-48 > 0){ //-48 für char umwandlung zu int
-			if (((person.getHomePosX()-Ressources.ZEROPOS.width)/Ressources.RASTERHEIGHT)+1 == xPos_current){
-				neuer_weg.push('l');
-			}
-			if (((person.getHomePosX()-Ressources.ZEROPOS.width)/Ressources.RASTERHEIGHT)+2 == xPos_current){
-				neuer_weg.push('l');
-				neuer_weg.push('l');
-			}
-			if (((person.getHomePosX()-Ressources.ZEROPOS.width)/Ressources.RASTERHEIGHT)-1 == xPos_current){
-				neuer_weg.push('r');
-			}
-			if (((person.getHomePosX()-Ressources.ZEROPOS.width)/Ressources.RASTERHEIGHT)-2 == xPos_current){
-				neuer_weg.push('r');
-				neuer_weg.push('r');
-			}
-			if (((person.getHomePosY()-Ressources.ZEROPOS.height)/Ressources.RASTERHEIGHT)-1 == yPos_current){
-				neuer_weg.push('u');
-			}
-			if (((person.getHomePosY()-Ressources.ZEROPOS.height)/Ressources.RASTERHEIGHT)-2 == yPos_current){
-				neuer_weg.push('u');
-				neuer_weg.push('u');
-			}
-			if (((person.getHomePosY()-Ressources.ZEROPOS.height)/Ressources.RASTERHEIGHT)+1 == yPos_current){
-				neuer_weg.push('o');
-			}
-			if (((person.getHomePosY()-Ressources.ZEROPOS.height)/Ressources.RASTERHEIGHT)+2 == yPos_current){
-				neuer_weg.push('o');
-				neuer_weg.push('o');
-			}
+			neuer_weg = wegberechnung_homeposition(person, xPos_current, yPos_current);
 		}
 		
-		
-		
 		// Der Stack für die Bewegung wird mit den richtigen Werten gefüllt. Dafür hangelt man sich absteigend an der zahlenreihe entlang
+		neuer_weg = wegberechnung_fuelle_stack(location_ids, counter, xPos_current, yPos_current);
+		
+		//Stack zur Bewegung freigeben
+		person.setMoves(neuer_weg);
+	}
+	
+	
+	
+	private Stack<Character> wegberechnung_fuelle_stack(ArrayList<ArrayList<String>> location_ids, int counter, int xPos_current, int yPos_current) {
+		Stack<Character> neuer_weg = new Stack<Character>();
+		
 		for (int i = counter; i>=0; i--){
 			if (yPos_current<15){
 				if (location_ids.get(yPos_current+1).get(xPos_current).equals(String.valueOf(i))) {			//unten gehts weiter
@@ -690,10 +701,67 @@ goal:	for (int i=0; i<100; i++){
 			}
 			
 		}
-		person.setMoves(neuer_weg);
+		return neuer_weg;
 	}
-	
-	
+
+
+	private Stack<Character> wegberechnung_homeposition(Person person, int xPos_current, int yPos_current) {
+		Stack<Character> neuer_weg = new Stack<Character>();
+		
+		if (((person.getHomePosX()-Ressources.ZEROPOS.width)/Ressources.RASTERHEIGHT)+1 == xPos_current){
+			neuer_weg.push('l');
+		}
+		if (((person.getHomePosX()-Ressources.ZEROPOS.width)/Ressources.RASTERHEIGHT)+2 == xPos_current){
+			neuer_weg.push('l');
+			neuer_weg.push('l');
+		}
+		if (((person.getHomePosX()-Ressources.ZEROPOS.width)/Ressources.RASTERHEIGHT)-1 == xPos_current){
+			neuer_weg.push('r');
+		}
+		if (((person.getHomePosX()-Ressources.ZEROPOS.width)/Ressources.RASTERHEIGHT)-2 == xPos_current){
+			neuer_weg.push('r');
+			neuer_weg.push('r');
+		}
+		if (((person.getHomePosY()-Ressources.ZEROPOS.height)/Ressources.RASTERHEIGHT)-1 == yPos_current){
+			neuer_weg.push('u');
+		}
+		if (((person.getHomePosY()-Ressources.ZEROPOS.height)/Ressources.RASTERHEIGHT)-2 == yPos_current){
+			neuer_weg.push('u');
+			neuer_weg.push('u');
+		}
+		if (((person.getHomePosY()-Ressources.ZEROPOS.height)/Ressources.RASTERHEIGHT)+1 == yPos_current){
+			neuer_weg.push('o');
+		}
+		if (((person.getHomePosY()-Ressources.ZEROPOS.height)/Ressources.RASTERHEIGHT)+2 == yPos_current){
+			neuer_weg.push('o');
+			neuer_weg.push('o');
+		}
+		return null;
+	}
+
+
+	private ArrayList<ArrayList<String>> wegberechnung_rasterkarte_initialisierung(ArrayList<ArrayList<String>> location_ids, String ziellocation, char locid) {
+		for (int i=0; i<location_ids.size(); i++){
+			for (int j=0; j<location_ids.get(i).size(); j++){
+				if (location_ids.get(i).get(j).charAt(0) != 'X' && location_ids.get(i).get(j).charAt(0) != ziellocation.charAt(0) && location_ids.get(i).get(j).charAt(0) != 'P' && location_ids.get(i).get(j).charAt(0) != locid ){
+					location_ids.get(i).set(j,"You shall not pass!") ;
+				}
+				if (location_ids.get(i).get(j).charAt(0) == ziellocation.charAt(0)){
+					location_ids.get(i).set(j,"Z") ;
+				}
+				if (location_ids.get(i).get(j).charAt(0) == 'P'){
+					location_ids.get(i).set(j,"X") ;
+				}
+				if (location_ids.get(i).get(j).charAt(0) == locid ){
+					location_ids.get(i).set(j,"X") ;
+				}
+			}
+		}
+		return location_ids;
+		
+	}
+
+
 	//Belobigungen an Tiki
 	//TODO Gameover implementieren -> Das Event dafür
 	//TODO Gameover Werte berechnen
