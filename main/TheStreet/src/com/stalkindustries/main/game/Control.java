@@ -82,7 +82,9 @@ public class Control implements IControl {
 			clickFernglas();
 		if(funktion.equals("aktionParkSpionage"))
 			clickParkSpionage();		
-
+		if(funktion.startsWith("Quiz"))
+			quizAntwort(funktion.substring(4));
+		
 		//Buttons Häuser (invisible)
 		if(funktion.equals("Haus1"))
 			clickHaus1();		
@@ -112,6 +114,9 @@ public class Control implements IControl {
 	}
 
 	
+	private void quizAntwort(String antwort){
+		closeWindow("quizfenster");
+	}
 	
 	/**
 	 * Klicks auf Häuser abfangen
