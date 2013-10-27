@@ -961,37 +961,6 @@ goala:	for (int i=0; i<100; i++){
 			for (int j=0; j<24; j++){
 				if (location_ids.get(i).get(j)=="Z" && location_ids.get(i+1).get(j)=="Z" && location_ids.get(i-1).get(j)=="Z" && location_ids.get(i).get(j+1)=="Z" && location_ids.get(i).get(j-1)=="Z"){
 					
-					//Der Agent wird zum Mittelpunkt des Hauses geleitet
-					if (location_ids.get(i-2).get(j-1)=="X" || location_ids.get(i-1).get(j-2)=="X"){
-						neuer_weg.push('u');
-						neuer_weg.push('r');
-					}
-					if (location_ids.get(i-2).get(j)=="X"){
-						neuer_weg.push('u');
-					}
-					if (location_ids.get(i-2).get(j+1)=="X" || location_ids.get(i-1).get(j+2)=="X"){
-						neuer_weg.push('u');
-						neuer_weg.push('l');
-					}
-					if (location_ids.get(i).get(j+2)=="X"){
-						neuer_weg.push('l');
-					}
-					if (location_ids.get(i+1).get(j+2)=="X" || location_ids.get(i+2).get(j+1)=="X"){
-						neuer_weg.push('o');
-						neuer_weg.push('l');
-					}
-					if (location_ids.get(i+2).get(j)=="X"){
-						neuer_weg.push('o');
-					}
-					if (location_ids.get(i+2).get(j-1)=="X" || location_ids.get(i+1).get(j-2)=="X" ){
-						neuer_weg.push('o');
-						neuer_weg.push('r');
-					}
-					if (location_ids.get(i).get(j-2)=="X"){
-						neuer_weg.push('r');
-					}
-					
-					
 					//Nun läuft der Agent lustig hin und her
 					neuer_weg.push('r');
 					neuer_weg.push('o');
@@ -1007,6 +976,38 @@ goala:	for (int i=0; i<100; i++){
 					neuer_weg.push('u');
 					neuer_weg.push('r');
 					neuer_weg.push('o');
+					
+					
+					//Der Agent wird zum Mittelpunkt des Hauses geleitet
+					if (location_ids.get(i-2).get(j-1).equals("X") || location_ids.get(i-1).get(j-2).equals("X")){
+						neuer_weg.push('u');
+						neuer_weg.push('r');
+					}
+					if (location_ids.get(i-2).get(j).equals("X")){
+						neuer_weg.push('u');
+					}
+					if (location_ids.get(i-2).get(j+1).equals("X") || location_ids.get(i-1).get(j+2).equals("X")){
+						neuer_weg.push('u');
+						neuer_weg.push('l');
+					}
+					if (location_ids.get(i).get(j+2).equals("X")){
+						neuer_weg.push('l');
+					}
+					if (location_ids.get(i+1).get(j+2).equals("X") || location_ids.get(i+2).get(j+1).equals("X")){
+						neuer_weg.push('o');
+						neuer_weg.push('l');
+					}
+					if (location_ids.get(i+2).get(j).equals("X")){
+						neuer_weg.push('o');
+					}
+					if (location_ids.get(i+2).get(j-1).equals("X") || location_ids.get(i+1).get(j-2).equals("X") ){
+						neuer_weg.push('o');
+						neuer_weg.push('r');
+					}
+					if (location_ids.get(i).get(j-2).equals("X")){
+						neuer_weg.push('r');
+					}
+					
 				}
 			}
 		}	
