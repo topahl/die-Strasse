@@ -88,7 +88,9 @@ public class Control implements IControl {
 		if(funktion.equals("aktionFernglas"))
 			clickFernglas();
 		if(funktion.equals("aktionParkSpionage"))
-			clickParkSpionage();		
+			clickParkSpionage();
+		
+		
 		if(funktion.equals("closeHaus"))
 			closeWindow("fensterhaus");
 		
@@ -152,6 +154,7 @@ public class Control implements IControl {
 				guilayer.getSimulation().bewegungAgentWanze(hausid);
 				guilayer.getSimulation().getHouses().get(hausid-1).getUeberwachungsmodule().add("Wanze");
 				guilayer.getSimulation().calc_misstrauen_after_ueberwachungs_action("Wanze", hausid);
+				guilayer.getButtonsMap().get("aktionNachhause").setEnabled(true);
 			}
 			istVorhanden = false;
 		}
@@ -169,10 +172,11 @@ public class Control implements IControl {
 				guilayer.getSimulation().bewegungAgentWanze(hausid);
 				guilayer.getSimulation().getHouses().get(hausid-1).getUeberwachungsmodule().add("Kamera");
 				guilayer.getSimulation().calc_misstrauen_after_ueberwachungs_action("Kamera", hausid);
+				guilayer.getButtonsMap().get("aktionNachhause").setEnabled(true);
 			}
 			istVorhanden = false;
 		}
-			
+
 //			
 //		if(lastFunktioncode.equals("aktionHacken"))
 //			
