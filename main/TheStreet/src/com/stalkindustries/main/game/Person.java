@@ -26,9 +26,9 @@ public abstract class Person extends Mensch {
 		if(misstrauen==0)
 			g2d.setColor(new Color(1f,1f,1f,0.2f));
 		else if(misstrauen>0)
-			g2d.setColor(new Color(1f,(float)(1-(misstrauen/(100))),(float)(1-(misstrauen/(100))),0.2f));
+			g2d.setColor(new Color(1f,(float)(1-(Math.sqrt(misstrauen/100))),(float)(1-(Math.sqrt(misstrauen/100))),0.2f));
 		else
-			g2d.setColor(new Color((float)(1-(misstrauen/(-100))),1f,(float)(1-(misstrauen/(-100))),0.2f));
+			g2d.setColor(new Color((float)(1-(Math.sqrt(-misstrauen/100))),1f,(float)(1-(Math.sqrt(-misstrauen/100))),0.2f));
 		
 		g2d.fillOval(3, 3, Ressources.RASTERHEIGHT-6, Ressources.RASTERHEIGHT-6);
 		g2d.fillOval(3+Ressources.RASTERHEIGHT, 3, Ressources.RASTERHEIGHT-6, Ressources.RASTERHEIGHT-6);
