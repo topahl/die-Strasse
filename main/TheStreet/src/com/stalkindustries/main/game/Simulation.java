@@ -172,7 +172,7 @@ public class Simulation {
 			risiko = (int)(Math.random()*3); 
 		}
 		else{	//Tagmodus
-			risiko = (int)(Math.random()*7); 
+			risiko = (int)(Math.random()*15); 
 		}
 		
 		int mittelpunktX = this.houses.get(house_location-1).getPosX()+3*Ressources.RASTERHEIGHT/2;
@@ -213,6 +213,17 @@ public class Simulation {
 		
 	}
 	
+	
+	//Beschwerden Miri
+	//während ein Haus überwacht wird, macht sich bei den Bewohnern ein Unwohlsein breit und sie werden mehr misstrauisch
+	public void calc_misstrauen_during_ueberwachung(){
+		for(int i=0;i<this.people.size();i++){
+			// wenn Überwachungsmodule in dem Haus, in dem die Person lebt, installiert wurden
+			if(this.houses.get(this.people.get(i).get_haus_id()).getUeberwachungsmodule().size() > 0){
+				this.people.get(i).set_misstrauen(this.people.get(i).get_misstrauen()+2);
+			}
+		}
+	}
 	
 	
 	//Beschwerden Miri

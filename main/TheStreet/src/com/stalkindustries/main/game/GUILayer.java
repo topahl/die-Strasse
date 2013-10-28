@@ -956,6 +956,11 @@ public class GUILayer extends JFrame implements MouseMotionListener {
 			quiz.starteQuiz();
 		}
 		
+		//Unwohlsein durch installierte Überwachungsmodule
+		if(this.stepcounter%1000 == 0){
+			this.simulation.calc_misstrauen_during_ueberwachung();
+		}
+		
 
 		// Tag-Nacht-Modus
 		if (this.simulation.getSpiel_stunde() == 20) {
