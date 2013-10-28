@@ -180,30 +180,30 @@ public class Simulation {
 		int epsilon = 200;	
 		
 		for(int i=0;i<this.people.size();i++){
-//			//Checken, ob sich noch jemand in dem Haus befindet
-//			//für alle Personen, die noch im Haus sind, das Misstrauen neu berechnen
-//			if(this.people.get(i).get_location_id() == house_location){
-//				if(risiko>2)	//wenn das risiko kleiner ist, hat man Glück und man wird nicht erwicht
-//					this.people.get(i).set_misstrauen(this.people.get(i).get_misstrauen()+50); //TODO: den Wert 50 testen ... eventuell erhöhen
-//			}
-//			//Checken, ob sich jemand in einer epsilon-Umgebung um das Haus befindet, in das eingebrochen werden soll
-//			//--> 1. Epsilon-Umgebung aufspannen (ist eine relative eckige :-D)
-//			//-->Mittelpunkt vom Haus bestimmen
-//			else{
+			//Checken, ob sich noch jemand in dem Haus befindet
+			//für alle Personen, die noch im Haus sind, das Misstrauen neu berechnen
+			if((int)(this.people.get(i).get_location_id())-48 == house_location){
+				if(risiko>2)	//wenn das risiko kleiner ist, hat man Glück und man wird nicht erwicht
+					this.people.get(i).set_misstrauen(this.people.get(i).get_misstrauen()+50); //TODO: den Wert 50 testen ... eventuell erhöhen
+			}
+			//Checken, ob sich jemand in einer epsilon-Umgebung um das Haus befindet, in das eingebrochen werden soll
+			//--> 1. Epsilon-Umgebung aufspannen (ist eine relative eckige :-D)
+			//-->Mittelpunkt vom Haus bestimmen
+			else{
 				// wenn sich eine Person in der Epsilon-Umgebung befindet
 				if(this.people.get(i).getPosX() >= mittelpunktX-epsilon && this.people.get(i).getPosX() <= mittelpunktX+epsilon && this.people.get(i).getPosY() >= mittelpunktY-epsilon && this.people.get(i).getPosY() <= mittelpunktY+epsilon && this.people.get(i).get_location_id()!='E'){
 					//wenn das per Zufall eine Person ist, die in dem Haus wohnt und z.B. auf dem Heimweg ist
 					//hier ist das Misstrauen natürlich größer
 					if(this.people.get(i).get_haus_id()+1 == house_location){
 						if(risiko>2)
-							this.people.get(i).set_misstrauen(this.people.get(i).get_misstrauen()+50);
+							this.people.get(i).set_misstrauen(this.people.get(i).get_misstrauen()+30);
 					}
 					else{
 						if(risiko>2)
 							this.people.get(i).set_misstrauen(this.people.get(i).get_misstrauen()+10);
 					}
 				}
-//			}
+			}
 			//sorgt dafür, dass sich das Misstrauen zwischen -100 und 100 bewegt
 			if(this.people.get(i).get_misstrauen()>100)
 				this.people.get(i).set_misstrauen(100);
@@ -279,37 +279,37 @@ public class Simulation {
 					if ((this.people.get(i).getZeitverzogerung() + this.spiel_minute) == 60){
 						
 						if (this.spiel_stunde==7){ //zur Schule gehen
-							berechne_weg(this.people.get(i), 'E');
+							berechne_weg(this.people.get(i), null, 'E');
 						}	
 						
 						//Nur wenn der Mensch nicht zuHause ist, kann er nach Hause gehen
 						if ((this.people.get(i).getHomePosX()!=this.people.get(i).getPosX() || this.people.get(i).getHomePosY()!=this.people.get(i).getPosY())){
 							
 							if (this.spiel_stunde==14){ //nach Hause gehen
-								berechne_weg(this.people.get(i), String.valueOf(hausid).charAt(0));				
+								berechne_weg(this.people.get(i), null, String.valueOf(hausid).charAt(0));				
 							}
 							if (this.spiel_stunde==20){ //nach Hause gehen
-								berechne_weg(this.people.get(i), String.valueOf(hausid).charAt(0));
+								berechne_weg(this.people.get(i), null, String.valueOf(hausid).charAt(0));
 							}	
 						} 
 					} else {
 
 						//nach Hause gehen, notwendig, falls die Kinder noch eine runde im Park drehen & 20 Uhr überschritten wird
 						if (this.spiel_stunde>=20 && (this.people.get(i).getHomePosX()!=this.people.get(i).getPosX() || this.people.get(i).getHomePosY()!=this.people.get(i).getPosY())){ 
-							berechne_weg(this.people.get(i), String.valueOf(hausid).charAt(0));
+							berechne_weg(this.people.get(i), null, String.valueOf(hausid).charAt(0));
 						}
 						
 						// randomisiert in den Park gehen
 						if (this.spiel_stunde >= 15 && this.spiel_stunde <=19 && locid !='P'){ 
 							if ((int)(Math.random()*200) == 3){
-								berechne_weg(this.people.get(i), 'P');
+								berechne_weg(this.people.get(i), null, 'P');
 							}
 						}
 						
 						// randomisiert den Park verlassen oder noch eine Runde drehen
 						if (locid =='P' && this.spiel_stunde<=19){ 
 							if ((int)(Math.random()*5) == 3){
-								berechne_weg(this.people.get(i), String.valueOf(hausid).charAt(0)); 
+								berechne_weg(this.people.get(i), null, String.valueOf(hausid).charAt(0)); 
 							} else{
 								if (this.people.get(i).getCurrentMove() == 'n'){
 									berechne_rundlauf_park(this.people.get(i));
@@ -325,45 +325,45 @@ public class Simulation {
 						//Zuerst werden die Erwachsenen untersucht, die Arbeit haben
 						if (((Erwachsene)people.get(i)).isHat_arbeit()){
 							if (this.spiel_stunde==8 && (this.people.get(i).getZeitverzogerung() + this.spiel_minute) == 60){ // Zur Arbeit gehen
-								berechne_weg(this.people.get(i), 'E');
+								berechne_weg(this.people.get(i), null, 'E');
 							}
 							if (this.spiel_stunde==16 && (this.people.get(i).getZeitverzogerung() + this.spiel_minute) >= 60 && (this.people.get(i).getHomePosX()!=this.people.get(i).getPosX() || this.people.get(i).getHomePosY()!=this.people.get(i).getPosY())){ //nach Hause gehen
-								berechne_weg(this.people.get(i), String.valueOf(hausid).charAt(0));
+								berechne_weg(this.people.get(i), null, String.valueOf(hausid).charAt(0));
 							}				
 							if ((this.spiel_stunde >= 17 || this.spiel_stunde <=0)){  // in den Park gehen
 								if ((int)(Math.random()*300) == 3){
-									berechne_weg(this.people.get(i), 'P');
+									berechne_weg(this.people.get(i), null, 'P');
 								}
 							}
 						} else {
 							if (this.spiel_stunde == 9 && (this.people.get(i).getZeitverzogerung() + this.spiel_minute) == 60){ //zum Einkaufen gehen
 								if ((int)(Math.random()*3)+1 == 1){
-									berechne_weg(this.people.get(i), 'E');
+									berechne_weg(this.people.get(i), null, 'E');
 								}
 							}	
 							if (this.spiel_stunde >= 9 && this.spiel_stunde <=14 && hausid!='E'){ //zum Einkaufen gehen
 								if ((int)(Math.random()*300) == 3){
-									berechne_weg(this.people.get(i), 'P');
+									berechne_weg(this.people.get(i), null, 'P');
 								}
 							}
 							if (this.spiel_stunde == 12 && (this.people.get(i).getZeitverzogerung() + this.spiel_minute) >= 60 && (this.people.get(i).getHomePosX()!=this.people.get(i).getPosX() || this.people.get(i).getHomePosY()!=this.people.get(i).getPosY())){ //nach Hause gehen
-								berechne_weg(this.people.get(i), String.valueOf(hausid).charAt(0));
+								berechne_weg(this.people.get(i), null, String.valueOf(hausid).charAt(0));
 							}
 							if ((this.spiel_stunde >=14 || this.spiel_stunde <=1)){  // in den Park gehen
 								if ((int)(Math.random()*300) == 3){
-									berechne_weg(this.people.get(i), 'P');
+									berechne_weg(this.people.get(i), null, 'P');
 								}
 							}
 						}
 						if (this.spiel_stunde==1 && (this.people.get(i).getZeitverzogerung() + this.spiel_minute) >= 60 && (this.people.get(i).getHomePosX()!=this.people.get(i).getPosX() || this.people.get(i).getHomePosY()!=this.people.get(i).getPosY())){ //nach Hause gehen
-							berechne_weg(this.people.get(i), String.valueOf(hausid).charAt(0));
+							berechne_weg(this.people.get(i), null, String.valueOf(hausid).charAt(0));
 						}
 						if (this.spiel_stunde>=2 && this.spiel_stunde<4 && (this.people.get(i).getHomePosX()!=this.people.get(i).getPosX() || this.people.get(i).getHomePosY()!=this.people.get(i).getPosY())){ //nach Hause gehen
-							berechne_weg(this.people.get(i), String.valueOf(hausid).charAt(0));
+							berechne_weg(this.people.get(i), null, String.valueOf(hausid).charAt(0));
 						}
 						if (locid =='P' && (this.spiel_stunde < 2 || this.spiel_stunde >= 9)){ //nach Hause gehen
 							if ((int)(Math.random()*5) == 3){
-								berechne_weg(this.people.get(i), String.valueOf(hausid).charAt(0)); 
+								berechne_weg(this.people.get(i), null, String.valueOf(hausid).charAt(0)); 
 							} else{
 								if (this.people.get(i).getCurrentMove() == 'n'){
 									berechne_rundlauf_park(this.people.get(i));
@@ -638,117 +638,121 @@ public class Simulation {
 	
 	
 	//Support Tiki
-	public void berechne_weg(Person person, char zielloc){
+	public void berechne_weg(Person person, Agent agent, char zielloc){
 		
-		int counter;
-		String ziellocation = String.valueOf(zielloc);
-		int xPos_current, yPos_current;
 		char locid = (char)((int)(person.get_location_id()));
 		ArrayList<ArrayList<String>> location_ids;
 		Stack<Character> neuer_weg = new Stack<Character>();
 		
-		counter = 1;
-		xPos_current = 0;
-		yPos_current = 0;
 		location_ids = Ressources.getLocation_ids();
 		
-		
 		//Rasterkarte initialisieren 
-		location_ids = wegberechnung_rasterkarte_initialisierung(location_ids, ziellocation, locid);
-		
-		ziellocation = "Z";
+		location_ids = wegberechnung_rasterkarte_initialisierung(location_ids, String.valueOf(zielloc), locid);
 		
 		//Aktuelle Position des Männchens wird auf 0 gesetzt
 		location_ids.get((person.getPosY()-Ressources.ZEROPOS.height)/Ressources.RASTERHEIGHT).set((person.getPosX()-Ressources.ZEROPOS.width)/Ressources.RASTERHEIGHT,"0");
-				
 		
-		
-		
-goal:	for (int i=0; i<100; i++){
-			for (int j=0; j<16; j++){  	// J entspricht y-wert, K entspricht x-wert
-				for (int k=0; k<25; k++){
-					// Es werden Zahlen auf der Map gesucht
-					if (location_ids.get(j).get(k).equals(String.valueOf(i))){
-						// Es wird überprüft, ob das Ziel in direkter Nähe liegt
-						if (j < 15){ //15 -> Rasterhöhe
-							if (location_ids.get(j+1).get(k).equals(ziellocation)) {
-								location_ids.get(j+1).set(k,String.valueOf(i+1));
-								counter = i;
-								yPos_current = j+1;
-								xPos_current = k;
-								break goal;
-							}
-						}
-						if (k<24){ //24 -> Rasterbreite
-							if (location_ids.get(j).get(k+1).equals(ziellocation)) {
-								location_ids.get(j).set(k+1,String.valueOf(i+1));
-								counter = i;
-								yPos_current = j;
-								xPos_current = k+1;
-								break goal;
-							}
-						}
-						if (j>0){
-							if (location_ids.get(j-1).get(k).equals(ziellocation)) {
-								location_ids.get(j-1).set(k,String.valueOf(i+1));
-								counter = i;
-								yPos_current = j-1;
-								xPos_current = k;
-								break goal;
-							}
-						}
-						if (k>0){
-							if (location_ids.get(j).get(k-1).equals(ziellocation)) {
-								location_ids.get(j).set(k-1,String.valueOf(i+1));
-								counter = i;
-								yPos_current = j;
-								xPos_current = k-1;
-								break goal;
-							}
-						}
-						
-						
-						// Es wird überprüft, ob ein Feld drüber/drunter/links oder rechts ebenfalls begehbar ist -> das wird markiert
-						if (j<15){
-							if (location_ids.get(j+1).get(k).equals("X")) {			//Weg nach unten ist begehbar
-							location_ids.get(j+1).set(k,String.valueOf(i+1));
-							}
-						}
-						if (k<24){
-							if (location_ids.get(j).get(k+1).equals("X")) {			//Weg nach rechts ist begehbar
-							location_ids.get(j).set(k+1,String.valueOf(i+1));
-							}
-						}
-						if (j>0){
-							if (location_ids.get(j-1).get(k).equals("X")) {			// Weg nach oben ist begehbar
-							location_ids.get(j-1).set(k,String.valueOf(i+1));
-							}
-						}
-						if (k>0){
-							if (location_ids.get(j).get(k-1).equals("X")) {			//Weg nach links ist begehbar
-							location_ids.get(j).set(k-1,String.valueOf(i+1));
-							}
-						}
-					}
-				}
-			}
-		}
-		
-		// Der Stack für die Bewegung wird mit den richtigen Werten gefüllt. Dafür hangelt man sich absteigend an der zahlenreihe entlang
-		neuer_weg = wegberechnung_fuelle_stack(zielloc, person, location_ids, counter, xPos_current, yPos_current);
+		//Bewegungsstack nach und nach füllen
+		neuer_weg = fuelle_bewegungs_stack(location_ids, person, agent, zielloc);
 		
 		//Stack zur Bewegung freigeben
 		person.setMoves(neuer_weg);
 	}
 	
 	
+	
 	//Support Tiki
-	private Stack<Character> wegberechnung_fuelle_stack(Character zielloc, Person person, ArrayList<ArrayList<String>> location_ids, int counter, int xPos_current, int yPos_current) {
+	private Stack<Character> fuelle_bewegungs_stack(ArrayList<ArrayList<String>> location_ids, Person person, Agent agent, char zielloc){
+		
+		Stack<Character> neuer_weg = new Stack<Character>();
+		int counter = 1;
+		int xPos_current = 0;
+		int yPos_current = 0;
+		
+		goal:	for (int i=0; i<100; i++){
+					for (int j=0; j<16; j++){  	// J entspricht y-wert, K entspricht x-wert
+						for (int k=0; k<25; k++){
+							// Es werden Zahlen auf der Map gesucht
+							if (location_ids.get(j).get(k).equals(String.valueOf(i))){
+								// Es wird überprüft, ob das Ziel in direkter Nähe liegt
+								if (j < 15){ //15 -> Rasterhöhe
+									if (location_ids.get(j+1).get(k).equals("Z")) {
+										location_ids.get(j+1).set(k,String.valueOf(i+1));
+										counter = i;
+										yPos_current = j+1;
+										xPos_current = k;
+										break goal;
+									}
+								}
+								if (k<24){ //24 -> Rasterbreite
+									if (location_ids.get(j).get(k+1).equals("Z")) {
+										location_ids.get(j).set(k+1,String.valueOf(i+1));
+										counter = i;
+										yPos_current = j;
+										xPos_current = k+1;
+										break goal;
+									}
+								}
+								if (j>0){
+									if (location_ids.get(j-1).get(k).equals("Z")) {
+										location_ids.get(j-1).set(k,String.valueOf(i+1));
+										counter = i;
+										yPos_current = j-1;
+										xPos_current = k;
+										break goal;
+									}
+								}
+								if (k>0){
+									if (location_ids.get(j).get(k-1).equals("Z")) {
+										location_ids.get(j).set(k-1,String.valueOf(i+1));
+										counter = i;
+										yPos_current = j;
+										xPos_current = k-1;
+										break goal;
+									}
+								}
+								
+								
+								// Es wird überprüft, ob ein Feld drüber/drunter/links oder rechts ebenfalls begehbar ist -> das wird markiert
+								if (j<15){
+									if (location_ids.get(j+1).get(k).equals("X")) {			//Weg nach unten ist begehbar
+									location_ids.get(j+1).set(k,String.valueOf(i+1));
+									}
+								}
+								if (k<24){
+									if (location_ids.get(j).get(k+1).equals("X")) {			//Weg nach rechts ist begehbar
+									location_ids.get(j).set(k+1,String.valueOf(i+1));
+									}
+								}
+								if (j>0){
+									if (location_ids.get(j-1).get(k).equals("X")) {			// Weg nach oben ist begehbar
+									location_ids.get(j-1).set(k,String.valueOf(i+1));
+									}
+								}
+								if (k>0){
+									if (location_ids.get(j).get(k-1).equals("X")) {			//Weg nach links ist begehbar
+									location_ids.get(j).set(k-1,String.valueOf(i+1));
+									}
+								}
+							}
+						}
+					}
+				}
+		
+		// Der Stack für die Bewegung wird mit den richtigen Werten gefüllt. Dafür hangelt man sich absteigend an der zahlenreihe entlang
+			neuer_weg = fuelle_stack_weg(zielloc, person, agent, location_ids, counter, xPos_current, yPos_current);
+		
+		
+		return neuer_weg;
+	}
+	
+	//Support Tiki
+	private Stack<Character> fuelle_stack_weg(Character zielloc, Person person, Agent agent, ArrayList<ArrayList<String>> location_ids, int counter, int xPos_current, int yPos_current) {
 		Stack<Character> neuer_weg = new Stack<Character>();
 		
 		//Falls das Ziel ein Haus ist, soll die Person auf ihren startpunkt laufen.
 		if ((int)(zielloc)-48 <=9 && (int)(zielloc)-48 > 0){ //-48 für char umwandlung zu int
-			neuer_weg = wegberechnung_homeposition(person, xPos_current, yPos_current);
+			neuer_weg = fuelle_stack_homeposition(person, agent, xPos_current, yPos_current);
 		}
 		
 		for (int i = counter; i>=0; i--){
@@ -782,7 +786,7 @@ goal:	for (int i=0; i<100; i++){
 	}
 
 	//Support Tiki
-	private Stack<Character> wegberechnung_homeposition(Person person, int xPos_current, int yPos_current) {
+	private Stack<Character>fuelle_stack_homeposition(Person person, Agent agent, int xPos_current, int yPos_current) {
 		Stack<Character> neuer_weg = new Stack<Character>();
 		
 		if (((person.getHomePosX()-Ressources.ZEROPOS.width)/Ressources.RASTERHEIGHT)+1 == xPos_current){

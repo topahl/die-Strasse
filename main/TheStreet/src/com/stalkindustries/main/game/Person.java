@@ -69,7 +69,7 @@ public abstract class Person extends Mensch {
 	public void set_misstrauen(double misstrauen){
 		this.misstrauen = misstrauen;
 	}
-
+ 
 
 	public int getZeitverzogerung() {
 		return zeitverzogerung;
