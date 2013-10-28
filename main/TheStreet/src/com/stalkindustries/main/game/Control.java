@@ -117,6 +117,12 @@ public class Control implements IControl {
 	 */
 
 	private void clickHaus(int hausid) {
+		
+		// hausid von 1-9, get_haus_id 0-8 => Deswegen plus 1
+		if (hausid != guilayer.getSimulation().get_agent().get_haus_id()+1){
+			
+		
+		
 //	    "aktion6Beschwichtigen"  && 	"aktion6Spionage"  werden nicht abgefragt
 //		if(lastFunktioncode.equals("aktionKuchen"))
 //			
@@ -132,8 +138,9 @@ public class Control implements IControl {
 //
 		if(lastFunktioncode.equals("aktionWanze"))
 			guilayer.getSimulation().bewegungAgentWanze(hausid);
-//			
-//		if(lastFunktioncode.equals("aktionKamera"))
+		
+		if(lastFunktioncode.equals("aktionKamera"))
+			guilayer.getSimulation().bewegungAgentWanze(hausid);
 //			
 //		if(lastFunktioncode.equals("aktionHacken"))
 //			
@@ -141,7 +148,7 @@ public class Control implements IControl {
 //			
 //		if(lastFunktioncode.equals("aktionParkSpionage"))
 			
-		
+		}
 		guilayer.getMousefollower().setVisible(false);
 	}
 
