@@ -117,6 +117,7 @@ public class Control implements IControl {
 	 */
 
 	private void clickHaus(int hausid) {
+		boolean istVorhanden = false;
 		
 		// hausid von 1-9, get_haus_id 0-8 => Deswegen plus 1
 		if (hausid != guilayer.getSimulation().get_agent().get_haus_id()+1){
@@ -136,11 +137,26 @@ public class Control implements IControl {
 //			
 //		
 //
-		if(lastFunktioncode.equals("aktionWanze"))
-			guilayer.getSimulation().bewegungAgentWanze(hausid);
+		if(lastFunktioncode.equals("aktionWanze")){
+			for (int i=0; i<guilayer.getSimulation().getHouses().get(hausid).getUeberwachungsmodule().size(); i++){
+				if (guilayer.getSimulation().getHouses().get(hausid).getUeberwachungsmodule().get(i).equals("Wanze")){
+					istVorhanden=true;
+					break;
+				}
+					
+			}
+			if (!istVorhanden){
+				guilayer.getSimulation().bewegungAgentWanze(hausid);
+				guilayer.getSimulation().getHouses().get(hausid).getUeberwachungsmodule().add("Wanze");
+			}
+			istVorhanden = false;
+		}
+			
 		
-		if(lastFunktioncode.equals("aktionKamera"))
+		if(lastFunktioncode.equals("aktionKamera")){
 			guilayer.getSimulation().bewegungAgentWanze(hausid);
+		}
+			
 //			
 //		if(lastFunktioncode.equals("aktionHacken"))
 //			
