@@ -640,115 +640,119 @@ public class Simulation {
 	//Support Tiki
 	public void berechne_weg(Person person, char zielloc){
 		
-		int counter;
-		String ziellocation = String.valueOf(zielloc);
-		int xPos_current, yPos_current;
 		char locid = (char)((int)(person.get_location_id()));
 		ArrayList<ArrayList<String>> location_ids;
 		Stack<Character> neuer_weg = new Stack<Character>();
 		
-		counter = 1;
-		xPos_current = 0;
-		yPos_current = 0;
 		location_ids = Ressources.getLocation_ids();
 		
-		
 		//Rasterkarte initialisieren 
-		location_ids = wegberechnung_rasterkarte_initialisierung(location_ids, ziellocation, locid);
-		
-		ziellocation = "Z";
+		location_ids = wegberechnung_rasterkarte_initialisierung(location_ids, String.valueOf(zielloc), locid);
 		
 		//Aktuelle Position des Männchens wird auf 0 gesetzt
 		location_ids.get((person.getPosY()-Ressources.ZEROPOS.height)/Ressources.RASTERHEIGHT).set((person.getPosX()-Ressources.ZEROPOS.width)/Ressources.RASTERHEIGHT,"0");
-				
 		
-		
-		
-goal:	for (int i=0; i<100; i++){
-			for (int j=0; j<16; j++){  	// J entspricht y-wert, K entspricht x-wert
-				for (int k=0; k<25; k++){
-					// Es werden Zahlen auf der Map gesucht
-					if (location_ids.get(j).get(k).equals(String.valueOf(i))){
-						// Es wird überprüft, ob das Ziel in direkter Nähe liegt
-						if (j < 15){ //15 -> Rasterhöhe
-							if (location_ids.get(j+1).get(k).equals(ziellocation)) {
-								location_ids.get(j+1).set(k,String.valueOf(i+1));
-								counter = i;
-								yPos_current = j+1;
-								xPos_current = k;
-								break goal;
-							}
-						}
-						if (k<24){ //24 -> Rasterbreite
-							if (location_ids.get(j).get(k+1).equals(ziellocation)) {
-								location_ids.get(j).set(k+1,String.valueOf(i+1));
-								counter = i;
-								yPos_current = j;
-								xPos_current = k+1;
-								break goal;
-							}
-						}
-						if (j>0){
-							if (location_ids.get(j-1).get(k).equals(ziellocation)) {
-								location_ids.get(j-1).set(k,String.valueOf(i+1));
-								counter = i;
-								yPos_current = j-1;
-								xPos_current = k;
-								break goal;
-							}
-						}
-						if (k>0){
-							if (location_ids.get(j).get(k-1).equals(ziellocation)) {
-								location_ids.get(j).set(k-1,String.valueOf(i+1));
-								counter = i;
-								yPos_current = j;
-								xPos_current = k-1;
-								break goal;
-							}
-						}
-						
-						
-						// Es wird überprüft, ob ein Feld drüber/drunter/links oder rechts ebenfalls begehbar ist -> das wird markiert
-						if (j<15){
-							if (location_ids.get(j+1).get(k).equals("X")) {			//Weg nach unten ist begehbar
-							location_ids.get(j+1).set(k,String.valueOf(i+1));
-							}
-						}
-						if (k<24){
-							if (location_ids.get(j).get(k+1).equals("X")) {			//Weg nach rechts ist begehbar
-							location_ids.get(j).set(k+1,String.valueOf(i+1));
-							}
-						}
-						if (j>0){
-							if (location_ids.get(j-1).get(k).equals("X")) {			// Weg nach oben ist begehbar
-							location_ids.get(j-1).set(k,String.valueOf(i+1));
-							}
-						}
-						if (k>0){
-							if (location_ids.get(j).get(k-1).equals("X")) {			//Weg nach links ist begehbar
-							location_ids.get(j).set(k-1,String.valueOf(i+1));
-							}
-						}
-					}
-				}
-			}
-		}
-		
-		// Der Stack für die Bewegung wird mit den richtigen Werten gefüllt. Dafür hangelt man sich absteigend an der zahlenreihe entlang
-		neuer_weg = wegberechnung_fuelle_stack(zielloc, person, location_ids, counter, xPos_current, yPos_current);
+		//Bewegungsstack nach und nach füllen
+		neuer_weg = fuelle_bewegungs_stack(location_ids, person, agent, zielloc);
 		
 		//Stack zur Bewegung freigeben
 		person.setMoves(neuer_weg);
 	}
 	
 	
+	
 	//Support Tiki
-	private Stack<Character> wegberechnung_fuelle_stack(Character zielloc, Person person, ArrayList<ArrayList<String>> location_ids, int counter, int xPos_current, int yPos_current) {
+	private Stack<Character> fuelle_bewegungs_stack(ArrayList<ArrayList<String>> location_ids, Person person, Agent agent, char zielloc){
+		
+		Stack<Character> neuer_weg = new Stack<Character>();
+		int counter = 1;
+		int xPos_current = 0;
+		int yPos_current = 0;
+		
+		goal:	for (int i=0; i<100; i++){
+					for (int j=0; j<16; j++){  	// J entspricht y-wert, K entspricht x-wert
+						for (int k=0; k<25; k++){
+							// Es werden Zahlen auf der Map gesucht
+							if (location_ids.get(j).get(k).equals(String.valueOf(i))){
+								// Es wird überprüft, ob das Ziel in direkter Nähe liegt
+								if (j < 15){ //15 -> Rasterhöhe
+									if (location_ids.get(j+1).get(k).equals("Z")) {
+										location_ids.get(j+1).set(k,String.valueOf(i+1));
+										counter = i;
+										yPos_current = j+1;
+										xPos_current = k;
+										break goal;
+									}
+								}
+								if (k<24){ //24 -> Rasterbreite
+									if (location_ids.get(j).get(k+1).equals("Z")) {
+										location_ids.get(j).set(k+1,String.valueOf(i+1));
+										counter = i;
+										yPos_current = j;
+										xPos_current = k+1;
+										break goal;
+									}
+								}
+								if (j>0){
+									if (location_ids.get(j-1).get(k).equals("Z")) {
+										location_ids.get(j-1).set(k,String.valueOf(i+1));
+										counter = i;
+										yPos_current = j-1;
+										xPos_current = k;
+										break goal;
+									}
+								}
+								if (k>0){
+									if (location_ids.get(j).get(k-1).equals("Z")) {
+										location_ids.get(j).set(k-1,String.valueOf(i+1));
+										counter = i;
+										yPos_current = j;
+										xPos_current = k-1;
+										break goal;
+									}
+								}
+								
+								
+								// Es wird überprüft, ob ein Feld drüber/drunter/links oder rechts ebenfalls begehbar ist -> das wird markiert
+								if (j<15){
+									if (location_ids.get(j+1).get(k).equals("X")) {			//Weg nach unten ist begehbar
+									location_ids.get(j+1).set(k,String.valueOf(i+1));
+									}
+								}
+								if (k<24){
+									if (location_ids.get(j).get(k+1).equals("X")) {			//Weg nach rechts ist begehbar
+									location_ids.get(j).set(k+1,String.valueOf(i+1));
+									}
+								}
+								if (j>0){
+									if (location_ids.get(j-1).get(k).equals("X")) {			// Weg nach oben ist begehbar
+									location_ids.get(j-1).set(k,String.valueOf(i+1));
+									}
+								}
+								if (k>0){
+									if (location_ids.get(j).get(k-1).equals("X")) {			//Weg nach links ist begehbar
+									location_ids.get(j).set(k-1,String.valueOf(i+1));
+									}
+								}
+							}
+						}
+					}
+				}
+		
+		// Der Stack für die Bewegung wird mit den richtigen Werten gefüllt. Dafür hangelt man sich absteigend an der zahlenreihe entlang
+			neuer_weg = fuelle_stack_weg(zielloc, person, agent, location_ids, counter, xPos_current, yPos_current);
+		
+		
+		return neuer_weg;
+	}
+	
+	//Support Tiki
+	private Stack<Character> fuelle_stack_weg(Character zielloc, Person person, Agent agent, ArrayList<ArrayList<String>> location_ids, int counter, int xPos_current, int yPos_current) {
 		Stack<Character> neuer_weg = new Stack<Character>();
 		
 		//Falls das Ziel ein Haus ist, soll die Person auf ihren startpunkt laufen.
 		if ((int)(zielloc)-48 <=9 && (int)(zielloc)-48 > 0){ //-48 für char umwandlung zu int
-			neuer_weg = wegberechnung_homeposition(person, xPos_current, yPos_current);
+			neuer_weg = fuelle_stack_homeposition(person, agent, xPos_current, yPos_current);
 		}
 		
 		for (int i = counter; i>=0; i--){
@@ -782,7 +786,7 @@ goal:	for (int i=0; i<100; i++){
 	}
 
 	//Support Tiki
-	private Stack<Character> wegberechnung_homeposition(Person person, int xPos_current, int yPos_current) {
+	private Stack<Character>fuelle_stack_homeposition(Person person, Agent agent, int xPos_current, int yPos_current) {
 		Stack<Character> neuer_weg = new Stack<Character>();
 		
 		if (((person.getHomePosX()-Ressources.ZEROPOS.width)/Ressources.RASTERHEIGHT)+1 == xPos_current){
