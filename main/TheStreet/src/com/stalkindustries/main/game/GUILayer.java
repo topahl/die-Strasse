@@ -311,15 +311,15 @@ public class GUILayer extends JFrame implements MouseMotionListener {
 		label = new JLabel();
 		label.setText("Bewohner");
 		label.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-		label.setFont(new Font("Corbel", Font.BOLD, 25));
+		label.setFont(new Font("Corbel", Font.BOLD, 20));
 		label.setForeground(new java.awt.Color(0xf9, 0xf9, 0xf9));
-		label.setBounds(20, 60, 150, 30);
+		label.setBounds(30, 60, 150, 30);
 		this.fensterHaus.add(label, javax.swing.JLayeredPane.DEFAULT_LAYER);
 		
 		label = new JLabel();
 		label.setText("Überwachung");
 		label.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-		label.setFont(new Font("Corbel", Font.BOLD, 25));
+		label.setFont(new Font("Corbel", Font.BOLD, 20));
 		label.setForeground(new java.awt.Color(0xf9, 0xf9, 0xf9));
 		label.setBounds(230, 60, 200, 30);
 		this.fensterHaus.add(label, javax.swing.JLayeredPane.DEFAULT_LAYER);
@@ -327,7 +327,7 @@ public class GUILayer extends JFrame implements MouseMotionListener {
 		label = new JLabel();
 		label.setText("Status");
 		label.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-		label.setFont(new Font("Corbel", Font.BOLD, 20));
+		label.setFont(new Font("Corbel", Font.BOLD, 18));
 		label.setForeground(new java.awt.Color(0xf9, 0xf9, 0xf9));
 		label.setBounds(230, 100, 200, 30);
 		this.fensterHaus.add(label, javax.swing.JLayeredPane.DEFAULT_LAYER);
@@ -335,7 +335,7 @@ public class GUILayer extends JFrame implements MouseMotionListener {
 		label = new JLabel();
 		label.setText("Installierte Werkzeuge");
 		label.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-		label.setFont(new Font("Corbel", Font.BOLD, 20));
+		label.setFont(new Font("Corbel", Font.BOLD, 18));
 		label.setForeground(new java.awt.Color(0xf9, 0xf9, 0xf9));
 		label.setBounds(230, 170, 200, 30);
 		this.fensterHaus.add(label, javax.swing.JLayeredPane.DEFAULT_LAYER);
@@ -344,13 +344,13 @@ public class GUILayer extends JFrame implements MouseMotionListener {
 		for(int i=0;i<4;i++){
 			hausinformationen[i+1] = new JLabel();
 			hausinformationen[i+1].setText(" ");
-			hausinformationen[i+1].setBounds(45, 100+45*i, 45, 45);
+			hausinformationen[i+1].setBounds(30, 93+45*i, 45, 45);
 			this.fensterHaus.add(hausinformationen[i+1], javax.swing.JLayeredPane.DEFAULT_LAYER);
 			hausinformationen[i+5]= new JLabel();
 			hausinformationen[i+5].setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-			hausinformationen[i+5].setFont(new Font("Corbel", Font.BOLD, 20));
+			hausinformationen[i+5].setFont(new Font("Corbel", Font.BOLD, 18));
 			hausinformationen[i+5].setForeground(new java.awt.Color(0xf9, 0xf9, 0xf9));
-			hausinformationen[i+5].setBounds(100, 100+45*i, 200, 45);
+			hausinformationen[i+5].setBounds(85, 93+45*i, 200, 45);
 			this.fensterHaus.add(hausinformationen[i+5], javax.swing.JLayeredPane.DEFAULT_LAYER);
 		}
 
@@ -395,7 +395,7 @@ public class GUILayer extends JFrame implements MouseMotionListener {
 		this.fensterBeschwichtigen.add(label, javax.swing.JLayeredPane.DEFAULT_LAYER);
 		beschwichtigenBeschr.setText("");
 		beschwichtigenBeschr.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-		beschwichtigenBeschr.setFont(new Font("Corbel", Font.BOLD, 20));
+		beschwichtigenBeschr.setFont(new Font("Corbel", Font.BOLD, 18));
 		beschwichtigenBeschr.setForeground(new java.awt.Color(0xf9, 0xf9, 0xf9));
 		beschwichtigenBeschr.setBounds(20, 50, 200, 30);
 		this.fensterBeschwichtigen.add(beschwichtigenBeschr, javax.swing.JLayeredPane.DEFAULT_LAYER);
@@ -447,7 +447,7 @@ public class GUILayer extends JFrame implements MouseMotionListener {
 		this.fensterSpionage.add(label, javax.swing.JLayeredPane.DEFAULT_LAYER);
 		spionageBeschr.setText("");
 		spionageBeschr.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-		spionageBeschr.setFont(new Font("Corbel", Font.BOLD, 20));
+		spionageBeschr.setFont(new Font("Corbel", Font.BOLD, 18));
 		spionageBeschr.setForeground(new java.awt.Color(0xf9, 0xf9, 0xf9));
 		spionageBeschr.setBounds(20, 50, 200, 30);
 		this.fensterSpionage.add(spionageBeschr, javax.swing.JLayeredPane.DEFAULT_LAYER);
@@ -466,7 +466,7 @@ public class GUILayer extends JFrame implements MouseMotionListener {
 		label.setBounds(0, 0, 248, 232);
 		this.fensterSpionage.add(label, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
-		
+
 		
 		//---
 		//generisches Hausfenster
@@ -643,7 +643,7 @@ public class GUILayer extends JFrame implements MouseMotionListener {
 		}
 	}
 
-	
+
 
 	/**
 	 * Erzeugt Aktionsfenster für Spionage und Beschwichtigen
@@ -678,7 +678,7 @@ public class GUILayer extends JFrame implements MouseMotionListener {
 		}
 	}
 
-	
+
 
 	/**
 	 * Generieren der Menschen und Teleport in die Häuser
