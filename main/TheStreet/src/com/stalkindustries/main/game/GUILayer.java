@@ -182,7 +182,20 @@ public class GUILayer extends JFrame implements MouseMotionListener {
 		this.anzeigeStatusUeberwachung.setForeground(new java.awt.Color(249, 249, 249));
 		this.anzeigeStatusUeberwachung.setVisible(true);
 		this.baseLayer.add(this.anzeigeStatusUeberwachung, javax.swing.JLayeredPane.DEFAULT_LAYER);
+		
+		//Überwachung Balken
 
+		JLabel label=new JLabel();
+		label.setIcon(new ImageIcon(Ressources.ingamebutton.getSubimage(948, 158, 179, 20)));
+		label.setBounds(Ressources.ZEROPOS.width+733, Ressources.ZEROPOS.height+685, 166, 19);
+		baseLayer.add(label, javax.swing.JLayeredPane.DEFAULT_LAYER);
+		label=new JLabel();
+		label.setIcon(new ImageIcon(Ressources.ingamebutton.getSubimage(948, 138, 179, 20)));
+		label.setBounds(Ressources.ZEROPOS.width+733, Ressources.ZEROPOS.height+685, 166, 19);
+		baseLayer.add(label, javax.swing.JLayeredPane.DEFAULT_LAYER);
+		
+		
+		
 		// Ingame Menübars
 		this.overlayMenubar.setIcon(new ImageIcon(Ressources.menubars));
 		this.overlayMenubar.setBounds(Ressources.ZEROPOS.width, Ressources.ZEROPOS.height, Ressources.MAPWIDTH, Ressources.MAPHEIGHT);
@@ -589,6 +602,7 @@ public class GUILayer extends JFrame implements MouseMotionListener {
 			this.baseLayer.add(button, javax.swing.JLayeredPane.DEFAULT_LAYER);
 			this.buttons.put(buttonNamesAktionsleiste[i], button);
 		}
+		
 
 		// Kleine Buttons TODO entfernen bei Code Cleanup am Schluss - solange bitte nicht löschen!
 		/*buttonSize = 39;
