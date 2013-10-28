@@ -82,12 +82,13 @@ public class GUILayer extends JFrame implements MouseMotionListener {
 		TheStreet.loadMenu();
 		this.timer.stop();
 		this.dispose();
+		//TODO auf Auswertungsmenü weiterleiten
 	}
 
 
 
 	/**
-	 * Liebesbriefe an Tobi
+	 * Ruft alle Submethoden zur Initialisierung des Spieles auf
 	 */
 	private void initComponents(String levelname) {
 		
@@ -101,7 +102,7 @@ public class GUILayer extends JFrame implements MouseMotionListener {
 		//MouseListener starten
 		this.initMouseListener();
 
-		//Aktionsfenster initialisieren
+		//Ingame Fenster initialisieren
 		this.initIngameFenster();
 
 		//Buttons auf Häusern erzeugen
@@ -186,7 +187,7 @@ public class GUILayer extends JFrame implements MouseMotionListener {
 		this.overlayMenubar.setBounds(Ressources.ZEROPOS.width, Ressources.ZEROPOS.height, Ressources.MAPWIDTH, Ressources.MAPHEIGHT);
 		this.baseLayer.add(this.overlayMenubar, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
-		// Tag-Nacht-Modus
+		// Nacht-Modus Overlay
 		this.overlayNacht.setBounds(Ressources.ZEROPOS.width, Ressources.ZEROPOS.height, Ressources.MAPWIDTH, Ressources.MAPHEIGHT);
 		this.overlayNacht.setBackground(new Color(0, 0, 1f, 0.2f));
 		this.overlayNacht.setOpaque(true);
@@ -200,8 +201,6 @@ public class GUILayer extends JFrame implements MouseMotionListener {
 	 * Levelkarte laden und einfügen
 	 */
 	private void initMap(String levelname) {
-		// TODO Dynamic map load
-	
 		// Karte laden
 		this.karte = new Map(levelname, this.humans.get(this.humans.size() - 1).get_haus_id());
 		// Agent steht an letzter Stelle
@@ -238,48 +237,23 @@ public class GUILayer extends JFrame implements MouseMotionListener {
 		JLabel label; 
 		Button button;
 		
+		
+		//TODO Belehrung entfernen
+		//So Leute... bitte alle Komponenten zu einem bestimmten Fenster
+		//Direkt hintereinander in einem Codeabschnitt angeben!
+		//Man findet sonst nix wieder ... :)
+		
+		
+		
+		//---
+		//Quiz
+		//---
+		
 		//Fenster: Quizfragen
 		this.fensterQuiz = new JLayeredPane();
 		this.fensterQuiz.setBounds(Ressources.ZEROPOS.width+(Ressources.MAPWIDTH-598)/2, Ressources.ZEROPOS.height+(Ressources.MAPHEIGHT-327)/2,598, 327);
 		this.baseLayer.add(this.fensterQuiz, javax.swing.JLayeredPane.DEFAULT_LAYER);
-		
-		//Fenster: Haus
-		this.fensterHaus = new JLayeredPane();
-		this.fensterHaus.setBounds(Ressources.ZEROPOS.width+(Ressources.MAPWIDTH-460)/2, Ressources.ZEROPOS.height+(Ressources.MAPHEIGHT-327)/2,460, 327);
-		this.baseLayer.add(this.fensterHaus, javax.swing.JLayeredPane.DEFAULT_LAYER);
-		
-		// Fenster: Beschwichtigen Aktionsfenster
-		this.fensterBeschwichtigen = new JLayeredPane();
-		this.fensterBeschwichtigen.setBounds(Ressources.ZEROPOS.width + 10, Ressources.ZEROPOS.height + 390, 248, 232);
-		this.baseLayer.add(this.fensterBeschwichtigen, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
-		// Schließen-Button Beschwichtigen
-		button = new Button(this.control,
-				Ressources.ingamebutton.getSubimage(948, 90, 27, 27),
-				Ressources.ingamebutton.getSubimage(975, 90, 27, 27),
-				Ressources.ingamebutton.getSubimage(1002, 90, 27, 27),
-				Ressources.ingamebutton.getSubimage(1029, 90, 27, 27),
-				"closeBeschwichtigen", 205, 13, this);
-		this.buttons.put("closeBeschwichtigen", button);
-		this.fensterBeschwichtigen.add(button, javax.swing.JLayeredPane.DEFAULT_LAYER);
-
-		// Inhalt des Beschwichtigen Fensters
-		label = new JLabel();
-		label.setText("Sozialleben");
-		label.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-		label.setFont(new Font("Corbel", Font.BOLD, 25));
-		label.setForeground(new java.awt.Color(0x1f, 0x1f, 0x1f));
-		label.setBounds(12, 12, 200, 30);
-		this.fensterBeschwichtigen.add(label, javax.swing.JLayeredPane.DEFAULT_LAYER);
-		beschwichtigenBeschr.setText("");
-		beschwichtigenBeschr.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-		beschwichtigenBeschr.setFont(new Font("Corbel", Font.BOLD, 20));
-		beschwichtigenBeschr.setForeground(new java.awt.Color(0xf9, 0xf9, 0xf9));
-		beschwichtigenBeschr.setBounds(20, 50, 200, 30);
-		this.fensterBeschwichtigen.add(beschwichtigenBeschr, javax.swing.JLayeredPane.DEFAULT_LAYER);		
-		this.fensterBeschwichtigen.setEnabled(false);
-		this.fensterBeschwichtigen.setVisible(false);
-		
 		//Titel Quizfrage
 		label = new JLabel();
 		label.setText("Quizfrage");
@@ -289,6 +263,40 @@ public class GUILayer extends JFrame implements MouseMotionListener {
 		label.setBounds(12, 12, 200, 30);
 		this.fensterQuiz.add(label, javax.swing.JLayeredPane.DEFAULT_LAYER);
 		
+		//Komponenten in Control Laden
+		this.quiz.initQuizWindow(this.control);
+		
+		//Hintergund Quiz Fenster
+		label = new JLabel();
+		label.setIcon(new ImageIcon(Ressources.ingameframe.getSubimage(765, 0, 598, 327)));
+		label.setBounds(0, 0, 598, 327);
+		this.fensterQuiz.add(label, javax.swing.JLayeredPane.DEFAULT_LAYER);
+		
+		//Quizfenster zu Anfang ausblenden
+		this.fensterQuiz.setVisible(false);
+		this.fensterQuiz.setEnabled(false);
+		
+		
+		
+		//---
+		//Haus
+		//---
+				
+		//Fenster: Haus
+		this.fensterHaus = new JLayeredPane();
+		this.fensterHaus.setBounds(Ressources.ZEROPOS.width+(Ressources.MAPWIDTH-460)/2, Ressources.ZEROPOS.height+(Ressources.MAPHEIGHT-327)/2,460, 327);
+		this.baseLayer.add(this.fensterHaus, javax.swing.JLayeredPane.DEFAULT_LAYER);
+
+		//Schließen-Button Hausinfo
+		button = new Button(this.control,
+				Ressources.ingamebutton.getSubimage(948, 90, 27, 27),
+				Ressources.ingamebutton.getSubimage(975, 90, 27, 27),
+				Ressources.ingamebutton.getSubimage(1002, 90, 27, 27),
+				Ressources.ingamebutton.getSubimage(1029, 90, 27, 27),
+				"closeHaus", 415, 15, this);
+		this.buttons.put("closeHaus", button);
+		this.fensterHaus.add(button, javax.swing.JLayeredPane.DEFAULT_LAYER);
+
 		//Titel Hausinfo
 		label = new JLabel();
 		label.setText("Haus1");
@@ -342,46 +350,74 @@ public class GUILayer extends JFrame implements MouseMotionListener {
 				numberpers++;
 			}
 		}
+
+		//Hintergrundbild HausFenster
+		label = new JLabel();
+		label.setIcon(new ImageIcon(Ressources.ingameframe.getSubimage(270, 0, 460, 327)));
+		label.setBounds(0, 0, 460, 327);
+		this.fensterHaus.add(label, javax.swing.JLayeredPane.DEFAULT_LAYER);
 		
-		this.quiz.initQuizWindow(this.control);
+		//Hausinfo initial ausblenden
+		this.fensterHaus.setVisible(false);
+		this.fensterHaus.setEnabled(false);
 		
-//		//Inhal des Quiz Fensters
-//		int buttonSize = 39;
-//		int buttonSliceX = 0;
-//		int buttonSliceY = buttonSize;
-//
-//		String[] buttonNamesSmall = { "QuizA", "QuizB","QuizC" };
-//		for (int i = 14; i < buttonNamesSmall.length+14; i++) {
-//			button = new Button(this.control,
-//					Ressources.ingamebutton.getSubimage(buttonSliceX, i * buttonSliceY, buttonSize, buttonSize),
-//					Ressources.ingamebutton.getSubimage(buttonSliceX + buttonSize, i * buttonSliceY, buttonSize, buttonSize),
-//					Ressources.ingamebutton.getSubimage(buttonSliceX + 2 * buttonSize, i * buttonSliceY, buttonSize, buttonSize),
-//					Ressources.ingamebutton.getSubimage(buttonSliceX + 3 * buttonSize, i * buttonSliceY, buttonSize, buttonSize),
-//					buttonNamesSmall[i-14], 45, 140+(i-14)*45 , this);
-//			label = new JLabel();
-//			label.setText("Antwort");
-//			label.setForeground(new java.awt.Color(0xf9, 0xf9, 0xf9));
-//			label.setBounds(100, 140+(i-14)*45, 300, 39);
-//			label.setFont(new Font("Corbel", Font.BOLD, 20));
-//			
-//			this.fensterQuiz.add(label, javax.swing.JLayeredPane.DEFAULT_LAYER);
-//			this.fensterQuiz.add(button, javax.swing.JLayeredPane.DEFAULT_LAYER);
-//			this.buttons.put(buttonNamesSmall[i-14], button);
-//		}
-//		//Textfeld für die Frage des Quizes
-//		JTextArea frage = new JTextArea();
-//        frage.setLineWrap(true);
-//        frage.setText("Frage bla bla bla..");
-//        frage.setWrapStyleWord(true);
-//        frage.setFocusCycleRoot(true);
-//        frage.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
-//        frage.setFocusable(false);
-//        frage.setOpaque(false);
-//        frage.setFont(new Font("Corbel",Font.BOLD,20));
-//        frage.setForeground(new java.awt.Color(0xf9, 0xf9, 0xf9));
-//        frage.setBounds(45,60, 500, 75);
-//        this.fensterQuiz.add(frage, javax.swing.JLayeredPane.DEFAULT_LAYER);
-        
+		
+				
+		//---
+		// Aktionsfenster Beschwichtigen
+		//---
+		
+		// Fenster: Beschwichtigen Aktionsfenster
+		this.fensterBeschwichtigen = new JLayeredPane();
+		this.fensterBeschwichtigen.setBounds(Ressources.ZEROPOS.width + 10, Ressources.ZEROPOS.height + 390, 248, 232);
+		this.baseLayer.add(this.fensterBeschwichtigen, javax.swing.JLayeredPane.DEFAULT_LAYER);
+
+		// Schließen-Button Beschwichtigen
+		button = new Button(this.control,
+				Ressources.ingamebutton.getSubimage(948, 90, 27, 27),
+				Ressources.ingamebutton.getSubimage(975, 90, 27, 27),
+				Ressources.ingamebutton.getSubimage(1002, 90, 27, 27),
+				Ressources.ingamebutton.getSubimage(1029, 90, 27, 27),
+				"closeBeschwichtigen", 205, 13, this);
+		this.buttons.put("closeBeschwichtigen", button);
+		this.fensterBeschwichtigen.add(button, javax.swing.JLayeredPane.DEFAULT_LAYER);
+
+		// Inhalt des Beschwichtigen Fensters
+		label = new JLabel();
+		label.setText("Sozialleben");
+		label.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+		label.setFont(new Font("Corbel", Font.BOLD, 25));
+		label.setForeground(new java.awt.Color(0x1f, 0x1f, 0x1f));
+		label.setBounds(12, 12, 200, 30);
+		this.fensterBeschwichtigen.add(label, javax.swing.JLayeredPane.DEFAULT_LAYER);
+		beschwichtigenBeschr.setText("");
+		beschwichtigenBeschr.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+		beschwichtigenBeschr.setFont(new Font("Corbel", Font.BOLD, 20));
+		beschwichtigenBeschr.setForeground(new java.awt.Color(0xf9, 0xf9, 0xf9));
+		beschwichtigenBeschr.setBounds(20, 50, 200, 30);
+		this.fensterBeschwichtigen.add(beschwichtigenBeschr, javax.swing.JLayeredPane.DEFAULT_LAYER);
+		
+		//Buttons in Aktionsfenster Beschwichtigen
+		String[] buttonNamesBeschwichtigen = { "aktionKuchen",
+				"aktionUnterhalten", "aktionFlirten", "aktionHand",
+				"aktionParkBeschwichtigen", "aktion6Beschwichtigen" };
+		this.initButtonsAktionsfenster(fensterBeschwichtigen, 156, buttonNamesBeschwichtigen);
+
+		//Hintergrundbild Beschwichtigen-Aktionsfenster
+		label = new JLabel();
+		label.setIcon(new ImageIcon(Ressources.ingameframe.getSubimage(0, 0, 248, 235)));
+		label.setBounds(0, 0, 248, 232);
+		this.fensterBeschwichtigen.add(label, javax.swing.JLayeredPane.DEFAULT_LAYER);
+		
+		//Fenster ausblenden
+		this.fensterBeschwichtigen.setEnabled(false);
+		this.fensterBeschwichtigen.setVisible(false);
+		
+		
+		
+		//---
+		//Aktionsfenster Spionage
+		//---
         
 		// Fenster: Spionage Aktionsfenster
 		this.fensterSpionage = new JLayeredPane();
@@ -397,17 +433,6 @@ public class GUILayer extends JFrame implements MouseMotionListener {
 				"closeSpionage", 205, 13, this);
 		this.buttons.put("closeSpionage", button);
 		this.fensterSpionage.add(button, javax.swing.JLayeredPane.DEFAULT_LAYER);
-
-		
-		//Schließen-Button Hausinfo
-			button = new Button(this.control,
-					Ressources.ingamebutton.getSubimage(948, 90, 27, 27),
-					Ressources.ingamebutton.getSubimage(975, 90, 27, 27),
-					Ressources.ingamebutton.getSubimage(1002, 90, 27, 27),
-					Ressources.ingamebutton.getSubimage(1029, 90, 27, 27),
-					"closeHaus", 415, 15, this);
-			this.buttons.put("closeHaus", button);
-			this.fensterHaus.add(button, javax.swing.JLayeredPane.DEFAULT_LAYER);
 		
 		// Inhalt des Spionage Fensters
 		label = new JLabel();
@@ -425,19 +450,12 @@ public class GUILayer extends JFrame implements MouseMotionListener {
 		this.fensterSpionage.add(spionageBeschr, javax.swing.JLayeredPane.DEFAULT_LAYER);
 		this.fensterSpionage.setEnabled(false);
 		this.fensterSpionage.setVisible(false);
-
 		
-		//Buttons in Aktionsfenster erzeugen
-		String[] buttonNamesBeschwichtigen = { "aktionKuchen",
-				"aktionUnterhalten", "aktionFlirten", "aktionHand",
-				"aktionParkBeschwichtigen", "aktion6Beschwichtigen" };
-		this.initButtonsAktionsfenster(fensterBeschwichtigen, 156, buttonNamesBeschwichtigen);
-
+		//Aktionsbuttons bei Spionage
 		String[] buttonNamesSpionage = { "aktionWanze", "aktionKamera",
 				"aktionHacken", "aktionFernglas", "aktionParkSpionage",
 				"aktion6Spionage" };
 		this.initButtonsAktionsfenster(fensterSpionage, 420, buttonNamesSpionage);
-		
 		
 		//Hintergrundbild Spionage-Aktionsfenster
 		label = new JLabel();
@@ -445,31 +463,11 @@ public class GUILayer extends JFrame implements MouseMotionListener {
 		label.setBounds(0, 0, 248, 232);
 		this.fensterSpionage.add(label, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
-		//Hintergrundbild Beschwichtigen-Aktionsfenster
-		label = new JLabel();
-		label.setIcon(new ImageIcon(Ressources.ingameframe.getSubimage(0, 0, 248, 235)));
-		label.setBounds(0, 0, 248, 232);
-		this.fensterBeschwichtigen.add(label, javax.swing.JLayeredPane.DEFAULT_LAYER);
 		
-		//Hintergrundbild HausFenster
-		label = new JLabel();
-		label.setIcon(new ImageIcon(Ressources.ingameframe.getSubimage(270, 0, 460, 327)));
-		label.setBounds(0, 0, 460, 327);
-		this.fensterHaus.add(label, javax.swing.JLayeredPane.DEFAULT_LAYER);
 		
-		//Hintergund Quiz Fenster
-		label = new JLabel();
-		label.setIcon(new ImageIcon(Ressources.ingameframe.getSubimage(765, 0, 598, 327)));
-		label.setBounds(0, 0, 598, 327);
-		this.fensterQuiz.add(label, javax.swing.JLayeredPane.DEFAULT_LAYER);
-		
-		//Quizfenster ausblenden
-		this.fensterQuiz.setVisible(false);
-		this.fensterQuiz.setEnabled(false);
-
-		//TODO entfernen
-		this.fensterHaus.setVisible(false);
-		this.fensterHaus.setEnabled(false);
+		//---
+		//generisches Hausfenster
+		//---
 		
 		//generisches Dialogfenster
 		this.fensterDialog = new JLayeredPane();
@@ -500,7 +498,6 @@ public class GUILayer extends JFrame implements MouseMotionListener {
         dialogText.setBounds(12 ,60, 204, 75);
       	this.fensterDialog.add(dialogText, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
-		
 		// Buttons Dialogfenster
 		int buttonSize = 66;
 		int buttonSliceX = 684;
@@ -574,8 +571,8 @@ public class GUILayer extends JFrame implements MouseMotionListener {
 			this.buttons.put(buttonNamesAktionsleiste[i], button);
 		}
 
-		// Kleine Buttons TODO entfernen
-		buttonSize = 39;
+		// Kleine Buttons TODO entfernen bei Code Cleanup am Schluss - solange bitte nicht löschen!
+		/*buttonSize = 39;
 		buttonSliceX = 0;
 		buttonSliceY = buttonSize;
 
@@ -594,7 +591,7 @@ public class GUILayer extends JFrame implements MouseMotionListener {
 					buttonNamesSmall[i], Ressources.ZEROPOS.width - 39, 0 + i * buttonSize, this);
 			this.baseLayer.add(button, javax.swing.JLayeredPane.DEFAULT_LAYER);
 			this.buttons.put(buttonNamesSmall[i], button);
-		}
+		}*/
 	}
 
 
@@ -649,7 +646,7 @@ public class GUILayer extends JFrame implements MouseMotionListener {
 	 * Erzeugt Aktionsfenster für Spionage und Beschwichtigen
 	 * @param fenster Fenster-Objekt
 	 * @param buttonSliceX Start-X-Position auf der Button Slicemap
-	 * @param buttonNames
+	 * @param buttonNames String-Array mit zugehörigen Aktionscodes der Buttons
 	 * @author Stephan
 	 */
 	private void initButtonsAktionsfenster(JLayeredPane fenster, int buttonSliceX, String[] buttonNames) {
@@ -949,10 +946,9 @@ public class GUILayer extends JFrame implements MouseMotionListener {
 		// zeichne neuen Überwachungswert
 		this.updateUeberwachung();
 		
-		
 		//Quizaufruf
-		int zeitpunkt =(int) (Math.random()*3000);
-		if(this.stepcounter%(3000+zeitpunkt) == 0){
+		int zeitpunkt = (int) (Math.random() * 3000);
+		if(this.stepcounter % (3000 + zeitpunkt) == 0) {
 			quiz.starteQuiz();
 		}
 		
@@ -962,7 +958,7 @@ public class GUILayer extends JFrame implements MouseMotionListener {
 		}
 		
 
-		// Tag-Nacht-Modus
+		//Nacht-Modus aktivieren / deaktivieren
 		if (this.simulation.getSpiel_stunde() == 20) {
 			this.overlayNacht.setVisible(true);
 		}
@@ -1051,6 +1047,10 @@ public class GUILayer extends JFrame implements MouseMotionListener {
 		return this.overlayMousefollower;
 	}
 	
+	/**
+	 * Gibt Simulationsobjekt zurück
+	 * @return Simulation
+	 */
 	public Simulation getSimulation(){
 		return this.simulation;
 	}
@@ -1077,7 +1077,10 @@ public class GUILayer extends JFrame implements MouseMotionListener {
 		// do nothing; notwendig für implements MouseMotion (Interface)
 	}
 	
-	//Beschwerden Miri
+	/**
+	 * ArrayList der Menschen zurückggeben
+	 * @return ArrayList Mensch
+	 */
 	public ArrayList<Mensch> getHumans(){
 		return this.humans;
 	}
