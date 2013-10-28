@@ -968,6 +968,18 @@ public class GUILayer extends JFrame implements MouseMotionListener {
 	}
 	
 	
+	//Beschwerden Miri
+	public void agentEntersOtherHouse(){
+		//wenn sich der Agent in irgendeinem Haus befindet
+		if((int)(this.humans.get(this.humans.size()-1).get_location_id())-48 >= 1 && (int)(this.humans.get(this.humans.size()-1).get_location_id())-48 <= 9){
+			//wenn sich der Agent in dem Haus befindet, das ausspioniert werden soll
+			if((int)(this.humans.get(this.humans.size()-1).get_location_id())-48 == this.control.getHouseId()){
+				this.simulation.calc_misstrauen_after_ueberwachungs_action("bla", this.control.getHouseId());
+			}
+		}
+	}
+	
+	
 	
 	/**
 	 * Step steuert den zeitlichen Ablauf des Spieles und triggert die Simulation und Updates im Spielfenster
@@ -988,6 +1000,11 @@ public class GUILayer extends JFrame implements MouseMotionListener {
 		//Unwohlsein durch installierte Überwachungsmodule
 		if(this.stepcounter%1000 == 0){
 			this.simulation.calc_misstrauen_during_ueberwachung();
+		}
+		
+		//Misstrauen bei Überwachungsaktion
+		if(this.stepcounter%(Ressources.GAMESPEED/2) == 0){
+			this.agentEntersOtherHouse();
 		}
 		
 

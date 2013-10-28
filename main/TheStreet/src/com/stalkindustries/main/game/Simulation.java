@@ -184,7 +184,7 @@ public class Simulation {
 			//für alle Personen, die noch im Haus sind, das Misstrauen neu berechnen
 			if((int)(this.people.get(i).get_location_id())-48 == house_location){
 				if(risiko>2)	//wenn das risiko kleiner ist, hat man Glück und man wird nicht erwicht
-					this.people.get(i).set_misstrauen(this.people.get(i).get_misstrauen()+50); //TODO: den Wert 50 testen ... eventuell erhöhen
+					this.people.get(i).set_misstrauen(this.people.get(i).get_misstrauen()+6); //TODO: den Wert 50 testen ... eventuell erhöhen
 			}
 			//Checken, ob sich jemand in einer epsilon-Umgebung um das Haus befindet, in das eingebrochen werden soll
 			//--> 1. Epsilon-Umgebung aufspannen (ist eine relative eckige :-D)
@@ -196,11 +196,11 @@ public class Simulation {
 					//hier ist das Misstrauen natürlich größer
 					if(this.people.get(i).get_haus_id()+1 == house_location){
 						if(risiko>2)
-							this.people.get(i).set_misstrauen(this.people.get(i).get_misstrauen()+30);
+							this.people.get(i).set_misstrauen(this.people.get(i).get_misstrauen()+5);
 					}
 					else{
 						if(risiko>2)
-							this.people.get(i).set_misstrauen(this.people.get(i).get_misstrauen()+10);
+							this.people.get(i).set_misstrauen(this.people.get(i).get_misstrauen()+2);
 					}
 				}
 			}

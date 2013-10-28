@@ -23,6 +23,7 @@ public class Control implements IControl {
 	//Laden des Spielfenster-Objektes, um auf Funktionen davon zugreifen zu können
 	private GUILayer guilayer;
 	private Quiz quiz;
+	private int house_id = -1;
 
 	
 	
@@ -159,7 +160,8 @@ public class Control implements IControl {
 			if (!istVorhanden){
 				guilayer.getSimulation().bewegungAgentWanze(hausid);
 				guilayer.getSimulation().getHouses().get(hausid-1).getUeberwachungsmodule().add("Wanze");
-				guilayer.getSimulation().calc_misstrauen_after_ueberwachungs_action("Wanze", hausid);
+				//guilayer.getSimulation().calc_misstrauen_after_ueberwachungs_action("Wanze", hausid);
+				this.house_id = hausid;
 				guilayer.getButtonsMap().get("aktionNachhause").setEnabled(true);
 			}
 			istVorhanden = false;
@@ -475,6 +477,15 @@ public class Control implements IControl {
 			buttons.get("werkzeug"+modul).setEnabled(true);
 		}
 		
+	}
+	
+	
+	public int getHouseId(){
+		return this.house_id;
+	}
+	
+	public void setHouseId(int hous_id){
+		this.house_id = hous_id;
 	}
 
 }
