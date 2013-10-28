@@ -219,9 +219,9 @@ public class Control implements IControl {
 		if(funktion.equals("aktionHacken"))
 			spionagelabelBeschr(isPresent, "Laptop hacken");
 		if(funktion.equals("aktionFernglas"))
-			spionagelabelBeschr(isPresent, "ausspionieren");
+			spionagelabelBeschr(isPresent, "Ausspionieren");
 		if(funktion.equals("aktionParkSpionage"))
-			spionagelabelBeschr(isPresent, "im Park spionieren");
+			spionagelabelBeschr(isPresent, "Im Park spionieren");
 		if(funktion.equals("aktion6Spionage"))
 			spionagelabelBeschr(isPresent, "Aufgabe 6");
 		
@@ -229,13 +229,13 @@ public class Control implements IControl {
 		if(funktion.equals("aktionKuchen"))
 			beschwichtigenlabelBeschr(isPresent, "Kuchen vorbeibringen");
 		if(funktion.equals("aktionUnterhalten"))
-			beschwichtigenlabelBeschr(isPresent, "sich Unterhalten");
+			beschwichtigenlabelBeschr(isPresent, "Sich unterhalten");
 		if(funktion.equals("aktionFlirten"))
 			beschwichtigenlabelBeschr(isPresent, "Flirten");
 		if(funktion.equals("aktionHand"))
-			beschwichtigenlabelBeschr(isPresent, "helfen");
+			beschwichtigenlabelBeschr(isPresent, "Helfen");
 		if(funktion.equals("aktionParkBeschwichtigen"))
-			beschwichtigenlabelBeschr(isPresent, "im Park Unterhalten");
+			beschwichtigenlabelBeschr(isPresent, "Im Park unterhalten");
 		if(funktion.equals("aktion6Beschwichtigen"))
 			beschwichtigenlabelBeschr(isPresent, "Aktion 6");
 	}

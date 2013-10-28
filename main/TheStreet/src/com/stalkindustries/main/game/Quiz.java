@@ -53,12 +53,12 @@ public class Quiz {
 							Ressources.ingamebutton.getSubimage(buttonSliceX + buttonSize, i * buttonSliceY, buttonSize, buttonSize),
 							Ressources.ingamebutton.getSubimage(buttonSliceX + 2 * buttonSize, i * buttonSliceY, buttonSize, buttonSize),
 							Ressources.ingamebutton.getSubimage(buttonSliceX + 3 * buttonSize, i * buttonSliceY, buttonSize, buttonSize),
-							buttonNamesSmall[i-14], 45, 140+(i-14)*45 , this.gui );
+							buttonNamesSmall[i-14], 30, 140+(i-14)*45 , this.gui );
 					label[i-14] = new JLabel();
 					label[i-14].setText("Antwort");
 					label[i-14].setForeground(new java.awt.Color(0xf9, 0xf9, 0xf9));
-					label[i-14].setBounds(100, 140+(i-14)*45, 500, 39);
-					label[i-14].setFont(new Font("Corbel", Font.BOLD, 20));
+					label[i-14].setBounds(85, 140+(i-14)*45, 500, 39);
+					label[i-14].setFont(new Font("Corbel", Font.BOLD, 18));
 					
 					this.quizwindow.add(label[i-14], javax.swing.JLayeredPane.DEFAULT_LAYER);
 					this.quizwindow.add(button, javax.swing.JLayeredPane.DEFAULT_LAYER);
@@ -71,9 +71,9 @@ public class Quiz {
 		        frage.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
 		        frage.setFocusable(false);
 		        frage.setOpaque(false);
-		        frage.setFont(new Font("Corbel",Font.BOLD,20));
+		        frage.setFont(new Font("Corbel",Font.BOLD,18));
 		        frage.setForeground(new java.awt.Color(0xf9, 0xf9, 0xf9));
-		        frage.setBounds(45,60, 500, 75);
+		        frage.setBounds(30,60, 515, 75);
 		        this.quizwindow.add(frage, javax.swing.JLayeredPane.DEFAULT_LAYER);
 	}
 	
