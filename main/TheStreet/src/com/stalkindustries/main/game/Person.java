@@ -87,5 +87,10 @@ public abstract class Person extends Mensch {
 	public void set_durchgefuehrteBeschwichtigungen(int index){
 		this.durchgefuehrteBeschwichtigungen[index]++;
 	}
+	
+	@Override
+	public String getName(){
+		return this.name;
+	}
 
 }

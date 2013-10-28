@@ -50,6 +50,7 @@ public class GUILayer extends JFrame implements MouseMotionListener {
 	private JLabel overlayNacht = new JLabel();
 	private JLabel spionageBeschr = new JLabel();
 	private JLabel beschwichtigenBeschr = new JLabel();
+	private JLabel[] hausinformationen = new JLabel[10]; //Titelfeld, 4Personenbilder, 4 Namen, Leiste Überwachungsstatus
 
 	
 	
@@ -298,13 +299,13 @@ public class GUILayer extends JFrame implements MouseMotionListener {
 		this.fensterHaus.add(button, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
 		//Titel Hausinfo
-		label = new JLabel();
-		label.setText("Haus1");
-		label.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-		label.setFont(new Font("Corbel", Font.BOLD, 25));
-		label.setForeground(new java.awt.Color(0x1f, 0x1f, 0x1f));
-		label.setBounds(12, 12, 200, 30);
-		this.fensterHaus.add(label, javax.swing.JLayeredPane.DEFAULT_LAYER);
+		hausinformationen[0] = new JLabel();
+		hausinformationen[0].setText("Haus1");
+		hausinformationen[0].setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+		hausinformationen[0].setFont(new Font("Corbel", Font.BOLD, 25));
+		hausinformationen[0].setForeground(new java.awt.Color(0x1f, 0x1f, 0x1f));
+		hausinformationen[0].setBounds(12, 12, 200, 30);
+		this.fensterHaus.add(hausinformationen[0], javax.swing.JLayeredPane.DEFAULT_LAYER);
 		
 		//Inhalte der Hausinfo
 		label = new JLabel();
@@ -340,15 +341,17 @@ public class GUILayer extends JFrame implements MouseMotionListener {
 		this.fensterHaus.add(label, javax.swing.JLayeredPane.DEFAULT_LAYER);
 		
 		//Personen im Hausfenster
-		int numberpers=0;
-		for(int i=0;i<humans.size();i++){
-			if(humans.get(i).get_haus_id()==1){
-				label = new JLabel();
-				label.setIcon(new ImageIcon(humans.get(i).getSprite()));
-				label.setBounds(45, 150+45*numberpers, 45, 45);
-				this.fensterHaus.add(label, javax.swing.JLayeredPane.DEFAULT_LAYER);
-				numberpers++;
-			}
+		for(int i=0;i<4;i++){
+			hausinformationen[i+1] = new JLabel();
+			hausinformationen[i+1].setText(" ");
+			hausinformationen[i+1].setBounds(45, 100+45*i, 45, 45);
+			this.fensterHaus.add(hausinformationen[i+1], javax.swing.JLayeredPane.DEFAULT_LAYER);
+			hausinformationen[i+5]= new JLabel();
+			hausinformationen[i+5].setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+			hausinformationen[i+5].setFont(new Font("Corbel", Font.BOLD, 20));
+			hausinformationen[i+5].setForeground(new java.awt.Color(0xf9, 0xf9, 0xf9));
+			hausinformationen[i+5].setBounds(100, 100+45*i, 200, 45);
+			this.fensterHaus.add(hausinformationen[i+5], javax.swing.JLayeredPane.DEFAULT_LAYER);
 		}
 
 		//Hintergrundbild HausFenster
@@ -1084,5 +1087,8 @@ public class GUILayer extends JFrame implements MouseMotionListener {
 	public ArrayList<Mensch> getHumans(){
 		return this.humans;
 	}
-
+	
+	public JLabel[] getHausinfoLabels(){
+		return hausinformationen;
+	}
 }

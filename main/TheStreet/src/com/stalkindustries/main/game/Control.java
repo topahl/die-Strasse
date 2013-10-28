@@ -1,6 +1,9 @@
 package com.stalkindustries.main.game;
 
+import java.util.ArrayList;
+
 import javax.swing.ImageIcon;
+import javax.swing.JLabel;
 import javax.swing.JLayeredPane;
 import com.stalkindustries.main.IControl;
 
@@ -184,6 +187,10 @@ public class Control implements IControl {
 //			
 //		if(lastFunktioncode.equals("aktionParkSpionage"))
 			
+		if(!lastFunktioncode.startsWith("aktion")){
+			schowHausinfo(hausid);			
+		}
+		
 		}
 		guilayer.getMousefollower().setVisible(false);
 	}
@@ -430,5 +437,33 @@ public class Control implements IControl {
 			guilayer.getBeschreibung("beschwichtigen").setText("");
 	}
 	
+	/**
+	 * Zeigt die Hausinformation für ein Haus an
+	 * @param hausnr Hausnummer des Hases welches angezeigt werden soll
+	 */
+	private void schowHausinfo(int hausnr){
+		JLayeredPane hausinfo = guilayer.getWindow("fensterhaus");
+		JLabel[] informationen = guilayer.getHausinfoLabels();
+		informationen[0].setText("Haus "+hausnr);
+		hausnr--;
+		hausinfo.setVisible(true);
+		hausinfo.setEnabled(true);
+		ArrayList<Mensch> personen = guilayer.getHumans();
+		int perscnt = 1;
+		for(int i=0;i<4;i++){
+				informationen[i+1].setVisible(false);
+				informationen[i+5].setVisible(false);
+		}
+		for(Mensch person:personen){
+			if(person.get_haus_id()==hausnr){
+				informationen[perscnt].setIcon(new ImageIcon(person.getSprite().getSubimage(0, 0, Ressources.RASTERHEIGHT, Ressources.RASTERHEIGHT)));
+				informationen[perscnt+4].setText(person.getName());
+				informationen[perscnt].setVisible(true);
+				informationen[perscnt+4].setVisible(true);
+				perscnt++;
+			}
+		}
+		
+	}
 
 }
