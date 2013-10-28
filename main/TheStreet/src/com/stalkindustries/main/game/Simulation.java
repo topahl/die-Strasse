@@ -1040,7 +1040,7 @@ goala:	for (int i=0; i<100; i++){
 		}
 		for (int i = 0; i < this.people.size(); i++){
 			if (this.people.get(i) instanceof Terrorist){
-				if (this.people.get(i).get_misstrauen() >= 90.00){
+				if (this.people.get(i).get_misstrauen() >= 85.00){
 					// GAMEOVER!!!
 				}
 			} 
