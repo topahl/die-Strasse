@@ -106,7 +106,6 @@ public class Quiz {
 		for(int i=0;i<this.gui.getHumans().size()-1;i++){
 			if(this.gui.getHumans().get(i) instanceof Person){
 				((Person)this.gui.getHumans().get(i)).set_misstrauen(((Person)this.gui.getHumans().get(i)).get_misstrauen()+misstrauen);
-				((Person)this.gui.getHumans().get(i)).update_schatten();
 			}
 			//sorgt dafür, dass sich das Misstrauen zwischen -100 und 100 bewegt
 			if(this.gui.getHumans().get(i) instanceof Person){
@@ -115,6 +114,7 @@ public class Quiz {
 				if(((Person)this.gui.getHumans().get(i)).get_misstrauen() < -100)
 					((Person)this.gui.getHumans().get(i)).set_misstrauen(-100);
 			}
+			((Person)this.gui.getHumans().get(i)).update_schatten();
 		}
 	}
 	
