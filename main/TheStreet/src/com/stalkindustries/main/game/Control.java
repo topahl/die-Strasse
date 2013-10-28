@@ -142,23 +142,35 @@ public class Control implements IControl {
 //		
 //
 		if(lastFunktioncode.equals("aktionWanze")){
-			for (int i=0; i<guilayer.getSimulation().getHouses().get(hausid).getUeberwachungsmodule().size(); i++){
-				if (guilayer.getSimulation().getHouses().get(hausid).getUeberwachungsmodule().get(i).equals("Wanze")){
+			for (int i=0; i<guilayer.getSimulation().getHouses().get(hausid-1).getUeberwachungsmodule().size(); i++){
+				if (guilayer.getSimulation().getHouses().get(hausid-1).getUeberwachungsmodule().get(i).equals("Wanze")){
 					istVorhanden=true;
 					break;
-				}
-					
+				}	
 			}
 			if (!istVorhanden){
 				guilayer.getSimulation().bewegungAgentWanze(hausid);
-				guilayer.getSimulation().getHouses().get(hausid).getUeberwachungsmodule().add("Wanze");
+				guilayer.getSimulation().getHouses().get(hausid-1).getUeberwachungsmodule().add("Wanze");
+				guilayer.getSimulation().calc_misstrauen_after_ueberwachungs_action("Wanze", hausid);
 			}
 			istVorhanden = false;
 		}
 			
 		
 		if(lastFunktioncode.equals("aktionKamera")){
-			guilayer.getSimulation().bewegungAgentWanze(hausid);
+			for (int i=0; i<guilayer.getSimulation().getHouses().get(hausid-1).getUeberwachungsmodule().size(); i++){
+				if (guilayer.getSimulation().getHouses().get(hausid-1).getUeberwachungsmodule().get(i).equals("Kamera")){
+					istVorhanden=true;
+					break;
+				}
+			}
+			if (!istVorhanden){
+				// gleiche Bewegung wie Verwanzen
+				guilayer.getSimulation().bewegungAgentWanze(hausid);
+				guilayer.getSimulation().getHouses().get(hausid-1).getUeberwachungsmodule().add("Kamera");
+				guilayer.getSimulation().calc_misstrauen_after_ueberwachungs_action("Kamera", hausid);
+			}
+			istVorhanden = false;
 		}
 			
 //			
