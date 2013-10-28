@@ -47,6 +47,10 @@ public class Control implements IControl {
 			clickPause();
 		if(funktion.equals("close"))
 			clickExit();
+		if(funktion.equals("dialogAccept"))
+			clickDialogAccept();
+		if(funktion.equals("dialogDecline"))
+			clickDialogDecline();
 		
 		//Buttons Menüleiste
 		if(funktion.equals("aktionenSpionage"))
@@ -124,7 +128,7 @@ public class Control implements IControl {
 			
 		
 		
-//	    "aktion6Beschwichtigen"  && 	"aktion6Spionage"  werden nicht abgefragt
+//	 TODO "aktion6Beschwichtigen" && "aktion6Spionage" werden nicht abgefragt
 //		if(lastFunktioncode.equals("aktionKuchen"))
 //			
 //		if(lastFunktioncode.equals("aktionUnterhalten"))
@@ -252,6 +256,7 @@ public class Control implements IControl {
 	
 	/**
 	 * Ingame-Fenster schließen
+	 * @param fensterName Bezeichnung des Fensters
 	 */
 	private void closeWindow(String fensterName) {
 		JLayeredPane frame = guilayer.getWindow(fensterName);
@@ -259,6 +264,27 @@ public class Control implements IControl {
 		frame.setEnabled(false);
 	}
 	
+	
+	
+	/**
+	 * Bestimmte Fenster öffnen
+	 */
+	private void openWindow(String fensterName) {
+		JLayeredPane frame = guilayer.getWindow(fensterName);
+		frame.setVisible(true);
+		frame.setEnabled(true);
+	}
+	
+	
+	
+	private void clickDialogAccept() {
+		guilayer.getWindow("dialog").setEnabled(false);
+		guilayer.getWindow("dialog").setVisible(false);
+	}
+	private void clickDialogDecline() {
+		guilayer.getWindow("dialog").setEnabled(false);
+		guilayer.getWindow("dialog").setVisible(false);
+	}
 	
 	
 	/**

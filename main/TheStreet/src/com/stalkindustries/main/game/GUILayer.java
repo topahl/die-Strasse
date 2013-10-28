@@ -33,6 +33,7 @@ public class GUILayer extends JFrame implements MouseMotionListener {
 	private JLayeredPane fensterBeschwichtigen;
 	private JLayeredPane fensterQuiz;
 	private JLayeredPane fensterHaus;
+	private JLayeredPane fensterDialog;
 	private Simulation simulation;
 	private Control control;
 	private Haus haus;
@@ -101,7 +102,7 @@ public class GUILayer extends JFrame implements MouseMotionListener {
 		this.initMouseListener();
 
 		//Aktionsfenster initialisieren
-		this.initAktionsfenster();
+		this.initIngameFenster();
 
 		//Buttons auf Häusern erzeugen
 		this.initButtonsHaeuser();
@@ -228,10 +229,10 @@ public class GUILayer extends JFrame implements MouseMotionListener {
 
 	
 	/**
-	 * Erzeugt die Aktionsfenster mit Inhalten
+	 * Erzeugt die Ingamefenster mit Inhalten
 	 * @author Stephan
 	 */
-	private void initAktionsfenster() {
+	private void initIngameFenster() {
 
 		//Dummys für Erzeugung
 		JLabel label; 
@@ -268,7 +269,7 @@ public class GUILayer extends JFrame implements MouseMotionListener {
 		label.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
 		label.setFont(new Font("Corbel", Font.BOLD, 25));
 		label.setForeground(new java.awt.Color(0x1f, 0x1f, 0x1f));
-		label.setBounds(20, 12, 200, 30);
+		label.setBounds(12, 12, 200, 30);
 		this.fensterBeschwichtigen.add(label, javax.swing.JLayeredPane.DEFAULT_LAYER);
 		beschwichtigenBeschr.setText("");
 		beschwichtigenBeschr.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
@@ -285,7 +286,7 @@ public class GUILayer extends JFrame implements MouseMotionListener {
 		label.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
 		label.setFont(new Font("Corbel", Font.BOLD, 25));
 		label.setForeground(new java.awt.Color(0x1f, 0x1f, 0x1f));
-		label.setBounds(20, 12, 200, 30);
+		label.setBounds(12, 12, 200, 30);
 		this.fensterQuiz.add(label, javax.swing.JLayeredPane.DEFAULT_LAYER);
 		
 		//Titel Hausinfo
@@ -294,10 +295,10 @@ public class GUILayer extends JFrame implements MouseMotionListener {
 		label.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
 		label.setFont(new Font("Corbel", Font.BOLD, 25));
 		label.setForeground(new java.awt.Color(0x1f, 0x1f, 0x1f));
-		label.setBounds(20, 12, 200, 30);
+		label.setBounds(12, 12, 200, 30);
 		this.fensterHaus.add(label, javax.swing.JLayeredPane.DEFAULT_LAYER);
 		
-		//Inhalt der Hausinfo
+		//Inhalte der Hausinfo
 		label = new JLabel();
 		label.setText("Bewohner");
 		label.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
@@ -323,14 +324,14 @@ public class GUILayer extends JFrame implements MouseMotionListener {
 		this.fensterHaus.add(label, javax.swing.JLayeredPane.DEFAULT_LAYER);
 		
 		label = new JLabel();
-		label.setText("Installierte Wergzeuge");
+		label.setText("Installierte Werkzeuge");
 		label.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
 		label.setFont(new Font("Corbel", Font.BOLD, 20));
 		label.setForeground(new java.awt.Color(0xf9, 0xf9, 0xf9));
 		label.setBounds(230, 170, 200, 30);
 		this.fensterHaus.add(label, javax.swing.JLayeredPane.DEFAULT_LAYER);
 		
-		//Personen im Hauscounter
+		//Personen im Hausfenster
 		int numberpers=0;
 		for(int i=0;i<humans.size();i++){
 			if(humans.get(i).get_haus_id()==1){
@@ -382,8 +383,6 @@ public class GUILayer extends JFrame implements MouseMotionListener {
 //        this.fensterQuiz.add(frage, javax.swing.JLayeredPane.DEFAULT_LAYER);
         
         
-        
-		
 		// Fenster: Spionage Aktionsfenster
 		this.fensterSpionage = new JLayeredPane();
 		this.fensterSpionage.setBounds(Ressources.ZEROPOS.width + 90, Ressources.ZEROPOS.height + 390, 248, 235);
@@ -416,7 +415,7 @@ public class GUILayer extends JFrame implements MouseMotionListener {
 		label.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
 		label.setFont(new Font("Corbel", Font.BOLD, 25));
 		label.setForeground(new java.awt.Color(0x1f, 0x1f, 0x1f));
-		label.setBounds(20, 12, 200, 30); 
+		label.setBounds(12, 12, 200, 30); 
 		this.fensterSpionage.add(label, javax.swing.JLayeredPane.DEFAULT_LAYER);
 		spionageBeschr.setText("");
 		spionageBeschr.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
@@ -463,7 +462,69 @@ public class GUILayer extends JFrame implements MouseMotionListener {
 		label.setIcon(new ImageIcon(Ressources.ingameframe.getSubimage(765, 0, 598, 327)));
 		label.setBounds(0, 0, 598, 327);
 		this.fensterQuiz.add(label, javax.swing.JLayeredPane.DEFAULT_LAYER);
+		
+		//Quizfenster ausblenden
+		this.fensterQuiz.setVisible(false);
+		this.fensterQuiz.setEnabled(false);
+
+		//TODO entfernen
+		this.fensterHaus.setVisible(false);
+		this.fensterHaus.setEnabled(false);
+		
+		//generisches Dialogfenster
+		this.fensterDialog = new JLayeredPane();
+		this.fensterDialog.setBounds(Ressources.ZEROPOS.width + (Ressources.MAPWIDTH - 248) / 2,
+									 Ressources.ZEROPOS.height + (Ressources.MAPHEIGHT - 235) / 2,
+									 248, 235);
+		this.baseLayer.add(this.fensterDialog, javax.swing.JLayeredPane.DEFAULT_LAYER);
+
+		// Überschrift des Dialogfensters
+		label = new JLabel();
+		label.setText("Überschrift");
+		label.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+		label.setFont(new Font("Corbel", Font.BOLD, 25));
+		label.setForeground(new java.awt.Color(0x1f, 0x1f, 0x1f));
+		label.setBounds(12, 12, 200, 30); 
+		this.fensterDialog.add(label, javax.swing.JLayeredPane.DEFAULT_LAYER);
+
+		JTextArea dialogText = new JTextArea();
+        dialogText.setLineWrap(true);
+        dialogText.setText("Text des Dialogfeldes als Test der Länge und so.");
+        dialogText.setWrapStyleWord(true);
+        dialogText.setFocusCycleRoot(true);
+        dialogText.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        dialogText.setFocusable(false);
+        dialogText.setOpaque(false);
+        dialogText.setFont(new Font("Corbel",Font.BOLD,18));
+        dialogText.setForeground(new java.awt.Color(0xf9, 0xf9, 0xf9));
+        dialogText.setBounds(12 ,60, 204, 75);
+      	this.fensterDialog.add(dialogText, javax.swing.JLayeredPane.DEFAULT_LAYER);
+
+		
+		// Buttons Dialogfenster
+		int buttonSize = 66;
+		int buttonSliceX = 684;
+		int buttonSliceY = buttonSize;
+
+		String[] buttonNamesDialog = { "dialogAccept", "dialogDecline" };
+		for (int i = 0; i < buttonNamesDialog.length; i++) {
+			button = new Button(this.control,
+					Ressources.ingamebutton.getSubimage(buttonSliceX, (i+4) * buttonSliceY, buttonSize, buttonSize),
+					Ressources.ingamebutton.getSubimage(buttonSliceX + buttonSize, (i+4) * buttonSliceY, buttonSize, buttonSize),
+					Ressources.ingamebutton.getSubimage(buttonSliceX + 2 * buttonSize, (i+4) * buttonSliceY, buttonSize, buttonSize),
+					Ressources.ingamebutton.getSubimage(buttonSliceX + 3 * buttonSize, (i+4) * buttonSliceY, buttonSize, buttonSize),
+					buttonNamesDialog[i], 40 + i * 100, 132, this);
+			this.fensterDialog.add(button, javax.swing.JLayeredPane.DEFAULT_LAYER);
+			this.buttons.put(buttonNamesDialog[i], button);
+		}
+
+		//Hintergrundbild Dialogfenster
+		label = new JLabel();
+		label.setIcon(new ImageIcon(Ressources.ingameframe.getSubimage(0, 0, 248, 235)));
+		label.setBounds(0, 0, 248, 232);
+		this.fensterDialog.add(label, javax.swing.JLayeredPane.DEFAULT_LAYER);
 	}
+
 
 
 	/**
@@ -959,6 +1020,8 @@ public class GUILayer extends JFrame implements MouseMotionListener {
 			return this.fensterQuiz;
 		if (window.equals("fensterhaus"))
 			return this.fensterHaus;
+		if (window.equals("dialog"))
+			return this.fensterDialog;
 		return null;
 	}
 
