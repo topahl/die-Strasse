@@ -108,6 +108,13 @@ public class Quiz {
 				((Person)this.gui.getHumans().get(i)).set_misstrauen(((Person)this.gui.getHumans().get(i)).get_misstrauen()+misstrauen);
 				((Person)this.gui.getHumans().get(i)).update_schatten();
 			}
+			//sorgt dafür, dass sich das Misstrauen zwischen -100 und 100 bewegt
+			if(this.gui.getHumans().get(i) instanceof Person){
+				if(((Person)this.gui.getHumans().get(i)).get_misstrauen() > 100)
+					((Person)this.gui.getHumans().get(i)).set_misstrauen(100);
+				if(((Person)this.gui.getHumans().get(i)).get_misstrauen() < -100)
+					((Person)this.gui.getHumans().get(i)).set_misstrauen(-100);
+			}
 		}
 	}
 	
