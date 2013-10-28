@@ -180,30 +180,30 @@ public class Simulation {
 		int epsilon = 200;	
 		
 		for(int i=0;i<this.people.size();i++){
-//			//Checken, ob sich noch jemand in dem Haus befindet
-//			//für alle Personen, die noch im Haus sind, das Misstrauen neu berechnen
-//			if(this.people.get(i).get_location_id() == house_location){
-//				if(risiko>2)	//wenn das risiko kleiner ist, hat man Glück und man wird nicht erwicht
-//					this.people.get(i).set_misstrauen(this.people.get(i).get_misstrauen()+50); //TODO: den Wert 50 testen ... eventuell erhöhen
-//			}
-//			//Checken, ob sich jemand in einer epsilon-Umgebung um das Haus befindet, in das eingebrochen werden soll
-//			//--> 1. Epsilon-Umgebung aufspannen (ist eine relative eckige :-D)
-//			//-->Mittelpunkt vom Haus bestimmen
-//			else{
+			//Checken, ob sich noch jemand in dem Haus befindet
+			//für alle Personen, die noch im Haus sind, das Misstrauen neu berechnen
+			if((int)(this.people.get(i).get_location_id())-48 == house_location){
+				if(risiko>2)	//wenn das risiko kleiner ist, hat man Glück und man wird nicht erwicht
+					this.people.get(i).set_misstrauen(this.people.get(i).get_misstrauen()+50); //TODO: den Wert 50 testen ... eventuell erhöhen
+			}
+			//Checken, ob sich jemand in einer epsilon-Umgebung um das Haus befindet, in das eingebrochen werden soll
+			//--> 1. Epsilon-Umgebung aufspannen (ist eine relative eckige :-D)
+			//-->Mittelpunkt vom Haus bestimmen
+			else{
 				// wenn sich eine Person in der Epsilon-Umgebung befindet
 				if(this.people.get(i).getPosX() >= mittelpunktX-epsilon && this.people.get(i).getPosX() <= mittelpunktX+epsilon && this.people.get(i).getPosY() >= mittelpunktY-epsilon && this.people.get(i).getPosY() <= mittelpunktY+epsilon && this.people.get(i).get_location_id()!='E'){
 					//wenn das per Zufall eine Person ist, die in dem Haus wohnt und z.B. auf dem Heimweg ist
 					//hier ist das Misstrauen natürlich größer
 					if(this.people.get(i).get_haus_id()+1 == house_location){
 						if(risiko>2)
-							this.people.get(i).set_misstrauen(this.people.get(i).get_misstrauen()+50);
+							this.people.get(i).set_misstrauen(this.people.get(i).get_misstrauen()+30);
 					}
 					else{
 						if(risiko>2)
 							this.people.get(i).set_misstrauen(this.people.get(i).get_misstrauen()+10);
 					}
 				}
-//			}
+			}
 			//sorgt dafür, dass sich das Misstrauen zwischen -100 und 100 bewegt
 			if(this.people.get(i).get_misstrauen()>100)
 				this.people.get(i).set_misstrauen(100);
