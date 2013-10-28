@@ -307,6 +307,22 @@ public class GUILayer extends JFrame implements MouseMotionListener {
 		hausinformationen[0].setBounds(12, 12, 200, 30);
 		this.fensterHaus.add(hausinformationen[0], javax.swing.JLayeredPane.DEFAULT_LAYER);
 		
+		//Werkzeug Button
+		int buttonSize = 39;
+		int buttonSliceX = 0;
+		int buttonSliceY = buttonSize;
+		String[] buttonNamesSmall = { "werkzeugWanze", "werkzeugKamera","werkzeugHacken","werkzeugFernglas" };
+		for (int i = 0; i < buttonNamesSmall.length; i++) {
+			button = new Button(control,
+					Ressources.ingamebutton.getSubimage(buttonSliceX, i * buttonSliceY, buttonSize, buttonSize),
+					Ressources.ingamebutton.getSubimage(buttonSliceX + buttonSize, i * buttonSliceY, buttonSize, buttonSize),
+					Ressources.ingamebutton.getSubimage(buttonSliceX + 2 * buttonSize, i * buttonSliceY, buttonSize, buttonSize),
+					Ressources.ingamebutton.getSubimage(buttonSliceX + 3 * buttonSize, i * buttonSliceY, buttonSize, buttonSize),
+					buttonNamesSmall[i], 230+(i)*45, 210 , this );
+			this.fensterHaus.add(button, javax.swing.JLayeredPane.DEFAULT_LAYER);
+			buttons.put(buttonNamesSmall[i], button);
+			
+		}
 		//Inhalte der Hausinfo
 		label = new JLabel();
 		label.setText("Bewohner");
@@ -502,9 +518,9 @@ public class GUILayer extends JFrame implements MouseMotionListener {
       	this.fensterDialog.add(dialogText, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
 		// Buttons Dialogfenster
-		int buttonSize = 66;
-		int buttonSliceX = 684;
-		int buttonSliceY = buttonSize;
+		buttonSize = 66;
+		buttonSliceX = 684;
+		buttonSliceY = buttonSize;
 
 		String[] buttonNamesDialog = { "dialogAccept", "dialogDecline" };
 		for (int i = 0; i < buttonNamesDialog.length; i++) {

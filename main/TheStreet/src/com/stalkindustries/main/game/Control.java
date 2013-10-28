@@ -1,10 +1,13 @@
 package com.stalkindustries.main.game;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import javax.swing.JLayeredPane;
+
+import com.stalkindustries.main.Button;
 import com.stalkindustries.main.IControl;
 
 //Kreiert vom unglaublichen Stephan
@@ -449,6 +452,11 @@ public class Control implements IControl {
 		hausinfo.setVisible(true);
 		hausinfo.setEnabled(true);
 		ArrayList<Mensch> personen = guilayer.getHumans();
+		HashMap<String,Button> buttons = guilayer.getButtonsMap();
+		buttons.get("werkzeugWanze").setEnabled(false);
+		buttons.get("werkzeugKamera").setEnabled(false);
+		buttons.get("werkzeugHacken").setEnabled(false);
+		buttons.get("werkzeugFernglas").setEnabled(false);
 		int perscnt = 1;
 		for(int i=0;i<4;i++){
 				informationen[i+1].setVisible(false);
@@ -462,6 +470,9 @@ public class Control implements IControl {
 				informationen[perscnt+4].setVisible(true);
 				perscnt++;
 			}
+		}
+		for(String modul:guilayer.getSimulation().getHouses().get(hausnr).getUeberwachungsmodule()){
+			buttons.get("werkzeug"+modul).setEnabled(true);
 		}
 		
 	}
