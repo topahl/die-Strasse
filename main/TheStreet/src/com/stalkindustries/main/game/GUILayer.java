@@ -1008,5 +1008,10 @@ public class GUILayer extends JFrame implements MouseMotionListener {
 	public void mouseDragged(MouseEvent e) {
 		// do nothing; notwendig für implements MouseMotion (Interface)
 	}
+	
+	//Beschwerden Miri
+	public ArrayList<Mensch> getHumans(){
+		return this.humans;
+	}
 
 }

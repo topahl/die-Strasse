@@ -108,6 +108,7 @@ public class Control implements IControl {
 	
 	private void quizAntwort(String antwort){ //antwort=A || B || C
 		this.quiz.analyzeAntwort(antwort);
+		this.quiz.calcMisstrauenAfterQuiz();
 		closeWindow("quizfenster");
 	}
 	

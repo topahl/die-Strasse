@@ -213,6 +213,8 @@ public class Simulation {
 		
 	}
 	
+	
+	
 	//Beschwerden Miri
 	//Allen Häusern den Überwachungsstatus updaten
 	public void calc_ueberwachungsstatus(){

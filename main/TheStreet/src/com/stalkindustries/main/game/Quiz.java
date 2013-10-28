@@ -82,7 +82,33 @@ public class Quiz {
 		int antwortnr = (int)antwort.charAt(0)-61;
 		int richtigkeit = Integer.parseInt(this.quizfragen.get(this.quizstart).get(antwortnr));
 		this.beantwortet.add(richtigkeit);
+		if(richtigkeit == 100)
+			this.quizfragen.remove(this.quizstart);
 		this.quizstart = (this.quizstart + this.quizstep)%this.quizfragen.size();
+	}
+	
+	//Beschwerden Miri
+	public void calcMisstrauenAfterQuiz(){
+		int misstrauen = 0;
+		//nur wenn die Antwort nicht zu 100% richtig war
+		if(this.beantwortet.get(this.beantwortet.size()-1) == 100){
+			misstrauen = -5;
+		}
+		//wenn Antwort so richtig falsch war
+		else if(this.beantwortet.get(this.beantwortet.size()-1) < 50){
+			misstrauen = 20;	//TODO misstrauenswerte überprüfen
+		}
+		//wenn Antwort nur teilweise falsch war
+		else{
+			misstrauen = 10;
+		}
+		//nur bis size-1, da der Agent wieder ausgenommen ist
+		for(int i=0;i<this.gui.getHumans().size()-1;i++){
+			if(this.gui.getHumans().get(i) instanceof Person){
+				((Person)this.gui.getHumans().get(i)).set_misstrauen(((Person)this.gui.getHumans().get(i)).get_misstrauen()+misstrauen);
+				((Person)this.gui.getHumans().get(i)).update_schatten();
+			}
+		}
 	}
 	
 	
