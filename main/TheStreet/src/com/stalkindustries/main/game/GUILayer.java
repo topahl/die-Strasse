@@ -1009,10 +1009,48 @@ public class GUILayer extends JFrame implements MouseMotionListener {
 		
 
 		//Nacht-Modus aktivieren / deaktivieren
-		if (this.simulation.getSpiel_stunde() == 20) {
-			this.overlayNacht.setVisible(true);
+		int stunde = this.simulation.getSpiel_stunde();
+		int minute = this.simulation.getSpiel_minute();
+		if(stunde == 21){
+			if (minute == 0) {
+				this.overlayNacht.setBackground(new Color(0, 0, 0.1f, 0.2f));
+				this.overlayNacht.setVisible(true);
+			}
+			if(minute == 2){
+				this.overlayNacht.setBackground(new Color(0, 0, 0.4f, 0.2f));
+			}
+			if(minute == 4){
+				this.overlayNacht.setBackground(new Color(0, 0, 0.4f, 0.2f));
+			}
+			if(minute == 6){
+				this.overlayNacht.setBackground(new Color(0, 0, 0.6f, 0.2f));
+			}
+			if(minute == 8){
+				this.overlayNacht.setBackground(new Color(0, 0, 0.8f, 0.2f));
+			}
+			if(minute == 10){
+				this.overlayNacht.setBackground(new Color(0, 0, 1f, 0.2f));
+			}
 		}
-		if (this.simulation.getSpiel_stunde() == 6) {
+		if (stunde == 6) {
+//			if(minute == 0){
+//				this.overlayNacht.setBackground(new Color(0, 0, 0.8f, 0.2f));
+//			}
+//			if(minute == 2){
+//				this.overlayNacht.setBackground(new Color(0, 0, 0.6f, 0.2f));
+//			}
+//			if(minute == 4){
+//				this.overlayNacht.setBackground(new Color(0, 0, 0.4f, 0.2f));
+//			}
+//			if(minute == 6){
+//				this.overlayNacht.setBackground(new Color(0, 0, 0.2f, 0.2f));
+//			}
+//			if(minute == 8){
+//				this.overlayNacht.setBackground(new Color(0, 0, 0.1f, 0.2f));
+//			}
+//			if(minute == 10){
+//				this.overlayNacht.setVisible(false);
+//			}
 			this.overlayNacht.setVisible(false);
 		}
 
