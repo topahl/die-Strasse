@@ -32,6 +32,9 @@ public class ControlMenu implements IControl{
 			mainmenu.showLayer(Menu.LAYERPROFIL);
 		if(funktion.equals("highscore"))
 			mainmenu.showLayer(Menu.LAYERHIGHSCORE);
+		if(funktion.equals("tutorial"))
+			mainmenu.showLayer(Menu.LAYERTUTORIAL);
+		
 			
 	}
 	
