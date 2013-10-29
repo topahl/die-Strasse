@@ -18,7 +18,7 @@ public class Ressources {
 	//private static ArrayList<ArrayList<String>> arabian_names;	TODO: entfernen
 	private static ArrayList<ArrayList<String>> quizfragen;
 	//private static ArrayList<ArrayList<String>> arabian_quiz;		TODO: entfernen
-	private static ArrayList<ArrayList<String>> livertickergags;
+	private static ArrayList<ArrayList<String>> livetickergags;
 	
 	public static final int RASTERHEIGHT = 45; //Map Raster
 	public static final int TORSOCNT =4; //Anzahl verschiedener Torsos in Sprite Grafik
@@ -35,7 +35,7 @@ public class Ressources {
 	public static BufferedImage menubutton;
 	public static BufferedImage ingameframe;
 	
-	public static int NUMBERHOUSES = 9;
+	public static int NUMBERHOUSES;
 	public static final int NUMBERBESCHWICHTIGENACTIONS = 4; // Zahl ist grad nur Dummywert
 	public static int AUSGEWAEHLTESLAND = 1; //TODO dynamisch ausgewähltes Land reinschreiben
 	
@@ -44,7 +44,8 @@ public class Ressources {
 		location_ids=read_from_csv("res\\level\\"+levelname+"\\"+levelname+"_map.csv");
 		names = read_from_csv("res\\level\\"+levelname+"\\"+levelname+"_namen.csv");
 		quizfragen = read_from_csv("res\\level\\"+levelname+"\\"+levelname+"_quizfragen.csv");
-		livertickergags = read_from_csv("res\\game\\"+"livetickergags.csv");
+		livetickergags = read_from_csv("res\\game\\"+"livetickergags.csv");
+		livetickergags = randomizeGags();
 		setNumberOfHouses();
 	}
 	
@@ -217,5 +218,25 @@ public class Ressources {
 		}	
 		return new_csv;
 	}
+	
+	public static ArrayList<ArrayList<String>> randomizeGags(){
+		ArrayList<ArrayList<String>> gags = new ArrayList<ArrayList<String>>();
+		ArrayList<ArrayList<String>> gags_input = copy_csv(livetickergags);
+		ArrayList<String> tmp;
+		int start = (int)(Math.random()*livetickergags.size());
+		int step = (int)(Math.random()*(livetickergags.size()-2)+1);
+		
+		for(int i=0;i<gags_input.size();i++){
+			tmp = new ArrayList<String>();
+			tmp.add(gags_input.get(start).get(0));
+			gags_input.remove(start);
+			start = (start+step)%gags_input.size();
+			gags.add(tmp);
+		}
+		
+		return gags;
+	}
+	
+	
 	
 }

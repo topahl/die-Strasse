@@ -222,6 +222,11 @@ public class Simulation {
 			if(this.houses.get(this.people.get(i).get_haus_id()).getUeberwachungsmodule().size() > 0){
 				this.people.get(i).set_misstrauen(this.people.get(i).get_misstrauen()+2);
 			}
+			//sorgt dafür, dass sich das Misstrauen zwischen -100 und 100 bewegt
+			if(this.people.get(i).get_misstrauen()>100)
+				this.people.get(i).set_misstrauen(100);
+			if(this.people.get(i).get_misstrauen()<-100)
+				this.people.get(i).set_misstrauen(-100);
 		}
 	}
 	

@@ -92,5 +92,9 @@ public abstract class Person extends Mensch {
 	public String getName(){
 		return this.name;
 	}
+	
+	public int getGeschlecht(){
+		return this.geschlecht;
+	}
 
 }

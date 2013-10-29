@@ -988,6 +988,61 @@ public class GUILayer extends JFrame implements MouseMotionListener {
 		}
 	}
 	
+	public String includeNames(String input){	
+		String frau = "";
+		String mann = "";
+		int index = (int)(Math.random()*(this.humans.size()-1));
+		if(((Person)this.humans.get(index)).getGeschlecht() == 2){
+			while(((Person)this.humans.get(index)).getGeschlecht() != 1){
+				frau = this.humans.get(index).getName();
+				index = (int)(Math.random()*(this.humans.size()-1));
+			}
+			mann = this.humans.get(index).getName();
+		}
+		else{
+			while(((Person)this.humans.get(index)).getGeschlecht() != 2){
+				mann = this.humans.get(index).getName();
+				index = (int)(Math.random()*(this.humans.size()-1));
+			}
+			frau = this.humans.get(index).getName();	
+		}
+		
+		
+		
+		String hausnr = String.valueOf((int)(Math.random()*Ressources.NUMBERHOUSES));
+		String egal1 = this.humans.get((int)(Math.random()*this.humans.size())).getName();
+		String egal2 = this.humans.get((int)(Math.random()*this.humans.size())).getName();
+		String output;
+				if(input.contains("$1")){
+					output = input.replace("$1",egal1);
+					input = output;
+				}
+				if(input.contains("$2")){
+					output = input.replace("$2",egal2);
+					input = output;
+				}
+				if(input.contains("$M")){
+					output = input.replace("$M",mann);
+					input = output;
+				}
+				if(input.contains("$W")){
+					output = input.replace("$W",frau);
+					input = output;
+				}
+				if(input.contains("&")){
+					output = input.replace("&",hausnr);
+					input = output;
+				}
+			return input;
+		}
+	
+	public String getLiveTickerGags(){
+		String text;
+		ArrayList<ArrayList<String>> gags = Ressources.randomizeGags();
+		text = gags.get(0).get(0);
+		return includeNames(text);
+	}
+	
 	
 	
 	/**
@@ -1008,9 +1063,9 @@ public class GUILayer extends JFrame implements MouseMotionListener {
 		
 		
 		//livetickergags
-		zeitpunkt = (int)(Math.random()*1000);
-		if(this.stepcounter%10 == 0){
-			this.newsticker.setText("BLA");
+		//zeitpunkt = (int)(Math.random()*1000);
+		if(this.stepcounter%500 == 0){
+			this.newsticker.setText(this.getLiveTickerGags());
 		}
 		
 		//Unwohlsein durch installierte Überwachungsmodule
