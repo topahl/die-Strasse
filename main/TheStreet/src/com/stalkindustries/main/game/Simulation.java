@@ -560,7 +560,7 @@ public class Simulation {
 			neuer_weg = fuelle_stack_homeposition(person, agent, xPos_current, yPos_current);
 		}
 		
-		if(person.get_location_id()!=zielloc || true){   //|| (int)(Math.random()*2) == 1
+		if(person.get_location_id()!=zielloc || (int)(Math.random()*2) == 1){   //|| 
 			for (int i = counter; i>=0; i--){
 				if (person.get_location_id()==zielloc && i == 0){
 					if (yPos_current<15){
@@ -731,7 +731,11 @@ public class Simulation {
 					if (location_ids.get(i).get(j).charAt(0) == locid ){
 						location_ids.get(i).set(j,"X") ;
 					}
-				} 
+				} else{
+					if (location_ids.get(i).get(j).charAt(0) == 'X'){
+						location_ids.get(i).set(j,"You shall not pass!") ;
+					}
+				}
 				if (location_ids.get(i).get(j).charAt(0) == 'P'){
 					location_ids.get(i).set(j,"X") ;
 				}
