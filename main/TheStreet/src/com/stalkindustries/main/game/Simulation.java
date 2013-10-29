@@ -386,18 +386,27 @@ public class Simulation {
 		for (int i = 1; i<14; i++){
 			for (int j = 1; j<23; j++){
 				if (location_ids.get(i).get(j).equals("P")){
-					if (location_ids.get(i+1).get(j).equals("P") || location_ids.get(i+1).get(j).equals("X")){
-						parkcounter++;
+					if (i<13){
+						if (location_ids.get(i+1).get(j).equals("P") || location_ids.get(i+1).get(j).equals("X")){
+							parkcounter++;
+						}
 					}
-					if (location_ids.get(i-1).get(j).equals("P") || location_ids.get(i-1).get(j).equals("X")){
-						parkcounter++;
+					if (i>0){
+						if (location_ids.get(i-1).get(j).equals("P") || location_ids.get(i-1).get(j).equals("X")){
+							parkcounter++;
+						}
 					}
-					if (location_ids.get(i).get(j+1).equals("P") || location_ids.get(i).get(j+1).equals("X")){
-						parkcounter++;
+					if (j<22){
+						if (location_ids.get(i).get(j+1).equals("P") || location_ids.get(i).get(j+1).equals("X")){
+							parkcounter++;
+						}
 					}
-					if (location_ids.get(i).get(j-1).equals("P") || location_ids.get(i).get(j-1).equals("X")){
-						parkcounter++;
+					if (j>0){
+						if (location_ids.get(i).get(j-1).equals("P") || location_ids.get(i).get(j-1).equals("X")){
+							parkcounter++;
+						}
 					}
+					
 				}
 				if (parkcounter == 3){
 					return new Point (i,j);
@@ -453,12 +462,16 @@ public class Simulation {
 		int counter = 1;
 		int xPos_current = 0;
 		int yPos_current = 0;
+		boolean firstStep = true;
 		String ziellocation="Z";
 		
 		goal:	for (int i=0; i<100; i++){
 					for (int j=0; j<16; j++){  	// J entspricht y-wert, K entspricht x-wert
 						for (int k=0; k<25; k++){
 							// Es werden Zahlen auf der Map gesucht
+							if (j==7){
+								System.out.print("testetstetstett");
+							}
 							if (location_ids.get(j).get(k).equals(String.valueOf(i))){
 								// Es wird überprüft, ob das Ziel in direkter Nähe liegt
 								if (j < 15){ //15 -> Rasterhöhe
@@ -520,15 +533,29 @@ public class Simulation {
 										location_ids.get(j).set(k-1,String.valueOf(i+1));
 										}
 									}
-								} else {
+								} else { //TODO anpassen!!!
 									if (j>0){
-										if (location_ids.get(j-1).get(k).equals("X")) {			// Weg nach oben ist begehbar
+										if (location_ids.get(j-1).get(k).equals("X") && firstStep) {			// Weg nach oben ist begehbar
 											location_ids.get(j-1).set(k,String.valueOf(i+1));
+											firstStep = false;
 										}
 									}
 									if (k>0){
-										if (location_ids.get(j).get(k-1).equals("X")) {			//Weg nach links ist begehbar
+										if (location_ids.get(j).get(k-1).equals("X") && firstStep) {			//Weg nach links ist begehbar
 											location_ids.get(j).set(k-1,String.valueOf(i+1));
+											firstStep = false;
+										}
+									}
+									if (k<24){
+										if (location_ids.get(j).get(k+1).equals("X") && firstStep) {			//Weg nach rechts ist begehbar
+											location_ids.get(j).set(k+1,String.valueOf(i+1));
+											firstStep = false;
+										}
+									}
+									if (j<15){
+										if (location_ids.get(j+1).get(k).equals("X") && firstStep) {			//Weg nach unten ist begehbar
+											location_ids.get(j+1).set(k,String.valueOf(i+1));
+											firstStep = false;
 										}
 									}
 								}
