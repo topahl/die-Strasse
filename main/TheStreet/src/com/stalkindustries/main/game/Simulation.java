@@ -428,7 +428,14 @@ public class Simulation {
 	//Support Tiki
 	public void berechne_weg(Person person, Agent agent, char zielloc){
 		
-		char locid = (char)((int)(person.get_location_id()));
+		char locid;
+		if (agent == null){
+			locid = (char)((int)(person.get_location_id()));
+		} else{
+			locid = (char)((int)(agent.get_location_id()));
+		}
+				
+				
 		ArrayList<ArrayList<String>> location_ids;
 		Stack<Character> neuer_weg = new Stack<Character>();
 		Point parkeingang = new Point();
@@ -443,9 +450,13 @@ public class Simulation {
 		
 		
 		//Aktuelle Position des Männchens wird auf 0 gesetzt
-		if (agent == null && !(zielloc == 'P' && person.get_location_id()=='P')){
+		if ((agent == null && !(zielloc == 'P' && person.get_location_id()=='P')) || person == null){
 			location_ids = wegberechnung_rasterkarte_initialisierung(location_ids, String.valueOf(zielloc), locid);
-			location_ids.get((person.getPosY()-Ressources.ZEROPOS.height)/Ressources.RASTERHEIGHT).set((person.getPosX()-Ressources.ZEROPOS.width)/Ressources.RASTERHEIGHT,"0");
+			if (agent==null){
+				location_ids.get((person.getPosY()-Ressources.ZEROPOS.height)/Ressources.RASTERHEIGHT).set((person.getPosX()-Ressources.ZEROPOS.width)/Ressources.RASTERHEIGHT,"0");
+			} else {
+				location_ids.get((agent.getPosY()-Ressources.ZEROPOS.height)/Ressources.RASTERHEIGHT).set((agent.getPosX()-Ressources.ZEROPOS.width)/Ressources.RASTERHEIGHT,"0");
+			}
 		} else {
 			location_ids = wegberechnung_rasterkarte_initialisierung(location_ids, "P", locid);
 			location_ids.get((int)(parkeingang.getX())).set((int)(parkeingang.getY()),"0");
@@ -515,8 +526,8 @@ public class Simulation {
 										break goal;
 									}
 								}
-//								(zielloc=='P' && ziellocation.equals("P") && i>0) || zielloc != person.get_location_id()
-								if ((i>0 && zielloc == person.get_location_id()) || zielloc != person.get_location_id()){
+//							
+								if ((i>0 && (person!= null && zielloc == person.get_location_id())) || (person!= null && zielloc != person.get_location_id()) || (agent!= null && zielloc != agent.get_location_id())){
 									// Es wird überprüft, ob ein Feld drüber/drunter/links oder rechts ebenfalls begehbar ist -> das wird markiert
 									if (j<15){
 										if (location_ids.get(j+1).get(k).equals("X")) {			//Weg nach unten ist begehbar
