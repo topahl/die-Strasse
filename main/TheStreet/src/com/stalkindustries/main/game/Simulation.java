@@ -560,33 +560,59 @@ public class Simulation {
 			neuer_weg = fuelle_stack_homeposition(person, agent, xPos_current, yPos_current);
 		}
 		
-		if(person.get_location_id()!=zielloc){ //  TODO || (int)(Math.random()*2) == 1
+		if(person.get_location_id()!=zielloc || true){   //|| (int)(Math.random()*2) == 1
 			for (int i = counter; i>=0; i--){
-				if (yPos_current<15){
-					if (location_ids.get(yPos_current+1).get(xPos_current).equals(String.valueOf(i))) {			//unten gehts weiter
-					yPos_current++;
-					neuer_weg.push('o');
+				if (person.get_location_id()==zielloc && i == 0){
+					if (yPos_current<15){
+						if (location_ids.get(yPos_current+1).get(xPos_current).equals(String.valueOf(counter+1))) {			//unten gehts weiter
+							yPos_current++;
+							neuer_weg.push('o');
+						}
+					}
+					if (xPos_current<24){
+						if (location_ids.get(yPos_current).get(xPos_current+1).equals(String.valueOf(counter+1))) {			//rechts gehts weiter
+							xPos_current++;
+							neuer_weg.push('l');
+						}
+					}
+					if (yPos_current>0){
+						if (location_ids.get(yPos_current-1).get(xPos_current).equals(String.valueOf(counter+1))) {			//oben gehts weiter
+							yPos_current--;
+							neuer_weg.push('u');
+						}
+					}
+					if (xPos_current>0){
+						if (location_ids.get(yPos_current).get(xPos_current-1).equals(String.valueOf(counter+1))) {			//links gehts weiter
+							xPos_current--;
+							neuer_weg.push('r');
+						}
+					}
+				} else{
+					if (yPos_current<15){
+						if (location_ids.get(yPos_current+1).get(xPos_current).equals(String.valueOf(i))) {			//unten gehts weiter
+						yPos_current++;
+						neuer_weg.push('o');
+						}
+					}
+					if (xPos_current<24){
+						if (location_ids.get(yPos_current).get(xPos_current+1).equals(String.valueOf(i))) {			//rechts gehts weiter
+						xPos_current++;
+						neuer_weg.push('l');
+						}
+					}
+					if (yPos_current>0){
+						if (location_ids.get(yPos_current-1).get(xPos_current).equals(String.valueOf(i))) {			//oben gehts weiter
+						yPos_current--;
+						neuer_weg.push('u');
+						}
+					}
+					if (xPos_current>0){
+						if (location_ids.get(yPos_current).get(xPos_current-1).equals(String.valueOf(i))) {			//links gehts weiter
+						xPos_current--;
+						neuer_weg.push('r');
+						}
 					}
 				}
-				if (xPos_current<24){
-					if (location_ids.get(yPos_current).get(xPos_current+1).equals(String.valueOf(i))) {			//rechts gehts weiter
-					xPos_current++;
-					neuer_weg.push('l');
-					}
-				}
-				if (yPos_current>0){
-					if (location_ids.get(yPos_current-1).get(xPos_current).equals(String.valueOf(i))) {			//oben gehts weiter
-					yPos_current--;
-					neuer_weg.push('u');
-					}
-				}
-				if (xPos_current>0){
-					if (location_ids.get(yPos_current).get(xPos_current-1).equals(String.valueOf(i))) {			//links gehts weiter
-					xPos_current--;
-					neuer_weg.push('r');
-					}
-				}
-			
 			}
 		} else {
 			for (int i = 1; i<=counter+1; i++){
