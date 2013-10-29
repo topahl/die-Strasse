@@ -1029,8 +1029,8 @@ public class GUILayer extends JFrame implements MouseMotionListener {
 					output = input.replace("$W",frau);
 					input = output;
 				}
-				if(input.contains("&")){
-					output = input.replace("&",hausnr);
+				if(input.contains("%")){
+					output = input.replace("%",hausnr);
 					input = output;
 				}
 			return input;
