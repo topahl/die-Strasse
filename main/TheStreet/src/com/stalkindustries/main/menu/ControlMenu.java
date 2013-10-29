@@ -25,9 +25,13 @@ public class ControlMenu implements IControl{
 		if(funktion.equals("beenden"))
 			exitMenu();
 		if(funktion.equals("start"))
-			mainmenu.showLayer(Menu.LEVELSELECT);
+			mainmenu.showLayer(Menu.LAYERLEVEL);
 		if(funktion.equals("back"))
-			mainmenu.showLayer(Menu.MENULAYER);
+			mainmenu.showLayer(Menu.LAYERMENU);
+		if(funktion.equals("profil"))
+			mainmenu.showLayer(Menu.LAYERPROFIL);
+		if(funktion.equals("highscore"))
+			mainmenu.showLayer(Menu.LAYERHIGHSCORE);
 			
 	}
 	
