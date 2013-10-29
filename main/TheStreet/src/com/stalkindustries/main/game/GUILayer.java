@@ -51,7 +51,7 @@ public class GUILayer extends JFrame implements MouseMotionListener {
 	private JLabel spionageBeschr = new JLabel();
 	private JLabel beschwichtigenBeschr = new JLabel();
 	private JLabel[] hausinformationen = new JLabel[10]; //Titelfeld, 4Personenbilder, 4 Namen, Leiste Überwachungsstatus
-
+	private JLabel newsticker = new JLabel();
 	
 	
 	/**
@@ -195,11 +195,19 @@ public class GUILayer extends JFrame implements MouseMotionListener {
 		baseLayer.add(label, javax.swing.JLayeredPane.DEFAULT_LAYER);
 		
 		
+		//Newsticker
+				this.newsticker.setBounds(Ressources.ZEROPOS.width +45, Ressources.ZEROPOS.height, Ressources.MAPWIDTH, 50);
+				this.newsticker.setFont(new Font("Corbel", Font.BOLD, 16));
+				this.newsticker.setForeground(new java.awt.Color(249, 249, 249));
+				this.newsticker.setVisible(true);
+				this.baseLayer.add(this.newsticker, javax.swing.JLayeredPane.DEFAULT_LAYER);
+		
 		
 		// Ingame Menübars
 		this.overlayMenubar.setIcon(new ImageIcon(Ressources.menubars));
 		this.overlayMenubar.setBounds(Ressources.ZEROPOS.width, Ressources.ZEROPOS.height, Ressources.MAPWIDTH, Ressources.MAPHEIGHT);
 		this.baseLayer.add(this.overlayMenubar, javax.swing.JLayeredPane.DEFAULT_LAYER);
+		
 
 		// Nacht-Modus Overlay
 		this.overlayNacht.setBounds(Ressources.ZEROPOS.width, Ressources.ZEROPOS.height, Ressources.MAPWIDTH, Ressources.MAPHEIGHT);
@@ -995,6 +1003,13 @@ public class GUILayer extends JFrame implements MouseMotionListener {
 		int zeitpunkt = (int) (Math.random() * 3000);
 		if(this.stepcounter % (3000 + zeitpunkt) == 0) {
 			quiz.starteQuiz();
+		}
+		
+		
+		//livetickergags
+		zeitpunkt = (int)(Math.random()*1000);
+		if(this.stepcounter%10 == 0){
+			this.newsticker.setText("BLA");
 		}
 		
 		//Unwohlsein durch installierte Überwachungsmodule

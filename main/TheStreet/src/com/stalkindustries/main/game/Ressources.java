@@ -18,6 +18,7 @@ public class Ressources {
 	//private static ArrayList<ArrayList<String>> arabian_names;	TODO: entfernen
 	private static ArrayList<ArrayList<String>> quizfragen;
 	//private static ArrayList<ArrayList<String>> arabian_quiz;		TODO: entfernen
+	private static ArrayList<ArrayList<String>> livertickergags;
 	
 	public static final int RASTERHEIGHT = 45; //Map Raster
 	public static final int TORSOCNT =4; //Anzahl verschiedener Torsos in Sprite Grafik
@@ -43,6 +44,7 @@ public class Ressources {
 		location_ids=read_from_csv("res\\level\\"+levelname+"\\"+levelname+"_map.csv");
 		names = read_from_csv("res\\level\\"+levelname+"\\"+levelname+"_namen.csv");
 		quizfragen = read_from_csv("res\\level\\"+levelname+"\\"+levelname+"_quizfragen.csv");
+		livertickergags = read_from_csv("res\\game\\"+"livetickergags.csv");
 		setNumberOfHouses();
 	}
 	
