@@ -148,7 +148,7 @@ public class Control implements IControl {
 		closeWindow("fensterhaus"); 
 		guilayer.getSimulation().getHouses().get(currentHouse).getUeberwachungsmodule().remove("Hacken");
 		guilayer.getButtonsMap().get("aktionHacken").setEnabled(true);
-		guilayer.getSimulation().get_agent().setMussWuseln("Hacken");
+		guilayer.getSimulation().get_agent().setMussWuseln("Hackenr");
 		guilayer.getSimulation().berechne_weg(null, guilayer.getSimulation().get_agent(), (char)(currentHouse+1+48));
 		guilayer.getSimulation().getHouses().get(currentHouse).setUeberwachungsstatus(guilayer.getSimulation().getHouses().get(currentHouse).getUeberwachungsstatus()-guilayer.getSimulation().getHouses().get(currentHouse).getUeberwachungsWert(2));
 		guilayer.getSimulation().getHouses().get(currentHouse).setUeberwachungsWert(0,2);
@@ -161,7 +161,7 @@ public class Control implements IControl {
 		closeWindow("fensterhaus"); 
 		guilayer.getSimulation().getHouses().get(currentHouse).getUeberwachungsmodule().remove("Kamera");
 		guilayer.getButtonsMap().get("aktionKamera").setEnabled(true);
-		guilayer.getSimulation().get_agent().setMussWuseln("Kamera");
+		guilayer.getSimulation().get_agent().setMussWuseln("Kamerar");
 		guilayer.getSimulation().berechne_weg(null, guilayer.getSimulation().get_agent(), (char)(currentHouse+1+48));
 		guilayer.getSimulation().getHouses().get(currentHouse).setUeberwachungsstatus(guilayer.getSimulation().getHouses().get(currentHouse).getUeberwachungsstatus()-guilayer.getSimulation().getHouses().get(currentHouse).getUeberwachungsWert(1));
 		guilayer.getSimulation().getHouses().get(currentHouse).setUeberwachungsWert(0,1);
@@ -174,7 +174,7 @@ public class Control implements IControl {
 		closeWindow("fensterhaus"); 
 		guilayer.getSimulation().getHouses().get(currentHouse).getUeberwachungsmodule().remove("Wanze");
 		guilayer.getButtonsMap().get("aktionNachhause").setEnabled(true);
-		guilayer.getSimulation().get_agent().setMussWuseln("Wanze");
+		guilayer.getSimulation().get_agent().setMussWuseln("Wanzer");
 		guilayer.getSimulation().berechne_weg(null, guilayer.getSimulation().get_agent(), (char)(currentHouse+1+48));
 		guilayer.getSimulation().getHouses().get(currentHouse).setUeberwachungsstatus(guilayer.getSimulation().getHouses().get(currentHouse).getUeberwachungsstatus()-guilayer.getSimulation().getHouses().get(currentHouse).getUeberwachungsWert(0));
 		guilayer.getSimulation().getHouses().get(currentHouse).setUeberwachungsWert(0,0);
