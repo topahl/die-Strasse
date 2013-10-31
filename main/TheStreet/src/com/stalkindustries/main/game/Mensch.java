@@ -51,7 +51,6 @@ public abstract class Mensch extends JLabel {
 					currentMove=moves.pop();
 				}else{
 					currentMove = 's';
-					System.out.print("test");
 				}
 			}
 			else{

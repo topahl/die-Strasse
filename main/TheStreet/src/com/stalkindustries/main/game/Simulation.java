@@ -867,7 +867,14 @@ public class Simulation {
 		}	
 		return neuer_weg;
 	}
-
+	
+	
+	//Support Tiki
+	public static void doSomethingAfterAgentAktion(String aktion, int hausid){
+		System.out.print("doSomethingAfterAgentAktion");
+	}
+	
+	
 
 	//Support Tiki
 	//TODO Gameover implementieren -> Das Event dafür
