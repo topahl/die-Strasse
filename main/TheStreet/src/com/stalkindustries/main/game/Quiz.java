@@ -100,6 +100,7 @@ public class Quiz {
 		if(richtigkeit == 0)
 			this.quizfragen.remove(this.quizstart);
 		this.quizstart = (this.quizstart + this.quizstep)%this.quizfragen.size();
+		this.running = false;
 	}
 	
 	//Beschwerden Miri
