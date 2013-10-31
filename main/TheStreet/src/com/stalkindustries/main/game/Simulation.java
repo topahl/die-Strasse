@@ -871,7 +871,18 @@ public class Simulation {
 	
 	//Support Tiki
 	public void doSomethingAfterAgentAktion(){
-		System.out.print(get_agent().getMussWuseln());
+		int personId =0;
+		
+		if (!wieeeeschteAktion){
+			if (get_agent().getMussWuseln().charAt(1) <='9' && get_agent().getMussWuseln().charAt(1)>='0'){
+				personId = Integer.parseInt(get_agent().getMussWuseln().substring(0,2));
+			} else{
+				personId = Integer.parseInt(get_agent().getMussWuseln().substring(0,1));
+			}
+		}
+		
+		
+		System.out.print(get_agent().getMussWuseln().substring(0,2));
 		
 		//Spionage
 		if(get_agent().getMussWuseln().equals("Wanze+") && get_agent().getCurrentMove()=='n'){
@@ -914,23 +925,32 @@ public class Simulation {
 		
 		
 		//Soziales
-		if(get_agent().getMussWuseln().equals("Kuchen")){
-//			for (int i=0; i<guilayer.getSimulation().get_people().size(); i++){
-//				if (guilayer.getSimulation().get_people().get(i).get_location_id()== (char)(hausid+48)){
-//					if (!soAtHome){
-//						soAtHome = true;
-//						stehenBleiben.add('s');
-//
-//						guilayer.getSimulation().get_agent().setMussWuseln("Kuchen");
-//						guilayer.getSimulation().berechne_weg(null, guilayer.getSimulation().get_agent(), (char)(hausid+48));
-//						guilayer.getSimulation().get_people().get(i).erhoehe_durchgefuehrteBeschwichtigungen(0);
-//						guilayer.getButtonsMap().get("aktionNachhause").setEnabled(true);
-//						guilayer.getSimulation().setWieeeeschteAktion(false);
-//						guilayer.getSimulation().calc_misstrauen_after_beschwichtigen_action(0, guilayer.getSimulation().get_people().get(i));
-//					}	
-//				}
-//			}
+		if(get_agent().getMussWuseln().length()>7 && personId <=9 &&  get_agent().getMussWuseln().substring(1,8).equals("Kuchen+") ||
+				get_agent().getMussWuseln().length()>8 && personId >9 &&  get_agent().getMussWuseln().substring(2,9).equals("Kuchen+")){
+			get_people().get(personId).erhoehe_durchgefuehrteBeschwichtigungen(0);
+			calc_misstrauen_after_beschwichtigen_action(0, get_people().get(personId));
+			get_people().get(personId).setMoves(new Stack());
+			get_agent().setMussWuseln("");
+		}	
+		if(get_agent().getMussWuseln().length()>6 && personId <=9 && get_agent().getMussWuseln().substring(1,7).equals("Kuchen") ||
+				get_agent().getMussWuseln().length()>7 && personId >9 && get_agent().getMussWuseln().substring(2,8).equals("Kuchen") ){
+			get_agent().setMussWuseln(personId+"Kuchen+");
+			//wuseln 
+		}	
+		
+		if(get_agent().getMussWuseln().length()>12 && personId <=9 &&  get_agent().getMussWuseln().substring(1,13).equals("Unterhalten+") ||
+				get_agent().getMussWuseln().length()>13 && personId >9 &&  get_agent().getMussWuseln().substring(2,14).equals("Unterhalten+")){
+			get_people().get(personId).erhoehe_durchgefuehrteBeschwichtigungen(1);
+			calc_misstrauen_after_beschwichtigen_action(1, get_people().get(personId));
+			get_people().get(personId).setMoves(new Stack());
+			get_agent().setMussWuseln("");
+		}	
+		if(get_agent().getMussWuseln().length()>11 && personId <=9 && get_agent().getMussWuseln().substring(1,12).equals("Unterhalten") ||
+				get_agent().getMussWuseln().length()>12 && personId >9 && get_agent().getMussWuseln().substring(2,13).equals("Unterhalten") ){
+			get_agent().setMussWuseln(personId+"Unterhalten+");
+			//wuseln 
 		}
+				
 	}
 	
 	
