@@ -521,6 +521,7 @@ public class Control implements IControl {
 	}
 
 	private void clickNachhause() {
+		guilayer.getSimulation().get_agent().setMussWuseln("");
 		guilayer.getButtonsMap().get("aktionNachhause").setEnabled(false);
 		guilayer.getSimulation().berechne_weg(null, guilayer.getSimulation().get_agent(), (char)(guilayer.getSimulation().get_agent().get_haus_id()+1+48));
 	}
