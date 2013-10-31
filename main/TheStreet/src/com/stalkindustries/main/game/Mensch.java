@@ -47,7 +47,9 @@ public abstract class Mensch extends JLabel {
 		
 		if((posX-Ressources.ZEROPOS.width)%45==0&&(posY-Ressources.ZEROPOS.height)%45==0){
 			if(!moves.empty()){
-				currentMove=moves.pop();
+				if (moves.peek()!='s'){
+					currentMove=moves.pop();
+				}
 			}
 			else{
 				currentMove = 'n';
@@ -70,6 +72,7 @@ public abstract class Mensch extends JLabel {
 			posY+=this.bewegungsgeschwindigkeit;
 			invisible_lefternside = false;
 			break;
+		default: break;
 		}
 
 		switch(currentMove){

@@ -192,8 +192,10 @@ public class Control implements IControl {
 		if (hausid != guilayer.getSimulation().get_agent().get_haus_id()+1){
 		
 //	 TODO "aktion6Beschwichtigen" && "aktion6Spionage" werden nicht abgefragt
-//		if(lastFunktioncode.equals("aktionKuchen"))
-//			
+		if(lastFunktioncode.equals("aktionKuchen")){
+			
+		}
+			
 //		if(lastFunktioncode.equals("aktionUnterhalten"))
 //			
 //		if(lastFunktioncode.equals("aktionFlirten"))
