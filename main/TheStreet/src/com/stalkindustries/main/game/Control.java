@@ -155,6 +155,7 @@ public class Control implements IControl {
 			}
 			if (!istVorhanden){
 				guilayer.getSimulation().berechne_weg(null, guilayer.getSimulation().get_agent(), (char)(hausid+48));
+				guilayer.getSimulation().get_agent().setMussWuseln("Wanze");
 				guilayer.getSimulation().getHouses().get(hausid-1).getUeberwachungsmodule().add("Wanze");
 				//guilayer.getSimulation().calc_misstrauen_after_ueberwachungs_action("Wanze", hausid);
 //				this.house_id = hausid;
