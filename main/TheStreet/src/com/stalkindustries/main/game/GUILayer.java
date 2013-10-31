@@ -1017,7 +1017,7 @@ public class GUILayer extends JFrame implements MouseMotionListener {
 		
 		
 		
-		String hausnr = String.valueOf((int)(Math.random()*Ressources.NUMBERHOUSES));
+		String hausnr = String.valueOf((int)(Math.random()*Ressources.NUMBERHOUSES))+1;
 		String egal1 = this.humans.get((int)(Math.random()*this.humans.size()-1)).getName();
 		String egal2 = this.humans.get((int)(Math.random()*this.humans.size()-1)).getName();
 		String output="";
