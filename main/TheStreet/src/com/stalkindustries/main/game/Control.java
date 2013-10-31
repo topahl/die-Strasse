@@ -46,9 +46,6 @@ public class Control implements IControl {
 	public void call(String funktion) {
 		System.out.println("You pressed:"+funktion);
 	
-		//aus irgendeinem schwachsinnigen Grund haben wir Java 1.6 (steht auch im Pflichtenheft)
-		//Switch-case mit Strings erst ab 1.7, schade.
-		
 		//GUI Ingame Buttons
 		if(funktion.equals("pause"))
 			clickPause();
@@ -97,6 +94,16 @@ public class Control implements IControl {
 		if(funktion.equals("aktionParkSpionage"))
 			clickParkSpionage();
 		
+		//Buttons small WerkzeugeSpionage im Houselayer
+		if(funktion.equals("werkzeugWanze"))
+			clickRemoveWanze();
+		if(funktion.equals("werkzeugKamera"))
+			clickRemoveKamera();
+		if(funktion.equals("werkzeugHacken"))
+			clickRemoveHacken();
+		if(funktion.equals("werkzeugFernglas"))
+			clickRemoveFernglas();
+		
 		
 		if(funktion.equals("closeHaus"))
 			closeWindow("fensterhaus");
@@ -111,7 +118,8 @@ public class Control implements IControl {
 
 		//Mousefollower abschalten bei bestimmten Buttons
 		if(funktion.equals("pause") || funktion.equals("close")
-				|| funktion.equals("aktionenBeschwichtigen") || funktion.equals("aktionenSpionage")) {
+				|| funktion.equals("aktionenBeschwichtigen") || funktion.equals("aktionenSpionage") ||
+				funktion.equals("nachHause")) {
 			guilayer.getMousefollower().setVisible(false);
 		}
 		
@@ -119,6 +127,45 @@ public class Control implements IControl {
 	}
 
 	
+	private void clickRemoveFernglas() {
+		// TODO Auto-generated method stub
+		
+	}
+
+
+
+	private void clickRemoveHacken() {
+		// TODO Auto-generated method stub
+		
+	}
+
+
+
+	private void clickRemoveKamera() {
+		// TODO Auto-generated method stub
+		
+	}
+
+
+
+	private void clickRemoveWanze() {
+		int currentHouse = Integer.parseInt(lastFunktioncode.substring(4,5)) ;
+		closeWindow("fensterhaus"); 
+		guilayer.getSimulation().getHouses().get(currentHouse).getUeberwachungsmodule().remove("Wanze");
+		
+		guilayer.getButtonsMap().get("aktionNachhause").setEnabled(true);
+		guilayer.getSimulation().get_agent().setMussWuseln("Wanze");
+		guilayer.getSimulation().berechne_weg(null, guilayer.getSimulation().get_agent(), (char)(currentHouse+48));
+		
+		
+//		guilayer.getSimulation().getHouses().get(currentHouse).getUeberwachungsmodule().remove("Wanze")
+	
+			}
+
+
+
+
+
 	private void quizAntwort(String antwort){ //antwort=A || B || C
 		this.quiz.analyzeAntwort(antwort);
 		this.quiz.calcMisstrauenAfterQuiz();
@@ -156,7 +203,7 @@ public class Control implements IControl {
 			if (!istVorhanden){
 				guilayer.getSimulation().berechne_weg(null, guilayer.getSimulation().get_agent(), (char)(hausid+48));
 				guilayer.getSimulation().get_agent().setMussWuseln("Wanze");
-				guilayer.getSimulation().getHouses().get(hausid-1).getUeberwachungsmodule().add("Wanze");
+				guilayer.getSimulation().getHouses().get(hausid).getUeberwachungsmodule().add("Wanze");
 				guilayer.getButtonsMap().get("aktionNachhause").setEnabled(true);
 			}
 			istVorhanden = false;
@@ -455,7 +502,6 @@ public class Control implements IControl {
 		JLayeredPane hausinfo = guilayer.getWindow("fensterhaus");
 		JLabel[] informationen = guilayer.getHausinfoLabels();
 		informationen[0].setText("Haus "+hausnr);
-		hausnr--;
 		hausinfo.setVisible(true);
 		hausinfo.setEnabled(true);
 		ArrayList<Mensch> personen = guilayer.getHumans();
