@@ -164,7 +164,7 @@ public class Simulation {
 	
 	//TODO
 	//Beschwerden an Miri
-	public void calc_misstrauen_after_ueberwachungs_action(String action_id, int house_location){
+	public void calc_misstrauen_after_ueberwachungs_action(int house_location){
 		//Risiko berechnen
 		//Risiko ist abhängig von der Uhrzeit, d.h.tagsüber ist das Risiko höher als nachts
 		int risiko=0;
