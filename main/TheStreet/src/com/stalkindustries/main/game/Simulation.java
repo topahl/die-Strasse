@@ -466,7 +466,12 @@ public class Simulation {
 		neuer_weg = fuelle_bewegungs_stack(location_ids, person, agent, zielloc);
 		
 		//Stack zur Bewegung freigeben
-		person.setMoves(neuer_weg);
+		if (person != null){
+			person.setMoves(neuer_weg);
+		} else{
+			agent.setMoves(neuer_weg);
+		}
+		
 	}
 	
 	
@@ -603,9 +608,9 @@ public class Simulation {
 			neuer_weg = fuelle_stack_homeposition(person, agent, xPos_current, yPos_current);
 		}
 		
-		if(person.get_location_id()!=zielloc || (int)(Math.random()*2) == 1){   //|| 
+		if((person != null && person.get_location_id()!=zielloc) || (int)(Math.random()*2) == 1 || agent!= null){   //
 			for (int i = counter; i>=0; i--){
-				if (person.get_location_id()==zielloc && i == 0){
+				if (((person != null && person.get_location_id()==zielloc) && i == 0) && agent == null){
 					if (yPos_current<15){
 						if (location_ids.get(yPos_current+1).get(xPos_current).equals(String.valueOf(counter+1))) {			//unten gehts weiter
 							yPos_current++;
