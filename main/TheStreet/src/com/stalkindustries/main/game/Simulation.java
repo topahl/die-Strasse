@@ -1,10 +1,7 @@
 package com.stalkindustries.main.game;
 import java.awt.Point;
 import java.util.ArrayList;
-import java.util.Set;
 import java.util.Stack;
-import java.util.TreeMap;
-import java.util.TreeSet;
 
 import com.stalkindustries.main.TheStreet;
 
@@ -18,6 +15,7 @@ public class Simulation {
 	private int spiel_stunde=7;
 	private int spiel_minute=0;
 	private ArrayList<Haus> houses = new ArrayList<Haus>();
+	private boolean wieeeeschteAktion=true;  //wieeeeescht = boese
 
 	
 	public Simulation(){
@@ -158,7 +156,7 @@ public class Simulation {
 		this.people.get(personen_id).set_misstrauen(misstrauen);
 		
 		//Bei Person die Anzahl der Beschwichtigenaktionen erhöhen
-		this.people.get(personen_id).set_durchgefuehrteBeschwichtigungen(action_id);
+		//this.people.get(personen_id).set_durchgefuehrteBeschwichtigungen(action_id);
 	}
 	
 	
@@ -212,6 +210,18 @@ public class Simulation {
 		}
 		
 	}
+	
+	
+	//Beschwerden Miri
+	public void agentEntersOtherHouse(){
+		//wenn sich der Agent in irgendeinem Haus befindet
+		if((int)(get_agent().get_location_id())-48 >= 1 && (int)(get_agent().get_location_id())-48 <= 9){
+			//wenn sich der Agent in dem Haus befindet, das ausspioniert werden soll
+			if(get_agent().get_location_id() != (char)get_agent().get_haus_id()+48+1){			
+				calc_misstrauen_after_ueberwachungs_action((int)(get_agent().get_location_id()-48));
+			}
+		}
+	}	
 	
 	
 	//Beschwerden Miri
@@ -928,6 +938,16 @@ public class Simulation {
 	
 	public void setHouses(Haus haus){
 		this.houses.add(haus);
+	}
+
+
+//	public boolean isWieeeeschteAktion() {
+//		return wieeeeschteAktion;
+//	}
+
+
+	public void setWieeeeschteAktion(boolean wieeeeschteAktion) {
+		this.wieeeeschteAktion = wieeeeschteAktion;
 	}
 
 }

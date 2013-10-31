@@ -84,7 +84,7 @@ public abstract class Person extends Mensch {
 		return this.durchgefuehrteBeschwichtigungen[index];
 	}
 	
-	public void set_durchgefuehrteBeschwichtigungen(int index){
+	public void erhoehe_durchgefuehrteBeschwichtigungen(int index){
 		this.durchgefuehrteBeschwichtigungen[index]++;
 	}
 	
