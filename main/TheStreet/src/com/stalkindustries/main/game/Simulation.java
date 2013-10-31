@@ -490,9 +490,6 @@ public class Simulation {
 					for (int j=0; j<16; j++){  	// J entspricht y-wert, K entspricht x-wert
 						for (int k=0; k<25; k++){
 							// Es werden Zahlen auf der Map gesucht
-							if (j==7){
-								System.out.print("testetstetstett");
-							}
 							if (location_ids.get(j).get(k).equals(String.valueOf(i))){
 								// Es wird überprüft, ob das Ziel in direkter Nähe liegt
 								if (j < 15){ //15 -> Rasterhöhe

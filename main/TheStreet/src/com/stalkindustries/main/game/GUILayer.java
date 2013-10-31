@@ -1012,7 +1012,7 @@ public class GUILayer extends JFrame implements MouseMotionListener {
 		String hausnr = String.valueOf((int)(Math.random()*Ressources.NUMBERHOUSES));
 		String egal1 = this.humans.get((int)(Math.random()*this.humans.size())).getName();
 		String egal2 = this.humans.get((int)(Math.random()*this.humans.size())).getName();
-		String output;
+		String output="";
 				if(input.contains("$1")){
 					output = input.replace("$1",egal1);
 					input = output;

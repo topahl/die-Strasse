@@ -134,8 +134,6 @@ public class Control implements IControl {
 		
 		// hausid von 1-9, get_haus_id 0-8 => Deswegen plus 1
 		if (hausid != guilayer.getSimulation().get_agent().get_haus_id()+1){
-			
-		
 		
 //	 TODO "aktion6Beschwichtigen" && "aktion6Spionage" werden nicht abgefragt
 //		if(lastFunktioncode.equals("aktionKuchen"))
@@ -147,9 +145,7 @@ public class Control implements IControl {
 //		if(lastFunktioncode.equals("aktionHand"))
 //			
 //		if(lastFunktioncode.equals("aktionParkBeschwichtigen"))
-//			
-//		
-//
+
 		if(lastFunktioncode.equals("aktionWanze")){
 			for (int i=0; i<guilayer.getSimulation().getHouses().get(hausid-1).getUeberwachungsmodule().size(); i++){
 				if (guilayer.getSimulation().getHouses().get(hausid-1).getUeberwachungsmodule().get(i).equals("Wanze")){
@@ -158,10 +154,10 @@ public class Control implements IControl {
 				}	
 			}
 			if (!istVorhanden){
-				guilayer.getSimulation().bewegungAgentWanze(hausid);
+				guilayer.getSimulation().berechne_weg(null, guilayer.getSimulation().get_agent(), (char)(hausid+48));
 				guilayer.getSimulation().getHouses().get(hausid-1).getUeberwachungsmodule().add("Wanze");
 				//guilayer.getSimulation().calc_misstrauen_after_ueberwachungs_action("Wanze", hausid);
-				this.house_id = hausid;
+//				this.house_id = hausid;
 				guilayer.getButtonsMap().get("aktionNachhause").setEnabled(true);
 			}
 			istVorhanden = false;
@@ -177,9 +173,9 @@ public class Control implements IControl {
 			}
 			if (!istVorhanden){
 				// gleiche Bewegung wie Verwanzen
-				guilayer.getSimulation().bewegungAgentWanze(hausid);
+				guilayer.getSimulation().berechne_weg(null, guilayer.getSimulation().get_agent(), (char)(hausid+48));
 				guilayer.getSimulation().getHouses().get(hausid-1).getUeberwachungsmodule().add("Kamera");
-				guilayer.getSimulation().calc_misstrauen_after_ueberwachungs_action("Kamera", hausid);
+//				guilayer.getSimulation().calc_misstrauen_after_ueberwachungs_action("Kamera", hausid);
 				guilayer.getButtonsMap().get("aktionNachhause").setEnabled(true);
 			}
 			istVorhanden = false;
@@ -263,9 +259,10 @@ public class Control implements IControl {
 		} else {
 			guilayer.getButtonsMap().get("aktionenSpionage").setEnabled(true);
 		}
-		// von Pause unabhängig?
 		closeWindow("spionage");
 		closeWindow("beschwichtigen");
+		
+		// von Pause unabhängig?
 //		if (guilayer.getButtonsMap().get("aktionNachhause").isEnabled()){
 //			guilayer.getButtonsMap().get("aktionNachhause").setEnabled(false);
 //		} else {
