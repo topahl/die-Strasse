@@ -128,22 +128,34 @@ public class Control implements IControl {
 
 	
 	private void clickRemoveFernglas() {
-		// TODO Auto-generated method stub
-		
+		int currentHouse = Integer.parseInt(lastFunktioncode.substring(4,5))-1 ;
+		closeWindow("fensterhaus"); 
+//		guilayer.getSimulation().getHouses().get(currentHouse).getUeberwachungsmodule().remove("Fernglas");
+		guilayer.getButtonsMap().get("aktionFernglas").setEnabled(true);
+		guilayer.getSimulation().get_agent().setMussWuseln("Fernglas");
+		guilayer.getSimulation().berechne_weg(null, guilayer.getSimulation().get_agent(), (char)(currentHouse+1+48));
 	}
 
 
 
 	private void clickRemoveHacken() {
-		// TODO Auto-generated method stub
-		
+		int currentHouse = Integer.parseInt(lastFunktioncode.substring(4,5))-1 ;
+		closeWindow("fensterhaus"); 
+		guilayer.getSimulation().getHouses().get(currentHouse).getUeberwachungsmodule().remove("Hacken");
+		guilayer.getButtonsMap().get("aktionHacken").setEnabled(true);
+		guilayer.getSimulation().get_agent().setMussWuseln("Hacken");
+		guilayer.getSimulation().berechne_weg(null, guilayer.getSimulation().get_agent(), (char)(currentHouse+1+48));
 	}
 
 
 
 	private void clickRemoveKamera() {
-		// TODO Auto-generated method stub
-		
+		int currentHouse = Integer.parseInt(lastFunktioncode.substring(4,5))-1 ;
+		closeWindow("fensterhaus"); 
+		guilayer.getSimulation().getHouses().get(currentHouse).getUeberwachungsmodule().remove("Kamera");
+		guilayer.getButtonsMap().get("aktionKamera").setEnabled(true);
+		guilayer.getSimulation().get_agent().setMussWuseln("Kamera");
+		guilayer.getSimulation().berechne_weg(null, guilayer.getSimulation().get_agent(), (char)(currentHouse+1+48));
 	}
 
 
@@ -152,15 +164,10 @@ public class Control implements IControl {
 		int currentHouse = Integer.parseInt(lastFunktioncode.substring(4,5))-1 ;
 		closeWindow("fensterhaus"); 
 		guilayer.getSimulation().getHouses().get(currentHouse).getUeberwachungsmodule().remove("Wanze");
-		
 		guilayer.getButtonsMap().get("aktionNachhause").setEnabled(true);
 		guilayer.getSimulation().get_agent().setMussWuseln("Wanze");
 		guilayer.getSimulation().berechne_weg(null, guilayer.getSimulation().get_agent(), (char)(currentHouse+1+48));
-		
-		
-//		guilayer.getSimulation().getHouses().get(currentHouse).getUeberwachungsmodule().remove("Wanze")
-	
-			}
+	}
 
 
 
