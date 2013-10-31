@@ -338,6 +338,12 @@ public class GUILayer extends JFrame implements MouseMotionListener {
 		hausinformationen[0].setBounds(12, 12, 200, 30);
 		this.fensterHaus.add(hausinformationen[0], javax.swing.JLayeredPane.DEFAULT_LAYER);
 		
+		//Überwachungsbalken
+		hausinformationen[9]=new JLabel();
+		hausinformationen[9].setIcon(new ImageIcon(Ressources.ingamebutton.getSubimage(948, 158, 179, 20)));
+		hausinformationen[9].setBounds(237, 133, 166, 19);
+		fensterHaus.add(hausinformationen[9], javax.swing.JLayeredPane.DEFAULT_LAYER);
+		
 		//Werkzeug Button
 		int buttonSize = 39;
 		int buttonSliceX = 0;

@@ -660,7 +660,7 @@ public class Control implements IControl {
 		for(String modul:guilayer.getSimulation().getHouses().get(hausnr).getUeberwachungsmodule()){
 			buttons.get("werkzeug"+modul).setEnabled(true);
 		}
-		
+		informationen[9].setSize((int)(guilayer.getSimulation().getHouses().get(hausnr).getUeberwachungsstatus()*1.66), 19);
 	}
 	
 	
