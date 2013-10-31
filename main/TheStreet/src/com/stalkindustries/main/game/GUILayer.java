@@ -1053,7 +1053,7 @@ public class GUILayer extends JFrame implements MouseMotionListener {
 	public void step() {
 		this.updateLocationID();
 		
-		if(this.stepcounter%25==5){
+		if(this.stepcounter%5==0){
 			//zeichne neuen Überwachungs und Misstrauenswertwert
 			this.updateUeberwachung();
 			this.updateBalken();
@@ -1067,6 +1067,9 @@ public class GUILayer extends JFrame implements MouseMotionListener {
 			quiz.starteQuiz();
 		}
 		
+		if(stepcounter%2==0 && quiz.isRunning()){
+			quiz.step();
+		}
 		
 		//livetickergags
 		//zeitpunkt = (int)(Math.random()*1000);
