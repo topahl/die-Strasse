@@ -225,7 +225,6 @@ public class Control implements IControl {
 				}
 			}
 			if (!istVorhanden){
-				// gleiche Bewegung wie Verwanzen
 				guilayer.getSimulation().berechne_weg(null, guilayer.getSimulation().get_agent(), (char)(hausid+48));
 				guilayer.getSimulation().get_agent().setMussWuseln("Kamera");
 				guilayer.getSimulation().getHouses().get(hausid-1).getUeberwachungsmodule().add("Kamera");
@@ -234,8 +233,22 @@ public class Control implements IControl {
 			istVorhanden = false;
 		}
 
-//			
-//		if(lastFunktioncode.equals("aktionHacken"))
+			
+		if(lastFunktioncode.equals("aktionHacken")){
+			for (int i=0; i<guilayer.getSimulation().getHouses().get(hausid-1).getUeberwachungsmodule().size(); i++){
+				if (guilayer.getSimulation().getHouses().get(hausid-1).getUeberwachungsmodule().get(i).equals("Hacken")){
+					istVorhanden=true;
+					break;
+				}
+			}
+			if (!istVorhanden){
+				guilayer.getSimulation().berechne_weg(null, guilayer.getSimulation().get_agent(), (char)(hausid+48));
+				guilayer.getSimulation().get_agent().setMussWuseln("Hacken");
+				guilayer.getSimulation().getHouses().get(hausid-1).getUeberwachungsmodule().add("Hacken");
+				guilayer.getButtonsMap().get("aktionNachhause").setEnabled(true);
+			}
+			istVorhanden = false;
+		}
 //			
 //		if(lastFunktioncode.equals("aktionFernglas"))
 //			
