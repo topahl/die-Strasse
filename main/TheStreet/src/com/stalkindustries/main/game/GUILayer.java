@@ -1,6 +1,7 @@
 package com.stalkindustries.main.game;
 
 import java.awt.Color;
+import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseMotionListener;
@@ -51,6 +52,7 @@ public class GUILayer extends JFrame implements MouseMotionListener {
 	private JLabel spionageBeschr = new JLabel();
 	private JLabel beschwichtigenBeschr = new JLabel();
 	private JLabel[] hausinformationen = new JLabel[10]; //Titelfeld, 4Personenbilder, 4 Namen, Leiste Überwachungsstatus
+	private JLabel[] informationsbalken = new JLabel[3]; //Misstrauen positiv, Misstrauen Negativ, Überwachung
 	private JLabel newsticker = new JLabel();
 	
 	
@@ -186,14 +188,21 @@ public class GUILayer extends JFrame implements MouseMotionListener {
 		
 		//Überwachung Balken
 
-		JLabel label=new JLabel();
-		label.setIcon(new ImageIcon(Ressources.ingamebutton.getSubimage(948, 158, 179, 20)));
-		label.setBounds(Ressources.ZEROPOS.width+733, Ressources.ZEROPOS.height+685, 166, 19);
-		baseLayer.add(label, javax.swing.JLayeredPane.DEFAULT_LAYER);
-		label=new JLabel();
-		label.setIcon(new ImageIcon(Ressources.ingamebutton.getSubimage(948, 138, 179, 20)));
-		label.setBounds(Ressources.ZEROPOS.width+733, Ressources.ZEROPOS.height+685, 166, 19);
-		baseLayer.add(label, javax.swing.JLayeredPane.DEFAULT_LAYER);
+		informationsbalken[2]=new JLabel();
+		informationsbalken[2].setIcon(new ImageIcon(Ressources.ingamebutton.getSubimage(948, 158, 179, 20)));
+		informationsbalken[2].setBounds(Ressources.ZEROPOS.width+733, Ressources.ZEROPOS.height+685, 166, 19);
+		baseLayer.add(informationsbalken[2], javax.swing.JLayeredPane.DEFAULT_LAYER);
+		
+		informationsbalken[1]=new JLabel();
+		informationsbalken[1].setIcon(new ImageIcon(Ressources.ingamebutton.getSubimage(948, 118, 179, 20)));
+		informationsbalken[1].setBounds(Ressources.ZEROPOS.width+733, Ressources.ZEROPOS.height+646, 166, 19);
+		baseLayer.add(informationsbalken[1], javax.swing.JLayeredPane.DEFAULT_LAYER);
+		
+		informationsbalken[0]=new JLabel();
+		informationsbalken[0].setIcon(new ImageIcon(Ressources.ingamebutton.getSubimage(948, 138, 179, 20)));
+		informationsbalken[0].setBounds(Ressources.ZEROPOS.width+733, Ressources.ZEROPOS.height+646, 166, 19);
+		baseLayer.add(informationsbalken[0], javax.swing.JLayeredPane.DEFAULT_LAYER);
+
 		
 		
 		//Newsticker
@@ -1055,11 +1064,16 @@ public class GUILayer extends JFrame implements MouseMotionListener {
 	 */
 	public void step() {
 		this.updateLocationID();
-
-		// zeichne neuen Überwachungswert
-		this.updateUeberwachung();
 		
-		//Quizaufruf
+		if(this.stepcounter%25==5){
+			//zeichne neuen Überwachungs und Misstrauenswertwert
+			this.updateUeberwachung();
+			this.updateBalken();
+		}
+		
+		
+		//TODO etwas besseres Verfahren ausdenken
+		//Quizaufruf 
 		int zeitpunkt = (int) (Math.random() * 3000);
 		if(this.stepcounter % (3000 + zeitpunkt) == 0) {
 			quiz.starteQuiz();
@@ -1228,5 +1242,21 @@ public class GUILayer extends JFrame implements MouseMotionListener {
 	
 	public JLabel[] getHausinfoLabels(){
 		return hausinformationen;
+	}
+	
+	/**
+	 * Erneuert die Balekn, die das Misstrauen anzeigen
+	 * @author Tobias
+	 */
+	public void updateBalken(){
+		float misstrauen = simulation.calc_misstrauen_in_street();
+		if(misstrauen > 0.0f){
+			this.informationsbalken[0].setSize(new Dimension((int)(1.66*misstrauen),19));
+			this.informationsbalken[1].setSize(new Dimension(0,19));
+		}
+		else{
+			this.informationsbalken[1].setSize(new Dimension((int)(-1.66*misstrauen),19));
+			this.informationsbalken[0].setSize(new Dimension(0,19));
+		}
 	}
 }
