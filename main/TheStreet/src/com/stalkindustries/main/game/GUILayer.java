@@ -986,11 +986,8 @@ public class GUILayer extends JFrame implements MouseMotionListener {
 		//wenn sich der Agent in irgendeinem Haus befindet
 		if((int)(this.humans.get(this.humans.size()-1).get_location_id())-48 >= 1 && (int)(this.humans.get(this.humans.size()-1).get_location_id())-48 <= 9){
 			//wenn sich der Agent in dem Haus befindet, das ausspioniert werden soll
-			if(this.humans.get(this.humans.size()-1).get_location_id() == simulation.get_agent().get_location_id() &&
-					this.humans.get(this.humans.size()-1).get_location_id() != (char)(getSimulation().get_agent().get_haus_id()+48+1) &&
-					this.humans.get(this.humans.size()-1).get_location_id() == getSimulation().get_agent().get_location_id()){
-				
-				this.simulation.calc_misstrauen_after_ueberwachungs_action("bla", (int)(simulation.get_agent().get_location_id()-48));
+			if(this.humans.get(this.humans.size()-1).get_location_id() != (char)(getSimulation().get_agent().get_haus_id()+48+1)){			
+				this.simulation.calc_misstrauen_after_ueberwachungs_action((int)(simulation.get_agent().get_location_id()-48));
 			}
 		}
 	}
