@@ -246,10 +246,8 @@ public class Simulation {
 	
 	//Beschwerden Miri
 	//Allen Häusern den Überwachungsstatus updaten
-	public void calc_ueberwachungsstatus(){
-		for(int i=0;i<this.houses.size();i++){
-			this.houses.get(i).setUeberwachungsstatus(this.houses.get(i).getUeberwachungsmodule().size()/Haus.MAXUBERWACHUNGSMODULE);
-		}
+	public void updateUeberwachungsstatus(){
+		
 	}
 	
 	//Beschwerden Miri

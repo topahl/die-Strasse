@@ -58,13 +58,13 @@ public class Control implements IControl {
 			clickDialogDecline();
 		
 		//Buttons Menüleiste
-		if(funktion.equals("aktionenSpionage"))
+		if(funktion.equals("spionage"))
 			clickAktionenSpionage();
-		if(funktion.equals("aktionenBeschwichtigen"))
+		if(funktion.equals("beschwichtigen"))
 			clickAktionenBeschwichtigen();
-		if(funktion.equals("aktionNachhause"))
+		if(funktion.equals("nachHause"))
 			clickNachhause();
-		if(funktion.equals("aktionRazzia"))
+		if(funktion.equals("razzia"))
 			clickRazzia();
 		
 		//Buttons Aktionsfenster Spionage
@@ -78,7 +78,7 @@ public class Control implements IControl {
 			clickFlirten();
 		if(funktion.equals("aktionHand"))
 			clickHand();
-		if(funktion.equals("aktionParkBeschwichtigen"))
+		if(funktion.equals("ParkBeschwichtigen"))
 			clickParkBeschwichtigen();
 		
 		//Buttons Aktionsfenster Beschwichtigen 
@@ -92,7 +92,7 @@ public class Control implements IControl {
 			clickHacken();
 		if(funktion.equals("aktionFernglas"))
 			clickFernglas();
-		if(funktion.equals("aktionParkSpionage"))
+		if(funktion.equals("parkSpionage"))
 			clickParkSpionage();
 		
 		//Buttons small WerkzeugeSpionage im Houselayer
@@ -119,8 +119,8 @@ public class Control implements IControl {
 
 		//Mousefollower abschalten bei bestimmten Buttons
 		if(funktion.equals("pause") || funktion.equals("close")
-				|| funktion.equals("aktionenBeschwichtigen") || funktion.equals("aktionenSpionage") ||
-				funktion.equals("nachHause")) {
+				|| funktion.equals("beschwichtigen") || funktion.equals("spionage") ||
+				funktion.equals("nachHause") || funktion.equals("razzia")) {
 			guilayer.getMousefollower().setVisible(false);
 		}
 		
@@ -345,7 +345,7 @@ public class Control implements IControl {
 			istVorhanden = false;
 		}
 //			
-//		if(lastFunktioncode.equals("aktionParkSpionage"))
+//		if(lastFunktioncode.equals("parkSpionage"))
 			
 		if(!lastFunktioncode.startsWith("aktion")){
 			schowHausinfo(hausid);			
@@ -377,7 +377,7 @@ public class Control implements IControl {
 			spionagelabelBeschr(isPresent, "Laptop hacken");
 		if(funktion.equals("aktionFernglas"))
 			spionagelabelBeschr(isPresent, "Ausspionieren");
-		if(funktion.equals("aktionParkSpionage"))
+		if(funktion.equals("parkSpionage"))
 			spionagelabelBeschr(isPresent, "Im Park spionieren");
 		if(funktion.equals("aktion6Spionage"))
 			spionagelabelBeschr(isPresent, "Aufgabe 6");
@@ -391,7 +391,7 @@ public class Control implements IControl {
 			beschwichtigenlabelBeschr(isPresent, "Flirten");
 		if(funktion.equals("aktionHand"))
 			beschwichtigenlabelBeschr(isPresent, "Helfen");
-		if(funktion.equals("aktionParkBeschwichtigen"))
+		if(funktion.equals("parkBeschwichtigen"))
 			beschwichtigenlabelBeschr(isPresent, "Im Park unterhalten");
 		if(funktion.equals("aktion6Beschwichtigen"))
 			beschwichtigenlabelBeschr(isPresent, "Aktion 6");
@@ -408,21 +408,21 @@ public class Control implements IControl {
 		
 		//TODO: funktioniert das auch später noch im Spiel?
 		//z.B. Menübuttons sind nicht immer disabled im spielverlauf ... vg Stephan
-		if (guilayer.getButtonsMap().get("aktionenBeschwichtigen").isEnabled()){
-			guilayer.getButtonsMap().get("aktionenBeschwichtigen").setEnabled(false);
+		if (guilayer.getButtonsMap().get("beschwichtigen").isEnabled()){
+			guilayer.getButtonsMap().get("beschwichtigen").setEnabled(false);
 		} else {
-			guilayer.getButtonsMap().get("aktionenBeschwichtigen").setEnabled(true);
+			guilayer.getButtonsMap().get("beschwichtigen").setEnabled(true);
 		}
-		if (guilayer.getButtonsMap().get("aktionenSpionage").isEnabled()){
-			guilayer.getButtonsMap().get("aktionenSpionage").setEnabled(false);
+		if (guilayer.getButtonsMap().get("spionage").isEnabled()){
+			guilayer.getButtonsMap().get("spionage").setEnabled(false);
 		} else {
-			guilayer.getButtonsMap().get("aktionenSpionage").setEnabled(true);
+			guilayer.getButtonsMap().get("spionage").setEnabled(true);
 		}
-		if (guilayer.getButtonsMap().get("aktionNachhause").isEnabled()){
-			guilayer.getButtonsMap().get("aktionNachhause").setEnabled(false);
+		if (guilayer.getButtonsMap().get("nachHause").isEnabled()){
+			guilayer.getButtonsMap().get("nachHause").setEnabled(false);
 		} else {
 			if ((char)(guilayer.getSimulation().get_agent().get_haus_id()+1+48) != guilayer.getSimulation().get_agent().get_location_id()){
-				guilayer.getButtonsMap().get("aktionNachhause").setEnabled(true);
+				guilayer.getButtonsMap().get("nachHause").setEnabled(true);
 			}
 		}
 		
