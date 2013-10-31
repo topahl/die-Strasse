@@ -149,13 +149,13 @@ public class Control implements IControl {
 
 
 	private void clickRemoveWanze() {
-		int currentHouse = Integer.parseInt(lastFunktioncode.substring(4,5)) ;
+		int currentHouse = Integer.parseInt(lastFunktioncode.substring(4,5))-1 ;
 		closeWindow("fensterhaus"); 
 		guilayer.getSimulation().getHouses().get(currentHouse).getUeberwachungsmodule().remove("Wanze");
 		
 		guilayer.getButtonsMap().get("aktionNachhause").setEnabled(true);
 		guilayer.getSimulation().get_agent().setMussWuseln("Wanze");
-		guilayer.getSimulation().berechne_weg(null, guilayer.getSimulation().get_agent(), (char)(currentHouse+48));
+		guilayer.getSimulation().berechne_weg(null, guilayer.getSimulation().get_agent(), (char)(currentHouse+1+48));
 		
 		
 //		guilayer.getSimulation().getHouses().get(currentHouse).getUeberwachungsmodule().remove("Wanze")
@@ -203,7 +203,7 @@ public class Control implements IControl {
 			if (!istVorhanden){
 				guilayer.getSimulation().berechne_weg(null, guilayer.getSimulation().get_agent(), (char)(hausid+48));
 				guilayer.getSimulation().get_agent().setMussWuseln("Wanze");
-				guilayer.getSimulation().getHouses().get(hausid).getUeberwachungsmodule().add("Wanze");
+				guilayer.getSimulation().getHouses().get(hausid-1).getUeberwachungsmodule().add("Wanze");
 				guilayer.getButtonsMap().get("aktionNachhause").setEnabled(true);
 			}
 			istVorhanden = false;
@@ -504,6 +504,7 @@ public class Control implements IControl {
 		informationen[0].setText("Haus "+hausnr);
 		hausinfo.setVisible(true);
 		hausinfo.setEnabled(true);
+		hausnr--;
 		ArrayList<Mensch> personen = guilayer.getHumans();
 		HashMap<String,Button> buttons = guilayer.getButtonsMap();
 		buttons.get("werkzeugWanze").setEnabled(false);
