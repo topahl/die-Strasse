@@ -136,6 +136,9 @@ public class Control implements IControl {
 //		guilayer.getSimulation().get_agent().setMussWuseln("Fernglas");
 //		guilayer.getSimulation().berechne_weg(null, guilayer.getSimulation().get_agent(), (char)(currentHouse+1+48));
 		guilayer.getButtonsMap().get("aktionFernglas").setEnabled(true);
+		guilayer.getSimulation().getHouses().get(currentHouse).setUeberwachungsstatus(guilayer.getSimulation().getHouses().get(currentHouse).getUeberwachungsstatus()-guilayer.getSimulation().getHouses().get(currentHouse).getUeberwachungsWert(3));
+		guilayer.getSimulation().getHouses().get(currentHouse).setUeberwachungsWert(0,3);
+		
 	}
 
 
@@ -147,6 +150,8 @@ public class Control implements IControl {
 		guilayer.getButtonsMap().get("aktionHacken").setEnabled(true);
 		guilayer.getSimulation().get_agent().setMussWuseln("Hacken");
 		guilayer.getSimulation().berechne_weg(null, guilayer.getSimulation().get_agent(), (char)(currentHouse+1+48));
+		guilayer.getSimulation().getHouses().get(currentHouse).setUeberwachungsstatus(guilayer.getSimulation().getHouses().get(currentHouse).getUeberwachungsstatus()-guilayer.getSimulation().getHouses().get(currentHouse).getUeberwachungsWert(2));
+		guilayer.getSimulation().getHouses().get(currentHouse).setUeberwachungsWert(0,2);
 	}
 
 
@@ -158,6 +163,8 @@ public class Control implements IControl {
 		guilayer.getButtonsMap().get("aktionKamera").setEnabled(true);
 		guilayer.getSimulation().get_agent().setMussWuseln("Kamera");
 		guilayer.getSimulation().berechne_weg(null, guilayer.getSimulation().get_agent(), (char)(currentHouse+1+48));
+		guilayer.getSimulation().getHouses().get(currentHouse).setUeberwachungsstatus(guilayer.getSimulation().getHouses().get(currentHouse).getUeberwachungsstatus()-guilayer.getSimulation().getHouses().get(currentHouse).getUeberwachungsWert(1));
+		guilayer.getSimulation().getHouses().get(currentHouse).setUeberwachungsWert(0,1);
 	}
 
 
@@ -169,6 +176,8 @@ public class Control implements IControl {
 		guilayer.getButtonsMap().get("aktionNachhause").setEnabled(true);
 		guilayer.getSimulation().get_agent().setMussWuseln("Wanze");
 		guilayer.getSimulation().berechne_weg(null, guilayer.getSimulation().get_agent(), (char)(currentHouse+1+48));
+		guilayer.getSimulation().getHouses().get(currentHouse).setUeberwachungsstatus(guilayer.getSimulation().getHouses().get(currentHouse).getUeberwachungsstatus()-guilayer.getSimulation().getHouses().get(currentHouse).getUeberwachungsWert(0));
+		guilayer.getSimulation().getHouses().get(currentHouse).setUeberwachungsWert(0,0);
 	}
 
 
@@ -232,6 +241,11 @@ public class Control implements IControl {
 				guilayer.getSimulation().getHouses().get(hausid-1).getUeberwachungsmodule().add("Wanze");
 				guilayer.getButtonsMap().get("aktionNachhause").setEnabled(true);
 				guilayer.getSimulation().setWieeeeschteAktion(true);
+				
+				
+				guilayer.getSimulation().getHouses().get(hausid-1).setUeberwachungsWert((float)(Math.random()*20+1)+20,0);
+				guilayer.getSimulation().getHouses().get(hausid-1).setUeberwachungsstatus(guilayer.getSimulation().getHouses().get(hausid-1).getUeberwachungsstatus() + guilayer.getSimulation().getHouses().get(hausid-1).getUeberwachungsWert(0));
+			
 			}
 			istVorhanden = false;
 		}
@@ -250,6 +264,8 @@ public class Control implements IControl {
 				guilayer.getSimulation().getHouses().get(hausid-1).getUeberwachungsmodule().add("Kamera");
 				guilayer.getButtonsMap().get("aktionNachhause").setEnabled(true);
 				guilayer.getSimulation().setWieeeeschteAktion(true);
+				guilayer.getSimulation().getHouses().get(hausid-1).setUeberwachungsWert((float)(Math.random()*20+1)+20,1);
+				guilayer.getSimulation().getHouses().get(hausid-1).setUeberwachungsstatus(guilayer.getSimulation().getHouses().get(hausid-1).getUeberwachungsstatus() + guilayer.getSimulation().getHouses().get(hausid-1).getUeberwachungsWert(1));
 			}
 			istVorhanden = false;
 		}
@@ -268,6 +284,8 @@ public class Control implements IControl {
 				guilayer.getSimulation().getHouses().get(hausid-1).getUeberwachungsmodule().add("Hacken");
 				guilayer.getButtonsMap().get("aktionNachhause").setEnabled(true);
 				guilayer.getSimulation().setWieeeeschteAktion(true);
+				guilayer.getSimulation().getHouses().get(hausid-1).setUeberwachungsWert((float)(Math.random()*20+1)+20,2);
+				guilayer.getSimulation().getHouses().get(hausid-1).setUeberwachungsstatus(guilayer.getSimulation().getHouses().get(hausid-1).getUeberwachungsstatus() + guilayer.getSimulation().getHouses().get(hausid-1).getUeberwachungsWert(2));
 			}
 			istVorhanden = false;
 		}
@@ -285,6 +303,9 @@ public class Control implements IControl {
 				guilayer.getSimulation().getHouses().get(hausid-1).getUeberwachungsmodule().add("Fernglas");
 //				guilayer.getButtonsMap().get("aktionNachhause").setEnabled(true);
 				guilayer.getSimulation().setWieeeeschteAktion(true);
+				guilayer.getSimulation().getHouses().get(hausid-1).setUeberwachungsWert((float)(Math.random()*20+1)+20,3);
+				guilayer.getSimulation().getHouses().get(hausid-1).setUeberwachungsstatus(guilayer.getSimulation().getHouses().get(hausid-1).getUeberwachungsstatus() + guilayer.getSimulation().getHouses().get(hausid-1).getUeberwachungsWert(3));
+			
 				for (int j = 0; j<=Ressources.NUMBERHOUSES-1; j++){
 					if (guilayer.getSimulation().getHouses().get(j).getUeberwachungsmodule().contains("Fernglas")){
 						fernglasCounter++;

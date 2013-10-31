@@ -6,6 +6,7 @@ public class Haus {
 	private int posX;
 	private int posY;
 	private int hausnummer;
+	private float ueberwachungsWerte[] = new float[6];
 	private ArrayList<String> ueberwachungsmodule = new ArrayList();
 	private ArrayList<String> boese_events = new ArrayList();
 	private boolean agentenhaus;
@@ -39,6 +40,14 @@ public class Haus {
 	
 	public int getPosY(){
 		return this.posY;
+	}
+
+	public float getUeberwachungsWert(int index) {
+		return ueberwachungsWerte[index];
+	}
+
+	public void setUeberwachungsWert(float ueberwachungsWert, int index) {
+		this.ueberwachungsWerte[index] = ueberwachungsWert;
 	}
 
 }
