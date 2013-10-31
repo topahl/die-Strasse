@@ -882,7 +882,7 @@ public class Simulation {
 		}
 		
 		
-		System.out.print(get_agent().getMussWuseln().substring(0,2));
+		System.out.print(personId);
 		
 		//Spionage
 		if(get_agent().getMussWuseln().equals("Wanze+") && get_agent().getCurrentMove()=='n'){
@@ -925,29 +925,55 @@ public class Simulation {
 		
 		
 		//Soziales
-		if(get_agent().getMussWuseln().length()>7 && personId <=9 &&  get_agent().getMussWuseln().substring(1,8).equals("Kuchen+") ||
-				get_agent().getMussWuseln().length()>8 && personId >9 &&  get_agent().getMussWuseln().substring(2,9).equals("Kuchen+")){
+		if(get_agent().getMussWuseln().length()>=8 && personId <=9 &&  get_agent().getMussWuseln().substring(1,8).equals("Kuchen+") ||
+				get_agent().getMussWuseln().length()>=9 && personId >9 &&  get_agent().getMussWuseln().substring(2,9).equals("Kuchen+")){
 			get_people().get(personId).erhoehe_durchgefuehrteBeschwichtigungen(0);
 			calc_misstrauen_after_beschwichtigen_action(0, get_people().get(personId));
 			get_people().get(personId).setMoves(new Stack());
 			get_agent().setMussWuseln("");
 		}	
-		if(get_agent().getMussWuseln().length()>6 && personId <=9 && get_agent().getMussWuseln().substring(1,7).equals("Kuchen") ||
-				get_agent().getMussWuseln().length()>7 && personId >9 && get_agent().getMussWuseln().substring(2,8).equals("Kuchen") ){
+		if(get_agent().getMussWuseln().length()>=7 && personId <=9 && get_agent().getMussWuseln().substring(1,7).equals("Kuchen") ||
+				get_agent().getMussWuseln().length()>=8 && personId >9 && get_agent().getMussWuseln().substring(2,8).equals("Kuchen") ){
 			get_agent().setMussWuseln(personId+"Kuchen+");
 			//wuseln 
 		}	
 		
-		if(get_agent().getMussWuseln().length()>12 && personId <=9 &&  get_agent().getMussWuseln().substring(1,13).equals("Unterhalten+") ||
-				get_agent().getMussWuseln().length()>13 && personId >9 &&  get_agent().getMussWuseln().substring(2,14).equals("Unterhalten+")){
+		if(get_agent().getMussWuseln().length()>=13 && personId <=9 &&  get_agent().getMussWuseln().substring(1,13).equals("Unterhalten+") ||
+				get_agent().getMussWuseln().length()>=14 && personId >9 &&  get_agent().getMussWuseln().substring(2,14).equals("Unterhalten+")){
 			get_people().get(personId).erhoehe_durchgefuehrteBeschwichtigungen(1);
 			calc_misstrauen_after_beschwichtigen_action(1, get_people().get(personId));
 			get_people().get(personId).setMoves(new Stack());
 			get_agent().setMussWuseln("");
 		}	
-		if(get_agent().getMussWuseln().length()>11 && personId <=9 && get_agent().getMussWuseln().substring(1,12).equals("Unterhalten") ||
-				get_agent().getMussWuseln().length()>12 && personId >9 && get_agent().getMussWuseln().substring(2,13).equals("Unterhalten") ){
+		if(get_agent().getMussWuseln().length()>=12 && personId <=9 && get_agent().getMussWuseln().substring(1,12).equals("Unterhalten") ||
+				get_agent().getMussWuseln().length()>=13 && personId >9 && get_agent().getMussWuseln().substring(2,13).equals("Unterhalten") ){
 			get_agent().setMussWuseln(personId+"Unterhalten+");
+			//wuseln 
+		}
+		
+		if(get_agent().getMussWuseln().length()>=9 && personId <=9 &&  get_agent().getMussWuseln().substring(1,9).equals("Flirten+") ||
+				get_agent().getMussWuseln().length()>=10 && personId >9 &&  get_agent().getMussWuseln().substring(2,10).equals("Flirten+")){
+			get_people().get(personId).erhoehe_durchgefuehrteBeschwichtigungen(2);
+			calc_misstrauen_after_beschwichtigen_action(2, get_people().get(personId));
+			get_people().get(personId).setMoves(new Stack());
+			get_agent().setMussWuseln("");
+		}	
+		if(get_agent().getMussWuseln().length()>=8 && personId <=9 && get_agent().getMussWuseln().substring(1,8).equals("Flirten") ||
+				get_agent().getMussWuseln().length()>=9 && personId >9 && get_agent().getMussWuseln().substring(2,9).equals("Flirten") ){
+			get_agent().setMussWuseln(personId+"Flirten+");
+			//wuseln 
+		}
+		
+		if(get_agent().getMussWuseln().length()>=6 && personId <=9 &&  get_agent().getMussWuseln().substring(1,6).equals("Hand+") ||
+				get_agent().getMussWuseln().length()>=7 && personId >9 &&  get_agent().getMussWuseln().substring(2,7).equals("Hand+")){
+			get_people().get(personId).erhoehe_durchgefuehrteBeschwichtigungen(3);
+			calc_misstrauen_after_beschwichtigen_action(3, get_people().get(personId));
+			get_people().get(personId).setMoves(new Stack());
+			get_agent().setMussWuseln("");
+		}	
+		if(get_agent().getMussWuseln().length()>=5 && personId <=9 && get_agent().getMussWuseln().substring(1,5).equals("Hand") ||
+				get_agent().getMussWuseln().length()>=6 && personId >9 && get_agent().getMussWuseln().substring(2,6).equals("Hand") ){
+			get_agent().setMussWuseln(personId+"Hand+");
 			//wuseln 
 		}
 				
