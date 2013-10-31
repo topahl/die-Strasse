@@ -114,13 +114,13 @@ public class Simulation {
 	
 	
 	//Beschwerden an Miri
-	public void calc_misstrauen_after_beschwichtigen_action(int action_id, int personen_id){
+	public void calc_misstrauen_after_beschwichtigen_action(int action_id, Person person){
 		int zufall=0;
 		int risiko;
-		double misstrauen = this.people.get(personen_id).get_misstrauen();
+		double misstrauen = person.get_misstrauen();
 		
 		//Risiko einer Beschwichtigenaktion steigt, je häufiger man sie ausführt
-		risiko = this.people.get(personen_id).get_durchgefuehrteBeschwichtigungen(action_id);
+		risiko = person.get_durchgefuehrteBeschwichtigungen(action_id);
 		
 		//Fehlschlagen der Aktionen ist zudem abhängig vom Misstrauensstatus
 		//Personen sind misstrauisch
@@ -153,7 +153,7 @@ public class Simulation {
 			misstrauen = -100;
 		
 		//Misstrauen der Person setzen
-		this.people.get(personen_id).set_misstrauen(misstrauen);
+		person.set_misstrauen(misstrauen);
 		
 		//Bei Person die Anzahl der Beschwichtigenaktionen erhöhen
 		//this.people.get(personen_id).set_durchgefuehrteBeschwichtigungen(action_id);
@@ -217,8 +217,11 @@ public class Simulation {
 		//wenn sich der Agent in irgendeinem Haus befindet
 		if((int)(get_agent().get_location_id())-48 >= 1 && (int)(get_agent().get_location_id())-48 <= 9){
 			//wenn sich der Agent in dem Haus befindet, das ausspioniert werden soll
-			if(get_agent().get_location_id() != (char)get_agent().get_haus_id()+48+1){			
-				calc_misstrauen_after_ueberwachungs_action((int)(get_agent().get_location_id()-48));
+			if(get_agent().get_location_id() != (char)get_agent().get_haus_id()+48+1){
+				if (wieeeeschteAktion){
+					calc_misstrauen_after_ueberwachungs_action((int)(get_agent().get_location_id()-48));
+				}
+					
 			}
 		}
 	}	

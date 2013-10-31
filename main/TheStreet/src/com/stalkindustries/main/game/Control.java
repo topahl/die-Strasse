@@ -215,16 +215,62 @@ public class Control implements IControl {
 						guilayer.getSimulation().get_people().get(i).erhoehe_durchgefuehrteBeschwichtigungen(0);
 						guilayer.getButtonsMap().get("aktionNachhause").setEnabled(true);
 						guilayer.getSimulation().setWieeeeschteAktion(false);
+						guilayer.getSimulation().calc_misstrauen_after_beschwichtigen_action(0, guilayer.getSimulation().get_people().get(i));
 					}	
 				}
 			}
 		}
 			
-//		if(lastFunktioncode.equals("aktionUnterhalten"))
-//			
-//		if(lastFunktioncode.equals("aktionFlirten"))
-//			
-//		if(lastFunktioncode.equals("aktionHand"))
+		if(lastFunktioncode.equals("aktionUnterhalten")){
+			for (int i=0; i<guilayer.getSimulation().get_people().size(); i++){
+				if (guilayer.getSimulation().get_people().get(i).get_location_id()== (char)(hausid+48)){
+					if (!soAtHome){
+						soAtHome = true;
+						stehenBleiben.add('s');
+						guilayer.getSimulation().get_people().get(i).setMoves(stehenBleiben);
+						guilayer.getSimulation().berechne_weg(null, guilayer.getSimulation().get_agent(), (char)(hausid+48));
+						guilayer.getSimulation().get_people().get(i).erhoehe_durchgefuehrteBeschwichtigungen(1);
+						guilayer.getButtonsMap().get("aktionNachhause").setEnabled(true);
+						guilayer.getSimulation().setWieeeeschteAktion(false);
+						guilayer.getSimulation().calc_misstrauen_after_beschwichtigen_action(1, guilayer.getSimulation().get_people().get(i));
+					}	
+				}
+			}
+		}
+			
+		if(lastFunktioncode.equals("aktionFlirten")){
+			for (int i=0; i<guilayer.getSimulation().get_people().size(); i++){
+				if (guilayer.getSimulation().get_people().get(i).get_location_id()== (char)(hausid+48)){
+					if (!soAtHome){
+						soAtHome = true;
+						stehenBleiben.add('s');
+						guilayer.getSimulation().get_people().get(i).setMoves(stehenBleiben);
+						guilayer.getSimulation().berechne_weg(null, guilayer.getSimulation().get_agent(), (char)(hausid+48));
+						guilayer.getSimulation().get_people().get(i).erhoehe_durchgefuehrteBeschwichtigungen(2);
+						guilayer.getButtonsMap().get("aktionNachhause").setEnabled(true);
+						guilayer.getSimulation().setWieeeeschteAktion(false);
+						guilayer.getSimulation().calc_misstrauen_after_beschwichtigen_action(2, guilayer.getSimulation().get_people().get(i));
+					}	
+				}
+			}
+		}
+			
+		if(lastFunktioncode.equals("aktionHand")){
+			for (int i=0; i<guilayer.getSimulation().get_people().size(); i++){
+				if (guilayer.getSimulation().get_people().get(i).get_location_id()== (char)(hausid+48)){
+					if (!soAtHome){
+						soAtHome = true;
+						stehenBleiben.add('s');
+						guilayer.getSimulation().get_people().get(i).setMoves(stehenBleiben);
+						guilayer.getSimulation().berechne_weg(null, guilayer.getSimulation().get_agent(), (char)(hausid+48));
+						guilayer.getSimulation().get_people().get(i).erhoehe_durchgefuehrteBeschwichtigungen(3);
+						guilayer.getButtonsMap().get("aktionNachhause").setEnabled(true);
+						guilayer.getSimulation().setWieeeeschteAktion(false);
+						guilayer.getSimulation().calc_misstrauen_after_beschwichtigen_action(3, guilayer.getSimulation().get_people().get(i));
+					}	
+				}
+			}
+		}
 //			
 //		if(lastFunktioncode.equals("aktionParkBeschwichtigen"))
 
