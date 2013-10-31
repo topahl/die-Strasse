@@ -108,8 +108,8 @@ public class Menu extends JFrame implements MouseMotionListener{
 		profilselect = new JLayeredPane();
 		
 		JTextField textfeld = new JTextField();
-		textfeld.setBounds(400, 200, 250, 45);
-		textfeld.setFont(new Font("Corbel",Font.BOLD,20));
+		textfeld.setBounds(460, 325, 300, 66);
+		textfeld.setFont(new Font("Corbel",Font.BOLD,30));
 		textfeld.setForeground(new Color(0xf9, 0xf9, 0xf9));
 		textfeld.setOpaque(false);
 		textfeld.setCursor(new Cursor(Cursor.TEXT_CURSOR));
@@ -117,12 +117,31 @@ public class Menu extends JFrame implements MouseMotionListener{
 		textfeld.setBorder(BorderFactory.createEmptyBorder());
 		profilselect.add(textfeld, javax.swing.JLayeredPane.DEFAULT_LAYER);
 		
+		JLabel label = new JLabel();
+		label.setIcon(new ImageIcon(Ressources.menubutton.getSubimage(360, 0, 315, 66)));		
+		label.setBounds(450, 320, 315, 66);
+		profilselect.add(label, javax.swing.JLayeredPane.DEFAULT_LAYER);
 		
-		JTextArea beschreibung = new JTextArea();
+		Button button = new Button(this.control,
+				Ressources.menubutton.getSubimage(0,603, 315,70),
+				Ressources.menubutton.getSubimage(315, 603, 313,70),
+				Ressources.menubutton.getSubimage(2 * 315, 603, 315,70),
+				Ressources.menubutton.getSubimage(3 * 315, 603, 315,70),
+				"create", 450, 400, this);
+	    profilselect.add(button, javax.swing.JLayeredPane.DEFAULT_LAYER);
+			
+		label = new JLabel();
+		label.setText("Benutzer anlegen");
+        label.setFont(new Font("Corbel",Font.BOLD,32));
+        label.setForeground(new Color(0xf9, 0xf9, 0xf9));
+        label.setBounds(450, 150, 250, 50);
+        profilselect.add(label, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        
+        JTextArea beschreibung = new JTextArea();
         beschreibung.setColumns(20);
         beschreibung.setLineWrap(true);
         beschreibung.setRows(5);
-        beschreibung.setText("Wechseln Sie hier den Benutzer mit dem Sie spielen, oder legen Sie einen neuen Benutzer an.");
+        beschreibung.setText("Sie haben noch keinen Nutzernamen? Legen Sie hier einen neuen an.");
         beschreibung.setWrapStyleWord(true);
         beschreibung.setFocusCycleRoot(true);
         beschreibung.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
@@ -130,8 +149,51 @@ public class Menu extends JFrame implements MouseMotionListener{
         beschreibung.setOpaque(false);
         beschreibung.setFont(new Font("Corbel",Font.BOLD,20));
         beschreibung.setForeground(new Color(0xf9, 0xf9, 0xf9));
-        beschreibung.setBounds(850,270, 250, 200);
+        beschreibung.setBounds(450,200, 350, 50);
         profilselect.add(beschreibung, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        
+        label = new JLabel();
+		label.setText("Benutzer wählen");
+        label.setFont(new Font("Corbel",Font.BOLD,32));
+        label.setForeground(new Color(0xf9, 0xf9, 0xf9));
+        label.setBounds(45, 150, 250, 50);
+        profilselect.add(label, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        
+        beschreibung = new JTextArea();
+        beschreibung.setLineWrap(true);
+        beschreibung.setText("Sie haben noch keinen Nutzernamen? Legen Sie hier einen neuen an.");
+        beschreibung.setWrapStyleWord(true);
+        beschreibung.setFocusCycleRoot(true);
+        beschreibung.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        beschreibung.setFocusable(false);
+        beschreibung.setOpaque(false);
+        beschreibung.setFont(new Font("Corbel",Font.BOLD,20));
+        beschreibung.setForeground(new Color(0xf9, 0xf9, 0xf9));
+        beschreibung.setBounds(450,200, 350, 50);
+        profilselect.add(beschreibung, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        
+		
+		
+		beschreibung = new JTextArea();
+        beschreibung.setLineWrap(true);
+        beschreibung.setText("Melden Sie sich mit Ihrem Nutzernamen an.");
+        beschreibung.setWrapStyleWord(true);
+        beschreibung.setFocusCycleRoot(true);
+        beschreibung.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        beschreibung.setFocusable(false);
+        beschreibung.setOpaque(false);
+        beschreibung.setFont(new Font("Corbel",Font.BOLD,20));
+        beschreibung.setForeground(new Color(0xf9, 0xf9, 0xf9));
+        beschreibung.setBounds(45,200, 300, 50);
+        profilselect.add(beschreibung, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        
+        button = new Button(this.control,
+				Ressources.menubutton.getSubimage(0,671, 315,70),
+				Ressources.menubutton.getSubimage(315, 671, 313,70),
+				Ressources.menubutton.getSubimage(2 * 315, 671, 315,70),
+				Ressources.menubutton.getSubimage(3 * 315, 671, 315,70),
+				"use", 45, 600, this);
+	    profilselect.add(button, javax.swing.JLayeredPane.DEFAULT_LAYER);
 		
 		generateStandartSubPageElements(profilselect, "Benutzer");
         
