@@ -1122,6 +1122,7 @@ public class GUILayer extends JFrame implements MouseMotionListener {
 				}
 			}
 			this.updateMisstrauen(); // Wert neu zeichnen
+			this.updateBalken();
 		}
 
 		//Spielzeit und Tagesablauf berechnen alle 4 Steps
@@ -1236,18 +1237,19 @@ public class GUILayer extends JFrame implements MouseMotionListener {
 	}
 	
 	/**
-	 * Erneuert die Balekn, die das Misstrauen anzeigen
+	 * Erneuert die Balekn, die das Misstrauen und die Überwachung anzeigen
 	 * @author Tobias
 	 */
 	public void updateBalken(){
 		float misstrauen = simulation.calc_misstrauen_in_street();
 		if(misstrauen > 0.0f){
-			this.informationsbalken[0].setSize(new Dimension((int)(1.66*misstrauen),19));
-			this.informationsbalken[1].setSize(new Dimension(0,19));
+			this.informationsbalken[0].setSize((int)(1.66*misstrauen),19);
+			this.informationsbalken[1].setSize(0,19);
 		}
 		else{
-			this.informationsbalken[1].setSize(new Dimension((int)(-1.66*misstrauen),19));
-			this.informationsbalken[0].setSize(new Dimension(0,19));
+			this.informationsbalken[1].setSize((int)(-1.66*misstrauen),19);
+			this.informationsbalken[0].setSize(0,19);
 		}
+		this.informationsbalken[2].setSize((int)(simulation.calc_ueberwachung_in_street()*1.66),19);
 	}
 }
