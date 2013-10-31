@@ -911,6 +911,7 @@ public class GUILayer extends JFrame implements MouseMotionListener {
 		ArrayList<ArrayList<String>> location_raster = Ressources.getLocation_ids();
 		int x;
 		int y;
+		//Update for Humans
 		for (int i = 0; i < this.humans.size(); i++) {
 			x = (this.humans.get(i).getPosX() + 2 * Ressources.RASTERHEIGHT - Ressources.ZEROPOS.width)
 					/ Ressources.RASTERHEIGHT - 2;
@@ -919,7 +920,10 @@ public class GUILayer extends JFrame implements MouseMotionListener {
 			this.humans.get(i).set_location_id(
 					location_raster.get(y).get(x).charAt(0));
 		}
-
+		//Update for Agent
+		x = (getSimulation().get_agent().getPosX() + 2 * Ressources.RASTERHEIGHT - Ressources.ZEROPOS.width) / Ressources.RASTERHEIGHT - 2;
+		y = (getSimulation().get_agent().getPosY() + 2 * Ressources.RASTERHEIGHT - Ressources.ZEROPOS.height)/ Ressources.RASTERHEIGHT - 2;
+		getSimulation().get_agent().set_location_id(location_raster.get(y).get(x).charAt(0));
 	}
 
 	
@@ -982,8 +986,8 @@ public class GUILayer extends JFrame implements MouseMotionListener {
 		//wenn sich der Agent in irgendeinem Haus befindet
 		if((int)(this.humans.get(this.humans.size()-1).get_location_id())-48 >= 1 && (int)(this.humans.get(this.humans.size()-1).get_location_id())-48 <= 9){
 			//wenn sich der Agent in dem Haus befindet, das ausspioniert werden soll
-			if((int)(this.humans.get(this.humans.size()-1).get_location_id())-48 == this.control.getHouseId()){
-				this.simulation.calc_misstrauen_after_ueberwachungs_action("bla", this.control.getHouseId());
+			if(this.humans.get(this.humans.size()-1).get_location_id() == simulation.get_agent().get_location_id()){
+				this.simulation.calc_misstrauen_after_ueberwachungs_action("bla", (int)(simulation.get_agent().get_location_id()-48));
 			}
 		}
 	}
