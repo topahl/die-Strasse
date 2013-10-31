@@ -258,15 +258,23 @@ public class Control implements IControl {
 		} else {
 			guilayer.getButtonsMap().get("aktionenSpionage").setEnabled(true);
 		}
+		if (guilayer.getButtonsMap().get("aktionNachhause").isEnabled()){
+			guilayer.getButtonsMap().get("aktionNachhause").setEnabled(false);
+		} else {
+			if ((char)(guilayer.getSimulation().get_agent().get_haus_id()+1+48) != guilayer.getSimulation().get_agent().get_location_id()){
+				guilayer.getButtonsMap().get("aktionNachhause").setEnabled(true);
+			}
+		}
+		
+		
+		
+		
+		
 		closeWindow("spionage");
 		closeWindow("beschwichtigen");
 		
 		// von Pause unabhängig?
-//		if (guilayer.getButtonsMap().get("aktionNachhause").isEnabled()){
-//			guilayer.getButtonsMap().get("aktionNachhause").setEnabled(false);
-//		} else {
-//			guilayer.getButtonsMap().get("aktionNachhause").setEnabled(true);
-//		}
+//		
 //		if (guilayer.getButtonsMap().get("aktionRazzia").isEnabled()){
 //			guilayer.getButtonsMap().get("aktionRazzia").setEnabled(false);
 //		} else {
