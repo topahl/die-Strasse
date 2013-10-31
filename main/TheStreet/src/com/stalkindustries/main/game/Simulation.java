@@ -247,7 +247,11 @@ public class Simulation {
 	//Beschwerden Miri
 	//Allen Häusern den Überwachungsstatus updaten
 	public void updateUeberwachungsstatus(){
+		float ueberwachungswert;
 		
+		for (int i=0; i<getHouses().size(); i++){
+//			for (int j=0; j<getHouses().get(i).get)
+		}
 	}
 	
 	//Beschwerden Miri
@@ -612,9 +616,12 @@ public class Simulation {
 		Stack<Character> neuer_weg = new Stack<Character>();
 		
 		//Falls das Ziel ein Haus ist, soll die Person auf ihren startpunkt laufen.
-		if ((int)(zielloc)-48 <=9 && (int)(zielloc)-48 > 0){ //-48 für char umwandlung zu int
-			neuer_weg = fuelle_stack_homeposition(person, agent, xPos_current, yPos_current);
+		if (agent != null && agent.get_haus_id() == (int)(zielloc-48-1) || person != null){
+			if ((int)(zielloc)-48 <=9 && (int)(zielloc)-48 > 0){ //-48 für char umwandlung zu int
+				neuer_weg = fuelle_stack_homeposition(person, agent, xPos_current, yPos_current);
+			}
 		}
+		
 		
 		if((person != null && person.get_location_id()!=zielloc) || (int)(Math.random()*2) == 1 || agent!= null){   //
 			for (int i = counter; i>=0; i--){
