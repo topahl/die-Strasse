@@ -870,8 +870,45 @@ public class Simulation {
 	
 	
 	//Support Tiki
-	public static void doSomethingAfterAgentAktion(String aktion, int hausid){
-		System.out.print("doSomethingAfterAgentAktion");
+	public void doSomethingAfterAgentAktion(){
+		System.out.print(get_agent().getMussWuseln());
+		
+		if(get_agent().getMussWuseln().equals("Wanze+") && get_agent().getCurrentMove()=='n'){
+			getHouses().get((int)(get_agent().get_location_id()-48-1)).getUeberwachungsmodule().add("Wanze");
+			getHouses().get((int)(get_agent().get_location_id()-48-1)).setUeberwachungsWert((float)(Math.random()*20+1)+20,0);
+			getHouses().get((int)(get_agent().get_location_id()-48-1)).setUeberwachungsstatus(getHouses().get((int)(get_agent().get_location_id()-48-1)).getUeberwachungsstatus() + 
+					getHouses().get((int)(get_agent().get_location_id()-48-1)).getUeberwachungsWert(0));
+			get_agent().setMussWuseln("");
+		}
+		if(get_agent().getMussWuseln().equals("Wanze")){
+			//TODO rumwuselbewegung
+			get_agent().setMussWuseln("Wanze+");
+		} 
+		
+		if(get_agent().getMussWuseln().equals("Kamera+") && get_agent().getCurrentMove()=='n'){
+			getHouses().get((int)(get_agent().get_location_id()-48-1)).getUeberwachungsmodule().add("Kamera");
+			getHouses().get((int)(get_agent().get_location_id()-48-1)).setUeberwachungsWert((float)(Math.random()*20+1)+20,1);
+			getHouses().get((int)(get_agent().get_location_id()-48-1)).setUeberwachungsstatus(getHouses().get((int)(get_agent().get_location_id()-48-1)).getUeberwachungsstatus() + 
+					getHouses().get((int)(get_agent().get_location_id()-48-1)).getUeberwachungsWert(1));
+			get_agent().setMussWuseln("");
+		}
+		if(get_agent().getMussWuseln().equals("Kamera")){
+			//TODO rumwuselbewegung
+			get_agent().setMussWuseln("Kamera+");
+		}
+		
+		if(get_agent().getMussWuseln().equals("Hacken+") && get_agent().getCurrentMove()=='n'){
+			getHouses().get((int)(get_agent().get_location_id()-48-1)).getUeberwachungsmodule().add("Hacken");
+			getHouses().get((int)(get_agent().get_location_id()-48-1)).setUeberwachungsWert((float)(Math.random()*20+1)+20,2);
+			getHouses().get((int)(get_agent().get_location_id()-48-1)).setUeberwachungsstatus(getHouses().get((int)(get_agent().get_location_id()-48-1)).getUeberwachungsstatus() + 
+					getHouses().get((int)(get_agent().get_location_id()-48-1)).getUeberwachungsWert(2));
+			get_agent().setMussWuseln("");
+		}
+		if(get_agent().getMussWuseln().equals("Hacken")){
+			//TODO rumwuselbewegung
+			get_agent().setMussWuseln("Hacken+");
+		}
+				
 	}
 	
 	
