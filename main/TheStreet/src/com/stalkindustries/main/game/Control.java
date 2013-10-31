@@ -130,10 +130,11 @@ public class Control implements IControl {
 	private void clickRemoveFernglas() {
 		int currentHouse = Integer.parseInt(lastFunktioncode.substring(4,5))-1 ;
 		closeWindow("fensterhaus"); 
-//		guilayer.getSimulation().getHouses().get(currentHouse).getUeberwachungsmodule().remove("Fernglas");
+		guilayer.getSimulation().getHouses().get(currentHouse).getUeberwachungsmodule().remove("Fernglas");
 		guilayer.getButtonsMap().get("aktionFernglas").setEnabled(true);
-		guilayer.getSimulation().get_agent().setMussWuseln("Fernglas");
-		guilayer.getSimulation().berechne_weg(null, guilayer.getSimulation().get_agent(), (char)(currentHouse+1+48));
+//		guilayer.getSimulation().get_agent().setMussWuseln("Fernglas");
+//		guilayer.getSimulation().berechne_weg(null, guilayer.getSimulation().get_agent(), (char)(currentHouse+1+48));
+		guilayer.getButtonsMap().get("aktionFernglas").setEnabled(true);
 	}
 
 
@@ -185,6 +186,7 @@ public class Control implements IControl {
 
 	private void clickHaus(int hausid) {
 		boolean istVorhanden = false;
+		int fernglasCounter=0;
 		
 		// hausid von 1-9, get_haus_id 0-8 => Deswegen plus 1
 		if (hausid != guilayer.getSimulation().get_agent().get_haus_id()+1){
@@ -249,8 +251,30 @@ public class Control implements IControl {
 			}
 			istVorhanden = false;
 		}
-//			
-//		if(lastFunktioncode.equals("aktionFernglas"))
+			
+		if(lastFunktioncode.equals("aktionFernglas")){
+			for (int i=0; i<guilayer.getSimulation().getHouses().get(hausid-1).getUeberwachungsmodule().size(); i++){
+				if (guilayer.getSimulation().getHouses().get(hausid-1).getUeberwachungsmodule().get(i).equals("Fernglas")){
+					istVorhanden=true;
+					break;
+				}
+			}
+			if (!istVorhanden){
+//				guilayer.getSimulation().berechne_weg(null, guilayer.getSimulation().get_agent(), (char)(hausid+48));
+//				guilayer.getSimulation().get_agent().setMussWuseln("Hacken");
+				guilayer.getSimulation().getHouses().get(hausid-1).getUeberwachungsmodule().add("Fernglas");
+//				guilayer.getButtonsMap().get("aktionNachhause").setEnabled(true);
+				for (int j = 0; j<=Ressources.NUMBERHOUSES-1; j++){
+					if (guilayer.getSimulation().getHouses().get(j).getUeberwachungsmodule().contains("Fernglas")){
+						fernglasCounter++;
+					}
+				}
+				if (fernglasCounter==3){
+					guilayer.getButtonsMap().get("aktionFernglas").setEnabled(false);
+				}
+			}
+			istVorhanden = false;
+		}
 //			
 //		if(lastFunktioncode.equals("aktionParkSpionage"))
 			
