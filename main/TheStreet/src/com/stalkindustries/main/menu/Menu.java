@@ -17,6 +17,7 @@ import java.util.HashMap;
 import javax.imageio.ImageIO;
 import javax.swing.AbstractListModel;
 import javax.swing.BorderFactory;
+import javax.swing.DefaultListModel;
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -26,6 +27,7 @@ import javax.swing.JScrollBar;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
+import javax.swing.ListSelectionModel;
 
 import com.stalkindustries.main.Button;
 import com.stalkindustries.main.game.Ressources;
@@ -156,22 +158,51 @@ public class Menu extends JFrame implements MouseMotionListener{
         profilselect.add(beschreibung, javax.swing.JLayeredPane.DEFAULT_LAYER);
         
         //Benutzerauswahl
-        JList list = new JList();
-        list.setModel(new AbstractListModel() {
-            String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5","Item 1", "Item 2", "Item 3", "Item 4", "Item 5","Item 1","Item 2", "Item 3", "Item 4", "Item 5" ,"Item 1", "Item 2", "Item 3", "Item 4", "Item 5"  };
-            public int getSize() { return strings.length; }
-            public Object getElementAt(int i) { return strings[i]; }
-        });
+        JList<String> list = new JList<String>();
+        
+        DefaultListModel<String> listModel = new DefaultListModel<String>();
+        listModel.addElement("Jane Doe");
+        listModel.addElement("John Smith");
+        listModel.addElement("Kathy Green");
+        listModel.addElement("Jane Doe");
+        listModel.addElement("John Smith");
+        listModel.addElement("Kathy Green");
+        listModel.addElement("Jane Doe");
+        listModel.addElement("John Smith");
+        listModel.addElement("Kathy Green");
+        listModel.addElement("Jane Doe");
+        listModel.addElement("John Smith");
+        listModel.addElement("Kathy Green");
+        listModel.addElement("Jane Doe");
+        listModel.addElement("John Smith");
+        listModel.addElement("Kathy Green");
+        listModel.addElement("Jane Doe");
+        listModel.addElement("John Smith");
+        listModel.addElement("Kathy Green");
+        listModel.addElement("Jane Doe");
+        listModel.addElement("John Smith");
+        listModel.addElement("Kathy Green");
+        listModel.addElement("Jane Doe");
+        listModel.addElement("John Smith");
+        listModel.addElement("Kathy Green");
+        
+        list.setModel(listModel);
+        list.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
         list.setOpaque(false);
+        list.setBackground(new Color(0,0,0,0));
         list.setFont(new Font("Corbel",Font.BOLD,20));
         JScrollPane scrollpane = new Scrollbar(this.control); 
         scrollpane.setViewportView(list);
+        scrollpane.getViewport().setOpaque(false);
+        scrollpane.setOpaque(false);
+        scrollpane.setBackground(new Color(0,0,0,0));
+        scrollpane.setBorder(null);
         JScrollBar sb = scrollpane.getVerticalScrollBar();
         sb.setPreferredSize(new Dimension(30,0));
-        scrollpane.setBounds(50, 260, 200, 300);
+        sb.setBackground(new Color(0,0,0,0));
+        scrollpane.setBounds(50, 260, 300, 300);
         profilselect.add(scrollpane, javax.swing.JLayeredPane.DEFAULT_LAYER);
-        
-        
+                
         
         label = new JLabel();
 		label.setText("Benutzer wählen");
