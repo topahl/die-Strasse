@@ -247,10 +247,29 @@ public class Simulation {
 	//Beschwerden Miri
 	//Allen Häusern den Überwachungsstatus updaten
 	public void updateUeberwachungsstatus(){
-		float ueberwachungswert;
+		float ueberwachungswert=0;
+		
 		
 		for (int i=0; i<getHouses().size(); i++){
-//			for (int j=0; j<getHouses().get(i).get)
+			getHouses().get(i).setUeberwachungsstatus(0);
+			for (int j=0; j<getHouses().get(i).getUeberwachungsmodule().size(); j++){
+				if (getHouses().get(i).getUeberwachungsmodule().get(j).equals("Wanze")){
+					ueberwachungswert = ueberwachungswert + getHouses().get(i).getUeberwachungsWert(0);
+				}
+				if (getHouses().get(i).getUeberwachungsmodule().get(j).equals("Kamera")){
+					ueberwachungswert = ueberwachungswert + getHouses().get(i).getUeberwachungsWert(1);
+				}
+				if (getHouses().get(i).getUeberwachungsmodule().get(j).equals("Hacken")){
+					ueberwachungswert = ueberwachungswert + getHouses().get(i).getUeberwachungsWert(2);
+				}
+				if (getHouses().get(i).getUeberwachungsmodule().get(j).equals("Fernglas")){
+					ueberwachungswert = ueberwachungswert + getHouses().get(i).getUeberwachungsWert(3);
+				}
+				if (ueberwachungswert > 100){
+					ueberwachungswert = 100;
+				}
+				getHouses().get(i).setUeberwachungsstatus(ueberwachungswert);
+			}
 		}
 	}
 	
@@ -887,14 +906,10 @@ public class Simulation {
 		}
 		
 		
-		System.out.print(personId);
-		
 		//Spionage
 		if(get_agent().getMussWuseln().equals("Wanze+") && get_agent().getCurrentMove()=='n'){
 			getHouses().get((int)(get_agent().get_location_id()-48-1)).getUeberwachungsmodule().add("Wanze");
 			getHouses().get((int)(get_agent().get_location_id()-48-1)).setUeberwachungsWert((float)(Math.random()*20+1)+20,0);
-			getHouses().get((int)(get_agent().get_location_id()-48-1)).setUeberwachungsstatus(getHouses().get((int)(get_agent().get_location_id()-48-1)).getUeberwachungsstatus() + 
-					getHouses().get((int)(get_agent().get_location_id()-48-1)).getUeberwachungsWert(0));
 			get_agent().setMussWuseln("");
 		}
 		if(get_agent().getMussWuseln().equals("Wanze")){
@@ -905,8 +920,6 @@ public class Simulation {
 		if(get_agent().getMussWuseln().equals("Kamera+") && get_agent().getCurrentMove()=='n'){
 			getHouses().get((int)(get_agent().get_location_id()-48-1)).getUeberwachungsmodule().add("Kamera");
 			getHouses().get((int)(get_agent().get_location_id()-48-1)).setUeberwachungsWert((float)(Math.random()*20+1)+20,1);
-			getHouses().get((int)(get_agent().get_location_id()-48-1)).setUeberwachungsstatus(getHouses().get((int)(get_agent().get_location_id()-48-1)).getUeberwachungsstatus() + 
-					getHouses().get((int)(get_agent().get_location_id()-48-1)).getUeberwachungsWert(1));
 			get_agent().setMussWuseln("");
 		}
 		if(get_agent().getMussWuseln().equals("Kamera")){
@@ -917,8 +930,6 @@ public class Simulation {
 		if(get_agent().getMussWuseln().equals("Hacken+") && get_agent().getCurrentMove()=='n'){
 			getHouses().get((int)(get_agent().get_location_id()-48-1)).getUeberwachungsmodule().add("Hacken");
 			getHouses().get((int)(get_agent().get_location_id()-48-1)).setUeberwachungsWert((float)(Math.random()*20+1)+20,2);
-			getHouses().get((int)(get_agent().get_location_id()-48-1)).setUeberwachungsstatus(getHouses().get((int)(get_agent().get_location_id()-48-1)).getUeberwachungsstatus() + 
-					getHouses().get((int)(get_agent().get_location_id()-48-1)).getUeberwachungsWert(2));
 			get_agent().setMussWuseln("");
 		}
 		if(get_agent().getMussWuseln().equals("Hacken")){

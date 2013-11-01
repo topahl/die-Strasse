@@ -1059,10 +1059,12 @@ public class GUILayer extends JFrame implements MouseMotionListener {
 	public void step() {
 		this.updateLocationID();
 		
+		
 		if(this.stepcounter%5==0){
 			//zeichne neuen Überwachungs und Misstrauenswertwert
 			this.updateUeberwachung();
 			this.updateBalken();
+			getSimulation().updateUeberwachungsstatus();
 		}
 		
 		
