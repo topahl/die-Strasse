@@ -486,16 +486,32 @@ public class Simulation {
 			parkeingang = berechne_Parkeingang(location_ids);
 		}
 		
-		//Rasterkarte initialisieren 
-		
 		
 		//Aktuelle Position des Männchens wird auf 0 gesetzt
 		if ((agent == null && !(zielloc == 'P' && person.get_location_id()=='P')) || person == null){
 			location_ids = wegberechnung_rasterkarte_initialisierung(location_ids, String.valueOf(zielloc), locid);
 			if (agent==null){
-				location_ids.get((person.getPosY()-Ressources.ZEROPOS.height)/Ressources.RASTERHEIGHT).set((person.getPosX()-Ressources.ZEROPOS.width)/Ressources.RASTERHEIGHT,"0");
+				switch(person.getCurrentMove()){
+		        case 'r': location_ids.get((person.getPosY()-Ressources.ZEROPOS.height)/Ressources.RASTERHEIGHT).set(((person.getPosX()-Ressources.ZEROPOS.width)/Ressources.RASTERHEIGHT)+1,"0");
+		                  break;
+		        case 'u': location_ids.get(((person.getPosY()-Ressources.ZEROPOS.height)/Ressources.RASTERHEIGHT)+1).set((person.getPosX()-Ressources.ZEROPOS.width)/Ressources.RASTERHEIGHT,"0");
+		                  break;
+		        case 'o':
+		        case 'l':
+		        default: location_ids.get((person.getPosY()-Ressources.ZEROPOS.height)/Ressources.RASTERHEIGHT).set((person.getPosX()-Ressources.ZEROPOS.width)/Ressources.RASTERHEIGHT,"0");
+		        }
+//				location_ids.get((person.getPosY()-Ressources.ZEROPOS.height)/Ressources.RASTERHEIGHT).set((person.getPosX()-Ressources.ZEROPOS.width)/Ressources.RASTERHEIGHT,"0");
 			} else {
-				location_ids.get((agent.getPosY()-Ressources.ZEROPOS.height)/Ressources.RASTERHEIGHT).set((agent.getPosX()-Ressources.ZEROPOS.width)/Ressources.RASTERHEIGHT,"0");
+				switch(agent.getCurrentMove()){
+		        case 'r': location_ids.get((agent.getPosY()-Ressources.ZEROPOS.height)/Ressources.RASTERHEIGHT).set(((agent.getPosX()-Ressources.ZEROPOS.width)/Ressources.RASTERHEIGHT)+1,"0");
+		                  break;
+		        case 'u': location_ids.get(((agent.getPosY()-Ressources.ZEROPOS.height)/Ressources.RASTERHEIGHT)+1).set((agent.getPosX()-Ressources.ZEROPOS.width)/Ressources.RASTERHEIGHT,"0");
+		                  break;
+		        case 'o':
+		        case 'l':
+		        default: location_ids.get((agent.getPosY()-Ressources.ZEROPOS.height)/Ressources.RASTERHEIGHT).set((agent.getPosX()-Ressources.ZEROPOS.width)/Ressources.RASTERHEIGHT,"0");
+		        }
+//				location_ids.get((agent.getPosY()-Ressources.ZEROPOS.height)/Ressources.RASTERHEIGHT).set((agent.getPosX()-Ressources.ZEROPOS.width)/Ressources.RASTERHEIGHT,"0");
 			}
 		} else {
 			location_ids = wegberechnung_rasterkarte_initialisierung(location_ids, "P", locid);
