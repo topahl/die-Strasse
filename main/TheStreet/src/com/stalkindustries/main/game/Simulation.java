@@ -284,7 +284,7 @@ public class Simulation {
 		for(int i=0;i<this.houses.size();i++){
 			ueberwachung += this.houses.get(i).getUeberwachungsstatus();
 		}
-		ueberwachung = ueberwachung/this.houses.size();
+		ueberwachung = ueberwachung/(this.houses.size()-1);
 		
 		return ueberwachung;
 	}
@@ -833,28 +833,39 @@ public class Simulation {
 	
 	
 	//Support Tiki
-	private Stack<Character> agentRumwuseln(ArrayList<ArrayList<String>> location_ids) {
+	private void agentRumwuseln(int doTimes) {
 		Stack<Character> neuer_weg = new Stack<Character>();
+		ArrayList<ArrayList<String>> location_ids;
+		location_ids = Ressources.getLocation_ids();
+		
+		location_ids.get((agent.getPosY()-Ressources.ZEROPOS.height)/Ressources.RASTERHEIGHT).set((agent.getPosX()-Ressources.ZEROPOS.width)/Ressources.RASTERHEIGHT,"0");
+		
+		location_ids = wegberechnung_rasterkarte_initialisierung(location_ids, String.valueOf(get_agent().get_location_id()), get_agent().get_location_id());
+		
+		location_ids.get((agent.getPosY()-Ressources.ZEROPOS.height)/Ressources.RASTERHEIGHT).set((agent.getPosX()-Ressources.ZEROPOS.width)/Ressources.RASTERHEIGHT,"Z");
 		
 		for (int i=0; i<15; i++){
 			for (int j=0; j<24; j++){
 				if ((location_ids.get(i).get(j)=="Z" || location_ids.get(i).get(j)=="0") && location_ids.get(i+1).get(j)=="Z" && location_ids.get(i-1).get(j)=="Z" && location_ids.get(i).get(j+1)=="Z" && location_ids.get(i).get(j-1)=="Z"){
 					
 					//Nun läuft der Agent lustig hin und her
-					neuer_weg.push('r');
-					neuer_weg.push('o');
-					neuer_weg.push('l');
-					neuer_weg.push('u');
-					neuer_weg.push('r');
-					neuer_weg.push('u');
-					neuer_weg.push('l');
-					neuer_weg.push('o');
-					neuer_weg.push('o');
-					neuer_weg.push('l');
-					neuer_weg.push('u');
-					neuer_weg.push('u');
-					neuer_weg.push('r');
-					neuer_weg.push('o');
+					for (int k=0; k<doTimes; k++){
+						neuer_weg.push('r');
+						neuer_weg.push('o');
+						neuer_weg.push('l');
+						neuer_weg.push('u');
+						neuer_weg.push('r');
+						neuer_weg.push('u');
+						neuer_weg.push('l');
+						neuer_weg.push('o');
+						neuer_weg.push('o');
+						neuer_weg.push('l');
+						neuer_weg.push('u');
+						neuer_weg.push('u');
+						neuer_weg.push('r');
+						neuer_weg.push('o');
+					}
+					
 					
 					if ((this.agent.getPosX()-Ressources.ZEROPOS.width)/Ressources.RASTERHEIGHT!=j || (this.agent.getPosY()-Ressources.ZEROPOS.height)/Ressources.RASTERHEIGHT!=i){
 						//Der Agent wird zum Mittelpunkt des Hauses geleitet
@@ -893,7 +904,7 @@ public class Simulation {
 				}
 			}
 		}	
-		return neuer_weg;
+		get_agent().setMoves(neuer_weg);
 	}
 	
 	
@@ -917,7 +928,7 @@ public class Simulation {
 			get_agent().setMussWuseln("");
 		}
 		if(get_agent().getMussWuseln().equals("Wanze")){
-			//TODO rumwuselbewegung
+			agentRumwuseln(2);
 			get_agent().setMussWuseln("Wanze+");
 		} 
 		
@@ -927,7 +938,7 @@ public class Simulation {
 			get_agent().setMussWuseln("");
 		}
 		if(get_agent().getMussWuseln().equals("Kamera")){
-			//TODO rumwuselbewegung
+			agentRumwuseln(3);
 			get_agent().setMussWuseln("Kamera+");
 		}
 		
@@ -937,7 +948,7 @@ public class Simulation {
 			get_agent().setMussWuseln("");
 		}
 		if(get_agent().getMussWuseln().equals("Hacken")){
-			//TODO rumwuselbewegung
+			agentRumwuseln(2);
 			get_agent().setMussWuseln("Hacken+");
 		}
 				
@@ -950,7 +961,7 @@ public class Simulation {
 			get_agent().setMussWuseln("");
 		}
 		if(get_agent().getMussWuseln().equals("Wanzer")){
-			//TODO rumwuselbewegung
+			agentRumwuseln(2);
 			get_agent().setMussWuseln("Wanzer+");
 		}
 		
@@ -960,7 +971,7 @@ public class Simulation {
 			get_agent().setMussWuseln("");
 		}
 		if(get_agent().getMussWuseln().equals("Kamerar")){
-			//TODO rumwuselbewegung
+			agentRumwuseln(3);
 			get_agent().setMussWuseln("Kamerar+");
 		}
 		
@@ -970,7 +981,7 @@ public class Simulation {
 			get_agent().setMussWuseln("");
 		}
 		if(get_agent().getMussWuseln().equals("Hackenr")){
-			//TODO rumwuselbewegung
+			agentRumwuseln(2);
 			get_agent().setMussWuseln("Hackenr+");
 		}
 		
