@@ -92,7 +92,7 @@ public class Quiz {
 		this.quizwindow.add(this.zeit, javax.swing.JLayeredPane.DEFAULT_LAYER);
 	}
 	
-	
+	//Beschwerden Miri
 	public void analyzeAntwort(String antwort){
 		int antwortnr = (int)antwort.charAt(0)-61;
 		int richtigkeit = Integer.parseInt(this.quizfragen.get(this.quizstart).get(antwortnr));
@@ -158,6 +158,10 @@ public class Quiz {
 
 	public boolean isRunning() {
 		return running;
+	}
+	
+	public ArrayList<Integer> getBeantwortete(){
+		return this.beantwortet;
 	}
 	
 }

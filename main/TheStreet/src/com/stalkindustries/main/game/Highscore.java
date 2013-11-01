@@ -36,7 +36,12 @@ public class Highscore {
 		double zeit = 0;
 		
 		//calc Wissenswert
-		
+		double tmp = 0;
+		ArrayList<Integer> fragen = this.quiz.getBeantwortete();
+		for(int i=0;i<fragen.size();i++){
+			tmp = tmp + fragen.get(i);
+		}
+		this.wissenswert = tmp/fragen.size();		//zwischen 0 und 100
 		
 		this.highscore = 1000/this.misstrauen_max + this.wissenswert + zeit + this.events;
 	}
