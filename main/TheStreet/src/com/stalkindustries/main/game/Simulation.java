@@ -16,6 +16,7 @@ public class Simulation {
 	private int spiel_minute=0;
 	private ArrayList<Haus> houses = new ArrayList<Haus>();
 	private boolean wieeeeschteAktion=true;  //wieeeeescht = boese
+	private double misstrauen_max=0;
 
 	
 	public Simulation(){
@@ -104,7 +105,7 @@ public class Simulation {
 	
 	//Beschwerden an Miri
 	//Mittelwert des Misstrauens der einzelnen Personen
-	float calc_misstrauen_in_street(){
+	public double calc_misstrauen_in_street(){
 		float misstrauen = 0;
 		for(int i=0;i<this.people.size();i++){
 			misstrauen += this.people.get(i).get_misstrauen();
@@ -1158,4 +1159,16 @@ public class Simulation {
 		this.wieeeeschteAktion = wieeeeschteAktion;
 	}
 
+	
+	
+	public void calcMisstrauenMax(){
+		double misstrauen = this.calc_misstrauen_in_street();
+		if(this.misstrauen_max < misstrauen){
+			this.misstrauen_max = misstrauen;
+		}
+	}
+	
+	public double getMisstrauenMax(){
+		return this.misstrauen_max;
+	}
 }

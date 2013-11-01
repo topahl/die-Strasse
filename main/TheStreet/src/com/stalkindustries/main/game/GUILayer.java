@@ -1257,7 +1257,7 @@ public class GUILayer extends JFrame implements MouseMotionListener {
 	 * @author Tobias
 	 */
 	public void updateBalken(){
-		float misstrauen = simulation.calc_misstrauen_in_street();
+		double misstrauen = simulation.calc_misstrauen_in_street();
 		if(misstrauen > 0.0f){
 			this.informationsbalken[0].setSize((int)(1.66*misstrauen),19);
 			this.informationsbalken[1].setSize(0,19);

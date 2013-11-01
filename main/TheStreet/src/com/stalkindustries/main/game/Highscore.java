@@ -8,8 +8,8 @@ import java.util.ArrayList;
 public class Highscore {
 	private double highscore = 0;
 	private double wissenswert = 0;
-	private double ueberwachungswert = 0;
-	private double misstrauen_street = 0;
+	private double events = 0;
+	private double misstrauen_max = 0;
 	private Simulation simulation;
 	private Quiz quiz;
 	private Agent agent;
@@ -27,13 +27,18 @@ public class Highscore {
 		int h = this.simulation.getSpiel_stunde();
 		int tag = this.simulation.getSpiel_tag();
 		this.spielzeit = min + h*60 + tag*24*60;
+
+		this.misstrauen_max = this.simulation.getMisstrauenMax();
 	}
 	
 	//Beschwerden Miri
 	public void calcHighscoreOfAgent(){
 		double zeit = 0;
 		
-		this.highscore = this.misstrauen_street + this.ueberwachungswert + this.wissenswert + zeit;
+		//calc Wissenswert
+		
+		
+		this.highscore = 1000/this.misstrauen_max + this.wissenswert + zeit + this.events;
 	}
 	
 	//Beschwerden Miri
