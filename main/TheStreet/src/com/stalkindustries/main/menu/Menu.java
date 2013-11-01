@@ -3,6 +3,7 @@ package com.stalkindustries.main.menu;
 import java.awt.AlphaComposite;
 import java.awt.Color;
 import java.awt.Cursor;
+import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.Graphics2D;
 import java.awt.event.MouseEvent;
@@ -14,15 +15,17 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 import javax.imageio.ImageIO;
+import javax.swing.AbstractListModel;
 import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JLayeredPane;
+import javax.swing.JList;
+import javax.swing.JScrollBar;
+import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
-import javax.swing.border.Border;
-import javax.swing.text.DefaultCaret;
 
 import com.stalkindustries.main.Button;
 import com.stalkindustries.main.game.Ressources;
@@ -35,6 +38,8 @@ public class Menu extends JFrame implements MouseMotionListener{
 	private JLayeredPane tutorial;
 	private JLayeredPane highscore;
 	private ControlMenu control;
+	
+	private JTextField username;
 	
 	public static final int LAYERMENU = 1;
 	public static final int LAYERLEVEL = 2;
@@ -107,19 +112,19 @@ public class Menu extends JFrame implements MouseMotionListener{
 	private void initProfilMenu(){
 		profilselect = new JLayeredPane();
 		
-		JTextField textfeld = new JTextField();
-		textfeld.setBounds(460, 325, 300, 66);
-		textfeld.setFont(new Font("Corbel",Font.BOLD,30));
-		textfeld.setForeground(new Color(0xf9, 0xf9, 0xf9));
-		textfeld.setOpaque(false);
-		textfeld.setCursor(new Cursor(Cursor.TEXT_CURSOR));
-		textfeld.setCaretColor(new Color(0xf9, 0xf9, 0xf9));
-		textfeld.setBorder(BorderFactory.createEmptyBorder());
-		profilselect.add(textfeld, javax.swing.JLayeredPane.DEFAULT_LAYER);
+		this.username = new JTextField();
+		this.username.setBounds(460, 335, 300, 66);
+		this.username.setFont(new Font("Corbel",Font.BOLD,30));
+		this.username.setForeground(new Color(0xf9, 0xf9, 0xf9));
+		this.username.setOpaque(false);
+		this.username.setCursor(new Cursor(Cursor.TEXT_CURSOR));
+		this.username.setCaretColor(new Color(0xf9, 0xf9, 0xf9));
+		this.username.setBorder(BorderFactory.createEmptyBorder());
+		profilselect.add(this.username, javax.swing.JLayeredPane.DEFAULT_LAYER);
 		
 		JLabel label = new JLabel();
 		label.setIcon(new ImageIcon(Ressources.menubutton.getSubimage(360, 0, 315, 66)));		
-		label.setBounds(450, 320, 315, 66);
+		label.setBounds(450, 330, 315, 66);
 		profilselect.add(label, javax.swing.JLayeredPane.DEFAULT_LAYER);
 		
 		Button button = new Button(this.control,
@@ -138,10 +143,8 @@ public class Menu extends JFrame implements MouseMotionListener{
         profilselect.add(label, javax.swing.JLayeredPane.DEFAULT_LAYER);
         
         JTextArea beschreibung = new JTextArea();
-        beschreibung.setColumns(20);
         beschreibung.setLineWrap(true);
-        beschreibung.setRows(5);
-        beschreibung.setText("Sie haben noch keinen Nutzernamen? Legen Sie hier einen neuen an.");
+        beschreibung.setText("Sie haben noch keinen Nutzernamen? Legen Sie hier einen neuen an. \n \n \nGewünschter Nutzername");
         beschreibung.setWrapStyleWord(true);
         beschreibung.setFocusCycleRoot(true);
         beschreibung.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
@@ -149,8 +152,25 @@ public class Menu extends JFrame implements MouseMotionListener{
         beschreibung.setOpaque(false);
         beschreibung.setFont(new Font("Corbel",Font.BOLD,20));
         beschreibung.setForeground(new Color(0xf9, 0xf9, 0xf9));
-        beschreibung.setBounds(450,200, 350, 50);
+        beschreibung.setBounds(450,200, 350, 150);
         profilselect.add(beschreibung, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        
+        //Benutzerauswahl
+        JList list = new JList();
+        list.setModel(new AbstractListModel() {
+            String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5","Item 1", "Item 2", "Item 3", "Item 4", "Item 5","Item 1","Item 2", "Item 3", "Item 4", "Item 5" ,"Item 1", "Item 2", "Item 3", "Item 4", "Item 5"  };
+            public int getSize() { return strings.length; }
+            public Object getElementAt(int i) { return strings[i]; }
+        });
+        list.setOpaque(false);
+        JScrollPane scrollpane = new Scrollbar(this.control); 
+        scrollpane.setViewportView(list);
+        JScrollBar sb = scrollpane.getVerticalScrollBar();
+        sb.setPreferredSize(new Dimension(30,0));
+        scrollpane.setBounds(50, 260, 200, 300);
+        profilselect.add(scrollpane, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        
+        
         
         label = new JLabel();
 		label.setText("Benutzer wählen");
@@ -412,5 +432,10 @@ public class Menu extends JFrame implements MouseMotionListener{
     	}
     	return levels;
     }
+    
+    public String getInputUsername(){
+    	return username.getText();
+    }
+    
     
 }

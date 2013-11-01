@@ -1,5 +1,9 @@
 package com.stalkindustries.main.menu;
 
+import java.io.File;
+import java.io.IOException;
+import java.util.ArrayList;
+
 import javax.swing.JLayeredPane;
 
 import com.stalkindustries.main.IControl;
@@ -34,6 +38,9 @@ public class ControlMenu implements IControl{
 			mainmenu.showLayer(Menu.LAYERHIGHSCORE);
 		if(funktion.equals("tutorial"))
 			mainmenu.showLayer(Menu.LAYERTUTORIAL);
+		if(funktion.equals("create"))
+			this.createUser();
+			
 		
 			
 	}
@@ -51,6 +58,24 @@ public class ControlMenu implements IControl{
 	public void mousePresent(String funktion, boolean isPresent) {
 		// TODO do nothing
 		
+	}
+	/**
+	 *@author Tobias
+	 */
+	private void createUser(){
+		String user = this.mainmenu.getInputUsername();
+		
+		File folder = new File("res\\user\\"+user+".usr");
+			
+    	if(!folder.canWrite())
+    		System.err.println("Can't write to user files");
+    	try {
+    		folder.mkdirs();
+			folder.createNewFile();
+		} catch (IOException e) {
+			System.err.println("Error while creating Userfile");
+			e.printStackTrace();
+		}
 	}
 	
 	
