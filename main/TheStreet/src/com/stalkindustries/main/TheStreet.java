@@ -24,6 +24,7 @@ public class TheStreet {
 	}
 	public static void loadLeve(String levelname){
 		GUILayer game = new GUILayer(levelname);
+		//game.callHighscore();
 	}
 	
 	public static void loadMenu(){
