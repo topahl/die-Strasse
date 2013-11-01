@@ -891,7 +891,7 @@ public class GUILayer extends JFrame implements MouseMotionListener {
 		// Agent hinzufügen
 		spawnPersonX[0] = spawnHausX[agent_house_nr];
 		spawnPersonY[0] = spawnHausY[agent_house_nr];
-		mensch = new Agent(agent_house_nr,"James Bond");
+		mensch = new Agent(agent_house_nr,"James_Bond");
 		this.humans.add(mensch);
 		this.baseLayer.add(mensch, javax.swing.JLayeredPane.DEFAULT_LAYER);
 		this.humans.get(mensch_cnt).teleport(spawnPersonX[0], spawnPersonY[0]);
