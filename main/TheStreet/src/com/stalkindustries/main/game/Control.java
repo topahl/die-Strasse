@@ -442,7 +442,7 @@ public class Control implements IControl {
 	 * Ingame-Fenster schlieﬂen
 	 * @param fensterName Bezeichnung des Fensters
 	 */
-	private void closeWindow(String fensterName) {
+	public void closeWindow(String fensterName) {
 		JLayeredPane frame = guilayer.getWindow(fensterName);
 		frame.setVisible(false);
 		frame.setEnabled(false);

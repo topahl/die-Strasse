@@ -1109,6 +1109,8 @@ public class GUILayer extends JFrame implements MouseMotionListener {
 				this.overlayNacht.setBackground(new Color(0, 0, farbteil1*minute, farbteil2*minute));
 				this.repaint();	
 			}
+			buttons.get("beschwichtigen").setEnabled(false);
+			control.closeWindow("beschwichtigen");
 		}
 		if (stunde == 6) {
 			if ((minute >= 0) && (minute <= 20)){
@@ -1118,6 +1120,7 @@ public class GUILayer extends JFrame implements MouseMotionListener {
 			if(minute == 20){
 				this.overlayNacht.setVisible(false);
 			}
+			buttons.get("beschwichtigen").setEnabled(true);
 		}
 
 		//Misstrauen berechnen alle 25 Steps
