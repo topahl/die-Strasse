@@ -837,6 +837,8 @@ public class Simulation {
 	//Support Tiki
 	private void agentRumwuseln(int doTimes) {
 		Stack<Character> neuer_weg = new Stack<Character>();
+		Stack<Character> hausmitte = new Stack<Character>();
+		Stack<Character> stackDrehen = new Stack<Character>();
 		ArrayList<ArrayList<String>> location_ids;
 		location_ids = Ressources.getLocation_ids();
 		
@@ -867,47 +869,79 @@ public class Simulation {
 						neuer_weg.push('r');
 						neuer_weg.push('o');
 					}
-					
-					
-					if ((this.agent.getPosX()-Ressources.ZEROPOS.width)/Ressources.RASTERHEIGHT!=j || (this.agent.getPosY()-Ressources.ZEROPOS.height)/Ressources.RASTERHEIGHT!=i){
-						//Der Agent wird zum Mittelpunkt des Hauses geleitet
-						if (location_ids.get(i-2).get(j-1).equals("X") || location_ids.get(i-1).get(j-2).equals("X")){
+				}
+			}
+		}	
+//		hausmitte = laufeZurHausmitte(location_ids);
+//		while (!hausmitte.empty()){
+//			stackDrehen.push(hausmitte.pop());
+//		}
+//		while (!stackDrehen.empty()){
+//			neuer_weg.push(stackDrehen.pop());
+//		}
+		get_agent().setMoves(neuer_weg);
+	}
+	
+	
+	//Support Tiki
+	private Stack<Character> laufeZurHausmitte (ArrayList<ArrayList<String>> location_ids){
+		Stack<Character> neuer_weg = new Stack<Character>();
+		
+		for (int i=0; i<15; i++){
+			for (int j=0; j<24; j++){
+				if ((this.agent.getPosX()-Ressources.ZEROPOS.width)/Ressources.RASTERHEIGHT==j && (this.agent.getPosY()-Ressources.ZEROPOS.height)/Ressources.RASTERHEIGHT==i){
+				//Der Agent wird zum Mittelpunkt des Hauses geleitet
+					if (i>2 && j>2){
+						if (location_ids.get(i-2).get(j-1).equals("Z") || location_ids.get(i-1).get(j-2).equals("Z")){
 							neuer_weg.push('u');
 							neuer_weg.push('r');
 						}
-						if (location_ids.get(i-2).get(j).equals("X")){
+					}
+					if (i>2){
+						if (location_ids.get(i-2).get(j).equals("Z")){
 							neuer_weg.push('u');
 						}
-						if (location_ids.get(i-2).get(j+1).equals("X") || location_ids.get(i-1).get(j+2).equals("X")){
+					}
+					if (i>2 && j<22){
+						if (location_ids.get(i-2).get(j+1).equals("Z") || location_ids.get(i-1).get(j+2).equals("Z")){
 							neuer_weg.push('u');
 							neuer_weg.push('l');
 						}
-						if (location_ids.get(i).get(j+2).equals("X")){
+					}
+					if (j<22){
+						if (location_ids.get(i).get(j+2).equals("Z")){
 							neuer_weg.push('l');
 						}
-						if (location_ids.get(i+1).get(j+2).equals("X") || location_ids.get(i+2).get(j+1).equals("X")){
+					}
+					if (i<13 && j<22){
+						if (location_ids.get(i+1).get(j+2).equals("Z") || location_ids.get(i+2).get(j+1).equals("Z")){
 							neuer_weg.push('o');
 							neuer_weg.push('l');
 						}
-						if (location_ids.get(i+2).get(j).equals("X")){
+					}
+					if (i<13){
+						if (location_ids.get(i+2).get(j).equals("Z")){
 							neuer_weg.push('o');
 						}
-						if (location_ids.get(i+2).get(j-1).equals("X") || location_ids.get(i+1).get(j-2).equals("X") ){
+					}
+					if (i<13 && j>2){
+						if (location_ids.get(i+2).get(j-1).equals("Z") || location_ids.get(i+1).get(j-2).equals("Z") ){
 							neuer_weg.push('o');
 							neuer_weg.push('r');
 						}
-						if (location_ids.get(i).get(j-2).equals("X")){
+					}
+					if (j>2){
+						if (location_ids.get(i).get(j-2).equals("Z")){
 							neuer_weg.push('r');
 						}
-					} else{
-						neuer_weg.push('o');
 					}
 					
 				}
 			}
-		}	
-		get_agent().setMoves(neuer_weg);
+		}
+		return neuer_weg;
 	}
+	
 	
 	
 	//Support Tiki
