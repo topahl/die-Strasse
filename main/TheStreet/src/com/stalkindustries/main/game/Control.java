@@ -639,7 +639,7 @@ public class Control implements IControl {
 		}
 		informationen[9].setSize((int)(guilayer.getSimulation().getHouses().get(hausnr).getUeberwachungsstatus()*1.66), 19);
 	}
-	
+
 	
 //	public int getHouseId(){
 //		return this.house_id;

@@ -269,6 +269,9 @@ public class Simulation {
 					ueberwachungswert = 100;
 				}
 				getHouses().get(i).setUeberwachungsstatus(ueberwachungswert);
+				if (ueberwachungswert >=0){
+					calcColouredPeople(i);
+				}
 			}
 		}
 	}
@@ -993,6 +996,16 @@ public class Simulation {
 			//wuseln 
 		}
 				
+	}
+	
+	
+	//Support Tiki
+	private void calcColouredPeople (int hausid){
+		for (int i = 0; i<get_people().size(); i++){
+			if (get_people().get(i).get_haus_id() == hausid){
+				get_people().get(i).farbeZeigen(true);
+			}
+		}
 	}
 	
 	
