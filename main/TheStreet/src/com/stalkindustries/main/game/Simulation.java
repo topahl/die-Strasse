@@ -49,46 +49,48 @@ public class Simulation {
 	
 	//Beschwerden an Sven und Miri
 	void calculate_misstrauen(){
-		//misstrauen[] ist eine Hilfvariable, die später die später die neuen Werte enthält und sie wird benötigt, dass nicht die echten Werte verändert werden, bevor alle berechnet wurden
-		double[] misstrauen = new double[people.size()];
-		
-		double faktor = 0.01275; //Faktor, der regelt, wie stark sich Personen bei einem Methodenaufruf beeinflussen --> abhängig von Häufigkeit des Methodenaufrufs
-		
-		//misstrauen[] mit den alten Misstrauenswerten initialisieren
-		for(int i=0;i<this.people.size();i++)
-			misstrauen[i] = this.people.get(i).get_misstrauen();
-		
-		//jede Person kann theoretisch wieder von jeder anderen beeinflusst werden
-		for(int i=0;i<this.people.size();i++){
-			//wenn sich Person dort befindet, wo sie auch beeinflusst werden kann
-			if((int)(this.people.get(i).get_location_id())-48+1 != 0 && (int)(this.people.get(i).get_location_id())-48+1 != 'X' && (int)(this.people.get(i).get_location_id())-48+1 != 'E'){
-				for(int j=0;j<this.people.size();j++){
-					//eine Person kann sich nicht selbst beeinflussen
-					if(i!=j){
-						//wenn sich die beiden Personen am selben Ort befinden
-						if((int)(this.people.get(i).get_location_id())-48+1 == (int)(this.people.get(j).get_location_id())-48+1){
-							//Ausnahme in der Berechnung: Kinder beeinflussen Erwachsene weniger
-							if(this.people.get(i) instanceof Erwachsene && this.people.get(j) instanceof Kinder){	//Kind beeinflusst Erwachsenen weniger
-								misstrauen[i] = misstrauen[i] - faktor/2*this.beziehungsmatrix[i][j]*(this.people.get(i).get_misstrauen()-this.people.get(j).get_misstrauen());
+		if(this.spiel_stunde > 5 && this.spiel_stunde <2){
+			//misstrauen[] ist eine Hilfvariable, die später die später die neuen Werte enthält und sie wird benötigt, dass nicht die echten Werte verändert werden, bevor alle berechnet wurden
+			double[] misstrauen = new double[people.size()];
+			
+			double faktor = 0.01275; //Faktor, der regelt, wie stark sich Personen bei einem Methodenaufruf beeinflussen --> abhängig von Häufigkeit des Methodenaufrufs
+			
+			//misstrauen[] mit den alten Misstrauenswerten initialisieren
+			for(int i=0;i<this.people.size();i++)
+				misstrauen[i] = this.people.get(i).get_misstrauen();
+			
+			//jede Person kann theoretisch wieder von jeder anderen beeinflusst werden
+			for(int i=0;i<this.people.size();i++){
+				//wenn sich Person dort befindet, wo sie auch beeinflusst werden kann
+				if((int)(this.people.get(i).get_location_id())-48+1 != 0 && (int)(this.people.get(i).get_location_id())-48+1 != 'X' && (int)(this.people.get(i).get_location_id())-48+1 != 'E'){
+					for(int j=0;j<this.people.size();j++){
+						//eine Person kann sich nicht selbst beeinflussen
+						if(i!=j){
+							//wenn sich die beiden Personen am selben Ort befinden
+							if((int)(this.people.get(i).get_location_id())-48+1 == (int)(this.people.get(j).get_location_id())-48+1){
+								//Ausnahme in der Berechnung: Kinder beeinflussen Erwachsene weniger
+								if(this.people.get(i) instanceof Erwachsene && this.people.get(j) instanceof Kinder){	//Kind beeinflusst Erwachsenen weniger
+									misstrauen[i] = misstrauen[i] - faktor/2*this.beziehungsmatrix[i][j]*(this.people.get(i).get_misstrauen()-this.people.get(j).get_misstrauen());
+								}
+								else{
+									misstrauen[i] = misstrauen[i] - faktor*this.beziehungsmatrix[i][j]*(this.people.get(i).get_misstrauen()-this.people.get(j).get_misstrauen());
+								}
+								
+								//sorgt dafür, dass sich das Misstrauen zwischen -100 und 100 bewegt
+								if(misstrauen[i]>100)
+									misstrauen[i] = 100;
+								if(misstrauen[i]<-100)
+									misstrauen[i] = -100;
 							}
-							else{
-								misstrauen[i] = misstrauen[i] - faktor*this.beziehungsmatrix[i][j]*(this.people.get(i).get_misstrauen()-this.people.get(j).get_misstrauen());
-							}
-							
-							//sorgt dafür, dass sich das Misstrauen zwischen -100 und 100 bewegt
-							if(misstrauen[i]>100)
-								misstrauen[i] = 100;
-							if(misstrauen[i]<-100)
-								misstrauen[i] = -100;
 						}
 					}
 				}
 			}
-		}
-		
-		//Mapping der neuen Misstrauenswerte auf Person
-		for(int i=0;i<this.people.size();i++){
-			this.people.get(i).set_misstrauen(misstrauen[i]);
+			
+			//Mapping der neuen Misstrauenswerte auf Person
+			for(int i=0;i<this.people.size();i++){
+				this.people.get(i).set_misstrauen(misstrauen[i]);
+			}
 		}
 	}
 	
@@ -137,13 +139,13 @@ public class Simulation {
 		//TODO Testen, ob die Werte passen
 		//wie sich das Misstrauen verändern soll
 		if(zufall < -5)
-			misstrauen -= 20;
+			misstrauen -= 30;
 		else if(zufall < 0)
-			misstrauen -= 10;
+			misstrauen -= 20;
 		else if(zufall < 5)
-			misstrauen -= 5;
+			misstrauen -= 10;
 		else if(zufall > 8)
-			misstrauen += 10;
+			misstrauen += 20;
 		
 		
 		//sorgt dafür, dass sich das Misstrauen zwischen -100 und 100 bewegt
