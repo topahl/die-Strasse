@@ -49,7 +49,7 @@ public class Simulation {
 	
 	//Beschwerden an Sven und Miri
 	void calculate_misstrauen(){
-		if(this.spiel_stunde > 5 && this.spiel_stunde <2){
+		if(this.spiel_stunde > 5 || this.spiel_stunde < 2){
 			//misstrauen[] ist eine Hilfvariable, die später die später die neuen Werte enthält und sie wird benötigt, dass nicht die echten Werte verändert werden, bevor alle berechnet wurden
 			double[] misstrauen = new double[people.size()];
 			
