@@ -10,12 +10,13 @@ public class Simulation {
 	private int[][] beziehungsmatrix;
 	//private int[] location_raster; nicht mehr benötigt
 	private ArrayList<Person> people = new ArrayList<Person>(); 
-	private Agent agent = new Agent(0);
+	private Agent agent = new Agent(0,"");
 	private int spiel_tag=1;
 	private int spiel_stunde=7;
 	private int spiel_minute=0;
 	private ArrayList<Haus> houses = new ArrayList<Haus>();
 	private boolean wieeeeschteAktion=true;  //wieeeeescht = boese
+	private double misstrauen_max=0;
 
 	
 	public Simulation(){
@@ -49,46 +50,48 @@ public class Simulation {
 	
 	//Beschwerden an Sven und Miri
 	void calculate_misstrauen(){
-		//misstrauen[] ist eine Hilfvariable, die später die später die neuen Werte enthält und sie wird benötigt, dass nicht die echten Werte verändert werden, bevor alle berechnet wurden
-		double[] misstrauen = new double[people.size()];
-		
-		double faktor = 0.01275; //Faktor, der regelt, wie stark sich Personen bei einem Methodenaufruf beeinflussen --> abhängig von Häufigkeit des Methodenaufrufs
-		
-		//misstrauen[] mit den alten Misstrauenswerten initialisieren
-		for(int i=0;i<this.people.size();i++)
-			misstrauen[i] = this.people.get(i).get_misstrauen();
-		
-		//jede Person kann theoretisch wieder von jeder anderen beeinflusst werden
-		for(int i=0;i<this.people.size();i++){
-			//wenn sich Person dort befindet, wo sie auch beeinflusst werden kann
-			if((int)(this.people.get(i).get_location_id())-48+1 != 0 && (int)(this.people.get(i).get_location_id())-48+1 != 'X' && (int)(this.people.get(i).get_location_id())-48+1 != 'E'){
-				for(int j=0;j<this.people.size();j++){
-					//eine Person kann sich nicht selbst beeinflussen
-					if(i!=j){
-						//wenn sich die beiden Personen am selben Ort befinden
-						if((int)(this.people.get(i).get_location_id())-48+1 == (int)(this.people.get(j).get_location_id())-48+1){
-							//Ausnahme in der Berechnung: Kinder beeinflussen Erwachsene weniger
-							if(this.people.get(i) instanceof Erwachsene && this.people.get(j) instanceof Kinder){	//Kind beeinflusst Erwachsenen weniger
-								misstrauen[i] = misstrauen[i] - faktor/2*this.beziehungsmatrix[i][j]*(this.people.get(i).get_misstrauen()-this.people.get(j).get_misstrauen());
+		if(this.spiel_stunde > 5 || this.spiel_stunde < 2){
+			//misstrauen[] ist eine Hilfvariable, die später die später die neuen Werte enthält und sie wird benötigt, dass nicht die echten Werte verändert werden, bevor alle berechnet wurden
+			double[] misstrauen = new double[people.size()];
+			
+			double faktor = 0.01275; //Faktor, der regelt, wie stark sich Personen bei einem Methodenaufruf beeinflussen --> abhängig von Häufigkeit des Methodenaufrufs
+			
+			//misstrauen[] mit den alten Misstrauenswerten initialisieren
+			for(int i=0;i<this.people.size();i++)
+				misstrauen[i] = this.people.get(i).get_misstrauen();
+			
+			//jede Person kann theoretisch wieder von jeder anderen beeinflusst werden
+			for(int i=0;i<this.people.size();i++){
+				//wenn sich Person dort befindet, wo sie auch beeinflusst werden kann
+				if((int)(this.people.get(i).get_location_id())-48+1 != 0 && (int)(this.people.get(i).get_location_id())-48+1 != 'X' && (int)(this.people.get(i).get_location_id())-48+1 != 'E'){
+					for(int j=0;j<this.people.size();j++){
+						//eine Person kann sich nicht selbst beeinflussen
+						if(i!=j){
+							//wenn sich die beiden Personen am selben Ort befinden
+							if((int)(this.people.get(i).get_location_id())-48+1 == (int)(this.people.get(j).get_location_id())-48+1){
+								//Ausnahme in der Berechnung: Kinder beeinflussen Erwachsene weniger
+								if(this.people.get(i) instanceof Erwachsene && this.people.get(j) instanceof Kinder){	//Kind beeinflusst Erwachsenen weniger
+									misstrauen[i] = misstrauen[i] - faktor/2*this.beziehungsmatrix[i][j]*(this.people.get(i).get_misstrauen()-this.people.get(j).get_misstrauen());
+								}
+								else{
+									misstrauen[i] = misstrauen[i] - faktor*this.beziehungsmatrix[i][j]*(this.people.get(i).get_misstrauen()-this.people.get(j).get_misstrauen());
+								}
+								
+								//sorgt dafür, dass sich das Misstrauen zwischen -100 und 100 bewegt
+								if(misstrauen[i]>100)
+									misstrauen[i] = 100;
+								if(misstrauen[i]<-100)
+									misstrauen[i] = -100;
 							}
-							else{
-								misstrauen[i] = misstrauen[i] - faktor*this.beziehungsmatrix[i][j]*(this.people.get(i).get_misstrauen()-this.people.get(j).get_misstrauen());
-							}
-							
-							//sorgt dafür, dass sich das Misstrauen zwischen -100 und 100 bewegt
-							if(misstrauen[i]>100)
-								misstrauen[i] = 100;
-							if(misstrauen[i]<-100)
-								misstrauen[i] = -100;
 						}
 					}
 				}
 			}
-		}
-		
-		//Mapping der neuen Misstrauenswerte auf Person
-		for(int i=0;i<this.people.size();i++){
-			this.people.get(i).set_misstrauen(misstrauen[i]);
+			
+			//Mapping der neuen Misstrauenswerte auf Person
+			for(int i=0;i<this.people.size();i++){
+				this.people.get(i).set_misstrauen(misstrauen[i]);
+			}
 		}
 	}
 	
@@ -102,7 +105,7 @@ public class Simulation {
 	
 	//Beschwerden an Miri
 	//Mittelwert des Misstrauens der einzelnen Personen
-	float calc_misstrauen_in_street(){
+	public double calc_misstrauen_in_street(){
 		float misstrauen = 0;
 		for(int i=0;i<this.people.size();i++){
 			misstrauen += this.people.get(i).get_misstrauen();
@@ -137,13 +140,13 @@ public class Simulation {
 		//TODO Testen, ob die Werte passen
 		//wie sich das Misstrauen verändern soll
 		if(zufall < -5)
-			misstrauen -= 20;
+			misstrauen -= 30;
 		else if(zufall < 0)
-			misstrauen -= 10;
+			misstrauen -= 20;
 		else if(zufall < 5)
-			misstrauen -= 5;
+			misstrauen -= 10;
 		else if(zufall > 8)
-			misstrauen += 10;
+			misstrauen += 20;
 		
 		
 		//sorgt dafür, dass sich das Misstrauen zwischen -100 und 100 bewegt
@@ -247,7 +250,34 @@ public class Simulation {
 	//Beschwerden Miri
 	//Allen Häusern den Überwachungsstatus updaten
 	public void updateUeberwachungsstatus(){
+		float ueberwachungswert=0;
 		
+		
+		for (int i=0; i<getHouses().size(); i++){
+			getHouses().get(i).setUeberwachungsstatus(0);
+			for (int j=0; j<getHouses().get(i).getUeberwachungsmodule().size(); j++){
+				if (getHouses().get(i).getUeberwachungsmodule().get(j).equals("Wanze")){
+					ueberwachungswert = ueberwachungswert + getHouses().get(i).getUeberwachungsWert(0);
+				}
+				if (getHouses().get(i).getUeberwachungsmodule().get(j).equals("Kamera")){
+					ueberwachungswert = ueberwachungswert + getHouses().get(i).getUeberwachungsWert(1);
+				}
+				if (getHouses().get(i).getUeberwachungsmodule().get(j).equals("Hacken")){
+					ueberwachungswert = ueberwachungswert + getHouses().get(i).getUeberwachungsWert(2);
+				}
+				if (getHouses().get(i).getUeberwachungsmodule().get(j).equals("Fernglas")){
+					ueberwachungswert = ueberwachungswert + getHouses().get(i).getUeberwachungsWert(3);
+				}
+				if (ueberwachungswert > 100){
+					ueberwachungswert = 100;
+				}
+				getHouses().get(i).setUeberwachungsstatus(ueberwachungswert);
+				if (ueberwachungswert >=0){
+					calcColouredPeople(i);
+				}
+			} 
+			ueberwachungswert=0;
+		}
 	}
 	
 	//Beschwerden Miri
@@ -257,7 +287,7 @@ public class Simulation {
 		for(int i=0;i<this.houses.size();i++){
 			ueberwachung += this.houses.get(i).getUeberwachungsstatus();
 		}
-		ueberwachung = ueberwachung/this.houses.size();
+		ueberwachung = ueberwachung/(this.houses.size()-1);
 		
 		return ueberwachung;
 	}
@@ -457,16 +487,32 @@ public class Simulation {
 			parkeingang = berechne_Parkeingang(location_ids);
 		}
 		
-		//Rasterkarte initialisieren 
-		
 		
 		//Aktuelle Position des Männchens wird auf 0 gesetzt
 		if ((agent == null && !(zielloc == 'P' && person.get_location_id()=='P')) || person == null){
 			location_ids = wegberechnung_rasterkarte_initialisierung(location_ids, String.valueOf(zielloc), locid);
 			if (agent==null){
-				location_ids.get((person.getPosY()-Ressources.ZEROPOS.height)/Ressources.RASTERHEIGHT).set((person.getPosX()-Ressources.ZEROPOS.width)/Ressources.RASTERHEIGHT,"0");
+				switch(person.getCurrentMove()){
+		        case 'r': location_ids.get((person.getPosY()-Ressources.ZEROPOS.height)/Ressources.RASTERHEIGHT).set(((person.getPosX()-Ressources.ZEROPOS.width)/Ressources.RASTERHEIGHT)+1,"0");
+		                  break;
+		        case 'u': location_ids.get(((person.getPosY()-Ressources.ZEROPOS.height)/Ressources.RASTERHEIGHT)+1).set((person.getPosX()-Ressources.ZEROPOS.width)/Ressources.RASTERHEIGHT,"0");
+		                  break;
+		        case 'o':
+		        case 'l':
+		        default: location_ids.get((person.getPosY()-Ressources.ZEROPOS.height)/Ressources.RASTERHEIGHT).set((person.getPosX()-Ressources.ZEROPOS.width)/Ressources.RASTERHEIGHT,"0");
+		        }
+//				location_ids.get((person.getPosY()-Ressources.ZEROPOS.height)/Ressources.RASTERHEIGHT).set((person.getPosX()-Ressources.ZEROPOS.width)/Ressources.RASTERHEIGHT,"0");
 			} else {
-				location_ids.get((agent.getPosY()-Ressources.ZEROPOS.height)/Ressources.RASTERHEIGHT).set((agent.getPosX()-Ressources.ZEROPOS.width)/Ressources.RASTERHEIGHT,"0");
+				switch(agent.getCurrentMove()){
+		        case 'r': location_ids.get((agent.getPosY()-Ressources.ZEROPOS.height)/Ressources.RASTERHEIGHT).set(((agent.getPosX()-Ressources.ZEROPOS.width)/Ressources.RASTERHEIGHT)+1,"0");
+		                  break;
+		        case 'u': location_ids.get(((agent.getPosY()-Ressources.ZEROPOS.height)/Ressources.RASTERHEIGHT)+1).set((agent.getPosX()-Ressources.ZEROPOS.width)/Ressources.RASTERHEIGHT,"0");
+		                  break;
+		        case 'o':
+		        case 'l':
+		        default: location_ids.get((agent.getPosY()-Ressources.ZEROPOS.height)/Ressources.RASTERHEIGHT).set((agent.getPosX()-Ressources.ZEROPOS.width)/Ressources.RASTERHEIGHT,"0");
+		        }
+//				location_ids.get((agent.getPosY()-Ressources.ZEROPOS.height)/Ressources.RASTERHEIGHT).set((agent.getPosX()-Ressources.ZEROPOS.width)/Ressources.RASTERHEIGHT,"0");
 			}
 		} else {
 			location_ids = wegberechnung_rasterkarte_initialisierung(location_ids, "P", locid);
@@ -612,9 +658,12 @@ public class Simulation {
 		Stack<Character> neuer_weg = new Stack<Character>();
 		
 		//Falls das Ziel ein Haus ist, soll die Person auf ihren startpunkt laufen.
-		if ((int)(zielloc)-48 <=9 && (int)(zielloc)-48 > 0){ //-48 für char umwandlung zu int
-			neuer_weg = fuelle_stack_homeposition(person, agent, xPos_current, yPos_current);
+		if (agent != null && agent.get_haus_id() == (int)(zielloc-48-1) || person != null){
+			if ((int)(zielloc)-48 <=9 && (int)(zielloc)-48 > 0){ //-48 für char umwandlung zu int
+				neuer_weg = fuelle_stack_homeposition(person, agent, xPos_current, yPos_current);
+			}
 		}
+		
 		
 		if((person != null && person.get_location_id()!=zielloc) || (int)(Math.random()*2) == 1 || agent!= null){   //
 			for (int i = counter; i>=0; i--){
@@ -803,67 +852,78 @@ public class Simulation {
 	
 	
 	//Support Tiki
-	private Stack<Character> agentRumwuseln(ArrayList<ArrayList<String>> location_ids) {
+	private void agentRumwuseln(int doTimes) {
 		Stack<Character> neuer_weg = new Stack<Character>();
+		ArrayList<ArrayList<String>> location_ids;
+		location_ids = Ressources.getLocation_ids();
+		
+		location_ids.get((agent.getPosY()-Ressources.ZEROPOS.height)/Ressources.RASTERHEIGHT).set((agent.getPosX()-Ressources.ZEROPOS.width)/Ressources.RASTERHEIGHT,"0");
+		
+		location_ids = wegberechnung_rasterkarte_initialisierung(location_ids, String.valueOf(get_agent().get_location_id()), get_agent().get_location_id());
+		
+		location_ids.get((agent.getPosY()-Ressources.ZEROPOS.height)/Ressources.RASTERHEIGHT).set((agent.getPosX()-Ressources.ZEROPOS.width)/Ressources.RASTERHEIGHT,"Z");
 		
 		for (int i=0; i<15; i++){
 			for (int j=0; j<24; j++){
 				if ((location_ids.get(i).get(j)=="Z" || location_ids.get(i).get(j)=="0") && location_ids.get(i+1).get(j)=="Z" && location_ids.get(i-1).get(j)=="Z" && location_ids.get(i).get(j+1)=="Z" && location_ids.get(i).get(j-1)=="Z"){
 					
 					//Nun läuft der Agent lustig hin und her
-					neuer_weg.push('r');
-					neuer_weg.push('o');
-					neuer_weg.push('l');
-					neuer_weg.push('u');
-					neuer_weg.push('r');
-					neuer_weg.push('u');
-					neuer_weg.push('l');
-					neuer_weg.push('o');
-					neuer_weg.push('o');
-					neuer_weg.push('l');
-					neuer_weg.push('u');
-					neuer_weg.push('u');
-					neuer_weg.push('r');
-					neuer_weg.push('o');
-					
-					if ((this.agent.getPosX()-Ressources.ZEROPOS.width)/Ressources.RASTERHEIGHT!=j || (this.agent.getPosY()-Ressources.ZEROPOS.height)/Ressources.RASTERHEIGHT!=i){
-						//Der Agent wird zum Mittelpunkt des Hauses geleitet
-						if (location_ids.get(i-2).get(j-1).equals("X") || location_ids.get(i-1).get(j-2).equals("X")){
-							neuer_weg.push('u');
-							neuer_weg.push('r');
-						}
-						if (location_ids.get(i-2).get(j).equals("X")){
-							neuer_weg.push('u');
-						}
-						if (location_ids.get(i-2).get(j+1).equals("X") || location_ids.get(i-1).get(j+2).equals("X")){
-							neuer_weg.push('u');
-							neuer_weg.push('l');
-						}
-						if (location_ids.get(i).get(j+2).equals("X")){
-							neuer_weg.push('l');
-						}
-						if (location_ids.get(i+1).get(j+2).equals("X") || location_ids.get(i+2).get(j+1).equals("X")){
-							neuer_weg.push('o');
-							neuer_weg.push('l');
-						}
-						if (location_ids.get(i+2).get(j).equals("X")){
-							neuer_weg.push('o');
-						}
-						if (location_ids.get(i+2).get(j-1).equals("X") || location_ids.get(i+1).get(j-2).equals("X") ){
-							neuer_weg.push('o');
-							neuer_weg.push('r');
-						}
-						if (location_ids.get(i).get(j-2).equals("X")){
-							neuer_weg.push('r');
-						}
-					} else{
+					for (int k=0; k<doTimes; k++){
+						neuer_weg.push('r');
+						neuer_weg.push('o');
+						neuer_weg.push('l');
+						neuer_weg.push('u');
+						neuer_weg.push('r');
+						neuer_weg.push('u');
+						neuer_weg.push('l');
+						neuer_weg.push('o');
+						neuer_weg.push('o');
+						neuer_weg.push('l');
+						neuer_weg.push('u');
+						neuer_weg.push('u');
+						neuer_weg.push('r');
 						neuer_weg.push('o');
 					}
 					
+					if ((this.agent.getPosX()-Ressources.ZEROPOS.width)/Ressources.RASTERHEIGHT==j && (this.agent.getPosY()-Ressources.ZEROPOS.height)/Ressources.RASTERHEIGHT==i+1){
+						neuer_weg.push('o');
+					} else{
+						if ((this.agent.getPosX()-Ressources.ZEROPOS.width)/Ressources.RASTERHEIGHT!=j || (this.agent.getPosY()-Ressources.ZEROPOS.height)/Ressources.RASTERHEIGHT!=i){
+							//Der Agent wird zum Mittelpunkt des Hauses geleitet
+							if (location_ids.get(i-2).get(j-1).equals("X") || location_ids.get(i-1).get(j-2).equals("X")){
+								neuer_weg.push('u');
+								neuer_weg.push('r');
+							}
+							if (location_ids.get(i-2).get(j).equals("X")){
+								neuer_weg.push('u');
+							}
+							if (location_ids.get(i-2).get(j+1).equals("X") || location_ids.get(i-1).get(j+2).equals("X")){
+								neuer_weg.push('u');
+								neuer_weg.push('l');
+							}
+							if (location_ids.get(i).get(j+2).equals("X")){
+								neuer_weg.push('l');
+							}
+							if (location_ids.get(i+1).get(j+2).equals("X") || location_ids.get(i+2).get(j+1).equals("X")){
+								neuer_weg.push('o');
+								neuer_weg.push('l');
+							}
+							if (location_ids.get(i+2).get(j).equals("X")){
+								neuer_weg.push('o');
+							}
+							if (location_ids.get(i+2).get(j-1).equals("X") || location_ids.get(i+1).get(j-2).equals("X") ){
+								neuer_weg.push('o');
+								neuer_weg.push('r');
+							}
+							if (location_ids.get(i).get(j-2).equals("X")){
+								neuer_weg.push('r');
+							}
+						} 
+					}					
 				}
 			}
 		}	
-		return neuer_weg;
+		get_agent().setMoves(neuer_weg);
 	}
 	
 	
@@ -880,53 +940,79 @@ public class Simulation {
 		}
 		
 		
-		System.out.print(personId);
-		
 		//Spionage
 		if(get_agent().getMussWuseln().equals("Wanze+") && get_agent().getCurrentMove()=='n'){
 			getHouses().get((int)(get_agent().get_location_id()-48-1)).getUeberwachungsmodule().add("Wanze");
 			getHouses().get((int)(get_agent().get_location_id()-48-1)).setUeberwachungsWert((float)(Math.random()*20+1)+20,0);
-			getHouses().get((int)(get_agent().get_location_id()-48-1)).setUeberwachungsstatus(getHouses().get((int)(get_agent().get_location_id()-48-1)).getUeberwachungsstatus() + 
-					getHouses().get((int)(get_agent().get_location_id()-48-1)).getUeberwachungsWert(0));
 			get_agent().setMussWuseln("");
 		}
 		if(get_agent().getMussWuseln().equals("Wanze")){
-			//TODO rumwuselbewegung
+			agentRumwuseln(2);
 			get_agent().setMussWuseln("Wanze+");
 		} 
 		
 		if(get_agent().getMussWuseln().equals("Kamera+") && get_agent().getCurrentMove()=='n'){
 			getHouses().get((int)(get_agent().get_location_id()-48-1)).getUeberwachungsmodule().add("Kamera");
 			getHouses().get((int)(get_agent().get_location_id()-48-1)).setUeberwachungsWert((float)(Math.random()*20+1)+20,1);
-			getHouses().get((int)(get_agent().get_location_id()-48-1)).setUeberwachungsstatus(getHouses().get((int)(get_agent().get_location_id()-48-1)).getUeberwachungsstatus() + 
-					getHouses().get((int)(get_agent().get_location_id()-48-1)).getUeberwachungsWert(1));
 			get_agent().setMussWuseln("");
 		}
 		if(get_agent().getMussWuseln().equals("Kamera")){
-			//TODO rumwuselbewegung
+			agentRumwuseln(3);
 			get_agent().setMussWuseln("Kamera+");
 		}
 		
 		if(get_agent().getMussWuseln().equals("Hacken+") && get_agent().getCurrentMove()=='n'){
 			getHouses().get((int)(get_agent().get_location_id()-48-1)).getUeberwachungsmodule().add("Hacken");
 			getHouses().get((int)(get_agent().get_location_id()-48-1)).setUeberwachungsWert((float)(Math.random()*20+1)+20,2);
-			getHouses().get((int)(get_agent().get_location_id()-48-1)).setUeberwachungsstatus(getHouses().get((int)(get_agent().get_location_id()-48-1)).getUeberwachungsstatus() + 
-					getHouses().get((int)(get_agent().get_location_id()-48-1)).getUeberwachungsWert(2));
 			get_agent().setMussWuseln("");
 		}
 		if(get_agent().getMussWuseln().equals("Hacken")){
-			//TODO rumwuselbewegung
+			agentRumwuseln(2);
 			get_agent().setMussWuseln("Hacken+");
 		}
 				
+		
+		//Spionage entfernen
+		
+		if(get_agent().getMussWuseln().equals("Wanzer+") && get_agent().getCurrentMove()=='n'){
+			getHouses().get((int)(get_agent().get_location_id()-48-1)).getUeberwachungsmodule().remove("Wanze");
+			getHouses().get((int)(get_agent().get_location_id()-48-1)).setUeberwachungsWert(0,0);			
+			get_agent().setMussWuseln("");
+		}
+		if(get_agent().getMussWuseln().equals("Wanzer")){
+			agentRumwuseln(2);
+			get_agent().setMussWuseln("Wanzer+");
+		}
+		
+		if(get_agent().getMussWuseln().equals("Kamerar+") && get_agent().getCurrentMove()=='n'){
+			getHouses().get((int)(get_agent().get_location_id()-48-1)).getUeberwachungsmodule().remove("Kamera");
+			getHouses().get((int)(get_agent().get_location_id()-48-1)).setUeberwachungsWert(0,1);			
+			get_agent().setMussWuseln("");
+		}
+		if(get_agent().getMussWuseln().equals("Kamerar")){
+			agentRumwuseln(3);
+			get_agent().setMussWuseln("Kamerar+");
+		}
+		
+		if(get_agent().getMussWuseln().equals("Hackenr+") && get_agent().getCurrentMove()=='n'){
+			getHouses().get((int)(get_agent().get_location_id()-48-1)).getUeberwachungsmodule().remove("Hacken");
+			getHouses().get((int)(get_agent().get_location_id()-48-1)).setUeberwachungsWert(0,2);			
+			get_agent().setMussWuseln("");
+		}
+		if(get_agent().getMussWuseln().equals("Hackenr")){
+			agentRumwuseln(2);
+			get_agent().setMussWuseln("Hackenr+");
+		}
+		
+			
 		
 		
 		
 		//Soziales
 		if(get_agent().getMussWuseln().length()>=8 && personId <=9 &&  get_agent().getMussWuseln().substring(1,8).equals("Kuchen+") ||
 				get_agent().getMussWuseln().length()>=9 && personId >9 &&  get_agent().getMussWuseln().substring(2,9).equals("Kuchen+")){
-			get_people().get(personId).erhoehe_durchgefuehrteBeschwichtigungen(0);
 			calc_misstrauen_after_beschwichtigen_action(0, get_people().get(personId));
+			get_people().get(personId).erhoehe_durchgefuehrteBeschwichtigungen(0);
 			get_people().get(personId).setMoves(new Stack());
 			get_agent().setMussWuseln("");
 		}	
@@ -938,8 +1024,8 @@ public class Simulation {
 		
 		if(get_agent().getMussWuseln().length()>=13 && personId <=9 &&  get_agent().getMussWuseln().substring(1,13).equals("Unterhalten+") ||
 				get_agent().getMussWuseln().length()>=14 && personId >9 &&  get_agent().getMussWuseln().substring(2,14).equals("Unterhalten+")){
-			get_people().get(personId).erhoehe_durchgefuehrteBeschwichtigungen(1);
 			calc_misstrauen_after_beschwichtigen_action(1, get_people().get(personId));
+			get_people().get(personId).erhoehe_durchgefuehrteBeschwichtigungen(1);
 			get_people().get(personId).setMoves(new Stack());
 			get_agent().setMussWuseln("");
 		}	
@@ -951,8 +1037,8 @@ public class Simulation {
 		
 		if(get_agent().getMussWuseln().length()>=9 && personId <=9 &&  get_agent().getMussWuseln().substring(1,9).equals("Flirten+") ||
 				get_agent().getMussWuseln().length()>=10 && personId >9 &&  get_agent().getMussWuseln().substring(2,10).equals("Flirten+")){
-			get_people().get(personId).erhoehe_durchgefuehrteBeschwichtigungen(2);
 			calc_misstrauen_after_beschwichtigen_action(2, get_people().get(personId));
+			get_people().get(personId).erhoehe_durchgefuehrteBeschwichtigungen(2);
 			get_people().get(personId).setMoves(new Stack());
 			get_agent().setMussWuseln("");
 		}	
@@ -964,8 +1050,8 @@ public class Simulation {
 		
 		if(get_agent().getMussWuseln().length()>=6 && personId <=9 &&  get_agent().getMussWuseln().substring(1,6).equals("Hand+") ||
 				get_agent().getMussWuseln().length()>=7 && personId >9 &&  get_agent().getMussWuseln().substring(2,7).equals("Hand+")){
-			get_people().get(personId).erhoehe_durchgefuehrteBeschwichtigungen(3);
 			calc_misstrauen_after_beschwichtigen_action(3, get_people().get(personId));
+			get_people().get(personId).erhoehe_durchgefuehrteBeschwichtigungen(3);
 			get_people().get(personId).setMoves(new Stack());
 			get_agent().setMussWuseln("");
 		}	
@@ -975,6 +1061,16 @@ public class Simulation {
 			//wuseln 
 		}
 				
+	}
+	
+	
+	//Support Tiki
+	private void calcColouredPeople (int hausid){
+		for (int i = 0; i<get_people().size(); i++){
+			if (get_people().get(i).get_haus_id() == hausid){
+				get_people().get(i).farbeZeigen(true);
+			}
+		}
 	}
 	
 	
@@ -1063,4 +1159,16 @@ public class Simulation {
 		this.wieeeeschteAktion = wieeeeschteAktion;
 	}
 
+	
+	
+	public void calcMisstrauenMax(){
+		double misstrauen = this.calc_misstrauen_in_street();
+		if(this.misstrauen_max < misstrauen){
+			this.misstrauen_max = misstrauen;
+		}
+	}
+	
+	public double getMisstrauenMax(){
+		return this.misstrauen_max;
+	}
 }

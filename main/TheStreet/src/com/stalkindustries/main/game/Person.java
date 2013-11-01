@@ -11,7 +11,6 @@ import javax.imageio.ImageIO;
 public abstract class Person extends Mensch {
 	private int id;
 	protected int[] aussehen;
-	private String name;
 	protected BufferedImage temp_sprite; //Sprite ohne Schatten
 	private double misstrauen; 	//-100=nicht misstrauisch, 100=ultra misstrauisch, 200=initial
 	protected int geschlecht; //1=male, 2=female
@@ -20,6 +19,10 @@ public abstract class Person extends Mensch {
 	
 	static private int last_id=-1;
 		
+	
+	public abstract void farbeZeigen(boolean farbeZeigen);
+	
+	
 	public void update_schatten(){
 		sprite = new BufferedImage(90, 90, BufferedImage.TYPE_INT_ARGB);
 		Graphics2D g2d = sprite.createGraphics();
@@ -58,7 +61,8 @@ public abstract class Person extends Mensch {
 				
 
 		//Person einen Namen geben
-		this.name = Ressources.getNames().get((int)(Math.random()*Ressources.getNames().size())).get(this.geschlecht-1);
+		//this.name = Ressources.getNames().get((int)(Math.random()*Ressources.getNames().size())).get(this.geschlecht-1);	
+		this.setName(Ressources.getNames().get((int)(Math.random()*Ressources.getNames().size())).get(this.geschlecht-1));
 		//System.out.println(this.name);
 	}
 	
@@ -88,10 +92,6 @@ public abstract class Person extends Mensch {
 		this.durchgefuehrteBeschwichtigungen[index]++;
 	}
 	
-	@Override
-	public String getName(){
-		return this.name;
-	}
 	
 	public int getGeschlecht(){
 		return this.geschlecht;

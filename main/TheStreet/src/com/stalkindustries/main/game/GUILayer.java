@@ -891,7 +891,7 @@ public class GUILayer extends JFrame implements MouseMotionListener {
 		// Agent hinzufügen
 		spawnPersonX[0] = spawnHausX[agent_house_nr];
 		spawnPersonY[0] = spawnHausY[agent_house_nr];
-		mensch = new Agent(agent_house_nr);
+		mensch = new Agent(agent_house_nr,"James_Bond");
 		this.humans.add(mensch);
 		this.baseLayer.add(mensch, javax.swing.JLayeredPane.DEFAULT_LAYER);
 		this.humans.get(mensch_cnt).teleport(spawnPersonX[0], spawnPersonY[0]);
@@ -1059,10 +1059,12 @@ public class GUILayer extends JFrame implements MouseMotionListener {
 	public void step() {
 		this.updateLocationID();
 		
+		
 		if(this.stepcounter%5==0){
 			//zeichne neuen Überwachungs und Misstrauenswertwert
 			this.updateUeberwachung();
 			this.updateBalken();
+			getSimulation().updateUeberwachungsstatus();
 		}
 		
 		
@@ -1107,6 +1109,8 @@ public class GUILayer extends JFrame implements MouseMotionListener {
 				this.overlayNacht.setBackground(new Color(0, 0, farbteil1*minute, farbteil2*minute));
 				this.repaint();	
 			}
+			buttons.get("beschwichtigen").setEnabled(false);
+			control.closeWindow("beschwichtigen");
 		}
 		if (stunde == 6) {
 			if ((minute >= 0) && (minute <= 20)){
@@ -1116,6 +1120,7 @@ public class GUILayer extends JFrame implements MouseMotionListener {
 			if(minute == 20){
 				this.overlayNacht.setVisible(false);
 			}
+			buttons.get("beschwichtigen").setEnabled(true);
 		}
 
 		//Misstrauen berechnen alle 25 Steps
@@ -1252,7 +1257,7 @@ public class GUILayer extends JFrame implements MouseMotionListener {
 	 * @author Tobias
 	 */
 	public void updateBalken(){
-		float misstrauen = simulation.calc_misstrauen_in_street();
+		double misstrauen = simulation.calc_misstrauen_in_street();
 		if(misstrauen > 0.0f){
 			this.informationsbalken[0].setSize((int)(1.66*misstrauen),19);
 			this.informationsbalken[1].setSize(0,19);
@@ -1262,5 +1267,14 @@ public class GUILayer extends JFrame implements MouseMotionListener {
 			this.informationsbalken[0].setSize(0,19);
 		}
 		this.informationsbalken[2].setSize((int)(simulation.calc_ueberwachung_in_street()*1.66),19);
+	}
+	
+	
+	//Beschwerden Miri
+	public void callHighscore(){
+		Highscore highscore = new Highscore(this.simulation,this.quiz,this.simulation.get_agent());
+		highscore.calcHighscoreOfAgent();
+		highscore.exportIntoUser();
+		highscore.exportIntoScores();
 	}
 }

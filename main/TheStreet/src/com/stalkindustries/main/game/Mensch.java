@@ -15,6 +15,7 @@ public abstract class Mensch extends JLabel {
 	private int posY;
 	private int homeposX;
 	private int homeposY;
+	private String name;
 	private char location_id;
 	protected char currentMove = 'n'; //links, rechts, oben , unten, nichts -> Kleinbuchstaben
 	private Stack<Character> moves = new Stack<Character>();
@@ -152,6 +153,14 @@ public abstract class Mensch extends JLabel {
 	
 	public void setHomePosY(int y){
 		this.homeposY = y;
+	}
+	
+	public void setName(String name){
+		this.name = name;
+	}
+	
+	public String getName(){
+		return this.name;
 	}
 	
 	public void set_location_id(char id){
