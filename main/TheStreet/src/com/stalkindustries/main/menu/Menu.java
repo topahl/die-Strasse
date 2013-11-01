@@ -123,7 +123,7 @@ public class Menu extends JFrame implements MouseMotionListener{
 		profilselect.add(this.username, javax.swing.JLayeredPane.DEFAULT_LAYER);
 		
 		JLabel label = new JLabel();
-		label.setIcon(new ImageIcon(Ressources.menubutton.getSubimage(360, 0, 315, 66)));		
+		label.setIcon(new ImageIcon(Ressources.menubutton.getSubimage(360, 0, 315, 66)));
 		label.setBounds(450, 330, 315, 66);
 		profilselect.add(label, javax.swing.JLayeredPane.DEFAULT_LAYER);
 		
@@ -163,6 +163,7 @@ public class Menu extends JFrame implements MouseMotionListener{
             public Object getElementAt(int i) { return strings[i]; }
         });
         list.setOpaque(false);
+        list.setFont(new Font("Corbel",Font.BOLD,20));
         JScrollPane scrollpane = new Scrollbar(this.control); 
         scrollpane.setViewportView(list);
         JScrollBar sb = scrollpane.getVerticalScrollBar();

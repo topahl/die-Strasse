@@ -29,14 +29,26 @@ public Scrollbar(IControl control){
 
 
 	static class ScrollbarUI extends MetalScrollBarUI {
-    private Image imageThumb, imageTrack;
+    private Image imageThumb;
     private JButton up,down;
     ScrollbarUI(IControl control) {
         imageThumb = Ressources.menubutton.getSubimage(675, 62, 30, 56);
 		up = new JButton();
-		up.setIcon(new ImageIcon(Ressources.menubutton.getSubimage(675, 30, 30, 30)));
+		up.setIcon(new ImageIcon(Ressources.menubutton.getSubimage(675, 0, 30, 30)));
+		up.setRolloverIcon(new ImageIcon(Ressources.menubutton.getSubimage(675+30, 0, 30, 30)));
+		up.setPressedIcon(new ImageIcon(Ressources.menubutton.getSubimage(675+60, 0, 30, 30)));
+		up.setPreferredSize(new Dimension(30,30));
+		up.setBorder(null);
+        up.setBorderPainted(false);
+        up.setContentAreaFilled(false);
 		down = new JButton();
-		down.setIcon(new ImageIcon(Ressources.menubutton.getSubimage(675, 0, 30, 30)));
+		down.setIcon(new ImageIcon(Ressources.menubutton.getSubimage(675, 30, 30, 30)));
+		down.setRolloverIcon(new ImageIcon(Ressources.menubutton.getSubimage(675+30, 30, 30, 30)));
+		down.setPressedIcon(new ImageIcon(Ressources.menubutton.getSubimage(675+60, 30, 30, 30)));
+		down.setPreferredSize(new Dimension(30,30));
+		down.setBorder(null);
+        down.setBorderPainted(false);
+        down.setContentAreaFilled(false);
 		
     }
 
@@ -61,42 +73,15 @@ public Scrollbar(IControl control){
     
     @Override
     protected JButton createDecreaseButton(int orientation) {
-        return down;
+        return up;
     }
 
     @Override
     protected JButton createIncreaseButton(int orientation) {
-        return up;
+        return down;
     }
 
   }
-
-	static class ScrollbarArrowUpUI extends MetalScrollButton {
-		private static Image arrow;
-		public ScrollbarArrowUpUI() {
-			super(0, 30, true);
-			arrow = Ressources.ingamebutton.getSubimage(948, Ressources.RASTERHEIGHT, Ressources.RASTERHEIGHT, Ressources.RASTERHEIGHT);
-		}
-		
-		@Override
-		public void paint(Graphics g){
-				g.drawImage(arrow, 0, 0, null);
-		}
-		
-		@Override
-		public Dimension getMaximumSize(){
-			return new Dimension(30,30);
-		}
-		public int getButtonWidth(){
-			return 30;
-		}
-		
-		public Dimension getPreferredSize(JComponent c){
-			return new Dimension(30,30);
-		}
-	}
-	
-
 	
 }
 
