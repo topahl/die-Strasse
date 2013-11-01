@@ -942,6 +942,40 @@ public class Simulation {
 		}
 				
 		
+		//Spionage entfernen
+		
+		if(get_agent().getMussWuseln().equals("Wanzer+") && get_agent().getCurrentMove()=='n'){
+			getHouses().get((int)(get_agent().get_location_id()-48-1)).getUeberwachungsmodule().remove("Wanze");
+			getHouses().get((int)(get_agent().get_location_id()-48-1)).setUeberwachungsWert(0,0);			
+			get_agent().setMussWuseln("");
+		}
+		if(get_agent().getMussWuseln().equals("Wanzer")){
+			//TODO rumwuselbewegung
+			get_agent().setMussWuseln("Wanzer+");
+		}
+		
+		if(get_agent().getMussWuseln().equals("Kamerar+") && get_agent().getCurrentMove()=='n'){
+			getHouses().get((int)(get_agent().get_location_id()-48-1)).getUeberwachungsmodule().remove("Kamera");
+			getHouses().get((int)(get_agent().get_location_id()-48-1)).setUeberwachungsWert(0,1);			
+			get_agent().setMussWuseln("");
+		}
+		if(get_agent().getMussWuseln().equals("Kamerar")){
+			//TODO rumwuselbewegung
+			get_agent().setMussWuseln("Kamerar+");
+		}
+		
+		if(get_agent().getMussWuseln().equals("Hackenr+") && get_agent().getCurrentMove()=='n'){
+			getHouses().get((int)(get_agent().get_location_id()-48-1)).getUeberwachungsmodule().remove("Hacken");
+			getHouses().get((int)(get_agent().get_location_id()-48-1)).setUeberwachungsWert(0,2);			
+			get_agent().setMussWuseln("");
+		}
+		if(get_agent().getMussWuseln().equals("Hackenr")){
+			//TODO rumwuselbewegung
+			get_agent().setMussWuseln("Hackenr+");
+		}
+		
+			
+		
 		
 		
 		//Soziales
