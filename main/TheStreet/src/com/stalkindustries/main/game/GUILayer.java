@@ -891,7 +891,7 @@ public class GUILayer extends JFrame implements MouseMotionListener {
 		// Agent hinzufügen
 		spawnPersonX[0] = spawnHausX[agent_house_nr];
 		spawnPersonY[0] = spawnHausY[agent_house_nr];
-		mensch = new Agent(agent_house_nr);
+		mensch = new Agent(agent_house_nr,"James Bond");
 		this.humans.add(mensch);
 		this.baseLayer.add(mensch, javax.swing.JLayeredPane.DEFAULT_LAYER);
 		this.humans.get(mensch_cnt).teleport(spawnPersonX[0], spawnPersonY[0]);
@@ -1264,5 +1264,14 @@ public class GUILayer extends JFrame implements MouseMotionListener {
 			this.informationsbalken[0].setSize(0,19);
 		}
 		this.informationsbalken[2].setSize((int)(simulation.calc_ueberwachung_in_street()*1.66),19);
+	}
+	
+	
+	//Beschwerden Miri
+	public void callHighscore(){
+		Highscore highscore = new Highscore(this.simulation,this.quiz,this.simulation.get_agent());
+		highscore.calcHighscoreOfAgent();
+		highscore.exportIntoUser();
+		highscore.exportIntoScores();
 	}
 }
