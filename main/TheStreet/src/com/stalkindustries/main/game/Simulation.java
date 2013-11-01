@@ -272,7 +272,8 @@ public class Simulation {
 				if (ueberwachungswert >=0){
 					calcColouredPeople(i);
 				}
-			}
+			} 
+			ueberwachungswert=0;
 		}
 	}
 	
