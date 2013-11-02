@@ -67,7 +67,9 @@ public Scrollbar(IControl control){
     }
 
     @Override
-    protected void paintTrack(Graphics g, JComponent c, Rectangle trackBounds) {        
+    protected void paintTrack(Graphics g, JComponent c, Rectangle trackBounds) { 
+    	//Java Grafik Bug Workaround
+        g.drawImage(Ressources.mainmenusub.getSubimage(c.getLocationOnScreen().x-Ressources.ZEROPOS.width, c.getLocationOnScreen().y-Ressources.ZEROPOS.height, c.getWidth(), c.getHeight()), 0, 0, null);
         
     }
     
