@@ -213,11 +213,11 @@ public class Simulation {
 					//hier ist das Misstrauen natürlich größer
 					if(this.people.get(i).get_haus_id()+1 == house_location){
 						if(risiko>2)
-							this.people.get(i).set_misstrauen(this.people.get(i).get_misstrauen()+5);
+							this.people.get(i).set_misstrauen(this.people.get(i).get_misstrauen()+2);
 					}
 					else{
 						if(risiko>2)
-							this.people.get(i).set_misstrauen(this.people.get(i).get_misstrauen()+2);
+							this.people.get(i).set_misstrauen(this.people.get(i).get_misstrauen()+1);
 					}
 				}
 			}
