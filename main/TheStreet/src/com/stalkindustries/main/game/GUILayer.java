@@ -1052,6 +1052,11 @@ public class GUILayer extends JFrame implements MouseMotionListener {
 	}
 	
 	
+	public void stop_game(){
+		
+	}
+	
+	
 	/**
 	 * Step steuert den zeitlichen Ablauf des Spieles und triggert die Simulation und Updates im Spielfenster
 	 * @author Miri, Tobias, Tiki
@@ -1134,6 +1139,7 @@ public class GUILayer extends JFrame implements MouseMotionListener {
 			}
 			this.updateMisstrauen(); // Wert neu zeichnen
 			this.updateBalken();
+			if(this.simulation.calc_gamoeover()) this.stop_game();
 		}
 
 		//Spielzeit und Tagesablauf berechnen alle 4 Steps
@@ -1151,7 +1157,6 @@ public class GUILayer extends JFrame implements MouseMotionListener {
 		if (getSimulation().get_agent().getCurrentMove()=='n' && !getSimulation().get_agent().getMussWuseln().equals("")){
 			getSimulation().doSomethingAfterAgentAktion();
 		}
-		
 		
 		this.stepcounter++;
 	}

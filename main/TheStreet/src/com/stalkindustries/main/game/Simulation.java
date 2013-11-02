@@ -1095,17 +1095,18 @@ public class Simulation {
 	//Support Tiki
 	//TODO Gameover implementieren -> Das Event dafür
 	//TODO Gameover Werte berechnen
-	public void calc_gamoeover(){
+	public boolean calc_gamoeover(){
 		if (calc_misstrauen_in_street()>=90.0){
-			//GAMEOVER!!!
+			return true;
 		}
 		for (int i = 0; i < this.people.size(); i++){
 			if (this.people.get(i) instanceof Terrorist){
 				if (this.people.get(i).get_misstrauen() >= 85.00){
-					// GAMEOVER!!!
+					return true;
 				}
 			} 
-		}		
+		}	
+		return false;
 	}
 	
 	

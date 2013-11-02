@@ -141,7 +141,7 @@ public class Quiz {
 		this.zeit.setSize((int)((timeleft*166)/QUIZTIME),19);
 		if(timeleft<=0){
 			this.running=false;
-			this.beantwortet.add(100);
+			this.beantwortet.add(0);
 			this.quizwindow.setEnabled(false);
 			this.quizwindow.setVisible(false);
 			this.calcMisstrauenAfterQuiz();
