@@ -818,7 +818,13 @@ public class GUILayer extends JFrame implements MouseMotionListener {
 				if (i == house_of_terrorist) {
 					// Terrorist muss kann kein Kind sein
 					number_of_adults = 1 + (int) (Math.random() * people_per_house);
-					mensch = new Terrorist(i);
+					
+					//Evil Event
+					int id = (int)(Math.random()*Ressources.getEvilEvents().size());
+					String event = this.includeTerroristHaus(Ressources.getEvilEvents().get(id).get(0),i);
+					mensch = new Terrorist(i,event);	
+					System.out.println(event);	//TODO: System.out.... entfernen
+					
 					this.humans.add(mensch);
 					this.baseLayer.add(mensch,
 							javax.swing.JLayeredPane.DEFAULT_LAYER);
@@ -998,6 +1004,14 @@ public class GUILayer extends JFrame implements MouseMotionListener {
 		} else {
 			this.timer.start();
 		}
+	}
+	
+	//Beschwerden Miri
+	public String includeTerroristHaus(String input, int i){
+		String hausnr = String.valueOf(i+1);
+		String output = "";
+		output = input.replace("%",hausnr);
+		return output;
 	}
 	
 	//Beschwerden Miri

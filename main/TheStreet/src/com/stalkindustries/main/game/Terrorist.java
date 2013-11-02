@@ -2,8 +2,11 @@ package com.stalkindustries.main.game;
 
 public class Terrorist extends Erwachsene {
 	
-	public Terrorist(int house_id){
+	private String evilevent;
+	
+	public Terrorist(int house_id, String evilevent){
 		super(house_id);
+		this.evilevent = evilevent;
 	}
 
 }

@@ -19,6 +19,7 @@ public class Ressources {
 	private static ArrayList<ArrayList<String>> quizfragen;
 	//private static ArrayList<ArrayList<String>> arabian_quiz;		TODO: entfernen
 	private static ArrayList<ArrayList<String>> livetickergags;
+	private static ArrayList<ArrayList<String>> evilevents;
 	
 	public static final int RASTERHEIGHT = 45; //Map Raster
 	public static final int TORSOCNT =4; //Anzahl verschiedener Torsos in Sprite Grafik
@@ -46,6 +47,7 @@ public class Ressources {
 		quizfragen = read_from_csv("res\\level\\"+levelname+"\\"+levelname+"_quizfragen.csv");
 		livetickergags = read_from_csv("res\\game\\"+"livetickergags.csv");
 		livetickergags = randomizeGags();
+		evilevents = read_from_csv("res\\game\\"+"EvilEvents.csv");
 		setNumberOfHouses();
 	}
 	
@@ -195,6 +197,12 @@ public class Ressources {
 		ArrayList<ArrayList<String>> quiz;
 		quiz = copy_csv(quizfragen);
 		return quiz;
+	}
+	
+	public static ArrayList<ArrayList<String>> getEvilEvents() {
+		ArrayList<ArrayList<String>> evil;
+		evil = copy_csv(evilevents);
+		return evil;
 	}
 	
 //	TODO: entfernen
