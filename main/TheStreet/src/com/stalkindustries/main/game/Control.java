@@ -199,7 +199,8 @@ public class Control implements IControl {
 //	 TODO "aktion6Beschwichtigen" && "aktion6Spionage" werden nicht abgefragt
 		if(lastFunktioncode.equals("aktionKuchen")){
 			for (int i=0; i<guilayer.getSimulation().get_people().size(); i++){
-				if (guilayer.getSimulation().get_people().get(i).get_location_id()== (char)(hausid+48)){
+				if (guilayer.getSimulation().get_people().get(i).get_location_id()== (char)(hausid+48) && 
+						guilayer.getSimulation().get_people().get(i).getCurrentMove()=='n'){
 					if (!soAtHome){
 						soAtHome = true;
 						stehenBleiben.add('s');
@@ -215,7 +216,8 @@ public class Control implements IControl {
 			
 		if(lastFunktioncode.equals("aktionUnterhalten")){
 			for (int i=0; i<guilayer.getSimulation().get_people().size(); i++){
-				if (guilayer.getSimulation().get_people().get(i).get_location_id()== (char)(hausid+48)){
+				if (guilayer.getSimulation().get_people().get(i).get_location_id()== (char)(hausid+48) &&
+						guilayer.getSimulation().get_people().get(i).getCurrentMove()=='n'){
 					if (!soAtHome){
 						soAtHome = true;
 						stehenBleiben.add('s');
@@ -231,7 +233,8 @@ public class Control implements IControl {
 			
 		if(lastFunktioncode.equals("aktionFlirten")){
 			for (int i=0; i<guilayer.getSimulation().get_people().size(); i++){
-				if (guilayer.getSimulation().get_people().get(i).get_location_id()== (char)(hausid+48)){
+				if (guilayer.getSimulation().get_people().get(i).get_location_id()== (char)(hausid+48) &&
+						guilayer.getSimulation().get_people().get(i).getCurrentMove()=='n'){
 					if (!soAtHome){
 						soAtHome = true;
 						stehenBleiben.add('s');
@@ -247,7 +250,8 @@ public class Control implements IControl {
 			
 		if(lastFunktioncode.equals("aktionHand")){
 			for (int i=0; i<guilayer.getSimulation().get_people().size(); i++){
-				if (guilayer.getSimulation().get_people().get(i).get_location_id()== (char)(hausid+48)){
+				if (guilayer.getSimulation().get_people().get(i).get_location_id()== (char)(hausid+48) &&
+						guilayer.getSimulation().get_people().get(i).getCurrentMove()=='n'){
 					if (!soAtHome){
 						soAtHome = true;
 						stehenBleiben.add('s');
