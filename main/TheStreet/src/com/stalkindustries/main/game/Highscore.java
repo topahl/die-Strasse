@@ -56,7 +56,10 @@ public class Highscore {
 			misstrauen = 1000/this.misstrauen_max;
 		
 		//TODO: eventsgesamt/eventsverteilt
-		this.highscore = misstrauen + this.wissenswert + zeit + this.events;
+		//this.highscore = misstrauen + this.wissenswert + zeit + this.events;
+		this.highscore = this.wissenswert - this.misstrauen_max - zeit/8640 + this.events;
+		if(this.highscore < 0)
+			this.highscore = 0;
 	}
 	
 	//Beschwerden Miri

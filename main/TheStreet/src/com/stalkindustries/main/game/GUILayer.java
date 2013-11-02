@@ -1000,7 +1000,7 @@ public class GUILayer extends JFrame implements MouseMotionListener {
 		}
 	}
 	
-	
+	//Beschwerden Miri
 	public String includeNames(String input){	
 		String frau = "";
 		String mann = "";
@@ -1049,6 +1049,7 @@ public class GUILayer extends JFrame implements MouseMotionListener {
 			return input;
 		}
 	
+	//Beschwerden Miri
 	public String getLiveTickerGags(){
 		String text;
 		ArrayList<ArrayList<String>> gags = Ressources.randomizeGags();
@@ -1056,10 +1057,12 @@ public class GUILayer extends JFrame implements MouseMotionListener {
 		return includeNames(text);
 	}
 	
+	//Beschwerden Miri
 	public void stopGame(){
 		this.gameover.setVisible(true);	//GameOver anzeigen
 		this.control.clickPause();
 		this.buttons.get("pause").setEnabled(false);
+		this.callHighscore();
 	}
 	
 	
@@ -1144,6 +1147,7 @@ public class GUILayer extends JFrame implements MouseMotionListener {
 				}
 			}
 			this.updateMisstrauen(); // Wert neu zeichnen
+			this.simulation.calcMisstrauenMax();
 			this.updateBalken();
 			if(this.simulation.calc_gamoeover()) 
 				this.stopGame();

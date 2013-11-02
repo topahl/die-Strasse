@@ -16,7 +16,7 @@ public class Simulation {
 	private int spiel_minute=0;
 	private ArrayList<Haus> houses = new ArrayList<Haus>();
 	private boolean wieeeeschteAktion=true;  //wieeeeescht = boese
-	private double misstrauen_max=0;
+	private double misstrauen_max=-100;
 
 	
 	public Simulation(){
@@ -1094,7 +1094,7 @@ public class Simulation {
 
 	//Support Tiki
 	public boolean calc_gamoeover(){
-		if (calc_misstrauen_in_street()>=80.0){
+		if (calc_misstrauen_in_street()>=90.0){
 			return true;
 		}
 		for (int i = 0; i < this.people.size(); i++){
