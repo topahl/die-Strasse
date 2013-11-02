@@ -1096,7 +1096,7 @@ public class Simulation {
 	//TODO Gameover implementieren -> Das Event dafür
 	//TODO Gameover Werte berechnen
 	public boolean calc_gamoeover(){
-		if (calc_misstrauen_in_street()>=25.0){
+		if (calc_misstrauen_in_street()>=80.0){
 			return true;
 		}
 		for (int i = 0; i < this.people.size(); i++){

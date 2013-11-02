@@ -398,7 +398,7 @@ public class Control implements IControl {
 	/**
 	 * Spiel pausieren
 	 */
-	private void clickPause() {
+	public void clickPause() {
 		//Pause-Funktion von GUILayer aufrufen
 		guilayer.updateTimerStatus();
 		

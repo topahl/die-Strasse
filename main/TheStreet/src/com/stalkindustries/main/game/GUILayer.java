@@ -54,6 +54,7 @@ public class GUILayer extends JFrame implements MouseMotionListener {
 	private JLabel[] hausinformationen = new JLabel[10]; //Titelfeld, 4Personenbilder, 4 Namen, Leiste Überwachungsstatus
 	private JLabel[] informationsbalken = new JLabel[3]; //Misstrauen positiv, Misstrauen Negativ, Überwachung
 	private JLabel newsticker = new JLabel();
+	private JLabel gameover = new JLabel();
 	
 	
 	
@@ -203,7 +204,13 @@ public class GUILayer extends JFrame implements MouseMotionListener {
 		informationsbalken[0].setBounds(Ressources.ZEROPOS.width+733, Ressources.ZEROPOS.height+646, 166, 19);
 		baseLayer.add(informationsbalken[0], javax.swing.JLayeredPane.DEFAULT_LAYER);
 
-		
+		//GAMEOVER
+		gameover.setBounds(Ressources.MAPWIDTH/2, Ressources.MAPHEIGHT/3, 500, 200);
+		gameover.setFont(new Font("Corbel", Font.BOLD, 60));
+		gameover.setForeground(new java.awt.Color(249, 249, 249));
+		gameover.setText("GAMEOVER");
+		gameover.setVisible(false);
+		this.baseLayer.add(gameover, javax.swing.JLayeredPane.DEFAULT_LAYER);
 		
 		//Newsticker
 				this.newsticker.setBounds(Ressources.ZEROPOS.width +45, Ressources.ZEROPOS.height, Ressources.MAPWIDTH, 50);
@@ -274,7 +281,6 @@ public class GUILayer extends JFrame implements MouseMotionListener {
 		//So Leute... bitte alle Komponenten zu einem bestimmten Fenster
 		//Direkt hintereinander in einem Codeabschnitt angeben!
 		//Man findet sonst nix wieder ... :)
-		
 		
 		
 		//---
@@ -1051,16 +1057,10 @@ public class GUILayer extends JFrame implements MouseMotionListener {
 		return includeNames(text);
 	}
 	
-	
-	public void stop_game(){
-		JLabel gameover = new JLabel();
-		gameover.setText("GAMEOVER");
-		gameover.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-		gameover.setFont(new Font("Corbel", Font.BOLD, 18));
-		gameover.setForeground(new java.awt.Color(0xf9, 0xf9, 0xf9));
-		gameover.setBounds(20, 50, 200, 30);
-		gameover.setVisible(true);
-		this.baseLayer.add(gameover);
+	public void stopGame(){
+		this.gameover.setVisible(true);	//GameOver anzeigen
+		this.control.clickPause();
+		this.buttons.get("pause").setEnabled(false);
 	}
 	
 	
@@ -1147,7 +1147,7 @@ public class GUILayer extends JFrame implements MouseMotionListener {
 			this.updateMisstrauen(); // Wert neu zeichnen
 			this.updateBalken();
 			if(this.simulation.calc_gamoeover()) 
-				this.stop_game();
+				this.stopGame();
 		}
 
 		//Spielzeit und Tagesablauf berechnen alle 4 Steps
