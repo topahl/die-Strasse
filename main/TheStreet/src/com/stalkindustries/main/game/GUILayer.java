@@ -821,9 +821,8 @@ public class GUILayer extends JFrame implements MouseMotionListener {
 					
 					//Evil Event
 					int id = (int)(Math.random()*Ressources.getEvilEvents().size());
-					String event = this.includeHaus(Ressources.getEvilEvents().get(id).get(0),i);
-					mensch = new Terrorist(i,event);	
-					System.out.println(event);	//TODO: System.out.... entfernen
+					mensch = new Terrorist(i,this.includeHaus(Ressources.getEvilEvents().get(id),i));	
+					System.out.println(mensch_cnt+". "+this.includeHaus(Ressources.getEvilEvents().get(id),i).get(0));	//TODO: System.out.... entfernen
 					
 					this.humans.add(mensch);
 					this.baseLayer.add(mensch,
@@ -840,7 +839,8 @@ public class GUILayer extends JFrame implements MouseMotionListener {
 
 					// übrige Erwachsene setzen
 					for (int j = 0; j < number_of_adults - 1; j++) {
-						mensch = new Erwachsene(i);
+						mensch = new Erwachsene(i,this.includeHaus(Ressources.getNormalEvents().get(mensch_cnt),i));
+						System.out.println(mensch_cnt+". "+this.includeHaus(Ressources.getNormalEvents().get(mensch_cnt),i).get(0));
 						this.humans.add(mensch);
 						this.baseLayer.add(mensch,
 								javax.swing.JLayeredPane.DEFAULT_LAYER);
@@ -858,7 +858,8 @@ public class GUILayer extends JFrame implements MouseMotionListener {
 					// in jedem Haushalt muss mindestens ein Erwachsener leben
 					number_of_adults = (int) (Math.random() * people_per_house) + 1;
 					for (int j = 0; j < number_of_adults; j++) {
-						mensch = new Erwachsene(i);
+						mensch = new Erwachsene(i,this.includeHaus(Ressources.getNormalEvents().get(mensch_cnt),i));
+						System.out.println(mensch_cnt+". "+this.includeHaus(Ressources.getNormalEvents().get(mensch_cnt),i).get(0));
 						this.humans.add(mensch);
 						this.baseLayer.add(mensch,
 								javax.swing.JLayeredPane.DEFAULT_LAYER);
@@ -876,7 +877,8 @@ public class GUILayer extends JFrame implements MouseMotionListener {
 				// Kinder berechnen
 				number_of_children = people_per_house - number_of_adults;
 				for (int j = 0; j < number_of_children; j++) {
-					mensch = new Kinder(i);
+					mensch = new Kinder(i,this.includeHaus(Ressources.getNormalEvents().get(mensch_cnt),i));
+					System.out.println(mensch_cnt+". "+this.includeHaus(Ressources.getNormalEvents().get(mensch_cnt),i).get(0));
 					this.humans.add(mensch);
 					this.baseLayer.add(mensch,
 							javax.swing.JLayeredPane.DEFAULT_LAYER);
@@ -892,7 +894,6 @@ public class GUILayer extends JFrame implements MouseMotionListener {
 				}
 				this.initHaus(i, false, spawnHausX[0], spawnHausY[0]);
 			}
-			System.out.println(this.includeHaus(Ressources.getNormalEvents().get(i).get(0),i));
 		}
 
 		// Simulation benötigt die Information von allen Bewohnern (ohne Agent)
@@ -1008,11 +1009,12 @@ public class GUILayer extends JFrame implements MouseMotionListener {
 	}
 	
 	//Beschwerden Miri
-	public String includeHaus(String input, int i){
+	public ArrayList<String> includeHaus(ArrayList<String> input, int i){
 		String hausnr = String.valueOf(i+1);
 		String output = "";
-		output = input.replace("%",hausnr);
-		return output;
+		output = input.get(0).replace("%",hausnr);
+		input.set(0,output);
+		return input;
 	}
 	
 	//Beschwerden Miri
@@ -1068,7 +1070,7 @@ public class GUILayer extends JFrame implements MouseMotionListener {
 	public String getLiveTickerGags(){
 		String text;
 		//ArrayList<ArrayList<String>> gags = Ressources.randomizeGags();
-		ArrayList<ArrayList<String>> gags = Ressources.randomizeLists(Ressources.getLiveTickerGags(), Ressources.getLiveTickerGags().size());
+		ArrayList<ArrayList<String>> gags = Ressources.randomizeLists(Ressources.getLiveTickerGags());
 		text = gags.get(0).get(0);
 		return includeNames(text);
 	}

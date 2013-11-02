@@ -1,12 +1,11 @@
 package com.stalkindustries.main.game;
 
+import java.util.ArrayList;
+
 public class Terrorist extends Erwachsene {
 	
-	private String evilevent;
-	
-	public Terrorist(int house_id, String evilevent){
-		super(house_id);
-		this.evilevent = evilevent;
+	public Terrorist(int house_id, ArrayList<String> evilevent){
+		super(house_id,evilevent);
 	}
 
 }

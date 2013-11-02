@@ -49,12 +49,12 @@ public class Ressources {
 		
 		livetickergags = read_from_csv("res\\game\\"+"livetickergags.csv");
 		//livetickergags = randomizeGags();
-		livetickergags = randomizeLists(copy_csv(livetickergags), livetickergags.size());
+		livetickergags = randomizeLists(copy_csv(livetickergags));
 		
 		evilevents = read_from_csv("res\\game\\"+"EvilEvents.csv");
 		
 		normalevents = read_from_csv("res\\game\\"+"NormaleEvents.csv");
-		normalevents = randomizeLists(copy_csv(normalevents), normalevents.size());
+		normalevents = randomizeLists(copy_csv(normalevents));
 		
 		setNumberOfHouses();
 	}
@@ -227,20 +227,20 @@ public class Ressources {
 //	}
 	
 	
-	public static ArrayList<ArrayList<String>> copy_csv(ArrayList<ArrayList<String>> location_ids){
+	public static ArrayList<ArrayList<String>> copy_csv(ArrayList<ArrayList<String>> input){
 		ArrayList<ArrayList<String>> new_csv = new ArrayList<ArrayList<String>>();
-		ArrayList<String>tmp;
 		
-		for(int i=0;i<location_ids.size();i++){
-			tmp = new ArrayList<String>();
-			for(int j=0;j<location_ids.get(i).size();j++){
-				tmp.add(location_ids.get(i).get(j));
+		for(int i=0;i<input.size();i++){
+			ArrayList<String> tmp = new ArrayList<String>();
+			for(int j=0;j<input.get(i).size();j++){
+				tmp.add(input.get(i).get(j));
 			}
 			new_csv.add(tmp);
 		}	
 		return new_csv;
 	}
 	
+	//TODO: entfernen
 	public static ArrayList<ArrayList<String>> randomizeGags(){
 		ArrayList<ArrayList<String>> gags = new ArrayList<ArrayList<String>>();
 		ArrayList<ArrayList<String>> gags_input = copy_csv(livetickergags);
@@ -259,17 +259,19 @@ public class Ressources {
 		return gags;
 	}
 	
-	public static ArrayList<ArrayList<String>> randomizeLists(ArrayList<ArrayList<String>> input, int listsize){
+	public static ArrayList<ArrayList<String>> randomizeLists(ArrayList<ArrayList<String>> input){
 		ArrayList<ArrayList<String>> output = new ArrayList<ArrayList<String>>();
 		ArrayList<String> tmp;
+		int listsize = input.size();
 		int start = (int)(Math.random()*listsize);
 		int step = (int)(Math.random()*(listsize-2)+1);
 		
-		for(int i=0;i<input.size();i++){
+		for(int i=0;i<listsize;i++){
 			tmp = new ArrayList<String>();
 			tmp.add(input.get(start).get(0));
 			input.remove(start);
-			start = (start+step)%input.size();
+			if(input.size() != 0)
+				start = (start+step)%input.size();
 			output.add(tmp);
 		}
 		
