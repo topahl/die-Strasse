@@ -137,6 +137,7 @@ public class Control implements IControl {
 //		guilayer.getSimulation().berechne_weg(null, guilayer.getSimulation().get_agent(), (char)(currentHouse+1+48));
 		guilayer.getButtonsMap().get("aktionFernglas").setEnabled(true);
 		guilayer.getSimulation().getHouses().get(currentHouse).setUeberwachungsWert(0,3);
+		guilayer.getSimulation().setWieeeeschteAktion(true);
 		
 	}
 
@@ -148,6 +149,7 @@ public class Control implements IControl {
 		guilayer.getButtonsMap().get("nachHause").setEnabled(true);
 		guilayer.getSimulation().get_agent().setMussWuseln("Hackenr");
 		guilayer.getSimulation().berechne_weg(null, guilayer.getSimulation().get_agent(), (char)(currentHouse+1+48));
+		guilayer.getSimulation().setWieeeeschteAktion(true);
 	}
 
 
@@ -158,6 +160,7 @@ public class Control implements IControl {
 		guilayer.getButtonsMap().get("nachHause").setEnabled(true);
 		guilayer.getSimulation().get_agent().setMussWuseln("Kamerar");
 		guilayer.getSimulation().berechne_weg(null, guilayer.getSimulation().get_agent(), (char)(currentHouse+1+48));
+		guilayer.getSimulation().setWieeeeschteAktion(true);
 	}
 
 
@@ -168,6 +171,7 @@ public class Control implements IControl {
 		guilayer.getButtonsMap().get("nachHause").setEnabled(true);
 		guilayer.getSimulation().get_agent().setMussWuseln("Wanzer");
 		guilayer.getSimulation().berechne_weg(null, guilayer.getSimulation().get_agent(), (char)(currentHouse+1+48));
+		guilayer.getSimulation().setWieeeeschteAktion(true);
 	}
 
 

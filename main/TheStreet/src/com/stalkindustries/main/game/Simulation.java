@@ -116,6 +116,22 @@ public class Simulation {
 	}
 	
 	
+	//Beschwerden Miri
+	public void calcMisstrauenAfterBeschwichtigenInPark(){
+		for(int i=0;i<this.people.size();i++){
+			//Checken, ob sich noch jemand im Park befindet
+			if(this.people.get(i).get_location_id() == 'P'){
+				this.people.get(i).set_misstrauen(this.people.get(i).get_misstrauen()-6); //TODO: den Wert testen ... eventuell erhöhen
+			}
+			
+			//sorgt dafür, dass sich das Misstrauen zwischen -100 und 100 bewegt
+			if(this.people.get(i).get_misstrauen()>100)
+				this.people.get(i).set_misstrauen(100);
+			if(this.people.get(i).get_misstrauen()<-100)
+				this.people.get(i).set_misstrauen(-100);
+		}
+	}
+	
 	//Beschwerden an Miri
 	public void calc_misstrauen_after_beschwichtigen_action(int action_id, Person person){
 		int zufall=0;
@@ -197,11 +213,11 @@ public class Simulation {
 					//hier ist das Misstrauen natürlich größer
 					if(this.people.get(i).get_haus_id()+1 == house_location){
 						if(risiko>2)
-							this.people.get(i).set_misstrauen(this.people.get(i).get_misstrauen()+5);
+							this.people.get(i).set_misstrauen(this.people.get(i).get_misstrauen()+2);
 					}
 					else{
 						if(risiko>2)
-							this.people.get(i).set_misstrauen(this.people.get(i).get_misstrauen()+2);
+							this.people.get(i).set_misstrauen(this.people.get(i).get_misstrauen()+1);
 					}
 				}
 			}

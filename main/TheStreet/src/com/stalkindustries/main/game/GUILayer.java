@@ -1165,7 +1165,7 @@ public class GUILayer extends JFrame implements MouseMotionListener {
 			this.humans.get(i).step();
 		}
 		
-		if (getSimulation().get_agent().getCurrentMove()=='n' && !getSimulation().get_agent().getMussWuseln().equals("")){
+		if (getSimulation().get_agent().getCurrentMove()=='n' && !getSimulation().get_agent().getMussWuseln().isEmpty()){
 			getSimulation().doSomethingAfterAgentAktion();
 		}
 		
