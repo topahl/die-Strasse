@@ -41,6 +41,7 @@ public class Menu extends JFrame implements MouseMotionListener{
 	private JLayeredPane highscore;
 	private ControlMenu control;
 	
+	
 	private JTextField username;
 	
 	public static final int LAYERMENU = 1;
