@@ -159,8 +159,7 @@ public class Menu extends JFrame implements MouseMotionListener{
         profilselect.add(beschreibung, javax.swing.JLayeredPane.DEFAULT_LAYER);
         
         //Benutzerauswahl
-        @SuppressWarnings("rawtypes")
-		JList list = new JList();
+		JList<String> list = new JList<String>();
         
         DefaultListModel<String> listModel = new DefaultListModel<String>();
         listModel.addElement("Jane Doe");
