@@ -936,7 +936,7 @@ public class Simulation {
 	public void doSomethingAfterAgentAktion(){
 		int personId =0;
 		
-		if (!wieeeeschteAktion && get_agent().getMussWuseln() != "Park" &&  get_agent().getMussWuseln() != "Park+"){ //TODO evtl drittes & entfernen
+		if (!wieeeeschteAktion && get_agent().getMussWuseln() != "Park"){ 
 			if (get_agent().getMussWuseln().charAt(1) <='9' && get_agent().getMussWuseln().charAt(1)>='0'){
 				personId = Integer.parseInt(get_agent().getMussWuseln().substring(0,2));
 			} else{
@@ -1093,8 +1093,6 @@ public class Simulation {
 	
 
 	//Support Tiki
-	//TODO Gameover implementieren -> Das Event dafür
-	//TODO Gameover Werte berechnen
 	public boolean calc_gamoeover(){
 		if (calc_misstrauen_in_street()>=80.0){
 			return true;

@@ -359,10 +359,6 @@ public class Control implements IControl {
 	 */
 	@Override
 	public void mousePresent(String funktion, boolean isPresent) {
-//		if(isPresent)//TODO entfernen
-//			System.out.println("You entered:"+funktion);
-//		else
-//			System.out.println("You leaved:"+funktion);
 		
 		//Aktionen Spionage
 		if(funktion.equals("aktionWanze"))
@@ -402,8 +398,6 @@ public class Control implements IControl {
 		//Pause-Funktion von GUILayer aufrufen
 		guilayer.updateTimerStatus();
 		
-		//TODO: funktioniert das auch später noch im Spiel?
-		//z.B. Menübuttons sind nicht immer disabled im spielverlauf ... vg Stephan
 		if (guilayer.getButtonsMap().get("beschwichtigen").isEnabled()){
 			guilayer.getButtonsMap().get("beschwichtigen").setEnabled(false);
 		} else {
@@ -422,22 +416,18 @@ public class Control implements IControl {
 			}
 		}
 		
-		
-		
-		
-		
-		closeWindow("spionage");
-		closeWindow("beschwichtigen");
-		
-		// von Pause unabhängig?
-//		
+		//TODO razzia einbinden
 //		if (guilayer.getButtonsMap().get("aktionRazzia").isEnabled()){
 //			guilayer.getButtonsMap().get("aktionRazzia").setEnabled(false);
 //		} else {
 //			guilayer.getButtonsMap().get("aktionRazzia").setEnabled(false);
 //		}
 		
-		//TODO: weitere Aktionen (buttons disablen, "Pause"-Fenster anzeigen etc.) bei Pause einfügen
+		
+		
+		closeWindow("spionage");
+		closeWindow("beschwichtigen");
+		
 	}
 
 	
