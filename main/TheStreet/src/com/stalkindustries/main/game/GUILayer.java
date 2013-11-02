@@ -821,7 +821,7 @@ public class GUILayer extends JFrame implements MouseMotionListener {
 					
 					//Evil Event
 					int id = (int)(Math.random()*Ressources.getEvilEvents().size());
-					String event = this.includeTerroristHaus(Ressources.getEvilEvents().get(id).get(0),i);
+					String event = this.includeHaus(Ressources.getEvilEvents().get(id).get(0),i);
 					mensch = new Terrorist(i,event);	
 					System.out.println(event);	//TODO: System.out.... entfernen
 					
@@ -892,6 +892,7 @@ public class GUILayer extends JFrame implements MouseMotionListener {
 				}
 				this.initHaus(i, false, spawnHausX[0], spawnHausY[0]);
 			}
+			System.out.println(this.includeHaus(Ressources.getNormalEvents().get(i).get(0),i));
 		}
 
 		// Simulation benötigt die Information von allen Bewohnern (ohne Agent)
@@ -1007,7 +1008,7 @@ public class GUILayer extends JFrame implements MouseMotionListener {
 	}
 	
 	//Beschwerden Miri
-	public String includeTerroristHaus(String input, int i){
+	public String includeHaus(String input, int i){
 		String hausnr = String.valueOf(i+1);
 		String output = "";
 		output = input.replace("%",hausnr);
@@ -1066,7 +1067,8 @@ public class GUILayer extends JFrame implements MouseMotionListener {
 	//Beschwerden Miri
 	public String getLiveTickerGags(){
 		String text;
-		ArrayList<ArrayList<String>> gags = Ressources.randomizeGags();
+		//ArrayList<ArrayList<String>> gags = Ressources.randomizeGags();
+		ArrayList<ArrayList<String>> gags = Ressources.randomizeLists(Ressources.getLiveTickerGags(), Ressources.getLiveTickerGags().size());
 		text = gags.get(0).get(0);
 		return includeNames(text);
 	}

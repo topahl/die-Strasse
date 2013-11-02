@@ -20,6 +20,7 @@ public class Ressources {
 	//private static ArrayList<ArrayList<String>> arabian_quiz;		TODO: entfernen
 	private static ArrayList<ArrayList<String>> livetickergags;
 	private static ArrayList<ArrayList<String>> evilevents;
+	private static ArrayList<ArrayList<String>> normalevents;
 	
 	public static final int RASTERHEIGHT = 45; //Map Raster
 	public static final int TORSOCNT =4; //Anzahl verschiedener Torsos in Sprite Grafik
@@ -45,9 +46,16 @@ public class Ressources {
 		location_ids=read_from_csv("res\\level\\"+levelname+"\\"+levelname+"_map.csv");
 		names = read_from_csv("res\\level\\"+levelname+"\\"+levelname+"_namen.csv");
 		quizfragen = read_from_csv("res\\level\\"+levelname+"\\"+levelname+"_quizfragen.csv");
+		
 		livetickergags = read_from_csv("res\\game\\"+"livetickergags.csv");
-		livetickergags = randomizeGags();
+		//livetickergags = randomizeGags();
+		livetickergags = randomizeLists(copy_csv(livetickergags), livetickergags.size());
+		
 		evilevents = read_from_csv("res\\game\\"+"EvilEvents.csv");
+		
+		normalevents = read_from_csv("res\\game\\"+"NormaleEvents.csv");
+		normalevents = randomizeLists(copy_csv(normalevents), normalevents.size());
+		
 		setNumberOfHouses();
 	}
 	
@@ -205,6 +213,12 @@ public class Ressources {
 		return evil;
 	}
 	
+	public static ArrayList<ArrayList<String>> getNormalEvents() {
+		ArrayList<ArrayList<String>> normal;
+		normal = copy_csv(normalevents);
+		return normal;
+	}
+	
 //	TODO: entfernen
 //	public static ArrayList<ArrayList<String>> getArabianQuiz() {
 //		ArrayList<ArrayList<String>> arab_quiz;
@@ -243,6 +257,28 @@ public class Ressources {
 		}
 		
 		return gags;
+	}
+	
+	public static ArrayList<ArrayList<String>> randomizeLists(ArrayList<ArrayList<String>> input, int listsize){
+		ArrayList<ArrayList<String>> output = new ArrayList<ArrayList<String>>();
+		ArrayList<String> tmp;
+		int start = (int)(Math.random()*listsize);
+		int step = (int)(Math.random()*(listsize-2)+1);
+		
+		for(int i=0;i<input.size();i++){
+			tmp = new ArrayList<String>();
+			tmp.add(input.get(start).get(0));
+			input.remove(start);
+			start = (start+step)%input.size();
+			output.add(tmp);
+		}
+		
+		return output;
+	}
+	
+	
+	public static ArrayList<ArrayList<String>> getLiveTickerGags(){
+		return livetickergags;
 	}
 	
 	
