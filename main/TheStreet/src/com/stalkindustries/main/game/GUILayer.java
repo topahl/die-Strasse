@@ -821,9 +821,9 @@ public class GUILayer extends JFrame implements MouseMotionListener {
 					
 					//Evil Event
 					int id = (int)(Math.random()*Ressources.getEvilEvents().size());
-					String event = this.includeTerroristHaus(Ressources.getEvilEvents().get(id).get(0));
+					String event = this.includeTerroristHaus(Ressources.getEvilEvents().get(id).get(0),i);
 					mensch = new Terrorist(i,event);	
-					System.out.println(event);
+					System.out.println(event);	//TODO: System.out.... entfernen
 					
 					this.humans.add(mensch);
 					this.baseLayer.add(mensch,
@@ -1007,13 +1007,9 @@ public class GUILayer extends JFrame implements MouseMotionListener {
 	}
 	
 	//Beschwerden Miri
-	public String includeTerroristHaus(String input){
-		String hausnr = "";
+	public String includeTerroristHaus(String input, int i){
+		String hausnr = String.valueOf(i+1);
 		String output = "";
-		for(int i=0;i<this.humans.size();i++){
-			if(this.humans.get(i) instanceof Terrorist)
-				hausnr = String.valueOf(this.humans.get(i).get_haus_id()+1);
-		}
 		output = input.replace("%",hausnr);
 		return output;
 	}
