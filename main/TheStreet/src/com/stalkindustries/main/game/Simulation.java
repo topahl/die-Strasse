@@ -586,7 +586,10 @@ public class Simulation {
 									}
 								}
 //							
-								if ((i>0 && (person!= null && zielloc == person.get_location_id())) || (person!= null && zielloc != person.get_location_id()) || (agent!= null && zielloc != agent.get_location_id())){
+								if ((i>0 && (person!= null && zielloc == person.get_location_id())) ||
+										(person!= null && zielloc != person.get_location_id()) ||
+										(i>0 && (agent!= null && zielloc == agent.get_location_id())) ||
+										(agent!= null && zielloc != agent.get_location_id())){
 									// Es wird überprüft, ob ein Feld drüber/drunter/links oder rechts ebenfalls begehbar ist -> das wird markiert
 									if (j<15){
 										if (location_ids.get(j+1).get(k).equals("X")) {			//Weg nach unten ist begehbar
@@ -639,8 +642,8 @@ public class Simulation {
 						}
 					}
 					//Wenn eine Person in den Park gehen möchte  und schon im Park ist, braucht man eine andere Ziellocation
-					if (agent == null && i == 2 && zielloc=='P'){
-						if (person.get_location_id()=='P'){
+					if (i == 2 && zielloc=='P'){
+						if ((person!= null && person.get_location_id()=='P') || (agent != null && agent.get_location_id()=='P')){
 							ziellocation="0";
 						}
 					}
@@ -665,9 +668,11 @@ public class Simulation {
 		}
 		
 		
-		if((person != null && person.get_location_id()!=zielloc) || (int)(Math.random()*2) == 1 || agent!= null){   //
+		if((person != null && (person.get_location_id()!=zielloc) || (int)(Math.random()*2) == 1) || 
+				agent!= null && (agent.get_location_id()!=zielloc) || (int)(Math.random()*2) == 1){ 
 			for (int i = counter; i>=0; i--){
-				if (((person != null && person.get_location_id()==zielloc) && i == 0) && agent == null){
+				if (((person != null && person.get_location_id()==zielloc) && i == 0) || 
+						((agent != null && agent.get_location_id()==zielloc) && i == 0)){
 					if (yPos_current<15){
 						if (location_ids.get(yPos_current+1).get(xPos_current).equals(String.valueOf(counter+1))) {			//unten gehts weiter
 							yPos_current++;
@@ -931,7 +936,7 @@ public class Simulation {
 	public void doSomethingAfterAgentAktion(){
 		int personId =0;
 		
-		if (!wieeeeschteAktion){
+		if (!wieeeeschteAktion && get_agent().getMussWuseln() != "Park" &&  get_agent().getMussWuseln() != "Park+"){ //TODO evtl drittes & entfernen
 			if (get_agent().getMussWuseln().charAt(1) <='9' && get_agent().getMussWuseln().charAt(1)>='0'){
 				personId = Integer.parseInt(get_agent().getMussWuseln().substring(0,2));
 			} else{
@@ -970,7 +975,19 @@ public class Simulation {
 			agentRumwuseln(2);
 			get_agent().setMussWuseln("Hacken+");
 		}
-				
+		
+		
+//		if(get_agent().getMussWuseln().equals("Wanze+") && get_agent().getCurrentMove()=='n'){
+//			getHouses().get((int)(get_agent().get_location_id()-48-1)).getUeberwachungsmodule().add("Wanze");
+//			getHouses().get((int)(get_agent().get_location_id()-48-1)).setUeberwachungsWert((float)(Math.random()*20+1)+20,0);
+//			get_agent().setMussWuseln("");
+//		}
+		if(get_agent().getMussWuseln().equals("Park")){
+			berechne_weg(null, agent, 'P');
+			//get_agent().setMussWuseln("Wanze+");
+		} 		
+		
+		
 		
 		//Spionage entfernen
 		

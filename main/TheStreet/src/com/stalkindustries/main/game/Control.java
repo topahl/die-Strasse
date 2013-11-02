@@ -78,7 +78,7 @@ public class Control implements IControl {
 			clickFlirten();
 		if(funktion.equals("aktionHand"))
 			clickHand();
-		if(funktion.equals("ParkBeschwichtigen"))
+		if(funktion.equals("parkBeschwichtigen"))
 			clickParkBeschwichtigen();
 		
 		//Buttons Aktionsfenster Beschwichtigen 
@@ -555,6 +555,10 @@ public class Control implements IControl {
 	private void clickParkSpionage() {
 		//kein Icon, da Einsatzort (Park) vorgegeben
 		closeWindow("spionage");
+		guilayer.getSimulation().berechne_weg(null, guilayer.getSimulation().get_agent(), 'P');
+		guilayer.getSimulation().get_agent().setMussWuseln("Park");
+		guilayer.getButtonsMap().get("nachHause").setEnabled(true);
+		guilayer.getSimulation().setWieeeeschteAktion(true);
 	}
 	
 	private void clickKuchen() {
@@ -584,6 +588,10 @@ public class Control implements IControl {
 	private void clickParkBeschwichtigen() {
 		//kein Icon, da Einsatzort (Park) vorgegeben
 		closeWindow("beschwichtigen");
+		guilayer.getSimulation().berechne_weg(null, guilayer.getSimulation().get_agent(), 'P');
+		guilayer.getSimulation().get_agent().setMussWuseln("Park");
+		guilayer.getButtonsMap().get("nachHause").setEnabled(true);
+		guilayer.getSimulation().setWieeeeschteAktion(false);
 	}
 	
 
