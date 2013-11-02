@@ -1053,7 +1053,14 @@ public class GUILayer extends JFrame implements MouseMotionListener {
 	
 	
 	public void stop_game(){
-		
+		JLabel gameover = new JLabel();
+		gameover.setText("GAMEOVER");
+		gameover.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+		gameover.setFont(new Font("Corbel", Font.BOLD, 18));
+		gameover.setForeground(new java.awt.Color(0xf9, 0xf9, 0xf9));
+		gameover.setBounds(20, 50, 200, 30);
+		gameover.setVisible(true);
+		this.baseLayer.add(gameover);
 	}
 	
 	
@@ -1075,7 +1082,7 @@ public class GUILayer extends JFrame implements MouseMotionListener {
 		
 		//TODO etwas besseres Verfahren ausdenken
 		//Quizaufruf 
-		int zeitpunkt = (int) (Math.random() * 3000);
+		int zeitpunkt = (int) (Math.random() * 1000);
 		if(this.stepcounter % (3000 + zeitpunkt) == 0) {
 			quiz.starteQuiz();
 		}
@@ -1139,7 +1146,8 @@ public class GUILayer extends JFrame implements MouseMotionListener {
 			}
 			this.updateMisstrauen(); // Wert neu zeichnen
 			this.updateBalken();
-			if(this.simulation.calc_gamoeover()) this.stop_game();
+			if(this.simulation.calc_gamoeover()) 
+				this.stop_game();
 		}
 
 		//Spielzeit und Tagesablauf berechnen alle 4 Steps

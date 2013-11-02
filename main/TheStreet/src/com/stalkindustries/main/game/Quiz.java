@@ -145,6 +145,7 @@ public class Quiz {
 			this.quizwindow.setEnabled(false);
 			this.quizwindow.setVisible(false);
 			this.calcMisstrauenAfterQuiz();
+			this.quizstart = (this.quizstart + this.quizstep)%this.quizfragen.size();
 		}
 	}
 
