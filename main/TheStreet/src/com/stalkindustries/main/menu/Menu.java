@@ -143,6 +143,7 @@ public class Menu extends JFrame implements MouseMotionListener{
 		generateStandartSubPageElements(tutorial, "Anleitung");
 	}
 	
+	@SuppressWarnings("rawtypes")
 	private void initProfilMenu(){
 		profilselect = new JLayeredPane();
 		

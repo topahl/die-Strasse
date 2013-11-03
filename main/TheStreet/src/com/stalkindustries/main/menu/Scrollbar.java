@@ -22,6 +22,8 @@ import com.stalkindustries.main.game.Ressources;
 public class Scrollbar extends JScrollPane {
 
 public Scrollbar(IControl control){
+	super(  JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED,
+            JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
     JScrollBar sb = this.getVerticalScrollBar();
     sb.setUI(new ScrollbarUI(control));
 }
