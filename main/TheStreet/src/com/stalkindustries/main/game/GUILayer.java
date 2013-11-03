@@ -53,6 +53,8 @@ public class GUILayer extends JFrame implements MouseMotionListener {
 	private JLabel beschwichtigenBeschr = new JLabel();
 	private JLabel[] hausinformationen = new JLabel[10]; //Titelfeld, 4Personenbilder, 4 Namen, Leiste ‹berwachungsstatus
 	private JLabel[] informationsbalken = new JLabel[3]; //Misstrauen positiv, Misstrauen Negativ, ‹berwachung
+	private JLabel dialog‹berschrift = new JLabel(); //‹berschrift, Beschreibungstext
+	private JTextArea dialogText = new JTextArea();
 	private JLabel newsticker = new JLabel();
 	private JLabel gameover = new JLabel();
 	
@@ -542,15 +544,14 @@ public class GUILayer extends JFrame implements MouseMotionListener {
 		this.baseLayer.add(this.fensterDialog, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
 		// ‹berschrift des Dialogfensters
-		label = new JLabel();
-		label.setText("‹berschrift");
-		label.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-		label.setFont(new Font("Corbel", Font.BOLD, 25));
-		label.setForeground(new java.awt.Color(0x1f, 0x1f, 0x1f));
-		label.setBounds(12, 12, 200, 30); 
-		this.fensterDialog.add(label, javax.swing.JLayeredPane.DEFAULT_LAYER);
+		dialog‹berschrift.setText("‹berschrift");
+		dialog‹berschrift.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+		dialog‹berschrift.setFont(new Font("Corbel", Font.BOLD, 25));
+		dialog‹berschrift.setForeground(new java.awt.Color(0x1f, 0x1f, 0x1f));
+		dialog‹berschrift.setBounds(12, 12, 200, 30); 
+		this.fensterDialog.add(dialog‹berschrift, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
-		JTextArea dialogText = new JTextArea();
+		
         dialogText.setLineWrap(true);
         dialogText.setText("Text des Dialogfeldes als Test der L‰nge und so.");
         dialogText.setWrapStyleWord(true);
@@ -562,6 +563,7 @@ public class GUILayer extends JFrame implements MouseMotionListener {
         dialogText.setForeground(new java.awt.Color(0xf9, 0xf9, 0xf9));
         dialogText.setBounds(12 ,60, 204, 75);
       	this.fensterDialog.add(dialogText, javax.swing.JLayeredPane.DEFAULT_LAYER);
+      	
 
 		// Buttons Dialogfenster
 		buttonSize = 66;
@@ -585,6 +587,10 @@ public class GUILayer extends JFrame implements MouseMotionListener {
 		label.setIcon(new ImageIcon(Ressources.ingameframe.getSubimage(0, 0, 248, 235)));
 		label.setBounds(0, 0, 248, 232);
 		this.fensterDialog.add(label, javax.swing.JLayeredPane.DEFAULT_LAYER);
+		
+		//Disable Dialogfenster on startup
+		fensterDialog.setEnabled(false);
+		fensterDialog.setVisible(false);
 	}
 
 
@@ -1348,6 +1354,31 @@ public class GUILayer extends JFrame implements MouseMotionListener {
 		this.informationsbalken[2].setSize((int)(simulation.calc_ueberwachung_in_street()*1.66),19);
 	}
 	
+	/**
+	 * Zeigt ein Dialogfenster mit ¸berschrift und Beschribung an.
+	 * <b>Die ‹berschrift muss identifizierend sein, um die clickEvents zuordnen zu kˆnnen</b>
+	 * @author Tobias
+	 * @param ueberschrift String f¸r die ‹berschrift
+	 * @param beschreibung String f¸r den Beschreibungstext
+	 * @param cancelButton true falls cancel Button angezeigt werden soll
+	 * @param acceptButton true faalls accept button angezeigt werden soll
+	 */
+	public void showDialogMessage(String ueberschrift, String beschreibung, boolean cancelButton, boolean acceptButton){
+		dialogText.setText(beschreibung);
+		dialog‹berschrift.setText(ueberschrift);
+		fensterDialog.setEnabled(true);
+		fensterDialog.setVisible(true);
+		buttons.get("dialogAccept").setLocation(cancelButton?40:90, 132);
+		buttons.get("dialogDecline").setLocation(acceptButton?140:90, 132);
+		buttons.get("dialogAccept").setVisible(acceptButton);
+		buttons.get("dialogAccept").setEnabled(acceptButton);
+		buttons.get("dialogDecline").setVisible(cancelButton);
+		buttons.get("dialogDecline").setEnabled(cancelButton);
+	}
+	
+	public String getDialogUeberschrift(){
+		return dialog‹berschrift.getText();
+	}
 	
 	//Beschwerden Miri
 	public void callHighscore(){

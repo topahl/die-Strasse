@@ -456,7 +456,7 @@ public class Control implements IControl {
 //			guilayer.getButtonsMap().get("aktionRazzia").setEnabled(false);
 //		}
 		
-		
+		guilayer.showDialogMessage("Pause", "Das Spiel wurde pausiert.", false,true);
 		
 		closeWindow("spionage");
 		closeWindow("beschwichtigen");
@@ -489,6 +489,8 @@ public class Control implements IControl {
 	
 	
 	private void clickDialogAccept() {
+		if(guilayer.getDialogUeberschrift().equals("Pause"))
+			clickPause();
 		guilayer.getWindow("dialog").setEnabled(false);
 		guilayer.getWindow("dialog").setVisible(false);
 	}
