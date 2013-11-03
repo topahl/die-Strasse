@@ -43,6 +43,7 @@ public class Menu extends JFrame implements MouseMotionListener{
 	
 	
 	private JTextField username;
+	private JList benutzerliste;
 	
 	public static final int LAYERMENU = 1;
 	public static final int LAYERLEVEL = 2;
@@ -159,42 +160,14 @@ public class Menu extends JFrame implements MouseMotionListener{
         profilselect.add(beschreibung, javax.swing.JLayeredPane.DEFAULT_LAYER);
         
         //Benutzerauswahl
-		JList<String> list = new JList<String>();
-        
-        DefaultListModel<String> listModel = new DefaultListModel<String>();
-        listModel.addElement("Jane Doe");
-        listModel.addElement("John Smith");
-        listModel.addElement("Kathy Green");
-        listModel.addElement("Jane Doe");
-        listModel.addElement("John Smith");
-        listModel.addElement("Kathy Green");
-        listModel.addElement("Jane Doe");
-        listModel.addElement("John Smith");
-        listModel.addElement("Kathy Green");
-        listModel.addElement("Jane Doe");
-        listModel.addElement("John Smith");
-        listModel.addElement("Kathy Green");
-        listModel.addElement("Jane Doe");
-        listModel.addElement("John Smith");
-        listModel.addElement("Kathy Green");
-        listModel.addElement("Jane Doe");
-        listModel.addElement("John Smith");
-        listModel.addElement("Kathy Green");
-        listModel.addElement("Jane Doe");
-        listModel.addElement("John Smith");
-        listModel.addElement("Kathy Green");
-        listModel.addElement("Jane Doe");
-        listModel.addElement("John Smith");
-        listModel.addElement("Kathy Green");
-        
-        list.setModel(listModel);
-        list.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
-        list.setOpaque(false);
-        list.setBackground(new Color(0,0,0,0));
-        list.setFont(new Font("Corbel",Font.BOLD,20));
-        list.setForeground(new Color(0xf9, 0xf9, 0xf9));
+		benutzerliste = new JList();
+        benutzerliste.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+        benutzerliste.setOpaque(false);
+        benutzerliste.setBackground(new Color(0,0,0,0));
+        benutzerliste.setFont(new Font("Corbel",Font.BOLD,20));
+        benutzerliste.setForeground(new Color(0xf9, 0xf9, 0xf9));
         JScrollPane scrollpane = new Scrollbar(this.control); 
-        scrollpane.setViewportView(list);
+        scrollpane.setViewportView(benutzerliste);
         scrollpane.getViewport().setOpaque(false);
         scrollpane.setOpaque(false);
         scrollpane.setBackground(new Color(0,0,0,0));
@@ -470,6 +443,10 @@ public class Menu extends JFrame implements MouseMotionListener{
     public String getInputUsername(){
     	return username.getText();
     }
-    
+
+	public JList getBenutzerliste() {
+		return benutzerliste;
+	}
+	
     
 }

@@ -4,6 +4,7 @@ import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 
+import javax.swing.DefaultListModel;
 import javax.swing.JLayeredPane;
 
 import com.stalkindustries.main.IControl;
@@ -33,7 +34,7 @@ public class ControlMenu implements IControl{
 		if(funktion.equals("back"))
 			mainmenu.showLayer(Menu.LAYERMENU);
 		if(funktion.equals("profil"))
-			mainmenu.showLayer(Menu.LAYERPROFIL);
+			openProfil();
 		if(funktion.equals("highscore"))
 			mainmenu.showLayer(Menu.LAYERHIGHSCORE);
 		if(funktion.equals("tutorial"))
@@ -65,20 +66,42 @@ public class ControlMenu implements IControl{
 	private void createUser(){
 		String user = this.mainmenu.getInputUsername();
 		
-		File folder = new File("res\\user\\"+user+".usr");
+		File folder = new File("res\\user\\");
+		File file = new File("res\\user\\"+user+".usr");
 			
     	if(!folder.canWrite())
     		System.err.println("Can't write to user files");
     	try {
     		folder.mkdirs();
-			folder.createNewFile();
+			file.createNewFile();
 		} catch (IOException e) {
 			System.err.println("Error while creating Userfile");
 			e.printStackTrace();
 		}
+    	mainmenu.showLayer(Menu.LAYERMENU);
 	}
 	
+	/**
+	 * Reads Userfiles
+	 * @author Tobias
+	 * @return Viewpoint list for JList with Usernames
+	 * 
+	 */
+	private DefaultListModel getPlayernames(){
+		DefaultListModel output = new DefaultListModel();
+		File folder = new File("res\\user\\");
+    	for (File fileEntry : folder.listFiles()) {
+            if (fileEntry.isFile()&&fileEntry.getName().endsWith(".usr")) {
+                output.addElement(fileEntry.getName().substring(0, fileEntry.getName().length()-4));
+                System.out.println(fileEntry.getName());
+            } 
+    	}
+    	return output;
+    }
 	
-	
+	private void openProfil(){
+		mainmenu.getBenutzerliste().setModel(getPlayernames());
+		mainmenu.showLayer(Menu.LAYERPROFIL);
+	}
 	
 }
