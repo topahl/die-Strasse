@@ -18,6 +18,7 @@ public class Highscore {
 	private Quiz quiz;
 	private Agent agent;
 	private int spielzeit;					//in Minuten
+	private boolean festgenommen = false;
 	
 	
 	//Beschwerden Miri
@@ -61,9 +62,12 @@ public class Highscore {
 		if(this.misstrauen_max!=0)
 			misstrauen = 1000/this.misstrauen_max;
 		
-		//TODO: eventsgesamt/eventsverteilt
 		//this.highscore = misstrauen + this.wissenswert + zeit + this.events;
 		this.highscore = this.wissenswert - this.misstrauen_max - zeit/8640 + this.events/this.simulation.get_people().size();
+		
+		if(this.festgenommen)
+			this.highscore *= 2;
+		
 		if(this.highscore < 0)
 			this.highscore = 0;
 	}
@@ -150,5 +154,11 @@ public class Highscore {
 	//Beschwerden Miri
 	public double getHighscore(){
 		return this.highscore;
+	}
+	
+	
+	//Beschwerden Miri
+	public void setFestgenommen(boolean b){
+		this.festgenommen = b;
 	}
 }

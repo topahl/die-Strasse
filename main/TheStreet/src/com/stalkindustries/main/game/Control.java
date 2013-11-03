@@ -64,7 +64,7 @@ public class Control implements IControl {
 			clickAktionenBeschwichtigen();
 		if(funktion.equals("nachHause"))
 			clickNachhause();
-		if(funktion.equals("razzia"))
+		if(funktion.equals("aktionrazzia"))
 			clickRazzia();
 		
 		//Buttons Aktionsfenster Spionage
@@ -120,7 +120,7 @@ public class Control implements IControl {
 		//Mousefollower abschalten bei bestimmten Buttons
 		if(funktion.equals("pause") || funktion.equals("close")
 				|| funktion.equals("beschwichtigen") || funktion.equals("spionage") ||
-				funktion.equals("nachHause") || funktion.equals("razzia")) {
+				funktion.equals("nachHause")) {
 			guilayer.getMousefollower().setVisible(false);
 		}
 		
@@ -344,6 +344,33 @@ public class Control implements IControl {
 			}
 			istVorhanden = false;
 		}
+		
+		
+		if(lastFunktioncode.equals("aktionrazzia")){
+			boolean festgenommen = false;
+			if (this.guilayer.getSimulation().getHouses().get(hausid-1).getUeberwachungsstatus() > 80){
+				for(int i=0;i<this.guilayer.getSimulation().get_people().size();i++){
+					//checken, wer in dem ausgewählten Haus wohnt
+					if(this.guilayer.getSimulation().get_people().get(i).get_haus_id() == hausid-1){
+						//checken, ob der Terrorist in dem ausgewählten Haus wohnt
+						if(this.guilayer.getSimulation().get_people().get(i) instanceof Terrorist){
+							festgenommen = true;
+						}
+					}
+				}
+				if(festgenommen){
+					this.guilayer.getHighscore().setFestgenommen(true);
+					//TODO:an Meldungsbox übergeben:"Herzlichen Glückwunsch, du hast den Terroristen festgenommen."
+				}
+				else{
+					//TODO: an Meldungsbox: "Schade! Das nächste Mal, solltest du mehr Beweise sammeln."
+				}
+				this.guilayer.stopGame();
+			}
+			else{
+				//TODO: return error Text "Das Hauptquartier fordert mehr Indizien, dass sich dem von Ihnen ausgewählten Haus der Terrorist befindet."
+			}
+		}
 //			
 //		if(lastFunktioncode.equals("parkSpionage"))
 			
@@ -520,7 +547,7 @@ public class Control implements IControl {
 		closeWindow("fensterhaus"); 
 		closeWindow("spionage");
 		closeWindow("beschwichtigen");
-		guilayer.getMousefollower().setIcon(new ImageIcon (Ressources.ingamebutton.getSubimage(0, (39)*12, 39, 39)));
+		guilayer.getMousefollower().setIcon(new ImageIcon (Ressources.ingamebutton.getSubimage(0, (39)*13, 39, 39)));
 		guilayer.getMousefollower().setVisible(true);
 	}
 

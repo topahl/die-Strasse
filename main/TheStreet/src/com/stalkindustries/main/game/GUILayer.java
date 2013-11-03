@@ -40,6 +40,7 @@ public class GUILayer extends JFrame implements MouseMotionListener {
 	private ArrayList<Mensch> humans = new ArrayList<Mensch>();
 	private int stepcounter = 0;
 	private Quiz quiz;
+	private Highscore highscore;
 
 	private JLabel anzeigeZeit = new JLabel();
 	private JLabel anzeigeTag = new JLabel();
@@ -76,6 +77,7 @@ public class GUILayer extends JFrame implements MouseMotionListener {
 		this.timer = new Timer(Ressources.GAMESPEED, new OSTimer(this));
 		this.timer.setCoalesce(false);
 		this.timer.start(); 
+		this.highscore = new Highscore(this.simulation,this.quiz,this.simulation.get_agent());
 	}
 
 
@@ -618,7 +620,7 @@ public class GUILayer extends JFrame implements MouseMotionListener {
 		buttonSliceY = buttonSize;
 
 		String[] buttonNamesAktionsleiste = { "beschwichtigen",
-				"spionage", "nachHause", "razzia" };
+				"spionage", "nachHause", "aktionrazzia" };
 		for (int i = 0; i < buttonNamesAktionsleiste.length; i++) {
 			button = new Button(this.control,
 					Ressources.ingamebutton.getSubimage(buttonSliceX, i * buttonSliceY, buttonSize, buttonSize),
@@ -627,7 +629,7 @@ public class GUILayer extends JFrame implements MouseMotionListener {
 					Ressources.ingamebutton.getSubimage(buttonSliceX + 3 * buttonSize, i * buttonSliceY, buttonSize, buttonSize),
 					buttonNamesAktionsleiste[i], Ressources.ZEROPOS.width + 12 + i * 2*Ressources.RASTERHEIGHT, Ressources.ZEROPOS.height + 642, this);
 			// Nach Hause und Razzia disabled
-			if (i > 1) {
+			if (i == 2) {
 				button.setEnabled(false);
 			}
 			this.baseLayer.add(button, javax.swing.JLayeredPane.DEFAULT_LAYER);
@@ -1349,9 +1351,13 @@ public class GUILayer extends JFrame implements MouseMotionListener {
 	
 	//Beschwerden Miri
 	public void callHighscore(){
-		Highscore highscore = new Highscore(this.simulation,this.quiz,this.simulation.get_agent());
-		highscore.calcHighscoreOfAgent();
-		highscore.exportIntoUser();
-		highscore.exportIntoScores();
+		this.highscore.calcHighscoreOfAgent();
+		this.highscore.exportIntoUser();
+		this.highscore.exportIntoScores();
+	}
+	
+	//Beschwerden Miri
+	public Highscore getHighscore(){
+		return this.highscore;
 	}
 }
