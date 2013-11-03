@@ -28,7 +28,7 @@ public class ControlMenu implements IControl{
 		if(funktion.equals("beenden"))
 			exitMenu();
 		if(funktion.equals("start"))
-			mainmenu.showLayer(Menu.LAYERLEVEL);
+			pressedStart();
 		if(funktion.equals("back"))
 			mainmenu.showLayer(Menu.LAYERMENU);
 		if(funktion.equals("profil"))
@@ -47,11 +47,18 @@ public class ControlMenu implements IControl{
 			
 	}
 	
+	private void pressedStart() {
+		if(mainmenu.getCurrentUser()!= "")
+			mainmenu.showLayer(Menu.LAYERLEVEL);
+		else
+			openProfil();
+		
+	}
+
 	private void changeCurrentUser() {
 		Object listselection = mainmenu.getBenutzerliste().getSelectedValue();
 		if(listselection != null){			
 			mainmenu.setCurrentUser(listselection.toString());
-			mainmenu.enableStart();
 			mainmenu.showLayer(Menu.LAYERMENU);
 		}
 		
@@ -91,7 +98,6 @@ public class ControlMenu implements IControl{
 				e.printStackTrace();
 			}
 	    	mainmenu.showLayer(Menu.LAYERMENU);
-	    	mainmenu.enableStart();
 	    	mainmenu.setCurrentUser(user);
 		}
 	}

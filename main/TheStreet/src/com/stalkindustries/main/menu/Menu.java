@@ -77,7 +77,7 @@ public class Menu extends JFrame implements MouseMotionListener{
 		this.addMouseMotionListener(this);
 		
 		 JLabel label = new JLabel();
-	     label.setText("Angelemdet als");
+	     label.setText("Angemeldet als");
 	     label.setFont(new Font("Corbel",Font.BOLD,20));
 	     label.setForeground(new Color(0x1f, 0x1f, 0x1f));
 	     label.setBounds(Ressources.ZEROPOS.width+900,Ressources.ZEROPOS.height+5,200,45);
@@ -130,7 +130,7 @@ public class Menu extends JFrame implements MouseMotionListener{
         showLayer(LAYERMENU);
         
         //disables bsi Benutzer ausgewählt ist
-        buttons.get("start").setEnabled(false);
+
         
         pack();
         
@@ -425,9 +425,6 @@ public class Menu extends JFrame implements MouseMotionListener{
     	return false;
     }
     
-    public void enableStart(){
-    	buttons.get("start").setEnabled(true);
-    }
     
     private void generateStandartSubPageElements(JLayeredPane subpage, String titel){
     	JLabel currentscreentext = new JLabel();
