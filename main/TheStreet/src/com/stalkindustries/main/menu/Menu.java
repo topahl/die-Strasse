@@ -419,7 +419,7 @@ public class Menu extends JFrame implements MouseMotionListener{
     				found++;
     		}
     	}
-    	if(found==7)
+    	if(found==7) 
     		return true;
     	System.err.println("levelfolder "+foldername+" is not valid!");
     	return false;
