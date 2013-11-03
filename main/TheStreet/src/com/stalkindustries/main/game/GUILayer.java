@@ -74,7 +74,7 @@ public class GUILayer extends JFrame implements MouseMotionListener {
 		this.setVisible(true);
 		this.timer = new Timer(Ressources.GAMESPEED, new OSTimer(this));
 		this.timer.setCoalesce(false);
-		this.timer.start();
+		this.timer.start(); 
 	}
 
 

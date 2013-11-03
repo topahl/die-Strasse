@@ -1186,7 +1186,7 @@ public class Simulation {
 //	}
 
 
-	public void setWieeeeschteAktion(boolean wieeeeschteAktion) {
+	public void setWieeeeschteAktion(boolean wieeeeschteAktion) { 
 		this.wieeeeschteAktion = wieeeeschteAktion;
 	}
 
