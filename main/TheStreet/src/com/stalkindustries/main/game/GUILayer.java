@@ -1165,6 +1165,10 @@ public class GUILayer extends JFrame implements MouseMotionListener {
 			}
 			buttons.get("beschwichtigen").setEnabled(false);
 			control.closeWindow("beschwichtigen");
+			if (!getSimulation().isWieeeeschteAktion()){
+				getMousefollower().setVisible(false);
+				getSimulation().get_agent().setMussWuseln("");
+			}
 		}
 		if (stunde == 6) {
 			if ((minute >= 0) && (minute <= 20)){

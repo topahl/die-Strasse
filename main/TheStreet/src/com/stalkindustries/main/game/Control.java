@@ -563,24 +563,28 @@ public class Control implements IControl {
 		guilayer.getMousefollower().setIcon(new ImageIcon (Ressources.ingamebutton.getSubimage(0, (39)*6, 39, 39)));
 		guilayer.getMousefollower().setVisible(true);
 		closeWindow("beschwichtigen");
+		guilayer.getSimulation().setWieeeeschteAktion(false);
 	}
 	
 	private void clickUnterhalten() {
 		guilayer.getMousefollower().setIcon(new ImageIcon (Ressources.ingamebutton.getSubimage(0, (39)*7, 39, 39)));
 		guilayer.getMousefollower().setVisible(true);
 		closeWindow("beschwichtigen");
+		guilayer.getSimulation().setWieeeeschteAktion(false);
 	}
 	
 	private void clickFlirten() {
 		guilayer.getMousefollower().setIcon(new ImageIcon (Ressources.ingamebutton.getSubimage(0, (39)*8, 39, 39)));
 		guilayer.getMousefollower().setVisible(true);
 		closeWindow("beschwichtigen");
+		guilayer.getSimulation().setWieeeeschteAktion(false);
 	}
 
 	private void clickHand() {
 		guilayer.getMousefollower().setIcon(new ImageIcon (Ressources.ingamebutton.getSubimage(0, (39)*9, 39, 39)));
 		guilayer.getMousefollower().setVisible(true);
 		closeWindow("beschwichtigen");
+		guilayer.getSimulation().setWieeeeschteAktion(false);
 	}
 
 	private void clickParkBeschwichtigen() {

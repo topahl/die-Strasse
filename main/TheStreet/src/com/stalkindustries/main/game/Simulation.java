@@ -1202,4 +1202,8 @@ public class Simulation {
 	public double getMisstrauenMax(){
 		return this.misstrauen_max;
 	}
+	
+	public boolean isWieeeeschteAktion(){
+		return this.wieeeeschteAktion;
+	}
 }
