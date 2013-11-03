@@ -90,7 +90,6 @@ public class Highscore {
 		       fw.append( System.getProperty("line.separator") ); 
 	    	 }
 	    	 fw.write(this.agent.getName()+": "+this.highscore);
-	    	 fw.append( System.getProperty("line.separator") );
 	    	 fw.append( System.getProperty("line.separator") ); 
 	    	 fw.close();
 	     }

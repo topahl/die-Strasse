@@ -138,31 +138,75 @@ public class Simulation {
 		int risiko;
 		double misstrauen = person.get_misstrauen();
 		
+		//Fehlschlagen der Aktionen ist unter anderem abhängig vom Misstrauensstatus
+				if(misstrauen >= 0){
+					zufall = (int)(Math.random()*(misstrauen/10));
+					if(zufall == 0)
+						zufall = 1;
+				}
+				//Personen sind weniger misstrauisch
+				else{
+					if(misstrauen/10 < 0){
+						zufall = (int)(Math.random()*(-(misstrauen/10)));
+						if(zufall == 0)
+							zufall = -1;
+					}
+//					else
+//						zufall = (int)(Math.random()*(misstrauen/10));
+				}
+		
 		//Risiko einer Beschwichtigenaktion steigt, je häufiger man sie ausführt
 		risiko = person.get_durchgefuehrteBeschwichtigungen(action_id);
-		
-		//Fehlschlagen der Aktionen ist zudem abhängig vom Misstrauensstatus
-		//Personen sind misstrauisch
-		if(misstrauen >= 0)
-			zufall = (int)(Math.random()*(risiko+misstrauen/10));
-		//Personen sind weniger misstrauisch
-		else{
-			if(risiko+misstrauen/10 < 0)
-				zufall = -(int)(Math.random()*(-(risiko+misstrauen/10)));
+		if(action_id == 0 || action_id == 2 || action_id == 3){	//Kuchen, Flirten, Helfen
+			if(risiko == 0){
+				if(zufall > 5)
+					zufall *= (-1);
+				else if(zufall >= 0)
+					zufall *= (-5);
+				else
+					zufall *= 6;
+			}
+			else{
+				if(zufall > 5)
+					zufall *= 6;
+				else if(zufall >= 0)
+					zufall *= 3;
+				else
+					zufall *= (-3);
+			}
+		}
+		else if(action_id == 1){	//bei Haus vorbeigehen, um zu reden
+			if(risiko <= 3)
+				if(zufall >= 0)
+					zufall *= (-3);
+				else
+					zufall *= 4;
 			else
-				zufall = (int)(Math.random()*(risiko+misstrauen/10));
+				if(zufall >= 0)
+					zufall *= 3;
+				else
+					zufall *= (-1); 
+		}
+		else{						//Im Park unterhalten
+				if(zufall >= 0)
+					zufall *= (-2);
+				else
+					zufall *= 3;
 		}
 		
-		//TODO Testen, ob die Werte passen
-		//wie sich das Misstrauen verändern soll
-		if(zufall < -5)
-			misstrauen -= 30;
-		else if(zufall < 0)
-			misstrauen -= 20;
-		else if(zufall < 5)
-			misstrauen -= 10;
-		else if(zufall > 8)
-			misstrauen += 20;
+		misstrauen += zufall;
+		
+		
+//		//TODO Testen, ob die Werte passen
+//		//wie sich das Misstrauen verändern soll
+//		if(zufall < -5)
+//			misstrauen -= 30;
+//		else if(zufall <= 0)
+//			misstrauen -= 20;
+//		else if(zufall < 5)
+//			misstrauen += 10;
+//		else if(zufall > 8)
+//			misstrauen += 20;
 		
 		
 		//sorgt dafür, dass sich das Misstrauen zwischen -100 und 100 bewegt

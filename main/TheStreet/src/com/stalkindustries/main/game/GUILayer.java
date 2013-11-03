@@ -214,7 +214,7 @@ public class GUILayer extends JFrame implements MouseMotionListener {
 		this.baseLayer.add(gameover, javax.swing.JLayeredPane.DEFAULT_LAYER);
 		
 		//Newsticker
-				this.newsticker.setBounds(Ressources.ZEROPOS.width +45, Ressources.ZEROPOS.height, Ressources.MAPWIDTH, 50);
+				this.newsticker.setBounds(Ressources.ZEROPOS.width +45, Ressources.ZEROPOS.height, Ressources.MAPWIDTH-120, 50);
 				this.newsticker.setFont(new Font("Corbel", Font.BOLD, 16));
 				this.newsticker.setForeground(new java.awt.Color(249, 249, 249));
 				this.newsticker.setVisible(true);
@@ -1219,6 +1219,16 @@ public class GUILayer extends JFrame implements MouseMotionListener {
 		if (getSimulation().get_agent().getCurrentMove()=='n' && !getSimulation().get_agent().getMussWuseln().isEmpty()){
 			getSimulation().doSomethingAfterAgentAktion();
 		}
+		
+		//durchgeführte Beschwichtigungen um 0Uhr zurücksetzen
+		if(this.simulation.getSpiel_stunde() == 0 && this.simulation.getSpiel_minute() == 0){
+			for(int i=0;i<this.simulation.get_people().size();i++){
+				for(int j=0;j<Ressources.NUMBERBESCHWICHTIGENACTIONS;j++){
+					this.simulation.get_people().get(i).set_durchgefuehrteBeschwichtigungen(j, 0);
+				}
+			}
+		}
+		
 		
 		this.stepcounter++;
 	}
