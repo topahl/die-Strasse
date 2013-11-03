@@ -31,19 +31,35 @@ public class Simulation {
 		for(int i=0;i<this.people.size();i++)
 			for(int j=0;j<this.people.size();j++)
 				this.beziehungsmatrix[i][j] = 0;
-			
+		
+		//asymmetrisch
 		for(int i=0;i<this.people.size();i++){
-			for(int j=i+1;j<this.people.size();j++){
-				tmp = (int)(Math.random()*(10))+1;
-				this.beziehungsmatrix[i][j] = tmp;
-				this.beziehungsmatrix[j][i] = tmp;
-				if(this.people.get(i).get_haus_id() == this.people.get(j).get_haus_id()){ //Person in einem Haushalt sind besser miteinander befreundet
-					tmp = (10-tmp)/2;
-					this.beziehungsmatrix[i][j] += tmp;
-					this.beziehungsmatrix[j][i] += tmp;
+			for(int j=0;j<this.people.size();j++){
+				if(i!=j){
+					tmp = (int)(Math.random()*(10))+1;
+					this.beziehungsmatrix[i][j] = tmp;
+					if(this.people.get(i).get_haus_id() == this.people.get(j).get_haus_id()){ //Person in einem Haushalt sind besser miteinander befreundet
+						tmp = (10-tmp)/2;
+						this.beziehungsmatrix[i][j] += tmp;
+						this.beziehungsmatrix[j][i] += tmp;
+					}
 				}
 			}
 		}
+		
+//		//symmetrische Matrix
+//		for(int i=0;i<this.people.size();i++){
+//			for(int j=i+1;j<this.people.size();j++){
+//				tmp = (int)(Math.random()*(10))+1;
+//				this.beziehungsmatrix[i][j] = tmp;
+//				this.beziehungsmatrix[j][i] = tmp;
+//				if(this.people.get(i).get_haus_id() == this.people.get(j).get_haus_id()){ //Person in einem Haushalt sind besser miteinander befreundet
+//					tmp = (10-tmp)/2;
+//					this.beziehungsmatrix[i][j] += tmp;
+//					this.beziehungsmatrix[j][i] += tmp;
+//				}
+//			}
+//		}
 	}
 	
 	

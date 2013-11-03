@@ -1189,7 +1189,7 @@ public class GUILayer extends JFrame implements MouseMotionListener {
 		}
 
 		//Misstrauen berechnen alle 25 Steps
-		if (this.stepcounter % 25 == 0) {
+		if (this.stepcounter % 100 == 0) {
 			this.simulation.calculate_misstrauen();
 			this.simulation.calc_misstrauen_in_street();
 			for (int i = 0; i < this.humans.size(); i++) {
