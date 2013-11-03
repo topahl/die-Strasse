@@ -20,7 +20,7 @@ import com.stalkindustries.main.IControl;
  */
 public class Control implements IControl {
 	
-	String lastFunktioncode = "";
+	private String lastFunktioncode = "";
 	//Laden des Spielfenster-Objektes, um auf Funktionen davon zugreifen zu können
 	private GUILayer guilayer;
 	private Quiz quiz;
@@ -405,7 +405,9 @@ public class Control implements IControl {
 		if (guilayer.getButtonsMap().get("beschwichtigen").isEnabled()){
 			guilayer.getButtonsMap().get("beschwichtigen").setEnabled(false);
 		} else {
-			guilayer.getButtonsMap().get("beschwichtigen").setEnabled(true);
+			if (guilayer.getSimulation().getSpiel_stunde()<22 && guilayer.getSimulation().getSpiel_stunde()>6){
+				guilayer.getButtonsMap().get("beschwichtigen").setEnabled(true);
+			}
 		}
 		if (guilayer.getButtonsMap().get("spionage").isEnabled()){
 			guilayer.getButtonsMap().get("spionage").setEnabled(false);
@@ -563,24 +565,28 @@ public class Control implements IControl {
 		guilayer.getMousefollower().setIcon(new ImageIcon (Ressources.ingamebutton.getSubimage(0, (39)*6, 39, 39)));
 		guilayer.getMousefollower().setVisible(true);
 		closeWindow("beschwichtigen");
+		guilayer.getSimulation().setWieeeeschteAktion(false);
 	}
 	
 	private void clickUnterhalten() {
 		guilayer.getMousefollower().setIcon(new ImageIcon (Ressources.ingamebutton.getSubimage(0, (39)*7, 39, 39)));
 		guilayer.getMousefollower().setVisible(true);
 		closeWindow("beschwichtigen");
+		guilayer.getSimulation().setWieeeeschteAktion(false);
 	}
 	
 	private void clickFlirten() {
 		guilayer.getMousefollower().setIcon(new ImageIcon (Ressources.ingamebutton.getSubimage(0, (39)*8, 39, 39)));
 		guilayer.getMousefollower().setVisible(true);
 		closeWindow("beschwichtigen");
+		guilayer.getSimulation().setWieeeeschteAktion(false);
 	}
 
 	private void clickHand() {
 		guilayer.getMousefollower().setIcon(new ImageIcon (Ressources.ingamebutton.getSubimage(0, (39)*9, 39, 39)));
 		guilayer.getMousefollower().setVisible(true);
 		closeWindow("beschwichtigen");
+		guilayer.getSimulation().setWieeeeschteAktion(false);
 	}
 
 	private void clickParkBeschwichtigen() {
@@ -657,5 +663,12 @@ public class Control implements IControl {
 //	public void setHouseId(int hous_id){
 //		this.house_id = hous_id;
 //	}
-
+	
+	public String getLastFunktioncode(){
+		return this.lastFunktioncode;
+	}
+	
+	public void setLastFunktioncode(String lastFunktioncode){
+		this.lastFunktioncode = lastFunktioncode;
+	}
 }

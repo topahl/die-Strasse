@@ -75,7 +75,7 @@ public class GUILayer extends JFrame implements MouseMotionListener {
 		this.setVisible(true);
 		this.timer = new Timer(Ressources.GAMESPEED, new OSTimer(this));
 		this.timer.setCoalesce(false);
-		this.timer.start();
+		this.timer.start(); 
 	}
 
 
@@ -1119,6 +1119,7 @@ public class GUILayer extends JFrame implements MouseMotionListener {
 		//Liveticker
 		//zeitpunkt = (int)(Math.random()*1000);
 		boolean b = false;
+		int zufall = (int)(Math.random()*5);
 		if(this.stepcounter%400 == 0){
 			//alle Personen auf Events überprüfen
 			for(int i=0;i<this.humans.size()-1;i++){	
@@ -1127,11 +1128,13 @@ public class GUILayer extends JFrame implements MouseMotionListener {
 					if(((Person)this.humans.get(i)).getEvent().size() == 3){
 						//wenn der Überwachungswert des Hauses hoch genug ist, um das Event zu entdecken
 						if(this.simulation.getHouses().get(this.humans.get(i).get_haus_id()).getUeberwachungsstatus() >= Integer.valueOf(((Person)this.humans.get(i)).getEvent().get(2))){
-							b = true;
-							this.newsticker.setForeground(new java.awt.Color(249, 50, 50));
-							this.newsticker.setText(((Person)this.humans.get(i)).getEvent().get(0));
-							((Person)this.humans.get(i)).addStringToEvent("used");
-							break;
+							if(zufall == 1){
+								b = true;
+								this.newsticker.setForeground(new java.awt.Color(249, 50, 50));
+								this.newsticker.setText(((Person)this.humans.get(i)).getEvent().get(0));
+								((Person)this.humans.get(i)).addStringToEvent("used");
+								break;
+							}
 						}
 					}
 				}
@@ -1168,6 +1171,11 @@ public class GUILayer extends JFrame implements MouseMotionListener {
 			}
 			buttons.get("beschwichtigen").setEnabled(false);
 			control.closeWindow("beschwichtigen");
+			if (!getSimulation().isWieeeeschteAktion()){
+				getMousefollower().setVisible(false);
+				getSimulation().get_agent().setMussWuseln("");
+				control.setLastFunktioncode("");
+			}
 		}
 		if (stunde == 6) {
 			if ((minute >= 0) && (minute <= 20)){

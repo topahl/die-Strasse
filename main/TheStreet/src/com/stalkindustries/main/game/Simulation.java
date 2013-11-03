@@ -1186,7 +1186,7 @@ public class Simulation {
 //	}
 
 
-	public void setWieeeeschteAktion(boolean wieeeeschteAktion) {
+	public void setWieeeeschteAktion(boolean wieeeeschteAktion) { 
 		this.wieeeeschteAktion = wieeeeschteAktion;
 	}
 
@@ -1201,5 +1201,9 @@ public class Simulation {
 	
 	public double getMisstrauenMax(){
 		return this.misstrauen_max;
+	}
+	
+	public boolean isWieeeeschteAktion(){
+		return this.wieeeeschteAktion;
 	}
 }
