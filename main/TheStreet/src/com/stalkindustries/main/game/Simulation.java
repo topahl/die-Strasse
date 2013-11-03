@@ -1169,7 +1169,7 @@ public class Simulation {
 
 	//Support Tiki
 	public boolean calc_gamoeover(){
-		if (calc_misstrauen_in_street()>=90.0){
+		if (calc_misstrauen_in_street()>=21.0){
 			return true;
 		}
 		for (int i = 0; i < this.people.size(); i++){

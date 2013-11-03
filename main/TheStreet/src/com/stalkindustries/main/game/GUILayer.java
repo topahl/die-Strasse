@@ -1083,7 +1083,7 @@ public class GUILayer extends JFrame implements MouseMotionListener {
 		this.gameover.setVisible(true);	//GameOver anzeigen
 		this.control.clickPause();
 		this.buttons.get("pause").setEnabled(false);
-		this.callHighscore();
+		//this.callHighscore();
 	}
 	
 	

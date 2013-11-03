@@ -475,6 +475,7 @@ public class Control implements IControl {
 	 * Spiel beenden
 	 */
 	private void clickExit() {
+		this.guilayer.callHighscore();
 		guilayer.endGame();
 	}
 	
