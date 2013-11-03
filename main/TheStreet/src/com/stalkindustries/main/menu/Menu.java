@@ -18,6 +18,7 @@ import javax.imageio.ImageIO;
 import javax.swing.AbstractListModel;
 import javax.swing.BorderFactory;
 import javax.swing.DefaultListModel;
+import javax.swing.GroupLayout.Alignment;
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -28,6 +29,7 @@ import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
 import javax.swing.ListSelectionModel;
+import javax.swing.SwingConstants;
 
 import com.stalkindustries.main.Button;
 import com.stalkindustries.main.game.Ressources;
@@ -44,6 +46,7 @@ public class Menu extends JFrame implements MouseMotionListener{
 	
 	private JTextField username;
 	private JList benutzerliste; 
+	private JLabel currentUser;
 	
 	public static final int LAYERMENU = 1;
 	public static final int LAYERLEVEL = 2;
@@ -61,16 +64,41 @@ public class Menu extends JFrame implements MouseMotionListener{
 
     }
 
+	public void setCurrentUser(String user){
+		currentUser.setText(user);
+	}
+
+	public void setCurrentUser(JLabel currentUser) {
+		this.currentUser = currentUser;
+	}
+
 	private void initComponents(){
 		window = new JLayeredPane();
 		this.addMouseMotionListener(this);
 		
+		 JLabel label = new JLabel();
+	     label.setText("Angelemdet als");
+	     label.setFont(new Font("Corbel",Font.BOLD,20));
+	     label.setForeground(new Color(0x1f, 0x1f, 0x1f));
+	     label.setBounds(Ressources.ZEROPOS.width+900,Ressources.ZEROPOS.height+5,200,45);
+	     window.add(label, javax.swing.JLayeredPane.DEFAULT_LAYER);
+
+	     currentUser= new JLabel();
+	     currentUser.setText("");
+	     currentUser.setFont(new Font("Corbel",Font.BOLD,30));
+	     currentUser.setForeground(new Color(0x1f, 0x1f, 0x1f));
+	     currentUser.setHorizontalAlignment(SwingConstants.RIGHT);
+	     currentUser.setBounds(Ressources.ZEROPOS.width+840,Ressources.ZEROPOS.height+30,200,45);
+	     window.add(currentUser, javax.swing.JLayeredPane.DEFAULT_LAYER);
+	     
 		       
 		setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         setResizable(false);
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
+        
+       
         
         initProfilMenu();
         
@@ -101,6 +129,8 @@ public class Menu extends JFrame implements MouseMotionListener{
 		
         showLayer(LAYERMENU);
         
+        //disables bsi Benutzer ausgewählt ist
+        buttons.get("start").setEnabled(false);
         
         pack();
         
@@ -395,6 +425,9 @@ public class Menu extends JFrame implements MouseMotionListener{
     	return false;
     }
     
+    public void enableStart(){
+    	buttons.get("start").setEnabled(true);
+    }
     
     private void generateStandartSubPageElements(JLayeredPane subpage, String titel){
     	JLabel currentscreentext = new JLabel();
@@ -448,5 +481,8 @@ public class Menu extends JFrame implements MouseMotionListener{
 		return benutzerliste;
 	}
 	
+	public String getCurrentUser(){
+		return currentUser.getText();
+	}
     
 }

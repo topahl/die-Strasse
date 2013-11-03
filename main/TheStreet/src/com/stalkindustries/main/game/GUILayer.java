@@ -59,8 +59,9 @@ public class GUILayer extends JFrame implements MouseMotionListener {
 	
 	/**
 	 * Konstruktor - steuert die Initialisierung aller GUI-Elemente
+	 * @param agentname 
 	 */
-	public GUILayer(String levelname) {
+	public GUILayer(String levelname, String agentname) {
 		
 		Mensch.loadImages(levelname);
 		Ressources.loadLevelInfomration(levelname);
@@ -69,7 +70,7 @@ public class GUILayer extends JFrame implements MouseMotionListener {
 		
 		this.quiz = new Quiz(this);
 		this.control = new Control(this,this.quiz);
-		this.initComponents(levelname);
+		this.initComponents(levelname, agentname);
 		this.simulation.initialize_beziehungsmatrix();
 		this.setVisible(true);
 		this.timer = new Timer(Ressources.GAMESPEED, new OSTimer(this));
@@ -93,8 +94,9 @@ public class GUILayer extends JFrame implements MouseMotionListener {
 
 	/**
 	 * Ruft alle Submethoden zur Initialisierung des Spieles auf
+	 * @param agentname 
 	 */
-	private void initComponents(String levelname) {
+	private void initComponents(String levelname, String agentname) {
 		
 		//Einstellungen zum Basisfenster
 		this.baseLayer = new JLayeredPane();
@@ -119,7 +121,7 @@ public class GUILayer extends JFrame implements MouseMotionListener {
 		this.initSpielanzeigen();
 
 		//Menschen erzeugen und in Häuser beamen
-		this.initHumans();
+		this.initHumans(agentname);
 
 		//Levelkarte laden
 		this.initMap(levelname);
@@ -742,8 +744,9 @@ public class GUILayer extends JFrame implements MouseMotionListener {
 	/**
 	 * Generieren der Menschen und Teleport in die Häuser
 	 * @author Miri
+	 * @param agentname 
 	 */
-	private void initHumans() {
+	private void initHumans(String agentname) {
 		// jeweils dem Agenten und dem Terroristen eine Hausnummer generieren
 		// und dafür sorgen, dass sie ungleich sind
 		int house_of_terrorist = (int) (Math.random() * Ressources.NUMBERHOUSES);
@@ -904,7 +907,7 @@ public class GUILayer extends JFrame implements MouseMotionListener {
 		// Agent hinzufügen
 		spawnPersonX[0] = spawnHausX[agent_house_nr];
 		spawnPersonY[0] = spawnHausY[agent_house_nr];
-		mensch = new Agent(agent_house_nr,"James_Bond");
+		mensch = new Agent(agent_house_nr,agentname);
 		this.humans.add(mensch);
 		this.baseLayer.add(mensch, javax.swing.JLayeredPane.DEFAULT_LAYER);
 		this.humans.get(mensch_cnt).teleport(spawnPersonX[0], spawnPersonY[0]);
