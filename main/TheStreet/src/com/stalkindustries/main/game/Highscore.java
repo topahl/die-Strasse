@@ -33,6 +33,12 @@ public class Highscore {
 		this.spielzeit = min + h*60 + (tag-1)*24*60 - 420;//-420, weil wir um 7 Uhr morgens anfangen
 
 		this.misstrauen_max = this.simulation.getMisstrauenMax();
+		
+		//Events
+		for(int i=0;i<this.simulation.get_people().size();i++){
+			if(this.simulation.get_people().get(i).getEvent().size() == 4)
+				this.events++;
+		}
 	}
 	
 	//Beschwerden Miri
@@ -57,7 +63,7 @@ public class Highscore {
 		
 		//TODO: eventsgesamt/eventsverteilt
 		//this.highscore = misstrauen + this.wissenswert + zeit + this.events;
-		this.highscore = this.wissenswert - this.misstrauen_max - zeit/8640 + this.events;
+		this.highscore = this.wissenswert - this.misstrauen_max - zeit/8640 + this.events/this.simulation.get_people().size();
 		if(this.highscore < 0)
 			this.highscore = 0;
 	}
@@ -122,7 +128,7 @@ public class Highscore {
 	    	 fw.append( System.getProperty("line.separator") );
 	    	 fw.write("Wissenswert: "+this.wissenswert);
 	    	 fw.append( System.getProperty("line.separator") );
-	    	 fw.write("Anzahl entdeckter Events: "+this.events);
+	    	 fw.write("Anzahl entdeckter Events: "+this.events+" von "+this.simulation.get_people().size());
 	    	 fw.append( System.getProperty("line.separator") ); 
 	    	 fw.append( System.getProperty("line.separator") ); 
 	    	 fw.close();
