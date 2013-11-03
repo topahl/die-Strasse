@@ -26,20 +26,6 @@ public class Highscore {
 		this.simulation = simulation;		//gebraucht für Misstrauen, Spielzeit und Überwachungsstatus
 		this.quiz = quiz;					//gebraucht für Beantwortungen der Fragen
 		this.agent = agent;
-		
-		//set Spielzeit
-		int min = this.simulation.getSpiel_minute();
-		int h = this.simulation.getSpiel_stunde();
-		int tag = this.simulation.getSpiel_tag();
-		this.spielzeit = min + h*60 + (tag-1)*24*60 - 420;//-420, weil wir um 7 Uhr morgens anfangen
-
-		this.misstrauen_max = this.simulation.getMisstrauenMax();
-		
-		//Events
-		for(int i=0;i<this.simulation.get_people().size();i++){
-			if(this.simulation.get_people().get(i).getEvent().size() == 4)
-				this.events++;
-		}
 	}
 	
 	//Beschwerden Miri
@@ -47,6 +33,21 @@ public class Highscore {
 		double zeit = 0;
 		if(this.spielzeit != 0)
 			zeit = 10000000/this.spielzeit;
+		
+		//set Spielzeit
+				int min = this.simulation.getSpiel_minute();
+				int h = this.simulation.getSpiel_stunde();
+				int tag = this.simulation.getSpiel_tag();
+				this.spielzeit = min + h*60 + (tag-1)*24*60 - 420;//-420, weil wir um 7 Uhr morgens anfangen
+		
+		//Misstrauen Max
+		this.misstrauen_max = this.simulation.getMisstrauenMax();
+		
+		//Events
+				for(int i=0;i<this.simulation.get_people().size();i++){
+					if(this.simulation.get_people().get(i).getEvent().size() == 4)
+						this.events++;
+				}
 		
 		//calc Wissenswert
 		double tmp = 0;
@@ -115,7 +116,13 @@ public class Highscore {
 	//Beschwerden Miri
 	public void exportIntoUser(){
 		ArrayList<String> file = this.getFile("res\\user\\"+this.agent.getName()+".usr");
-		  
+		
+		String festnahme="";
+		if(this.festgenommen)
+			festnahme = "ja";
+		else
+			festnahme = "nein";
+		
 	     Writer fw = null;
 	     try
 	     {
@@ -125,6 +132,8 @@ public class Highscore {
 		       fw.append( System.getProperty("line.separator") ); 
 	    	 }
 	    	 fw.write("Highscore: "+this.highscore);
+	    	 fw.append( System.getProperty("line.separator") );
+	    	 fw.write("Terroristen festgenommen: "+festnahme);
 	    	 fw.append( System.getProperty("line.separator") );
 	    	 fw.write("Maximales Misstrauen: "+this.misstrauen_max);
 	    	 fw.append( System.getProperty("line.separator") );
