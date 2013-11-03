@@ -1105,6 +1105,7 @@ public class GUILayer extends JFrame implements MouseMotionListener {
 		int zeitpunkt = (int) (Math.random() * 1000);
 		if(this.stepcounter % (3000 + zeitpunkt) == 0) {
 			quiz.starteQuiz();
+			getMousefollower().setVisible(false);
 		}
 		
 		if(stepcounter%2==0 && quiz.isRunning()){
