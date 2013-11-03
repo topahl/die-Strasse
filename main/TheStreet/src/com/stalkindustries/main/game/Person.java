@@ -3,8 +3,7 @@ package com.stalkindustries.main.game;
 import java.awt.Color;
 import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
-
-import javax.imageio.ImageIO;
+import java.util.ArrayList;
 
 public abstract class Person extends Mensch {
 	private int id;
@@ -14,6 +13,7 @@ public abstract class Person extends Mensch {
 	protected int geschlecht; //1=male, 2=female
 	private int zeitverzogerung; // in Minuten
 	private int durchgefuehrteBeschwichtigungen[] = new int[Ressources.NUMBERBESCHWICHTIGENACTIONS];//zum Mitzählen, weil 20 Kuchen am Tag, doch wieder misstrauisch machen
+	protected ArrayList<String> event;
 	
 	static private int last_id=-1;
 		
@@ -38,7 +38,7 @@ public abstract class Person extends Mensch {
 		g2d.drawImage(temp_sprite, 0, 0,null);
 	}
 	
-	public Person(int house_id){
+	public Person(int house_id, ArrayList<String> event){
 		last_id++;
 		
 		this.id = last_id;
@@ -56,6 +56,7 @@ public abstract class Person extends Mensch {
 		this.geschlecht = (int)(Math.random()*(2)+1);
 		this.zeitverzogerung = (int)(Math.random()*(59))+1;
 		this.haus_id = house_id;
+		this.event = event;
 				
 
 		//Person einen Namen geben
@@ -93,6 +94,14 @@ public abstract class Person extends Mensch {
 	
 	public int getGeschlecht(){
 		return this.geschlecht;
+	}
+	
+	public void addStringToEvent(String s){
+		this.event.add(s);
+	}
+	
+	public ArrayList<String> getEvent(){
+		return this.event;
 	}
 
 }

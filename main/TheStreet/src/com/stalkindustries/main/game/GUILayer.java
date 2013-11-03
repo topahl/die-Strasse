@@ -821,9 +821,8 @@ public class GUILayer extends JFrame implements MouseMotionListener {
 					
 					//Evil Event
 					int id = (int)(Math.random()*Ressources.getEvilEvents().size());
-					String event = this.includeTerroristHaus(Ressources.getEvilEvents().get(id).get(0),i);
-					mensch = new Terrorist(i,event);	
-					System.out.println(event);	//TODO: System.out.... entfernen
+					mensch = new Terrorist(i,this.includeHaus(Ressources.getEvilEvents().get(id),i));	
+					System.out.println(mensch_cnt+". "+this.includeHaus(Ressources.getEvilEvents().get(id),i).get(0));	//TODO: System.out.... entfernen
 					
 					this.humans.add(mensch);
 					this.baseLayer.add(mensch,
@@ -840,7 +839,8 @@ public class GUILayer extends JFrame implements MouseMotionListener {
 
 					// übrige Erwachsene setzen
 					for (int j = 0; j < number_of_adults - 1; j++) {
-						mensch = new Erwachsene(i);
+						mensch = new Erwachsene(i,this.includeHaus(Ressources.getNormalEvents().get(mensch_cnt),i));
+						System.out.println(mensch_cnt+". "+this.includeHaus(Ressources.getNormalEvents().get(mensch_cnt),i).get(0));
 						this.humans.add(mensch);
 						this.baseLayer.add(mensch,
 								javax.swing.JLayeredPane.DEFAULT_LAYER);
@@ -858,7 +858,8 @@ public class GUILayer extends JFrame implements MouseMotionListener {
 					// in jedem Haushalt muss mindestens ein Erwachsener leben
 					number_of_adults = (int) (Math.random() * people_per_house) + 1;
 					for (int j = 0; j < number_of_adults; j++) {
-						mensch = new Erwachsene(i);
+						mensch = new Erwachsene(i,this.includeHaus(Ressources.getNormalEvents().get(mensch_cnt),i));
+						System.out.println(mensch_cnt+". "+this.includeHaus(Ressources.getNormalEvents().get(mensch_cnt),i).get(0));
 						this.humans.add(mensch);
 						this.baseLayer.add(mensch,
 								javax.swing.JLayeredPane.DEFAULT_LAYER);
@@ -876,7 +877,8 @@ public class GUILayer extends JFrame implements MouseMotionListener {
 				// Kinder berechnen
 				number_of_children = people_per_house - number_of_adults;
 				for (int j = 0; j < number_of_children; j++) {
-					mensch = new Kinder(i);
+					mensch = new Kinder(i,this.includeHaus(Ressources.getNormalEvents().get(mensch_cnt),i));
+					System.out.println(mensch_cnt+". "+this.includeHaus(Ressources.getNormalEvents().get(mensch_cnt),i).get(0));
 					this.humans.add(mensch);
 					this.baseLayer.add(mensch,
 							javax.swing.JLayeredPane.DEFAULT_LAYER);
@@ -1007,11 +1009,12 @@ public class GUILayer extends JFrame implements MouseMotionListener {
 	}
 	
 	//Beschwerden Miri
-	public String includeTerroristHaus(String input, int i){
+	public ArrayList<String> includeHaus(ArrayList<String> input, int i){
 		String hausnr = String.valueOf(i+1);
 		String output = "";
-		output = input.replace("%",hausnr);
-		return output;
+		output = input.get(0).replace("%",hausnr);
+		input.set(0,output);
+		return input;
 	}
 	
 	//Beschwerden Miri
@@ -1066,8 +1069,9 @@ public class GUILayer extends JFrame implements MouseMotionListener {
 	//Beschwerden Miri
 	public String getLiveTickerGags(){
 		String text;
-		ArrayList<ArrayList<String>> gags = Ressources.randomizeGags();
-		text = gags.get(0).get(0);
+		int zufall = (int)(Math.random()*Ressources.getLiveTickerGags().size());
+		ArrayList<String> gag = Ressources.getLiveTickerGags().get(zufall);
+		text = gag.get(0);
 		return includeNames(text);
 	}
 	
@@ -1101,16 +1105,38 @@ public class GUILayer extends JFrame implements MouseMotionListener {
 		int zeitpunkt = (int) (Math.random() * 1000);
 		if(this.stepcounter % (3000 + zeitpunkt) == 0) {
 			quiz.starteQuiz();
+			getMousefollower().setVisible(false);
 		}
 		
 		if(stepcounter%2==0 && quiz.isRunning()){
 			quiz.step();
 		}
 		
-		//livetickergags
+		//Beschwerden Miri
+		//Liveticker
 		//zeitpunkt = (int)(Math.random()*1000);
-		if(this.stepcounter%500 == 0){
-			this.newsticker.setText(this.getLiveTickerGags());
+		boolean b = false;
+		if(this.stepcounter%400 == 0){
+			//alle Personen auf Events überprüfen
+			for(int i=0;i<this.humans.size()-1;i++){	
+				if(this.humans.get(i) instanceof Person){
+					//wenn das Event noch nicht aufgetaucht ist
+					if(((Person)this.humans.get(i)).getEvent().size() == 3){
+						//wenn der Überwachungswert des Hauses hoch genug ist, um das Event zu entdecken
+						if(this.simulation.getHouses().get(this.humans.get(i).get_haus_id()).getUeberwachungsstatus() >= Integer.valueOf(((Person)this.humans.get(i)).getEvent().get(2))){
+							b = true;
+							this.newsticker.setForeground(new java.awt.Color(249, 50, 50));
+							this.newsticker.setText(((Person)this.humans.get(i)).getEvent().get(0));
+							((Person)this.humans.get(i)).addStringToEvent("used");
+							break;
+						}
+					}
+				}
+			}
+			if(!b){
+				this.newsticker.setForeground(new java.awt.Color(249, 249, 249));
+				this.newsticker.setText(this.getLiveTickerGags());
+			}
 		}
 		
 		//Unwohlsein durch installierte Überwachungsmodule

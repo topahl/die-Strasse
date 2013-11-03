@@ -2,12 +2,13 @@ package com.stalkindustries.main.game;
 
 import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
+import java.util.ArrayList;
 
 public class Erwachsene extends Person{
 	
 	private boolean hat_arbeit;	
-	public Erwachsene(int house_id){
-		super(house_id);
+	public Erwachsene(int house_id,ArrayList<String> event){
+		super(house_id,event);
 		this.haus_id=house_id;
 		
 		//hat Arbeit?

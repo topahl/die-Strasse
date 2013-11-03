@@ -3,11 +3,12 @@ package com.stalkindustries.main.game;
 
 import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
+import java.util.ArrayList;
 
 public class Kinder extends Person {
 	
-	public Kinder(int house_id){
-		super(house_id);
+	public Kinder(int house_id, ArrayList<String> event){
+		super(house_id,event);
 		this.haus_id=house_id;
 		setSize(Ressources.RASTERHEIGHT, Ressources.RASTERHEIGHT);			//Sven weis jetzt wie das funktioniert
 		aussehen = new int[3];

@@ -43,7 +43,7 @@ public class Menu extends JFrame implements MouseMotionListener{
 	
 	
 	private JTextField username;
-	private JList benutzerliste;
+	private JList benutzerliste; 
 	
 	public static final int LAYERMENU = 1;
 	public static final int LAYERLEVEL = 2;

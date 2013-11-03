@@ -120,8 +120,8 @@ public class Simulation {
 	public void calcMisstrauenAfterBeschwichtigenInPark(){
 		for(int i=0;i<this.people.size();i++){
 			//Checken, ob sich noch jemand im Park befindet
-			if(this.people.get(i).get_location_id() == 'P'){
-				this.people.get(i).set_misstrauen(this.people.get(i).get_misstrauen()-6); //TODO: den Wert testen ... eventuell erhöhen
+			if(this.people.get(i).get_location_id() == 'P'){							//Ich (Tiki) hab den wert auf 1 gesetzt, da es sonst zu schnell war
+				this.people.get(i).set_misstrauen(this.people.get(i).get_misstrauen()-1); //TODO: den Wert testen ... eventuell erhöhen
 			}
 			
 			//sorgt dafür, dass sich das Misstrauen zwischen -100 und 100 bewegt
@@ -952,7 +952,7 @@ public class Simulation {
 	public void doSomethingAfterAgentAktion(){
 		int personId =0;
 		
-		if (!wieeeeschteAktion && get_agent().getMussWuseln() != "Park"){ 
+		if (!wieeeeschteAktion && get_agent().getMussWuseln() != "Park" && get_agent().getMussWuseln() != "Park+"){ 
 			if (get_agent().getMussWuseln().charAt(1) <='9' && get_agent().getMussWuseln().charAt(1)>='0'){
 				personId = Integer.parseInt(get_agent().getMussWuseln().substring(0,2));
 			} else{
@@ -993,14 +993,13 @@ public class Simulation {
 		}
 		
 		
-//		if(get_agent().getMussWuseln().equals("Wanze+") && get_agent().getCurrentMove()=='n'){
-//			getHouses().get((int)(get_agent().get_location_id()-48-1)).getUeberwachungsmodule().add("Wanze");
-//			getHouses().get((int)(get_agent().get_location_id()-48-1)).setUeberwachungsWert((float)(Math.random()*20+1)+20,0);
-//			get_agent().setMussWuseln("");
+//		if(get_agent().getMussWuseln().equals("Park+") && get_agent().getCurrentMove()=='n'){
+//			berechne_weg(null, agent, 'P');
+//			calcMisstrauenAfterBeschwichtigenInPark();
 //		}
 		if(get_agent().getMussWuseln().equals("Park")){
 			berechne_weg(null, agent, 'P');
-			//get_agent().setMussWuseln("Wanze+");
+			calcMisstrauenAfterBeschwichtigenInPark();
 		} 		
 		
 		
