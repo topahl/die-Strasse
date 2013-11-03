@@ -1124,14 +1124,18 @@ public class GUILayer extends JFrame implements MouseMotionListener {
 						//wenn der Überwachungswert des Hauses hoch genug ist, um das Event zu entdecken
 						if(this.simulation.getHouses().get(this.humans.get(i).get_haus_id()).getUeberwachungsstatus() >= Integer.valueOf(((Person)this.humans.get(i)).getEvent().get(2))){
 							b = true;
+							this.newsticker.setForeground(new java.awt.Color(249, 50, 50));
 							this.newsticker.setText(((Person)this.humans.get(i)).getEvent().get(0));
+							((Person)this.humans.get(i)).addStringToEvent("used");
 							break;
 						}
 					}
 				}
 			}
-			if(!b)
+			if(!b){
+				this.newsticker.setForeground(new java.awt.Color(249, 249, 249));
 				this.newsticker.setText(this.getLiveTickerGags());
+			}
 		}
 		
 		//Unwohlsein durch installierte Überwachungsmodule
