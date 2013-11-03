@@ -56,7 +56,6 @@ public class GUILayer extends JFrame implements MouseMotionListener {
 	private JLabel dialogÜberschrift = new JLabel(); //Überschrift, Beschreibungstext
 	private JTextArea dialogText = new JTextArea();
 	private JLabel newsticker = new JLabel();
-	private JLabel gameover = new JLabel();
 	
 	
 	
@@ -209,13 +208,6 @@ public class GUILayer extends JFrame implements MouseMotionListener {
 		informationsbalken[0].setBounds(Ressources.ZEROPOS.width+733, Ressources.ZEROPOS.height+646, 166, 19);
 		baseLayer.add(informationsbalken[0], javax.swing.JLayeredPane.DEFAULT_LAYER);
 
-		//GAMEOVER
-		gameover.setBounds(Ressources.MAPWIDTH/2, Ressources.MAPHEIGHT/3, 500, 200);
-		gameover.setFont(new Font("Corbel", Font.BOLD, 60));
-		gameover.setForeground(new java.awt.Color(249, 249, 249));
-		gameover.setText("GAMEOVER");
-		gameover.setVisible(false);
-		this.baseLayer.add(gameover, javax.swing.JLayeredPane.DEFAULT_LAYER);
 		
 		//Newsticker
 				this.newsticker.setBounds(Ressources.ZEROPOS.width +45, Ressources.ZEROPOS.height, Ressources.MAPWIDTH-120, 50);
@@ -1088,7 +1080,6 @@ public class GUILayer extends JFrame implements MouseMotionListener {
 	
 	//Beschwerden Miri
 	public void stopGame(){
-		this.gameover.setVisible(true);	//GameOver anzeigen
 		this.control.clickPause();
 		this.buttons.get("pause").setEnabled(false);
 		//this.callHighscore();
@@ -1196,7 +1187,7 @@ public class GUILayer extends JFrame implements MouseMotionListener {
 			buttons.get("beschwichtigen").setEnabled(true);
 		}
 
-		//Misstrauen berechnen alle 25 Steps
+		//Misstrauen berechnen alle 100 Steps
 		if (this.stepcounter % 100 == 0) {
 			this.simulation.calculate_misstrauen();
 			this.simulation.calc_misstrauen_in_street();
@@ -1208,8 +1199,11 @@ public class GUILayer extends JFrame implements MouseMotionListener {
 			this.updateMisstrauen(); // Wert neu zeichnen
 			this.simulation.calcMisstrauenMax();
 			this.updateBalken();
-			if(this.simulation.calc_gamoeover()) 
+			if(this.simulation.calc_gamoeover()){
 				this.stopGame();
+				this.showDialogMessage("Verloren", "Die Bevölkerung wurde zu misstrauisch. Ihre Identität wurde enttarnt.", false, false);
+			}
+				
 		}
 
 		//Spielzeit und Tagesablauf berechnen alle 4 Steps

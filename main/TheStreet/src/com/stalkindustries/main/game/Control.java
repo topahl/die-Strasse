@@ -346,6 +346,7 @@ public class Control implements IControl {
 		}
 		
 		
+		//Beschwerden Miri
 		if(lastFunktioncode.equals("aktionrazzia")){
 			boolean festgenommen = false;
 			if (this.guilayer.getSimulation().getHouses().get(hausid-1).getUeberwachungsstatus() > 80){
@@ -358,17 +359,18 @@ public class Control implements IControl {
 						}
 					}
 				}
+				this.guilayer.stopGame();
 				if(festgenommen){
 					this.guilayer.getHighscore().setFestgenommen(true);
-					//TODO:an Meldungsbox übergeben:"Herzlichen Glückwunsch, du hast den Terroristen festgenommen."
+					this.guilayer.showDialogMessage("Gewonnen", "Herzlichen Glückwunsch, du hast den Terroristen festgenommen.", false, false);
 				}
 				else{
-					//TODO: an Meldungsbox: "Schade! Das nächste Mal, solltest du mehr Beweise sammeln."
+					this.guilayer.showDialogMessage("Verloren", "Schade! Das nächste Mal, solltest du mehr Beweise sammeln.", false, false);
 				}
-				this.guilayer.stopGame();
+				
 			}
 			else{
-				//TODO: return error Text "Das Hauptquartier fordert mehr Indizien, dass sich dem von Ihnen ausgewählten Haus der Terrorist befindet."
+				this.guilayer.showDialogMessage("Nicht verfügbar", "Das Hauptquartier fordert mehr Indizien.", false, true);
 			}
 		}
 //			
