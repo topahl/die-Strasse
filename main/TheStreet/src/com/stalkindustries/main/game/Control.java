@@ -20,7 +20,7 @@ import com.stalkindustries.main.IControl;
  */
 public class Control implements IControl {
 	
-	String lastFunktioncode = "";
+	private String lastFunktioncode = "";
 	//Laden des Spielfenster-Objektes, um auf Funktionen davon zugreifen zu können
 	private GUILayer guilayer;
 	private Quiz quiz;
@@ -663,5 +663,12 @@ public class Control implements IControl {
 //	public void setHouseId(int hous_id){
 //		this.house_id = hous_id;
 //	}
-
+	
+	public String getLastFunktioncode(){
+		return this.lastFunktioncode;
+	}
+	
+	public void setLastFunktioncode(String lastFunktioncode){
+		this.lastFunktioncode = lastFunktioncode;
+	}
 }

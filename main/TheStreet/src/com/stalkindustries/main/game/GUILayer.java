@@ -1171,6 +1171,7 @@ public class GUILayer extends JFrame implements MouseMotionListener {
 			if (!getSimulation().isWieeeeschteAktion()){
 				getMousefollower().setVisible(false);
 				getSimulation().get_agent().setMussWuseln("");
+				control.setLastFunktioncode("");
 			}
 		}
 		if (stunde == 6) {
