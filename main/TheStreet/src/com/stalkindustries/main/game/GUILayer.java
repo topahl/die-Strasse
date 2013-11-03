@@ -1111,10 +1111,27 @@ public class GUILayer extends JFrame implements MouseMotionListener {
 			quiz.step();
 		}
 		
-		//livetickergags
+		//Beschwerden Miri
+		//Liveticker
 		//zeitpunkt = (int)(Math.random()*1000);
+		boolean b = false;
 		if(this.stepcounter%400 == 0){
-			this.newsticker.setText(this.getLiveTickerGags());
+			//alle Personen auf Events überprüfen
+			for(int i=0;i<this.humans.size()-1;i++){	
+				if(this.humans.get(i) instanceof Person){
+					//wenn das Event noch nicht aufgetaucht ist
+					if(((Person)this.humans.get(i)).getEvent().size() == 3){
+						//wenn der Überwachungswert des Hauses hoch genug ist, um das Event zu entdecken
+						if(this.simulation.getHouses().get(this.humans.get(i).get_haus_id()).getUeberwachungsstatus() >= Integer.valueOf(((Person)this.humans.get(i)).getEvent().get(2))){
+							b = true;
+							this.newsticker.setText(((Person)this.humans.get(i)).getEvent().get(0));
+							break;
+						}
+					}
+				}
+			}
+			if(!b)
+				this.newsticker.setText(this.getLiveTickerGags());
 		}
 		
 		//Unwohlsein durch installierte Überwachungsmodule

@@ -95,5 +95,13 @@ public abstract class Person extends Mensch {
 	public int getGeschlecht(){
 		return this.geschlecht;
 	}
+	
+	public void addStringToEvent(String s){
+		this.event.add(s);
+	}
+	
+	public ArrayList<String> getEvent(){
+		return this.event;
+	}
 
 }

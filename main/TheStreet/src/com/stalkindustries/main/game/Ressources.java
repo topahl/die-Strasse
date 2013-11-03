@@ -267,8 +267,9 @@ public class Ressources {
 		int step = (int)(Math.random()*(listsize-2)+1);
 		
 		for(int i=0;i<listsize;i++){
-			tmp = new ArrayList<String>();
-			tmp.add(input.get(start).get(0));
+			//tmp = new ArrayList<String>();
+			//tmp.add(input.get(start).get(0));
+			tmp = input.get(start);
 			input.remove(start);
 			if(input.size() != 0)
 				start = (start+step)%input.size();
