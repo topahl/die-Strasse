@@ -1069,9 +1069,9 @@ public class GUILayer extends JFrame implements MouseMotionListener {
 	//Beschwerden Miri
 	public String getLiveTickerGags(){
 		String text;
-		//ArrayList<ArrayList<String>> gags = Ressources.randomizeGags();
-		ArrayList<ArrayList<String>> gags = Ressources.randomizeLists(Ressources.getLiveTickerGags());
-		text = gags.get(0).get(0);
+		int zufall = (int)(Math.random()*Ressources.getLiveTickerGags().size());
+		ArrayList<String> gag = Ressources.getLiveTickerGags().get(zufall);
+		text = gag.get(0);
 		return includeNames(text);
 	}
 	
@@ -1113,7 +1113,7 @@ public class GUILayer extends JFrame implements MouseMotionListener {
 		
 		//livetickergags
 		//zeitpunkt = (int)(Math.random()*1000);
-		if(this.stepcounter%500 == 0){
+		if(this.stepcounter%400 == 0){
 			this.newsticker.setText(this.getLiveTickerGags());
 		}
 		
