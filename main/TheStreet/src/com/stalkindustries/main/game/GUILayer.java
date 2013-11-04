@@ -1160,7 +1160,7 @@ public class GUILayer extends JFrame implements MouseMotionListener {
 		int minute = this.simulation.getSpiel_minute();
 		float farbteil1 = 0.05f;
 		float farbteil2 = 0.01f;
-		if(stunde == 22){
+		if(stunde == 21){
 			if (minute == 0){
 				this.overlayNacht.setVisible(true);
 			}
