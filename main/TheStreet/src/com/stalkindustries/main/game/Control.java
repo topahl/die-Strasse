@@ -435,7 +435,7 @@ public class Control implements IControl {
 		if (guilayer.getButtonsMap().get("beschwichtigen").isEnabled()){
 			guilayer.getButtonsMap().get("beschwichtigen").setEnabled(false);
 		} else {
-			if (guilayer.getSimulation().getSpiel_stunde()<22 && guilayer.getSimulation().getSpiel_stunde()>6){
+			if (guilayer.getSimulation().getSpiel_stunde()<21 && guilayer.getSimulation().getSpiel_stunde()>6){
 				guilayer.getButtonsMap().get("beschwichtigen").setEnabled(true);
 			}
 		}
@@ -452,12 +452,11 @@ public class Control implements IControl {
 			}
 		}
 		
-		//TODO razzia einbinden
-//		if (guilayer.getButtonsMap().get("aktionRazzia").isEnabled()){
-//			guilayer.getButtonsMap().get("aktionRazzia").setEnabled(false);
-//		} else {
-//			guilayer.getButtonsMap().get("aktionRazzia").setEnabled(false);
-//		}
+		if (guilayer.getButtonsMap().get("aktionrazzia").isEnabled()){
+			guilayer.getButtonsMap().get("aktionrazzia").setEnabled(false);
+		} else {
+			guilayer.getButtonsMap().get("aktionrazzia").setEnabled(true);
+		}
 		
 		guilayer.showDialogMessage("Pause", "Das Spiel wurde pausiert.", false,true);
 		
