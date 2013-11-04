@@ -332,7 +332,7 @@ public class Control implements IControl {
 			if (!istVorhanden){
 				guilayer.getSimulation().getHouses().get(hausid-1).getUeberwachungsmodule().add("Fernglas");
 				guilayer.getSimulation().setWieeeeschteAktion(true);
-				guilayer.getSimulation().getHouses().get(hausid-1).setUeberwachungsWert((float)(Math.random()*10+1)+5,3);
+				guilayer.getSimulation().getHouses().get(hausid-1).setUeberwachungsWert((float)(Math.random()*7+1)+8,3);
 				
 				for (int j = 0; j<=Ressources.NUMBERHOUSES-1; j++){
 					if (guilayer.getSimulation().getHouses().get(j).getUeberwachungsmodule().contains("Fernglas")){
