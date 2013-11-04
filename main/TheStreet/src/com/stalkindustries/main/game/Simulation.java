@@ -390,7 +390,7 @@ public class Simulation {
 		char locid ='0';
 		int hausid = 0;
 		for	(int i=0; i<this.people.size(); i++){
-			locid = (char)((int)(this.people.get(i).get_location_id()));
+			locid = this.people.get(i).get_location_id();
 			hausid = this.people.get(i).get_haus_id()+1;
 			
 			// Es bekommen nur die Menschen einen neuen Weg zugewiesen, wenn sie sich gerade nicht bewegen
@@ -401,40 +401,40 @@ public class Simulation {
 					if ((this.people.get(i).getZeitverzogerung() + this.spiel_minute) == 60){
 						
 						if (this.spiel_stunde==7){ //zur Schule gehen
-							berechne_weg(this.people.get(i), null, 'E');
+							berechne_weg(this.people.get(i), 'E');
 						}	
 						
 						//Nur wenn der Mensch nicht zuHause ist, kann er nach Hause gehen
 						if ((this.people.get(i).getHomePosX()!=this.people.get(i).getPosX() || this.people.get(i).getHomePosY()!=this.people.get(i).getPosY())){
 							
 							if (this.spiel_stunde==14){ //nach Hause gehen
-								berechne_weg(this.people.get(i), null, String.valueOf(hausid).charAt(0));				
+								berechne_weg(this.people.get(i), String.valueOf(hausid).charAt(0));				
 							}
 							if (this.spiel_stunde==20){ //nach Hause gehen
-								berechne_weg(this.people.get(i), null, String.valueOf(hausid).charAt(0));
+								berechne_weg(this.people.get(i), String.valueOf(hausid).charAt(0));
 							}	
 						} 
 					} else {
 
 						//nach Hause gehen, notwendig, falls die Kinder noch eine runde im Park drehen & 20 Uhr überschritten wird
 						if (this.spiel_stunde>=20 && (this.people.get(i).getHomePosX()!=this.people.get(i).getPosX() || this.people.get(i).getHomePosY()!=this.people.get(i).getPosY())){ 
-							berechne_weg(this.people.get(i), null, String.valueOf(hausid).charAt(0));
+							berechne_weg(this.people.get(i), String.valueOf(hausid).charAt(0));
 						}
 						
 						// randomisiert in den Park gehen
 						if (this.spiel_stunde >= 15 && this.spiel_stunde <=19 && locid !='P'){ 
 							if ((int)(Math.random()*200) == 3){
-								berechne_weg(this.people.get(i), null, 'P');
+								berechne_weg(this.people.get(i), 'P');
 							}
 						}
 						
 						// randomisiert den Park verlassen oder noch eine Runde drehen
 						if (locid =='P' && this.spiel_stunde<=19){ 
 							if ((int)(Math.random()*5) == 3){
-								berechne_weg(this.people.get(i), null, String.valueOf(hausid).charAt(0)); 
+								berechne_weg(this.people.get(i), String.valueOf(hausid).charAt(0)); 
 							} else{
 								if (this.people.get(i).getCurrentMove() == 'n'){
-									berechne_weg(this.people.get(i), null, 'P');
+									berechne_weg(this.people.get(i), 'P');
 								}
 							}
 						}
@@ -447,48 +447,48 @@ public class Simulation {
 						//Zuerst werden die Erwachsenen untersucht, die Arbeit haben
 						if (((Erwachsene)people.get(i)).isHat_arbeit()){
 							if (this.spiel_stunde==8 && (this.people.get(i).getZeitverzogerung() + this.spiel_minute) == 60){ // Zur Arbeit gehen
-								berechne_weg(this.people.get(i), null, 'E');
+								berechne_weg(this.people.get(i), 'E');
 							}
 							if (this.spiel_stunde==16 && (this.people.get(i).getZeitverzogerung() + this.spiel_minute) >= 60 && (this.people.get(i).getHomePosX()!=this.people.get(i).getPosX() || this.people.get(i).getHomePosY()!=this.people.get(i).getPosY())){ //nach Hause gehen
-								berechne_weg(this.people.get(i), null, String.valueOf(hausid).charAt(0));
+								berechne_weg(this.people.get(i), String.valueOf(hausid).charAt(0));
 							}				
 							if ((this.spiel_stunde >= 17 || this.spiel_stunde <=0)){  // in den Park gehen
 								if ((int)(Math.random()*300) == 3){
-									berechne_weg(this.people.get(i), null, 'P');
+									berechne_weg(this.people.get(i), 'P');
 								}
 							}
 						} else {
 							if (this.spiel_stunde == 9 && (this.people.get(i).getZeitverzogerung() + this.spiel_minute) == 60){ //zum Einkaufen gehen
 								if ((int)(Math.random()*3)+1 == 1){
-									berechne_weg(this.people.get(i), null, 'E');
+									berechne_weg(this.people.get(i), 'E');
 								}
 							}	
 							if (this.spiel_stunde >= 9 && this.spiel_stunde <=14 && hausid!='E'){ //zum Einkaufen gehen
 								if ((int)(Math.random()*300) == 3){
-									berechne_weg(this.people.get(i), null, 'P');
+									berechne_weg(this.people.get(i), 'P');
 								}
 							}
 							if (this.spiel_stunde == 12 && (this.people.get(i).getZeitverzogerung() + this.spiel_minute) >= 60 && (this.people.get(i).getHomePosX()!=this.people.get(i).getPosX() || this.people.get(i).getHomePosY()!=this.people.get(i).getPosY())){ //nach Hause gehen
-								berechne_weg(this.people.get(i), null, String.valueOf(hausid).charAt(0));
+								berechne_weg(this.people.get(i), String.valueOf(hausid).charAt(0));
 							}
 							if ((this.spiel_stunde >=14 || this.spiel_stunde <=1)){  // in den Park gehen
 								if ((int)(Math.random()*300) == 3){
-									berechne_weg(this.people.get(i), null, 'P');
+									berechne_weg(this.people.get(i), 'P');
 								}
 							}
 						}
 						if (this.spiel_stunde==1 && (this.people.get(i).getZeitverzogerung() + this.spiel_minute) >= 60 && (this.people.get(i).getHomePosX()!=this.people.get(i).getPosX() || this.people.get(i).getHomePosY()!=this.people.get(i).getPosY())){ //nach Hause gehen
-							berechne_weg(this.people.get(i), null, String.valueOf(hausid).charAt(0));
+							berechne_weg(this.people.get(i), String.valueOf(hausid).charAt(0));
 						}
 						if (this.spiel_stunde>=2 && this.spiel_stunde<4 && (this.people.get(i).getHomePosX()!=this.people.get(i).getPosX() || this.people.get(i).getHomePosY()!=this.people.get(i).getPosY())){ //nach Hause gehen
-							berechne_weg(this.people.get(i), null, String.valueOf(hausid).charAt(0));
+							berechne_weg(this.people.get(i), String.valueOf(hausid).charAt(0));
 						}
 						if (locid =='P' && (this.spiel_stunde < 2 || this.spiel_stunde >= 9)){ //nach Hause gehen
 							if ((int)(Math.random()*5) == 3){
-								berechne_weg(this.people.get(i), null, String.valueOf(hausid).charAt(0)); 
+								berechne_weg(this.people.get(i), String.valueOf(hausid).charAt(0)); 
 							} else{
 								if (this.people.get(i).getCurrentMove() == 'n'){
-									berechne_weg(this.people.get(i), null, 'P');
+									berechne_weg(this.people.get(i), 'P');
 								}
 							}
 						}
@@ -543,20 +543,14 @@ public class Simulation {
 	
 	
 	//Support Tiki
-	public void berechne_weg(Person person, Agent agent, char zielloc){
+	public void berechne_weg(Mensch mensch, char zielloc){
 		
-		char locid;
-		if (agent == null){
-			locid = (char)((int)(person.get_location_id()));
-		} else{
-			locid = (char)((int)(agent.get_location_id()));
-		}
-				
-				
+		char locationId;				
 		ArrayList<ArrayList<String>> location_ids;
 		Stack<Character> neuer_weg = new Stack<Character>();
 		Point parkeingang = new Point();
 		
+		locationId = mensch.get_location_id();			
 		location_ids = Ressources.getLocation_ids();
 		
 		if (zielloc == 'P'){
@@ -565,52 +559,38 @@ public class Simulation {
 		
 		
 		//Aktuelle Position des Männchens wird auf 0 gesetzt
-		if ((agent == null && !(zielloc == 'P' && person.get_location_id()=='P')) || person == null){
-			location_ids = wegberechnung_rasterkarte_initialisierung(location_ids, String.valueOf(zielloc), locid);
-			if (agent==null){
-				switch(person.getCurrentMove()){
-		        case 'r': location_ids.get((person.getPosY()-Ressources.ZEROPOS.height)/Ressources.RASTERHEIGHT).set(((person.getPosX()-Ressources.ZEROPOS.width)/Ressources.RASTERHEIGHT)+1,"0");
+		if (zielloc != locationId){
+			location_ids = wegberechnung_rasterkarte_initialisierung(location_ids, String.valueOf(zielloc), locationId);
+			if ((mensch.getPosY()-Ressources.ZEROPOS.height)%45!=0 && ((mensch.getPosX()-Ressources.ZEROPOS.width)/Ressources.RASTERHEIGHT)%45!=0){
+				switch(mensch.getCurrentMove()){
+		        case 'r': location_ids.get((mensch.getPosY()-Ressources.ZEROPOS.height)/Ressources.RASTERHEIGHT).set(((mensch.getPosX()-Ressources.ZEROPOS.width)/Ressources.RASTERHEIGHT)+1,"0");
 		                  break;
-		        case 'u': location_ids.get(((person.getPosY()-Ressources.ZEROPOS.height)/Ressources.RASTERHEIGHT)+1).set((person.getPosX()-Ressources.ZEROPOS.width)/Ressources.RASTERHEIGHT,"0");
-		                  break;
-		        case 'o':
-		        case 'l':
-		        default: location_ids.get((person.getPosY()-Ressources.ZEROPOS.height)/Ressources.RASTERHEIGHT).set((person.getPosX()-Ressources.ZEROPOS.width)/Ressources.RASTERHEIGHT,"0");
-		        }
-//				location_ids.get((person.getPosY()-Ressources.ZEROPOS.height)/Ressources.RASTERHEIGHT).set((person.getPosX()-Ressources.ZEROPOS.width)/Ressources.RASTERHEIGHT,"0");
-			} else {
-				switch(agent.getCurrentMove()){
-		        case 'r': location_ids.get((agent.getPosY()-Ressources.ZEROPOS.height)/Ressources.RASTERHEIGHT).set(((agent.getPosX()-Ressources.ZEROPOS.width)/Ressources.RASTERHEIGHT)+1,"0");
-		                  break;
-		        case 'u': location_ids.get(((agent.getPosY()-Ressources.ZEROPOS.height)/Ressources.RASTERHEIGHT)+1).set((agent.getPosX()-Ressources.ZEROPOS.width)/Ressources.RASTERHEIGHT,"0");
+		        case 'u': location_ids.get(((mensch.getPosY()-Ressources.ZEROPOS.height)/Ressources.RASTERHEIGHT)+1).set((mensch.getPosX()-Ressources.ZEROPOS.width)/Ressources.RASTERHEIGHT,"0");
 		                  break;
 		        case 'o':
 		        case 'l':
-		        default: location_ids.get((agent.getPosY()-Ressources.ZEROPOS.height)/Ressources.RASTERHEIGHT).set((agent.getPosX()-Ressources.ZEROPOS.width)/Ressources.RASTERHEIGHT,"0");
+		        default: location_ids.get((mensch.getPosY()-Ressources.ZEROPOS.height)/Ressources.RASTERHEIGHT).set((mensch.getPosX()-Ressources.ZEROPOS.width)/Ressources.RASTERHEIGHT,"0");
 		        }
-//				location_ids.get((agent.getPosY()-Ressources.ZEROPOS.height)/Ressources.RASTERHEIGHT).set((agent.getPosX()-Ressources.ZEROPOS.width)/Ressources.RASTERHEIGHT,"0");
+			} else{
+				location_ids.get((mensch.getPosY()-Ressources.ZEROPOS.height)/Ressources.RASTERHEIGHT).set((mensch.getPosX()-Ressources.ZEROPOS.width)/Ressources.RASTERHEIGHT,"0");
 			}
 		} else {
-			location_ids = wegberechnung_rasterkarte_initialisierung(location_ids, "P", locid);
+			location_ids = wegberechnung_rasterkarte_initialisierung(location_ids, "P", locationId);
 			location_ids.get((int)(parkeingang.getX())).set((int)(parkeingang.getY()),"0");
 		}
-		
+
 		//Bewegungsstack nach und nach füllen
-		neuer_weg = fuelle_bewegungs_stack(location_ids, person, agent, zielloc);
-		
+		neuer_weg = fuelle_bewegungs_stack(location_ids, mensch, zielloc);
+			
 		//Stack zur Bewegung freigeben
-		if (person != null){
-			person.setMoves(neuer_weg);
-		} else{
-			agent.setMoves(neuer_weg);
-		}
-		
+		mensch.setMoves(neuer_weg);
+
 	}
 	
 	
 	
 	//Support Tiki
-	private Stack<Character> fuelle_bewegungs_stack(ArrayList<ArrayList<String>> location_ids, Person person, Agent agent, char zielloc){
+	private Stack<Character> fuelle_bewegungs_stack(ArrayList<ArrayList<String>> location_ids, Mensch mensch, char zielloc){
 		
 		Stack<Character> neuer_weg = new Stack<Character>();
 		int counter = 1;
@@ -662,10 +642,10 @@ public class Simulation {
 									}
 								}
 //							
-								if ((i>0 && (person!= null && zielloc == person.get_location_id())) ||
-										(person!= null && zielloc != person.get_location_id()) ||
-										(i>0 && (agent!= null && zielloc == agent.get_location_id())) ||
-										(agent!= null && zielloc != agent.get_location_id())){
+								if ((i>0 && (mensch!= null && zielloc == mensch.get_location_id())) ||
+										(mensch!= null && zielloc != mensch.get_location_id()) ||
+										(i>0 && (mensch!= null && zielloc == mensch.get_location_id())) ||
+										(mensch!= null && zielloc != mensch.get_location_id())){
 									// Es wird überprüft, ob ein Feld drüber/drunter/links oder rechts ebenfalls begehbar ist -> das wird markiert
 									if (j<15){
 										if (location_ids.get(j+1).get(k).equals("X")) {			//Weg nach unten ist begehbar
@@ -718,37 +698,33 @@ public class Simulation {
 						}
 					}
 					//Wenn eine Person in den Park gehen möchte  und schon im Park ist, braucht man eine andere Ziellocation
-					if (i == 2 && zielloc=='P'){
-						if ((person!= null && person.get_location_id()=='P') || (agent != null && agent.get_location_id()=='P')){
-							ziellocation="0";
-						}
+					if (i == 2 && zielloc=='P' && mensch.get_location_id()=='P'){
+						ziellocation="0";
 					}
 				}
 		
 		// Der Stack für die Bewegung wird mit den richtigen Werten gefüllt. Dafür hangelt man sich absteigend an der zahlenreihe entlang
-			neuer_weg = fuelle_stack_weg(zielloc, person, agent, location_ids, counter, xPos_current, yPos_current);
+			neuer_weg = fuelle_stack_weg(zielloc, mensch, location_ids, counter, xPos_current, yPos_current);
 		
 		
 		return neuer_weg;
 	}
 	
 	//Support Tiki
-	private Stack<Character> fuelle_stack_weg(Character zielloc, Person person, Agent agent, ArrayList<ArrayList<String>> location_ids, int counter, int xPos_current, int yPos_current) {
+	private Stack<Character> fuelle_stack_weg(Character zielloc, Mensch mensch, ArrayList<ArrayList<String>> location_ids, int counter, int xPos_current, int yPos_current) {
 		Stack<Character> neuer_weg = new Stack<Character>();
 		
 		//Falls das Ziel ein Haus ist, soll die Person auf ihren startpunkt laufen.
-		if (agent != null && agent.get_haus_id() == (int)(zielloc-48-1) || person != null){
+		if (mensch.get_haus_id() == (int)(zielloc-48-1)){
 			if ((int)(zielloc)-48 <=9 && (int)(zielloc)-48 > 0){ //-48 für char umwandlung zu int
-				neuer_weg = fuelle_stack_homeposition(person, agent, xPos_current, yPos_current);
+				neuer_weg = fuelle_stack_homeposition(mensch, xPos_current, yPos_current);
 			}
 		}
 		
 		
-		if((person != null && (person.get_location_id()!=zielloc) || (int)(Math.random()*2) == 1) || 
-				agent!= null && (agent.get_location_id()!=zielloc) || (int)(Math.random()*2) == 1){ 
+		if(mensch.get_location_id()!=zielloc || (int)(Math.random()*2) == 1){ 
 			for (int i = counter; i>=0; i--){
-				if (((person != null && person.get_location_id()==zielloc) && i == 0) || 
-						((agent != null && agent.get_location_id()==zielloc) && i == 0)){
+				if (mensch.get_location_id()==zielloc && i == 0){
 					if (yPos_current<15){
 						if (location_ids.get(yPos_current+1).get(xPos_current).equals(String.valueOf(counter+1))) {			//unten gehts weiter
 							yPos_current++;
@@ -834,16 +810,17 @@ public class Simulation {
 	}
 
 	//Support Tiki
-	private Stack<Character>fuelle_stack_homeposition(Person person, Agent agent, int xPos_current, int yPos_current) {
+	private Stack<Character>fuelle_stack_homeposition( Mensch mensch, int xPos_current, int yPos_current) {
 		Stack<Character> neuer_weg = new Stack<Character>();
-		
-		Mensch mensch;
-		if (agent!=null){
-			mensch = (Mensch)(agent);
-		} else{
-			mensch = (Mensch)(person);
-		}
-		
+//		
+//		Mensch mensch;
+//		
+//		if (agent!=null){
+//			mensch = (Mensch)(agent);
+//		} else{
+//			mensch = (Mensch)(person);
+//		}
+//		
 	
 		if (((mensch.getHomePosX()-Ressources.ZEROPOS.width)/Ressources.RASTERHEIGHT)+1 == xPos_current){
 			neuer_weg.push('l');
@@ -879,17 +856,17 @@ public class Simulation {
 
 	
 	//Support Tiki
-	private ArrayList<ArrayList<String>> wegberechnung_rasterkarte_initialisierung(ArrayList<ArrayList<String>> location_ids, String ziellocation, char locid) {
+	private ArrayList<ArrayList<String>> wegberechnung_rasterkarte_initialisierung(ArrayList<ArrayList<String>> location_ids, String ziellocation, char locationId) {
 		for (int i=0; i<location_ids.size(); i++){
 			for (int j=0; j<location_ids.get(i).size(); j++){
-				if (location_ids.get(i).get(j).charAt(0) != 'X' && location_ids.get(i).get(j).charAt(0) != ziellocation.charAt(0) && location_ids.get(i).get(j).charAt(0) != 'P' && location_ids.get(i).get(j).charAt(0) != locid ){
+				if (location_ids.get(i).get(j).charAt(0) != 'X' && location_ids.get(i).get(j).charAt(0) != ziellocation.charAt(0) && location_ids.get(i).get(j).charAt(0) != 'P' && location_ids.get(i).get(j).charAt(0) != locationId ){
 					location_ids.get(i).set(j,"You shall not pass!") ;
 				}
-				if (!(ziellocation.equals("P") && locid == 'P')){
+				if (!(ziellocation.equals("P") && locationId == 'P')){
 					if (location_ids.get(i).get(j).charAt(0) == ziellocation.charAt(0)){
 						location_ids.get(i).set(j,"Z") ;
 					}
-					if (location_ids.get(i).get(j).charAt(0) == locid ){
+					if (location_ids.get(i).get(j).charAt(0) == locationId ){
 						location_ids.get(i).set(j,"X") ;
 					}
 				} else{
@@ -1033,7 +1010,7 @@ public class Simulation {
 //			calcMisstrauenAfterBeschwichtigenInPark();
 //		}
 		if(get_agent().getMussWuseln().equals("Park")){
-			berechne_weg(null, agent, 'P');
+			berechne_weg(agent, 'P');
 			calcMisstrauenAfterBeschwichtigenInPark();
 		} 		
 		

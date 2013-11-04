@@ -148,7 +148,7 @@ public class Control implements IControl {
 		closeWindow("fensterhaus"); 
 		guilayer.getButtonsMap().get("nachHause").setEnabled(true);
 		guilayer.getSimulation().get_agent().setMussWuseln("Hackenr");
-		guilayer.getSimulation().berechne_weg(null, guilayer.getSimulation().get_agent(), (char)(currentHouse+1+48));
+		guilayer.getSimulation().berechne_weg(guilayer.getSimulation().get_agent(), (char)(currentHouse+1+48));
 		guilayer.getSimulation().setWieeeeschteAktion(true);
 	}
 
@@ -159,7 +159,7 @@ public class Control implements IControl {
 		closeWindow("fensterhaus"); 
 		guilayer.getButtonsMap().get("nachHause").setEnabled(true);
 		guilayer.getSimulation().get_agent().setMussWuseln("Kamerar");
-		guilayer.getSimulation().berechne_weg(null, guilayer.getSimulation().get_agent(), (char)(currentHouse+1+48));
+		guilayer.getSimulation().berechne_weg(guilayer.getSimulation().get_agent(), (char)(currentHouse+1+48));
 		guilayer.getSimulation().setWieeeeschteAktion(true);
 	}
 
@@ -170,7 +170,7 @@ public class Control implements IControl {
 		closeWindow("fensterhaus"); 
 		guilayer.getButtonsMap().get("nachHause").setEnabled(true);
 		guilayer.getSimulation().get_agent().setMussWuseln("Wanzer");
-		guilayer.getSimulation().berechne_weg(null, guilayer.getSimulation().get_agent(), (char)(currentHouse+1+48));
+		guilayer.getSimulation().berechne_weg(guilayer.getSimulation().get_agent(), (char)(currentHouse+1+48));
 		guilayer.getSimulation().setWieeeeschteAktion(true);
 	}
 
@@ -210,7 +210,7 @@ public class Control implements IControl {
 						stehenBleiben.add('s');
 						guilayer.getSimulation().get_people().get(i).setMoves(stehenBleiben);
 						guilayer.getSimulation().get_agent().setMussWuseln(i+"Kuchen");
-						guilayer.getSimulation().berechne_weg(null, guilayer.getSimulation().get_agent(), (char)(hausid+48));
+						guilayer.getSimulation().berechne_weg(guilayer.getSimulation().get_agent(), (char)(hausid+48));
 						guilayer.getButtonsMap().get("nachHause").setEnabled(true);
 						guilayer.getSimulation().setWieeeeschteAktion(false);
 					}	
@@ -227,7 +227,7 @@ public class Control implements IControl {
 						stehenBleiben.add('s');
 						guilayer.getSimulation().get_people().get(i).setMoves(stehenBleiben);
 						guilayer.getSimulation().get_agent().setMussWuseln(i+"Unterhalten");
-						guilayer.getSimulation().berechne_weg(null, guilayer.getSimulation().get_agent(), (char)(hausid+48));
+						guilayer.getSimulation().berechne_weg(guilayer.getSimulation().get_agent(), (char)(hausid+48));
 						guilayer.getButtonsMap().get("nachHause").setEnabled(true);
 						guilayer.getSimulation().setWieeeeschteAktion(false);
 					}	
@@ -245,7 +245,7 @@ public class Control implements IControl {
 						stehenBleiben.add('s');
 						guilayer.getSimulation().get_people().get(i).setMoves(stehenBleiben);
 						guilayer.getSimulation().get_agent().setMussWuseln(i+"Flirten");
-						guilayer.getSimulation().berechne_weg(null, guilayer.getSimulation().get_agent(), (char)(hausid+48));
+						guilayer.getSimulation().berechne_weg(guilayer.getSimulation().get_agent(), (char)(hausid+48));
 						guilayer.getButtonsMap().get("nachHause").setEnabled(true);
 						guilayer.getSimulation().setWieeeeschteAktion(false);
 					}	
@@ -262,7 +262,7 @@ public class Control implements IControl {
 						stehenBleiben.add('s');
 						guilayer.getSimulation().get_people().get(i).setMoves(stehenBleiben);
 						guilayer.getSimulation().get_agent().setMussWuseln(i+"Hand");
-						guilayer.getSimulation().berechne_weg(null, guilayer.getSimulation().get_agent(), (char)(hausid+48));
+						guilayer.getSimulation().berechne_weg(guilayer.getSimulation().get_agent(), (char)(hausid+48));
 						guilayer.getButtonsMap().get("nachHause").setEnabled(true);
 						guilayer.getSimulation().setWieeeeschteAktion(false);
 					}	
@@ -280,7 +280,7 @@ public class Control implements IControl {
 				}	
 			}
 			if (!istVorhanden){
-				guilayer.getSimulation().berechne_weg(null, guilayer.getSimulation().get_agent(), (char)(hausid+48));
+				guilayer.getSimulation().berechne_weg(guilayer.getSimulation().get_agent(), (char)(hausid+48));
 				guilayer.getSimulation().get_agent().setMussWuseln("Wanze");
 				guilayer.getButtonsMap().get("nachHause").setEnabled(true);
 				guilayer.getSimulation().setWieeeeschteAktion(true);
@@ -297,7 +297,7 @@ public class Control implements IControl {
 				}
 			}
 			if (!istVorhanden){
-				guilayer.getSimulation().berechne_weg(null, guilayer.getSimulation().get_agent(), (char)(hausid+48));
+				guilayer.getSimulation().berechne_weg(guilayer.getSimulation().get_agent(), (char)(hausid+48));
 				guilayer.getSimulation().get_agent().setMussWuseln("Kamera");
 				guilayer.getButtonsMap().get("nachHause").setEnabled(true);
 				guilayer.getSimulation().setWieeeeschteAktion(true);
@@ -314,7 +314,7 @@ public class Control implements IControl {
 				}
 			}
 			if (!istVorhanden){
-				guilayer.getSimulation().berechne_weg(null, guilayer.getSimulation().get_agent(), (char)(hausid+48));
+				guilayer.getSimulation().berechne_weg(guilayer.getSimulation().get_agent(), (char)(hausid+48));
 				guilayer.getSimulation().get_agent().setMussWuseln("Hacken");
 				guilayer.getButtonsMap().get("nachHause").setEnabled(true);
 				guilayer.getSimulation().setWieeeeschteAktion(true);
@@ -545,7 +545,7 @@ public class Control implements IControl {
 		closeWindow("beschwichtigen");
 		guilayer.getSimulation().get_agent().setMussWuseln("");
 		guilayer.getButtonsMap().get("nachHause").setEnabled(false);
-		guilayer.getSimulation().berechne_weg(null, guilayer.getSimulation().get_agent(), (char)(guilayer.getSimulation().get_agent().get_haus_id()+1+48));
+		guilayer.getSimulation().berechne_weg(guilayer.getSimulation().get_agent(), (char)(guilayer.getSimulation().get_agent().get_haus_id()+1+48));
 	}
 	
 	private void clickRazzia() {
@@ -588,7 +588,7 @@ public class Control implements IControl {
 	private void clickParkSpionage() {
 		//kein Icon, da Einsatzort (Park) vorgegeben
 		closeWindow("spionage");
-		guilayer.getSimulation().berechne_weg(null, guilayer.getSimulation().get_agent(), 'P');
+		guilayer.getSimulation().berechne_weg(guilayer.getSimulation().get_agent(), 'P');
 		guilayer.getSimulation().get_agent().setMussWuseln("Park");
 		guilayer.getButtonsMap().get("nachHause").setEnabled(true);
 		guilayer.getSimulation().setWieeeeschteAktion(true);
@@ -625,7 +625,7 @@ public class Control implements IControl {
 	private void clickParkBeschwichtigen() {
 		//kein Icon, da Einsatzort (Park) vorgegeben
 		closeWindow("beschwichtigen");
-		guilayer.getSimulation().berechne_weg(null, guilayer.getSimulation().get_agent(), 'P');
+		guilayer.getSimulation().berechne_weg(guilayer.getSimulation().get_agent(), 'P');
 		guilayer.getSimulation().get_agent().setMussWuseln("Park");
 		guilayer.getButtonsMap().get("nachHause").setEnabled(true);
 		guilayer.getSimulation().setWieeeeschteAktion(false);
