@@ -561,24 +561,24 @@ public class Simulation {
 		//Aktuelle Position des Männchens wird auf 0 gesetzt
 		if (zielloc != locationId){
 			location_ids = wegberechnung_rasterkarte_initialisierung(location_ids, String.valueOf(zielloc), locationId);
-			if ((mensch.getPosY()-Ressources.ZEROPOS.height)%45!=0 && ((mensch.getPosX()-Ressources.ZEROPOS.width)/Ressources.RASTERHEIGHT)%45!=0){
-				switch(mensch.getCurrentMove()){
-		        case 'r': location_ids.get((mensch.getPosY()-Ressources.ZEROPOS.height)/Ressources.RASTERHEIGHT).set(((mensch.getPosX()-Ressources.ZEROPOS.width)/Ressources.RASTERHEIGHT)+1,"0");
-		                  break;
-		        case 'u': location_ids.get(((mensch.getPosY()-Ressources.ZEROPOS.height)/Ressources.RASTERHEIGHT)+1).set((mensch.getPosX()-Ressources.ZEROPOS.width)/Ressources.RASTERHEIGHT,"0");
-		                  break;
-		        case 'o':
-		        case 'l':
-		        default: location_ids.get((mensch.getPosY()-Ressources.ZEROPOS.height)/Ressources.RASTERHEIGHT).set((mensch.getPosX()-Ressources.ZEROPOS.width)/Ressources.RASTERHEIGHT,"0");
-		        }
-			} else{
-				location_ids.get((mensch.getPosY()-Ressources.ZEROPOS.height)/Ressources.RASTERHEIGHT).set((mensch.getPosX()-Ressources.ZEROPOS.width)/Ressources.RASTERHEIGHT,"0");
-			}
 		} else {
 			location_ids = wegberechnung_rasterkarte_initialisierung(location_ids, "P", locationId);
-			location_ids.get((int)(parkeingang.getX())).set((int)(parkeingang.getY()),"0");
 		}
 
+		//if ((mensch.getPosY()-Ressources.ZEROPOS.height)%45!=0 && ((mensch.getPosX()-Ressources.ZEROPOS.width)/Ressources.RASTERHEIGHT)%45!=0){
+			switch(mensch.getCurrentMove()){
+	        case 'r': location_ids.get((mensch.getPosY()-Ressources.ZEROPOS.height)/Ressources.RASTERHEIGHT).set(((mensch.getPosX()-Ressources.ZEROPOS.width)/Ressources.RASTERHEIGHT)+1,"0");
+	                  break;
+	        case 'u': location_ids.get(((mensch.getPosY()-Ressources.ZEROPOS.height)/Ressources.RASTERHEIGHT)+1).set((mensch.getPosX()-Ressources.ZEROPOS.width)/Ressources.RASTERHEIGHT,"0");
+	                  break;
+	        case 'o':
+	        case 'l':
+	        default: location_ids.get((mensch.getPosY()-Ressources.ZEROPOS.height)/Ressources.RASTERHEIGHT).set((mensch.getPosX()-Ressources.ZEROPOS.width)/Ressources.RASTERHEIGHT,"0");
+	        }
+//		} else{
+//			location_ids.get((mensch.getPosY()-Ressources.ZEROPOS.height)/Ressources.RASTERHEIGHT).set((mensch.getPosX()-Ressources.ZEROPOS.width)/Ressources.RASTERHEIGHT,"0");
+//		}
+		
 		//Bewegungsstack nach und nach füllen
 		neuer_weg = fuelle_bewegungs_stack(location_ids, mensch, zielloc);
 			
