@@ -584,9 +584,7 @@ public class Simulation {
 			
 		//Stack zur Bewegung freigeben
 		mensch.setMoves(neuer_weg);
-
 	}
-	
 	
 	
 	//Support Tiki
