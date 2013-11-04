@@ -1168,13 +1168,19 @@ public class GUILayer extends JFrame implements MouseMotionListener {
 				this.overlayNacht.setBackground(new Color(0, 0, farbteil1*minute, farbteil2*minute));
 				this.repaint();	
 			}
-			buttons.get("beschwichtigen").setEnabled(false);
-			control.closeWindow("beschwichtigen");
-			if (!getSimulation().isWieeeeschteAktion()){
+			buttons.get("aktionKuchen").setEnabled(false);
+			buttons.get("aktionFlirten").setEnabled(false);
+			buttons.get("aktionUnterhalten").setEnabled(false);
+			buttons.get("aktionHand").setEnabled(false);
+			
+			if (!getSimulation().isWieeeeschteAktion() && !control.getLastFunktioncode().equals("parkBeschwichtigen")){
 				getMousefollower().setVisible(false);
 				getSimulation().get_agent().setMussWuseln("");
 				control.setLastFunktioncode("");
 			}
+		}
+		if (stunde == 2){
+			buttons.get("beschwichtigen").setEnabled(false);
 		}
 		if (stunde == 6) {
 			if ((minute >= 0) && (minute <= 20)){
@@ -1184,6 +1190,11 @@ public class GUILayer extends JFrame implements MouseMotionListener {
 			if(minute == 20){
 				this.overlayNacht.setVisible(false);
 			}
+			buttons.get("aktionKuchen").setEnabled(true);
+			buttons.get("aktionFlirten").setEnabled(true);
+			buttons.get("aktionUnterhalten").setEnabled(true);
+			buttons.get("aktionHand").setEnabled(true);
+			buttons.get("parkBeschwichtigen").setEnabled(true);
 			buttons.get("beschwichtigen").setEnabled(true);
 		}
 

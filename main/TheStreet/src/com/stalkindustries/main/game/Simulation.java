@@ -836,69 +836,44 @@ public class Simulation {
 	//Support Tiki
 	private Stack<Character>fuelle_stack_homeposition(Person person, Agent agent, int xPos_current, int yPos_current) {
 		Stack<Character> neuer_weg = new Stack<Character>();
-		//TODO generisch machen
 		
-		if (agent == null){
-			if (((person.getHomePosX()-Ressources.ZEROPOS.width)/Ressources.RASTERHEIGHT)+1 == xPos_current){
-				neuer_weg.push('l');
-			}
-			if (((person.getHomePosX()-Ressources.ZEROPOS.width)/Ressources.RASTERHEIGHT)+2 == xPos_current){
-				neuer_weg.push('l');
-				neuer_weg.push('l');
-			}
-			if (((person.getHomePosX()-Ressources.ZEROPOS.width)/Ressources.RASTERHEIGHT)-1 == xPos_current){
-				neuer_weg.push('r');
-			}
-			if (((person.getHomePosX()-Ressources.ZEROPOS.width)/Ressources.RASTERHEIGHT)-2 == xPos_current){
-				neuer_weg.push('r');
-				neuer_weg.push('r');
-			}
-			if (((person.getHomePosY()-Ressources.ZEROPOS.height)/Ressources.RASTERHEIGHT)-1 == yPos_current){
-				neuer_weg.push('u');
-			}
-			if (((person.getHomePosY()-Ressources.ZEROPOS.height)/Ressources.RASTERHEIGHT)-2 == yPos_current){
-				neuer_weg.push('u');
-				neuer_weg.push('u');
-			}
-			if (((person.getHomePosY()-Ressources.ZEROPOS.height)/Ressources.RASTERHEIGHT)+1 == yPos_current){
-				neuer_weg.push('o');
-			}
-			if (((person.getHomePosY()-Ressources.ZEROPOS.height)/Ressources.RASTERHEIGHT)+2 == yPos_current){
-				neuer_weg.push('o');
-				neuer_weg.push('o');
-			}
-		} else {
-			if (((agent.getHomePosX()-Ressources.ZEROPOS.width)/Ressources.RASTERHEIGHT)+1 == xPos_current){
-				neuer_weg.push('l');
-			}
-			if (((agent.getHomePosX()-Ressources.ZEROPOS.width)/Ressources.RASTERHEIGHT)+2 == xPos_current){
-				neuer_weg.push('l');
-				neuer_weg.push('l');
-			}
-			if (((agent.getHomePosX()-Ressources.ZEROPOS.width)/Ressources.RASTERHEIGHT)-1 == xPos_current){
-				neuer_weg.push('r');
-			}
-			if (((agent.getHomePosX()-Ressources.ZEROPOS.width)/Ressources.RASTERHEIGHT)-2 == xPos_current){
-				neuer_weg.push('r');
-				neuer_weg.push('r');
-			}
-			if (((agent.getHomePosY()-Ressources.ZEROPOS.height)/Ressources.RASTERHEIGHT)-1 == yPos_current){
-				neuer_weg.push('u');
-			}
-			if (((agent.getHomePosY()-Ressources.ZEROPOS.height)/Ressources.RASTERHEIGHT)-2 == yPos_current){
-				neuer_weg.push('u');
-				neuer_weg.push('u');
-			}
-			if (((agent.getHomePosY()-Ressources.ZEROPOS.height)/Ressources.RASTERHEIGHT)+1 == yPos_current){
-				neuer_weg.push('o');
-			}
-			if (((agent.getHomePosY()-Ressources.ZEROPOS.height)/Ressources.RASTERHEIGHT)+2 == yPos_current){
-				neuer_weg.push('o');
-				neuer_weg.push('o');
-			}
+		Mensch mensch;
+		if (agent!=null){
+			mensch = (Mensch)(agent);
+		} else{
+			mensch = (Mensch)(person);
 		}
 		
-		
+	
+		if (((mensch.getHomePosX()-Ressources.ZEROPOS.width)/Ressources.RASTERHEIGHT)+1 == xPos_current){
+			neuer_weg.push('l');
+		}
+		if (((mensch.getHomePosX()-Ressources.ZEROPOS.width)/Ressources.RASTERHEIGHT)+2 == xPos_current){
+			neuer_weg.push('l');
+			neuer_weg.push('l');
+		}
+		if (((mensch.getHomePosX()-Ressources.ZEROPOS.width)/Ressources.RASTERHEIGHT)-1 == xPos_current){
+			neuer_weg.push('r');
+		}
+		if (((mensch.getHomePosX()-Ressources.ZEROPOS.width)/Ressources.RASTERHEIGHT)-2 == xPos_current){
+			neuer_weg.push('r');
+			neuer_weg.push('r');
+		}
+		if (((mensch.getHomePosY()-Ressources.ZEROPOS.height)/Ressources.RASTERHEIGHT)-1 == yPos_current){
+			neuer_weg.push('u');
+		}
+		if (((mensch.getHomePosY()-Ressources.ZEROPOS.height)/Ressources.RASTERHEIGHT)-2 == yPos_current){
+			neuer_weg.push('u');
+			neuer_weg.push('u');
+		}
+		if (((mensch.getHomePosY()-Ressources.ZEROPOS.height)/Ressources.RASTERHEIGHT)+1 == yPos_current){
+			neuer_weg.push('o');
+		}
+		if (((mensch.getHomePosY()-Ressources.ZEROPOS.height)/Ressources.RASTERHEIGHT)+2 == yPos_current){
+			neuer_weg.push('o');
+			neuer_weg.push('o');
+		}
+				
 		return neuer_weg;
 	}
 

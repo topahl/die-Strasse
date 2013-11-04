@@ -238,7 +238,8 @@ public class Control implements IControl {
 		if(lastFunktioncode.equals("aktionFlirten")){
 			for (int i=0; i<guilayer.getSimulation().get_people().size(); i++){
 				if (guilayer.getSimulation().get_people().get(i).get_location_id()== (char)(hausid+48) &&
-						guilayer.getSimulation().get_people().get(i).getCurrentMove()=='n'){
+						guilayer.getSimulation().get_people().get(i).getCurrentMove()=='n' &&
+						guilayer.getSimulation().get_people().get(i) instanceof Erwachsene){
 					if (!soAtHome){
 						soAtHome = true;
 						stehenBleiben.add('s');
