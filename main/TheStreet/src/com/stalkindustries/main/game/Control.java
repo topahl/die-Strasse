@@ -363,15 +363,15 @@ public class Control implements IControl {
 				this.guilayer.stopGame();
 				if(festgenommen){
 					this.guilayer.getHighscore().setFestgenommen(true);
-					this.guilayer.showDialogMessage("Gewonnen", "Herzlichen Glückwunsch, du hast den Terroristen festgenommen.", false, false);
+					this.guilayer.showDialogMessage("Gewonnen", "Herzlichen Glückwunsch, Sie haben den Terroristen festgenommen!", false, false);
 				}
 				else{
-					this.guilayer.showDialogMessage("Verloren", "Schade! Das nächste Mal, solltest du mehr Beweise sammeln.", false, false);
+					this.guilayer.showDialogMessage("Verloren", "Schade! Das nächste Mal sollten Sie mehr Beweise sammeln.", false, false);
 				}
 				
 			}
 			else{
-				this.guilayer.showDialogMessage("Nicht verfügbar", "Das Hauptquartier fordert mehr Indizien.", false, true);
+				this.guilayer.showDialogMessage("Abgelehnt", "Das Hauptquartier fordert mehr Indizien.", false, true);
 			}
 		}
 //			
@@ -400,9 +400,9 @@ public class Control implements IControl {
 		if(funktion.equals("aktionKamera"))
 			spionagelabelBeschr(isPresent, "Kameras anbringen");
 		if(funktion.equals("aktionHacken"))
-			spionagelabelBeschr(isPresent, "Laptop hacken");
+			spionagelabelBeschr(isPresent, "Trojaner installieren");
 		if(funktion.equals("aktionFernglas"))
-			spionagelabelBeschr(isPresent, "Ausspionieren");
+			spionagelabelBeschr(isPresent, "Haus beobachten");
 		if(funktion.equals("parkSpionage"))
 			spionagelabelBeschr(isPresent, "Im Park spionieren");
 		if(funktion.equals("aktion6Spionage"))
@@ -456,6 +456,13 @@ public class Control implements IControl {
 			guilayer.getButtonsMap().get("aktionrazzia").setEnabled(false);
 		} else {
 			guilayer.getButtonsMap().get("aktionrazzia").setEnabled(true);
+		}
+		
+		//Pause-Button oben rechts ausblenden, wenn pausiert
+		if (guilayer.getButtonsMap().get("pause").isEnabled()) {
+			guilayer.getButtonsMap().get("pause").setEnabled(false);
+		} else {
+			guilayer.getButtonsMap().get("pause").setEnabled(true);
 		}
 		
 		guilayer.showDialogMessage("Pause", "Das Spiel wurde pausiert.", false,true);

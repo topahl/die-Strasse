@@ -210,11 +210,11 @@ public class GUILayer extends JFrame implements MouseMotionListener {
 
 		
 		//Newsticker
-				this.newsticker.setBounds(Ressources.ZEROPOS.width +45, Ressources.ZEROPOS.height, Ressources.MAPWIDTH-120, 50);
-				this.newsticker.setFont(new Font("Corbel", Font.BOLD, 16));
-				this.newsticker.setForeground(new java.awt.Color(249, 249, 249));
-				this.newsticker.setVisible(true);
-				this.baseLayer.add(this.newsticker, javax.swing.JLayeredPane.DEFAULT_LAYER);
+		this.newsticker.setBounds(Ressources.ZEROPOS.width +15, Ressources.ZEROPOS.height, Ressources.MAPWIDTH-120, Ressources.RASTERHEIGHT+2);
+		this.newsticker.setFont(new Font("Corbel", Font.BOLD, 16));
+		this.newsticker.setForeground(new java.awt.Color(249, 249, 249));
+		this.newsticker.setVisible(true);
+		this.baseLayer.add(this.newsticker, javax.swing.JLayeredPane.DEFAULT_LAYER);
 		
 		
 		// Ingame Menübars
@@ -525,7 +525,7 @@ public class GUILayer extends JFrame implements MouseMotionListener {
 
 		
 		//---
-		//generisches Hausfenster
+		//generisches Dialogfenster
 		//---
 		
 		//generisches Dialogfenster

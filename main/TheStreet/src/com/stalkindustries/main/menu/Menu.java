@@ -80,7 +80,8 @@ public class Menu extends JFrame implements MouseMotionListener{
 	     label.setText("Angemeldet als");
 	     label.setFont(new Font("Corbel",Font.BOLD,20));
 	     label.setForeground(new Color(0x1f, 0x1f, 0x1f));
-	     label.setBounds(Ressources.ZEROPOS.width+900,Ressources.ZEROPOS.height+5,200,45);
+	     label.setHorizontalAlignment(SwingConstants.RIGHT);
+	     label.setBounds(Ressources.ZEROPOS.width+855,Ressources.ZEROPOS.height+10,200,45);
 	     window.add(label, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
 	     currentUser= new JLabel();
@@ -88,7 +89,7 @@ public class Menu extends JFrame implements MouseMotionListener{
 	     currentUser.setFont(new Font("Corbel",Font.BOLD,30));
 	     currentUser.setForeground(new Color(0x1f, 0x1f, 0x1f));
 	     currentUser.setHorizontalAlignment(SwingConstants.RIGHT);
-	     currentUser.setBounds(Ressources.ZEROPOS.width+840,Ressources.ZEROPOS.height+30,200,45);
+	     currentUser.setBounds(Ressources.ZEROPOS.width+855,Ressources.ZEROPOS.height+35,200,45);
 	     window.add(currentUser, javax.swing.JLayeredPane.DEFAULT_LAYER);
 	     
 		       
@@ -302,7 +303,7 @@ public class Menu extends JFrame implements MouseMotionListener{
 	private void initHighscore(){
 		highscore = new JLayeredPane();
 		
-		generateStandartSubPageElements(highscore, "Highscore");
+		generateStandartSubPageElements(highscore, "Highscores");
 	}
 	
 	private void initLevelSelect(){
