@@ -559,7 +559,7 @@ public class Simulation {
 		
 		
 		//Aktuelle Position des Männchens wird auf 0 gesetzt
-		if (zielloc != locationId){
+		if (zielloc != locationId && zielloc!='P'){
 			location_ids = wegberechnung_rasterkarte_initialisierung(location_ids, String.valueOf(zielloc), locationId);
 		} else {
 			location_ids = wegberechnung_rasterkarte_initialisierung(location_ids, "P", locationId);
