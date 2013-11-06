@@ -1,6 +1,7 @@
 package com.stalkindustries.main.game;
 
 import java.awt.Color;
+import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseMotionListener;
@@ -30,6 +31,7 @@ public class GUILayer extends JFrame implements MouseMotionListener {
 	private Timer timer;
 	private Map karte;
 	private JLayeredPane baseLayer;
+	private JLayeredPane liveTickerLayer;
 	private JLayeredPane fensterSpionage;
 	private JLayeredPane fensterBeschwichtigen;
 	private JLayeredPane fensterQuiz;
@@ -42,6 +44,10 @@ public class GUILayer extends JFrame implements MouseMotionListener {
 	private int stepcounter = 0;
 	private Quiz quiz;
 	private Highscore highscore;
+	
+	private double tickerStep = 0;
+	private int tickerTextSize = 0;
+	private static final int tickerHaufigkeit = 400;
 
 	private JLabel anzeigeZeit = new JLabel();
 	private JLabel anzeigeTag = new JLabel();
@@ -115,6 +121,12 @@ public class GUILayer extends JFrame implements MouseMotionListener {
 		this.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
 		this.setResizable(false);
 		this.setUndecorated(true);
+	
+		//LiveTickerLayer initialisieren
+		this.liveTickerLayer = new JLayeredPane();
+		this.liveTickerLayer.setBounds(Ressources.ZEROPOS.width+15,Ressources.ZEROPOS.height,Ressources.MAPWIDTH-120,Ressources.RASTERHEIGHT+2);
+		this.baseLayer.add(liveTickerLayer,javax.swing.JLayeredPane.DEFAULT_LAYER);
+				
 
 		//MouseListener starten
 		this.initMouseListener();
@@ -218,11 +230,16 @@ public class GUILayer extends JFrame implements MouseMotionListener {
 
 		
 		//Newsticker
-		this.newsticker.setBounds(Ressources.ZEROPOS.width +15, Ressources.ZEROPOS.height, Ressources.MAPWIDTH-120, Ressources.RASTERHEIGHT+2);
+//		this.newsticker.setBounds(Ressources.ZEROPOS.width +15, Ressources.ZEROPOS.height, Ressources.MAPWIDTH-120, Ressources.RASTERHEIGHT+2);
+//		this.newsticker.setFont(new Font("Corbel", Font.BOLD, 16));
+//		this.newsticker.setForeground(new java.awt.Color(249, 249, 249));
+//		this.newsticker.setVisible(true);
+//		this.baseLayer.add(this.newsticker, javax.swing.JLayeredPane.DEFAULT_LAYER);
+		this.newsticker.setBounds(0, 0, 2000, 2000);
 		this.newsticker.setFont(new Font("Corbel", Font.BOLD, 16));
 		this.newsticker.setForeground(new java.awt.Color(249, 249, 249));
 		this.newsticker.setVisible(true);
-		this.baseLayer.add(this.newsticker, javax.swing.JLayeredPane.DEFAULT_LAYER);
+		this.liveTickerLayer.add(this.newsticker, javax.swing.JLayeredPane.DEFAULT_LAYER);
 		
 		
 		// Ingame Menübars
@@ -1023,7 +1040,9 @@ public class GUILayer extends JFrame implements MouseMotionListener {
 		}
 	}
 	
-	//Beschwerden Miri
+	/**
+	 * @author Miriam
+	 */
 	public ArrayList<String> includeHaus(ArrayList<String> input, int i){
 		String hausnr = String.valueOf(i+1);
 		String output = "";
@@ -1032,7 +1051,9 @@ public class GUILayer extends JFrame implements MouseMotionListener {
 		return input;
 	}
 	
-	//Beschwerden Miri
+	/**
+	 * @author Miriam
+	 */
 	public String includeNames(String input){	
 		String frau = "";
 		String mann = "";
@@ -1084,7 +1105,9 @@ public class GUILayer extends JFrame implements MouseMotionListener {
 			return input;
 		}
 	
-	//Beschwerden Miri
+	/**
+	 * @author Miriam
+	 */
 	public String getLiveTickerGags(){
 		String text;
 		int zufall = (int)(Math.random()*Ressources.getLiveTickerGags().size());
@@ -1093,11 +1116,48 @@ public class GUILayer extends JFrame implements MouseMotionListener {
 		return includeNames(text);
 	}
 	
-	//Beschwerden Miri
+	/**
+	 * @author Miriam
+	 */
 	public void stopGame(){
 		this.control.clickPause();
 		this.buttons.get("pause").setEnabled(false);
 		//this.callHighscore();
+	}
+	
+	/**
+	 * @author Miriam
+	 */
+	private void generateLiveTicker(){
+		boolean b = false;
+		int zufall = (int)(Math.random()*5);
+		//alle Personen auf Events überprüfen
+		for(int i=0;i<this.humans.size()-1;i++){	
+			if(this.humans.get(i) instanceof Person){
+				//wenn das Event noch nicht aufgetaucht ist
+				if(((Person)this.humans.get(i)).getEvent().size() == 3){
+					//wenn der Überwachungswert des Hauses hoch genug ist, um das Event zu entdecken
+					if(this.simulation.getHouses().get(this.humans.get(i).get_haus_id()).getUeberwachungsstatus() >= Integer.valueOf(((Person)this.humans.get(i)).getEvent().get(2))){
+						if(zufall == 1){
+							b = true;
+							this.newsticker.setForeground(new java.awt.Color(249, 50, 50));
+							this.newsticker.setText(((Person)this.humans.get(i)).getEvent().get(0));
+							((Person)this.humans.get(i)).addStringToEvent("used");
+							break;
+						}
+					}
+				}
+			}
+		}
+		if(!b){
+			this.newsticker.setForeground(new java.awt.Color(249, 249, 249));
+			this.newsticker.setText(this.getLiveTickerGags());
+		}
+		this.tickerTextSize = this.newsticker.getGraphics().getFontMetrics().stringWidth(this.newsticker.getText());
+		this.newsticker.setBounds(0, 0, this.tickerTextSize+5, Ressources.RASTERHEIGHT+2);
+		tickerStep = 0;
+		if(this.tickerTextSize > Ressources.MAPWIDTH-120)
+			tickerStep = 50;
 	}
 	
 	
@@ -1132,31 +1192,20 @@ public class GUILayer extends JFrame implements MouseMotionListener {
 		
 		//Beschwerden Miri
 		//Liveticker
-		//zeitpunkt = (int)(Math.random()*1000);
-		boolean b = false;
-		int zufall = (int)(Math.random()*5);
-		if(this.stepcounter%400 == 0){
-			//alle Personen auf Events überprüfen
-			for(int i=0;i<this.humans.size()-1;i++){	
-				if(this.humans.get(i) instanceof Person){
-					//wenn das Event noch nicht aufgetaucht ist
-					if(((Person)this.humans.get(i)).getEvent().size() == 3){
-						//wenn der Überwachungswert des Hauses hoch genug ist, um das Event zu entdecken
-						if(this.simulation.getHouses().get(this.humans.get(i).get_haus_id()).getUeberwachungsstatus() >= Integer.valueOf(((Person)this.humans.get(i)).getEvent().get(2))){
-							if(zufall == 1){
-								b = true;
-								this.newsticker.setForeground(new java.awt.Color(249, 50, 50));
-								this.newsticker.setText(((Person)this.humans.get(i)).getEvent().get(0));
-								((Person)this.humans.get(i)).addStringToEvent("used");
-								break;
-							}
-						}
-					}
-				}
-			}
-			if(!b){
-				this.newsticker.setForeground(new java.awt.Color(249, 249, 249));
-				this.newsticker.setText(this.getLiveTickerGags());
+		if(this.stepcounter%tickerHaufigkeit == 0){
+			this.generateLiveTicker();
+		}
+		
+		//Newsticker durchtickern lassen, falls der Text zu lang ist
+		if(this.tickerTextSize > Ressources.MAPWIDTH-120){
+			int tmp = tickerHaufigkeit/(this.tickerTextSize-(Ressources.MAPWIDTH-120));
+			if(tmp == 0)
+				tmp = 3;
+			else
+				tmp = 2;
+			if((this.stepcounter)%2 == 0){
+				tickerStep -= tmp;
+				this.newsticker.setLocation((int)tickerStep,0);
 			}
 		}
 		
