@@ -442,8 +442,10 @@ public class Control implements IControl {
 		}
 		if (guilayer.getButtonsMap().get("spionage").isEnabled()){
 			guilayer.getButtonsMap().get("spionage").setEnabled(false);
+			guilayer.showDialogMessage("Pause", "Das Spiel wurde pausiert.", false,true);
 		} else {
 			guilayer.getButtonsMap().get("spionage").setEnabled(true);
+			closeWindow("dialog");
 		}
 		if (guilayer.getButtonsMap().get("nachHause").isEnabled()){
 			guilayer.getButtonsMap().get("nachHause").setEnabled(false);
@@ -460,14 +462,14 @@ public class Control implements IControl {
 		}
 		
 		//Pause-Button oben rechts ausblenden, wenn pausiert
-		if (guilayer.getButtonsMap().get("pause").isEnabled()) {
-			guilayer.getButtonsMap().get("pause").setEnabled(false);
-		} else {
-			guilayer.getButtonsMap().get("pause").setEnabled(true);
-		}
+//		if (guilayer.getButtonsMap().get("pause").isEnabled()) {
+//			guilayer.getButtonsMap().get("pause").setEnabled(false);
+//		} else {
+//			guilayer.getButtonsMap().get("pause").setEnabled(true);
+//		}
 		
-		guilayer.showDialogMessage("Pause", "Das Spiel wurde pausiert.", false,true);
-		
+//		guilayer.showDialogMessage("Pause", "Das Spiel wurde pausiert.", false,true);
+//		
 		closeWindow("spionage");
 		closeWindow("beschwichtigen");
 		
