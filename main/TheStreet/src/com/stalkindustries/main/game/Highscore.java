@@ -98,8 +98,8 @@ public class Highscore {
 	//Beschwerden Miri
 	public void exportIntoScores(){
 		//für den Fall, dass der Dateipfad und die Datei noch nicht existieren, werden sie hier neu erstellt
-			File folder = new File("res\\user\\");
-			File file = new File("res\\user\\"+this.levelname+".bnd");
+			File folder = new File(Ressources.HOMEDIR+"res\\user\\");
+			File file = new File(Ressources.HOMEDIR+"res\\user\\"+this.levelname+".bnd");
 				
 	    	if(!folder.canWrite())
 	    		System.err.println("Can't write to user files");
@@ -112,11 +112,11 @@ public class Highscore {
 			}		
 		
 	    //Beschreiben der Datei levelname.bnd
-		ArrayList<String> filearray = this.getFile("res\\user\\"+this.levelname+".bnd");
+		ArrayList<String> filearray = this.getFile(Ressources.HOMEDIR+"res\\user\\"+this.levelname+".bnd");
 		Writer fw = null;
 	     try
 	     {
-	    	 fw = new FileWriter("res\\user\\"+this.levelname+".bnd");
+	    	 fw = new FileWriter(Ressources.HOMEDIR+"res\\user\\"+this.levelname+".bnd");
 	    	 for(int i=0;i<filearray.size();i++){
 	  	       fw.write(filearray.get(i));
 		       fw.append( System.getProperty("line.separator") ); 
@@ -139,7 +139,7 @@ public class Highscore {
 	
 	//Beschwerden Miri
 	public void exportIntoUser(){
-		ArrayList<String> file = this.getFile("res\\user\\"+this.agent.getName()+".usr");
+		ArrayList<String> file = this.getFile(Ressources.HOMEDIR+"res\\user\\"+this.agent.getName()+".usr");
 		
 		String festnahme="";
 		if(this.festgenommen)
@@ -150,7 +150,7 @@ public class Highscore {
 	     Writer fw = null;
 	     try
 	     {
-	    	 fw = new FileWriter("res\\user\\"+this.agent.getName()+".usr");
+	    	 fw = new FileWriter(Ressources.HOMEDIR+"res\\user\\"+this.agent.getName()+".usr");
 	    	 for(int i=0;i<file.size();i++){
 	  	       fw.write(file.get(i));
 		       fw.append( System.getProperty("line.separator") ); 

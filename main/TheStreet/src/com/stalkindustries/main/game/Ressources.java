@@ -37,30 +37,28 @@ public class Ressources {
 	public static BufferedImage menubutton;
 	public static BufferedImage ingameframe;
 	
-	public static String HOMEDIR;
+	public static final String HOMEDIR = defaultDirectory();
 	public static int NUMBERHOUSES;
 	public static final int NUMBERBESCHWICHTIGENACTIONS = 4; // Zahl ist grad nur Dummywert
 	public static int AUSGEWAEHLTESLAND = 1; //TODO dynamisch ausgewähltes Land reinschreiben
 	
 	 
 	public static void loadLevelInfomration(String levelname){
-		location_ids=read_from_csv("res\\level\\"+levelname+"\\"+levelname+"_map.csv");
-		names = read_from_csv("res\\level\\"+levelname+"\\"+levelname+"_namen.csv");
-		quizfragen = read_from_csv("res\\level\\"+levelname+"\\"+levelname+"_quizfragen.csv");
+		location_ids=read_from_csv(Ressources.HOMEDIR+"res\\level\\"+levelname+"\\"+levelname+"_map.csv");
+		names = read_from_csv(Ressources.HOMEDIR+"res\\level\\"+levelname+"\\"+levelname+"_namen.csv");
+		quizfragen = read_from_csv(Ressources.HOMEDIR+"res\\level\\"+levelname+"\\"+levelname+"_quizfragen.csv");
 		
-		livetickergags = read_from_csv("res\\game\\"+"livetickergags.csv");
+		livetickergags = read_from_csv(Ressources.HOMEDIR+"res\\game\\"+"livetickergags.csv");
 		//livetickergags = randomizeGags();
 		livetickergags = randomizeLists(copy_csv(livetickergags));
 		
-		evilevents = read_from_csv("res\\game\\"+"EvilEvents.csv");
+		evilevents = read_from_csv(Ressources.HOMEDIR+"res\\game\\"+"EvilEvents.csv");
 		
-		normalevents = read_from_csv("res\\game\\"+"NormaleEvents.csv");
+		normalevents = read_from_csv(Ressources.HOMEDIR+"res\\game\\"+"NormaleEvents.csv");
 		normalevents = randomizeLists(copy_csv(normalevents));
 		
 		setNumberOfHouses();
-		HOMEDIR = defaultDirectory();
 		
-			System.out.println(HOMEDIR);
 	}
 	
 	
@@ -77,49 +75,49 @@ public class Ressources {
 		ZEROPOS.setSize((SCREEN.getWidth()/2)-(MAPWIDTH/2),(SCREEN.getHeight()/2)-(MAPHEIGHT/2));
 		
 		try {
-			menubars = ImageIO.read(new File("res\\game\\gui_ingame_bars.png"));
+			menubars = ImageIO.read(new File(Ressources.HOMEDIR+"res\\game\\gui_ingame_bars.png"));
 		} catch (IOException e) {
 			System.err.println("Could not find Image gui_ingame_bars.png");
 			e.printStackTrace();
 		}
 		
 		try {
-			zahlen = ImageIO.read(new File("res\\game\\slice_digits.png"));
+			zahlen = ImageIO.read(new File(Ressources.HOMEDIR+"res\\game\\slice_digits.png"));
 		} catch (IOException e) {
 			System.err.println("Could not find Image slice_digits.png");  
 			e.printStackTrace();
 		}
 		
 		try {
-			ingamebutton = ImageIO.read(new File("res\\game\\slice_buttons_ingame.png"));
+			ingamebutton = ImageIO.read(new File(Ressources.HOMEDIR+"res\\game\\slice_buttons_ingame.png"));
 		} catch (IOException e) {
 			System.err.println("Could not find Image slice_buttons_ingame.png");
 			e.printStackTrace();
 		}
 		
 		try {
-			mainmenu = ImageIO.read(new File("res\\game\\gui_menu_main.png"));
+			mainmenu = ImageIO.read(new File(Ressources.HOMEDIR+"res\\game\\gui_menu_main.png"));
 		} catch (IOException e) {
 			System.err.println("Could not find Image gui_menu_main.png");
 			e.printStackTrace();
 		}
 		
 		try {
-			menubutton = ImageIO.read(new File("res\\game\\slice_buttons_menu.png"));
+			menubutton = ImageIO.read(new File(Ressources.HOMEDIR+"res\\game\\slice_buttons_menu.png"));
 		} catch (IOException e) {
 			System.err.println("Could not find Image slice_buttons_menu.png");
 			e.printStackTrace();
 		}
 		
 		try {
-			ingameframe = ImageIO.read(new File("res\\game\\slice_fenster.png"));
+			ingameframe = ImageIO.read(new File(Ressources.HOMEDIR+"res\\game\\slice_fenster.png"));
 		} catch (IOException e) {
 			System.err.println("Could not find Image slice_fenster.png,");
 			e.printStackTrace();
 		}
 		
 		try {
-			mainmenusub = ImageIO.read(new File("res\\game\\gui_menu_sub.png"));
+			mainmenusub = ImageIO.read(new File(Ressources.HOMEDIR+"res\\game\\gui_menu_sub.png"));
 		} catch (IOException e) {
 			System.err.println("Could not find Image gui_menu_sub.png,");
 			e.printStackTrace();
@@ -290,16 +288,16 @@ public class Ressources {
 	
 	private static String defaultDirectory()
 	{
-		if(!System.getenv("DevelopmentEnvironment").equals("1")){
+		if(System.getenv("DevelopmentEnvironment")== null){
 		    String OS = System.getProperty("os.name").toUpperCase();
 		    if (OS.contains("WIN"))
-		        return System.getenv("APPDATA")+"\\The Street";
+		        return System.getenv("APPDATA")+"\\The Street\\";
 		    else if (OS.contains("MAC"))
-		        return System.getProperty("user.home") + "/Library/Application/The Street "
+		        return System.getProperty("user.home") + "/Library/Application/The Street/ "
 		                + "Support";
 		    else if (OS.contains("NUX"))
-		        return System.getProperty("user.home")+"\\The Street";
-		    return System.getProperty("user.dir")+"\\The Street";
+		        return System.getProperty("user.home")+"\\The Street\\";
+		    return System.getProperty("user.dir")+"\\The Street\\";
 		}
 		return "";
 	}

@@ -333,7 +333,7 @@ public class Menu extends JFrame implements MouseMotionListener{
         	if(i>3)
         		break;
         	try {
-    			BufferedImage loader = ImageIO.read(new File("res\\level\\"+levels.get(i)+"\\"+levels.get(i)+"_slice_menu.png"));
+    			BufferedImage loader = ImageIO.read(new File(Ressources.HOMEDIR+"res\\level\\"+levels.get(i)+"\\"+levels.get(i)+"_slice_menu.png"));
     			BufferedImage iconnormal = new BufferedImage(312,134, BufferedImage.TYPE_INT_ARGB);
     			BufferedImage iconhover = new BufferedImage(312,134, BufferedImage.TYPE_INT_ARGB);
     			Graphics2D g2d = iconhover.createGraphics();
@@ -461,7 +461,7 @@ public class Menu extends JFrame implements MouseMotionListener{
      * @return Liste aller validen Levelfiles
      */
     private ArrayList<String> readAvaidableLevel(){
-    	File folder = new File("res\\level");
+    	File folder = new File(Ressources.HOMEDIR+"res\\level");
     	ArrayList<String> levels = new ArrayList<String>();
     	for (File fileEntry : folder.listFiles()) {
             if (fileEntry.isDirectory() && isValidLevel(fileEntry)) {
