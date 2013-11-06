@@ -78,7 +78,7 @@ public class GUILayer extends JFrame implements MouseMotionListener {
 		this.timer = new Timer(Ressources.GAMESPEED, new OSTimer(this));
 		this.timer.setCoalesce(false);
 		this.timer.start(); 
-		this.highscore = new Highscore(this.simulation,this.quiz,this.simulation.get_agent());
+		this.highscore = new Highscore(this.simulation,this.quiz,this.simulation.get_agent(),levelname);
 	}
 
 
@@ -1042,9 +1042,12 @@ public class GUILayer extends JFrame implements MouseMotionListener {
 		
 		
 		
-		String hausnr = String.valueOf((int)(Math.random()*Ressources.NUMBERHOUSES))+1;
+		String hausnr = String.valueOf((int)(Math.random()*Ressources.NUMBERHOUSES)+1);
 		String egal1 = this.humans.get((int)(Math.random()*this.humans.size()-1)).getName();
 		String egal2 = this.humans.get((int)(Math.random()*this.humans.size()-1)).getName();
+		while(egal1.equals(egal2))
+			egal2 = this.humans.get((int)(Math.random()*this.humans.size()-1)).getName();
+			
 		String output="";
 				if(input.contains("$1")){
 					output = input.replace("$1",egal1);

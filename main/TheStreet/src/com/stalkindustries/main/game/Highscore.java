@@ -9,6 +9,8 @@ import java.io.IOException;
 import java.io.Writer;
 import java.util.ArrayList;
 
+import com.stalkindustries.main.menu.Menu;
+
 public class Highscore {
 	private double highscore = 0d;
 	private double wissenswert = 0d;
@@ -19,13 +21,15 @@ public class Highscore {
 	private Agent agent;
 	private int spielzeit;					//in Minuten
 	private boolean festgenommen = false;
+	private String levelname;
 	
 	
 	//Beschwerden Miri
-	public Highscore(Simulation simulation, Quiz quiz, Agent agent){
+	public Highscore(Simulation simulation, Quiz quiz, Agent agent, String levelname){
 		this.simulation = simulation;		//gebraucht für Misstrauen, Spielzeit und Überwachungsstatus
 		this.quiz = quiz;					//gebraucht für Beantwortungen der Fragen
 		this.agent = agent;
+		this.levelname = levelname;
 	}
 	
 	//Beschwerden Miri
@@ -91,13 +95,28 @@ public class Highscore {
 	
 	//Beschwerden Miri
 	public void exportIntoScores(){
-		ArrayList<String> file = this.getFile("res\\user\\scores.bnd");
+		//für den Fall, dass der Dateipfad und die Datei noch nicht existieren, werden sie hier neu erstellt
+			File folder = new File("res\\user\\");
+			File file = new File("res\\user\\"+this.levelname+".bnd");
+				
+	    	if(!folder.canWrite())
+	    		System.err.println("Can't write to user files");
+	    	try {
+	    		folder.mkdirs();
+				file.createNewFile();
+			} catch (IOException e) {
+				System.err.println("Error while creating Userfile");
+				e.printStackTrace();
+			}		
+		
+	    //Beschreiben der Datei levelname.bnd
+		ArrayList<String> filearray = this.getFile("res\\user\\"+this.levelname+".bnd");
 		Writer fw = null;
 	     try
 	     {
-	    	 fw = new FileWriter("res\\user\\scores.bnd");
-	    	 for(int i=0;i<file.size();i++){
-	  	       fw.write(file.get(i));
+	    	 fw = new FileWriter("res\\user\\"+this.levelname+".bnd");
+	    	 for(int i=0;i<filearray.size();i++){
+	  	       fw.write(filearray.get(i));
 		       fw.append( System.getProperty("line.separator") ); 
 	    	 }
 	    	 fw.write(this.agent.getName()+": "+this.highscore);
@@ -143,6 +162,8 @@ public class Highscore {
 	    	 fw.append( System.getProperty("line.separator") );
 	    	 fw.write("Anzahl entdeckter Events: "+this.events+" von "+this.simulation.get_people().size());
 	    	 fw.append( System.getProperty("line.separator") ); 
+	    	 fw.write("Level: "+this.levelname);
+	    	 fw.append( System.getProperty("line.separator") );
 	    	 fw.append( System.getProperty("line.separator") ); 
 	    	 fw.close();
 	     }
