@@ -290,7 +290,7 @@ public class Ressources {
 	
 	private static String defaultDirectory()
 	{
-		if(!System.getenv("DevelopmentEnvionment").equals("1")){
+		if(!System.getenv("DevelopmentEnvironment").equals("1")){
 		    String OS = System.getProperty("os.name").toUpperCase();
 		    if (OS.contains("WIN"))
 		        return System.getenv("APPDATA")+"\\The Street";
