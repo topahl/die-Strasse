@@ -379,7 +379,7 @@ public class Control implements IControl {
 //		if(lastFunktioncode.equals("parkSpionage"))
 			
 		if(!lastFunktioncode.startsWith("aktion")){
-			schowHausinfo(hausid);			
+			showHouseInfo(hausid);			
 		}
 		
 		}
@@ -662,7 +662,7 @@ public class Control implements IControl {
 	 * Zeigt die Hausinformation für ein Haus an
 	 * @param hausnr Hausnummer des Hases welches angezeigt werden soll
 	 */
-	private void schowHausinfo(int hausnr){
+	private void showHouseInfo(int hausnr){
 		JLayeredPane hausinfo = guilayer.getWindow("fensterhaus");
 		JLabel[] informationen = guilayer.getHausinfoLabels();
 		informationen[0].setText("Haus "+hausnr);
