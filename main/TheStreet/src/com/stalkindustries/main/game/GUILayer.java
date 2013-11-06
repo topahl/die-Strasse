@@ -4,6 +4,7 @@ import java.awt.Color;
 import java.awt.Font;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseMotionListener;
+import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -56,7 +57,9 @@ public class GUILayer extends JFrame implements MouseMotionListener {
 	private JLabel dialog‹berschrift = new JLabel(); //‹berschrift, Beschreibungstext
 	private JTextArea dialogText = new JTextArea();
 	private JLabel newsticker = new JLabel();
+	private JLabel actionsStatus = new JLabel(); //Statusanzeige der Agentenaktion;
 	
+	private BufferedImage fortschrittskreis[]=new BufferedImage[7];
 	
 	
 	/**
@@ -69,7 +72,9 @@ public class GUILayer extends JFrame implements MouseMotionListener {
 		Ressources.loadLevelInfomration(levelname);
 		
 		simulation = new Simulation();
-		
+		for(int i=0;i<7;i++){
+			fortschrittskreis[i]=Ressources.ingamebutton.getSubimage(948, 222+i*Ressources.RASTERHEIGHT+44, Ressources.RASTERHEIGHT, Ressources.RASTERHEIGHT);
+		}
 		this.quiz = new Quiz(this);
 		this.control = new Control(this,this.quiz);
 		this.initComponents(levelname, agentname);
@@ -79,6 +84,9 @@ public class GUILayer extends JFrame implements MouseMotionListener {
 		this.timer.setCoalesce(false);
 		this.timer.start(); 
 		this.highscore = new Highscore(this.simulation,this.quiz,this.simulation.get_agent(),levelname);
+		
+		
+		
 	}
 
 
@@ -610,6 +618,10 @@ public class GUILayer extends JFrame implements MouseMotionListener {
 			this.buttons.put(buttonNamesPauseExit[i], button);
 		}
 
+		//Statusanzeige f¸r den Fortschritt einer Aktion
+		this.actionsStatus.setBounds(Ressources.ZEROPOS.width+400, Ressources.ZEROPOS.height +642, 45, 45);
+		this.actionsStatus.setIcon(new ImageIcon(fortschrittskreis[2]));
+		this.baseLayer.add(actionsStatus, javax.swing.JLayeredPane.DEFAULT_LAYER);
 		// Groﬂe Buttons
 		buttonSize = 66;
 
@@ -1406,4 +1418,5 @@ public class GUILayer extends JFrame implements MouseMotionListener {
 	public Highscore getHighscore(){
 		return this.highscore;
 	}
+	
 }
