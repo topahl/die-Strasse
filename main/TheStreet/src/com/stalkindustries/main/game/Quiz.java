@@ -28,7 +28,7 @@ public class Quiz {
 		this.gui = gui;
 		this.quizfragen = Ressources.getQuiz();
 		this.quizstart = (int)(Math.random()*(this.quizfragen.size()));
-		this.quizstep = (int)(Math.random()*(this.quizfragen.size())+1);
+		this.quizstep = (int)(Math.random()*(this.quizfragen.size()-2)+1);
 	}
 	
 
