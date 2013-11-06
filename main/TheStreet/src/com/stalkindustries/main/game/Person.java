@@ -14,6 +14,7 @@ public abstract class Person extends Mensch {
 	private int zeitverzogerung; // in Minuten
 	private int durchgefuehrteBeschwichtigungen[] = new int[Ressources.NUMBERBESCHWICHTIGENACTIONS];//zum Mitzählen, weil 20 Kuchen am Tag, doch wieder misstrauisch machen
 	protected ArrayList<String> event;
+	private Boolean istFarbig;
 	
 	static private int last_id=-1;
 		
@@ -57,6 +58,7 @@ public abstract class Person extends Mensch {
 		this.zeitverzogerung = (int)(Math.random()*(59))+1;
 		this.haus_id = house_id;
 		this.event = event;
+		this.istFarbig=false;
 				
 
 		//Person einen Namen geben
@@ -106,6 +108,16 @@ public abstract class Person extends Mensch {
 	
 	public ArrayList<String> getEvent(){
 		return this.event;
+	}
+
+
+	public Boolean getIstFarbig() {
+		return istFarbig;
+	}
+
+
+	public void setIstFarbig(Boolean istFarbig) {
+		this.istFarbig = istFarbig;
 	}
 
 }

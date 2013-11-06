@@ -11,6 +11,7 @@ public class Erwachsene extends Person{
 		super(house_id,event);
 		this.haus_id=house_id;
 		
+		
 		//hat Arbeit?
 		int tmp = (int)(Math.random()*3+1);
 		if(tmp == 3)

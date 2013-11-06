@@ -680,9 +680,8 @@ public class Control implements IControl {
 				informationen[i+1].setVisible(false);
 				informationen[i+5].setVisible(false);
 		}
-		//TODO -> wenn person globale Variable hat "istFarbig" kann man hier darauf abfragen und dementsprechend nicht malen
 		for(Mensch person:personen){
-			if(person.get_haus_id()==hausnr){
+			if(person.get_haus_id()==hausnr && ((Person)person).getIstFarbig()==true){
 				informationen[perscnt].setIcon(new ImageIcon(person.getSprite().getSubimage(0, 0, Ressources.RASTERHEIGHT, Ressources.RASTERHEIGHT)));
 				informationen[perscnt+4].setText(person.getName());
 				informationen[perscnt].setVisible(true);
