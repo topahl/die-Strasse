@@ -124,7 +124,7 @@ public class ControlMenu implements IControl{
 	 * @author Tobias
 	 */
 	@SuppressWarnings("unchecked")
-	private void openProfil(){
+	public void openProfil(){
 		mainmenu.getBenutzerliste().setModel(getPlayernames());
 		mainmenu.showLayer(Menu.LAYERPROFIL);
 	}

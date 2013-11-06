@@ -127,9 +127,9 @@ public class Menu extends JFrame implements MouseMotionListener{
         
 		
 		
-		
-        showLayer(LAYERMENU);
-        
+		//call Login screen
+        control.openProfil();
+      
         //disables bsi Benutzer ausgewählt ist
 
         
