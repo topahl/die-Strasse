@@ -557,10 +557,6 @@ public class Simulation {
 			parkeingang = berechne_Parkeingang(location_ids);
 		}
 		
-		if (mensch instanceof Agent && zielloc == (char)(get_agent().get_haus_id()+48+1)){
-			System.out.print("Agent muss sich zu " + zielloc + " bewegen!");
-		}
-		
 		//Aktuelle Position des Männchens wird auf 0 gesetzt
 		if (zielloc != locationId || zielloc!='P'){
 			location_ids = wegberechnung_rasterkarte_initialisierung(location_ids, String.valueOf(zielloc), locationId);
@@ -578,9 +574,6 @@ public class Simulation {
 	        case 'l':
 	        default: location_ids.get((mensch.getPosY()-Ressources.ZEROPOS.height)/Ressources.RASTERHEIGHT).set((mensch.getPosX()-Ressources.ZEROPOS.width)/Ressources.RASTERHEIGHT,"0");
 	        }
-//		} else{
-//			location_ids.get((mensch.getPosY()-Ressources.ZEROPOS.height)/Ressources.RASTERHEIGHT).set((mensch.getPosX()-Ressources.ZEROPOS.width)/Ressources.RASTERHEIGHT,"0");
-//		}
 		
 		//Bewegungsstack nach und nach füllen
 		neuer_weg = fuelle_bewegungs_stack(location_ids, mensch, zielloc);
@@ -601,12 +594,12 @@ public class Simulation {
 		String ziellocation="Z";
 		
 		goal:	for (int i=0; i<100; i++){
-					for (int j=0; j<16; j++){  	// J entspricht y-wert, K entspricht x-wert
-						for (int k=0; k<25; k++){
+					for (int j=0; j<Ressources.MAPHEIGHT/Ressources.RASTERHEIGHT; j++){  	// J entspricht y-wert, K entspricht x-wert
+						for (int k=0; k<Ressources.MAPWIDTH/Ressources.RASTERHEIGHT; k++){
 							// Es werden Zahlen auf der Map gesucht
 							if (location_ids.get(j).get(k).equals(String.valueOf(i))){
 								// Es wird überprüft, ob das Ziel in direkter Nähe liegt
-								if (j < 15){ //15 -> Rasterhöhe
+								if (j < Ressources.MAPHEIGHT/Ressources.RASTERHEIGHT-1){ //15 -> Rasterhöhe
 									if (location_ids.get(j+1).get(k).equals(ziellocation)) {
 										location_ids.get(j+1).set(k,String.valueOf(i+1));
 										counter = i;
@@ -615,7 +608,7 @@ public class Simulation {
 										break goal;
 									}
 								}
-								if (k<24){ //24 -> Rasterbreite
+								if (k<Ressources.MAPWIDTH/Ressources.RASTERHEIGHT-1){ //24 -> Rasterbreite
 									if (location_ids.get(j).get(k+1).equals(ziellocation)) {
 										location_ids.get(j).set(k+1,String.valueOf(i+1));
 										counter = i;
@@ -648,12 +641,12 @@ public class Simulation {
 										(i>0 && (mensch!= null && zielloc == mensch.get_location_id())) ||
 										(mensch!= null && zielloc != mensch.get_location_id())){
 									// Es wird überprüft, ob ein Feld drüber/drunter/links oder rechts ebenfalls begehbar ist -> das wird markiert
-									if (j<15){
+									if (j<Ressources.MAPHEIGHT/Ressources.RASTERHEIGHT-1){
 										if (location_ids.get(j+1).get(k).equals("X")) {			//Weg nach unten ist begehbar
 										location_ids.get(j+1).set(k,String.valueOf(i+1));
 										}
 									}
-									if (k<24){
+									if (k<Ressources.MAPWIDTH/Ressources.RASTERHEIGHT-1){
 										if (location_ids.get(j).get(k+1).equals("X")) {			//Weg nach rechts ist begehbar
 										location_ids.get(j).set(k+1,String.valueOf(i+1));
 										}
@@ -681,13 +674,13 @@ public class Simulation {
 											firstStep = false;
 										}
 									}
-									if (k<24){
+									if (k<Ressources.MAPWIDTH/Ressources.RASTERHEIGHT-1){
 										if (location_ids.get(j).get(k+1).equals("X") && firstStep) {			//Weg nach rechts ist begehbar
 											location_ids.get(j).set(k+1,String.valueOf(i+1));
 											firstStep = false;
 										}
 									}
-									if (j<15){
+									if (j<Ressources.MAPHEIGHT/Ressources.RASTERHEIGHT-1){
 										if (location_ids.get(j+1).get(k).equals("X") && firstStep) {			//Weg nach unten ist begehbar
 											location_ids.get(j+1).set(k,String.valueOf(i+1));
 											firstStep = false;
@@ -726,13 +719,13 @@ public class Simulation {
 		if(mensch.get_location_id()!=zielloc || (int)(Math.random()*2) == 1){ 
 			for (int i = counter; i>=0; i--){
 				if (mensch.get_location_id()==zielloc && i == 0 && zielloc=='P'){
-					if (yPos_current<15){
+					if (yPos_current<Ressources.MAPHEIGHT/Ressources.RASTERHEIGHT-1){
 						if (location_ids.get(yPos_current+1).get(xPos_current).equals(String.valueOf(counter+1))) {			//unten gehts weiter
 							yPos_current++;
 							neuer_weg.push('o');
 						}
 					}
-					if (xPos_current<24){
+					if (xPos_current<Ressources.MAPWIDTH/Ressources.RASTERHEIGHT-1){
 						if (location_ids.get(yPos_current).get(xPos_current+1).equals(String.valueOf(counter+1))) {			//rechts gehts weiter
 							xPos_current++;
 							neuer_weg.push('l');
@@ -751,13 +744,13 @@ public class Simulation {
 						}
 					}
 				} else{
-					if (yPos_current<15){
+					if (yPos_current<Ressources.MAPHEIGHT/Ressources.RASTERHEIGHT-1){
 						if (location_ids.get(yPos_current+1).get(xPos_current).equals(String.valueOf(i))) {			//unten gehts weiter
 						yPos_current++;
 						neuer_weg.push('o');
 						}
 					}
-					if (xPos_current<24){
+					if (xPos_current<Ressources.MAPWIDTH/Ressources.RASTERHEIGHT-1){
 						if (location_ids.get(yPos_current).get(xPos_current+1).equals(String.valueOf(i))) {			//rechts gehts weiter
 						xPos_current++;
 						neuer_weg.push('l');
@@ -782,13 +775,13 @@ public class Simulation {
 				if (zielloc!='P'){
 					i--;
 				}
-				if (yPos_current<15){
+				if (yPos_current<Ressources.MAPHEIGHT/Ressources.RASTERHEIGHT-1){
 					if (location_ids.get(yPos_current+1).get(xPos_current).equals(String.valueOf(i))) {			//unten gehts weiter
 					yPos_current++;
 					neuer_weg.push('o');
 					}
 				}
-				if (xPos_current<24){
+				if (xPos_current<Ressources.MAPWIDTH/Ressources.RASTERHEIGHT-1){
 					if (location_ids.get(yPos_current).get(xPos_current+1).equals(String.valueOf(i))) {			//rechts gehts weiter
 					xPos_current++;
 					neuer_weg.push('l');
