@@ -41,6 +41,7 @@ public class Menu extends JFrame implements MouseMotionListener{
 	private JLayeredPane profilselect;
 	private JLayeredPane tutorial;
 	private JLayeredPane highscore;
+	private JLayeredPane credits;
 	private ControlMenu control;
 	
 	
@@ -53,6 +54,7 @@ public class Menu extends JFrame implements MouseMotionListener{
 	public static final int LAYERPROFIL = 3;
 	public static final int LAYERHIGHSCORE = 4;
 	public static final int LAYERTUTORIAL = 5;
+	public static final int LAYERCREDITS = 6;
 	
 	private HashMap<String,Button> buttons = new HashMap<String,Button>();
 	
@@ -108,6 +110,8 @@ public class Menu extends JFrame implements MouseMotionListener{
         initLevelSelect();
         
         initTutorial();
+
+        initCredits();
         
         initMainMenu();
         
@@ -130,19 +134,27 @@ public class Menu extends JFrame implements MouseMotionListener{
 		//call Login screen
         control.openProfil();
       
-        //disables bsi Benutzer ausgewählt ist
+        //disabled bis Benutzer ausgewählt ist
 
-        
         pack();
         
       
     }
 	
-	private void initTutorial(){
+	
+	private void initTutorial() {
 		tutorial = new JLayeredPane();
 		
-		generateStandartSubPageElements(tutorial, "Anleitung");
+		generateStandardSubPageElements(tutorial, "Anleitung");
 	}
+
+	
+	private void initCredits() {
+		credits = new JLayeredPane();
+		
+		generateStandardSubPageElements(credits, "Credits");
+	}
+	
 	
 	@SuppressWarnings("rawtypes")
 	private void initProfilMenu(){
@@ -254,7 +266,7 @@ public class Menu extends JFrame implements MouseMotionListener{
 				"use", 45, 600, this);
 	    profilselect.add(button, javax.swing.JLayeredPane.DEFAULT_LAYER);
 		
-		generateStandartSubPageElements(profilselect, "Benutzer");
+		generateStandardSubPageElements(profilselect, "Benutzer");
         
 	}
 	
@@ -290,6 +302,15 @@ public class Menu extends JFrame implements MouseMotionListener{
         mainmenu.add(button, javax.swing.JLayeredPane.DEFAULT_LAYER);
         buttons.put("beenden", button);
         
+		button = new Button(this.control,
+				Ressources.menubutton.getSubimage(0, 881, 315, 70),
+				Ressources.menubutton.getSubimage(315, 881, 313, 70),
+				Ressources.menubutton.getSubimage(2 * 315, 881, 315, 70),
+				Ressources.menubutton.getSubimage(3 * 315, 881, 315, 70),
+				"credits", 17 * Ressources.RASTERHEIGHT, 9 * Ressources.RASTERHEIGHT - 10, this);
+	    mainmenu.add(button, javax.swing.JLayeredPane.DEFAULT_LAYER);
+	    buttons.put("credits", button);
+        
         JLabel main = new JLabel();
         main.setIcon(new ImageIcon(Ressources.mainmenu));
         main.setBounds(0, 0, Ressources.MAPWIDTH, Ressources.MAPHEIGHT);
@@ -303,7 +324,7 @@ public class Menu extends JFrame implements MouseMotionListener{
 	private void initHighscore(){
 		highscore = new JLayeredPane();
 		
-		generateStandartSubPageElements(highscore, "Highscores");
+		generateStandardSubPageElements(highscore, "Highscores");
 	}
 	
 	private void initLevelSelect(){
@@ -363,7 +384,7 @@ public class Menu extends JFrame implements MouseMotionListener{
     			e.printStackTrace();
     		}
 		}
-        generateStandartSubPageElements(mapselect, "Levelauswahl");
+        generateStandardSubPageElements(mapselect, "Levelauswahl");
     }
 	
 	
@@ -390,6 +411,8 @@ public class Menu extends JFrame implements MouseMotionListener{
     	highscore.setEnabled(layernummer==LAYERHIGHSCORE?true:false);
     	tutorial.setVisible(layernummer==LAYERTUTORIAL?true:false);
     	tutorial.setEnabled(layernummer==LAYERTUTORIAL?true:false);
+    	credits.setVisible(layernummer==LAYERCREDITS?true:false);
+    	credits.setEnabled(layernummer==LAYERCREDITS?true:false);
     }
     
     
@@ -428,7 +451,7 @@ public class Menu extends JFrame implements MouseMotionListener{
     }
     
     
-    private void generateStandartSubPageElements(JLayeredPane subpage, String titel){
+    private void generateStandardSubPageElements(JLayeredPane subpage, String titel){
     	JLabel currentscreentext = new JLabel();
 		currentscreentext.setText(titel);
 	    currentscreentext.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
@@ -478,7 +501,7 @@ public class Menu extends JFrame implements MouseMotionListener{
      * @author Tobias
      * @return Username input String
      */
-    public String popInputUsername(){
+    public String popInputUsername() {
     	String input = username.getText();
     	username.setText("");
     	return input;
@@ -489,7 +512,7 @@ public class Menu extends JFrame implements MouseMotionListener{
 		return benutzerliste;
 	}
 	
-	public String getCurrentUser(){
+	public String getCurrentUser() {
 		return currentUser.getText();
 	}
     
