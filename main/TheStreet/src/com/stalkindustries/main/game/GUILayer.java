@@ -752,7 +752,7 @@ public class GUILayer extends JFrame implements MouseMotionListener {
 		int house_of_terrorist = (int) (Math.random() * Ressources.NUMBERHOUSES);
 		int agent_house_nr = (int) (Math.random() * Ressources.NUMBERHOUSES);
 		if (agent_house_nr == house_of_terrorist) {
-			if (house_of_terrorist == 8) {
+			if (house_of_terrorist == Ressources.NUMBERHOUSES-1) {
 				house_of_terrorist--;
 			} else {
 				house_of_terrorist++;
