@@ -599,7 +599,7 @@ public class Simulation {
 							// Es werden Zahlen auf der Map gesucht
 							if (location_ids.get(j).get(k).equals(String.valueOf(i))){
 								// Es wird überprüft, ob das Ziel in direkter Nähe liegt
-								if (j+1 < Ressources.MAPHEIGHT/Ressources.RASTERHEIGHT){ //15 -> Rasterhöhe
+								if (valuesInRange(k, j+1)){ //15 -> Rasterhöhe
 									if (location_ids.get(j+1).get(k).equals(ziellocation)) {
 										location_ids.get(j+1).set(k,String.valueOf(i+1));
 										counter = i;
@@ -608,7 +608,7 @@ public class Simulation {
 										break goal;
 									}
 								}
-								if (k+1<Ressources.MAPWIDTH/Ressources.RASTERHEIGHT){ //24 -> Rasterbreite
+								if (valuesInRange(k+1, j)){ //24 -> Rasterbreite
 									if (location_ids.get(j).get(k+1).equals(ziellocation)) {
 										location_ids.get(j).set(k+1,String.valueOf(i+1));
 										counter = i;
@@ -617,7 +617,7 @@ public class Simulation {
 										break goal;
 									}
 								}
-								if (j>0){
+								if (valuesInRange(k, j-1)){
 									if (location_ids.get(j-1).get(k).equals(ziellocation)) {
 										location_ids.get(j-1).set(k,String.valueOf(i+1));
 										counter = i;
@@ -626,7 +626,7 @@ public class Simulation {
 										break goal;
 									}
 								}
-								if (k>0){
+								if (valuesInRange(k-1, j)){
 									if (location_ids.get(j).get(k-1).equals(ziellocation)) {
 										location_ids.get(j).set(k-1,String.valueOf(i+1));
 										counter = i;
@@ -641,46 +641,46 @@ public class Simulation {
 										(i>0 && (mensch!= null && zielloc == mensch.get_location_id())) ||
 										(mensch!= null && zielloc != mensch.get_location_id())){
 									// Es wird überprüft, ob ein Feld drüber/drunter/links oder rechts ebenfalls begehbar ist -> das wird markiert
-									if (j+1<Ressources.MAPHEIGHT/Ressources.RASTERHEIGHT){
+									if (valuesInRange(k, j+1)){
 										if (location_ids.get(j+1).get(k).equals("X")) {			//Weg nach unten ist begehbar
 										location_ids.get(j+1).set(k,String.valueOf(i+1));
 										}
 									}
-									if (k+1<Ressources.MAPWIDTH/Ressources.RASTERHEIGHT){
+									if (valuesInRange(k+1, j)){
 										if (location_ids.get(j).get(k+1).equals("X")) {			//Weg nach rechts ist begehbar
 										location_ids.get(j).set(k+1,String.valueOf(i+1));
 										}
 									}
-									if (j>0){
+									if (valuesInRange(k, j-1)){
 										if (location_ids.get(j-1).get(k).equals("X")) {			// Weg nach oben ist begehbar
 										location_ids.get(j-1).set(k,String.valueOf(i+1));
 										}
 									}
-									if (k>0){
+									if (valuesInRange(k-1, j)){
 										if (location_ids.get(j).get(k-1).equals("X")) {			//Weg nach links ist begehbar
 										location_ids.get(j).set(k-1,String.valueOf(i+1));
 										}
 									}
 								} else { //TODO anpassen!!!
-									if (j>0){
+									if (valuesInRange(k, j)){
 										if (location_ids.get(j-1).get(k).equals("X") && firstStep) {			// Weg nach oben ist begehbar
 											location_ids.get(j-1).set(k,String.valueOf(i+1));
 											firstStep = false;
 										}
 									}
-									if (k>0){
+									if (valuesInRange(k, j)){
 										if (location_ids.get(j).get(k-1).equals("X") && firstStep) {			//Weg nach links ist begehbar
 											location_ids.get(j).set(k-1,String.valueOf(i+1));
 											firstStep = false;
 										}
 									}
-									if (k+1<Ressources.MAPWIDTH/Ressources.RASTERHEIGHT){
+									if (valuesInRange(k+1, j)){
 										if (location_ids.get(j).get(k+1).equals("X") && firstStep) {			//Weg nach rechts ist begehbar
 											location_ids.get(j).set(k+1,String.valueOf(i+1));
 											firstStep = false;
 										}
 									}
-									if (j+1<Ressources.MAPHEIGHT/Ressources.RASTERHEIGHT){
+									if (valuesInRange(k, j+1)){
 										if (location_ids.get(j+1).get(k).equals("X") && firstStep) {			//Weg nach unten ist begehbar
 											location_ids.get(j+1).set(k,String.valueOf(i+1));
 											firstStep = false;
@@ -1106,6 +1106,17 @@ public class Simulation {
 				get_people().get(i).setIstFarbig(true);
 				get_people().get(i).farbeZeigen(true);
 			}
+		}
+	}
+	
+	
+	//Support Tiki
+	private boolean valuesInRange(int x, int y){
+		if (x>=0 && x<Ressources.MAPWIDTH/Ressources.RASTERHEIGHT && 
+				y>=0 && y<Ressources.MAPHEIGHT/Ressources.RASTERHEIGHT){
+			return true;
+		} else{
+			return false;
 		}
 	}
 	
