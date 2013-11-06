@@ -599,7 +599,7 @@ public class Simulation {
 							// Es werden Zahlen auf der Map gesucht
 							if (location_ids.get(j).get(k).equals(String.valueOf(i))){
 								// Es wird überprüft, ob das Ziel in direkter Nähe liegt
-								if (j < Ressources.MAPHEIGHT/Ressources.RASTERHEIGHT-1){ //15 -> Rasterhöhe
+								if (j+1 < Ressources.MAPHEIGHT/Ressources.RASTERHEIGHT){ //15 -> Rasterhöhe
 									if (location_ids.get(j+1).get(k).equals(ziellocation)) {
 										location_ids.get(j+1).set(k,String.valueOf(i+1));
 										counter = i;
@@ -608,7 +608,7 @@ public class Simulation {
 										break goal;
 									}
 								}
-								if (k<Ressources.MAPWIDTH/Ressources.RASTERHEIGHT-1){ //24 -> Rasterbreite
+								if (k+1<Ressources.MAPWIDTH/Ressources.RASTERHEIGHT){ //24 -> Rasterbreite
 									if (location_ids.get(j).get(k+1).equals(ziellocation)) {
 										location_ids.get(j).set(k+1,String.valueOf(i+1));
 										counter = i;
@@ -641,12 +641,12 @@ public class Simulation {
 										(i>0 && (mensch!= null && zielloc == mensch.get_location_id())) ||
 										(mensch!= null && zielloc != mensch.get_location_id())){
 									// Es wird überprüft, ob ein Feld drüber/drunter/links oder rechts ebenfalls begehbar ist -> das wird markiert
-									if (j<Ressources.MAPHEIGHT/Ressources.RASTERHEIGHT-1){
+									if (j+1<Ressources.MAPHEIGHT/Ressources.RASTERHEIGHT){
 										if (location_ids.get(j+1).get(k).equals("X")) {			//Weg nach unten ist begehbar
 										location_ids.get(j+1).set(k,String.valueOf(i+1));
 										}
 									}
-									if (k<Ressources.MAPWIDTH/Ressources.RASTERHEIGHT-1){
+									if (k+1<Ressources.MAPWIDTH/Ressources.RASTERHEIGHT){
 										if (location_ids.get(j).get(k+1).equals("X")) {			//Weg nach rechts ist begehbar
 										location_ids.get(j).set(k+1,String.valueOf(i+1));
 										}
@@ -674,13 +674,13 @@ public class Simulation {
 											firstStep = false;
 										}
 									}
-									if (k<Ressources.MAPWIDTH/Ressources.RASTERHEIGHT-1){
+									if (k+1<Ressources.MAPWIDTH/Ressources.RASTERHEIGHT){
 										if (location_ids.get(j).get(k+1).equals("X") && firstStep) {			//Weg nach rechts ist begehbar
 											location_ids.get(j).set(k+1,String.valueOf(i+1));
 											firstStep = false;
 										}
 									}
-									if (j<Ressources.MAPHEIGHT/Ressources.RASTERHEIGHT-1){
+									if (j+1<Ressources.MAPHEIGHT/Ressources.RASTERHEIGHT){
 										if (location_ids.get(j+1).get(k).equals("X") && firstStep) {			//Weg nach unten ist begehbar
 											location_ids.get(j+1).set(k,String.valueOf(i+1));
 											firstStep = false;
