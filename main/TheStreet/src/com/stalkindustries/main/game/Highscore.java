@@ -70,7 +70,7 @@ public class Highscore {
 			misstrauen = 1000/this.misstrauen_max;
 		
 		//this.highscore = misstrauen + this.wissenswert + zeit + this.events;
-		this.highscore = this.wissenswert - this.misstrauen_max - zeit/8640 + this.events/this.simulation.get_people().size();
+		this.highscore = this.wissenswert - this.misstrauen_max - zeit/8640 + 100*this.events/this.simulation.get_people().size();
 		
 		if(this.festgenommen)
 			this.highscore *= 2;
