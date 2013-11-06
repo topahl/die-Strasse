@@ -386,7 +386,7 @@ public class Simulation {
 	
 	
 	//Support Tiki
-	void tagesablauf(){
+	public void tagesablauf(){
 		char locid ='0';
 		int hausid = 0;
 		for	(int i=0; i<this.people.size(); i++){
@@ -557,7 +557,7 @@ public class Simulation {
 			parkeingang = berechne_Parkeingang(location_ids);
 		}
 		
-		if (mensch instanceof Agent){
+		if (mensch instanceof Agent && zielloc == (char)(get_agent().get_haus_id()+48+1)){
 			System.out.print("Agent muss sich zu " + zielloc + " bewegen!");
 		}
 		
@@ -725,7 +725,7 @@ public class Simulation {
 		
 		if(mensch.get_location_id()!=zielloc || (int)(Math.random()*2) == 1){ 
 			for (int i = counter; i>=0; i--){
-				if (mensch.get_location_id()==zielloc && i == 0){
+				if (mensch.get_location_id()==zielloc && i == 0 && zielloc=='P'){
 					if (yPos_current<15){
 						if (location_ids.get(yPos_current+1).get(xPos_current).equals(String.valueOf(counter+1))) {			//unten gehts weiter
 							yPos_current++;
@@ -779,6 +779,9 @@ public class Simulation {
 			}
 		} else {
 			for (int i = 1; i<=counter+1; i++){
+				if (zielloc!='P'){
+					i--;
+				}
 				if (yPos_current<15){
 					if (location_ids.get(yPos_current+1).get(xPos_current).equals(String.valueOf(i))) {			//unten gehts weiter
 					yPos_current++;
@@ -803,6 +806,9 @@ public class Simulation {
 					neuer_weg.push('r');
 					}
 				} 
+				if (zielloc!='P'){
+					i++;
+				}
 			}
 		}
 		
@@ -813,16 +819,7 @@ public class Simulation {
 	//Support Tiki
 	private Stack<Character>fuelle_stack_homeposition( Mensch mensch, int xPos_current, int yPos_current) {
 		Stack<Character> neuer_weg = new Stack<Character>();
-//		
-//		Mensch mensch;
-//		
-//		if (agent!=null){
-//			mensch = (Mensch)(agent);
-//		} else{
-//			mensch = (Mensch)(person);
-//		}
-//		
-	
+
 		if (((mensch.getHomePosX()-Ressources.ZEROPOS.width)/Ressources.RASTERHEIGHT)+1 == xPos_current){
 			neuer_weg.push('l');
 		}
