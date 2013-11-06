@@ -245,7 +245,7 @@ public class Simulation {
 		//Risiko berechnen
 		//Risiko ist abhängig von der Uhrzeit, d.h.tagsüber ist das Risiko höher als nachts
 		int risiko=0;
-		if(this.spiel_stunde>1 && this.spiel_stunde<7){	//Nachtmodus
+		if(this.spiel_stunde>1 && this.spiel_stunde<6){	//Nachtmodus
 			risiko = (int)(Math.random()*3); 
 		}
 		else{	//Tagmodus
