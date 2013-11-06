@@ -121,7 +121,10 @@ public class Highscore {
 	  	       fw.write(filearray.get(i));
 		       fw.append( System.getProperty("line.separator") ); 
 	    	 }
-	    	 fw.write(this.agent.getName()+": "+this.highscore);
+	    	 
+	    	 fw.write(this.agent.getName()+": "+this.highscore +":");
+	    	 String now = new SimpleDateFormat(" dd.MM.yyyy : HH.mm.ss").format(new Date());
+	    	 fw.write(now);
 	    	 fw.append( System.getProperty("line.separator") ); 
 	    	 fw.close();
 	     }
