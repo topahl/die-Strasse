@@ -435,7 +435,7 @@ public class Control implements IControl {
 		if (guilayer.getButtonsMap().get("beschwichtigen").isEnabled()){
 			guilayer.getButtonsMap().get("beschwichtigen").setEnabled(false);
 		} else {
-			if (guilayer.getSimulation().getSpiel_stunde()<21 && guilayer.getSimulation().getSpiel_stunde()>6){
+			if (guilayer.getSimulation().getSpiel_stunde()<2 || guilayer.getSimulation().getSpiel_stunde()>6){
 				guilayer.getButtonsMap().get("beschwichtigen").setEnabled(true);
 			}
 		}

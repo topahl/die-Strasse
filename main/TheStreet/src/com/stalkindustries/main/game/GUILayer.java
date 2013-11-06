@@ -1178,12 +1178,17 @@ public class GUILayer extends JFrame implements MouseMotionListener {
 			
 			if (!getSimulation().isWieeeeschteAktion() && !control.getLastFunktioncode().equals("parkBeschwichtigen")){
 				getMousefollower().setVisible(false);
-				getSimulation().get_agent().setMussWuseln("");
+				if (!getSimulation().get_agent().getMussWuseln().equals("Park")){
+					getSimulation().get_agent().setMussWuseln("");
+				}
 				control.setLastFunktioncode("");
 			}
 		}
 		if (stunde == 2){
 			buttons.get("beschwichtigen").setEnabled(false);
+			if (getSimulation().get_agent().getMussWuseln().equals("Park")){
+				getSimulation().get_agent().setMussWuseln("");
+			}
 		}
 		if (stunde == 6) {
 			if ((minute >= 0) && (minute <= 20)){
