@@ -37,6 +37,7 @@ public class Ressources {
 	public static BufferedImage menubutton;
 	public static BufferedImage ingameframe;
 	
+	public static String HOMEDIR;
 	public static int NUMBERHOUSES;
 	public static final int NUMBERBESCHWICHTIGENACTIONS = 4; // Zahl ist grad nur Dummywert
 	public static int AUSGEWAEHLTESLAND = 1; //TODO dynamisch ausgewähltes Land reinschreiben
@@ -57,6 +58,9 @@ public class Ressources {
 		normalevents = randomizeLists(copy_csv(normalevents));
 		
 		setNumberOfHouses();
+		HOMEDIR = defaultDirectory();
+		
+			System.out.println(HOMEDIR);
 	}
 	
 	
@@ -284,6 +288,20 @@ public class Ressources {
 		return livetickergags;
 	}
 	
-	
+	private static String defaultDirectory()
+	{
+		if(!System.getenv("DevelopmentEnvionment").equals("1")){
+		    String OS = System.getProperty("os.name").toUpperCase();
+		    if (OS.contains("WIN"))
+		        return System.getenv("APPDATA")+"\\The Street";
+		    else if (OS.contains("MAC"))
+		        return System.getProperty("user.home") + "/Library/Application/The Street "
+		                + "Support";
+		    else if (OS.contains("NUX"))
+		        return System.getProperty("user.home")+"\\The Street";
+		    return System.getProperty("user.dir")+"\\The Street";
+		}
+		return "";
+	}
 	
 }
