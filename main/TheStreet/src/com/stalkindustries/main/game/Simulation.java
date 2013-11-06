@@ -1121,7 +1121,7 @@ public class Simulation {
 	
 
 	//Support Tiki
-	public boolean calc_gamoeover(){
+	public boolean calcGameOver(){
 		if (calc_misstrauen_in_street()>=90.0){
 			return true;
 		}

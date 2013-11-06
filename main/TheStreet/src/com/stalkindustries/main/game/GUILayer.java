@@ -1210,7 +1210,7 @@ public class GUILayer extends JFrame implements MouseMotionListener {
 			this.updateMisstrauen(); // Wert neu zeichnen
 			this.simulation.calcMisstrauenMax();
 			this.updateBalken();
-			if(this.simulation.calc_gamoeover()){
+			if(this.simulation.calcGameOver()){
 				this.stopGame();
 				this.showDialogMessage("Verloren", "Die Bevölkerung wurde zu misstrauisch. Ihre Identität wurde enttarnt.", false, false);
 			}
