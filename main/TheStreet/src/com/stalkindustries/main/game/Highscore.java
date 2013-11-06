@@ -7,7 +7,9 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.Writer;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 
 import com.stalkindustries.main.menu.Menu;
 
@@ -150,6 +152,9 @@ public class Highscore {
 	  	       fw.write(file.get(i));
 		       fw.append( System.getProperty("line.separator") ); 
 	    	 }
+	    	 String now = new SimpleDateFormat("dd.MM.yyyy HH:mm:ss").format(new Date());
+	    	 fw.write(now);
+	    	 fw.append( System.getProperty("line.separator") );
 	    	 fw.write("Highscore: "+this.highscore);
 	    	 fw.append( System.getProperty("line.separator") );
 	    	 fw.write("Terroristen festgenommen: "+festnahme);
