@@ -472,8 +472,17 @@ public class Menu extends JFrame implements MouseMotionListener{
     	return levels;
     }
     
-    public String getInputUsername(){
-    	return username.getText();
+    /**
+     * Returns the current input username and resets the field.
+     * 
+     * @author Tobias
+     * @return Username input String
+     */
+    public String popInputUsername(){
+    	String input = username.getText();
+    	username.setText("");
+    	return input;
+    	
     }
 
 	public JList getBenutzerliste() {

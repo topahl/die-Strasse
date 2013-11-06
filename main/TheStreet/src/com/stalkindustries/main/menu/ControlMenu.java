@@ -83,8 +83,8 @@ public class ControlMenu implements IControl{
 	 *@author Tobias
 	 */
 	private void createUser(){
-		String user = this.mainmenu.getInputUsername();
-		if(user!=""){
+		String user = this.mainmenu.popInputUsername().trim();
+		if(!user.equals("")){
 			File folder = new File("res\\user\\");
 			File file = new File("res\\user\\"+user+".usr");
 				
