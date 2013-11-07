@@ -484,7 +484,7 @@ public class GUILayer extends JFrame implements MouseMotionListener {
 		//Buttons in Aktionsfenster Beschwichtigen
 		String[] buttonNamesBeschwichtigen = { "aktionKuchen",
 				"aktionUnterhalten", "aktionFlirten", "aktionHand",
-				"parkBeschwichtigen", "aktion6Beschwichtigen" };
+				"parkBeschwichtigen"};
 		this.initButtonsAktionsfenster(fensterBeschwichtigen, 156, buttonNamesBeschwichtigen);
 
 		//Hintergrundbild Beschwichtigen-Aktionsfenster
@@ -537,8 +537,7 @@ public class GUILayer extends JFrame implements MouseMotionListener {
 		
 		//Aktionsbuttons bei Spionage
 		String[] buttonNamesSpionage = { "aktionWanze", "aktionKamera",
-				"aktionHacken", "aktionFernglas", "parkSpionage",
-				"aktion6Spionage" };
+				"aktionHacken", "aktionFernglas"};
 		this.initButtonsAktionsfenster(fensterSpionage, 420, buttonNamesSpionage);
 		
 		//Hintergrundbild Spionage-Aktionsfenster

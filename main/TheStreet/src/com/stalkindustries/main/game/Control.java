@@ -92,8 +92,6 @@ public class Control implements IControl {
 			clickHacken();
 		if(funktion.equals("aktionFernglas"))
 			clickFernglas();
-		if(funktion.equals("parkSpionage"))
-			clickParkSpionage();
 		
 		//Buttons small WerkzeugeSpionage im Houselayer
 		if(funktion.equals("werkzeugWanze"))
@@ -201,7 +199,6 @@ public class Control implements IControl {
 		// hausid von 1-9, get_haus_id 0-8 => Deswegen plus 1
 		if (hausid != guilayer.getSimulation().get_agent().get_haus_id()+1){
 		
-//	 TODO "aktion6Beschwichtigen" && "aktion6Spionage" werden nicht abgefragt
 		if(lastFunktioncode.equals("aktionKuchen")){
 			for (int i=0; i<guilayer.getSimulation().get_people().size(); i++){
 				if (guilayer.getSimulation().get_people().get(i).get_location_id()== (char)(hausid+48) && 
@@ -413,10 +410,7 @@ public class Control implements IControl {
 			spionagelabelBeschr(isPresent, "Trojaner installieren");
 		if(funktion.equals("aktionFernglas"))
 			spionagelabelBeschr(isPresent, "Haus beobachten");
-		if(funktion.equals("parkSpionage"))
-			spionagelabelBeschr(isPresent, "Im Park spionieren");
-		if(funktion.equals("aktion6Spionage"))
-			spionagelabelBeschr(isPresent, "Aufgabe 6");
+
 		
 		//Aktionen Beschwichtigen
 		if(funktion.equals("aktionKuchen"))
@@ -429,8 +423,6 @@ public class Control implements IControl {
 			beschwichtigenlabelBeschr(isPresent, "Helfen");
 		if(funktion.equals("parkBeschwichtigen"))
 			beschwichtigenlabelBeschr(isPresent, "Im Park unterhalten");
-		if(funktion.equals("aktion6Beschwichtigen"))
-			beschwichtigenlabelBeschr(isPresent, "Aktion 6");
 	}
 	
 	
@@ -603,14 +595,6 @@ public class Control implements IControl {
 		closeWindow("spionage");
 	}
 	
-	private void clickParkSpionage() {
-		//kein Icon, da Einsatzort (Park) vorgegeben
-		closeWindow("spionage");
-		guilayer.getSimulation().berechne_weg(guilayer.getSimulation().get_agent(), 'P');
-		guilayer.getSimulation().get_agent().setMussWuseln("Park");
-		guilayer.getButtonsMap().get("nachHause").setEnabled(true);
-		guilayer.getSimulation().setWieeeeschteAktion(true);
-	}
 	
 	private void clickKuchen() {
 		guilayer.getMousefollower().setIcon(new ImageIcon (Ressources.ingamebutton.getSubimage(0, (39)*6, 39, 39)));
