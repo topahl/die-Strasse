@@ -494,9 +494,17 @@ public class Simulation {
 						}
 					}
 				}
-			
 			}
 		}
+		if (get_agent().get_location_id() != (char)(get_agent().get_haus_id()+48+1) && (this.spiel_stunde>=21 || 
+			this.spiel_stunde<=6) && !wieeeeschteAktion && get_agent().getCurrentMove()=='n' &&
+			get_agent().get_location_id() != 'P'){
+			berechne_weg(get_agent(), (char)(get_agent().get_haus_id()+48+1));
+		}
+		if (get_agent().get_location_id() != (char)(get_agent().get_haus_id()+48+1) && this.spiel_stunde>=2 && 
+				this.spiel_stunde<=6 && !wieeeeschteAktion && get_agent().getCurrentMove()=='n'){
+				berechne_weg(get_agent(), (char)(get_agent().get_haus_id()+48+1));
+			}
 	} 	
 	
 	
@@ -719,7 +727,7 @@ public class Simulation {
 		if(mensch.get_location_id()!=zielloc || (int)(Math.random()*2) == 1){ 
 			for (int i = counter; i>=0; i--){
 				if (mensch.get_location_id()==zielloc && i == 0 && zielloc=='P'){
-					if (yPos_current<Ressources.MAPHEIGHT/Ressources.RASTERHEIGHT-1){
+					if (valuesInRange(xPos_current, yPos_current+1)){
 						if (location_ids.get(yPos_current+1).get(xPos_current).equals(String.valueOf(counter+1))) {			//unten gehts weiter
 							yPos_current++;
 							neuer_weg.push('o');
