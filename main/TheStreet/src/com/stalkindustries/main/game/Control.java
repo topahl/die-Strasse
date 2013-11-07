@@ -129,11 +129,12 @@ public class Control implements IControl {
 	private void clickRemoveFernglas() {
 		int currentHouse = Integer.parseInt(lastFunktioncode.substring(4,5))-1 ;
 		closeWindow("fensterhaus"); 
-		guilayer.getSimulation().getHouses().get(currentHouse).getUeberwachungsmodule().remove("Fernglas");
+		//guilayer.getSimulation().getHouses().get(currentHouse).getUeberwachungsmodule().remove("Fernglas");
 //		guilayer.getSimulation().get_agent().setMussWuseln("Fernglas");
 //		guilayer.getSimulation().berechne_weg(null, guilayer.getSimulation().get_agent(), (char)(currentHouse+1+48));
-		guilayer.getSimulation().getHouses().get(currentHouse).setUeberwachungsWert(0,3);
+	//	guilayer.getSimulation().getHouses().get(currentHouse).setUeberwachungsWert(0,3);
 		guilayer.getSimulation().setWieeeeschteAktion(true);
+		guilayer.getSimulation().get_agent().setMussWuseln(currentHouse+"Fernglasr");
 		
 	}
 
@@ -189,7 +190,6 @@ public class Control implements IControl {
 		Stack<Character> stehenBleiben = new Stack<Character>();
 		boolean istVorhanden = false;
 		boolean soAtHome = false;
-		int fernglasCounter=0;
 		
 		closeWindow("spionage");
 		closeWindow("beschwichtigen");
@@ -335,11 +335,10 @@ public class Control implements IControl {
 				}
 			}
 			if (!istVorhanden){
-				guilayer.getSimulation().getHouses().get(hausid-1).getUeberwachungsmodule().add("Fernglas");
+				//guilayer.getSimulation().getHouses().get(hausid-1).getUeberwachungsmodule().add("Fernglas");
 				guilayer.getSimulation().setWieeeeschteAktion(true);
-				guilayer.getSimulation().getHouses().get(hausid-1).setUeberwachungsWert((float)(Math.random()*7+1)+8,3);
-				
-				
+				//guilayer.getSimulation().getHouses().get(hausid-1).setUeberwachungsWert((float)(Math.random()*7+1)+8,3);	
+				guilayer.getSimulation().get_agent().setMussWuseln(hausid+"Fernglas");
 			}
 			istVorhanden = false;
 		}
@@ -372,9 +371,7 @@ public class Control implements IControl {
 				this.guilayer.showDialogMessage("Abgelehnt", "Das Hauptquartier fordert mehr Indizien.", false, true);
 			}
 		}
-//			
-//		if(lastFunktioncode.equals("parkSpionage"))
-			
+	
 		if(!lastFunktioncode.startsWith("aktion")){
 			showHouseInfo(hausid);			
 		}

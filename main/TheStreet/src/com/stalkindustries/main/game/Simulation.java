@@ -1004,6 +1004,19 @@ public class Simulation {
 		}
 		
 		
+		if(get_agent().getMussWuseln().length()==10 && get_agent().getMussWuseln().substring(1,10).equals("Fernglas+") && get_agent().getCurrentMove()=='n'){
+			getHouses().get((int)(get_agent().getMussWuseln().charAt(0)-48-1)).getUeberwachungsmodule().add("Fernglas");
+			getHouses().get((int)(get_agent().getMussWuseln().charAt(0)-48-1)).setUeberwachungsWert((float)(Math.random()*7+1)+8,3);
+			get_agent().setMussWuseln("");
+		}
+		if(get_agent().getMussWuseln().length()==9 && get_agent().getMussWuseln().substring(1,9).equals("Fernglas")){
+			//agentRumwuseln(1);
+			get_agent().setMussWuseln(get_agent().getMussWuseln()+"+");
+		}
+		
+
+		
+		
 //		if(get_agent().getMussWuseln().equals("Park+") && get_agent().getCurrentMove()=='n'){
 //			berechne_weg(null, agent, 'P');
 //			calcMisstrauenAfterBeschwichtigenInPark();
@@ -1047,6 +1060,15 @@ public class Simulation {
 			get_agent().setMussWuseln("Hackenr+");
 		}
 		
+		if(get_agent().getMussWuseln().length()==11 && get_agent().getMussWuseln().substring(1,11).equals("Fernglasr+") && get_agent().getCurrentMove()=='n'){
+			getHouses().get((int)(get_agent().getMussWuseln().charAt(0)-48)).getUeberwachungsmodule().remove("Fernglas");
+			getHouses().get((int)(get_agent().getMussWuseln().charAt(0)-48)).setUeberwachungsWert(0,3);
+			get_agent().setMussWuseln("");
+		}
+		if(get_agent().getMussWuseln().length()==10 && get_agent().getMussWuseln().substring(1,10).equals("Fernglasr")){
+			//agentRumwuseln(1);
+			get_agent().setMussWuseln(get_agent().getMussWuseln()+"+");
+		}
 			
 		
 		
