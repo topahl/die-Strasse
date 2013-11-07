@@ -1173,6 +1173,7 @@ public class GUILayer extends JFrame implements MouseMotionListener {
 			this.updateUeberwachung();
 			this.updateBalken();
 			getSimulation().updateUeberwachungsstatus();
+			checkThreeFernglaeserInStreet();
 		}
 		
 		
@@ -1316,7 +1317,27 @@ public class GUILayer extends JFrame implements MouseMotionListener {
 		this.stepcounter++;
 	}
 
-
+	/**
+	 * deaktiviert den Fernglasbutton, wenn 3 Fernglaeser installiert sind
+	 * aktiviert den Fernglasbutton, wenn weniger als 3 Fernglaeser installiert sind
+	 * @author Martika
+	 */
+	private void checkThreeFernglaeserInStreet(){
+		int fernglasCounter = 0;
+		
+		for (int i = 0; i<=Ressources.NUMBERHOUSES-1; i++){
+			if (getSimulation().getHouses().get(i).getUeberwachungsmodule().contains("Fernglas")){
+				fernglasCounter++;
+			}
+		}
+		if (fernglasCounter==3){
+			getButtonsMap().get("aktionFernglas").setEnabled(false);
+		} else{
+			getButtonsMap().get("aktionFernglas").setEnabled(true);
+		}
+	}
+	
+	
 	
 	/**
 	 * Gibt die HashMap der Buttons zurück

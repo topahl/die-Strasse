@@ -130,10 +130,8 @@ public class Control implements IControl {
 		int currentHouse = Integer.parseInt(lastFunktioncode.substring(4,5))-1 ;
 		closeWindow("fensterhaus"); 
 		guilayer.getSimulation().getHouses().get(currentHouse).getUeberwachungsmodule().remove("Fernglas");
-		guilayer.getButtonsMap().get("aktionFernglas").setEnabled(true);
 //		guilayer.getSimulation().get_agent().setMussWuseln("Fernglas");
 //		guilayer.getSimulation().berechne_weg(null, guilayer.getSimulation().get_agent(), (char)(currentHouse+1+48));
-		guilayer.getButtonsMap().get("aktionFernglas").setEnabled(true);
 		guilayer.getSimulation().getHouses().get(currentHouse).setUeberwachungsWert(0,3);
 		guilayer.getSimulation().setWieeeeschteAktion(true);
 		
@@ -341,14 +339,7 @@ public class Control implements IControl {
 				guilayer.getSimulation().setWieeeeschteAktion(true);
 				guilayer.getSimulation().getHouses().get(hausid-1).setUeberwachungsWert((float)(Math.random()*7+1)+8,3);
 				
-				for (int j = 0; j<=Ressources.NUMBERHOUSES-1; j++){
-					if (guilayer.getSimulation().getHouses().get(j).getUeberwachungsmodule().contains("Fernglas")){
-						fernglasCounter++;
-					}
-				}
-				if (fernglasCounter==3){
-					guilayer.getButtonsMap().get("aktionFernglas").setEnabled(false);
-				}
+				
 			}
 			istVorhanden = false;
 		}
