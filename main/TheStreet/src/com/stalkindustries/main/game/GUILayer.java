@@ -1303,7 +1303,7 @@ public class GUILayer extends JFrame implements MouseMotionListener {
 		}
 		if (getSimulation().get_agent().getCurrentMove()!= 'n' &&
 				(int)(getSimulation().get_agent().get_location_id()-48)>=1 && (int)(getSimulation().get_agent().get_location_id()-48)<=9 &&
-				getSimulation().isWieeeeschteAktion() && (char)(getSimulation().get_agent().get_haus_id()+48+1) != getSimulation().get_agent().get_location_id()){
+				getSimulation().isWieeeeschteAktion()){
 			drawFortschrittsbalken();
 		} else{
 			this.fortschrittsstatus.setVisible(false);
@@ -1337,46 +1337,49 @@ public class GUILayer extends JFrame implements MouseMotionListener {
 		if (getSimulation().get_agent().getMussWuseln().equals("Kamera+") || getSimulation().get_agent().getMussWuseln().equals("Kamerar+")){
 			step = 45/6;
 		}
+		if (getSimulation().get_agent().getMussWuseln().contains("Fernglas+") || getSimulation().get_agent().getMussWuseln().contains("Fernglas+")){
+			step = 15/6;
+		}
 		
-		step++;
+		//step++;
 		if (step!=0){
 			switch (step=getSimulation().get_agent().getMoves().size()/step){
-			case 0: System.out.println("6 Kuchenstück");
+			case 0: 
 					this.fortschrittsstatus.setBounds(Ressources.ZEROPOS.width+400, Ressources.ZEROPOS.height +642, 45, 45);
 					this.fortschrittsstatus.setIcon(new ImageIcon(fortschrittskreis[6]));
 					this.fortschrittsstatus.setVisible(true);
 					break;
-			case 1: System.out.println("5 Kuchenstück");
+			case 1: 
 					this.fortschrittsstatus.setBounds(Ressources.ZEROPOS.width+400, Ressources.ZEROPOS.height +642, 45, 45);
 					this.fortschrittsstatus.setIcon(new ImageIcon(fortschrittskreis[5]));
 					this.fortschrittsstatus.setVisible(true);
 					break;
-			case 2: System.out.println("4 Kuchenstück");
+			case 2: 
 					this.fortschrittsstatus.setBounds(Ressources.ZEROPOS.width+400, Ressources.ZEROPOS.height +642, 45, 45);
 					this.fortschrittsstatus.setIcon(new ImageIcon(fortschrittskreis[4]));
 					this.fortschrittsstatus.setVisible(true);
 					break;
-			case 3:	System.out.println("3 Kuchenstück");
+			case 3:	
 					this.fortschrittsstatus.setBounds(Ressources.ZEROPOS.width+400, Ressources.ZEROPOS.height +642, 45, 45);
 					this.fortschrittsstatus.setIcon(new ImageIcon(fortschrittskreis[3]));
 					this.fortschrittsstatus.setVisible(true);
 					break;
-			case 4: System.out.println("2 Kuchenstück");
+			case 4: 
 					this.fortschrittsstatus.setBounds(Ressources.ZEROPOS.width+400, Ressources.ZEROPOS.height +642, 45, 45);
 					this.fortschrittsstatus.setIcon(new ImageIcon(fortschrittskreis[2]));
 					this.fortschrittsstatus.setVisible(true);
 					break;
-			case 5: System.out.println("1 Kuchenstück");
+			case 5: 
 					this.fortschrittsstatus.setBounds(Ressources.ZEROPOS.width+400, Ressources.ZEROPOS.height +642, 45, 45);
 					this.fortschrittsstatus.setIcon(new ImageIcon(fortschrittskreis[1]));
 					this.fortschrittsstatus.setVisible(true);
 					break;
-			case 6: System.out.println("leerer Kuchen");
+			case 6: 
 					this.fortschrittsstatus.setBounds(Ressources.ZEROPOS.width+400, Ressources.ZEROPOS.height +642, 45, 45);
 					this.fortschrittsstatus.setIcon(new ImageIcon(fortschrittskreis[0]));
 					this.fortschrittsstatus.setVisible(true);
 					break;
-			default:System.out.println("default Kuchen");
+			default:
 					break;
 			}
 		}
