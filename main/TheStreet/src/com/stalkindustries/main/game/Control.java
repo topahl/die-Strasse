@@ -544,6 +544,13 @@ public class Control implements IControl {
 		guilayer.getSimulation().get_agent().setMussWuseln("");
 		guilayer.getButtonsMap().get("nachHause").setEnabled(false);
 		guilayer.getSimulation().berechne_weg(guilayer.getSimulation().get_agent(), (char)(guilayer.getSimulation().get_agent().get_haus_id()+1+48));
+		if (!guilayer.getSimulation().isWieeeeschteAktion()){
+			for (int i=0; i<guilayer.getSimulation().get_people().size(); i++){
+				if (guilayer.getSimulation().get_people().get(i).getCurrentMove()=='s'){
+					guilayer.getSimulation().get_people().get(i).setMoves(new Stack());
+				}
+			}
+		}
 	}
 	
 	private void clickRazzia() {

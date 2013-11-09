@@ -500,12 +500,12 @@ public class Simulation {
 			}
 		}
 		if (get_agent().get_location_id() != (char)(get_agent().get_haus_id()+48+1) && (this.spiel_stunde>=21 || 
-			this.spiel_stunde<=6) && !wieeeeschteAktion && get_agent().getCurrentMove()=='n' &&
+			this.spiel_stunde<6) && !wieeeeschteAktion && get_agent().getCurrentMove()=='n' &&
 			get_agent().get_location_id() != 'P'){
 			berechne_weg(get_agent(), (char)(get_agent().get_haus_id()+48+1));
 		}
 		if (get_agent().get_location_id() != (char)(get_agent().get_haus_id()+48+1) && this.spiel_stunde>=2 && 
-				this.spiel_stunde<=6 && !wieeeeschteAktion && get_agent().getCurrentMove()=='n'){
+				this.spiel_stunde<6 && !wieeeeschteAktion && get_agent().getCurrentMove()=='n'){
 				berechne_weg(get_agent(), (char)(get_agent().get_haus_id()+48+1));
 			}
 	} 	
