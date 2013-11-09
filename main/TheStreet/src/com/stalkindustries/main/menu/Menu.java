@@ -724,7 +724,6 @@ public class Menu extends JFrame implements MouseMotionListener{
     	for (File fileEntry : folder.listFiles()) {
             if (fileEntry.isDirectory() && isValidLevel(fileEntry)) {
                 levels.add(fileEntry.getName().trim());
-                System.out.println(fileEntry.getName());
             } 
     	}
     	return levels;

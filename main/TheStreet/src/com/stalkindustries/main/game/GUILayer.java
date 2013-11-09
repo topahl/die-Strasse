@@ -869,7 +869,6 @@ public class GUILayer extends JFrame implements MouseMotionListener {
 					// übrige Erwachsene setzen
 					for (int j = 0; j < number_of_adults - 1; j++) {
 						mensch = new Erwachsene(i,this.includeHaus(Ressources.getNormalEvents().get(mensch_cnt),i));
-						System.out.println(mensch_cnt+". "+this.includeHaus(Ressources.getNormalEvents().get(mensch_cnt),i).get(0));
 						this.humans.add(mensch);
 						this.baseLayer.add(mensch,
 								javax.swing.JLayeredPane.DEFAULT_LAYER);
@@ -888,7 +887,6 @@ public class GUILayer extends JFrame implements MouseMotionListener {
 					number_of_adults = (int) (Math.random() * people_per_house) + 1;
 					for (int j = 0; j < number_of_adults; j++) {
 						mensch = new Erwachsene(i,this.includeHaus(Ressources.getNormalEvents().get(mensch_cnt),i));
-						System.out.println(mensch_cnt+". "+this.includeHaus(Ressources.getNormalEvents().get(mensch_cnt),i).get(0));
 						this.humans.add(mensch);
 						this.baseLayer.add(mensch,
 								javax.swing.JLayeredPane.DEFAULT_LAYER);
@@ -907,7 +905,6 @@ public class GUILayer extends JFrame implements MouseMotionListener {
 				number_of_children = people_per_house - number_of_adults;
 				for (int j = 0; j < number_of_children; j++) {
 					mensch = new Kinder(i,this.includeHaus(Ressources.getNormalEvents().get(mensch_cnt),i));
-					System.out.println(mensch_cnt+". "+this.includeHaus(Ressources.getNormalEvents().get(mensch_cnt),i).get(0));
 					this.humans.add(mensch);
 					this.baseLayer.add(mensch,
 							javax.swing.JLayeredPane.DEFAULT_LAYER);

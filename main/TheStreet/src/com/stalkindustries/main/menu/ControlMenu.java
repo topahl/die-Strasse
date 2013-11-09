@@ -69,7 +69,6 @@ public class ControlMenu implements IControl{
 
 	private void beginGame(String levelname){
 		TheStreet.loadLeve(levelname.substring(6), mainmenu.getCurrentUser());
-		System.out.println(mainmenu.getCurrentUser());
 		exitMenu();
 	}
 	
@@ -118,7 +117,6 @@ public class ControlMenu implements IControl{
     	for (File fileEntry : folder.listFiles()) {
             if (fileEntry.isFile()&&fileEntry.getName().endsWith(".usr")) {
                 output.addElement(fileEntry.getName().substring(0, fileEntry.getName().length()-4));
-                System.out.println(fileEntry.getName());
             } 
     	}
     	return output;

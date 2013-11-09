@@ -45,7 +45,6 @@ public class Control implements IControl {
 	 * TODO Funktionalität komplett testen
 	 */
 	public void call(String funktion) {
-		System.out.println("You pressed:"+funktion);
 	
 		//GUI Ingame Buttons
 		if(funktion.equals("pause"))
