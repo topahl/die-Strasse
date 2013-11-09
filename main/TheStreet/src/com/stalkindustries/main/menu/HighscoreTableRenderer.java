@@ -1,4 +1,4 @@
-package com.stalkindustries.main;
+package com.stalkindustries.main.menu;
 
 import java.awt.Color;
 import java.awt.Component;

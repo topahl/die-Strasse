@@ -36,7 +36,6 @@ import javax.swing.ListSelectionModel;
 import javax.swing.SwingConstants;
 
 import com.stalkindustries.main.Button;
-import com.stalkindustries.main.HighscoreTableRenderer;
 import com.stalkindustries.main.Scrollbar;
 import com.stalkindustries.main.game.Ressources;
 
@@ -524,10 +523,34 @@ public class Menu extends JFrame implements MouseMotionListener{
 		generateStandardSubPageElements(highscore, "Highscores", "Sehen Sie hier die Auswertung Ihrer Spiele und vergleichen Sie Ihr Ergebnis mit dem von anderen Spielern.");
 	}
 	
-	
+	/**
+	 * @author Tobias
+	 */
 	private void initPersHighscore(){
 		pershighscore = new JLayeredPane();
 		
+		
+		//Eigene Bestenliste
+		JList list = new JList();
+		//list.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+		list.setOpaque(false);
+		list.setBackground(new Color(0,0,0,0));
+		list.setForeground(new Color(0xf9, 0xf9, 0xf9));
+		list.setFont(new Font("Corbel",Font.BOLD,20));
+		HighscoreTableRenderer renderer = new HighscoreTableRenderer();
+		list.setCellRenderer(renderer);
+		        
+		JScrollPane scrollpane = new Scrollbar(this.control); 
+		scrollpane.setViewportView(list);
+		scrollpane.getViewport().setOpaque(false);
+		scrollpane.setOpaque(false);
+		scrollpane.setBackground(new Color(0,0,0,0));
+		scrollpane.setBorder(null);
+		JScrollBar sb = scrollpane.getVerticalScrollBar();
+		sb.setPreferredSize(new Dimension(30,0));
+        sb.setBackground(new Color(0,0,0,0));
+        scrollpane.setBounds(50, 350, 700, 300);
+        highscore.add(scrollpane, javax.swing.JLayeredPane.DEFAULT_LAYER);
 		
 		
 		generateStandardSubPageElements(pershighscore, "Meine Scores", "");
