@@ -917,41 +917,48 @@ public class Simulation {
 						neuer_weg.push('o');
 					}
 					
-					if ((this.agent.getPosX()-Ressources.ZEROPOS.width)/Ressources.RASTERHEIGHT==j && (this.agent.getPosY()-Ressources.ZEROPOS.height)/Ressources.RASTERHEIGHT==i+1){
-						neuer_weg.push('o');
+					if (this.agent.get_location_id()==(char)(this.agent.get_haus_id()+48+1) && 
+							this.agent.getPosX() == this.agent.getHomePosX() && 
+							this.agent.getPosY() ==this.agent.getHomePosY()){
+						neuer_weg.push('u');
+						neuer_weg.push('r');
 					} else{
-						if ((this.agent.getPosX()-Ressources.ZEROPOS.width)/Ressources.RASTERHEIGHT!=j || (this.agent.getPosY()-Ressources.ZEROPOS.height)/Ressources.RASTERHEIGHT!=i){
-							//Der Agent wird zum Mittelpunkt des Hauses geleitet
-							if (location_ids.get(i-2).get(j-1).equals("X") || location_ids.get(i-1).get(j-2).equals("X")){
-								neuer_weg.push('u');
-								neuer_weg.push('r');
-							}
-							if (location_ids.get(i-2).get(j).equals("X")){
-								neuer_weg.push('u');
-							}
-							if (location_ids.get(i-2).get(j+1).equals("X") || location_ids.get(i-1).get(j+2).equals("X")){
-								neuer_weg.push('u');
-								neuer_weg.push('l');
-							}
-							if (location_ids.get(i).get(j+2).equals("X")){
-								neuer_weg.push('l');
-							}
-							if (location_ids.get(i+1).get(j+2).equals("X") || location_ids.get(i+2).get(j+1).equals("X")){
-								neuer_weg.push('o');
-								neuer_weg.push('l');
-							}
-							if (location_ids.get(i+2).get(j).equals("X")){
-								neuer_weg.push('o');
-							}
-							if (location_ids.get(i+2).get(j-1).equals("X") || location_ids.get(i+1).get(j-2).equals("X") ){
-								neuer_weg.push('o');
-								neuer_weg.push('r');
-							}
-							if (location_ids.get(i).get(j-2).equals("X")){
-								neuer_weg.push('r');
-							}
-						} 
-					}					
+						if ((this.agent.getPosX()-Ressources.ZEROPOS.width)/Ressources.RASTERHEIGHT==j && (this.agent.getPosY()-Ressources.ZEROPOS.height)/Ressources.RASTERHEIGHT==i+1){
+							neuer_weg.push('o');
+						} else {
+							if ((this.agent.getPosX()-Ressources.ZEROPOS.width)/Ressources.RASTERHEIGHT!=j || (this.agent.getPosY()-Ressources.ZEROPOS.height)/Ressources.RASTERHEIGHT!=i){
+								//Der Agent wird zum Mittelpunkt des Hauses geleitet
+								if (location_ids.get(i-2).get(j-1).equals("X") || location_ids.get(i-1).get(j-2).equals("X")){
+									neuer_weg.push('u');
+									neuer_weg.push('r');
+								}
+								if (location_ids.get(i-2).get(j).equals("X")){
+									neuer_weg.push('u');
+								}
+								if (location_ids.get(i-2).get(j+1).equals("X") || location_ids.get(i-1).get(j+2).equals("X")){
+									neuer_weg.push('u');
+									neuer_weg.push('l');
+								}
+								if (location_ids.get(i).get(j+2).equals("X")){
+									neuer_weg.push('l');
+								}
+								if (location_ids.get(i+1).get(j+2).equals("X") || location_ids.get(i+2).get(j+1).equals("X")){
+									neuer_weg.push('o');
+									neuer_weg.push('l');
+								}
+								if (location_ids.get(i+2).get(j).equals("X")){
+									neuer_weg.push('o');
+								}
+								if (location_ids.get(i+2).get(j-1).equals("X") || location_ids.get(i+1).get(j-2).equals("X") ){
+									neuer_weg.push('o');
+									neuer_weg.push('r');
+								}
+								if (location_ids.get(i).get(j-2).equals("X")){
+									neuer_weg.push('r');
+								}
+							} 
+						}	
+					}
 				}
 			}
 		}	
@@ -1010,7 +1017,7 @@ public class Simulation {
 			get_agent().setMussWuseln("");
 		}
 		if(get_agent().getMussWuseln().length()==9 && get_agent().getMussWuseln().substring(1,9).equals("Fernglas")){
-			//agentRumwuseln(1);
+			agentRumwuseln(1);
 			get_agent().setMussWuseln(get_agent().getMussWuseln()+"+");
 		}
 		
@@ -1066,7 +1073,7 @@ public class Simulation {
 			get_agent().setMussWuseln("");
 		}
 		if(get_agent().getMussWuseln().length()==10 && get_agent().getMussWuseln().substring(1,10).equals("Fernglasr")){
-			//agentRumwuseln(1);
+			agentRumwuseln(1);
 			get_agent().setMussWuseln(get_agent().getMussWuseln()+"+");
 		}
 			
