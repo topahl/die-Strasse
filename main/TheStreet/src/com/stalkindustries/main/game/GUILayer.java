@@ -773,7 +773,7 @@ public class GUILayer extends JFrame implements MouseMotionListener {
 	 * @param agentname 
 	 */
 	private void initHumans(String agentname) {
-		// jeweils dem Agenten und dem Terroristen eine Hausnummer generieren
+		// jeweils dem Agenten und dem Schwerverbrecheren eine Hausnummer generieren
 		// und dafür sorgen, dass sie ungleich sind
 		int house_of_terrorist = (int) (Math.random() * Ressources.NUMBERHOUSES);
 		int agent_house_nr = (int) (Math.random() * Ressources.NUMBERHOUSES);
@@ -1178,7 +1178,7 @@ public class GUILayer extends JFrame implements MouseMotionListener {
 				if (getSimulation().calc_misstrauen_in_street()>=90.0){
 					this.showDialogMessage("Verloren", "Die Bevölkerung wurde zu misstrauisch. Ihre Identität wurde enttarnt.", false, false);
 				}
-				this.showDialogMessage("Verloren", "Der Terrorist ist geflohen.", false, false);
+				this.showDialogMessage("Verloren", "Der Schwerverbrecher ist geflohen.", false, false);
 			}
 		}
 		
