@@ -48,6 +48,7 @@ public class Menu extends JFrame implements MouseMotionListener{
 	private JLayeredPane tutorial;
 	private JLayeredPane highscore;
 	private JLayeredPane credits;
+	private JLayeredPane pershighscore;
 	private ControlMenu control;
 	
 	private JTextField username;
@@ -60,6 +61,7 @@ public class Menu extends JFrame implements MouseMotionListener{
 	public static final int LAYERHIGHSCORE = 4;
 	public static final int LAYERTUTORIAL = 5;
 	public static final int LAYERCREDITS = 6;
+	public static final int LAYERPERSHIGHSCORE = 7;
 	
 	private HashMap<String,Button> buttons = new HashMap<String,Button>();
 	
@@ -146,6 +148,7 @@ public class Menu extends JFrame implements MouseMotionListener{
         //Alle Menüseiten initialisieren
         initProfilMenu();
         initHighscore();
+        initPersHighscore();
         initLevelSelect();
         initTutorial();
         initCredits();
@@ -522,6 +525,14 @@ public class Menu extends JFrame implements MouseMotionListener{
 	}
 	
 	
+	private void initPersHighscore(){
+		pershighscore = new JLayeredPane();
+		
+		
+		
+		generateStandardSubPageElements(pershighscore, "Meine Scores", "");
+	}
+	
 	
 	/**
 	 * Init Level Select
@@ -587,6 +598,8 @@ public class Menu extends JFrame implements MouseMotionListener{
     	tutorial.setEnabled(layernummer==LAYERTUTORIAL?true:false);
     	credits.setVisible(layernummer==LAYERCREDITS?true:false);
     	credits.setEnabled(layernummer==LAYERCREDITS?true:false);
+    	pershighscore.setVisible(layernummer==LAYERPERSHIGHSCORE?true:false);
+    	pershighscore.setEnabled(layernummer==LAYERPERSHIGHSCORE?true:false);
     }
     
     
