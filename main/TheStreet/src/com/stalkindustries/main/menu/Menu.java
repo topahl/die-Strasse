@@ -53,6 +53,7 @@ public class Menu extends JFrame implements MouseMotionListener{
 	private JTextField username;
 	private JList benutzerliste; 
 	private JLabel currentUser;
+	private HashMap<String,BufferedImage> levelicons = new HashMap<String,BufferedImage>();
 	
 	public static final int LAYERMENU = 1;
 	public static final int LAYERLEVEL = 2;
@@ -136,7 +137,7 @@ public class Menu extends JFrame implements MouseMotionListener{
 	     currentUser.setBounds(Ressources.ZEROPOS.width+855,Ressources.ZEROPOS.height+35,200,45);
 	     window.add(currentUser, javax.swing.JLayeredPane.DEFAULT_LAYER);
 	     
-		     
+	        initLevelIcons();
 		setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         setResizable(false);
@@ -147,7 +148,7 @@ public class Menu extends JFrame implements MouseMotionListener{
         //Alle Menüseiten initialisieren
         initProfilMenu();
         initHighscore();
-        initPersHighscore();
+//        initPersHighscore();
         initLevelSelect();
         initTutorial();
         initCredits();
@@ -169,7 +170,9 @@ public class Menu extends JFrame implements MouseMotionListener{
 		
 		//call Login screen
         control.openProfil();
+        
 
+        
         pack();
     }
 	
@@ -460,7 +463,7 @@ public class Menu extends JFrame implements MouseMotionListener{
         list.setFont(new Font("Corbel",Font.BOLD,20));
         HighscoreTableRenderer renderer = new HighscoreTableRenderer();
         list.setCellRenderer(renderer);
-        
+        renderer.addIcons(levelicons);
         JScrollPane scrollpane = new Scrollbar(this.control); 
         scrollpane.setViewportView(list);
         scrollpane.getViewport().setOpaque(false);
@@ -478,42 +481,30 @@ public class Menu extends JFrame implements MouseMotionListener{
         ArrayList<ArrayList<String>> scores = new ArrayList<ArrayList<String>>();
         for(String levelname : levels){
         	try {
-				BufferedImage loader = ImageIO.read(new File(Ressources.HOMEDIR+"res\\level\\"+levelname+"\\"+levelname+"_slice_menu.png"));
-				Graphics2D g2d = loader.createGraphics();
-    			g2d.drawImage(Ressources.menubutton.getSubimage(315, 9, 37, 26), 315, 9, null);
-				renderer.addIcon(levelname, loader.getSubimage(315, 9, loader.getWidth()-315, 26));
-				
-			} catch (IOException e) {
-				e.printStackTrace();
-			}
-        	
-        	try {
         		File file= new File(Ressources.HOMEDIR+"res\\user\\"+levelname+".bnd");
         		BufferedReader in = new BufferedReader(new FileReader(file));
         		String nextLine;
-				while((nextLine = in.readLine()) != null){					
-					if(!nextLine.equals("")){
-						String[] split = nextLine.split(":");
-						ArrayList<String> score = new ArrayList<String>();
-						score.add(levelname);
-						score.add(split[1]);
-						score.add(split[0]);
-						score.add(split[2]);
-						scores.add(score);
-					}
-				}
-			} catch (FileNotFoundException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			} catch (IOException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-        	
+    			while((nextLine = in.readLine()) != null){					
+    				if(!nextLine.equals("")){
+    					String[] split = nextLine.split(":");
+    					ArrayList<String> score = new ArrayList<String>();
+    					score.add(levelname);
+    					score.add(split[1]);
+    					score.add(split[0]);
+    					score.add(split[2]);
+    					scores.add(score);
+    				}
+    			}
+    		} catch (FileNotFoundException e) {
+    			// TODO Auto-generated catch block
+    			e.printStackTrace();
+    		} catch (IOException e) {
+    			// TODO Auto-generated catch block
+    			e.printStackTrace();
+    		}
         }
-        
+        	
         Collections.sort(scores, new CompareScore());
-        
 		DefaultListModel model = new DefaultListModel();
 		for(ArrayList<String> score : scores)
 			model.addElement(score);
@@ -537,7 +528,7 @@ public class Menu extends JFrame implements MouseMotionListener{
 		list.setBackground(new Color(0,0,0,0));
 		list.setForeground(new Color(0xf9, 0xf9, 0xf9));
 		list.setFont(new Font("Corbel",Font.BOLD,20));
-		HighscoreTableRenderer renderer = new HighscoreTableRenderer();
+		PersHighscoreTableRenderer renderer = new PersHighscoreTableRenderer();
 		list.setCellRenderer(renderer);
 		        
 		JScrollPane scrollpane = new Scrollbar(this.control); 
@@ -552,6 +543,9 @@ public class Menu extends JFrame implements MouseMotionListener{
         scrollpane.setBounds(50, 350, 700, 300);
         highscore.add(scrollpane, javax.swing.JLayeredPane.DEFAULT_LAYER);
 		
+       
+    	renderer.addIcons(levelicons);
+        
 		
 		generateStandardSubPageElements(pershighscore, "Meine Scores", "");
 	}
@@ -602,8 +596,25 @@ public class Menu extends JFrame implements MouseMotionListener{
         generateStandardSubPageElements(mapselect, "Levelauswahl", "Wählen Sie das Land, welches in diesem Spiel simuliert werden soll.");
     }
 	
-	 
-    
+	/**
+	 * @author Tobias 
+	 */
+	private void initLevelIcons(){
+		ArrayList<String> levels = readAvaidableLevel();
+		for(String levelname : levels){
+        	try {
+				BufferedImage loader = ImageIO.read(new File(Ressources.HOMEDIR+"res\\level\\"+levelname+"\\"+levelname+"_slice_menu.png"));
+				Graphics2D g2d = loader.createGraphics();
+    			g2d.drawImage(Ressources.menubutton.getSubimage(315, 9, 37, 26), 315, 9, null);
+				this.levelicons.put(levelname, loader.getSubimage(315, 9, loader.getWidth()-315, 26));
+				
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+        }
+    }
+	
+	
     /**
      * Blendet den ausgewälten layer ein und alle anderen aus
      * @param layernummer Nummer des layers der angezeigt werden soll
@@ -621,8 +632,8 @@ public class Menu extends JFrame implements MouseMotionListener{
     	tutorial.setEnabled(layernummer==LAYERTUTORIAL?true:false);
     	credits.setVisible(layernummer==LAYERCREDITS?true:false);
     	credits.setEnabled(layernummer==LAYERCREDITS?true:false);
-    	pershighscore.setVisible(layernummer==LAYERPERSHIGHSCORE?true:false);
-    	pershighscore.setEnabled(layernummer==LAYERPERSHIGHSCORE?true:false);
+//    	pershighscore.setVisible(layernummer==LAYERPERSHIGHSCORE?true:false);
+//    	pershighscore.setEnabled(layernummer==LAYERPERSHIGHSCORE?true:false);
     }
     
     
@@ -731,6 +742,72 @@ public class Menu extends JFrame implements MouseMotionListener{
     }
     
     
+    private ArrayList<ArrayList<String>> readUserHighscores(String username){
+    	ArrayList<String> levels = readAvaidableLevel();
+        ArrayList<ArrayList<String>> scores = new ArrayList<ArrayList<String>>();
+    	try {
+    		File file= new File(Ressources.HOMEDIR+"res\\user\\"+username+".usr");
+    		BufferedReader in = new BufferedReader(new FileReader(file));
+    		String nextLine;
+			while((nextLine = in.readLine()) != null){					
+				if(!nextLine.equals("")){
+					ArrayList<String> score = new ArrayList<String>();
+					String[] split;
+					//Datum + Uhrzeit
+					split = nextLine.split(" ");
+					score.add(split[0]);
+					score.add(split[1]);
+					
+					//Highscore
+					nextLine = in.readLine();
+					split = nextLine.split(":");
+					score.add(split[1].trim());
+					
+					//Terrorist
+					nextLine = in.readLine();
+					split = nextLine.split(":");
+					score.add(split[1].trim().toUpperCase());
+					
+					//Misstrauen
+					nextLine = in.readLine();
+					split = nextLine.split(":");
+					score.add(split[1].trim());
+					
+					//Spielzeit
+					nextLine = in.readLine();
+					split = nextLine.split(":");
+					score.add(split[1].trim());
+					
+					//Wissenswert
+					nextLine = in.readLine();
+					split = nextLine.split(":");
+					score.add(split[1].trim());
+					
+					//Events
+					nextLine = in.readLine();
+					split = nextLine.split(":");
+					split = split[1].split("von");
+					score.add(split[0].trim());
+					score.add(split[1].trim());
+					
+					//Level
+					nextLine = in.readLine();
+					split = nextLine.split(":");
+					score.add(split[1].trim());
+					
+					
+					scores.add(score);
+				}
+			}
+		} catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+    	return scores;
+    }
     
     /**
      * Returns the current input username and resets the field.
@@ -745,6 +822,7 @@ public class Menu extends JFrame implements MouseMotionListener{
     	
     }
 
+    
     
     
 	public JList getBenutzerliste() {

@@ -83,8 +83,8 @@ public class HighscoreTableRenderer extends DefaultListCellRenderer {
     }
 
     
-    public void addIcon(String levelname, BufferedImage icon){
-    	icons.put(levelname, icon);
+    public void addIcons(HashMap<String,BufferedImage> icons){
+    	this.icons = icons;
     }
     
     @Override
