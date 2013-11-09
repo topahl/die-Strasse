@@ -1177,6 +1177,9 @@ public class Simulation {
 					return false;
 				}
 			} 
+			if (this.people.get(i).getBorder()!= null){
+				return true;
+			}
 		}	
 		return false;
 	}
