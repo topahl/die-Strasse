@@ -96,6 +96,7 @@ Spielzeit in Minuten: 473
 Wissenswert: 0.0
 Anzahl entdeckter Events: 0 von 20
 
+<<<<<<< Upstream, based on origin/master
 09.11.2013 16:28:50
 Highscore: 100.0
 Terroristen festgenommen: nein
@@ -103,6 +104,15 @@ Maximales Misstrauen: 0.0
 Spielzeit in Minuten: 25
 Wissenswert: 100.0
 Anzahl entdeckter Events: 0 von 17
+=======
+09.11.2013 15:25:54
+Highscore: 0.0
+Terroristen festgenommen: nein
+Maximales Misstrauen: 0.0
+Spielzeit in Minuten: 12
+Wissenswert: 0.0
+Anzahl entdeckter Events: 0 von 19
+>>>>>>> 76d6e39 Highscore wird eingelesen und sortiert
 Level: saudiarabien
 
 09.11.2013 16:37:36

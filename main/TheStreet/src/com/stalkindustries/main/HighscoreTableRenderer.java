@@ -69,7 +69,7 @@ public class HighscoreTableRenderer extends DefaultListCellRenderer {
         				.addComponent(land,200,200,200)
         				.addComponent(score,70,70,70)
         				.addComponent(user,200,200,200)
-        				.addComponent(date,100,100,100))
+        				.addComponent(date,150,150,150))
         );
         paneLayout.setVerticalGroup(
         		paneLayout.createParallelGroup(Alignment.LEADING)

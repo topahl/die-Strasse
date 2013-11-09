@@ -9,10 +9,15 @@ import java.awt.Graphics2D;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseMotionListener;
 import java.awt.image.BufferedImage;
+import java.io.BufferedReader;
 import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
+import java.util.Scanner;
 
 import javax.imageio.ImageIO;
 import javax.swing.BorderFactory;
@@ -402,11 +407,12 @@ public class Menu extends JFrame implements MouseMotionListener{
         JScrollBar sb = scrollpane.getVerticalScrollBar();
         sb.setPreferredSize(new Dimension(30,0));
         sb.setBackground(new Color(0,0,0,0));
-        scrollpane.setBounds(50, 260, 700, 300);
+        scrollpane.setBounds(50, 350, 700, 300);
         highscore.add(scrollpane, javax.swing.JLayeredPane.DEFAULT_LAYER);
                 
 		//load level icons for Highscore List
         ArrayList<String> levels = readAvaidableLevel();
+        ArrayList<ArrayList<String>> scores = new ArrayList<ArrayList<String>>();
         for(String levelname : levels){
         	try {
 				BufferedImage loader = ImageIO.read(new File(Ressources.HOMEDIR+"res\\level\\"+levelname+"\\"+levelname+"_slice_menu.png"));
@@ -417,32 +423,38 @@ public class Menu extends JFrame implements MouseMotionListener{
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
+        	
+        	try {
+        		File file= new File(Ressources.HOMEDIR+"res\\user\\"+levelname+".bnd");
+        		BufferedReader in = new BufferedReader(new FileReader(file));
+        		String nextLine;
+				while((nextLine = in.readLine()) != null){					
+					if(!nextLine.equals("")){
+						String[] split = nextLine.split(":");
+						ArrayList<String> score = new ArrayList<String>();
+						score.add(levelname);
+						score.add(split[1]);
+						score.add(split[0]);
+						score.add(split[2]);
+						scores.add(score);
+					}
+				}
+			} catch (FileNotFoundException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+        	
         }
         
+        Collections.sort(scores, new CompareScore());
+        
 		DefaultListModel model = new DefaultListModel();
-		ArrayList<String> eins  = new ArrayList<String>();
-		ArrayList<String> zwei  = new ArrayList<String>();
-		ArrayList<String> drei  = new ArrayList<String>();
-		eins.add("kanada");
-		eins.add("189.69");
-		eins.add("Tikitastisch");
-		eins.add("30.09.2013");
-		
-		zwei.add("saudiarabien");
-		zwei.add("57.88");
-		zwei.add("Sir Tobi");
-		zwei.add("5.10.2013");
-		
-		drei.add("russland");
-		drei.add("46.5");
-		drei.add("Miss Miri");
-		drei.add("05.10.2013");
-		
-		for(int i=0;i<33;i++){
-			model.addElement(eins);
-			model.addElement(zwei);
-			model.addElement(drei);
-		}
+		for(ArrayList<String> score : scores)
+			model.addElement(score);
+			
 		list.setModel(model);
 
 		generateStandardSubPageElements(highscore, "Highscores", "Sehen Sie hier die Auswertung Ihrer Spiele und vergleichen Sie Ihr Ergebnis mit dem von anderen Spielern.");
