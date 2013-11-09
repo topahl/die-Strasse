@@ -45,7 +45,6 @@ public class Menu extends JFrame implements MouseMotionListener{
 	private JLayeredPane credits;
 	private ControlMenu control;
 	
-	
 	private JTextField username;
 	private JList benutzerliste; 
 	private JLabel currentUser;
@@ -60,28 +59,58 @@ public class Menu extends JFrame implements MouseMotionListener{
 	private HashMap<String,Button> buttons = new HashMap<String,Button>();
 	
 	
+	
+	/**
+	 * Konstruktor des Menus ohne Spielername
+	 * @author Tobias
+	 */
 	public Menu() {
 		control = new ControlMenu(this);
         initComponents();
         setVisible(true);
     }
 	
-	public Menu(String playername){
+	
+	
+	/**
+	 * Konstruktor des Menus mit Spielername
+	 * @param playername Angemeldeter Benutzer
+	 * @author Tobias
+	 */
+	public Menu(String playername) {
 		this(); //Call main constructor
 		this.setCurrentUser(playername);
 		this.showLayer(LAYERMENU);
 	}
 	
 
-	public void setCurrentUser(String user){
+	
+	/**
+	 * Setzt aktuell angemeldeten Benutzer neu
+	 * @param user benutzername
+	 */
+	public void setCurrentUser(String user) {
 		currentUser.setText(user);
 	}
 
+	
+	
+	//TODO was zum Geier macht diese Methode?
+	/**
+	 * Setzt das JLabel mit angemeldetem Benutzer neu
+	 * @param currentUser Label mit angemeldetem Benutzer
+	 */
 	public void setCurrentUser(JLabel currentUser) {
 		this.currentUser = currentUser;
 	}
 
-	private void initComponents(){
+	
+	
+	/**
+	 * Init Components (auf jeder Menüseite)
+	 * @author Tobias
+	 */
+	private void initComponents() {
 		window = new JLayeredPane();
 		this.addMouseMotionListener(this);
 		
@@ -93,7 +122,7 @@ public class Menu extends JFrame implements MouseMotionListener{
 	     label.setBounds(Ressources.ZEROPOS.width+855,Ressources.ZEROPOS.height+10,200,45);
 	     window.add(label, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
-	     currentUser= new JLabel();
+	     currentUser = new JLabel();
 	     currentUser.setText("");
 	     currentUser.setFont(new Font("Corbel",Font.BOLD,30));
 	     currentUser.setForeground(new Color(0x1f, 0x1f, 0x1f));
@@ -101,7 +130,7 @@ public class Menu extends JFrame implements MouseMotionListener{
 	     currentUser.setBounds(Ressources.ZEROPOS.width+855,Ressources.ZEROPOS.height+35,200,45);
 	     window.add(currentUser, javax.swing.JLayeredPane.DEFAULT_LAYER);
 	     
-		       
+		     
 		setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         setResizable(false);
@@ -109,20 +138,14 @@ public class Menu extends JFrame implements MouseMotionListener{
         getContentPane().setLayout(layout);
         
        
-        
+        //Alle Menüseiten initialisieren
         initProfilMenu();
-        
         initHighscore();
-        
         initLevelSelect();
-        
         initTutorial();
-
         initCredits();
-        
         initMainMenu();
-        
-        
+
         
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -137,7 +160,6 @@ public class Menu extends JFrame implements MouseMotionListener{
         setBackground(Color.black);
         
 		
-		
 		//call Login screen
         //control.openProfil();
       
@@ -145,29 +167,43 @@ public class Menu extends JFrame implements MouseMotionListener{
         showLayer(LAYERHIGHSCORE);
         
         //disabled bis Benutzer ausgewählt ist
+        //TODO Kommentar weg?
 
         pack();
-        
-      
     }
 	
 	
+	
+	/**
+	 * Init Tutorial
+	 * @author Stephan
+	 */
 	private void initTutorial() {
 		tutorial = new JLayeredPane();
 		
-		generateStandardSubPageElements(tutorial, "Anleitung");
+		generateStandardSubPageElements(tutorial, "Anleitung", "");
 	}
 
 	
+	
+	/**
+	 * Init Credits
+	 * @author Stephan
+	 */
 	private void initCredits() {
 		credits = new JLayeredPane();
 		
-		generateStandardSubPageElements(credits, "Credits");
+		generateStandardSubPageElements(credits, "Credits", "");
 	}
 	
 	
+	
+	/**
+	 * Init Profil Menu
+	 * @author Tobias
+	 */
 	@SuppressWarnings("rawtypes")
-	private void initProfilMenu(){
+	private void initProfilMenu() {
 		profilselect = new JLayeredPane();
 		
 		this.username = new JTextField();
@@ -254,7 +290,6 @@ public class Menu extends JFrame implements MouseMotionListener{
         profilselect.add(beschreibung, javax.swing.JLayeredPane.DEFAULT_LAYER);
         
 		
-		
 		beschreibung = new JTextArea();
         beschreibung.setLineWrap(true);
         beschreibung.setText("Melden Sie sich mit Ihrem Nutzernamen an.");
@@ -276,11 +311,17 @@ public class Menu extends JFrame implements MouseMotionListener{
 				"use", 45, 600, this);
 	    profilselect.add(button, javax.swing.JLayeredPane.DEFAULT_LAYER);
 		
-		generateStandardSubPageElements(profilselect, "Benutzer");
+		generateStandardSubPageElements(profilselect, "Benutzer", "Wählen Sie hier den Benutzer, als der Sie spielen, oder legen Sie einen neuen Benutzer an.");
         
 	}
 	
-	private void initMainMenu(){
+	
+	
+	/**
+	 * Init Main Menu
+	 * @author Tobias
+	 */
+	private void initMainMenu() {
 		mainmenu = new javax.swing.JLayeredPane();
 		JLabel currentscreentext = new JLabel();
         currentscreentext.setText("Hauptmenü");
@@ -331,6 +372,12 @@ public class Menu extends JFrame implements MouseMotionListener{
         
 	}
 	
+	
+	
+	/**
+	 * Init Highscore
+	 * @author Tobias
+	 */
 	@SuppressWarnings("rawtypes")
 	private void initHighscore(){
 		highscore = new JLayeredPane();
@@ -398,32 +445,17 @@ public class Menu extends JFrame implements MouseMotionListener{
 		}
 		list.setModel(model);
 
-		
-        
-		generateStandardSubPageElements(highscore, "Highscores");
+		generateStandardSubPageElements(highscore, "Highscores", "Sehen Sie hier die Auswertung Ihrer Spiele und vergleichen Sie Ihr Ergebnis mit dem von anderen Spielern.");
 	}
 	
+	
+	
+	/**
+	 * Init Level Select
+	 * @author Tobias
+	 */
 	private void initLevelSelect(){
-		mapselect = new JLayeredPane();
-		
-		
-        
-                
-        JTextArea beschreibung = new JTextArea();
-        beschreibung.setColumns(20);
-        beschreibung.setLineWrap(true);
-        beschreibung.setRows(5);
-        beschreibung.setText("Wählen Sie das Land, welches in diesem Spiel simuliert werden soll.");
-        beschreibung.setWrapStyleWord(true);
-        beschreibung.setFocusCycleRoot(true);
-        beschreibung.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
-        beschreibung.setFocusable(false);
-        beschreibung.setOpaque(false);
-        beschreibung.setFont(new Font("Corbel",Font.BOLD,20));
-        beschreibung.setForeground(new java.awt.Color(0xf9, 0xf9, 0xf9));
-        beschreibung.setBounds(850,270, 250, 200);
-        mapselect.add(beschreibung, javax.swing.JLayeredPane.DEFAULT_LAYER);
-        
+		mapselect = new JLayeredPane();      
         
         ArrayList<String> levels=readAvaidableLevel();
         for(int i=0;i<levels.size();i++){
@@ -460,17 +492,10 @@ public class Menu extends JFrame implements MouseMotionListener{
     			e.printStackTrace();
     		}
 		}
-        generateStandardSubPageElements(mapselect, "Levelauswahl");
+        generateStandardSubPageElements(mapselect, "Levelauswahl", "Wählen Sie das Land, welches in diesem Spiel simuliert werden soll.");
     }
 	
-	
-	//Support Tiki
-	public void mouseMoved(MouseEvent e) {	
-		//mousefollower.setLocation(e.getX()-15, e.getY()-15);
-	}
-    public void mouseDragged(MouseEvent e) {} //do nothing, notwendig für implements MouseMotion
-    
-    
+	 
     
     /**
      * Blendet den ausgewälten layer ein und alle anderen aus
@@ -490,6 +515,7 @@ public class Menu extends JFrame implements MouseMotionListener{
     	credits.setVisible(layernummer==LAYERCREDITS?true:false);
     	credits.setEnabled(layernummer==LAYERCREDITS?true:false);
     }
+    
     
     
     /**
@@ -527,7 +553,14 @@ public class Menu extends JFrame implements MouseMotionListener{
     }
     
     
-    private void generateStandardSubPageElements(JLayeredPane subpage, String titel){
+    
+    /**
+     * 
+     * @param subpage Referenz auf JLayeredPane
+     * @param titel Titel der Menuseite
+     * @param description Beschreibung der Menuseite
+     */
+    private void generateStandardSubPageElements(JLayeredPane subpage, String titel, String description) {
     	JLabel currentscreentext = new JLabel();
 		currentscreentext.setText(titel);
 	    currentscreentext.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
@@ -543,6 +576,21 @@ public class Menu extends JFrame implements MouseMotionListener{
 				Ressources.ingamebutton.getSubimage(948 + 3 * Ressources.RASTERHEIGHT, Ressources.RASTERHEIGHT, Ressources.RASTERHEIGHT, Ressources.RASTERHEIGHT),
 				"back", Ressources.MAPWIDTH-Ressources.RASTERHEIGHT, 0, this);
 	    subpage.add(back, javax.swing.JLayeredPane.DEFAULT_LAYER);
+	    
+	    JTextArea beschreibung = new JTextArea();
+        beschreibung.setColumns(20);
+        beschreibung.setLineWrap(true);
+        beschreibung.setRows(5);
+        beschreibung.setText(description);
+        beschreibung.setWrapStyleWord(true);
+        beschreibung.setFocusCycleRoot(true);
+        beschreibung.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        beschreibung.setFocusable(false);
+        beschreibung.setOpaque(false);
+        beschreibung.setFont(new Font("Corbel",Font.BOLD,20));
+        beschreibung.setForeground(new java.awt.Color(0xf9, 0xf9, 0xf9));
+        beschreibung.setBounds(850,270, 250, 200);
+        subpage.add(beschreibung, javax.swing.JLayeredPane.DEFAULT_LAYER);
         
 		JLabel main = new JLabel();
 		main.setIcon(new ImageIcon(Ressources.mainmenusub));
@@ -553,8 +601,10 @@ public class Menu extends JFrame implements MouseMotionListener{
         
     }
     
+    
+    
     /**
-     * Ließt alle verfügbaren levels ein und überprüft sie auf richtigkeit
+     * Liest alle verfügbaren Levels ein und überprüft sie auf Richtigkeit
      * 
      * @author Tobias
      * @return Liste aller validen Levelfiles
@@ -571,6 +621,8 @@ public class Menu extends JFrame implements MouseMotionListener{
     	return levels;
     }
     
+    
+    
     /**
      * Returns the current input username and resets the field.
      * 
@@ -584,6 +636,8 @@ public class Menu extends JFrame implements MouseMotionListener{
     	
     }
 
+    
+    
 	public JList getBenutzerliste() {
 		return benutzerliste;
 	}
@@ -591,5 +645,7 @@ public class Menu extends JFrame implements MouseMotionListener{
 	public String getCurrentUser() {
 		return currentUser.getText();
 	}
-    
+	
+	public void mouseMoved(MouseEvent e) {}
+    public void mouseDragged(MouseEvent e) {}    
 }
