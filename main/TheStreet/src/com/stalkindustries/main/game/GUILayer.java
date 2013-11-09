@@ -921,7 +921,7 @@ public class GUILayer extends JFrame implements MouseMotionListener {
 					mensch_cnt++;
 					familien_cnt++;
 				}
-				this.initHaus(i, false, spawnHausX[0], spawnHausY[0]);
+				this.initHaus(i, false, spawnHausX[i], spawnHausY[i]);
 			}
 		}
 
@@ -1330,6 +1330,8 @@ public class GUILayer extends JFrame implements MouseMotionListener {
 
 	private void drawFortschrittsbalken() {
 		int step=0;
+		int hausposx = 0;
+		int hausposy = 0;
 		
 		if (getSimulation().get_agent().getMussWuseln().equals("Wanze+") || getSimulation().get_agent().getMussWuseln().equals("Wanzer+") ||
 			getSimulation().get_agent().getMussWuseln().equals("Hacken+") || getSimulation().get_agent().getMussWuseln().equals("Hackenr+")){
@@ -1342,41 +1344,46 @@ public class GUILayer extends JFrame implements MouseMotionListener {
 			step = 15/6;
 		}
 		
-		//step++;
+		
+		hausposx= getSimulation().getHouses().get((int)(getSimulation().get_agent().get_location_id()-48-1)).getPosX() + Ressources.RASTERHEIGHT;
+		hausposy= getSimulation().getHouses().get((int)(getSimulation().get_agent().get_location_id()-48-1)).getPosY() + Ressources.RASTERHEIGHT;
+
+		System.out.println(hausposx);
+		System.out.println(hausposy);
 		if (step!=0){
 			switch (step=getSimulation().get_agent().getMoves().size()/step){
 			case 0: 
-					this.fortschrittsstatus.setBounds(Ressources.ZEROPOS.width+400, Ressources.ZEROPOS.height +642, 45, 45);
+					this.fortschrittsstatus.setBounds(hausposx, hausposy, 45, 45);
 					this.fortschrittsstatus.setIcon(new ImageIcon(fortschrittskreis[6]));
 					this.fortschrittsstatus.setVisible(true);
 					break;
 			case 1: 
-					this.fortschrittsstatus.setBounds(Ressources.ZEROPOS.width+400, Ressources.ZEROPOS.height +642, 45, 45);
+					this.fortschrittsstatus.setBounds(hausposx, hausposy, 45, 45);
 					this.fortschrittsstatus.setIcon(new ImageIcon(fortschrittskreis[5]));
 					this.fortschrittsstatus.setVisible(true);
 					break;
 			case 2: 
-					this.fortschrittsstatus.setBounds(Ressources.ZEROPOS.width+400, Ressources.ZEROPOS.height +642, 45, 45);
+					this.fortschrittsstatus.setBounds(hausposx, hausposy, 45, 45);
 					this.fortschrittsstatus.setIcon(new ImageIcon(fortschrittskreis[4]));
 					this.fortschrittsstatus.setVisible(true);
 					break;
 			case 3:	
-					this.fortschrittsstatus.setBounds(Ressources.ZEROPOS.width+400, Ressources.ZEROPOS.height +642, 45, 45);
+					this.fortschrittsstatus.setBounds(hausposx, hausposy, 45, 45);
 					this.fortschrittsstatus.setIcon(new ImageIcon(fortschrittskreis[3]));
 					this.fortschrittsstatus.setVisible(true);
 					break;
 			case 4: 
-					this.fortschrittsstatus.setBounds(Ressources.ZEROPOS.width+400, Ressources.ZEROPOS.height +642, 45, 45);
+					this.fortschrittsstatus.setBounds(hausposx, hausposy, 45, 45);
 					this.fortschrittsstatus.setIcon(new ImageIcon(fortschrittskreis[2]));
 					this.fortschrittsstatus.setVisible(true);
 					break;
 			case 5: 
-					this.fortschrittsstatus.setBounds(Ressources.ZEROPOS.width+400, Ressources.ZEROPOS.height +642, 45, 45);
+					this.fortschrittsstatus.setBounds(hausposx, hausposy, 45, 45);
 					this.fortschrittsstatus.setIcon(new ImageIcon(fortschrittskreis[1]));
 					this.fortschrittsstatus.setVisible(true);
 					break;
 			case 6: 
-					this.fortschrittsstatus.setBounds(Ressources.ZEROPOS.width+400, Ressources.ZEROPOS.height +642, 45, 45);
+					this.fortschrittsstatus.setBounds(hausposx, hausposy, 45, 45);
 					this.fortschrittsstatus.setIcon(new ImageIcon(fortschrittskreis[0]));
 					this.fortschrittsstatus.setVisible(true);
 					break;
