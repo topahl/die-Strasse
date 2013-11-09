@@ -192,7 +192,77 @@ public class Menu extends JFrame implements MouseMotionListener{
 	private void initCredits() {
 		credits = new JLayeredPane();
 		
-		generateStandardSubPageElements(credits, "Credits", "");
+		JLabel label = new JLabel();
+		label.setText("Team");
+        label.setFont(new Font("Corbel",Font.BOLD,32));
+        label.setForeground(new Color(0xf9, 0xf9, 0xf9));
+        label.setBounds(Ressources.RASTERHEIGHT, 150, 250, 50);
+        credits.add(label, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        
+        JTextArea beschreibung = new JTextArea();
+        beschreibung.setLineWrap(true);
+        beschreibung.setText("Teamleitung\n\nProjektmanagement\n\nSimulation &\nAlgorithmus\n\nFrontend & GUI\n\n\nStoryline\n\nDesign");
+        beschreibung.setWrapStyleWord(true);
+        beschreibung.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        beschreibung.setFocusable(false);
+        beschreibung.setOpaque(false);
+        beschreibung.setFont(new Font("Corbel",Font.BOLD,20));
+        beschreibung.setForeground(new Color(0xf9, 0xf9, 0xf9));
+        beschreibung.setBounds(Ressources.RASTERHEIGHT, 200, Ressources.RASTERHEIGHT*5, 9*Ressources.RASTERHEIGHT);
+        credits.add(beschreibung, javax.swing.JLayeredPane.DEFAULT_LAYER);
+
+        beschreibung = new JTextArea();
+        beschreibung.setLineWrap(true);
+        beschreibung.setText("Tobias Pahlings\n\nSven Wessiepe\n\nMiriam Marx\nMartika Schwan\n\nTobias Pahlings\nStephan Giesau\n\nCarolina Maetzing\n\nStephan Giesau\n");
+        beschreibung.setWrapStyleWord(true);
+        beschreibung.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        beschreibung.setFocusable(false);
+        beschreibung.setOpaque(false);
+        beschreibung.setFont(new Font("Corbel",Font.BOLD,20));
+        beschreibung.setForeground(new Color(0xf9, 0xf9, 0xf9));
+        beschreibung.setBounds(Ressources.RASTERHEIGHT*6, 200, Ressources.RASTERHEIGHT*4, 9*Ressources.RASTERHEIGHT);
+        credits.add(beschreibung, javax.swing.JLayeredPane.DEFAULT_LAYER);
+
+        label = new JLabel();
+		label.setText("Projekt");
+        label.setFont(new Font("Corbel",Font.BOLD,32));
+        label.setForeground(new Color(0xf9, 0xf9, 0xf9));
+        label.setBounds(Ressources.RASTERHEIGHT*11, 150, 250, 50);
+        credits.add(label, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        
+        beschreibung = new JTextArea();
+        beschreibung.setLineWrap(true);
+        beschreibung.setText("The Street ist entstanden als Projekt im Modul Software Engineering bei Eckard Kruse an der DHBW Mannheim.\n(TINF12AI-BC, WS 2013/2014)");
+        beschreibung.setWrapStyleWord(true);
+        beschreibung.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        beschreibung.setFocusable(false);
+        beschreibung.setOpaque(false);
+        beschreibung.setFont(new Font("Corbel",Font.BOLD,20));
+        beschreibung.setForeground(new Color(0xf9, 0xf9, 0xf9));
+        beschreibung.setBounds(Ressources.RASTERHEIGHT*11, 200, Ressources.RASTERHEIGHT*6, Ressources.RASTERHEIGHT*3);
+        credits.add(beschreibung, javax.swing.JLayeredPane.DEFAULT_LAYER);
+
+        label = new JLabel();
+		label.setText("Disclaimer");
+        label.setFont(new Font("Corbel",Font.BOLD,32));
+        label.setForeground(new Color(0xf9, 0xf9, 0xf9));
+        label.setBounds(Ressources.RASTERHEIGHT*11, Ressources.RASTERHEIGHT*8, 250, 50);
+        credits.add(label, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        
+        beschreibung = new JTextArea();
+        beschreibung.setLineWrap(true);
+        beschreibung.setText("Die Handlung und alle handelnden Personen sowie deren Namen sind frei erfunden. Jegliche Ähnlichkeiten mit lebenden oder realen Personen wären rein zufällig.");
+        beschreibung.setWrapStyleWord(true);
+        beschreibung.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        beschreibung.setFocusable(false);
+        beschreibung.setOpaque(false);
+        beschreibung.setFont(new Font("Corbel",Font.BOLD,20));
+        beschreibung.setForeground(new Color(0xf9, 0xf9, 0xf9));
+        beschreibung.setBounds(Ressources.RASTERHEIGHT*11, Ressources.RASTERHEIGHT*8+50, Ressources.RASTERHEIGHT*6, Ressources.RASTERHEIGHT*4);
+        credits.add(beschreibung, javax.swing.JLayeredPane.DEFAULT_LAYER);
+
+        
+		generateStandardSubPageElements(credits, "Credits", "Informationen zur Entwicklung von The Street und Disclaimer.");
 	}
 	
 	
@@ -505,7 +575,7 @@ public class Menu extends JFrame implements MouseMotionListener{
      * Blendet den ausgewälten layer ein und alle anderen aus
      * @param layernummer Nummer des layers der angezeigt werden soll
      */
-    public void showLayer(int layernummer){
+    public void showLayer(int layernummer) {
     	mainmenu.setVisible(layernummer==LAYERMENU?true:false);
     	mainmenu.setEnabled(layernummer==LAYERMENU?true:false);
     	mapselect.setVisible(layernummer==LAYERLEVEL?true:false);
@@ -528,7 +598,7 @@ public class Menu extends JFrame implements MouseMotionListener{
      * @param folder ein Ordner welcher ein level beinhalten soll
      * @return true = Level ist ok 
      */
-    private boolean isValidLevel(File folder){
+    private boolean isValidLevel(File folder) {
     	int found=0;
     	String foldername=folder.getName().trim();
     	for (File fileEntry : folder.listFiles()) {
