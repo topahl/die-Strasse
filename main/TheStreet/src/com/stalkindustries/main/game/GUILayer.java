@@ -869,7 +869,6 @@ public class GUILayer extends JFrame implements MouseMotionListener {
 					// übrige Erwachsene setzen
 					for (int j = 0; j < number_of_adults - 1; j++) {
 						mensch = new Erwachsene(i,this.includeHaus(Ressources.getNormalEvents().get(mensch_cnt),i));
-						System.out.println(mensch_cnt+". "+this.includeHaus(Ressources.getNormalEvents().get(mensch_cnt),i).get(0));
 						this.humans.add(mensch);
 						this.baseLayer.add(mensch,
 								javax.swing.JLayeredPane.DEFAULT_LAYER);
@@ -888,7 +887,6 @@ public class GUILayer extends JFrame implements MouseMotionListener {
 					number_of_adults = (int) (Math.random() * people_per_house) + 1;
 					for (int j = 0; j < number_of_adults; j++) {
 						mensch = new Erwachsene(i,this.includeHaus(Ressources.getNormalEvents().get(mensch_cnt),i));
-						System.out.println(mensch_cnt+". "+this.includeHaus(Ressources.getNormalEvents().get(mensch_cnt),i).get(0));
 						this.humans.add(mensch);
 						this.baseLayer.add(mensch,
 								javax.swing.JLayeredPane.DEFAULT_LAYER);
@@ -907,7 +905,6 @@ public class GUILayer extends JFrame implements MouseMotionListener {
 				number_of_children = people_per_house - number_of_adults;
 				for (int j = 0; j < number_of_children; j++) {
 					mensch = new Kinder(i,this.includeHaus(Ressources.getNormalEvents().get(mensch_cnt),i));
-					System.out.println(mensch_cnt+". "+this.includeHaus(Ressources.getNormalEvents().get(mensch_cnt),i).get(0));
 					this.humans.add(mensch);
 					this.baseLayer.add(mensch,
 							javax.swing.JLayeredPane.DEFAULT_LAYER);
@@ -1173,6 +1170,7 @@ public class GUILayer extends JFrame implements MouseMotionListener {
 			this.updateBalken();
 			getSimulation().updateUeberwachungsstatus();
 			checkThreeFernglaeserInStreet();
+			this.updateMisstrauen(); // Wert neu zeichnen
 			if(this.simulation.calcGameOver()){
 				this.stopGame();
 				if (getSimulation().calc_misstrauen_in_street()>=90.0){
@@ -1186,7 +1184,7 @@ public class GUILayer extends JFrame implements MouseMotionListener {
 		//TODO etwas besseres Verfahren ausdenken
 		//Quizaufruf 
 		//int zeitpunkt = (int) (Math.random() * 1000);
-		if(this.stepcounter % (3000) == 0 && ((getSimulation().getSpiel_tag()==1 && getSimulation().getSpiel_stunde()>7) || getSimulation().getSpiel_tag()>1)) {
+		if(this.stepcounter % (2000) == 0 && ((getSimulation().getSpiel_tag()==1 && getSimulation().getSpiel_stunde()>7) || getSimulation().getSpiel_tag()>1)) {
 			quiz.starteQuiz();
 			getMousefollower().setVisible(false);
 			buttons.get("pause").setEnabled(false);
@@ -1284,12 +1282,13 @@ public class GUILayer extends JFrame implements MouseMotionListener {
 					((Person) this.humans.get(i)).update_schatten();
 				}
 			}
-			this.updateMisstrauen(); // Wert neu zeichnen
+			//this.updateMisstrauen(); // Wert neu zeichnen
 			this.simulation.calcMisstrauenMax();
 			this.updateBalken();
 			
 				
 		}
+		
 
 		//Spielzeit und Tagesablauf berechnen alle 4 Steps
 		if (this.stepcounter % 4 == 0) {
