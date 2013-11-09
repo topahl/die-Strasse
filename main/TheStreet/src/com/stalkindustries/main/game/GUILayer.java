@@ -1173,6 +1173,7 @@ public class GUILayer extends JFrame implements MouseMotionListener {
 			this.updateBalken();
 			getSimulation().updateUeberwachungsstatus();
 			checkThreeFernglaeserInStreet();
+			this.updateMisstrauen(); // Wert neu zeichnen
 			if(this.simulation.calcGameOver()){
 				this.stopGame();
 				if (getSimulation().calc_misstrauen_in_street()>=90.0){
@@ -1186,7 +1187,7 @@ public class GUILayer extends JFrame implements MouseMotionListener {
 		//TODO etwas besseres Verfahren ausdenken
 		//Quizaufruf 
 		//int zeitpunkt = (int) (Math.random() * 1000);
-		if(this.stepcounter % (3000) == 0 && ((getSimulation().getSpiel_tag()==1 && getSimulation().getSpiel_stunde()>7) || getSimulation().getSpiel_tag()>1)) {
+		if(this.stepcounter % (2000) == 0 && ((getSimulation().getSpiel_tag()==1 && getSimulation().getSpiel_stunde()>7) || getSimulation().getSpiel_tag()>1)) {
 			quiz.starteQuiz();
 			getMousefollower().setVisible(false);
 			buttons.get("pause").setEnabled(false);
@@ -1284,12 +1285,13 @@ public class GUILayer extends JFrame implements MouseMotionListener {
 					((Person) this.humans.get(i)).update_schatten();
 				}
 			}
-			this.updateMisstrauen(); // Wert neu zeichnen
+			//this.updateMisstrauen(); // Wert neu zeichnen
 			this.simulation.calcMisstrauenMax();
 			this.updateBalken();
 			
 				
 		}
+		
 
 		//Spielzeit und Tagesablauf berechnen alle 4 Steps
 		if (this.stepcounter % 4 == 0) {
