@@ -261,7 +261,6 @@ public class Menu extends JFrame implements MouseMotionListener{
         beschreibung.setBounds(Ressources.RASTERHEIGHT*11, Ressources.RASTERHEIGHT*8+50, Ressources.RASTERHEIGHT*6, Ressources.RASTERHEIGHT*4);
         credits.add(beschreibung, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
-        
 		generateStandardSubPageElements(credits, "Credits", "Informationen zur Entwicklung von The Street und Disclaimer.");
 	}
 	
