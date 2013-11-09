@@ -129,6 +129,7 @@ public class Control implements IControl {
 	private void clickRemoveFernglas() {
 		int currentHouse = Integer.parseInt(lastFunktioncode.substring(4,5))-1 ;
 		closeWindow("fensterhaus"); 
+		guilayer.getSimulation().berechne_weg(guilayer.getSimulation().get_agent(), (char)(guilayer.getSimulation().get_agent().get_haus_id()+48+1));
 		//guilayer.getSimulation().getHouses().get(currentHouse).getUeberwachungsmodule().remove("Fernglas");
 //		guilayer.getSimulation().get_agent().setMussWuseln("Fernglas");
 //		guilayer.getSimulation().berechne_weg(null, guilayer.getSimulation().get_agent(), (char)(currentHouse+1+48));
@@ -335,9 +336,8 @@ public class Control implements IControl {
 				}
 			}
 			if (!istVorhanden){
-				//guilayer.getSimulation().getHouses().get(hausid-1).getUeberwachungsmodule().add("Fernglas");
+				guilayer.getSimulation().berechne_weg(guilayer.getSimulation().get_agent(), (char)(guilayer.getSimulation().get_agent().get_haus_id()+48+1));
 				guilayer.getSimulation().setWieeeeschteAktion(true);
-				//guilayer.getSimulation().getHouses().get(hausid-1).setUeberwachungsWert((float)(Math.random()*7+1)+8,3);	
 				guilayer.getSimulation().get_agent().setMussWuseln(hausid+"Fernglas");
 			}
 			istVorhanden = false;
@@ -397,7 +397,7 @@ public class Control implements IControl {
 		if(funktion.equals("aktionHacken"))
 			spionagelabelBeschr(isPresent, "Trojaner installieren");
 		if(funktion.equals("aktionFernglas"))
-			spionagelabelBeschr(isPresent, "Haus beobachten");
+			spionagelabelBeschr(isPresent, "Fernglas anbringen");
 
 		
 		//Aktionen Beschwichtigen
