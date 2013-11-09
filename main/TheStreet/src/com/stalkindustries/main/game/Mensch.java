@@ -192,7 +192,7 @@ public abstract class Mensch extends JLabel {
 		return sprite;
 	}
 	
-//	public Stack<Character> getMoves(){
-//		return this.moves;
-//	}
+	public Stack<Character> getMoves(){
+		return this.moves;
+	}
 }

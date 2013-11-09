@@ -1,6 +1,7 @@
 package com.stalkindustries.main.game;
 
 import java.awt.image.BufferedImage;
+import java.util.Stack;
 
 public class Agent extends Mensch { 
 	private String mussWuseln;

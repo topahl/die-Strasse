@@ -63,7 +63,7 @@ public class GUILayer extends JFrame implements MouseMotionListener {
 	private JLabel dialogÜberschrift = new JLabel(); //Überschrift, Beschreibungstext
 	private JTextArea dialogText = new JTextArea();
 	private JLabel newsticker = new JLabel();
-	private JLabel actionsStatus = new JLabel(); //Statusanzeige der Agentenaktion;
+	private JLabel fortschrittsstatus = new JLabel(); //Statusanzeige der Agentenaktion;
 	
 	private BufferedImage fortschrittskreis[]=new BufferedImage[7];
 	
@@ -632,9 +632,10 @@ public class GUILayer extends JFrame implements MouseMotionListener {
 		}
 
 		//Statusanzeige für den Fortschritt einer Aktion
-		this.actionsStatus.setBounds(Ressources.ZEROPOS.width+400, Ressources.ZEROPOS.height +642, 45, 45);
-		this.actionsStatus.setIcon(new ImageIcon(fortschrittskreis[2]));
-		this.baseLayer.add(actionsStatus, javax.swing.JLayeredPane.DEFAULT_LAYER);
+//		this.fortschrittsstatus.setBounds(Ressources.ZEROPOS.width+400, Ressources.ZEROPOS.height +642, 45, 45);
+//		this.fortschrittsstatus.setIcon(new ImageIcon(fortschrittskreis[2]));
+		this.baseLayer.add(fortschrittsstatus, javax.swing.JLayeredPane.DEFAULT_LAYER);
+		this.fortschrittsstatus.setVisible(false);
 		// Große Buttons
 		buttonSize = 66;
 
@@ -1300,6 +1301,14 @@ public class GUILayer extends JFrame implements MouseMotionListener {
 		for (int i = 0; i < this.humans.size(); i++) {
 			this.humans.get(i).step();
 		}
+		if (getSimulation().get_agent().getCurrentMove()!= 'n' &&
+				(int)(getSimulation().get_agent().get_location_id()-48)>=1 && (int)(getSimulation().get_agent().get_location_id()-48)<=9 &&
+				getSimulation().isWieeeeschteAktion() && (char)(getSimulation().get_agent().get_haus_id()+48+1) != getSimulation().get_agent().get_location_id()){
+			drawFortschrittsbalken();
+		} else{
+			this.fortschrittsstatus.setVisible(false);
+		}
+		
 		
 		if (getSimulation().get_agent().getCurrentMove()=='n' && !getSimulation().get_agent().getMussWuseln().isEmpty()){
 			getSimulation().doSomethingAfterAgentAktion();
@@ -1317,6 +1326,63 @@ public class GUILayer extends JFrame implements MouseMotionListener {
 		
 		this.stepcounter++;
 	}
+
+	private void drawFortschrittsbalken() {
+		int step=0;
+		
+		if (getSimulation().get_agent().getMussWuseln().equals("Wanze+") || getSimulation().get_agent().getMussWuseln().equals("Wanzer+") ||
+			getSimulation().get_agent().getMussWuseln().equals("Hacken+") || getSimulation().get_agent().getMussWuseln().equals("Hackenr+")){
+			step = 30/6;
+		}
+		if (getSimulation().get_agent().getMussWuseln().equals("Kamera+") || getSimulation().get_agent().getMussWuseln().equals("Kamerar+")){
+			step = 45/6;
+		}
+		
+		step++;
+		if (step!=0){
+			switch (step=getSimulation().get_agent().getMoves().size()/step){
+			case 0: System.out.println("6 Kuchenstück");
+					this.fortschrittsstatus.setBounds(Ressources.ZEROPOS.width+400, Ressources.ZEROPOS.height +642, 45, 45);
+					this.fortschrittsstatus.setIcon(new ImageIcon(fortschrittskreis[6]));
+					this.fortschrittsstatus.setVisible(true);
+					break;
+			case 1: System.out.println("5 Kuchenstück");
+					this.fortschrittsstatus.setBounds(Ressources.ZEROPOS.width+400, Ressources.ZEROPOS.height +642, 45, 45);
+					this.fortschrittsstatus.setIcon(new ImageIcon(fortschrittskreis[5]));
+					this.fortschrittsstatus.setVisible(true);
+					break;
+			case 2: System.out.println("4 Kuchenstück");
+					this.fortschrittsstatus.setBounds(Ressources.ZEROPOS.width+400, Ressources.ZEROPOS.height +642, 45, 45);
+					this.fortschrittsstatus.setIcon(new ImageIcon(fortschrittskreis[4]));
+					this.fortschrittsstatus.setVisible(true);
+					break;
+			case 3:	System.out.println("3 Kuchenstück");
+					this.fortschrittsstatus.setBounds(Ressources.ZEROPOS.width+400, Ressources.ZEROPOS.height +642, 45, 45);
+					this.fortschrittsstatus.setIcon(new ImageIcon(fortschrittskreis[3]));
+					this.fortschrittsstatus.setVisible(true);
+					break;
+			case 4: System.out.println("2 Kuchenstück");
+					this.fortschrittsstatus.setBounds(Ressources.ZEROPOS.width+400, Ressources.ZEROPOS.height +642, 45, 45);
+					this.fortschrittsstatus.setIcon(new ImageIcon(fortschrittskreis[2]));
+					this.fortschrittsstatus.setVisible(true);
+					break;
+			case 5: System.out.println("1 Kuchenstück");
+					this.fortschrittsstatus.setBounds(Ressources.ZEROPOS.width+400, Ressources.ZEROPOS.height +642, 45, 45);
+					this.fortschrittsstatus.setIcon(new ImageIcon(fortschrittskreis[1]));
+					this.fortschrittsstatus.setVisible(true);
+					break;
+			case 6: System.out.println("leerer Kuchen");
+					this.fortschrittsstatus.setBounds(Ressources.ZEROPOS.width+400, Ressources.ZEROPOS.height +642, 45, 45);
+					this.fortschrittsstatus.setIcon(new ImageIcon(fortschrittskreis[0]));
+					this.fortschrittsstatus.setVisible(true);
+					break;
+			default:System.out.println("default Kuchen");
+					break;
+			}
+		}
+	}
+
+
 
 	/**
 	 * deaktiviert den Fernglasbutton, wenn 3 Fernglaeser installiert sind
