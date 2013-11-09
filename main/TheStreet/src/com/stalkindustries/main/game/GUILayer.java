@@ -1340,7 +1340,7 @@ public class GUILayer extends JFrame implements MouseMotionListener {
 		if (getSimulation().get_agent().getMussWuseln().equals("Kamera+") || getSimulation().get_agent().getMussWuseln().equals("Kamerar+")){
 			step = 45/6;
 		}
-		if (getSimulation().get_agent().getMussWuseln().contains("Fernglas+") || getSimulation().get_agent().getMussWuseln().contains("Fernglas+")){
+		if (getSimulation().get_agent().getMussWuseln().contains("Fernglas+") || getSimulation().get_agent().getMussWuseln().contains("Fernglasr+")){
 			step = 15/6;
 		}
 		
@@ -1348,8 +1348,6 @@ public class GUILayer extends JFrame implements MouseMotionListener {
 		hausposx= getSimulation().getHouses().get((int)(getSimulation().get_agent().get_location_id()-48-1)).getPosX() + Ressources.RASTERHEIGHT;
 		hausposy= getSimulation().getHouses().get((int)(getSimulation().get_agent().get_location_id()-48-1)).getPosY() + Ressources.RASTERHEIGHT;
 
-		System.out.println(hausposx);
-		System.out.println(hausposy);
 		if (step!=0){
 			switch (step=getSimulation().get_agent().getMoves().size()/step){
 			case 0: 
