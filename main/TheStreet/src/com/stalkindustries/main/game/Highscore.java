@@ -26,7 +26,9 @@ public class Highscore {
 	private String levelname;
 	
 	
-	//Beschwerden Miri
+	/**
+	 * @author Miriam
+	 */
 	public Highscore(Simulation simulation, Quiz quiz, Agent agent, String levelname){
 		this.simulation = simulation;		//gebraucht für Misstrauen, Spielzeit und Überwachungsstatus
 		this.quiz = quiz;					//gebraucht für Beantwortungen der Fragen
@@ -34,52 +36,47 @@ public class Highscore {
 		this.levelname = levelname;
 	}
 	
-	//Beschwerden Miri
-	public void calcHighscoreOfAgent(){
-		double zeit = 0;
-		if(this.spielzeit != 0)
-			zeit = 10000000/this.spielzeit;
-		
-		//set Spielzeit
-				int min = this.simulation.getSpiel_minute();
-				int h = this.simulation.getSpiel_stunde();
-				int tag = this.simulation.getSpiel_tag();
-				this.spielzeit = min + h*60 + (tag-1)*24*60 - 420;//-420, weil wir um 7 Uhr morgens anfangen
-		
-		//Misstrauen Max
-		this.misstrauen_max = this.simulation.getMisstrauenMax();
-		
-		//Events
-				for(int i=0;i<this.simulation.get_people().size();i++){
-					if(this.simulation.get_people().get(i).getEvent().size() == 4)
-						this.events++;
-				}
-		
-		//calc Wissenswert
-		double tmp = 0;
-		ArrayList<Integer> fragen = this.quiz.getBeantwortete();
-		for(int i=0;i<fragen.size();i++){
-			tmp = tmp + fragen.get(i);
-		}
-		if(fragen.size() != 0){
-			this.wissenswert = tmp/fragen.size();		//zwischen 0 und 100
-		}
-		
-		double misstrauen=0;
-		if(this.misstrauen_max!=0)
-			misstrauen = 1000/this.misstrauen_max;
-		
-		//this.highscore = misstrauen + this.wissenswert + zeit + this.events;
-		this.highscore = this.wissenswert - this.misstrauen_max - zeit/8640 + 100*this.events/this.simulation.get_people().size();
-		
-		if(this.festgenommen)
-			this.highscore *= 2;
-		
-		if(this.highscore < 0)
-			this.highscore = 0;
-	}
+	/**
+	 * @author Miriam
+	 */
+    public void calcHighscoreOfAgent(){
+        //set Spielzeit
+                int min = this.simulation.getSpiel_minute();
+                int h = this.simulation.getSpiel_stunde();
+                int tag = this.simulation.getSpiel_tag();
+                this.spielzeit = min + h*60 + (tag-1)*24*60 - 420;//-420, weil wir um 7 Uhr morgens anfangen
+        
+        //Misstrauen Max
+        this.misstrauen_max = this.simulation.getMisstrauenMax();
+        
+        //Events
+                for(int i=0;i<this.simulation.get_people().size();i++){
+                    if(this.simulation.get_people().get(i).getEvent().size() == 4)
+                        this.events++;
+                }
+        
+        //calc Wissenswert
+        double tmp = 0;
+        ArrayList<Integer> fragen = this.quiz.getBeantwortete();
+        for(int i=0;i<fragen.size();i++){
+            tmp = tmp + fragen.get(i);
+        }
+        if(fragen.size() != 0){
+            this.wissenswert = tmp/fragen.size();        //zwischen 0 und 100
+        }
+        
+        this.highscore = this.wissenswert - this.misstrauen_max - this.spielzeit/8640 + 100*this.events/this.simulation.get_people().size();
+        
+        if(this.festgenommen)
+            this.highscore += 300-70*Math.log(this.spielzeit/8640);
+        
+        if(this.highscore < 0)
+            this.highscore = 0;
+    }
 	
-	//Beschwerden Miri
+    /**
+	 * @author Miriam
+	 */
 	public ArrayList<String> getFile(String dateiName){
 		ArrayList<String> file = new ArrayList<String>(); 
 		try {
@@ -95,7 +92,9 @@ public class Highscore {
 		return file;
 	}
 	
-	//Beschwerden Miri
+	/**
+	 * @author Miriam
+	 */
 	public void exportIntoScores(){
 		//für den Fall, dass der Dateipfad und die Datei noch nicht existieren, werden sie hier neu erstellt
 			File folder = new File(Ressources.HOMEDIR+"res\\user\\");
@@ -137,7 +136,9 @@ public class Highscore {
 	     }
 	}
 	
-	//Beschwerden Miri
+	/**
+	 * @author Miriam
+	 */
 	public void exportIntoUser(){
 		ArrayList<String> file = this.getFile(Ressources.HOMEDIR+"res\\user\\"+this.agent.getName()+".usr");
 		
@@ -184,18 +185,24 @@ public class Highscore {
 	     }
 	}
 
-	//Beschwerden Miri
+	/**
+	 * @author Miriam
+	 */
 	public void setHighscore(double highscore){
 		this.highscore = highscore;
 	}
 	
-	//Beschwerden Miri
+	/**
+	 * @author Miriam
+	 */
 	public double getHighscore(){
 		return this.highscore;
 	}
 	
 	
-	//Beschwerden Miri
+	/**
+	 * @author Miriam
+	 */
 	public void setFestgenommen(boolean b){
 		this.festgenommen = b;
 	}

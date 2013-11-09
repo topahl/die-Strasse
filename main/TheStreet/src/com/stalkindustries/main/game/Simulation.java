@@ -152,94 +152,80 @@ public class Simulation {
 	}
 	
 	//Beschwerden an Miri
-	public void calc_misstrauen_after_beschwichtigen_action(int action_id, Person person){
-		int zufall=0;
-		int risiko;
-		double misstrauen = person.get_misstrauen();
-		
-		//Fehlschlagen der Aktionen ist unter anderem abhängig vom Misstrauensstatus
-				if(misstrauen >= 0){
-					zufall = (int)(Math.random()*(misstrauen/10));
-					if(zufall == 0)
-						zufall = 1;
-				}
-				//Personen sind weniger misstrauisch
-				else{
-					if(misstrauen/10 < 0){
-						zufall = (int)(Math.random()*(-(misstrauen/10)));
-						if(zufall == 0)
-							zufall = -1;
-					}
-//					else
-//						zufall = (int)(Math.random()*(misstrauen/10));
-				}
-		
-		//Risiko einer Beschwichtigenaktion steigt, je häufiger man sie ausführt
-		risiko = person.get_durchgefuehrteBeschwichtigungen(action_id);
-		if(action_id == 0 || action_id == 2 || action_id == 3){	//Kuchen, Flirten, Helfen
-			if(risiko == 0){
-				if(zufall > 5)
-					zufall *= (-1);
-				else if(zufall >= 0)
-					zufall *= (-5);
-				else
-					zufall *= 6;
-			}
-			else{
-				if(zufall > 5)
-					zufall *= 6;
-				else if(zufall >= 0)
-					zufall *= 3;
-				else
-					zufall *= (-3);
-			}
-		}
-		else if(action_id == 1){	//bei Haus vorbeigehen, um zu reden
-			if(risiko <= 3)
-				if(zufall >= 0)
-					zufall *= (-3);
-				else
-					zufall *= 4;
-			else
-				if(zufall >= 0)
-					zufall *= 3;
-				else
-					zufall *= (-1); 
-		}
-		else{						//Im Park unterhalten
-				if(zufall >= 0)
-					zufall *= (-2);
-				else
-					zufall *= 3;
-		}
-		
-		misstrauen += zufall;
-		
-		
-//		//TODO Testen, ob die Werte passen
-//		//wie sich das Misstrauen verändern soll
-//		if(zufall < -5)
-//			misstrauen -= 30;
-//		else if(zufall <= 0)
-//			misstrauen -= 20;
-//		else if(zufall < 5)
-//			misstrauen += 10;
-//		else if(zufall > 8)
-//			misstrauen += 20;
-		
-		
-		//sorgt dafür, dass sich das Misstrauen zwischen -100 und 100 bewegt
-		if(misstrauen>100)
-			misstrauen = 100;
-		if(misstrauen<-100)
-			misstrauen = -100;
-		
-		//Misstrauen der Person setzen
-		person.set_misstrauen(misstrauen);
-		
-		//Bei Person die Anzahl der Beschwichtigenaktionen erhöhen
-		//this.people.get(personen_id).set_durchgefuehrteBeschwichtigungen(action_id);
-	}
+	//Beschwerden an Miri
+    public void calc_misstrauen_after_beschwichtigen_action(int action_id, Person person){
+        int zufall=0;
+        int risiko;
+        double misstrauen = person.get_misstrauen();
+        
+        //Fehlschlagen der Aktionen ist unter anderem abhängig vom Misstrauensstatus
+                if(misstrauen >= 0){
+                    zufall = (int)(Math.random()*(misstrauen/10));
+                    if(zufall == 0)
+                        zufall = 1;
+                }
+                //Personen sind weniger misstrauisch
+                else{
+                    if(misstrauen/10 < 0){
+                        zufall = -(int)(Math.random()*(-(misstrauen/10)));
+                        if(zufall == 0)
+                            zufall = -1;
+                    }
+//                    else
+//                        zufall = (int)(Math.random()*(misstrauen/10));
+                }
+        
+        //Risiko einer Beschwichtigenaktion steigt, je häufiger man sie ausführt
+        risiko = person.get_durchgefuehrteBeschwichtigungen(action_id);
+        if(action_id == 0 || action_id == 2 || action_id == 3){    //Kuchen, Flirten, Helfen
+            if(risiko == 0){
+                if(zufall > 5)
+                    zufall *= (-1);
+                else if(zufall >= 0)
+                    zufall *= (-10);
+                else
+                    zufall *= 10;
+            }
+            else{
+                if(zufall > 5)
+                    zufall *= 6;
+                else if(zufall >= 0)
+                    zufall *= 6;
+                else
+                    zufall *= (-3);
+            }
+        }
+        else if(action_id == 1){    //bei Haus vorbeigehen, um zu reden
+            if(risiko <= 3)
+                if(zufall >= 0)
+                    zufall *= (-3);
+                else
+                    zufall *= 4;
+            else
+                if(zufall >= 0)
+                    zufall *= 3;
+                else
+                    zufall *= (-1); 
+        }
+        else{                        //Im Park unterhalten
+                if(zufall >= 0)
+                    zufall *= (-2);
+                else
+                    zufall *= 3;
+        }
+        
+        misstrauen += zufall;
+        
+        
+        //sorgt dafür, dass sich das Misstrauen zwischen -100 und 100 bewegt
+        if(misstrauen>100)
+            misstrauen = 100;
+        if(misstrauen<-100)
+            misstrauen = -100;
+        
+        //Misstrauen der Person setzen
+        person.set_misstrauen(misstrauen);
+    }
 	
 	
 	//TODO
