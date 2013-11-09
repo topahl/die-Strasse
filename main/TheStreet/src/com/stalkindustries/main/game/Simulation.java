@@ -1166,19 +1166,18 @@ public class Simulation {
 			return true;
 		}
 		for (int i = 0; i < this.people.size(); i++){
+			if (this.people.get(i).getBorder()!= null && this.people.get(i).getCurrentMove()=='n' && 
+					this.people.get(i).get_location_id()=='E'){
+				return true;
+			}
 			if (this.people.get(i) instanceof Terrorist && this.people.get(i).get_misstrauen() >= 85.00){
-				if (this.people.get(i).getCurrentMove()=='n' && this.people.get(i).get_location_id()=='E'){
-					return true;
-				} else {
+				if (this.people.get(i).getCurrentMove()=='n'){
 					berechne_weg(this.people.get(i), 'E');
 					this.people.get(i).setBorder(BorderFactory.createLineBorder(Color.red));
 					return false;
 				}
 			} 
-			if (this.people.get(i).getBorder()!= null && this.people.get(i).getCurrentMove()=='n' && 
-					this.people.get(i).get_location_id()=='E'){
-				return true;
-			}
+			
 		}	
 		return false;
 	}
