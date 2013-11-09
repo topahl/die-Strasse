@@ -1185,8 +1185,8 @@ public class GUILayer extends JFrame implements MouseMotionListener {
 		
 		//TODO etwas besseres Verfahren ausdenken
 		//Quizaufruf 
-		int zeitpunkt = (int) (Math.random() * 1000);
-		if(this.stepcounter % (3000 + zeitpunkt) == 0) {
+		//int zeitpunkt = (int) (Math.random() * 1000);
+		if(this.stepcounter % (3000) == 0 && ((getSimulation().getSpiel_tag()==1 && getSimulation().getSpiel_stunde()>7) || getSimulation().getSpiel_tag()>1)) {
 			quiz.starteQuiz();
 			getMousefollower().setVisible(false);
 			buttons.get("pause").setEnabled(false);
