@@ -1122,6 +1122,7 @@ public class GUILayer extends JFrame implements MouseMotionListener {
 		//this.callHighscore();
 	}
 	
+	
 	/**
 	 * @author Miriam
 	 */

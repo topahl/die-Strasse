@@ -449,15 +449,30 @@ public class Control implements IControl {
 			guilayer.getButtonsMap().get("aktionrazzia").setEnabled(true);
 		}
 		
-		//Pause-Button oben rechts ausblenden, wenn pausiert
-//		if (guilayer.getButtonsMap().get("pause").isEnabled()) {
-//			guilayer.getButtonsMap().get("pause").setEnabled(false);
-//		} else {
-//			guilayer.getButtonsMap().get("pause").setEnabled(true);
-//		}
+		if (guilayer.getButtonsMap().get("Haus1").isEnabled()){
+			guilayer.getButtonsMap().get("Haus1").setEnabled(false);
+			guilayer.getButtonsMap().get("Haus2").setEnabled(false);
+			guilayer.getButtonsMap().get("Haus3").setEnabled(false);
+			guilayer.getButtonsMap().get("Haus4").setEnabled(false);
+			guilayer.getButtonsMap().get("Haus5").setEnabled(false);
+			guilayer.getButtonsMap().get("Haus6").setEnabled(false);
+			guilayer.getButtonsMap().get("Haus7").setEnabled(false);
+			guilayer.getButtonsMap().get("Haus8").setEnabled(false);
+			guilayer.getButtonsMap().get("Haus9").setEnabled(false);
+		} else{
+			guilayer.getButtonsMap().get("Haus1").setEnabled(true);
+			guilayer.getButtonsMap().get("Haus2").setEnabled(true);
+			guilayer.getButtonsMap().get("Haus3").setEnabled(true);
+			guilayer.getButtonsMap().get("Haus4").setEnabled(true);
+			guilayer.getButtonsMap().get("Haus5").setEnabled(true);
+			guilayer.getButtonsMap().get("Haus6").setEnabled(true);
+			guilayer.getButtonsMap().get("Haus7").setEnabled(true);
+			guilayer.getButtonsMap().get("Haus8").setEnabled(true);
+			guilayer.getButtonsMap().get("Haus9").setEnabled(true);
+		}
 		
-//		guilayer.showDialogMessage("Pause", "Das Spiel wurde pausiert.", false,true);
-//		
+
+				
 		closeWindow("spionage");
 		closeWindow("beschwichtigen");
 		
