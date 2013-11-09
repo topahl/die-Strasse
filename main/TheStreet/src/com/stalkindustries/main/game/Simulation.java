@@ -647,10 +647,8 @@ public class Simulation {
 									}
 								}
 //							
-								if ((i>0 && (mensch!= null && zielloc == mensch.get_location_id())) ||
-										(mensch!= null && zielloc != mensch.get_location_id()) ||
-										(i>0 && (mensch!= null && zielloc == mensch.get_location_id())) ||
-										(mensch!= null && zielloc != mensch.get_location_id())){
+								if ((i>0 && (zielloc == mensch.get_location_id())) ||
+										(zielloc != mensch.get_location_id())){
 									// Es wird überprüft, ob ein Feld drüber/drunter/links oder rechts ebenfalls begehbar ist -> das wird markiert
 									if (valuesInRange(k, j+1)){
 										if (location_ids.get(j+1).get(k).equals("X")) {			//Weg nach unten ist begehbar
@@ -1177,7 +1175,8 @@ public class Simulation {
 					return false;
 				}
 			} 
-			if (this.people.get(i).getBorder()!= null){
+			if (this.people.get(i).getBorder()!= null && this.people.get(i).getCurrentMove()=='n' && 
+					this.people.get(i).get_location_id()=='E'){
 				return true;
 			}
 		}	
