@@ -239,7 +239,6 @@ public class Menu extends JFrame implements MouseMotionListener{
         beschreibung.setLineWrap(true);
         beschreibung.setText("Sie haben noch keinen Nutzernamen? Legen Sie hier einen neuen an. \n \n \nGewünschter Nutzername");
         beschreibung.setWrapStyleWord(true);
-        beschreibung.setFocusCycleRoot(true);
         beschreibung.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         beschreibung.setFocusable(false);
         beschreibung.setOpaque(false);
@@ -378,12 +377,11 @@ public class Menu extends JFrame implements MouseMotionListener{
 	 * @author Tobias
 	 */
 	@SuppressWarnings("rawtypes")
-	private void initHighscore(){
+	private void initHighscore() {
 		highscore = new JLayeredPane();
 		
-		//BEstenliste
-//		JList list = new JList();
-		JList list =new JList();
+		//Bestenliste
+		JList list = new JList();
 		//list.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
         list.setOpaque(false);
         list.setBackground(new Color(0,0,0,0));
@@ -403,7 +401,7 @@ public class Menu extends JFrame implements MouseMotionListener{
         sb.setBackground(new Color(0,0,0,0));
         scrollpane.setBounds(50, 350, 700, 300);
         highscore.add(scrollpane, javax.swing.JLayeredPane.DEFAULT_LAYER);
-                
+        
 		//load level icons for Highscore List
         ArrayList<String> levels = readAvaidableLevel();
         ArrayList<ArrayList<String>> scores = new ArrayList<ArrayList<String>>();
@@ -653,5 +651,5 @@ public class Menu extends JFrame implements MouseMotionListener{
 	}
 	
 	public void mouseMoved(MouseEvent e) {}
-    public void mouseDragged(MouseEvent e) {}    
+    public void mouseDragged(MouseEvent e) {}
 }
