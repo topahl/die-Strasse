@@ -501,26 +501,25 @@ public class Simulation {
 	private Point berechne_Parkeingang(ArrayList<ArrayList<String>> location_ids){
 		int parkcounter=0;
 		
-		// Der Park darf sich niemals ganz am Rand befinden (sieht auch doof aus)
-		for (int i = 1; i<14; i++){
-			for (int j = 1; j<23; j++){
+		for (int i = 1; i<15; i++){
+			for (int j = 1; j<24; j++){
 				if (location_ids.get(i).get(j).equals("P")){
-					if (i<13){
+					if (valuesInRange(j, i+1)){
 						if (location_ids.get(i+1).get(j).equals("P") || location_ids.get(i+1).get(j).equals("X")){
 							parkcounter++;
 						}
 					}
-					if (i>0){
+					if (valuesInRange(j, i-1)){
 						if (location_ids.get(i-1).get(j).equals("P") || location_ids.get(i-1).get(j).equals("X")){
 							parkcounter++;
 						}
 					}
-					if (j<22){
+					if (valuesInRange(j+1, i)){
 						if (location_ids.get(i).get(j+1).equals("P") || location_ids.get(i).get(j+1).equals("X")){
 							parkcounter++;
 						}
 					}
-					if (j>0){
+					if (valuesInRange(j-1, i)){
 						if (location_ids.get(i).get(j-1).equals("P") || location_ids.get(i).get(j-1).equals("X")){
 							parkcounter++;
 						}
@@ -632,7 +631,7 @@ public class Simulation {
 										break goal;
 									}
 								}
-//							
+							
 								if ((i>0 && (zielloc == mensch.get_location_id())) ||
 										(zielloc != mensch.get_location_id())){
 									// Es wird überprüft, ob ein Feld drüber/drunter/links oder rechts ebenfalls begehbar ist -> das wird markiert
@@ -720,44 +719,44 @@ public class Simulation {
 							neuer_weg.push('o');
 						}
 					}
-					if (xPos_current<Ressources.MAPWIDTH/Ressources.RASTERHEIGHT-1){
+					if (valuesInRange(xPos_current+1, yPos_current)){
 						if (location_ids.get(yPos_current).get(xPos_current+1).equals(String.valueOf(counter+1))) {			//rechts gehts weiter
 							xPos_current++;
 							neuer_weg.push('l');
 						}
 					}
-					if (yPos_current>0){
+					if (valuesInRange(xPos_current, yPos_current-1)){
 						if (location_ids.get(yPos_current-1).get(xPos_current).equals(String.valueOf(counter+1))) {			//oben gehts weiter
 							yPos_current--;
 							neuer_weg.push('u');
 						}
 					}
-					if (xPos_current>0){
+					if (valuesInRange(xPos_current-1, yPos_current)){
 						if (location_ids.get(yPos_current).get(xPos_current-1).equals(String.valueOf(counter+1))) {			//links gehts weiter
 							xPos_current--;
 							neuer_weg.push('r');
 						}
 					}
 				} else{
-					if (yPos_current<Ressources.MAPHEIGHT/Ressources.RASTERHEIGHT-1){
+					if (valuesInRange(xPos_current, yPos_current+1)){
 						if (location_ids.get(yPos_current+1).get(xPos_current).equals(String.valueOf(i))) {			//unten gehts weiter
 						yPos_current++;
 						neuer_weg.push('o');
 						}
 					}
-					if (xPos_current<Ressources.MAPWIDTH/Ressources.RASTERHEIGHT-1){
+					if (valuesInRange(xPos_current+1, yPos_current)){
 						if (location_ids.get(yPos_current).get(xPos_current+1).equals(String.valueOf(i))) {			//rechts gehts weiter
 						xPos_current++;
 						neuer_weg.push('l');
 						}
 					}
-					if (yPos_current>0){
+					if (valuesInRange(xPos_current, yPos_current-1)){
 						if (location_ids.get(yPos_current-1).get(xPos_current).equals(String.valueOf(i))) {			//oben gehts weiter
 						yPos_current--;
 						neuer_weg.push('u');
 						}
 					}
-					if (xPos_current>0){
+					if (valuesInRange(xPos_current-1, yPos_current)){
 						if (location_ids.get(yPos_current).get(xPos_current-1).equals(String.valueOf(i))) {			//links gehts weiter
 						xPos_current--;
 						neuer_weg.push('r');
@@ -770,25 +769,25 @@ public class Simulation {
 				if (zielloc!='P'){
 					i--;
 				}
-				if (yPos_current<Ressources.MAPHEIGHT/Ressources.RASTERHEIGHT-1){
+				if (valuesInRange(xPos_current, yPos_current+1)){
 					if (location_ids.get(yPos_current+1).get(xPos_current).equals(String.valueOf(i))) {			//unten gehts weiter
 					yPos_current++;
 					neuer_weg.push('o');
 					}
 				}
-				if (xPos_current<Ressources.MAPWIDTH/Ressources.RASTERHEIGHT-1){
+				if (valuesInRange(xPos_current+1, yPos_current)){
 					if (location_ids.get(yPos_current).get(xPos_current+1).equals(String.valueOf(i))) {			//rechts gehts weiter
 					xPos_current++;
 					neuer_weg.push('l');
 					}
 				}
-				if (yPos_current>0){
+				if (valuesInRange(xPos_current, yPos_current-1)){
 					if (location_ids.get(yPos_current-1).get(xPos_current).equals(String.valueOf(i))) {			//oben gehts weiter
 					yPos_current--;
 					neuer_weg.push('u');
 					}
 				}
-				if (xPos_current>0){
+				if (valuesInRange(xPos_current-1, yPos_current)){
 					if (location_ids.get(yPos_current).get(xPos_current-1).equals(String.valueOf(i))) {			//links gehts weiter
 					xPos_current--;
 					neuer_weg.push('r');
@@ -904,9 +903,7 @@ public class Simulation {
 						neuer_weg.push('o');
 					}
 					
-					if (this.agent.get_location_id()==(char)(this.agent.get_haus_id()+48+1) && 
-							this.agent.getPosX() == this.agent.getHomePosX() && 
-							this.agent.getPosY() ==this.agent.getHomePosY()){
+					if (this.agent.getPosX() == this.agent.getHomePosX() && this.agent.getPosY() ==this.agent.getHomePosY()){
 						neuer_weg.push('u');
 						neuer_weg.push('r');
 					} else{
