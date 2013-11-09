@@ -63,8 +63,14 @@ public class Menu extends JFrame implements MouseMotionListener{
 		control = new ControlMenu(this);
         initComponents();
         setVisible(true);
-
     }
+	
+	public Menu(String playername){
+		this(); //Call main constructor
+		this.setCurrentUser(playername);
+		this.showLayer(LAYERMENU);
+	}
+	
 
 	public void setCurrentUser(String user){
 		currentUser.setText(user);

@@ -24,10 +24,9 @@ public class TheStreet {
 	}
 	public static void loadLeve(String levelname, String agentname){
 		GUILayer game = new GUILayer(levelname, agentname);
-		//game.callHighscore();
 	}
 	
-	public static void loadMenu(){
-		Menu menu = new Menu();
+	public static void loadMenu(String playername){
+		Menu menu = new Menu(playername);
 	}
 }

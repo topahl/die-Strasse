@@ -90,9 +90,6 @@ public class GUILayer extends JFrame implements MouseMotionListener {
 		this.timer.setCoalesce(false);
 		this.timer.start(); 
 		this.highscore = new Highscore(this.simulation,this.quiz,this.simulation.get_agent(),levelname);
-		
-		
-		
 	}
 
 
@@ -101,7 +98,7 @@ public class GUILayer extends JFrame implements MouseMotionListener {
 	 * Beenden: das Spiel stoppen und Fenster schließen
 	 */
 	public void endGame() {
-		TheStreet.loadMenu();
+		TheStreet.loadMenu(simulation.get_agent().getName());
 		this.timer.stop();
 		this.dispose();
 		//TODO auf Auswertungsmenü weiterleiten
