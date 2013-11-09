@@ -28,13 +28,13 @@ public abstract class Mensch extends JLabel {
 	
 	public static void loadImages(String levelname){
 		 try {
-				adults = ImageIO.read(new File("res\\level\\"+levelname+"\\"+levelname+"_slice_person_adult.png"));
+				adults = ImageIO.read(new File(Ressources.HOMEDIR+"res\\level\\"+levelname+"\\"+levelname+"_slice_person_adult.png"));
 			} catch (IOException e) {
 				System.err.println("Could not find adult.png");
 				e.printStackTrace();
 			}
 			 try {
-				infants = ImageIO.read(new File("res\\level\\"+levelname+"\\"+levelname+"_slice_person_child.png"));
+				infants = ImageIO.read(new File(Ressources.HOMEDIR+"res\\level\\"+levelname+"\\"+levelname+"_slice_person_child.png"));
 			} catch (IOException e) {
 				System.err.println("Could not find child.png");
 				e.printStackTrace();

@@ -7,6 +7,7 @@ import javax.swing.DefaultListModel;
 
 import com.stalkindustries.main.IControl;
 import com.stalkindustries.main.TheStreet;
+import com.stalkindustries.main.game.Ressources;
 
 /**
  * 
@@ -113,7 +114,7 @@ public class ControlMenu implements IControl{
 	@SuppressWarnings({ "rawtypes", "unchecked" })
 	private DefaultListModel getPlayernames(){
 		DefaultListModel output = new DefaultListModel();
-		File folder = new File("res\\user\\");
+		File folder = new File(Ressources.HOMEDIR+"res\\user\\");
     	for (File fileEntry : folder.listFiles()) {
             if (fileEntry.isFile()&&fileEntry.getName().endsWith(".usr")) {
                 output.addElement(fileEntry.getName().substring(0, fileEntry.getName().length()-4));
