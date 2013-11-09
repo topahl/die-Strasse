@@ -1,4 +1,4 @@
-package com.stalkindustries.main.menu;
+package com.stalkindustries.main;
 
 import java.awt.Color;
 import java.awt.Dimension;
@@ -16,7 +16,6 @@ import javax.swing.JScrollPane;
 import javax.swing.plaf.metal.MetalScrollBarUI;
 import javax.swing.plaf.metal.MetalScrollButton;
 
-import com.stalkindustries.main.IControl;
 import com.stalkindustries.main.game.Ressources;
 
 public class Scrollbar extends JScrollPane {

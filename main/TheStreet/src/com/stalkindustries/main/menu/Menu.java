@@ -30,8 +30,10 @@ import javax.swing.JTextArea;
 import javax.swing.JTextField;
 import javax.swing.ListSelectionModel;
 import javax.swing.SwingConstants;
+import javax.xml.ws.handler.MessageContext.Scope;
 
 import com.stalkindustries.main.Button;
+import com.stalkindustries.main.Scrollbar;
 import com.stalkindustries.main.game.Ressources;
 
 public class Menu extends JFrame implements MouseMotionListener{
@@ -327,9 +329,42 @@ public class Menu extends JFrame implements MouseMotionListener{
         
 	}
 	
+	@SuppressWarnings("rawtypes")
 	private void initHighscore(){
 		highscore = new JLayeredPane();
 		
+		//BEstenliste
+		JList list = new JList();
+        list.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+        list.setOpaque(false);
+        list.setBackground(new Color(0,0,0,0));
+        list.setFont(new Font("Corbel",Font.BOLD,20));
+        list.setForeground(new Color(0xf9, 0xf9, 0xf9));
+        JScrollPane scrollpane = new Scrollbar(this.control); 
+        scrollpane.setViewportView(list);
+        scrollpane.getViewport().setOpaque(false);
+        scrollpane.setOpaque(false);
+        scrollpane.setBackground(new Color(0,0,0,0));
+        scrollpane.setBorder(null);
+        JScrollBar sb = scrollpane.getVerticalScrollBar();
+        sb.setPreferredSize(new Dimension(30,0));
+        sb.setBackground(new Color(0,0,0,0));
+        scrollpane.setBounds(50, 260, 300, 300);
+        highscore.add(scrollpane, javax.swing.JLayeredPane.DEFAULT_LAYER);
+                
+		
+		DefaultListModel model = new DefaultListModel();
+		model.addElement("Hallo");
+		model.addElement("Hallo");
+		model.addElement("Hallo");
+		model.addElement("Hallo");
+		model.addElement("Hallo");
+		model.addElement("Hallo");
+		model.addElement("Hallo");
+		model.addElement("Hallo");
+		model.addElement("Hallo");
+        list.setModel(model);
+        
 		generateStandardSubPageElements(highscore, "Highscores");
 	}
 	
