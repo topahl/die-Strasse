@@ -15,10 +15,9 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 import javax.imageio.ImageIO;
-import javax.swing.AbstractListModel;
 import javax.swing.BorderFactory;
 import javax.swing.DefaultListModel;
-import javax.swing.GroupLayout.Alignment;
+import javax.swing.GroupLayout;
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -30,9 +29,9 @@ import javax.swing.JTextArea;
 import javax.swing.JTextField;
 import javax.swing.ListSelectionModel;
 import javax.swing.SwingConstants;
-import javax.xml.ws.handler.MessageContext.Scope;
 
 import com.stalkindustries.main.Button;
+import com.stalkindustries.main.HighscoreTableRenderer;
 import com.stalkindustries.main.Scrollbar;
 import com.stalkindustries.main.game.Ressources;
 
@@ -106,7 +105,7 @@ public class Menu extends JFrame implements MouseMotionListener{
 		setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         setResizable(false);
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
+        GroupLayout layout = new GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         
        
@@ -140,8 +139,11 @@ public class Menu extends JFrame implements MouseMotionListener{
 		
 		
 		//call Login screen
-        control.openProfil();
+        //control.openProfil();
       
+        //TODO wieder normal starten
+        showLayer(LAYERHIGHSCORE);
+        
         //disabled bis Benutzer ausgewählt ist
 
         pack();
@@ -334,12 +336,16 @@ public class Menu extends JFrame implements MouseMotionListener{
 		highscore = new JLayeredPane();
 		
 		//BEstenliste
-		JList list = new JList();
-        list.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+//		JList list = new JList();
+		JList list =new JList();
+		//list.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
         list.setOpaque(false);
         list.setBackground(new Color(0,0,0,0));
-        list.setFont(new Font("Corbel",Font.BOLD,20));
         list.setForeground(new Color(0xf9, 0xf9, 0xf9));
+        list.setFont(new Font("Corbel",Font.BOLD,20));
+        HighscoreTableRenderer renderer = new HighscoreTableRenderer();
+        list.setCellRenderer(renderer);
+        
         JScrollPane scrollpane = new Scrollbar(this.control); 
         scrollpane.setViewportView(list);
         scrollpane.getViewport().setOpaque(false);
@@ -349,21 +355,50 @@ public class Menu extends JFrame implements MouseMotionListener{
         JScrollBar sb = scrollpane.getVerticalScrollBar();
         sb.setPreferredSize(new Dimension(30,0));
         sb.setBackground(new Color(0,0,0,0));
-        scrollpane.setBounds(50, 260, 300, 300);
+        scrollpane.setBounds(50, 260, 700, 300);
         highscore.add(scrollpane, javax.swing.JLayeredPane.DEFAULT_LAYER);
                 
-		
+		//load level icons for Highscore List
+        ArrayList<String> levels = readAvaidableLevel();
+        for(String levelname : levels){
+        	try {
+				BufferedImage loader = ImageIO.read(new File(Ressources.HOMEDIR+"res\\level\\"+levelname+"\\"+levelname+"_slice_menu.png"));
+				Graphics2D g2d = loader.createGraphics();
+    			g2d.drawImage(Ressources.menubutton.getSubimage(315, 9, 37, 26), 315, 9, null);
+				renderer.addIcon(levelname, loader.getSubimage(315, 9, loader.getWidth()-315, 26));
+				
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+        }
+        
 		DefaultListModel model = new DefaultListModel();
-		model.addElement("Hallo");
-		model.addElement("Hallo");
-		model.addElement("Hallo");
-		model.addElement("Hallo");
-		model.addElement("Hallo");
-		model.addElement("Hallo");
-		model.addElement("Hallo");
-		model.addElement("Hallo");
-		model.addElement("Hallo");
-        list.setModel(model);
+		ArrayList<String> eins  = new ArrayList<String>();
+		ArrayList<String> zwei  = new ArrayList<String>();
+		ArrayList<String> drei  = new ArrayList<String>();
+		eins.add("kanada");
+		eins.add("189.69");
+		eins.add("Tikitastisch");
+		eins.add("30.09.2013");
+		
+		zwei.add("saudiarabien");
+		zwei.add("57.88");
+		zwei.add("Sir Tobi");
+		zwei.add("5.10.2013");
+		
+		drei.add("russland");
+		drei.add("46.5");
+		drei.add("Miss Miri");
+		drei.add("05.10.2013");
+		
+		for(int i=0;i<33;i++){
+			model.addElement(eins);
+			model.addElement(zwei);
+			model.addElement(drei);
+		}
+		list.setModel(model);
+
+		
         
 		generateStandardSubPageElements(highscore, "Highscores");
 	}
