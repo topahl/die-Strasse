@@ -105,6 +105,9 @@ public class Quiz {
 	
 	//Beschwerden Miri
 	public void calcMisstrauenAfterQuiz(){
+		
+		gui.getButtonsMap().get("pause").setEnabled(true);
+		
 		int misstrauen = 0;
 		//nur wenn die Antwort nicht zu 100% richtig war
 		if(this.beantwortet.get(this.beantwortet.size()-1) == 100){
