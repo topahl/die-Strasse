@@ -166,13 +166,7 @@ public class Menu extends JFrame implements MouseMotionListener{
         
 		
 		//call Login screen
-        //control.openProfil();
-      
-        //TODO wieder normal starten
-        showLayer(LAYERHIGHSCORE);
-        
-        //disabled bis Benutzer ausgewählt ist
-        //TODO Kommentar weg?
+        control.openProfil();
 
         pack();
     }
