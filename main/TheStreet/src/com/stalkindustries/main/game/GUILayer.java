@@ -921,8 +921,8 @@ public class GUILayer extends JFrame implements MouseMotionListener {
 					mensch_cnt++;
 					familien_cnt++;
 				}
-				this.initHaus(i, false, spawnHausX[i], spawnHausY[i]);
-			}
+				
+			} this.initHaus(i, false, spawnHausX[i], spawnHausY[i]);
 		}
 
 		// Simulation benötigt die Information von allen Bewohnern (ohne Agent)
