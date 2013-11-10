@@ -19,7 +19,6 @@ public class Haus {
 		this.posX = posX;
 		this.posY = posY;
 		this.agentenhaus = agentenhaus;
-		//TODO böse Events
 	}
 	
 	public float getUeberwachungsstatus(){
