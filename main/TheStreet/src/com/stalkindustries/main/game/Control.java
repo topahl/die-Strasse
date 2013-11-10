@@ -358,7 +358,7 @@ public class Control implements IControl {
 				this.guilayer.stopGame();
 				if(festgenommen){
 					this.guilayer.getHighscore().setFestgenommen(true);
-					this.guilayer.showDialogMessage("Gewonnen", "Herzlichen Glückwunsch, Sie haben den Schwerverbrecher festgenommen!", false, false);
+					this.guilayer.showDialogMessage("Gewonnen", "Glückwunsch, Sie haben den Schwerverbrecher festgenommen!", false, false);
 				}
 				else{
 					this.guilayer.showDialogMessage("Verloren", "Schade! Das nächste Mal sollten Sie mehr Beweise sammeln.", false, false);
