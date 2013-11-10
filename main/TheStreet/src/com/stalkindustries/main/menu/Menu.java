@@ -481,7 +481,7 @@ public class Menu extends JFrame implements MouseMotionListener {
         JScrollBar sb = scrollpane.getVerticalScrollBar();
         sb.setPreferredSize(new Dimension(30,0));
         sb.setBackground(new Color(0,0,0,0));
-        scrollpane.setBounds(50, 260, 300, 300);
+        scrollpane.setBounds(50, 260, 315, 315);
         profilselect.add(scrollpane, javax.swing.JLayeredPane.DEFAULT_LAYER);
                 
         
@@ -526,6 +526,12 @@ public class Menu extends JFrame implements MouseMotionListener {
 				Ressources.menuButton.getSubimage(3 * 315, 671, 315,70),
 				"use", 45, 600, this);
 	    profilselect.add(button, javax.swing.JLayeredPane.DEFAULT_LAYER);
+	    
+	    
+	    JLabel listbackground = new JLabel();
+	    listbackground.setIcon(new ImageIcon(Ressources.menuButton.getSubimage(0, 955, 335, 350)));
+	    listbackground.setBounds(39, 222, 750, 395);
+	    profilselect.add(listbackground, javax.swing.JLayeredPane.DEFAULT_LAYER);
 		
 		generateStandardSubPageElements(profilselect, "Benutzer", "Wählen Sie hier den Benutzer, als der Sie spielen, oder legen Sie einen neuen Benutzer an.");
         
