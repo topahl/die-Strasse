@@ -1123,7 +1123,7 @@ public class Simulation {
 	//Support Tiki
 	private void calcColouredPeople (int hausid){
 		for (int i = 0; i<get_people().size(); i++){
-			if (get_people().get(i).get_haus_id() == hausid){
+			if (get_people().get(i).get_haus_id() == hausid && !get_people().get(i).getIstFarbig()){
 				get_people().get(i).setIstFarbig(true);
 				get_people().get(i).farbeZeigen(true);
 			}
