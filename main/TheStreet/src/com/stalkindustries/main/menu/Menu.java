@@ -68,6 +68,8 @@ public class Menu extends JFrame implements MouseMotionListener {
 	private JLabel tutorialTitel = new JLabel();
 	private JTextArea tutorialBeschreibung = new JTextArea();
 	private JLabel tutorialOverlay = new JLabel();
+	private JLabel[] gameDetails = new JLabel[14];
+	private JList persHighscoreList;
 	private int tutorialPage = 0;
 	
 	
@@ -142,22 +144,22 @@ public class Menu extends JFrame implements MouseMotionListener {
 	     currentUser.setBounds(Ressources.ZEROPOS.width+855,Ressources.ZEROPOS.height+35,200,45);
 	     window.add(currentUser, javax.swing.JLayeredPane.DEFAULT_LAYER);
 	     
-	        initLevelIcons();
-		setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
-        setResizable(false);
-        GroupLayout layout = new GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
+	     initLevelIcons();
+		 setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+         setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+         setResizable(false);
+         GroupLayout layout = new GroupLayout(getContentPane());
+         getContentPane().setLayout(layout);
         
        
-        //Alle Menüseiten initialisieren
-        initProfilMenu();
-        initHighscore();
-//        initPersHighscore();
-        initLevelSelect();
-        initTutorial();
-        initCredits();
-        initMainMenu();
+         //Alle Menüseiten initialisieren
+         initProfilMenu();
+         initHighscore();
+         initPersHighscore();
+         initLevelSelect();
+         initTutorial();
+         initCredits();
+         initMainMenu();
 
         
         layout.setHorizontalGroup(
@@ -646,19 +648,43 @@ public class Menu extends JFrame implements MouseMotionListener {
 	private void initPersHighscore(){
 		pershighscore = new JLayeredPane();
 		
+		JLabel label = new JLabel();
+		label.setText("Meine Spiele");
+		label.setFont(new Font("Corbel",Font.BOLD,30));
+		label.setBounds(50, 250, 200, 45);
+		label.setForeground(new Color(0xf9,0xf9,0xf9));
+		pershighscore.add(label, javax.swing.JLayeredPane.DEFAULT_LAYER);
+		
+		label = new JLabel();
+		label.setText("Spieldetails");
+		label.setFont(new Font("Corbel",Font.BOLD,30));
+		label.setBounds(400, 250, 200, 45);
+		label.setForeground(new Color(0xf9,0xf9,0xf9));
+		pershighscore.add(label, javax.swing.JLayeredPane.DEFAULT_LAYER);
+		
+		gameDetails[0] = new JLabel();  //Land
+		gameDetails[0].setIcon(new ImageIcon(levelicons.get("russland")));
+		gameDetails[0].setBounds(405, 290, 200, 45);
+		pershighscore.add(gameDetails[0], javax.swing.JLayeredPane.DEFAULT_LAYER);
+		
+		gameDetails[1] = new JLabel(); //Uhrzeit Datum
+		gameDetails[1].setText("20.09.2013 - 23:41 Uhr");
+		gameDetails[1].setFont(new Font("Corbel",Font.BOLD,20));
+		
 		
 		//Eigene Bestenliste
-		JList list = new JList();
+		persHighscoreList = new JList();
 		//list.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
-		list.setOpaque(false);
-		list.setBackground(new Color(0,0,0,0));
-		list.setForeground(new Color(0xf9, 0xf9, 0xf9));
-		list.setFont(new Font("Corbel",Font.BOLD,20));
+		persHighscoreList.setOpaque(false);
+		persHighscoreList.setBackground(new Color(0,0,0,0));
+		persHighscoreList.setForeground(new Color(0xf9, 0xf9, 0xf9));
+		persHighscoreList.setFont(new Font("Corbel",Font.BOLD,20));
 		PersHighscoreTableRenderer renderer = new PersHighscoreTableRenderer();
-		list.setCellRenderer(renderer);
-		        
+		persHighscoreList.setCellRenderer(renderer);
+		persHighscoreList.addListSelectionListener(control);
+		
 		JScrollPane scrollpane = new Scrollbar(this.control); 
-		scrollpane.setViewportView(list);
+		scrollpane.setViewportView(persHighscoreList);
 		scrollpane.getViewport().setOpaque(false);
 		scrollpane.setOpaque(false);
 		scrollpane.setBackground(new Color(0,0,0,0));
@@ -666,10 +692,8 @@ public class Menu extends JFrame implements MouseMotionListener {
 		JScrollBar sb = scrollpane.getVerticalScrollBar();
 		sb.setPreferredSize(new Dimension(30,0));
         sb.setBackground(new Color(0,0,0,0));
-        scrollpane.setBounds(50, 350, 700, 300);
-        highscore.add(scrollpane, javax.swing.JLayeredPane.DEFAULT_LAYER);
-		
-       
+        scrollpane.setBounds(50, 300, 300, 300);
+        pershighscore.add(scrollpane, javax.swing.JLayeredPane.DEFAULT_LAYER);
     	renderer.addIcons(levelicons);
         
 		
@@ -758,8 +782,8 @@ public class Menu extends JFrame implements MouseMotionListener {
     	tutorial.setEnabled(layernummer==LAYERTUTORIAL?true:false);
     	credits.setVisible(layernummer==LAYERCREDITS?true:false);
     	credits.setEnabled(layernummer==LAYERCREDITS?true:false);
-//    	pershighscore.setVisible(layernummer==LAYERPERSHIGHSCORE?true:false);
-//    	pershighscore.setEnabled(layernummer==LAYERPERSHIGHSCORE?true:false);
+    	pershighscore.setVisible(layernummer==LAYERPERSHIGHSCORE?true:false);
+    	pershighscore.setEnabled(layernummer==LAYERPERSHIGHSCORE?true:false);
     }
     
     
@@ -867,7 +891,7 @@ public class Menu extends JFrame implements MouseMotionListener {
     }
     
     
-    private ArrayList<ArrayList<String>> readUserHighscores(String username){
+    public ArrayList<ArrayList<String>> readUserHighscores(String username){
     	ArrayList<String> levels = readAvaidableLevel();
         ArrayList<ArrayList<String>> scores = new ArrayList<ArrayList<String>>();
     	try {
@@ -931,6 +955,12 @@ public class Menu extends JFrame implements MouseMotionListener {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		DefaultListModel model = new DefaultListModel();
+		
+    	for(int i=scores.size();i>0;i--)
+    		model.addElement(scores.get(i-1));
+    	
+    	persHighscoreList.setModel(model);
     	return scores;
     }
     

@@ -38,6 +38,7 @@ public class PersHighscoreTableRenderer extends DefaultListCellRenderer {
 	        land = new JLabel();
 	        land.setOpaque(true);
 	        land.setFont(font);
+
 	        score = new JLabel();
 	        score.setOpaque(true);
 	        score.setFont(font);
@@ -49,7 +50,7 @@ public class PersHighscoreTableRenderer extends DefaultListCellRenderer {
 	        paneLayout.setHorizontalGroup(
 	        		paneLayout.createParallelGroup(Alignment.LEADING)
 	        			.addGroup(paneLayout.createSequentialGroup()
-	        				.addComponent(land,50,50,50)
+	        				.addComponent(land,45,45,45)
 	        				.addComponent(score,100,100,100)
 	        				.addComponent(date,150,150,150))
 	        );
@@ -77,13 +78,13 @@ public class PersHighscoreTableRenderer extends DefaultListCellRenderer {
 	    		
 	    	ArrayList<String> values = (ArrayList<String>) value;
 	        
-	        land.setIcon(new ImageIcon(icons.get(values.get(0))));
+	        land.setIcon(new ImageIcon(icons.get(values.get(9))));
 	        this.setColors(land, selected);
 	        
-	        score.setText(values.get(1));
+	        score.setText(values.get(2));
 	        this.setColors(score, selected);
 	        
-	        date.setText(values.get(3));
+	        date.setText(values.get(0));
 	        this.setColors(date, selected);
 	        
 	        

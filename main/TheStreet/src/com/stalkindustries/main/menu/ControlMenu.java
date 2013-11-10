@@ -4,6 +4,8 @@ import java.io.File;
 import java.io.IOException;
 
 import javax.swing.DefaultListModel;
+import javax.swing.event.ListSelectionEvent;
+import javax.swing.event.ListSelectionListener;
 
 import com.stalkindustries.main.IControl;
 import com.stalkindustries.main.TheStreet;
@@ -14,7 +16,7 @@ import com.stalkindustries.main.game.Ressources;
  * @author Tobias
  *
  */
-public class ControlMenu implements IControl {
+public class ControlMenu implements IControl, ListSelectionListener {
 	
 	private Menu mainmenu;
 	
@@ -69,6 +71,7 @@ public class ControlMenu implements IControl {
 		if(listselection != null){			
 			mainmenu.setCurrentUser(listselection.toString());
 			mainmenu.showLayer(Menu.LAYERMENU);
+			mainmenu.readUserHighscores(listselection.toString());
 		}
 		
 	}
@@ -134,6 +137,13 @@ public class ControlMenu implements IControl {
 	public void openProfil(){
 		mainmenu.getBenutzerliste().setModel(getPlayernames());
 		mainmenu.showLayer(Menu.LAYERPROFIL);
+	}
+
+	@Override
+	public void valueChanged(ListSelectionEvent arg0) {
+		System.out.println(arg0.toString());
+		
+		
 	}
 	
 }
