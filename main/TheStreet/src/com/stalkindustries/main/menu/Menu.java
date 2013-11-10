@@ -677,6 +677,18 @@ public class Menu extends JFrame implements MouseMotionListener {
 		datumLabel.setBounds(570, 305, 100, 50);
 		highscore.add(datumLabel, javax.swing.JLayeredPane.DEFAULT_LAYER);
 		
+		
+		//Button
+		Button alleScoresButton = new Button(this.control,
+				Ressources.menuButton.getSubimage(0, 815, 315, 70),
+				Ressources.menuButton.getSubimage(315, 815, 313, 70),
+				Ressources.menuButton.getSubimage(2 * 315, 815, 315, 70),
+				Ressources.menuButton.getSubimage(3 * 315, 815, 315, 70),
+				"Alle Scores", Ressources.RASTERHEIGHT, 3 * Ressources.RASTERHEIGHT - 10, this);
+	    highscore.add(alleScoresButton, javax.swing.JLayeredPane.DEFAULT_LAYER);
+	    buttons.put("credits", alleScoresButton);
+		
+		
 		generateStandardSubPageElements(highscore, "Highscores", "Sehen Sie hier die Auswertung Ihrer Spiele und vergleichen Sie Ihr Ergebnis mit dem von anderen Spielern.");
 	}
 	
