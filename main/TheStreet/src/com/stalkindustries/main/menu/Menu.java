@@ -897,9 +897,7 @@ public class Menu extends JFrame implements MouseMotionListener {
     	renderer.addIcons(levelicons);
         
     	
-    	
-		
-		generateStandardSubPageElements(pershighscore, "Meine Scores", "");
+		generateStandardSubPageElements(pershighscore, "Meine Scores", "Durch Klicken auf ein Spiel, können Sie sich die Details des Spielstandes ansehen");
 	}
 	
 	/**
@@ -908,6 +906,7 @@ public class Menu extends JFrame implements MouseMotionListener {
 	 */
 	public void resetPersHighscore(){
 		gameDetails[0].setVisible(false);
+		gameDetails[1].setVisible(false);
 		gameDetails[2].setVisible(false);
 		gameDetails[3].setVisible(false);
 		gameDetails[4].setVisible(false);
@@ -923,7 +922,7 @@ public class Menu extends JFrame implements MouseMotionListener {
 		gameDetails[14].setVisible(false);
 		gameDetails[15].setVisible(false);
 		gameDetails[16].setVisible(false);
-		gameDetails[1].setText("Wählen Sie einen Spielstand aus");
+//		gameDetails[1].setText("Wählen Sie einen Spielstand aus");
 		
 	}
 	
