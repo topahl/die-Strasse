@@ -1215,7 +1215,7 @@ public class GUILayer extends JFrame implements MouseMotionListener {
 		
 		//Unwohlsein durch installierte Überwachungsmodule
 		if(this.stepcounter%1000 == 0){
-			this.simulation.calc_misstrauen_during_ueberwachung();
+			this.simulation.calcMisstrauenDuringUeberwachung();
 		}
 		
 		//Misstrauen bei Überwachungsaktion

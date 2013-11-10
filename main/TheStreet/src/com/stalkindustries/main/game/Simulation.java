@@ -296,7 +296,7 @@ public class Simulation {
 	
 	//Beschwerden Miri
 	//während ein Haus überwacht wird, macht sich bei den Bewohnern ein Unwohlsein breit und sie werden mehr misstrauisch
-	public void calc_misstrauen_during_ueberwachung(){
+	public void calcMisstrauenDuringUeberwachung(){
 		for(int i=0;i<this.people.size();i++){
 			// wenn Überwachungsmodule in dem Haus, in dem die Person lebt, installiert wurden
 			if(this.houses.get(this.people.get(i).get_haus_id()).getUeberwachungsmodule().size() > 0){
@@ -571,7 +571,7 @@ public class Simulation {
 	        }
 		
 		//Bewegungsstack nach und nach füllen
-		neuerWeg = fuelle_bewegungs_stack(locationIds, mensch, zielLoc);
+		neuerWeg = calcWegInRasterkarte(locationIds, mensch, zielLoc);
 			
 		//Stack zur Bewegung freigeben
 		mensch.setMoves(neuerWeg);
@@ -579,7 +579,7 @@ public class Simulation {
 	
 	
 	//Support Tiki
-	private Stack<Character> fuelle_bewegungs_stack(ArrayList<ArrayList<String>> location_ids, Mensch mensch, char zielloc){
+	private Stack<Character> calcWegInRasterkarte(ArrayList<ArrayList<String>> location_ids, Mensch mensch, char zielloc){
 		
 		Stack<Character> neuer_weg = new Stack<Character>();
 		int counter = 1;
