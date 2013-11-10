@@ -16,14 +16,14 @@ public abstract class Mensch extends JLabel {
 	private int homeposX;
 	private int homeposY;
 	private String name;
-	private char location_id;
+	private char locationId;
 	protected char currentMove = 'n'; //links, rechts, oben , unten, nichts -> Kleinbuchstaben
 	private Stack<Character> moves = new Stack<Character>();
 	protected static BufferedImage adults; //slice PNG to save RAM
 	protected static BufferedImage infants; //slice PNG to save RAM
 	protected int bewegungsgeschwindigkeit;
-	protected int haus_id;
-	private boolean invisible_lefternside=false;
+	protected int hausId;
+	private boolean invisibleLeftOrUp=false; //Wenn eine Person nach links oder oben rausläuft, muss sie noch einen Schritt länger gezeichnet werden
 	
 	
 	public static void loadImages(String levelname){
@@ -61,19 +61,19 @@ public abstract class Mensch extends JLabel {
 		switch(currentMove){
 		case 'l':
 			posX-=this.bewegungsgeschwindigkeit;
-			invisible_lefternside = true;
+			invisibleLeftOrUp = true;
 			break;
 		case 'r':
 			posX+=this.bewegungsgeschwindigkeit;
-			invisible_lefternside = false;
+			invisibleLeftOrUp = false;
 			break;
 		case 'o':
 			posY-=this.bewegungsgeschwindigkeit;
-			invisible_lefternside = true;
+			invisibleLeftOrUp = true;
 			break;
 		case 'u':
 			posY+=this.bewegungsgeschwindigkeit;
-			invisible_lefternside = false;
+			invisibleLeftOrUp = false;
 			break;
 		default: break;
 		}
@@ -101,11 +101,11 @@ public abstract class Mensch extends JLabel {
 		setLocation(posX,posY); //no repaint needed
 		
 		
-		if(moves.empty() && location_id=='E'){
-			if (invisible_lefternside==false){
+		if(moves.empty() && locationId=='E'){
+			if (invisibleLeftOrUp==false){
 				this.setVisible(false);
 			} else{
-				invisible_lefternside=false;
+				invisibleLeftOrUp=false;
 			}
 		} else{
 			this.setVisible(true);
@@ -163,12 +163,12 @@ public abstract class Mensch extends JLabel {
 		return this.name;
 	}
 	
-	public void set_location_id(char id){
-		this.location_id = id;
+	public void setLocationId(char id){
+		this.locationId = id;
 	}
 	
-	public char get_location_id(){
-		return this.location_id;
+	public char getLocationId(){
+		return this.locationId;
 	}
 	
 	
@@ -180,12 +180,12 @@ public abstract class Mensch extends JLabel {
 		return currentMove;
 	} 
 	
-	public int get_haus_id(){
-		return this.haus_id;
+	public int getHausId(){
+		return this.hausId;
 	}
 	
-	public void set_haus_id(int haus_id){
-		this.haus_id = haus_id;
+	public void setHausId(int hausId){
+		this.hausId = hausId;
 	}
 	
 	public BufferedImage getSprite(){

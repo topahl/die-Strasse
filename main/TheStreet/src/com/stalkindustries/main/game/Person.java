@@ -43,7 +43,7 @@ public abstract class Person extends Mensch {
 		last_id++;
 		
 		this.id = last_id;
-		this.set_location_id('0');
+		this.setLocationId('0');
 		this.setLocation(0, 0);
 		this.misstrauen = 0;
 		
@@ -56,7 +56,7 @@ public abstract class Person extends Mensch {
 		
 		this.geschlecht = (int)(Math.random()*(2)+1);
 		this.zeitverzogerung = (int)(Math.random()*(59))+1;
-		this.haus_id = house_id;
+		this.hausId = house_id;
 		this.event = event;
 		this.istFarbig=false;
 				

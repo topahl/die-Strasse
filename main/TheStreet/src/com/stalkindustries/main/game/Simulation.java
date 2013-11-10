@@ -41,7 +41,7 @@ public class Simulation {
 				if(i!=j){
 					tmp = (int)(Math.random()*(10))+1;
 					this.beziehungsmatrix[i][j] = tmp;
-					if(this.people.get(i).get_haus_id() == this.people.get(j).get_haus_id()){ //Person in einem Haushalt sind besser miteinander befreundet
+					if(this.people.get(i).getHausId() == this.people.get(j).getHausId()){ //Person in einem Haushalt sind besser miteinander befreundet
 						tmp = (10-tmp)/2;
 						this.beziehungsmatrix[i][j] += tmp;
 						this.beziehungsmatrix[j][i] += tmp;
@@ -82,12 +82,12 @@ public class Simulation {
 			//jede Person kann theoretisch wieder von jeder anderen beeinflusst werden
 			for(int i=0;i<this.people.size();i++){
 				//wenn sich Person dort befindet, wo sie auch beeinflusst werden kann
-				if((int)(this.people.get(i).get_location_id())-48+1 != 0 && (int)(this.people.get(i).get_location_id())-48+1 != 'X' && (int)(this.people.get(i).get_location_id())-48+1 != 'E'){
+				if((int)(this.people.get(i).getLocationId())-48+1 != 0 && (int)(this.people.get(i).getLocationId())-48+1 != 'X' && (int)(this.people.get(i).getLocationId())-48+1 != 'E'){
 					for(int j=0;j<this.people.size();j++){
 						//eine Person kann sich nicht selbst beeinflussen
 						if(i!=j){
 							//wenn sich die beiden Personen am selben Ort befinden
-							if((int)(this.people.get(i).get_location_id())-48+1 == (int)(this.people.get(j).get_location_id())-48+1){
+							if((int)(this.people.get(i).getLocationId())-48+1 == (int)(this.people.get(j).getLocationId())-48+1){
 								//Ausnahme in der Berechnung: Kinder beeinflussen Erwachsene weniger
 								if(this.people.get(i) instanceof Erwachsene && this.people.get(j) instanceof Kinder){	//Kind beeinflusst Erwachsenen weniger
 									misstrauen[i] = misstrauen[i] - faktor/2*this.beziehungsmatrix[i][j]*(this.people.get(i).get_misstrauen()-this.people.get(j).get_misstrauen());
@@ -138,7 +138,7 @@ public class Simulation {
 	public void calcMisstrauenNachBeschwichtigenInPark(){
 		for(int i=0;i<this.people.size();i++){
 			//Checken, ob sich noch jemand im Park befindet
-			if(this.people.get(i).get_location_id() == 'P'){						
+			if(this.people.get(i).getLocationId() == 'P'){						
 				this.people.get(i).set_misstrauen(this.people.get(i).get_misstrauen()-1); 
 			}
 			
@@ -247,7 +247,7 @@ public class Simulation {
 		for(int i=0;i<this.people.size();i++){
 			//Checken, ob sich noch jemand in dem Haus befindet
 			//für alle Personen, die noch im Haus sind, das Misstrauen neu berechnen
-			if((int)(this.people.get(i).get_location_id())-48 == hausId){
+			if((int)(this.people.get(i).getLocationId())-48 == hausId){
 				if(risiko>2)	//wenn das risiko kleiner ist, hat man Glück und man wird nicht erwicht
 					this.people.get(i).set_misstrauen(this.people.get(i).get_misstrauen()+6); //TODO: den Wert 50 testen ... eventuell erhöhen
 			}
@@ -256,10 +256,10 @@ public class Simulation {
 			//-->Mittelpunkt vom Haus bestimmen
 			else{
 				// wenn sich eine Person in der Epsilon-Umgebung befindet
-				if(this.people.get(i).getPosX() >= mittelpunktX-epsilon && this.people.get(i).getPosX() <= mittelpunktX+epsilon && this.people.get(i).getPosY() >= mittelpunktY-epsilon && this.people.get(i).getPosY() <= mittelpunktY+epsilon && this.people.get(i).get_location_id()!='E'){
+				if(this.people.get(i).getPosX() >= mittelpunktX-epsilon && this.people.get(i).getPosX() <= mittelpunktX+epsilon && this.people.get(i).getPosY() >= mittelpunktY-epsilon && this.people.get(i).getPosY() <= mittelpunktY+epsilon && this.people.get(i).getLocationId()!='E'){
 					//wenn das per Zufall eine Person ist, die in dem Haus wohnt und z.B. auf dem Heimweg ist
 					//hier ist das Misstrauen natürlich größer
-					if(this.people.get(i).get_haus_id()+1 == hausId){
+					if(this.people.get(i).getHausId()+1 == hausId){
 						if(risiko>2)
 							this.people.get(i).set_misstrauen(this.people.get(i).get_misstrauen()+2);
 					}
@@ -282,11 +282,11 @@ public class Simulation {
 	//Beschwerden Miri
 	public void agentBetrittFremdesHaus(){
 		//wenn sich der Agent in irgendeinem Haus befindet
-		if((int)(getAgent().get_location_id())-48 >= 1 && (int)(getAgent().get_location_id())-48 <= 9){
+		if((int)(getAgent().getLocationId())-48 >= 1 && (int)(getAgent().getLocationId())-48 <= 9){
 			//wenn sich der Agent in dem Haus befindet, das ausspioniert werden soll
-			if(getAgent().get_location_id() != (char)getAgent().get_haus_id()+48+1){
+			if(getAgent().getLocationId() != (char)getAgent().getHausId()+48+1){
 				if (wieschteAktion){
-					calcMisstrauenNachUeberwachung((int)(getAgent().get_location_id()-48));
+					calcMisstrauenNachUeberwachung((int)(getAgent().getLocationId()-48));
 				}
 					
 			}
@@ -299,7 +299,7 @@ public class Simulation {
 	public void calcMisstrauenDuringUeberwachung(){
 		for(int i=0;i<this.people.size();i++){
 			// wenn Überwachungsmodule in dem Haus, in dem die Person lebt, installiert wurden
-			if(this.houses.get(this.people.get(i).get_haus_id()).getUeberwachungsmodule().size() > 0){
+			if(this.houses.get(this.people.get(i).getHausId()).getUeberwachungsmodule().size() > 0){
 				this.people.get(i).set_misstrauen(this.people.get(i).get_misstrauen()+2);
 			}
 			//sorgt dafür, dass sich das Misstrauen zwischen -100 und 100 bewegt
@@ -378,8 +378,8 @@ public class Simulation {
 		char locationId ='0';
 		int hausId = 0;
 		for	(int i=0; i<this.people.size(); i++){
-			locationId = this.people.get(i).get_location_id();
-			hausId = this.people.get(i).get_haus_id()+1;
+			locationId = this.people.get(i).getLocationId();
+			hausId = this.people.get(i).getHausId()+1;
 			
 			// Es bekommen nur die Menschen einen neuen Weg zugewiesen, wenn sie sich gerade nicht bewegen
 			if (this.people.get(i).getCurrentMove() == 'n'){
@@ -484,14 +484,14 @@ public class Simulation {
 				}
 			}
 		}
-		if (getAgent().get_location_id() != (char)(getAgent().get_haus_id()+48+1) && (this.spielStunde>=21 || 
+		if (getAgent().getLocationId() != (char)(getAgent().getHausId()+48+1) && (this.spielStunde>=21 || 
 			this.spielStunde<6) && !wieschteAktion && getAgent().getCurrentMove()=='n' &&
-			getAgent().get_location_id() != 'P'){
-			calcWeg(getAgent(), (char)(getAgent().get_haus_id()+48+1));
+			getAgent().getLocationId() != 'P'){
+			calcWeg(getAgent(), (char)(getAgent().getHausId()+48+1));
 		}
-		if (getAgent().get_location_id() != (char)(getAgent().get_haus_id()+48+1) && this.spielStunde>=2 && 
+		if (getAgent().getLocationId() != (char)(getAgent().getHausId()+48+1) && this.spielStunde>=2 && 
 				this.spielStunde<6 && !wieschteAktion && getAgent().getCurrentMove()=='n'){
-				calcWeg(getAgent(), (char)(getAgent().get_haus_id()+48+1));
+				calcWeg(getAgent(), (char)(getAgent().getHausId()+48+1));
 			}
 	} 	
 	
@@ -545,7 +545,7 @@ public class Simulation {
 		Stack<Character> neuerWeg = new Stack<Character>();
 		Point parkeingang = new Point();
 		
-		locationId = mensch.get_location_id();			
+		locationId = mensch.getLocationId();			
 		locationIds = Ressources.getLocation_ids();
 		
 		if (zielLoc == 'P'){
@@ -631,8 +631,8 @@ public class Simulation {
 									}
 								}
 							
-								if ((i>0 && (zielloc == mensch.get_location_id())) ||
-										(zielloc != mensch.get_location_id())){
+								if ((i>0 && (zielloc == mensch.getLocationId())) ||
+										(zielloc != mensch.getLocationId())){
 									// Es wird überprüft, ob ein Feld drüber/drunter/links oder rechts ebenfalls begehbar ist -> das wird markiert
 									if (valuesInRange(k, j+1)){
 										if (location_ids.get(j+1).get(k).equals("X")) {			//Weg nach unten ist begehbar
@@ -685,7 +685,7 @@ public class Simulation {
 						}
 					}
 					//Wenn eine Person in den Park gehen möchte  und schon im Park ist, braucht man eine andere Ziellocation
-					if (i == 2 && zielloc=='P' && mensch.get_location_id()=='P'){
+					if (i == 2 && zielloc=='P' && mensch.getLocationId()=='P'){
 						ziellocation="0";
 					}
 				}
@@ -702,16 +702,16 @@ public class Simulation {
 		Stack<Character> neuerWeg = new Stack<Character>();
 		
 		//Falls das Ziel ein Haus ist, soll die Person auf ihren startpunkt laufen.
-		if (mensch.get_haus_id() == (int)(zielLoc-48-1)){
+		if (mensch.getHausId() == (int)(zielLoc-48-1)){
 			if ((int)(zielLoc)-48 <=9 && (int)(zielLoc)-48 > 0){ //-48 für char umwandlung zu int
 				neuerWeg = fuelleStackFuerHomeposition(mensch, xPosCurrent, yPosCurrent);
 			}
 		}
 		
 		
-		if(mensch.get_location_id()!=zielLoc || (int)(Math.random()*2) == 1){ 
+		if(mensch.getLocationId()!=zielLoc || (int)(Math.random()*2) == 1){ 
 			for (int i = counter; i>=0; i--){
-				if (mensch.get_location_id()==zielLoc && i == 0 && zielLoc=='P'){
+				if (mensch.getLocationId()==zielLoc && i == 0 && zielLoc=='P'){
 					if (valuesInRange(xPosCurrent, yPosCurrent+1)){
 						if (locationIds.get(yPosCurrent+1).get(xPosCurrent).equals(String.valueOf(counter+1))) {			//unten gehts weiter
 							yPosCurrent++;
@@ -876,7 +876,7 @@ public class Simulation {
 		
 		locationIds.get((agent.getPosY()-Ressources.ZEROPOS.height)/Ressources.RASTERHEIGHT).set((agent.getPosX()-Ressources.ZEROPOS.width)/Ressources.RASTERHEIGHT,"0");
 		
-		locationIds = rasterkarteInitialisieren(locationIds, String.valueOf(getAgent().get_location_id()), getAgent().get_location_id());
+		locationIds = rasterkarteInitialisieren(locationIds, String.valueOf(getAgent().getLocationId()), getAgent().getLocationId());
 		
 		locationIds.get((agent.getPosY()-Ressources.ZEROPOS.height)/Ressources.RASTERHEIGHT).set((agent.getPosX()-Ressources.ZEROPOS.width)/Ressources.RASTERHEIGHT,"Z");
 		
@@ -964,8 +964,8 @@ public class Simulation {
 		
 		//Spionage
 		if(getAgent().getMussWuseln().equals("Wanze+") && getAgent().getCurrentMove()=='n'){
-			getHouses().get((int)(getAgent().get_location_id()-48-1)).getUeberwachungsmodule().add("Wanze");
-			getHouses().get((int)(getAgent().get_location_id()-48-1)).setUeberwachungsWert((float)(Math.random()*17.5f+1)+22.5f,0);
+			getHouses().get((int)(getAgent().getLocationId()-48-1)).getUeberwachungsmodule().add("Wanze");
+			getHouses().get((int)(getAgent().getLocationId()-48-1)).setUeberwachungsWert((float)(Math.random()*17.5f+1)+22.5f,0);
 			getAgent().setMussWuseln("");
 		}
 		if(getAgent().getMussWuseln().equals("Wanze")){
@@ -974,8 +974,8 @@ public class Simulation {
 		} 
 		
 		if(getAgent().getMussWuseln().equals("Kamera+") && getAgent().getCurrentMove()=='n'){
-			getHouses().get((int)(getAgent().get_location_id()-48-1)).getUeberwachungsmodule().add("Kamera");
-			getHouses().get((int)(getAgent().get_location_id()-48-1)).setUeberwachungsWert((float)(Math.random()*10+1)+35,1);
+			getHouses().get((int)(getAgent().getLocationId()-48-1)).getUeberwachungsmodule().add("Kamera");
+			getHouses().get((int)(getAgent().getLocationId()-48-1)).setUeberwachungsWert((float)(Math.random()*10+1)+35,1);
 			getAgent().setMussWuseln("");
 		}
 		if(getAgent().getMussWuseln().equals("Kamera")){
@@ -984,8 +984,8 @@ public class Simulation {
 		}
 		
 		if(getAgent().getMussWuseln().equals("Hacken+") && getAgent().getCurrentMove()=='n'){
-			getHouses().get((int)(getAgent().get_location_id()-48-1)).getUeberwachungsmodule().add("Hacken");
-			getHouses().get((int)(getAgent().get_location_id()-48-1)).setUeberwachungsWert((float)(Math.random()*20+1)+15,2);
+			getHouses().get((int)(getAgent().getLocationId()-48-1)).getUeberwachungsmodule().add("Hacken");
+			getHouses().get((int)(getAgent().getLocationId()-48-1)).setUeberwachungsWert((float)(Math.random()*20+1)+15,2);
 			getAgent().setMussWuseln("");
 		}
 		if(getAgent().getMussWuseln().equals("Hacken")){
@@ -1021,8 +1021,8 @@ public class Simulation {
 		//Spionage entfernen
 		
 		if(getAgent().getMussWuseln().equals("Wanzer+") && getAgent().getCurrentMove()=='n'){
-			getHouses().get((int)(getAgent().get_location_id()-48-1)).getUeberwachungsmodule().remove("Wanze");
-			getHouses().get((int)(getAgent().get_location_id()-48-1)).setUeberwachungsWert(0,0);			
+			getHouses().get((int)(getAgent().getLocationId()-48-1)).getUeberwachungsmodule().remove("Wanze");
+			getHouses().get((int)(getAgent().getLocationId()-48-1)).setUeberwachungsWert(0,0);			
 			getAgent().setMussWuseln("");
 		}
 		if(getAgent().getMussWuseln().equals("Wanzer")){
@@ -1031,8 +1031,8 @@ public class Simulation {
 		}
 		
 		if(getAgent().getMussWuseln().equals("Kamerar+") && getAgent().getCurrentMove()=='n'){
-			getHouses().get((int)(getAgent().get_location_id()-48-1)).getUeberwachungsmodule().remove("Kamera");
-			getHouses().get((int)(getAgent().get_location_id()-48-1)).setUeberwachungsWert(0,1);			
+			getHouses().get((int)(getAgent().getLocationId()-48-1)).getUeberwachungsmodule().remove("Kamera");
+			getHouses().get((int)(getAgent().getLocationId()-48-1)).setUeberwachungsWert(0,1);			
 			getAgent().setMussWuseln("");
 		}
 		if(getAgent().getMussWuseln().equals("Kamerar")){
@@ -1041,8 +1041,8 @@ public class Simulation {
 		}
 		
 		if(getAgent().getMussWuseln().equals("Hackenr+") && getAgent().getCurrentMove()=='n'){
-			getHouses().get((int)(getAgent().get_location_id()-48-1)).getUeberwachungsmodule().remove("Hacken");
-			getHouses().get((int)(getAgent().get_location_id()-48-1)).setUeberwachungsWert(0,2);			
+			getHouses().get((int)(getAgent().getLocationId()-48-1)).getUeberwachungsmodule().remove("Hacken");
+			getHouses().get((int)(getAgent().getLocationId()-48-1)).setUeberwachungsWert(0,2);			
 			getAgent().setMussWuseln("");
 		}
 		if(getAgent().getMussWuseln().equals("Hackenr")){
@@ -1122,7 +1122,7 @@ public class Simulation {
 	//Support Tiki
 	private void calcColouredPeople (int hausid){
 		for (int i = 0; i<getPeople().size(); i++){
-			if (getPeople().get(i).get_haus_id() == hausid && !getPeople().get(i).getIstFarbig()){
+			if (getPeople().get(i).getHausId() == hausid && !getPeople().get(i).getIstFarbig()){
 				getPeople().get(i).setIstFarbig(true);
 				getPeople().get(i).farbeZeigen(true);
 			}
@@ -1149,7 +1149,7 @@ public class Simulation {
 		}
 		for (int i = 0; i < this.people.size(); i++){
 			if (this.people.get(i).getBorder()!= null && this.people.get(i).getCurrentMove()=='n' && 
-					this.people.get(i).get_location_id()=='E'){
+					this.people.get(i).getLocationId()=='E'){
 				return true;
 			}
 			if (this.people.get(i) instanceof Terrorist && this.people.get(i).get_misstrauen() >= 85.00){

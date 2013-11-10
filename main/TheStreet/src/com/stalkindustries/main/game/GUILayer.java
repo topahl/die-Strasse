@@ -260,7 +260,7 @@ public class GUILayer extends JFrame implements MouseMotionListener {
 	 */
 	private void initMap(String levelname) {
 		// Karte laden
-		this.karte = new Map(levelname, this.humans.get(this.humans.size() - 1).get_haus_id());
+		this.karte = new Map(levelname, this.humans.get(this.humans.size() - 1).getHausId());
 		// Agent steht an letzter Stelle
 		this.karte.setBounds(Ressources.ZEROPOS.width, Ressources.ZEROPOS.height, 1125, 720);
 		this.baseLayer.add(this.karte, javax.swing.JLayeredPane.DEFAULT_LAYER);
@@ -971,13 +971,13 @@ public class GUILayer extends JFrame implements MouseMotionListener {
 					/ Ressources.RASTERHEIGHT - 2;
 			y = (this.humans.get(i).getPosY() + 2 * Ressources.RASTERHEIGHT - Ressources.ZEROPOS.height)
 					/ Ressources.RASTERHEIGHT - 2;
-			this.humans.get(i).set_location_id(
+			this.humans.get(i).setLocationId(
 					location_raster.get(y).get(x).charAt(0));
 		}
 		//Update for Agent
 		x = (getSimulation().getAgent().getPosX() + 2 * Ressources.RASTERHEIGHT - Ressources.ZEROPOS.width) / Ressources.RASTERHEIGHT - 2;
 		y = (getSimulation().getAgent().getPosY() + 2 * Ressources.RASTERHEIGHT - Ressources.ZEROPOS.height)/ Ressources.RASTERHEIGHT - 2;
-		getSimulation().getAgent().set_location_id(location_raster.get(y).get(x).charAt(0));
+		getSimulation().getAgent().setLocationId(location_raster.get(y).get(x).charAt(0));
 	}
 
 	
@@ -1132,7 +1132,7 @@ public class GUILayer extends JFrame implements MouseMotionListener {
 				//wenn das Event noch nicht aufgetaucht ist
 				if(((Person)this.humans.get(i)).getEvent().size() == 3){
 					//wenn der Überwachungswert des Hauses hoch genug ist, um das Event zu entdecken
-					if(this.simulation.getHouses().get(this.humans.get(i).get_haus_id()).getUeberwachungsstatus() >= Integer.valueOf(((Person)this.humans.get(i)).getEvent().get(2))){
+					if(this.simulation.getHouses().get(this.humans.get(i).getHausId()).getUeberwachungsstatus() >= Integer.valueOf(((Person)this.humans.get(i)).getEvent().get(2))){
 						if(zufall == 1){
 							b = true;
 							this.newsticker.setForeground(new java.awt.Color(249, 50, 50));
@@ -1302,7 +1302,7 @@ public class GUILayer extends JFrame implements MouseMotionListener {
 			this.humans.get(i).step();
 		}
 		if (getSimulation().getAgent().getCurrentMove()!= 'n' &&
-				(int)(getSimulation().getAgent().get_location_id()-48)>=1 && (int)(getSimulation().getAgent().get_location_id()-48)<=9 &&
+				(int)(getSimulation().getAgent().getLocationId()-48)>=1 && (int)(getSimulation().getAgent().getLocationId()-48)<=9 &&
 				getSimulation().isWieschteAktion()){
 			drawFortschrittsbalken();
 		} else{
@@ -1344,8 +1344,8 @@ public class GUILayer extends JFrame implements MouseMotionListener {
 		}
 		
 		
-		hausposx= getSimulation().getHouses().get((int)(getSimulation().getAgent().get_location_id()-48-1)).getPosX() + Ressources.RASTERHEIGHT;
-		hausposy= getSimulation().getHouses().get((int)(getSimulation().getAgent().get_location_id()-48-1)).getPosY() + Ressources.RASTERHEIGHT;
+		hausposx= getSimulation().getHouses().get((int)(getSimulation().getAgent().getLocationId()-48-1)).getPosX() + Ressources.RASTERHEIGHT;
+		hausposy= getSimulation().getHouses().get((int)(getSimulation().getAgent().getLocationId()-48-1)).getPosY() + Ressources.RASTERHEIGHT;
 
 		if (step!=0){
 			switch (step=getSimulation().getAgent().getMoves().size()/step){

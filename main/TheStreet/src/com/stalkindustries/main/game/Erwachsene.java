@@ -9,7 +9,7 @@ public class Erwachsene extends Person{
 	private boolean hat_arbeit;	
 	public Erwachsene(int house_id,ArrayList<String> event){
 		super(house_id,event);
-		this.haus_id=house_id;
+		this.hausId=house_id;
 		
 		
 		//hat Arbeit?
@@ -32,7 +32,7 @@ public class Erwachsene extends Person{
 													//Fragen an Sven
 		temp_sprite = new BufferedImage(Ressources.RASTERHEIGHT*2, Ressources.RASTERHEIGHT*2, BufferedImage.TYPE_INT_ARGB);
 		Graphics2D g2d = temp_sprite.createGraphics();
-		g2d.drawImage(adults.getSubimage(Ressources.RASTERHEIGHT*2*aussehen[0], (this.haus_id+1)*Ressources.RASTERHEIGHT*2*(farbeZeigen?1:0), Ressources.RASTERHEIGHT*2, Ressources.RASTERHEIGHT*2) ,0,0 , null); //Körperbau
+		g2d.drawImage(adults.getSubimage(Ressources.RASTERHEIGHT*2*aussehen[0], (this.hausId+1)*Ressources.RASTERHEIGHT*2*(farbeZeigen?1:0), Ressources.RASTERHEIGHT*2, Ressources.RASTERHEIGHT*2) ,0,0 , null); //Körperbau
 		g2d.drawImage(adults.getSubimage(Ressources.RASTERHEIGHT*2*aussehen[0]+Ressources.RASTERHEIGHT*Ressources.TORSOCNT*2, (aussehen[1]-1)*Ressources.RASTERHEIGHT*2, Ressources.RASTERHEIGHT*2, Ressources.RASTERHEIGHT*2),0,0, null); //Hautfarbe
 		g2d.drawImage(adults.getSubimage(Ressources.RASTERHEIGHT*Ressources.TORSOCNT*4+geschlecht*Ressources.RASTERHEIGHT*2, (aussehen[2]-1)*Ressources.RASTERHEIGHT*2, Ressources.RASTERHEIGHT*2, Ressources.RASTERHEIGHT*2),0,0, null); //Frisur
 		if(hat_arbeit && farbeZeigen==true)
