@@ -6,7 +6,7 @@ import java.util.ArrayList;
 
 public class Erwachsene extends Person{
 	
-	private boolean hat_arbeit;	
+	private boolean hatArbeit;	
 	public Erwachsene(int house_id,ArrayList<String> event){
 		super(house_id,event);
 		this.hausId=house_id;
@@ -15,9 +15,9 @@ public class Erwachsene extends Person{
 		//hat Arbeit?
 		int tmp = (int)(Math.random()*3+1);
 		if(tmp == 3)
-			this.hat_arbeit = false;
+			this.hatArbeit = false;
 		else
-			this.hat_arbeit = true;
+			this.hatArbeit = true;
 		
 		setSize(Ressources.RASTERHEIGHT, Ressources.RASTERHEIGHT);		//Sven weis jetzt wie das funktioniert
 		aussehen = new int[3];
@@ -35,7 +35,7 @@ public class Erwachsene extends Person{
 		g2d.drawImage(adults.getSubimage(Ressources.RASTERHEIGHT*2*aussehen[0], (this.hausId+1)*Ressources.RASTERHEIGHT*2*(farbeZeigen?1:0), Ressources.RASTERHEIGHT*2, Ressources.RASTERHEIGHT*2) ,0,0 , null); //Körperbau
 		g2d.drawImage(adults.getSubimage(Ressources.RASTERHEIGHT*2*aussehen[0]+Ressources.RASTERHEIGHT*Ressources.TORSOCNT*2, (aussehen[1]-1)*Ressources.RASTERHEIGHT*2, Ressources.RASTERHEIGHT*2, Ressources.RASTERHEIGHT*2),0,0, null); //Hautfarbe
 		g2d.drawImage(adults.getSubimage(Ressources.RASTERHEIGHT*Ressources.TORSOCNT*4+geschlecht*Ressources.RASTERHEIGHT*2, (aussehen[2]-1)*Ressources.RASTERHEIGHT*2, Ressources.RASTERHEIGHT*2, Ressources.RASTERHEIGHT*2),0,0, null); //Frisur
-		if(hat_arbeit && farbeZeigen==true)
+		if(hatArbeit && farbeZeigen==true)
 			g2d.drawImage(adults.getSubimage(Ressources.RASTERHEIGHT*2*11, (geschlecht-1)*Ressources.RASTERHEIGHT*2, Ressources.RASTERHEIGHT*2, Ressources.RASTERHEIGHT*2),0,0, null); //Krawate
 		
 		update_schatten();
@@ -44,10 +44,6 @@ public class Erwachsene extends Person{
 	
 	
 	public boolean isHat_arbeit() {
-		return hat_arbeit;
-	}
-
-	public void setHat_arbeit(boolean hat_arbeit) {
-		this.hat_arbeit = hat_arbeit;
+		return hatArbeit;
 	}
 }
