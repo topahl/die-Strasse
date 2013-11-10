@@ -689,28 +689,28 @@ public class Menu extends JFrame implements MouseMotionListener {
 		levelLabel.setText("Level");
 		levelLabel.setFont(new Font("Corbel",Font.BOLD,22));
 		levelLabel.setForeground(new Color(0xf9, 0xf9, 0xf9));
-		levelLabel.setBounds(98, 227, 100, 50);
+		levelLabel.setBounds(93, 227, 100, 50);
 		highscore.add(levelLabel, javax.swing.JLayeredPane.DEFAULT_LAYER);
 		
 		JLabel scoreLabel = new JLabel();
 		scoreLabel.setText("Score");
 		scoreLabel.setFont(new Font("Corbel",Font.BOLD,22));
 		scoreLabel.setForeground(new Color(0xf9, 0xf9, 0xf9));
-		scoreLabel.setBounds(300, 227, 100, 50);
+		scoreLabel.setBounds(325, 227, 100, 50);
 		highscore.add(scoreLabel, javax.swing.JLayeredPane.DEFAULT_LAYER);
 		
 		JLabel benutzerLabel = new JLabel();
 		benutzerLabel.setText("Benutzer");
 		benutzerLabel.setFont(new Font("Corbel",Font.BOLD,22));
 		benutzerLabel.setForeground(new Color(0xf9, 0xf9, 0xf9));
-		benutzerLabel.setBounds(365, 227, 100, 50);
+		benutzerLabel.setBounds(415, 227, 100, 50);
 		highscore.add(benutzerLabel, javax.swing.JLayeredPane.DEFAULT_LAYER);
 		
 		JLabel datumLabel = new JLabel();
 		datumLabel.setText("Datum");
 		datumLabel.setFont(new Font("Corbel",Font.BOLD,22));
 		datumLabel.setForeground(new Color(0xf9, 0xf9, 0xf9));
-		datumLabel.setBounds(570, 227, 100, 50);
+		datumLabel.setBounds(600, 227, 100, 50);
 		highscore.add(datumLabel, javax.swing.JLayeredPane.DEFAULT_LAYER);
 		
 		

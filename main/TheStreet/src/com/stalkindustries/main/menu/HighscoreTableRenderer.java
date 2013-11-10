@@ -65,11 +65,11 @@ public class HighscoreTableRenderer extends DefaultListCellRenderer {
         paneLayout.setHorizontalGroup(
         		paneLayout.createParallelGroup(Alignment.LEADING)
         			.addGroup(paneLayout.createSequentialGroup()
-        				.addComponent(nummer,45,45,45)
-        				.addComponent(land,200,200,200)
-        				.addComponent(score,70,70,70)
-        				.addComponent(user,200,200,200)
-        				.addComponent(date,150,150,150))
+            				.addComponent(nummer,45,45,45)
+            				.addComponent(land,225,225,225)
+            				.addComponent(score,95,95,95)
+            				.addComponent(user,180,180,180)
+            				.addComponent(date,120,120,120))
         );
         paneLayout.setVerticalGroup(
         		paneLayout.createParallelGroup(Alignment.LEADING)
