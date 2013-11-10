@@ -1256,7 +1256,7 @@ public class Menu extends JFrame implements MouseMotionListener {
 	public void updatePersHighscore(){  
 		int selectionId = persHighscoreList.getSelectedIndex();
 		ArrayList<String> score=(ArrayList<String>) persHighscoreList.getModel().getElementAt(selectionId);
-		for (int i=0; i<16; i++){
+		for (int i=0; i<=16; i++){
 			gameDetails[i].setVisible(true);
 		}
 		gameDetails[0].setIcon(new ImageIcon(levelicons.get(score.get(9))));
