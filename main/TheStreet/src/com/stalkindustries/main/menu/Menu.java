@@ -530,7 +530,7 @@ public class Menu extends JFrame implements MouseMotionListener {
 	    
 	    JLabel listbackground = new JLabel();
 	    listbackground.setIcon(new ImageIcon(Ressources.menuButton.getSubimage(0, 955, 335, 350)));
-	    listbackground.setBounds(39, 222, 750, 395);
+	    listbackground.setBounds(42, 222, 750, 395);
 	    profilselect.add(listbackground, javax.swing.JLayeredPane.DEFAULT_LAYER);
 		
 		generateStandardSubPageElements(profilselect, "Benutzer", "Wählen Sie hier den Benutzer, als der Sie spielen, oder legen Sie einen neuen Benutzer an.");
