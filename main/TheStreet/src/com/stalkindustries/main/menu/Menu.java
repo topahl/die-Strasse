@@ -745,7 +745,7 @@ public class Menu extends JFrame implements MouseMotionListener {
 		gameDetails[1] = new JLabel(); //Uhrzeit Datum
 		gameDetails[1].setText("20.09.2013 - 23:41 Uhr");
 		gameDetails[1].setFont(new Font("Corbel",Font.BOLD,20));
-		gameDetails[1].setBounds(405, 325, 200, 30);
+		gameDetails[1].setBounds(405, 325, 400, 30);
 		gameDetails[1].setForeground(new Color(0xf9,0xf9,0xf9));
 		pershighscore.add(gameDetails[1], javax.swing.JLayeredPane.DEFAULT_LAYER);
 		
@@ -890,6 +890,28 @@ public class Menu extends JFrame implements MouseMotionListener {
         
 		
 		generateStandardSubPageElements(pershighscore, "Meine Scores", "");
+	}
+	
+	
+	public void resetPersHighscore(){
+		gameDetails[0].setVisible(false);
+		gameDetails[2].setVisible(false);
+		gameDetails[3].setVisible(false);
+		gameDetails[4].setVisible(false);
+		gameDetails[5].setVisible(false);
+		gameDetails[6].setVisible(false);
+		gameDetails[7].setVisible(false);
+		gameDetails[8].setVisible(false);
+		gameDetails[9].setVisible(false);
+		gameDetails[10].setVisible(false);
+		gameDetails[11].setVisible(false);
+		gameDetails[12].setVisible(false);
+		gameDetails[13].setVisible(false);
+		gameDetails[14].setVisible(false);
+		gameDetails[15].setVisible(false);
+		gameDetails[16].setVisible(false);
+		gameDetails[1].setText("Wählen Sie einen Spielstand aus");
+		
 	}
 	
 	
@@ -1213,9 +1235,12 @@ public class Menu extends JFrame implements MouseMotionListener {
 		return currentUser.getText();
 	}
 	
-	public void updatePersHighscore(){
+	public void updatePersHighscore(){   //TODO sachen enablen
 		int selectionId = persHighscoreList.getSelectedIndex();
 		ArrayList<String> score=(ArrayList<String>) persHighscoreList.getModel().getElementAt(selectionId);
+		for (int i=0; i<16; i++){
+			gameDetails[i].setVisible(true);
+		}
 		gameDetails[0].setIcon(new ImageIcon(levelicons.get(score.get(9))));
 		gameDetails[1].setText(score.get(0)+" - "+score.get(1).substring(0,score.get(1).length()-3)+" Uhr");
 		gameDetails[2].setText(score.get(2));

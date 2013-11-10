@@ -75,6 +75,7 @@ public class ControlMenu implements IControl, ListSelectionListener {
 			mainmenu.showLayer(Menu.LAYERMENU);
 			mainmenu.readUserHighscores(listselection.toString());
 		}
+		mainmenu.resetPersHighscore();
 		
 	}
 
@@ -113,6 +114,7 @@ public class ControlMenu implements IControl, ListSelectionListener {
 	    	mainmenu.showLayer(Menu.LAYERMENU);
 	    	mainmenu.setCurrentUser(user);
 		}
+		mainmenu.resetPersHighscore();
 	}
 	
 	/**
