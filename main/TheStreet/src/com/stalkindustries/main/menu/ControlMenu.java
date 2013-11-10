@@ -134,8 +134,6 @@ public class ControlMenu implements IControl, ListSelectionListener {
     	}
     	return output;
     }
-	
-	
 	/**
 	 * @author Tobias
 	 */
