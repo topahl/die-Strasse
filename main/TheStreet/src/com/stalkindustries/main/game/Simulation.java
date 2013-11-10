@@ -17,7 +17,7 @@ public class Simulation {
 	private int spielStunde=7;
 	private int spielMinute=0;
 	private ArrayList<Haus> houses = new ArrayList<Haus>();
-	private boolean wieschteAktion=true;  //wieeeeescht = boese
+	private boolean wieschteAktion=true;  //wiescht = boese
 	private double misstrauenMax=-100;
 
 	
