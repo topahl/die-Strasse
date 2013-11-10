@@ -248,10 +248,10 @@ public class Menu extends JFrame implements MouseMotionListener {
         tutorial.add(tutorialOverlay, javax.swing.JLayeredPane.DEFAULT_LAYER);
         
         //Hintergrundbild des Tutorials
-		JLabel label = new JLabel();
-        label.setIcon(new ImageIcon(Ressources.tutorialBg));
-        label.setBounds(2*Ressources.RASTERHEIGHT, 3*Ressources.RASTERHEIGHT, 14*Ressources.RASTERHEIGHT, 9*Ressources.RASTERHEIGHT);
-        tutorial.add(label, javax.swing.JLayeredPane.DEFAULT_LAYER);
+		JLabel bg = new JLabel();
+        bg.setIcon(new ImageIcon(Ressources.tutorialBg));
+        bg.setBounds(2*Ressources.RASTERHEIGHT-3, 3*Ressources.RASTERHEIGHT-3, 14*Ressources.RASTERHEIGHT+6, 9*Ressources.RASTERHEIGHT+6);
+        tutorial.add(bg, javax.swing.JLayeredPane.DEFAULT_LAYER);
         
 		generateStandardSubPageElements(tutorial, "Tutorial", "Lernen Sie das Spielprinzip und die Funktionen von The Street kennen.");
 	}
