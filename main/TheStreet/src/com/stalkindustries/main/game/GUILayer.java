@@ -773,7 +773,7 @@ public class GUILayer extends JFrame implements MouseMotionListener {
 	 * @param agentname 
 	 */
 	private void initHumans(String agentname) {
-		// jeweils dem Agenten und dem Schwerverbrecheren eine Hausnummer generieren
+		// jeweils dem Agenten und dem Schwerverbrecher eine Hausnummer generieren
 		// und dafür sorgen, dass sie ungleich sind
 		int house_of_terrorist = (int) (Math.random() * Ressources.NUMBERHOUSES);
 		int agent_house_nr = (int) (Math.random() * Ressources.NUMBERHOUSES);
