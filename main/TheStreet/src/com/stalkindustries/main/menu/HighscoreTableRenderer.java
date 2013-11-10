@@ -32,8 +32,8 @@ public class HighscoreTableRenderer extends DefaultListCellRenderer {
     private JLabel date;
     private JPanel pane;
     private Font font = new Font("Corbel",Font.BOLD,20);
-    private Color textSelectionColor = Color.BLACK;
-    private Color backgroundSelectionColor = new Color(184,207,229);
+    private Color textSelectionColor = new Color(0xf9, 0xf9, 0xf9);
+    private Color backgroundSelectionColor = new Color(0x2d,0x7c,0x9b);
     private Color textNonSelectionColor = new Color(0xf9, 0xf9, 0xf9);
     private Color backgroundNonSelectionColor = new Color(0,0,0,0);
     HashMap<String,BufferedImage> icons= new HashMap<String,BufferedImage>();

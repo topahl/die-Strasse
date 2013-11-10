@@ -1185,7 +1185,7 @@ public class Menu extends JFrame implements MouseMotionListener {
     	g2d.drawImage(Ressources.ingamebutton.getSubimage(948, 180, 135, 20), 0, 0,null);
     	if(valuePercent>1d)
     		valuePercent=1d;
-    	if(valuePercent<=0d)
+    	if(valuePercent<=0.008d)
     		valuePercent=0.008d;
     	if(valuePercent>thresholdPercent)
     		g2d.drawImage(Ressources.ingamebutton.getSubimage(948, 222, (int)(valuePercent*135), 20),0,0,null);
