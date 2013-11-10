@@ -385,9 +385,9 @@ public class Simulation {
 				
 				//Zuerst wird der Tagesablauf der Kinder überprüft, da dieser von den Erwachsenen unterschiedlich ist
 				if (this.people.get(i) instanceof Kinder){
-					if ((this.people.get(i).getZeitverzogerung() + this.spielMinute) >= 60){
+					if ((this.people.get(i).getZeitverzogerung() + this.spielMinute) == 60){
 						
-						if ((this.spielStunde==7 || this.spielStunde==8) && this.people.get(i).getLocationId()!='E'){ //zur Schule gehen
+						if (this.spielStunde==7 && this.people.get(i).getLocationId()!='E'){ //zur Schule gehen
 							calcWeg(this.people.get(i), 'E');
 						}	
 						
