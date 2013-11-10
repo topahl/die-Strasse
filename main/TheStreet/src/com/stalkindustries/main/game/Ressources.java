@@ -30,10 +30,10 @@ public class Ressources {
 	public static BufferedImage menubars;
 	public static BufferedImage zahlen;
 	public static BufferedImage ingamebutton;
-	public static BufferedImage mainmenu;
-	public static BufferedImage mainmenusub;
-	public static BufferedImage menubutton;
-	public static BufferedImage ingameframe;
+	public static BufferedImage mainMenu;
+	public static BufferedImage mainMenuSub;
+	public static BufferedImage menuButton;
+	public static BufferedImage ingameFrame;
 	public static BufferedImage tutorialBg;
 	public static BufferedImage[] tutorial;
 	
@@ -96,28 +96,28 @@ public class Ressources {
 		}
 		
 		try {
-			mainmenu = ImageIO.read(new File(Ressources.HOMEDIR+"res\\game\\gui_menu_main.png"));
+			mainMenu = ImageIO.read(new File(Ressources.HOMEDIR+"res\\game\\gui_menu_main.png"));
 		} catch (IOException e) {
 			System.err.println("Could not find Image gui_menu_main.png");
 			e.printStackTrace();
 		}
 		
 		try {
-			menubutton = ImageIO.read(new File(Ressources.HOMEDIR+"res\\game\\slice_buttons_menu.png"));
+			menuButton = ImageIO.read(new File(Ressources.HOMEDIR+"res\\game\\slice_buttons_menu.png"));
 		} catch (IOException e) {
 			System.err.println("Could not find Image slice_buttons_menu.png");
 			e.printStackTrace();
 		}
 		
 		try {
-			ingameframe = ImageIO.read(new File(Ressources.HOMEDIR+"res\\game\\slice_fenster.png"));
+			ingameFrame = ImageIO.read(new File(Ressources.HOMEDIR+"res\\game\\slice_fenster.png"));
 		} catch (IOException e) {
 			System.err.println("Could not find Image slice_fenster.png");
 			e.printStackTrace();
 		}
 		
 		try {
-			mainmenusub = ImageIO.read(new File(Ressources.HOMEDIR+"res\\game\\gui_menu_sub.png"));
+			mainMenuSub = ImageIO.read(new File(Ressources.HOMEDIR+"res\\game\\gui_menu_sub.png"));
 		} catch (IOException e) {
 			System.err.println("Could not find Image gui_menu_sub.png");
 			e.printStackTrace();

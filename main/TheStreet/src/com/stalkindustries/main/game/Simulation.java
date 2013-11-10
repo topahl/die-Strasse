@@ -48,7 +48,7 @@ public class Simulation {
 				}
 			}
 		}
-		
+		//TODO entfernen?!
 //		//symmetrische Matrix
 //		for(int i=0;i<this.people.size();i++){
 //			for(int j=i+1;j<this.people.size();j++){
@@ -76,7 +76,7 @@ public class Simulation {
 			
 			//misstrauen[] mit den alten Misstrauenswerten initialisieren
 			for(int i=0;i<this.people.size();i++)
-				misstrauen[i] = this.people.get(i).get_misstrauen();
+				misstrauen[i] = this.people.get(i).getMisstrauen();
 			
 			//jede Person kann theoretisch wieder von jeder anderen beeinflusst werden
 			for(int i=0;i<this.people.size();i++){
@@ -89,10 +89,10 @@ public class Simulation {
 							if((int)(this.people.get(i).getLocationId())-48+1 == (int)(this.people.get(j).getLocationId())-48+1){
 								//Ausnahme in der Berechnung: Kinder beeinflussen Erwachsene weniger
 								if(this.people.get(i) instanceof Erwachsene && this.people.get(j) instanceof Kinder){	//Kind beeinflusst Erwachsenen weniger
-									misstrauen[i] = misstrauen[i] - faktor/2*this.beziehungsmatrix[i][j]*(this.people.get(i).get_misstrauen()-this.people.get(j).get_misstrauen());
+									misstrauen[i] = misstrauen[i] - faktor/2*this.beziehungsmatrix[i][j]*(this.people.get(i).getMisstrauen()-this.people.get(j).getMisstrauen());
 								}
 								else{
-									misstrauen[i] = misstrauen[i] - faktor*this.beziehungsmatrix[i][j]*(this.people.get(i).get_misstrauen()-this.people.get(j).get_misstrauen());
+									misstrauen[i] = misstrauen[i] - faktor*this.beziehungsmatrix[i][j]*(this.people.get(i).getMisstrauen()-this.people.get(j).getMisstrauen());
 								}
 								
 								//sorgt dafür, dass sich das Misstrauen zwischen -100 und 100 bewegt
@@ -108,7 +108,7 @@ public class Simulation {
 			
 			//Mapping der neuen Misstrauenswerte auf Person
 			for(int i=0;i<this.people.size();i++){
-				this.people.get(i).set_misstrauen(misstrauen[i]);
+				this.people.get(i).setMisstrauen(misstrauen[i]);
 			}
 		}
 	}
@@ -125,7 +125,7 @@ public class Simulation {
 	public double calcMisstrauenInStreet(){
 		float misstrauen = 0;
 		for(int i=0;i<this.people.size();i++){
-			misstrauen += this.people.get(i).get_misstrauen();
+			misstrauen += this.people.get(i).getMisstrauen();
 		}
 		misstrauen = misstrauen/this.people.size();
 		
@@ -138,14 +138,14 @@ public class Simulation {
 		for(int i=0;i<this.people.size();i++){
 			//Checken, ob sich noch jemand im Park befindet
 			if(this.people.get(i).getLocationId() == 'P'){						
-				this.people.get(i).set_misstrauen(this.people.get(i).get_misstrauen()-1); 
+				this.people.get(i).setMisstrauen(this.people.get(i).getMisstrauen()-1); 
 			}
 			
 			//sorgt dafür, dass sich das Misstrauen zwischen -100 und 100 bewegt
-			if(this.people.get(i).get_misstrauen()>100)
-				this.people.get(i).set_misstrauen(100);
-			if(this.people.get(i).get_misstrauen()<-100)
-				this.people.get(i).set_misstrauen(-100);
+			if(this.people.get(i).getMisstrauen()>100)
+				this.people.get(i).setMisstrauen(100);
+			if(this.people.get(i).getMisstrauen()<-100)
+				this.people.get(i).setMisstrauen(-100);
 		}
 	}
 	
@@ -154,7 +154,7 @@ public class Simulation {
     public void calcMisstrauenNachBeschwichtigen(int actionId, Person person){
         int zufall=0;
         int risiko;
-        double misstrauen = person.get_misstrauen();
+        double misstrauen = person.getMisstrauen();
         
         //Fehlschlagen der Aktionen ist unter anderem abhängig vom Misstrauensstatus
                 if(misstrauen >= 0){
@@ -174,7 +174,7 @@ public class Simulation {
                 }
         
         //Risiko einer Beschwichtigenaktion steigt, je häufiger man sie ausführt
-        risiko = person.get_durchgefuehrteBeschwichtigungen(actionId);
+        risiko = person.getDurchgefuehrteBeschwichtigungen(actionId);
         if(actionId == 0 || actionId == 2 || actionId == 3){    //Kuchen, Flirten, Helfen
             if(risiko == 0){
                 if(zufall > 5)
@@ -222,7 +222,7 @@ public class Simulation {
             misstrauen = -100;
         
         //Misstrauen der Person setzen
-        person.set_misstrauen(misstrauen);
+        person.setMisstrauen(misstrauen);
     }
 	
 	
@@ -248,7 +248,7 @@ public class Simulation {
 			//für alle Personen, die noch im Haus sind, das Misstrauen neu berechnen
 			if((int)(this.people.get(i).getLocationId())-48 == hausId){
 				if(risiko>2)	//wenn das risiko kleiner ist, hat man Glück und man wird nicht erwicht
-					this.people.get(i).set_misstrauen(this.people.get(i).get_misstrauen()+6); //TODO: den Wert 50 testen ... eventuell erhöhen
+					this.people.get(i).setMisstrauen(this.people.get(i).getMisstrauen()+6); //TODO: den Wert 50 testen ... eventuell erhöhen
 			}
 			//Checken, ob sich jemand in einer epsilon-Umgebung um das Haus befindet, in das eingebrochen werden soll
 			//--> 1. Epsilon-Umgebung aufspannen (ist eine relative eckige :-D)
@@ -260,19 +260,19 @@ public class Simulation {
 					//hier ist das Misstrauen natürlich größer
 					if(this.people.get(i).getHausId()+1 == hausId){
 						if(risiko>2)
-							this.people.get(i).set_misstrauen(this.people.get(i).get_misstrauen()+2);
+							this.people.get(i).setMisstrauen(this.people.get(i).getMisstrauen()+2);
 					}
 					else{
 						if(risiko>2)
-							this.people.get(i).set_misstrauen(this.people.get(i).get_misstrauen()+1);
+							this.people.get(i).setMisstrauen(this.people.get(i).getMisstrauen()+1);
 					}
 				}
 			}
 			//sorgt dafür, dass sich das Misstrauen zwischen -100 und 100 bewegt
-			if(this.people.get(i).get_misstrauen()>100)
-				this.people.get(i).set_misstrauen(100);
-			if(this.people.get(i).get_misstrauen()<-100)
-				this.people.get(i).set_misstrauen(-100);
+			if(this.people.get(i).getMisstrauen()>100)
+				this.people.get(i).setMisstrauen(100);
+			if(this.people.get(i).getMisstrauen()<-100)
+				this.people.get(i).setMisstrauen(-100);
 		}
 		
 	}
@@ -299,13 +299,13 @@ public class Simulation {
 		for(int i=0;i<this.people.size();i++){
 			// wenn Überwachungsmodule in dem Haus, in dem die Person lebt, installiert wurden
 			if(this.houses.get(this.people.get(i).getHausId()).getUeberwachungsmodule().size() > 0){
-				this.people.get(i).set_misstrauen(this.people.get(i).get_misstrauen()+2);
+				this.people.get(i).setMisstrauen(this.people.get(i).getMisstrauen()+2);
 			}
 			//sorgt dafür, dass sich das Misstrauen zwischen -100 und 100 bewegt
-			if(this.people.get(i).get_misstrauen()>100)
-				this.people.get(i).set_misstrauen(100);
-			if(this.people.get(i).get_misstrauen()<-100)
-				this.people.get(i).set_misstrauen(-100);
+			if(this.people.get(i).getMisstrauen()>100)
+				this.people.get(i).setMisstrauen(100);
+			if(this.people.get(i).getMisstrauen()<-100)
+				this.people.get(i).setMisstrauen(-100);
 		}
 	}
 	
@@ -542,14 +542,14 @@ public class Simulation {
 		char locationId;				
 		ArrayList<ArrayList<String>> locationIds;
 		Stack<Character> neuerWeg = new Stack<Character>();
-		Point parkeingang = new Point();
+//		Point parkeingang = new Point();
 		
 		locationId = mensch.getLocationId();			
 		locationIds = Ressources.getLocation_ids();
 		
-		if (zielLoc == 'P'){
-			parkeingang = calcParkeingang(locationIds);
-		}
+//		if (zielLoc == 'P'){
+//			parkeingang = calcParkeingang(locationIds);
+//		}
 		
 		//Aktuelle Position des Männchens wird auf 0 gesetzt
 		if (zielLoc != locationId || zielLoc!='P'){
@@ -1066,7 +1066,7 @@ public class Simulation {
 		if(getAgent().getMussWuseln().length()>=8 && personId <=9 &&  getAgent().getMussWuseln().substring(1,8).equals("Kuchen+") ||
 				getAgent().getMussWuseln().length()>=9 && personId >9 &&  getAgent().getMussWuseln().substring(2,9).equals("Kuchen+")){
 			calcMisstrauenNachBeschwichtigen(0, getPeople().get(personId));
-			getPeople().get(personId).erhoehe_durchgefuehrteBeschwichtigungen(0);
+			getPeople().get(personId).erhoeheDurchgefuehrteBeschwichtigungen(0);
 			getPeople().get(personId).setMoves(new Stack());
 			getAgent().setMussWuseln("");
 		}	
@@ -1079,7 +1079,7 @@ public class Simulation {
 		if(getAgent().getMussWuseln().length()>=13 && personId <=9 &&  getAgent().getMussWuseln().substring(1,13).equals("Unterhalten+") ||
 				getAgent().getMussWuseln().length()>=14 && personId >9 &&  getAgent().getMussWuseln().substring(2,14).equals("Unterhalten+")){
 			calcMisstrauenNachBeschwichtigen(1, getPeople().get(personId));
-			getPeople().get(personId).erhoehe_durchgefuehrteBeschwichtigungen(1);
+			getPeople().get(personId).erhoeheDurchgefuehrteBeschwichtigungen(1);
 			getPeople().get(personId).setMoves(new Stack());
 			getAgent().setMussWuseln("");
 		}	
@@ -1092,7 +1092,7 @@ public class Simulation {
 		if(getAgent().getMussWuseln().length()>=9 && personId <=9 &&  getAgent().getMussWuseln().substring(1,9).equals("Flirten+") ||
 				getAgent().getMussWuseln().length()>=10 && personId >9 &&  getAgent().getMussWuseln().substring(2,10).equals("Flirten+")){
 			calcMisstrauenNachBeschwichtigen(2, getPeople().get(personId));
-			getPeople().get(personId).erhoehe_durchgefuehrteBeschwichtigungen(2);
+			getPeople().get(personId).erhoeheDurchgefuehrteBeschwichtigungen(2);
 			getPeople().get(personId).setMoves(new Stack());
 			getAgent().setMussWuseln("");
 		}	
@@ -1105,7 +1105,7 @@ public class Simulation {
 		if(getAgent().getMussWuseln().length()>=6 && personId <=9 &&  getAgent().getMussWuseln().substring(1,6).equals("Hand+") ||
 				getAgent().getMussWuseln().length()>=7 && personId >9 &&  getAgent().getMussWuseln().substring(2,7).equals("Hand+")){
 			calcMisstrauenNachBeschwichtigen(3, getPeople().get(personId));
-			getPeople().get(personId).erhoehe_durchgefuehrteBeschwichtigungen(3);
+			getPeople().get(personId).erhoeheDurchgefuehrteBeschwichtigungen(3);
 			getPeople().get(personId).setMoves(new Stack());
 			getAgent().setMussWuseln("");
 		}	
@@ -1123,7 +1123,7 @@ public class Simulation {
 		for (int i = 0; i<getPeople().size(); i++){
 			if (getPeople().get(i).getHausId() == hausid && !getPeople().get(i).getIstFarbig()){
 				getPeople().get(i).setIstFarbig(true);
-				getPeople().get(i).farbeZeigen(true);
+				getPeople().get(i).farbeZeigen();
 			}
 		}
 	}
@@ -1151,7 +1151,7 @@ public class Simulation {
 					this.people.get(i).getLocationId()=='E'){
 				return true;
 			}
-			if (this.people.get(i) instanceof Terrorist && this.people.get(i).get_misstrauen() >= 85.00){
+			if (this.people.get(i) instanceof Terrorist && this.people.get(i).getMisstrauen() >= 85.00){
 				if (this.people.get(i).getCurrentMove()=='n'){
 					calcWeg(this.people.get(i), 'E');
 					this.people.get(i).setBorder(BorderFactory.createLineBorder(Color.red));

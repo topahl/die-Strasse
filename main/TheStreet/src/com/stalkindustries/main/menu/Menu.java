@@ -223,10 +223,10 @@ public class Menu extends JFrame implements MouseMotionListener {
 
         //Zurück-Button
         Button button = new Button(this.control,
-				Ressources.menubutton.getSubimage(795   , 0, 30, 30),
-				Ressources.menubutton.getSubimage(795+30, 0, 30, 30),
-				Ressources.menubutton.getSubimage(795+60, 0, 30, 30),
-				Ressources.menubutton.getSubimage(795+90, 0, 30, 30),
+				Ressources.menuButton.getSubimage(795   , 0, 30, 30),
+				Ressources.menuButton.getSubimage(795+30, 0, 30, 30),
+				Ressources.menuButton.getSubimage(795+60, 0, 30, 30),
+				Ressources.menuButton.getSubimage(795+90, 0, 30, 30),
 				"tutorialBack", Ressources.RASTERHEIGHT + 7, 7 * Ressources.RASTERHEIGHT + 7, this);
 	    button.setEnabled(false);
 	    tutorial.add(button, javax.swing.JLayeredPane.DEFAULT_LAYER);
@@ -234,10 +234,10 @@ public class Menu extends JFrame implements MouseMotionListener {
 
 	    //Vor-Button
 	    button = new Button(this.control,
-				Ressources.menubutton.getSubimage(795   , 30, 30, 30),
-				Ressources.menubutton.getSubimage(795+30, 30, 30, 30),
-				Ressources.menubutton.getSubimage(795+60, 30, 30, 30),
-				Ressources.menubutton.getSubimage(795+90, 30, 30, 30),
+				Ressources.menuButton.getSubimage(795   , 30, 30, 30),
+				Ressources.menuButton.getSubimage(795+30, 30, 30, 30),
+				Ressources.menuButton.getSubimage(795+60, 30, 30, 30),
+				Ressources.menuButton.getSubimage(795+90, 30, 30, 30),
 				"tutorialNext", 16 * Ressources.RASTERHEIGHT + 7, 7 * Ressources.RASTERHEIGHT + 7, this);
 	    tutorial.add(button, javax.swing.JLayeredPane.DEFAULT_LAYER);
 	    buttons.put("tutorialNext", button);
@@ -416,15 +416,15 @@ public class Menu extends JFrame implements MouseMotionListener {
 		profilselect.add(this.username, javax.swing.JLayeredPane.DEFAULT_LAYER);
 		
 		JLabel label = new JLabel();
-		label.setIcon(new ImageIcon(Ressources.menubutton.getSubimage(360, 0, 315, 66)));
+		label.setIcon(new ImageIcon(Ressources.menuButton.getSubimage(360, 0, 315, 66)));
 		label.setBounds(450, 330, 315, 66);
 		profilselect.add(label, javax.swing.JLayeredPane.DEFAULT_LAYER);
 		
 		Button button = new Button(this.control,
-				Ressources.menubutton.getSubimage(0,603, 315,70),
-				Ressources.menubutton.getSubimage(315, 603, 313,70),
-				Ressources.menubutton.getSubimage(2 * 315, 603, 315,70),
-				Ressources.menubutton.getSubimage(3 * 315, 603, 315,70),
+				Ressources.menuButton.getSubimage(0,603, 315,70),
+				Ressources.menuButton.getSubimage(315, 603, 313,70),
+				Ressources.menuButton.getSubimage(2 * 315, 603, 315,70),
+				Ressources.menuButton.getSubimage(3 * 315, 603, 315,70),
 				"create", 450, 400, this);
 	    profilselect.add(button, javax.swing.JLayeredPane.DEFAULT_LAYER);
 			
@@ -502,10 +502,10 @@ public class Menu extends JFrame implements MouseMotionListener {
         profilselect.add(beschreibung, javax.swing.JLayeredPane.DEFAULT_LAYER);
         
         button = new Button(this.control,
-				Ressources.menubutton.getSubimage(0,671, 315,70),
-				Ressources.menubutton.getSubimage(315, 671, 313,70),
-				Ressources.menubutton.getSubimage(2 * 315, 671, 315,70),
-				Ressources.menubutton.getSubimage(3 * 315, 671, 315,70),
+				Ressources.menuButton.getSubimage(0,671, 315,70),
+				Ressources.menuButton.getSubimage(315, 671, 313,70),
+				Ressources.menuButton.getSubimage(2 * 315, 671, 315,70),
+				Ressources.menuButton.getSubimage(3 * 315, 671, 315,70),
 				"use", 45, 600, this);
 	    profilselect.add(button, javax.swing.JLayeredPane.DEFAULT_LAYER);
 		
@@ -531,37 +531,37 @@ public class Menu extends JFrame implements MouseMotionListener {
 		
         Button button;
         
-        button=new Button(control, Ressources.menubutton.getSubimage(0, 136, 370, 80), Ressources.menubutton.getSubimage(370, 136, 370, 80), Ressources.menubutton.getSubimage(740, 136, 370, 80), Ressources.menubutton.getSubimage(1110, 136, 370, 80), "start", 70,140, this);
+        button=new Button(control, Ressources.menuButton.getSubimage(0, 136, 370, 80), Ressources.menuButton.getSubimage(370, 136, 370, 80), Ressources.menuButton.getSubimage(740, 136, 370, 80), Ressources.menuButton.getSubimage(1110, 136, 370, 80), "start", 70,140, this);
         mainmenu.add(button, javax.swing.JLayeredPane.DEFAULT_LAYER);
         buttons.put("start", button);
         
-        button=new Button(control, Ressources.menubutton.getSubimage(0, 136+80, 370, 80), Ressources.menubutton.getSubimage(370, 136+80, 370, 80), Ressources.menubutton.getSubimage(740, 136+80, 370, 80), Ressources.menubutton.getSubimage(1110, 136+80, 370, 80), "tutorial",70, 230, this);
+        button=new Button(control, Ressources.menuButton.getSubimage(0, 136+80, 370, 80), Ressources.menuButton.getSubimage(370, 136+80, 370, 80), Ressources.menuButton.getSubimage(740, 136+80, 370, 80), Ressources.menuButton.getSubimage(1110, 136+80, 370, 80), "tutorial",70, 230, this);
         mainmenu.add(button, javax.swing.JLayeredPane.DEFAULT_LAYER);
         buttons.put("tutorial", button);
         
-        button=new Button(control, Ressources.menubutton.getSubimage(0, 136+160, 370, 80), Ressources.menubutton.getSubimage(370, 136+160, 370, 80), Ressources.menubutton.getSubimage(740, 136+160, 370, 80), Ressources.menubutton.getSubimage(1110, 136+160, 370, 80), "profil", 70, 320, this);
+        button=new Button(control, Ressources.menuButton.getSubimage(0, 136+160, 370, 80), Ressources.menuButton.getSubimage(370, 136+160, 370, 80), Ressources.menuButton.getSubimage(740, 136+160, 370, 80), Ressources.menuButton.getSubimage(1110, 136+160, 370, 80), "profil", 70, 320, this);
         mainmenu.add(button, javax.swing.JLayeredPane.DEFAULT_LAYER);
         buttons.put("profil", button);
         
-        button=new Button(control, Ressources.menubutton.getSubimage(0, 136+240, 370, 80), Ressources.menubutton.getSubimage(370, 136+240, 370, 80), Ressources.menubutton.getSubimage(740, 136+240, 370, 80), Ressources.menubutton.getSubimage(1110, 136+240, 370, 80), "highscore", 70, 410, this);
+        button=new Button(control, Ressources.menuButton.getSubimage(0, 136+240, 370, 80), Ressources.menuButton.getSubimage(370, 136+240, 370, 80), Ressources.menuButton.getSubimage(740, 136+240, 370, 80), Ressources.menuButton.getSubimage(1110, 136+240, 370, 80), "highscore", 70, 410, this);
         mainmenu.add(button, javax.swing.JLayeredPane.DEFAULT_LAYER);
         buttons.put("highscore", button);
         
-        button=new Button(control, Ressources.menubutton.getSubimage(0, 136+320, 370, 80), Ressources.menubutton.getSubimage(370, 136+320, 370, 80), Ressources.menubutton.getSubimage(740, 136+320, 370, 80), Ressources.menubutton.getSubimage(1110, 136+320, 370, 80), "beenden", 70, 500, this);
+        button=new Button(control, Ressources.menuButton.getSubimage(0, 136+320, 370, 80), Ressources.menuButton.getSubimage(370, 136+320, 370, 80), Ressources.menuButton.getSubimage(740, 136+320, 370, 80), Ressources.menuButton.getSubimage(1110, 136+320, 370, 80), "beenden", 70, 500, this);
         mainmenu.add(button, javax.swing.JLayeredPane.DEFAULT_LAYER);
         buttons.put("beenden", button);
         
 		button = new Button(this.control,
-				Ressources.menubutton.getSubimage(0, 881, 315, 70),
-				Ressources.menubutton.getSubimage(315, 881, 313, 70),
-				Ressources.menubutton.getSubimage(2 * 315, 881, 315, 70),
-				Ressources.menubutton.getSubimage(3 * 315, 881, 315, 70),
+				Ressources.menuButton.getSubimage(0, 881, 315, 70),
+				Ressources.menuButton.getSubimage(315, 881, 313, 70),
+				Ressources.menuButton.getSubimage(2 * 315, 881, 315, 70),
+				Ressources.menuButton.getSubimage(3 * 315, 881, 315, 70),
 				"credits", 17 * Ressources.RASTERHEIGHT, 9 * Ressources.RASTERHEIGHT - 10, this);
 	    mainmenu.add(button, javax.swing.JLayeredPane.DEFAULT_LAYER);
 	    buttons.put("credits", button);
         
         JLabel main = new JLabel();
-        main.setIcon(new ImageIcon(Ressources.mainmenu));
+        main.setIcon(new ImageIcon(Ressources.mainMenu));
         main.setBounds(0, 0, Ressources.MAPWIDTH, Ressources.MAPHEIGHT);
         mainmenu.add(main, javax.swing.JLayeredPane.DEFAULT_LAYER);
         
@@ -694,13 +694,13 @@ public class Menu extends JFrame implements MouseMotionListener {
     			BufferedImage iconhover = new BufferedImage(312,134, BufferedImage.TYPE_INT_ARGB);
     			Graphics2D g2d = iconhover.createGraphics();
     			g2d.drawImage(loader.getSubimage(0, 0, 312, 134), 0, 0, null);
-    			g2d.drawImage(Ressources.menubutton.getSubimage(0, 0, 312, 135), 0, 0, null);
+    			g2d.drawImage(Ressources.menuButton.getSubimage(0, 0, 312, 135), 0, 0, null);
     			g2d.dispose();
     			
     			g2d = iconnormal.createGraphics();
     			g2d.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 0.5f));
     			g2d.drawImage(loader.getSubimage(0, 0, 312, 134), 0, 0, null);
-    			g2d.drawImage(Ressources.menubutton.getSubimage(0, 0, 312, 135), 0, 0, null);
+    			g2d.drawImage(Ressources.menuButton.getSubimage(0, 0, 312, 135), 0, 0, null);
     			g2d.dispose();
     			
     			Button button = new Button(control,iconnormal,iconhover,iconnormal,iconnormal,"level:"+levels.get(i), 45+((i/2)*360),180+((i%2)*200), this);
@@ -710,7 +710,7 @@ public class Menu extends JFrame implements MouseMotionListener {
     			JLabel label= new JLabel();
     			BufferedImage textlabel = loader.getSubimage(315, 9, loader.getWidth()-315, 26);
     			g2d = textlabel.createGraphics();
-    			g2d.drawImage(Ressources.menubutton.getSubimage(315, 9, 37, 26), 0, 0, null);
+    			g2d.drawImage(Ressources.menuButton.getSubimage(315, 9, 37, 26), 0, 0, null);
     			label.setIcon(new ImageIcon(textlabel));
     			label.setBounds(45+((i/2)*360),145+((i%2)*200), loader.getWidth()-315, 25);
     			mapselect.add(label, javax.swing.JLayeredPane.DEFAULT_LAYER);	
@@ -731,7 +731,7 @@ public class Menu extends JFrame implements MouseMotionListener {
         	try {
 				BufferedImage loader = ImageIO.read(new File(Ressources.HOMEDIR+"res\\level\\"+levelname+"\\"+levelname+"_slice_menu.png"));
 				Graphics2D g2d = loader.createGraphics();
-    			g2d.drawImage(Ressources.menubutton.getSubimage(315, 9, 37, 26), 315, 9, null);
+    			g2d.drawImage(Ressources.menuButton.getSubimage(315, 9, 37, 26), 315, 9, null);
 				this.levelicons.put(levelname, loader.getSubimage(315, 9, loader.getWidth()-315, 26));
 				
 			} catch (IOException e) {
@@ -839,7 +839,7 @@ public class Menu extends JFrame implements MouseMotionListener {
         subpage.add(beschreibung, javax.swing.JLayeredPane.DEFAULT_LAYER);
         
 		JLabel main = new JLabel();
-		main.setIcon(new ImageIcon(Ressources.mainmenusub));
+		main.setIcon(new ImageIcon(Ressources.mainMenuSub));
         main.setBounds(0, 0, Ressources.MAPWIDTH, Ressources.MAPHEIGHT);
         subpage.add(main, javax.swing.JLayeredPane.DEFAULT_LAYER);
         subpage.setBounds(Ressources.ZEROPOS.width,Ressources.ZEROPOS.height , Ressources.MAPWIDTH, Ressources.MAPWIDTH);

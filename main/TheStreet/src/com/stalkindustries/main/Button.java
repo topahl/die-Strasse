@@ -16,7 +16,7 @@ import com.stalkindustries.main.game.Control;
 
 public class Button extends JButton implements ActionListener, MouseListener{
 	
-	private String ok_code;
+	private String okCode;
 	private IControl controlunit;
 	
 	
@@ -25,7 +25,7 @@ public class Button extends JButton implements ActionListener, MouseListener{
 		addMouseMotionListener(ml);
 		addMouseListener(this);
 		addActionListener(this);		
-		this.ok_code = funktionsname;
+		this.okCode = funktionsname;
 		setBorder(null);
         setBorderPainted(false);
         setContentAreaFilled(false);
@@ -41,7 +41,7 @@ public class Button extends JButton implements ActionListener, MouseListener{
 		addMouseMotionListener(ml);
 		addMouseListener(this);
 		addActionListener(this);
-		this.ok_code = funktionsname;
+		this.okCode = funktionsname;
 		
 		setIcon(new ImageIcon(normal));
 		setRolloverIcon(new ImageIcon(hover));
@@ -60,7 +60,7 @@ public class Button extends JButton implements ActionListener, MouseListener{
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		controlunit.call(ok_code);
+		controlunit.call(okCode);
 	}
 
 	@Override
@@ -70,12 +70,12 @@ public class Button extends JButton implements ActionListener, MouseListener{
 
 	@Override
 	public void mouseEntered(MouseEvent e) {
-		controlunit.mousePresent(ok_code, true);
+		controlunit.mousePresent(okCode, true);
 	}
 
 	@Override
 	public void mouseExited(MouseEvent e) {
-		controlunit.mousePresent(ok_code, false);
+		controlunit.mousePresent(okCode, false);
 		
 	}
 

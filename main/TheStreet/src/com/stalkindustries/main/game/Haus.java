@@ -8,7 +8,7 @@ public class Haus {
 	private int hausnummer;
 	private float ueberwachungsWerte[] = new float[6];
 	private ArrayList<String> ueberwachungsmodule = new ArrayList();
-	private ArrayList<String> boese_events = new ArrayList();
+	private ArrayList<String> boeseEvents = new ArrayList();
 	private boolean agentenhaus;
 	public static final int MAXUBERWACHUNGSMODULE = 6;
 	

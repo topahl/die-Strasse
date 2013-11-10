@@ -8,21 +8,21 @@ import java.util.ArrayList;
 public abstract class Person extends Mensch {
 	private int id;
 	protected int[] aussehen;
-	protected BufferedImage temp_sprite; //Sprite ohne Schatten
+	protected BufferedImage tempSprite; //Sprite ohne Schatten
 	private double misstrauen; 	//-100=nicht misstrauisch, 100=ultra misstrauisch, 200=initial
 	protected int geschlecht; //1=male, 2=female
-	private int zeitverzogerung; // in Minuten
+	private int zeitverzoegerung; // in Minuten
 	private int durchgefuehrteBeschwichtigungen[] = new int[Ressources.NUMBERBESCHWICHTIGENACTIONS];//zum Mitzählen, weil 20 Kuchen am Tag, doch wieder misstrauisch machen
 	protected ArrayList<String> event;
-	private Boolean istFarbig;
+	protected Boolean istFarbig;
 	
-	static private int last_id=-1;
+	static private int lastId=-1;
 		
 	
-	public abstract void farbeZeigen(boolean farbeZeigen);
+	public abstract void farbeZeigen();
 	
 	
-	public void update_schatten(){
+	public void updateSchatten(){
 		sprite = new BufferedImage(90, 90, BufferedImage.TYPE_INT_ARGB);
 		Graphics2D g2d = sprite.createGraphics();
 		if(misstrauen==0)
@@ -36,13 +36,13 @@ public abstract class Person extends Mensch {
 		g2d.fillOval(3+Ressources.RASTERHEIGHT, 3, Ressources.RASTERHEIGHT-6, Ressources.RASTERHEIGHT-6);
 		g2d.fillOval(3, 3+Ressources.RASTERHEIGHT, Ressources.RASTERHEIGHT-6, Ressources.RASTERHEIGHT-6);
 		g2d.fillOval(3+Ressources.RASTERHEIGHT,3+Ressources.RASTERHEIGHT, Ressources.RASTERHEIGHT-6, Ressources.RASTERHEIGHT-6);
-		g2d.drawImage(temp_sprite, 0, 0,null);
+		g2d.drawImage(tempSprite, 0, 0,null);
 	}
 	
 	public Person(int house_id, ArrayList<String> event){
-		last_id++;
+		lastId++;
 		
-		this.id = last_id;
+		this.id = lastId;
 		this.setLocationId('0');
 		this.setLocation(0, 0);
 		this.misstrauen = 0;
@@ -55,7 +55,7 @@ public abstract class Person extends Mensch {
 			this.bewegungsgeschwindigkeit = 3;
 		
 		this.geschlecht = (int)(Math.random()*(2)+1);
-		this.zeitverzogerung = (int)(Math.random()*(59))+1;
+		this.zeitverzoegerung = (int)(Math.random()*(59))+1;
 		this.hausId = house_id;
 		this.event = event;
 		this.istFarbig=false;
@@ -67,33 +67,33 @@ public abstract class Person extends Mensch {
 		//System.out.println(this.name);
 	}
 	
-	public double get_misstrauen(){
+	public double getMisstrauen(){
 		return this.misstrauen;
 	}
 	
-	public void set_misstrauen(double misstrauen){
+	public void setMisstrauen(double misstrauen){
 		this.misstrauen = misstrauen;
 	}
  
 
 	public int getZeitverzogerung() {
-		return zeitverzogerung;
+		return zeitverzoegerung;
 	}
 
 
 	public void setZeitverzogerung(int zeitverzogerung) {
-		this.zeitverzogerung = zeitverzogerung;
+		this.zeitverzoegerung = zeitverzogerung;
 	}
 	
-	public int get_durchgefuehrteBeschwichtigungen(int index){
+	public int getDurchgefuehrteBeschwichtigungen(int index){
 		return this.durchgefuehrteBeschwichtigungen[index];
 	}
 	
-	public void set_durchgefuehrteBeschwichtigungen(int index, int wert){
+	public void setDurchgefuehrteBeschwichtigungen(int index, int wert){
 		this.durchgefuehrteBeschwichtigungen[index] = wert;
 	}
 	
-	public void erhoehe_durchgefuehrteBeschwichtigungen(int index){
+	public void erhoeheDurchgefuehrteBeschwichtigungen(int index){
 		this.durchgefuehrteBeschwichtigungen[index]++;
 	}
 	

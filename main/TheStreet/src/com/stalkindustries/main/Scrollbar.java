@@ -33,19 +33,19 @@ public Scrollbar(IControl control){
     private Image imageThumb;
     private JButton up,down;
     ScrollbarUI(IControl control) {
-        imageThumb = Ressources.menubutton.getSubimage(675, 62, 30, 56);
+        imageThumb = Ressources.menuButton.getSubimage(675, 62, 30, 56);
 		up = new JButton();
-		up.setIcon(new ImageIcon(Ressources.menubutton.getSubimage(675, 0, 30, 30)));
-		up.setRolloverIcon(new ImageIcon(Ressources.menubutton.getSubimage(675+30, 0, 30, 30)));
-		up.setPressedIcon(new ImageIcon(Ressources.menubutton.getSubimage(675+60, 0, 30, 30)));
+		up.setIcon(new ImageIcon(Ressources.menuButton.getSubimage(675, 0, 30, 30)));
+		up.setRolloverIcon(new ImageIcon(Ressources.menuButton.getSubimage(675+30, 0, 30, 30)));
+		up.setPressedIcon(new ImageIcon(Ressources.menuButton.getSubimage(675+60, 0, 30, 30)));
 		up.setPreferredSize(new Dimension(30,30));
 		up.setBorder(null);
         up.setBorderPainted(false);
         up.setContentAreaFilled(false);
 		down = new JButton();
-		down.setIcon(new ImageIcon(Ressources.menubutton.getSubimage(675, 30, 30, 30)));
-		down.setRolloverIcon(new ImageIcon(Ressources.menubutton.getSubimage(675+30, 30, 30, 30)));
-		down.setPressedIcon(new ImageIcon(Ressources.menubutton.getSubimage(675+60, 30, 30, 30)));
+		down.setIcon(new ImageIcon(Ressources.menuButton.getSubimage(675, 30, 30, 30)));
+		down.setRolloverIcon(new ImageIcon(Ressources.menuButton.getSubimage(675+30, 30, 30, 30)));
+		down.setPressedIcon(new ImageIcon(Ressources.menuButton.getSubimage(675+60, 30, 30, 30)));
 		down.setPreferredSize(new Dimension(30,30));
 		down.setBorder(null);
         down.setBorderPainted(false);
@@ -62,15 +62,15 @@ public Scrollbar(IControl control){
         g.drawRect( 0, 0, thumbBounds.width - 2, thumbBounds.height - 1 );
         AffineTransform transform = AffineTransform.getScaleInstance((double)thumbBounds.width/imageThumb.getWidth(null),(double)thumbBounds.height/imageThumb.getHeight(null));
         ((Graphics2D)g).drawImage(imageThumb, transform, null);
-        g.drawImage(Ressources.menubutton.getSubimage(675, 60, 30, 2), 0, 0, null);
-        g.drawImage(Ressources.menubutton.getSubimage(675, 118, 30, 2), 0, thumbBounds.height-2, null);
+        g.drawImage(Ressources.menuButton.getSubimage(675, 60, 30, 2), 0, 0, null);
+        g.drawImage(Ressources.menuButton.getSubimage(675, 118, 30, 2), 0, thumbBounds.height-2, null);
         g.translate( -thumbBounds.x, -thumbBounds.y );
     }
 
     @Override
     protected void paintTrack(Graphics g, JComponent c, Rectangle trackBounds) { 
     	//Java Grafik Bug Workaround
-        g.drawImage(Ressources.mainmenusub.getSubimage(c.getLocationOnScreen().x-Ressources.ZEROPOS.width, c.getLocationOnScreen().y-Ressources.ZEROPOS.height, c.getWidth(), c.getHeight()), 0, 0, null);
+        g.drawImage(Ressources.mainMenuSub.getSubimage(c.getLocationOnScreen().x-Ressources.ZEROPOS.width, c.getLocationOnScreen().y-Ressources.ZEROPOS.height, c.getWidth(), c.getHeight()), 0, 0, null);
         
     }
     

@@ -12,44 +12,44 @@ import com.stalkindustries.main.Button;
 
 public class Quiz {
 	private ArrayList<Integer> beantwortet = new ArrayList<Integer>();
-	private ArrayList<ArrayList<String>> quizfragen; 
+	private ArrayList<ArrayList<String>> quizFragen; 
 	private GUILayer gui;
-	private JLayeredPane quizwindow;
+	private JLayeredPane quizWindow;
 	private JTextArea frage = new JTextArea();
 	private JLabel zeit = new JLabel();
-	private int quizstart = 0;
-	private int quizstep = 1;
+	private int quizStart = 0;
+	private int quizStep = 1;
 	private JLabel label[] = new JLabel[3];
-	private int timeleft=0;
+	private int timeLeft=0;
 	private static final int QUIZTIME = 100;
 	private boolean running = false;
 
 	public Quiz(GUILayer gui){
 		this.gui = gui;
-		this.quizfragen = Ressources.getQuiz();
-		this.quizstart = (int)(Math.random()*(this.quizfragen.size()));
-		this.quizstep = (int)(Math.random()*(this.quizfragen.size()-2)+1);
+		this.quizFragen = Ressources.getQuiz();
+		this.quizStart = (int)(Math.random()*(this.quizFragen.size()));
+		this.quizStep = (int)(Math.random()*(this.quizFragen.size()-2)+1);
 	}
 	
 
 	public void starteQuiz(){
 		//Frage setzen
-		this.frage.setText(this.quizfragen.get(this.quizstart).get(0));
+		this.frage.setText(this.quizFragen.get(this.quizStart).get(0));
 		
 		//Antworten setzen
 		for(int i=0;i<3;i++){
-			label[i].setText(this.quizfragen.get(this.quizstart).get(i+1));
+			label[i].setText(this.quizFragen.get(this.quizStart).get(i+1));
 		}
-		this.timeleft = this.QUIZTIME;
+		this.timeLeft = this.QUIZTIME;
 		
-		this.quizwindow.setVisible(true);
-		this.quizwindow.setEnabled(true);
+		this.quizWindow.setVisible(true);
+		this.quizWindow.setEnabled(true);
 		this.running=true;
-		this.timeleft = this.QUIZTIME;
+		this.timeLeft = this.QUIZTIME;
 	}
 	
 	public void initQuizWindow(Control control){
-		this.quizwindow = this.gui.getWindow("quizfenster");
+		this.quizWindow = this.gui.getWindow("quizfenster");
 		//Inhalt des Quiz Fensters
 		Button button;
 		int buttonSize = 39;
@@ -70,8 +70,8 @@ public class Quiz {
 			label[i-14].setBounds(85, 140+(i-14)*45, 500, 39);
 			label[i-14].setFont(new Font("Corbel", Font.BOLD, 18));
 					
-			this.quizwindow.add(label[i-14], javax.swing.JLayeredPane.DEFAULT_LAYER);
-			this.quizwindow.add(button, javax.swing.JLayeredPane.DEFAULT_LAYER);
+			this.quizWindow.add(label[i-14], javax.swing.JLayeredPane.DEFAULT_LAYER);
+			this.quizWindow.add(button, javax.swing.JLayeredPane.DEFAULT_LAYER);
 		}
 				//Textfeld für die Frage des Quizes
 		frage.setLineWrap(true);
@@ -84,22 +84,22 @@ public class Quiz {
 		frage.setFont(new Font("Corbel",Font.BOLD,18));
 		frage.setForeground(new java.awt.Color(0xf9, 0xf9, 0xf9));
 		frage.setBounds(30,60, 515, 75);
-		this.quizwindow.add(frage, javax.swing.JLayeredPane.DEFAULT_LAYER);
+		this.quizWindow.add(frage, javax.swing.JLayeredPane.DEFAULT_LAYER);
 		
 		this.zeit=new JLabel();
 		this.zeit.setIcon(new ImageIcon(Ressources.ingamebutton.getSubimage(948, 138, 179, 20)));
 		this.zeit.setBounds(412,19, 167, 19);
-		this.quizwindow.add(this.zeit, javax.swing.JLayeredPane.DEFAULT_LAYER);
+		this.quizWindow.add(this.zeit, javax.swing.JLayeredPane.DEFAULT_LAYER);
 	}
 	
 	//Beschwerden Miri
 	public void analyzeAntwort(String antwort){
 		int antwortnr = (int)antwort.charAt(0)-61;
-		int richtigkeit = Integer.parseInt(this.quizfragen.get(this.quizstart).get(antwortnr));
+		int richtigkeit = Integer.parseInt(this.quizFragen.get(this.quizStart).get(antwortnr));
 		this.beantwortet.add(richtigkeit);
 		if(richtigkeit == 100)
-			this.quizfragen.remove(this.quizstart);
-		this.quizstart = (this.quizstart + this.quizstep)%this.quizfragen.size();
+			this.quizFragen.remove(this.quizStart);
+		this.quizStart = (this.quizStart + this.quizStep)%this.quizFragen.size();
 		this.running = false;
 	}
 	
@@ -124,40 +124,40 @@ public class Quiz {
 		//nur bis size-1, da der Agent wieder ausgenommen ist
 		for(int i=0;i<this.gui.getHumans().size()-1;i++){
 			if(this.gui.getHumans().get(i) instanceof Person){
-				((Person)this.gui.getHumans().get(i)).set_misstrauen(((Person)this.gui.getHumans().get(i)).get_misstrauen()+misstrauen);
+				((Person)this.gui.getHumans().get(i)).setMisstrauen(((Person)this.gui.getHumans().get(i)).getMisstrauen()+misstrauen);
 			}
 			//sorgt dafür, dass sich das Misstrauen zwischen -100 und 100 bewegt
 			if(this.gui.getHumans().get(i) instanceof Person){
-				if(((Person)this.gui.getHumans().get(i)).get_misstrauen() > 100)
-					((Person)this.gui.getHumans().get(i)).set_misstrauen(100);
-				if(((Person)this.gui.getHumans().get(i)).get_misstrauen() < -100)
-					((Person)this.gui.getHumans().get(i)).set_misstrauen(-100);
+				if(((Person)this.gui.getHumans().get(i)).getMisstrauen() > 100)
+					((Person)this.gui.getHumans().get(i)).setMisstrauen(100);
+				if(((Person)this.gui.getHumans().get(i)).getMisstrauen() < -100)
+					((Person)this.gui.getHumans().get(i)).setMisstrauen(-100);
 			}
-			((Person)this.gui.getHumans().get(i)).update_schatten();
+			((Person)this.gui.getHumans().get(i)).updateSchatten();
 		}
 	}
 	/**
 	 * @author Tobias
 	 */
 	public void step(){
-		this.timeleft--;
-		this.zeit.setSize((int)((timeleft*166)/QUIZTIME),19);
-		if(timeleft<=0){
+		this.timeLeft--;
+		this.zeit.setSize((int)((timeLeft*166)/QUIZTIME),19);
+		if(timeLeft<=0){
 			this.running=false;
 			this.beantwortet.add(0);
-			this.quizwindow.setEnabled(false);
-			this.quizwindow.setVisible(false);
+			this.quizWindow.setEnabled(false);
+			this.quizWindow.setVisible(false);
 			this.calcMisstrauenAfterQuiz();
-			this.quizstart = (this.quizstart + this.quizstep)%this.quizfragen.size();
+			this.quizStart = (this.quizStart + this.quizStep)%this.quizFragen.size();
 		}
 	}
 
 	public int getTimeleft() {
-		return timeleft;
+		return timeLeft;
 	}
 
 	public void setTimeleft(int timeleft) {
-		this.timeleft = timeleft;
+		this.timeLeft = timeleft;
 	}
 
 	public boolean isRunning() {

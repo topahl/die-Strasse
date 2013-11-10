@@ -113,9 +113,8 @@ public abstract class Mensch extends JLabel {
 	}
 	
 	
-	
-	void update_location_raster(){
-		//TODO
+	//TODO entfernen?!
+	private void updateLocationRaster(){
 		//weiﬂt Bewohnern eine Location-ID zu
 		//--> man weiﬂ nun, wo sie sich grob befinden, d.h.
 		//wenn sich Person in bestimmtem Haus befindet, dann ist Location-Id = Haus-Id

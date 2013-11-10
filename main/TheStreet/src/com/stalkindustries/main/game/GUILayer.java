@@ -1,7 +1,6 @@
 package com.stalkindustries.main.game;
 
 import java.awt.Color;
-import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseMotionListener;
@@ -325,7 +324,7 @@ public class GUILayer extends JFrame implements MouseMotionListener {
 		
 		//Hintergund Quiz Fenster
 		label = new JLabel();
-		label.setIcon(new ImageIcon(Ressources.ingameframe.getSubimage(765, 0, 598, 327)));
+		label.setIcon(new ImageIcon(Ressources.ingameFrame.getSubimage(765, 0, 598, 327)));
 		label.setBounds(0, 0, 598, 327);
 		this.fensterQuiz.add(label, javax.swing.JLayeredPane.DEFAULT_LAYER);
 		
@@ -434,7 +433,7 @@ public class GUILayer extends JFrame implements MouseMotionListener {
 
 		//Hintergrundbild HausFenster
 		label = new JLabel();
-		label.setIcon(new ImageIcon(Ressources.ingameframe.getSubimage(270, 0, 460, 327)));
+		label.setIcon(new ImageIcon(Ressources.ingameFrame.getSubimage(270, 0, 460, 327)));
 		label.setBounds(0, 0, 460, 327);
 		this.fensterHaus.add(label, javax.swing.JLayeredPane.DEFAULT_LAYER);
 		
@@ -486,7 +485,7 @@ public class GUILayer extends JFrame implements MouseMotionListener {
 
 		//Hintergrundbild Beschwichtigen-Aktionsfenster
 		label = new JLabel();
-		label.setIcon(new ImageIcon(Ressources.ingameframe.getSubimage(0, 0, 248, 235)));
+		label.setIcon(new ImageIcon(Ressources.ingameFrame.getSubimage(0, 0, 248, 235)));
 		label.setBounds(0, 0, 248, 232);
 		this.fensterBeschwichtigen.add(label, javax.swing.JLayeredPane.DEFAULT_LAYER);
 		
@@ -539,7 +538,7 @@ public class GUILayer extends JFrame implements MouseMotionListener {
 		
 		//Hintergrundbild Spionage-Aktionsfenster
 		label = new JLabel();
-		label.setIcon(new ImageIcon(Ressources.ingameframe.getSubimage(0, 0, 248, 235)));
+		label.setIcon(new ImageIcon(Ressources.ingameFrame.getSubimage(0, 0, 248, 235)));
 		label.setBounds(0, 0, 248, 232);
 		this.fensterSpionage.add(label, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
@@ -597,7 +596,7 @@ public class GUILayer extends JFrame implements MouseMotionListener {
 
 		//Hintergrundbild Dialogfenster
 		label = new JLabel();
-		label.setIcon(new ImageIcon(Ressources.ingameframe.getSubimage(0, 0, 248, 235)));
+		label.setIcon(new ImageIcon(Ressources.ingameFrame.getSubimage(0, 0, 248, 235)));
 		label.setBounds(0, 0, 248, 232);
 		this.fensterDialog.add(label, javax.swing.JLayeredPane.DEFAULT_LAYER);
 		
@@ -1279,7 +1278,7 @@ public class GUILayer extends JFrame implements MouseMotionListener {
 			this.simulation.calcMisstrauenInStreet();
 			for (int i = 0; i < this.humans.size(); i++) {
 				if (this.humans.get(i) instanceof Person) {
-					((Person) this.humans.get(i)).update_schatten();
+					((Person) this.humans.get(i)).updateSchatten();
 				}
 			}
 			//this.updateMisstrauen(); // Wert neu zeichnen
@@ -1318,7 +1317,7 @@ public class GUILayer extends JFrame implements MouseMotionListener {
 		if(this.simulation.getSpielStunde() == 0 && this.simulation.getSpielMinute() == 0){
 			for(int i=0;i<this.simulation.getPeople().size();i++){
 				for(int j=0;j<Ressources.NUMBERBESCHWICHTIGENACTIONS;j++){
-					this.simulation.getPeople().get(i).set_durchgefuehrteBeschwichtigungen(j, 0);
+					this.simulation.getPeople().get(i).setDurchgefuehrteBeschwichtigungen(j, 0);
 				}
 			}
 		}
