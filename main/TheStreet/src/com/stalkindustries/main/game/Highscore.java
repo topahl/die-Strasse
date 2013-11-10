@@ -76,8 +76,8 @@ public class Highscore {
         this.misstrauenMax = Double.valueOf(Math.round(this.misstrauenMax*100)/100.00);
         this.wissenswert = Double.valueOf(Math.round(this.wissenswert*100)/100.00);
         
-//        if(this.highscore < 0)
-//            this.highscore = 0;
+        if(this.highscore < 0)
+            this.highscore = 0;
     }
 	
     /**

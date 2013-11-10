@@ -1202,15 +1202,26 @@ public class GUILayer extends JFrame implements MouseMotionListener {
 		
 		//Newsticker durchtickern lassen, falls der Text zu lang ist
 		if(this.tickerTextSize > Ressources.MAPWIDTH-120){
-			int tmp = tickerHaufigkeit/(this.tickerTextSize-(Ressources.MAPWIDTH-120));
-			if(tmp == 0)
+			double tmp = (this.tickerTextSize)/tickerHaufigkeit;
+			
+			if(tmp < 1)
 				tmp = 3;
 			else
-				tmp = 2;
+				tmp=(int)tmp+1;
+			
 			if((this.stepcounter)%2 == 0){
 				tickerStep -= tmp;
 				this.newsticker.setLocation((int)tickerStep,0);
 			}
+//			int tmp = tickerHaufigkeit/(this.tickerTextSize-(Ressources.MAPWIDTH-120));
+//			if(tmp == 0)
+//				tmp = 3;
+//			else
+//				tmp = 2;
+//			if((this.stepcounter)%2 == 0){
+//				tickerStep -= tmp;
+//				this.newsticker.setLocation((int)tickerStep,0);
+//			}
 		}
 		
 		//Unwohlsein durch installierte Überwachungsmodule
