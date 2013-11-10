@@ -715,13 +715,15 @@ public class Menu extends JFrame implements MouseMotionListener {
 		
 		gameDetails[0] = new JLabel();  //Land
 		gameDetails[0].setIcon(new ImageIcon(levelicons.get("russland")));
-		gameDetails[0].setBounds(405, 290, 200, 45);
+		gameDetails[0].setBounds(405, 280, 200, 45);
 		pershighscore.add(gameDetails[0], javax.swing.JLayeredPane.DEFAULT_LAYER);
 		
 		gameDetails[1] = new JLabel(); //Uhrzeit Datum
 		gameDetails[1].setText("20.09.2013 - 23:41 Uhr");
 		gameDetails[1].setFont(new Font("Corbel",Font.BOLD,20));
-		
+		gameDetails[1].setBounds(405, 315, 200, 30);
+		gameDetails[1].setForeground(new Color(0xf9,0xf9,0xf9));
+		pershighscore.add(gameDetails[1], javax.swing.JLayeredPane.DEFAULT_LAYER);
 		
 		//Eigene Bestenliste
 		persHighscoreList = new JList();
