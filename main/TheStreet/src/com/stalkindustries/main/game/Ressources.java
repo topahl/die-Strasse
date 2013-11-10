@@ -15,9 +15,7 @@ public class Ressources {
 	
 	private static ArrayList<ArrayList<String>> location_ids; 
 	private static ArrayList<ArrayList<String>> names;
-	//private static ArrayList<ArrayList<String>> arabian_names;	TODO: entfernen
 	private static ArrayList<ArrayList<String>> quizfragen;
-	//private static ArrayList<ArrayList<String>> arabian_quiz;		TODO: entfernen
 	private static ArrayList<ArrayList<String>> livetickergags;
 	private static ArrayList<ArrayList<String>> evilevents;
 	private static ArrayList<ArrayList<String>> normalevents;
@@ -46,18 +44,18 @@ public class Ressources {
 	
 	 
 	public static void loadLevelInfomration(String levelname){
-		location_ids=read_from_csv(Ressources.HOMEDIR+"res\\level\\"+levelname+"\\"+levelname+"_map.csv");
-		names = read_from_csv(Ressources.HOMEDIR+"res\\level\\"+levelname+"\\"+levelname+"_namen.csv");
-		quizfragen = read_from_csv(Ressources.HOMEDIR+"res\\level\\"+levelname+"\\"+levelname+"_quizfragen.csv");
+		location_ids=readFromCsv(Ressources.HOMEDIR+"res\\level\\"+levelname+"\\"+levelname+"_map.csv");
+		names = readFromCsv(Ressources.HOMEDIR+"res\\level\\"+levelname+"\\"+levelname+"_namen.csv");
+		quizfragen = readFromCsv(Ressources.HOMEDIR+"res\\level\\"+levelname+"\\"+levelname+"_quizfragen.csv");
 		
-		livetickergags = read_from_csv(Ressources.HOMEDIR+"res\\game\\"+"livetickergags.csv");
+		livetickergags = readFromCsv(Ressources.HOMEDIR+"res\\game\\"+"livetickergags.csv");
 		//livetickergags = randomizeGags();
-		livetickergags = randomizeLists(copy_csv(livetickergags));
+		livetickergags = randomizeLists(copyCsv(livetickergags));
 		
-		evilevents = read_from_csv(Ressources.HOMEDIR+"res\\game\\"+"EvilEvents.csv");
+		evilevents = readFromCsv(Ressources.HOMEDIR+"res\\game\\"+"EvilEvents.csv");
 		
-		normalevents = read_from_csv(Ressources.HOMEDIR+"res\\game\\"+"NormaleEvents.csv");
-		normalevents = randomizeLists(copy_csv(normalevents));
+		normalevents = readFromCsv(Ressources.HOMEDIR+"res\\game\\"+"NormaleEvents.csv");
+		normalevents = randomizeLists(copyCsv(normalevents));
 		
 		setNumberOfHouses();
 		
@@ -146,7 +144,7 @@ public class Ressources {
 	
 	
 	//Beschwerden an Sven und Miri
-		public static ArrayList<ArrayList<String>> read_from_csv(String dateiName){
+		public static ArrayList<ArrayList<String>> readFromCsv(String dateiName){
 			ArrayList<ArrayList<String>> list_of_lists = new ArrayList<ArrayList<String>>();
 			
 			//File vorhanden?
@@ -204,52 +202,37 @@ public class Ressources {
 //			loc_ids.add(tmp);
 //		}
 		ArrayList<ArrayList<String>> loc_ids;
-		loc_ids = copy_csv(location_ids);
+		loc_ids = copyCsv(location_ids);
 		return loc_ids;
 	}
 	
 	
 	public static ArrayList<ArrayList<String>> getNames() {
 		ArrayList<ArrayList<String>> namen;
-		namen = copy_csv(names);
+		namen = copyCsv(names);
 		return namen;
 	}
-	
-//	TODO: entfernen
-//	public static ArrayList<ArrayList<String>> getArabianNames() {
-//		ArrayList<ArrayList<String>> arab_names;
-//		arab_names = copy_csv(arabian_names);
-//		return arab_names;
-//	}
 	
 	
 	public static ArrayList<ArrayList<String>> getQuiz() {
 		ArrayList<ArrayList<String>> quiz;
-		quiz = copy_csv(quizfragen);
+		quiz = copyCsv(quizfragen);
 		return quiz;
 	}
 	
 	public static ArrayList<ArrayList<String>> getEvilEvents() {
 		ArrayList<ArrayList<String>> evil;
-		evil = copy_csv(evilevents);
+		evil = copyCsv(evilevents);
 		return evil;
 	}
 	
 	public static ArrayList<ArrayList<String>> getNormalEvents() {
 		ArrayList<ArrayList<String>> normal;
-		normal = copy_csv(normalevents);
+		normal = copyCsv(normalevents);
 		return normal;
-	}
+	}	
 	
-//	TODO: entfernen
-//	public static ArrayList<ArrayList<String>> getArabianQuiz() {
-//		ArrayList<ArrayList<String>> arab_quiz;
-//		arab_quiz = copy_csv(arabian_quiz);
-//		return arab_quiz;
-//	}
-	
-	
-	public static ArrayList<ArrayList<String>> copy_csv(ArrayList<ArrayList<String>> input){
+	public static ArrayList<ArrayList<String>> copyCsv(ArrayList<ArrayList<String>> input){
 		ArrayList<ArrayList<String>> new_csv = new ArrayList<ArrayList<String>>();
 		
 		for(int i=0;i<input.size();i++){
@@ -265,7 +248,7 @@ public class Ressources {
 	//TODO: entfernen
 	public static ArrayList<ArrayList<String>> randomizeGags(){
 		ArrayList<ArrayList<String>> gags = new ArrayList<ArrayList<String>>();
-		ArrayList<ArrayList<String>> gags_input = copy_csv(livetickergags);
+		ArrayList<ArrayList<String>> gags_input = copyCsv(livetickergags);
 		ArrayList<String> tmp;
 		int start = (int)(Math.random()*livetickergags.size());
 		int step = (int)(Math.random()*(livetickergags.size()-2)+1);
