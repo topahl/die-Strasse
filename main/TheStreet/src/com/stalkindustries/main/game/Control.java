@@ -449,25 +449,14 @@ public class Control implements IControl {
 		}
 		
 		if (guilayer.getButtonsMap().get("Haus1").isEnabled()){
-			guilayer.getButtonsMap().get("Haus1").setEnabled(false);
-			guilayer.getButtonsMap().get("Haus2").setEnabled(false);
-			guilayer.getButtonsMap().get("Haus3").setEnabled(false);
-			guilayer.getButtonsMap().get("Haus4").setEnabled(false);
-			guilayer.getButtonsMap().get("Haus5").setEnabled(false);
-			guilayer.getButtonsMap().get("Haus6").setEnabled(false);
-			guilayer.getButtonsMap().get("Haus7").setEnabled(false);
-			guilayer.getButtonsMap().get("Haus8").setEnabled(false);
-			guilayer.getButtonsMap().get("Haus9").setEnabled(false);
+			for (int i=1; i<=Ressources.NUMBERHOUSES; i++){
+				guilayer.getButtonsMap().get("Haus"+i).setEnabled(false);
+				
+			}
 		} else{
-			guilayer.getButtonsMap().get("Haus1").setEnabled(true);
-			guilayer.getButtonsMap().get("Haus2").setEnabled(true);
-			guilayer.getButtonsMap().get("Haus3").setEnabled(true);
-			guilayer.getButtonsMap().get("Haus4").setEnabled(true);
-			guilayer.getButtonsMap().get("Haus5").setEnabled(true);
-			guilayer.getButtonsMap().get("Haus6").setEnabled(true);
-			guilayer.getButtonsMap().get("Haus7").setEnabled(true);
-			guilayer.getButtonsMap().get("Haus8").setEnabled(true);
-			guilayer.getButtonsMap().get("Haus9").setEnabled(true);
+			for (int i=1; i<=Ressources.NUMBERHOUSES; i++){
+				guilayer.getButtonsMap().get("Haus"+i).setEnabled(true);
+			}
 		}
 		
 
