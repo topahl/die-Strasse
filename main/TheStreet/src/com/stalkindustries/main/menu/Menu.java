@@ -96,7 +96,9 @@ public class Menu extends JFrame implements MouseMotionListener {
 	public Menu(String playername) {
 		this(); //Call main constructor
 		this.setCurrentUser(playername);
-		this.showLayer(LAYERMENU);
+		this.showLayer(LAYERPERSHIGHSCORE);
+		this.resetPersHighscore();
+		this.readUserHighscores(playername);
 	}
 	
 
@@ -900,7 +902,10 @@ public class Menu extends JFrame implements MouseMotionListener {
 		generateStandardSubPageElements(pershighscore, "Meine Scores", "");
 	}
 	
-	
+	/**
+	 * Reset pers Highscore
+	 * @author Martika
+	 */
 	public void resetPersHighscore(){
 		gameDetails[0].setVisible(false);
 		gameDetails[2].setVisible(false);
@@ -1243,7 +1248,7 @@ public class Menu extends JFrame implements MouseMotionListener {
 		return currentUser.getText();
 	}
 	
-	public void updatePersHighscore(){   //TODO sachen enablen
+	public void updatePersHighscore(){  
 		int selectionId = persHighscoreList.getSelectedIndex();
 		ArrayList<String> score=(ArrayList<String>) persHighscoreList.getModel().getElementAt(selectionId);
 		for (int i=0; i<16; i++){
