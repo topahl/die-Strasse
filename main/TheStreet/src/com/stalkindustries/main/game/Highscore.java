@@ -17,7 +17,7 @@ public class Highscore {
 	private double highscore = 0d;
 	private double wissenswert = 0d;
 	private int events = 0;
-	private double misstrauen_max = 0d;
+	private double misstrauenMax = 0d;
 	private Simulation simulation;
 	private Quiz quiz;
 	private Agent agent;
@@ -47,7 +47,7 @@ public class Highscore {
                 this.spielzeit = min + h*60 + (tag-1)*24*60 - 420;//-420, weil wir um 7 Uhr morgens anfangen
         
         //Misstrauen Max
-        this.misstrauen_max = this.simulation.getMisstrauenMax();
+        this.misstrauenMax = this.simulation.getMisstrauenMax();
         
         //Events
                 for(int i=0;i<this.simulation.getPeople().size();i++){
@@ -65,7 +65,7 @@ public class Highscore {
             this.wissenswert = tmp/fragen.size();        //zwischen 0 und 100
         }
         
-        this.highscore = this.wissenswert - this.misstrauen_max - this.spielzeit/8640 + 100*this.events/this.simulation.getPeople().size();
+        this.highscore = this.wissenswert - this.misstrauenMax - this.spielzeit/8640 + 100*this.events/this.simulation.getPeople().size();
         
         if(this.festgenommen)
             this.highscore += 300-70*Math.log(this.spielzeit/8640);
@@ -163,7 +163,7 @@ public class Highscore {
 	    	 fw.append( System.getProperty("line.separator") );
 	    	 fw.write("Terroristen festgenommen: "+festnahme);
 	    	 fw.append( System.getProperty("line.separator") );
-	    	 fw.write("Maximales Misstrauen: "+this.misstrauen_max);
+	    	 fw.write("Maximales Misstrauen: "+this.misstrauenMax);
 	    	 fw.append( System.getProperty("line.separator") );
 	    	 fw.write("Spielzeit in Minuten: "+this.spielzeit);
 	    	 fw.append( System.getProperty("line.separator") );
