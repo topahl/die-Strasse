@@ -14,15 +14,15 @@ import com.stalkindustries.main.game.Ressources;
  * @author Tobias
  *
  */
-public class ControlMenu implements IControl{
+public class ControlMenu implements IControl {
 	
 	private Menu mainmenu;
 	
-	public ControlMenu(Menu mainmenu){
+	public ControlMenu(Menu mainmenu) {
 		this.mainmenu=mainmenu;
 	}
 	
-	public void call(String funktion){
+	public void call(String funktion) {
 		System.out.println("You pressed: "+funktion);
 		if(funktion.startsWith("level:"))
 			beginGame(funktion);
@@ -42,13 +42,19 @@ public class ControlMenu implements IControl{
 			mainmenu.showLayer(Menu.LAYERCREDITS);
 		if(funktion.equals("create"))
 			this.createUser();
-		if(funktion.equals("use")){
+		if(funktion.equals("use")) {
 			this.changeCurrentUser();
 		}
-			
 		
-			
+		if(funktion.equals("tutorialBack")) {
+			mainmenu.tutorialBack();
+		}
+		if(funktion.equals("tutorialNext")) {
+			mainmenu.tutorialNext();
+		}
+
 	}
+	
 	
 	private void pressedStart() {
 		if(mainmenu.getCurrentUser()!= "")

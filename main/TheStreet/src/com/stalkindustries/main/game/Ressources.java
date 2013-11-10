@@ -36,6 +36,8 @@ public class Ressources {
 	public static BufferedImage mainmenusub;
 	public static BufferedImage menubutton;
 	public static BufferedImage ingameframe;
+	public static BufferedImage tutorialBg;
+	public static BufferedImage[] tutorial;
 	
 	public static final String HOMEDIR = defaultDirectory();
 	public static int NUMBERHOUSES;
@@ -112,15 +114,33 @@ public class Ressources {
 		try {
 			ingameframe = ImageIO.read(new File(Ressources.HOMEDIR+"res\\game\\slice_fenster.png"));
 		} catch (IOException e) {
-			System.err.println("Could not find Image slice_fenster.png,");
+			System.err.println("Could not find Image slice_fenster.png");
 			e.printStackTrace();
 		}
 		
 		try {
 			mainmenusub = ImageIO.read(new File(Ressources.HOMEDIR+"res\\game\\gui_menu_sub.png"));
 		} catch (IOException e) {
-			System.err.println("Could not find Image gui_menu_sub.png,");
+			System.err.println("Could not find Image gui_menu_sub.png");
 			e.printStackTrace();
+		}
+		
+		
+		try {
+			tutorialBg = ImageIO.read(new File(Ressources.HOMEDIR+"res\\tutorial\\tutorial_bg.png"));
+		} catch (IOException e) {
+			System.err.println("Could not find Image tutorial_bg.png");
+			e.printStackTrace();
+		}
+		
+		tutorial = new BufferedImage[5];
+		for(int i = 1; i < tutorial.length; i++) {
+			try {
+				tutorial[i] = ImageIO.read(new File(Ressources.HOMEDIR+"res\\tutorial\\tutorial_overlay" + i + ".png"));
+			} catch (IOException e) {
+				System.err.println("Could not find Image tutorial_overlay" + i + ".png");
+				e.printStackTrace();
+			}
 		}
 	}
 	

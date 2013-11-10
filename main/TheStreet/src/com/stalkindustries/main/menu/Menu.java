@@ -39,7 +39,7 @@ import com.stalkindustries.main.Button;
 import com.stalkindustries.main.Scrollbar;
 import com.stalkindustries.main.game.Ressources;
 
-public class Menu extends JFrame implements MouseMotionListener{
+public class Menu extends JFrame implements MouseMotionListener {
 	private JLayeredPane window;
 	private JLayeredPane mainmenu;
 	private JLayeredPane mapselect;
@@ -64,6 +64,11 @@ public class Menu extends JFrame implements MouseMotionListener{
 	public static final int LAYERPERSHIGHSCORE = 7;
 	
 	private HashMap<String,Button> buttons = new HashMap<String,Button>();
+	private String[][] tutorialText = new String[10][2];
+	private JLabel tutorialTitel = new JLabel();
+	private JTextArea tutorialBeschreibung = new JTextArea();
+	private JLabel tutorialOverlay = new JLabel();
+	private int tutorialPage = 0;
 	
 	
 	
@@ -185,7 +190,128 @@ public class Menu extends JFrame implements MouseMotionListener{
 	private void initTutorial() {
 		tutorial = new JLayeredPane();
 		
-		generateStandardSubPageElements(tutorial, "Anleitung", "");
+		//Texte auf den Tutorialseiten
+		tutorialText[0][0] = "Willkommen in The Street!";
+		tutorialText[0][1] = "Sie sind ein Agent in geheimer Mission. Überwachen Sie Ihre Nachbarschaft und stellen Sie so den Schwerverbrecher, aber seien Sie achtsam, damit die Bewohner nicht zu misstrauisch werden und sie deshalb auffliegen...";
+		tutorialText[1][0] = "Aufbau des Spielfensters";
+		tutorialText[1][1] = "Im Spielfenster sehen Sie Ihre Nachbarschaft aus der Vogelperspektive. Oben sehen Sie die Liveticker-Leiste, den Pause- und Beenden-Button. Unten ist die Menüleiste, über die Sie das Spiel steuern.";
+		tutorialText[2][0] = "Die Straße";
+		tutorialText[2][1] = "Zu Beginn sehen Sie die Bewohner der Straße in ihren Häusern. Ihr eigenes Haus ist für Sie mit dem Bundesadler gekennzeichnet. Die Verteilung der Bewohner und Häuser erfolgt pro Spiel zufällig.";
+		tutorialText[3][0] = "Tagesablauf";
+		tutorialText[3][1] = "Die Bewohner folgen ihren jeweiligen Tagesabläufen: morgens verlassen Kinder die Straße zur Schule und Erwachsene gehen zur Arbeit, oder sie gehen Einkaufen oder in den Park. Die aktuelle Uhrzeit wird Ihnen in der Menüleiste angezeigt.";
+		tutorialText[4][0] = "Aktionen";
+		tutorialText[4][1] = "Über die Aktionsbuttons können Sie als Agent spionieren oder sozial interagieren. Ihre Aktionen wirken sich positiv oder negativ auf den Überwachungswert und das Misstrauen in der Nachbarschaft aus.";
+		//tutorialText[5][0] = "";
+		//tutorialText[5][1] = "";
+
+		tutorialTitel.setText(tutorialText[0][0]);
+		tutorialTitel.setFont(new Font("Corbel", Font.BOLD, 24));
+		tutorialTitel.setForeground(new Color(0xf9, 0xf9, 0xf9));
+		tutorialTitel.setBounds(2*Ressources.RASTERHEIGHT, 12*Ressources.RASTERHEIGHT+5, 14*Ressources.RASTERHEIGHT, Ressources.RASTERHEIGHT-5);
+        tutorial.add(tutorialTitel, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        
+        tutorialBeschreibung.setLineWrap(true);
+        tutorialBeschreibung.setText(tutorialText[0][1]);
+        tutorialBeschreibung.setWrapStyleWord(true);
+        tutorialBeschreibung.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        tutorialBeschreibung.setFocusable(false);
+        tutorialBeschreibung.setOpaque(false);
+        tutorialBeschreibung.setFont(new Font("Corbel",Font.BOLD,20));
+        tutorialBeschreibung.setForeground(new Color(0xf9, 0xf9, 0xf9));
+        tutorialBeschreibung.setBounds(2*Ressources.RASTERHEIGHT, 13*Ressources.RASTERHEIGHT, 14*Ressources.RASTERHEIGHT, 3*Ressources.RASTERHEIGHT);
+        tutorial.add(tutorialBeschreibung, javax.swing.JLayeredPane.DEFAULT_LAYER);
+
+        //Zurück-Button
+        Button button = new Button(this.control,
+				Ressources.menubutton.getSubimage(795   , 0, 30, 30),
+				Ressources.menubutton.getSubimage(795+30, 0, 30, 30),
+				Ressources.menubutton.getSubimage(795+60, 0, 30, 30),
+				Ressources.menubutton.getSubimage(795+90, 0, 30, 30),
+				"tutorialBack", Ressources.RASTERHEIGHT + 7, 7 * Ressources.RASTERHEIGHT + 7, this);
+	    button.setEnabled(false);
+	    tutorial.add(button, javax.swing.JLayeredPane.DEFAULT_LAYER);
+	    buttons.put("tutorialBack", button);
+
+	    //Vor-Button
+	    button = new Button(this.control,
+				Ressources.menubutton.getSubimage(795   , 30, 30, 30),
+				Ressources.menubutton.getSubimage(795+30, 30, 30, 30),
+				Ressources.menubutton.getSubimage(795+60, 30, 30, 30),
+				Ressources.menubutton.getSubimage(795+90, 30, 30, 30),
+				"tutorialNext", 16 * Ressources.RASTERHEIGHT + 7, 7 * Ressources.RASTERHEIGHT + 7, this);
+	    tutorial.add(button, javax.swing.JLayeredPane.DEFAULT_LAYER);
+	    buttons.put("tutorialNext", button);
+
+	    //aktueller Overlay der Tutorial Seite
+        tutorialOverlay.setIcon(tutorialGetCurrentOverlay());
+        tutorialOverlay.setBounds(2*Ressources.RASTERHEIGHT, 3*Ressources.RASTERHEIGHT, 14*Ressources.RASTERHEIGHT, 9*Ressources.RASTERHEIGHT);
+        tutorial.add(tutorialOverlay, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        
+        //Hintergrundbild des Tutorials
+		JLabel label = new JLabel();
+        label.setIcon(new ImageIcon(Ressources.tutorialBg));
+        label.setBounds(2*Ressources.RASTERHEIGHT, 3*Ressources.RASTERHEIGHT, 14*Ressources.RASTERHEIGHT, 9*Ressources.RASTERHEIGHT);
+        tutorial.add(label, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        
+		generateStandardSubPageElements(tutorial, "Tutorial", "Lernen Sie das Spielprinzip und die Funktionen von The Street kennen.");
+	}
+
+
+	
+	/**
+	 * Gibt aktuelle OverlayGrafik als Icon zurück
+	 * @author Stephan
+	 */
+	private ImageIcon tutorialGetCurrentOverlay() {
+		if(tutorialPage == 0)
+			return null;
+		if(tutorialPage < Ressources.tutorial.length)
+			return new ImageIcon(Ressources.tutorial[tutorialPage]);
+		return null;
+	}
+	
+	
+	
+	/**
+	 * Im Tutorial eine Seite zurück gehen
+	 * @author Stephan
+	 */
+	public void tutorialBack() {
+		//nur Blättern wenn nicht erste Seite
+		if(tutorialPage != 0) {
+			tutorialPage--;
+			tutorialOverlay.setIcon(tutorialGetCurrentOverlay());
+			tutorialTitel.setText(tutorialText[tutorialPage][0]);
+			tutorialBeschreibung.setText(tutorialText[tutorialPage][1]);
+			
+			//Wenn nötig, Buttons enablen/disablen
+			if(tutorialPage == 0)
+				this.getButtonsMap().get("tutorialBack").setEnabled(false);
+			if(tutorialPage == tutorialText.length / 2 - 2)
+				this.getButtonsMap().get("tutorialNext").setEnabled(true);
+		}
+	}
+	
+	
+	
+	/**
+	 * Im Tutorial eine Seite vor gehen
+	 * @author Stephan
+	 */
+	public void tutorialNext() {
+		//nur Blättern wenn nicht letzte Seite
+		if(tutorialPage < tutorialText.length / 2 - 1) {
+			tutorialPage++;
+			tutorialOverlay.setIcon(tutorialGetCurrentOverlay());
+			tutorialTitel.setText(tutorialText[tutorialPage][0]);
+			tutorialBeschreibung.setText(tutorialText[tutorialPage][1]);
+			
+			//Wenn nötig, Buttons enablen/disablen
+			if(tutorialPage == 1)
+				this.getButtonsMap().get("tutorialBack").setEnabled(true);
+			if(tutorialPage == tutorialText.length / 2 - 1)
+				this.getButtonsMap().get("tutorialNext").setEnabled(false);
+		}
 	}
 
 	
@@ -821,7 +947,16 @@ public class Menu extends JFrame implements MouseMotionListener{
     	
     }
 
+
     
+	/**
+	 * Gibt die HashMap der Buttons zurück
+	 * @return Hashmap der Menu-Buttons
+	 * @author Stephan
+	 */
+	public HashMap<String, Button> getButtonsMap() {
+		return this.buttons;
+	}
     
     
 	public JList getBenutzerliste() {
