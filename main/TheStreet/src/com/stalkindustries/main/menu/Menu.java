@@ -909,7 +909,7 @@ public class Menu extends JFrame implements MouseMotionListener {
     	pershighscore.add(listbackground, javax.swing.JLayeredPane.DEFAULT_LAYER);
     	
 		
-		generateStandardSubPageElements(pershighscore, "Meine Scores", "Durch Klicken auf ein Spiel, können Sie sich die Details des Spielstandes ansehen");
+		generateStandardSubPageElements(pershighscore, "Meine Scores", "Sehen Sie hier detaillierte Auswertungen Ihrer eigenen Spiele.");
 	}
 	
 	/**
