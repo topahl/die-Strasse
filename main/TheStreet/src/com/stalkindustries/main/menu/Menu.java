@@ -38,6 +38,7 @@ import javax.swing.SwingConstants;
 
 import com.stalkindustries.main.Button;
 import com.stalkindustries.main.Scrollbar;
+import com.stalkindustries.main.TheStreet;
 import com.stalkindustries.main.game.Ressources;
 
 public class Menu extends JFrame implements MouseMotionListener {
@@ -1162,7 +1163,29 @@ public class Menu extends JFrame implements MouseMotionListener {
     	
     }
 
-
+    /**
+     * @author Tobias
+     * 
+     * kopiert einen Fortschrittsbalken aus veschiedenen grafiken zusammen
+     * 
+     * @param valuePercent Prozentuale anzeige des Balkens
+     * @param thresholdPercent Schwellwert von rotem zu grünem Balken
+     * @return Bild mit kompletter Leiste mit Hintergrung
+     */
+    private BufferedImage createPrivateScoreBar(double valuePercent, double thresholdPercent){
+    	BufferedImage output = Ressources.ingamebutton.getSubimage(948, 180, 135, 20);
+    	Graphics2D g2d = output.createGraphics();
+    	if(valuePercent>1d)
+    		valuePercent=1d;
+    	if(valuePercent<=0d)
+    		valuePercent=0.0001d;
+    	if(valuePercent<thresholdPercent)
+    		g2d.drawImage(Ressources.ingamebutton.getSubimage(948, 201, (int)(valuePercent*135), 20),0,0,null);
+    	else
+    		g2d.drawImage(Ressources.ingamebutton.getSubimage(948, 222, (int)(valuePercent*135), 20),0,0,null);
+    	return output;
+    }
+    
     
 	/**
 	 * Gibt die HashMap der Buttons zurück
@@ -1180,6 +1203,10 @@ public class Menu extends JFrame implements MouseMotionListener {
 	
 	public String getCurrentUser() {
 		return currentUser.getText();
+	}
+	
+	public void updatePersHighscore(int selectionId){
+		
 	}
 	
 	public void mouseMoved(MouseEvent e) {}
