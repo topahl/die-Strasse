@@ -131,7 +131,7 @@ public class Ressources {
 			e.printStackTrace();
 		}
 		
-		tutorial = new BufferedImage[5];
+		tutorial = new BufferedImage[11];
 		for(int i = 1; i < tutorial.length; i++) {
 			try {
 				tutorial[i] = ImageIO.read(new File(Ressources.HOMEDIR+"res\\tutorial\\tutorial_overlay" + i + ".png"));

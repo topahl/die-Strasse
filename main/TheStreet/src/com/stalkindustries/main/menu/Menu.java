@@ -50,7 +50,7 @@ public class Menu extends JFrame implements MouseMotionListener {
 	private JLayeredPane credits;
 	private JLayeredPane pershighscore;
 	private ControlMenu control;
-	
+	 
 	private JTextField username;
 	private JList benutzerliste; 
 	private JLabel currentUser;
@@ -65,7 +65,7 @@ public class Menu extends JFrame implements MouseMotionListener {
 	public static final int LAYERPERSHIGHSCORE = 7;
 	
 	private HashMap<String,Button> buttons = new HashMap<String,Button>();
-	private String[][] tutorialText = new String[10][2];
+	private String[][] tutorialText = new String[12][2];
 	private JLabel tutorialTitel = new JLabel();
 	private JTextArea tutorialBeschreibung = new JTextArea();
 	private JLabel tutorialOverlay = new JLabel();
@@ -195,18 +195,30 @@ public class Menu extends JFrame implements MouseMotionListener {
 		
 		//Texte auf den Tutorialseiten
 		tutorialText[0][0] = "Willkommen in The Street!";
-		tutorialText[0][1] = "Sie sind ein Agent in geheimer Mission. Überwachen Sie Ihre Nachbarschaft und stellen Sie so den Schwerverbrecher, aber seien Sie achtsam, damit die Bewohner nicht zu misstrauisch werden und sie deshalb auffliegen...";
+		tutorialText[0][1] = "Sie sind ein Agent in geheimer Mission. Überwachen Sie Ihre Nachbarschaft und stellen Sie so den Schwerverbrecher, aber seien Sie achtsam, damit die Bewohner nicht zu misstrauisch werden und Sie deshalb auffliegen...";
 		tutorialText[1][0] = "Aufbau des Spielfensters";
 		tutorialText[1][1] = "Im Spielfenster sehen Sie Ihre Nachbarschaft aus der Vogelperspektive. Oben sehen Sie die Liveticker-Leiste, den Pause- und Beenden-Button. Unten ist die Menüleiste, über die Sie das Spiel steuern.";
 		tutorialText[2][0] = "Die Straße";
 		tutorialText[2][1] = "Zu Beginn sehen Sie die Bewohner der Straße in ihren Häusern. Ihr eigenes Haus ist für Sie mit dem Bundesadler gekennzeichnet. Die Verteilung der Bewohner und Häuser erfolgt pro Spiel zufällig.";
 		tutorialText[3][0] = "Tagesablauf";
-		tutorialText[3][1] = "Die Bewohner folgen ihren jeweiligen Tagesabläufen: morgens verlassen Kinder die Straße zur Schule und Erwachsene gehen zur Arbeit, oder sie gehen Einkaufen oder in den Park. Die aktuelle Uhrzeit wird Ihnen in der Menüleiste angezeigt.";
+		tutorialText[3][1] = "Die Bewohner folgen ihren jeweiligen Tagesabläufen: morgens verlassen Kinder die Straße zur Schule. Erwachsene gehen zur Arbeit, Einkaufen oder in den Park. Die aktuelle Uhrzeit wird Ihnen in der Menüleiste angezeigt.";
 		tutorialText[4][0] = "Aktionen";
 		tutorialText[4][1] = "Über die Aktionsbuttons können Sie als Agent spionieren oder sozial interagieren. Ihre Aktionen wirken sich positiv oder negativ auf den Überwachungswert und das Misstrauen in der Nachbarschaft aus.";
-		//tutorialText[5][0] = "";
-		//tutorialText[5][1] = "";
-
+		tutorialText[5][0] = "Spionageaktionen";
+		tutorialText[5][1] = "Installieren Sie Spionageinstrumente in den Häusern der Nachbarschaft und beobachten Sie einige Häuser über Fernglas, um den Überwachungswert zu erhöhen. Lassen Sie sich bei der Installation, ob tagsüber oder nachts, nur nicht erwischen - sonst werden die Bewohner sehr misstrauisch... Überwachungswerkzeuge können im Haus wieder deinstalliert werden.";
+		tutorialText[6][0] = "Soziale Aktionen";
+		tutorialText[6][1] = "Sie können das Misstrauen der Bewohner wieder senken, indem Sie tagsüber an deren Häusern oder im Park sozial aktiv werden. Das Misstrauen einzelner Bewohner können Sie anhand der roten (negativen) oder grünen (positiven) Färbung des Scheins erkennen.";
+		tutorialText[7][0] = "Misstrauenswert";
+		tutorialText[7][1] = "Der Misstrauenswert bildet das durchschnittliche Misstrauen der Nachbarschaft ab. Jeder Bewohner hat Beziehungen zu anderen Bewohnern, über die sich das Misstrauen verbreitet und angleicht, wenn sich diese im Park oder in der Schule begegnen.";
+		tutorialText[8][0] = "Überwachungswert und Liveticker";
+		tutorialText[8][1] = "Wenn Sie ein Haus überwachen, können Sie dessen Bewohner sehen und erkennen, ob die Bewohner arbeiten (Krawatte/Halstuch). Durch entsprechend hohe Überwachung können Sie 'Evil Events' aufdecken, die Ihnen Hinweise auf den Schwerverbrecher geben könnten. Evil Events erscheinen rot im Liveticker - seien Sie also wachsam!";
+		tutorialText[9][0] = "Quizfragen";
+		tutorialText[9][1] = "Während des Spiels wird Ihr Wissen zum entsprechenden Land abgefragt. Antworten Sie schnell in der vorgegebenen Zeit und präzise, denn eine falsche oder keine Antwort wirkt sich negativ auf den Misstrauenswert der Nachbarschaft aus, wogegen eine richtige Antwort den Misstrauenswert senkt.";
+		tutorialText[10][0] = "Spielende";
+		tutorialText[10][1] = "Glauben Sie den Schwerverbrecher gefunden zu haben, können Sie sein Haus (bei entsprechendem Überwachungswert) hochnehmen lassen. Haben Sie das falsche Haus gewählt oder wird der Schwerverbrecher aus anderen Gründen zu misstrauisch, flieht er und Sie haben verloren. Fliegen Sie durch zu hohes Misstrauen der Nachbarschaft auf, ist das Spiel auch vorbei.";
+		tutorialText[11][0] = "Sie sind bereit!";
+		tutorialText[11][1] = "Nun sind Sie mit den Grundlagen des Spieles vertraut und können Ihre nächste Mission starten!";
+		
 		tutorialTitel.setText(tutorialText[0][0]);
 		tutorialTitel.setFont(new Font("Corbel", Font.BOLD, 24));
 		tutorialTitel.setForeground(new Color(0xf9, 0xf9, 0xf9));
@@ -219,7 +231,7 @@ public class Menu extends JFrame implements MouseMotionListener {
         tutorialBeschreibung.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         tutorialBeschreibung.setFocusable(false);
         tutorialBeschreibung.setOpaque(false);
-        tutorialBeschreibung.setFont(new Font("Corbel",Font.BOLD,20));
+        tutorialBeschreibung.setFont(new Font("Corbel",Font.BOLD,18));
         tutorialBeschreibung.setForeground(new Color(0xf9, 0xf9, 0xf9));
         tutorialBeschreibung.setBounds(2*Ressources.RASTERHEIGHT, 13*Ressources.RASTERHEIGHT, 14*Ressources.RASTERHEIGHT, 3*Ressources.RASTERHEIGHT);
         tutorial.add(tutorialBeschreibung, javax.swing.JLayeredPane.DEFAULT_LAYER);
@@ -290,7 +302,7 @@ public class Menu extends JFrame implements MouseMotionListener {
 			//Wenn nötig, Buttons enablen/disablen
 			if(tutorialPage == 0)
 				this.getButtonsMap().get("tutorialBack").setEnabled(false);
-			if(tutorialPage == tutorialText.length / 2 - 2)
+			if(tutorialPage == tutorialText.length - 2)
 				this.getButtonsMap().get("tutorialNext").setEnabled(true);
 		}
 	}
@@ -303,7 +315,7 @@ public class Menu extends JFrame implements MouseMotionListener {
 	 */
 	public void tutorialNext() {
 		//nur Blättern wenn nicht letzte Seite
-		if(tutorialPage < tutorialText.length / 2 - 1) {
+		if(tutorialPage < tutorialText.length - 1) {
 			tutorialPage++;
 			tutorialOverlay.setIcon(tutorialGetCurrentOverlay());
 			tutorialTitel.setText(tutorialText[tutorialPage][0]);
@@ -312,7 +324,7 @@ public class Menu extends JFrame implements MouseMotionListener {
 			//Wenn nötig, Buttons enablen/disablen
 			if(tutorialPage == 1)
 				this.getButtonsMap().get("tutorialBack").setEnabled(true);
-			if(tutorialPage == tutorialText.length / 2 - 1)
+			if(tutorialPage == tutorialText.length - 1)
 				this.getButtonsMap().get("tutorialNext").setEnabled(false);
 		}
 	}
