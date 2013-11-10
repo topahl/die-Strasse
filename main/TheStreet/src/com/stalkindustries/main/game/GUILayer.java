@@ -1409,8 +1409,13 @@ public class GUILayer extends JFrame implements MouseMotionListener {
 				fernglasCounter++;
 			}
 		}
-		if (fernglasCounter==3){
+		if (fernglasCounter>=3){
 			getButtonsMap().get("aktionFernglas").setEnabled(false);
+			if (control.getLastFunktioncode()=="aktionFernglas"){
+				overlayMousefollower.setVisible(false);
+				getSimulation().getAgent().setMussWuseln("");
+				control.setLastFunktioncode("");
+			}
 		} else{
 			getButtonsMap().get("aktionFernglas").setEnabled(true);
 		}
