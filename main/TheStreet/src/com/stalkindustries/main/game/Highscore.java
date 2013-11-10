@@ -1,17 +1,15 @@
 package com.stalkindustries.main.game;
 
 import java.io.BufferedReader;
-import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.Writer;
+import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
-
-import com.stalkindustries.main.menu.Menu;
 
 public class Highscore {
 	private double highscore = 0d;
@@ -67,11 +65,19 @@ public class Highscore {
         
         this.highscore = this.wissenswert - this.misstrauenMax - this.spielzeit/8640 + 100*this.events/this.simulation.getPeople().size();
         
+              
         if(this.festgenommen)
-            this.highscore += 300-70*Math.log(this.spielzeit/8640);
+        	if(this.spielzeit/8640 <= 1)
+        		this.highscore += 300;
+        	else
+        		this.highscore += 300-70*Math.log(this.spielzeit/8640);
         
-        if(this.highscore < 0)
-            this.highscore = 0;
+        this.highscore = Double.valueOf(Math.round(this.highscore*100)/100.00);
+        this.misstrauenMax = Double.valueOf(Math.round(this.misstrauenMax*100)/100.00);
+        this.wissenswert = Double.valueOf(Math.round(this.wissenswert*100)/100.00);
+        
+//        if(this.highscore < 0)
+//            this.highscore = 0;
     }
 	
     /**
