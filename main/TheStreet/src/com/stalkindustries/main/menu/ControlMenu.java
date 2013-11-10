@@ -143,7 +143,8 @@ public class ControlMenu implements IControl, ListSelectionListener {
 
 	@Override
 	public void valueChanged(ListSelectionEvent arg0) {
-		System.out.println(arg0.toString());
+		if(!arg0.getValueIsAdjusting())
+			mainmenu.updatePersHighscore();
 		
 		
 	}

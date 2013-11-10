@@ -749,7 +749,7 @@ public class Menu extends JFrame implements MouseMotionListener {
 		gameDetails[1].setForeground(new Color(0xf9,0xf9,0xf9));
 		pershighscore.add(gameDetails[1], javax.swing.JLayeredPane.DEFAULT_LAYER);
 		
-		gameDetails[2] = new JLabel(); //Uhrzeit Datum
+		gameDetails[2] = new JLabel(); //Score
 		gameDetails[2].setText("999.99");
 		gameDetails[2].setFont(new Font("Corbel",Font.BOLD,40));
 		gameDetails[2].setBounds(610, 295, 150, 50);
@@ -757,14 +757,14 @@ public class Menu extends JFrame implements MouseMotionListener {
 		gameDetails[2].setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
 		pershighscore.add(gameDetails[2], javax.swing.JLayeredPane.DEFAULT_LAYER);
 		
-		gameDetails[3] = new JLabel(); //Uhrzeit Datum
+		gameDetails[3] = new JLabel();
 		gameDetails[3].setText("Spielminuten");
 		gameDetails[3].setFont(new Font("Corbel",Font.BOLD,20));
 		gameDetails[3].setBounds(405, 375, 200, 30);
 		gameDetails[3].setForeground(new Color(0xf9,0xf9,0xf9));
 		pershighscore.add(gameDetails[3], javax.swing.JLayeredPane.DEFAULT_LAYER);
 		
-		gameDetails[4] = new JLabel(); //Uhrzeit Datum
+		gameDetails[4] = new JLabel(); //Spielminuten
 		gameDetails[4].setText("1855425556");
 		gameDetails[4].setFont(new Font("Corbel",Font.BOLD,20));
 		gameDetails[4].setBounds(640, 375, 120, 30);
@@ -772,14 +772,14 @@ public class Menu extends JFrame implements MouseMotionListener {
 		gameDetails[4].setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
 		pershighscore.add(gameDetails[4], javax.swing.JLayeredPane.DEFAULT_LAYER);
 		
-		gameDetails[5] = new JLabel(); //Uhrzeit Datum
+		gameDetails[5] = new JLabel(); 
 		gameDetails[5].setText("Terrorist festgenommen");
 		gameDetails[5].setFont(new Font("Corbel",Font.BOLD,20));
 		gameDetails[5].setBounds(405, 425, 250, 30);
 		gameDetails[5].setForeground(new Color(0xf9,0xf9,0xf9));
 		pershighscore.add(gameDetails[5], javax.swing.JLayeredPane.DEFAULT_LAYER);
 		
-		gameDetails[7] = new JLabel(); //Uhrzeit Datum
+		gameDetails[7] = new JLabel(); //Terrorist
 		gameDetails[7].setText("Nein");
 		gameDetails[7].setFont(new Font("Corbel",Font.BOLD,14));
 		gameDetails[7].setBounds(710, 425, 50, 30);
@@ -787,7 +787,7 @@ public class Menu extends JFrame implements MouseMotionListener {
 		gameDetails[7].setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
 		pershighscore.add(gameDetails[7], javax.swing.JLayeredPane.DEFAULT_LAYER);
 		
-		gameDetails[6] = new JLabel(); //Uhrzeit Datum7
+		gameDetails[6] = new JLabel(); //Terrorist Balken
 		gameDetails[6].setIcon(new ImageIcon (Ressources.ingamebutton.getSubimage(951, 225, 129, 15)));
 		gameDetails[6].setFont(new Font("Corbel",Font.BOLD,20));
 		gameDetails[6].setBounds(635, 425, 200, 30);
@@ -817,7 +817,7 @@ public class Menu extends JFrame implements MouseMotionListener {
 		pershighscore.add(gameDetails[10], javax.swing.JLayeredPane.DEFAULT_LAYER);
 		
 		gameDetails[11] = new JLabel(); //Uhrzeit Datum
-		gameDetails[11].setText("Überwachungswert");
+		gameDetails[11].setText("Wissenswert");
 		gameDetails[11].setFont(new Font("Corbel",Font.BOLD,20));
 		gameDetails[11].setBounds(405, 525, 200, 30);
 		gameDetails[11].setForeground(new Color(0xf9,0xf9,0xf9));
@@ -1179,16 +1179,18 @@ public class Menu extends JFrame implements MouseMotionListener {
      * @return Bild mit kompletter Leiste mit Hintergrung
      */
     private BufferedImage createPrivateScoreBar(double valuePercent, double thresholdPercent){
-    	BufferedImage output = Ressources.ingamebutton.getSubimage(948, 180, 135, 20);
+    	BufferedImage output = new BufferedImage(135,20,BufferedImage.TYPE_INT_ARGB); 
+    	
     	Graphics2D g2d = output.createGraphics();
+    	g2d.drawImage(Ressources.ingamebutton.getSubimage(948, 180, 135, 20), 0, 0,null);
     	if(valuePercent>1d)
     		valuePercent=1d;
     	if(valuePercent<=0d)
-    		valuePercent=0.0001d;
-    	if(valuePercent<thresholdPercent)
-    		g2d.drawImage(Ressources.ingamebutton.getSubimage(948, 201, (int)(valuePercent*135), 20),0,0,null);
-    	else
+    		valuePercent=0.008d;
+    	if(valuePercent>thresholdPercent)
     		g2d.drawImage(Ressources.ingamebutton.getSubimage(948, 222, (int)(valuePercent*135), 20),0,0,null);
+    	else
+    		g2d.drawImage(Ressources.ingamebutton.getSubimage(948, 201, (int)(valuePercent*135), 20),0,0,null);
     	return output;
     }
     
@@ -1211,8 +1213,21 @@ public class Menu extends JFrame implements MouseMotionListener {
 		return currentUser.getText();
 	}
 	
-	public void updatePersHighscore(int selectionId){
-		
+	public void updatePersHighscore(){
+		int selectionId = persHighscoreList.getSelectedIndex();
+		ArrayList<String> score=(ArrayList<String>) persHighscoreList.getModel().getElementAt(selectionId);
+		gameDetails[0].setIcon(new ImageIcon(levelicons.get(score.get(9))));
+		gameDetails[1].setText(score.get(0)+" - "+score.get(1).substring(0,score.get(1).length()-3)+" Uhr");
+		gameDetails[2].setText(score.get(2));
+		gameDetails[4].setText(score.get(5));
+		gameDetails[6].setIcon(new ImageIcon(createPrivateScoreBar(1d, score.get(3).equals("JA")?1d:0d)));
+		gameDetails[7].setText(score.get(3));
+		gameDetails[10].setIcon(new ImageIcon(createPrivateScoreBar(Double.parseDouble(score.get(4))/100, 0.25d)));
+		gameDetails[9].setText(score.get(4)+"%");
+		gameDetails[13].setIcon(new ImageIcon(createPrivateScoreBar(Double.parseDouble(score.get(6))/100, 0.25d)));
+		gameDetails[12].setText(score.get(6)+"%");
+		gameDetails[16].setIcon(new ImageIcon(createPrivateScoreBar(Double.parseDouble(score.get(7))/Double.parseDouble(score.get(8)), 0.25d)));
+		gameDetails[15].setText(score.get(7)+" / "+score.get(8));
 	}
 	
 	public void mouseMoved(MouseEvent e) {}
