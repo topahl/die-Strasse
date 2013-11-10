@@ -615,7 +615,7 @@ public class Menu extends JFrame implements MouseMotionListener {
         JScrollBar sb = scrollpane.getVerticalScrollBar();
         sb.setPreferredSize(new Dimension(30,0));
         sb.setBackground(new Color(0,0,0,0));
-        scrollpane.setBounds(50, 300, 700, 340);
+        scrollpane.setBounds(50, 280, 720, 360);
         highscore.add(scrollpane, javax.swing.JLayeredPane.DEFAULT_LAYER);
         
 		//load level icons for Highscore List
@@ -670,7 +670,7 @@ public class Menu extends JFrame implements MouseMotionListener {
 		headerLabel.setText("Bestenliste - Top 100");
 		headerLabel.setFont(new Font("Corbel",Font.BOLD,30));
 		headerLabel.setForeground(new Color(0xf9, 0xf9, 0xf9));
-		headerLabel.setBounds(60, 220, 400, 50);
+		headerLabel.setBounds(60, 200, 400, 50);
 		highscore.add(headerLabel, javax.swing.JLayeredPane.DEFAULT_LAYER);
 		
 		
@@ -680,29 +680,35 @@ public class Menu extends JFrame implements MouseMotionListener {
 		levelLabel.setText("Level");
 		levelLabel.setFont(new Font("Corbel",Font.BOLD,22));
 		levelLabel.setForeground(new Color(0xf9, 0xf9, 0xf9));
-		levelLabel.setBounds(98, 255, 100, 50);
+		levelLabel.setBounds(98, 235, 100, 50);
 		highscore.add(levelLabel, javax.swing.JLayeredPane.DEFAULT_LAYER);
 		
 		JLabel scoreLabel = new JLabel();
 		scoreLabel.setText("Score");
 		scoreLabel.setFont(new Font("Corbel",Font.BOLD,22));
 		scoreLabel.setForeground(new Color(0xf9, 0xf9, 0xf9));
-		scoreLabel.setBounds(300, 255, 100, 50);
+		scoreLabel.setBounds(300, 235, 100, 50);
 		highscore.add(scoreLabel, javax.swing.JLayeredPane.DEFAULT_LAYER);
 		
 		JLabel benutzerLabel = new JLabel();
 		benutzerLabel.setText("Benutzer");
 		benutzerLabel.setFont(new Font("Corbel",Font.BOLD,22));
 		benutzerLabel.setForeground(new Color(0xf9, 0xf9, 0xf9));
-		benutzerLabel.setBounds(365, 255, 100, 50);
+		benutzerLabel.setBounds(365, 235, 100, 50);
 		highscore.add(benutzerLabel, javax.swing.JLayeredPane.DEFAULT_LAYER);
 		
 		JLabel datumLabel = new JLabel();
 		datumLabel.setText("Datum");
 		datumLabel.setFont(new Font("Corbel",Font.BOLD,22));
 		datumLabel.setForeground(new Color(0xf9, 0xf9, 0xf9));
-		datumLabel.setBounds(570, 255, 100, 50);
+		datumLabel.setBounds(570, 235, 100, 50);
 		highscore.add(datumLabel, javax.swing.JLayeredPane.DEFAULT_LAYER);
+		
+		
+		JLabel listbackground = new JLabel();
+    	listbackground.setIcon(new ImageIcon(Ressources.menuButton.getSubimage(335, 955, 750, 395)));
+    	listbackground.setBounds(33, 263, 750, 395);
+    	highscore.add(listbackground, javax.swing.JLayeredPane.DEFAULT_LAYER);
 		
 		generateStandardSubPageElements(highscore, "Highscores", "Sehen Sie hier die Auswertung Ihrer Spiele und vergleichen Sie Ihr Ergebnis mit dem von anderen Spielern.");
 	}
@@ -888,6 +894,8 @@ public class Menu extends JFrame implements MouseMotionListener {
         pershighscore.add(scrollpane, javax.swing.JLayeredPane.DEFAULT_LAYER);
     	renderer.addIcons(levelicons);
         
+    	
+    	
 		
 		generateStandardSubPageElements(pershighscore, "Meine Scores", "");
 	}
