@@ -642,13 +642,13 @@ public class Menu extends JFrame implements MouseMotionListener {
 		
 		//Button
 		Button alleScoresButton = new Button(this.control,
-		Ressources.menuButton.getSubimage(0, 815, 315, 70),
-		Ressources.menuButton.getSubimage(315, 815, 313, 70),
-		Ressources.menuButton.getSubimage(2 * 315, 815, 315, 70),
-		Ressources.menuButton.getSubimage(3 * 315, 815, 315, 70),
-		"alleScores", Ressources.RASTERHEIGHT, 3 * Ressources.RASTERHEIGHT - 10, this);
+		Ressources.menuButton.getSubimage(0, 740, 315, 70),
+		Ressources.menuButton.getSubimage(315, 740, 313, 70),
+		Ressources.menuButton.getSubimage(2 * 315, 740, 315, 70),
+		Ressources.menuButton.getSubimage(3 * 315, 740, 315, 70),
+		"meineScores", Ressources.RASTERHEIGHT, 3 * Ressources.RASTERHEIGHT - 10, this);
 		highscore.add(alleScoresButton, javax.swing.JLayeredPane.DEFAULT_LAYER);
-		buttons.put("alleScores", alleScoresButton);
+		buttons.put("meineScores", alleScoresButton);
 		
 		
 		//Label header
