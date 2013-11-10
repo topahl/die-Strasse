@@ -84,7 +84,7 @@ public class GUILayer extends JFrame implements MouseMotionListener {
 		this.quiz = new Quiz(this);
 		this.control = new Control(this,this.quiz);
 		this.initComponents(levelname, agentname);
-		this.simulation.initialize_beziehungsmatrix();
+		this.simulation.initialisiereBeziehungsmatrix();
 		this.setVisible(true);
 		this.timer = new Timer(Ressources.GAMESPEED, new OSTimer(this));
 		this.timer.setCoalesce(false);
@@ -1004,7 +1004,7 @@ public class GUILayer extends JFrame implements MouseMotionListener {
 	 */
 	public void updateMisstrauen() {
 		String s = (float) Math.round(this.simulation
-				.calc_misstrauen_in_street() * 100) / 100 + "%";
+				.calcMisstrauenInStreet() * 100) / 100 + "%";
 		this.anzeigeStatusMisstrauen.setText(s);
 	}
 
@@ -1173,7 +1173,7 @@ public class GUILayer extends JFrame implements MouseMotionListener {
 			this.updateMisstrauen(); // Wert neu zeichnen
 			if(this.simulation.calcGameOver()){
 				this.stopGame();
-				if (getSimulation().calc_misstrauen_in_street()>=90.0){
+				if (getSimulation().calcMisstrauenInStreet()>=90.0){
 					this.showDialogMessage("Verloren", "Die Bevölkerung wurde zu misstrauisch. Ihre Identität wurde enttarnt.", false, false);
 				}
 				this.showDialogMessage("Verloren", "Der Schwerverbrecher ist geflohen.", false, false);
@@ -1220,7 +1220,7 @@ public class GUILayer extends JFrame implements MouseMotionListener {
 		
 		//Misstrauen bei Überwachungsaktion
 		if(this.stepcounter%(Ressources.GAMESPEED/2) == 0){
-			getSimulation().agentEntersOtherHouse();
+			getSimulation().agentBetrittFremdesHaus();
 		}
 		
 
@@ -1275,8 +1275,8 @@ public class GUILayer extends JFrame implements MouseMotionListener {
 
 		//Misstrauen berechnen alle 100 Steps
 		if (this.stepcounter % 100 == 0) {
-			this.simulation.calculate_misstrauen();
-			this.simulation.calc_misstrauen_in_street();
+			this.simulation.calcMisstrauen();
+			this.simulation.calcMisstrauenInStreet();
 			for (int i = 0; i < this.humans.size(); i++) {
 				if (this.humans.get(i) instanceof Person) {
 					((Person) this.humans.get(i)).update_schatten();
@@ -1513,7 +1513,7 @@ public class GUILayer extends JFrame implements MouseMotionListener {
 	 * @author Tobias
 	 */
 	public void updateBalken(){
-		double misstrauen = simulation.calc_misstrauen_in_street();
+		double misstrauen = simulation.calcMisstrauenInStreet();
 		if(misstrauen > 0.0f){
 			this.informationsbalken[0].setSize((int)(1.66*misstrauen),19);
 			this.informationsbalken[1].setSize(0,19);
