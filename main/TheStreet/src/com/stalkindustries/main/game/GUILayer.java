@@ -1187,6 +1187,7 @@ public class GUILayer extends JFrame implements MouseMotionListener {
 			quiz.starteQuiz();
 			getMousefollower().setVisible(false);
 			buttons.get("pause").setEnabled(false);
+			control.closeWindow("fensterhaus");
 		}
 		
 		if(stepcounter%2==0 && quiz.isRunning()){

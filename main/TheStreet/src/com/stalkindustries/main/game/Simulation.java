@@ -385,9 +385,9 @@ public class Simulation {
 				
 				//Zuerst wird der Tagesablauf der Kinder überprüft, da dieser von den Erwachsenen unterschiedlich ist
 				if (this.people.get(i) instanceof Kinder){
-					if ((this.people.get(i).getZeitverzogerung() + this.spielMinute) == 60){
+					if ((this.people.get(i).getZeitverzogerung() + this.spielMinute) >= 60){
 						
-						if (this.spielStunde==7){ //zur Schule gehen
+						if ((this.spielStunde==7 || this.spielStunde==8) && this.people.get(i).getLocationId()!='E'){ //zur Schule gehen
 							calcWeg(this.people.get(i), 'E');
 						}	
 						
@@ -433,7 +433,7 @@ public class Simulation {
 						
 						//Zuerst werden die Erwachsenen untersucht, die Arbeit haben
 						if (((Erwachsene)people.get(i)).isHatArbeit()){
-							if (this.spielStunde==8 && (this.people.get(i).getZeitverzogerung() + this.spielMinute) == 60){ // Zur Arbeit gehen
+							if ((this.spielStunde==8 || this.spielStunde==9) && this.people.get(i).getLocationId()!='E' && (this.people.get(i).getZeitverzogerung() + this.spielMinute) >= 60){ // Zur Arbeit gehen
 								calcWeg(this.people.get(i), 'E');
 							}
 							if (this.spielStunde==16 && (this.people.get(i).getZeitverzogerung() + this.spielMinute) >= 60 && (this.people.get(i).getHomePosX()!=this.people.get(i).getPosX() || this.people.get(i).getHomePosY()!=this.people.get(i).getPosY())){ //nach Hause gehen
@@ -660,7 +660,7 @@ public class Simulation {
 											firstStep = false;
 										}
 									}
-									if (valuesInRange(k, j)){
+									if (valuesInRange(k-1, j)){
 										if (location_ids.get(j).get(k-1).equals("X") && firstStep) {			//Weg nach links ist begehbar
 											location_ids.get(j).set(k-1,String.valueOf(i+1));
 											firstStep = false;
