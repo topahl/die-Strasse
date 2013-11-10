@@ -340,7 +340,7 @@ public class Menu extends JFrame implements MouseMotionListener {
 	 */
 	private void initCredits() {
 		credits = new JLayeredPane();
-		
+
 		JLabel label = new JLabel();
 		label.setText("Team");
         label.setFont(new Font("Corbel",Font.BOLD,32));
@@ -422,7 +422,7 @@ public class Menu extends JFrame implements MouseMotionListener {
 	@SuppressWarnings("rawtypes")
 	private void initProfilMenu() {
 		profilselect = new JLayeredPane();
-		
+
 		this.username = new JTextField();
 		this.username.setBounds(460, 335, 300, 66);
 		this.username.setFont(new Font("Corbel",Font.BOLD,30));
@@ -432,7 +432,7 @@ public class Menu extends JFrame implements MouseMotionListener {
 		this.username.setCaretColor(new Color(0xf9, 0xf9, 0xf9));
 		this.username.setBorder(BorderFactory.createEmptyBorder());
 		profilselect.add(this.username, javax.swing.JLayeredPane.DEFAULT_LAYER);
-		
+
 		JLabel label = new JLabel();
 		label.setIcon(new ImageIcon(Ressources.menuButton.getSubimage(360, 0, 315, 66)));
 		label.setBounds(450, 330, 315, 66);
@@ -682,28 +682,28 @@ public class Menu extends JFrame implements MouseMotionListener {
 		levelLabel.setText("Level");
 		levelLabel.setFont(new Font("Corbel",Font.BOLD,22));
 		levelLabel.setForeground(new Color(0xf9, 0xf9, 0xf9));
-		levelLabel.setBounds(98, 235, 100, 50);
+		levelLabel.setBounds(98, 227, 100, 50);
 		highscore.add(levelLabel, javax.swing.JLayeredPane.DEFAULT_LAYER);
 		
 		JLabel scoreLabel = new JLabel();
 		scoreLabel.setText("Score");
 		scoreLabel.setFont(new Font("Corbel",Font.BOLD,22));
 		scoreLabel.setForeground(new Color(0xf9, 0xf9, 0xf9));
-		scoreLabel.setBounds(300, 235, 100, 50);
+		scoreLabel.setBounds(300, 227, 100, 50);
 		highscore.add(scoreLabel, javax.swing.JLayeredPane.DEFAULT_LAYER);
 		
 		JLabel benutzerLabel = new JLabel();
 		benutzerLabel.setText("Benutzer");
 		benutzerLabel.setFont(new Font("Corbel",Font.BOLD,22));
 		benutzerLabel.setForeground(new Color(0xf9, 0xf9, 0xf9));
-		benutzerLabel.setBounds(365, 235, 100, 50);
+		benutzerLabel.setBounds(365, 227, 100, 50);
 		highscore.add(benutzerLabel, javax.swing.JLayeredPane.DEFAULT_LAYER);
 		
 		JLabel datumLabel = new JLabel();
 		datumLabel.setText("Datum");
 		datumLabel.setFont(new Font("Corbel",Font.BOLD,22));
 		datumLabel.setForeground(new Color(0xf9, 0xf9, 0xf9));
-		datumLabel.setBounds(570, 235, 100, 50);
+		datumLabel.setBounds(570, 227, 100, 50);
 		highscore.add(datumLabel, javax.swing.JLayeredPane.DEFAULT_LAYER);
 		
 		
