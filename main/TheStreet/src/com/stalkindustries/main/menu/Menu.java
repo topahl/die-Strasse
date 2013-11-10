@@ -1220,7 +1220,7 @@ public class Menu extends JFrame implements MouseMotionListener {
 		gameDetails[1].setText(score.get(0)+" - "+score.get(1).substring(0,score.get(1).length()-3)+" Uhr");
 		gameDetails[2].setText(score.get(2));
 		gameDetails[4].setText(score.get(5));
-		gameDetails[6].setIcon(new ImageIcon(createPrivateScoreBar(1d, score.get(3).equals("JA")?1d:0d)));
+		gameDetails[6].setIcon(new ImageIcon(createPrivateScoreBar(1d, score.get(3).equals("JA")?0d:1d)));
 		gameDetails[7].setText(score.get(3));
 		gameDetails[10].setIcon(new ImageIcon(createPrivateScoreBar(Double.parseDouble(score.get(4))/100, 0.25d)));
 		gameDetails[9].setText(score.get(4)+"%");
