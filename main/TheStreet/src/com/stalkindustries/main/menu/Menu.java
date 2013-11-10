@@ -749,10 +749,11 @@ public class Menu extends JFrame implements MouseMotionListener {
 		pershighscore.add(gameDetails[1], javax.swing.JLayeredPane.DEFAULT_LAYER);
 		
 		gameDetails[2] = new JLabel(); //Uhrzeit Datum
-		gameDetails[2].setText("189.03");
+		gameDetails[2].setText("999.99");
 		gameDetails[2].setFont(new Font("Corbel",Font.BOLD,40));
-		gameDetails[2].setBounds(650, 295, 200, 50);
+		gameDetails[2].setBounds(610, 295, 150, 50);
 		gameDetails[2].setForeground(new Color(0xf9,0xf9,0xf9));
+		gameDetails[2].setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
 		pershighscore.add(gameDetails[2], javax.swing.JLayeredPane.DEFAULT_LAYER);
 		
 		gameDetails[3] = new JLabel(); //Uhrzeit Datum
@@ -763,10 +764,11 @@ public class Menu extends JFrame implements MouseMotionListener {
 		pershighscore.add(gameDetails[3], javax.swing.JLayeredPane.DEFAULT_LAYER);
 		
 		gameDetails[4] = new JLabel(); //Uhrzeit Datum
-		gameDetails[4].setText("1826");
+		gameDetails[4].setText("1855425556");
 		gameDetails[4].setFont(new Font("Corbel",Font.BOLD,20));
-		gameDetails[4].setBounds(720, 375, 200, 30);
+		gameDetails[4].setBounds(640, 375, 120, 30);
 		gameDetails[4].setForeground(new Color(0xf9,0xf9,0xf9));
+		gameDetails[4].setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
 		pershighscore.add(gameDetails[4], javax.swing.JLayeredPane.DEFAULT_LAYER);
 		
 		gameDetails[5] = new JLabel(); //Uhrzeit Datum
@@ -777,10 +779,11 @@ public class Menu extends JFrame implements MouseMotionListener {
 		pershighscore.add(gameDetails[5], javax.swing.JLayeredPane.DEFAULT_LAYER);
 		
 		gameDetails[7] = new JLabel(); //Uhrzeit Datum
-		gameDetails[7].setText("Ja");
-		gameDetails[7].setFont(new Font("Corbel",Font.BOLD,15));
-		gameDetails[7].setBounds(745, 425, 200, 30);
+		gameDetails[7].setText("Nein");
+		gameDetails[7].setFont(new Font("Corbel",Font.BOLD,14));
+		gameDetails[7].setBounds(710, 425, 50, 30);
 		gameDetails[7].setForeground(new Color(0xf9,0xf9,0xf9));
+		gameDetails[7].setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
 		pershighscore.add(gameDetails[7], javax.swing.JLayeredPane.DEFAULT_LAYER);
 		
 		gameDetails[6] = new JLabel(); //Uhrzeit Datum7
@@ -798,10 +801,11 @@ public class Menu extends JFrame implements MouseMotionListener {
 		pershighscore.add(gameDetails[8], javax.swing.JLayeredPane.DEFAULT_LAYER);
 		
 		gameDetails[9] = new JLabel(); //Uhrzeit Datum
-		gameDetails[9].setText("21,9 %");
-		gameDetails[9].setFont(new Font("Corbel",Font.BOLD,15));
-		gameDetails[9].setBounds(715, 475, 200, 30);
+		gameDetails[9].setText("121,9 %");
+		gameDetails[9].setFont(new Font("Corbel",Font.BOLD,14));
+		gameDetails[9].setBounds(710, 475, 50, 30);
 		gameDetails[9].setForeground(new Color(0xf9,0xf9,0xf9));
+		gameDetails[9].setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
 		pershighscore.add(gameDetails[9], javax.swing.JLayeredPane.DEFAULT_LAYER);
 		
 		gameDetails[10] = new JLabel(); //Uhrzeit Datum
@@ -819,10 +823,11 @@ public class Menu extends JFrame implements MouseMotionListener {
 		pershighscore.add(gameDetails[11], javax.swing.JLayeredPane.DEFAULT_LAYER);
 		
 		gameDetails[12] = new JLabel(); //Uhrzeit Datum
-		gameDetails[12].setText("91.7 %");
-		gameDetails[12].setFont(new Font("Corbel",Font.BOLD,15));
-		gameDetails[12].setBounds(715, 525, 200, 30);
+		gameDetails[12].setText("191.7 %");
+		gameDetails[12].setFont(new Font("Corbel",Font.BOLD,14));
+		gameDetails[12].setBounds(710, 525, 50, 30);
 		gameDetails[12].setForeground(new Color(0xf9,0xf9,0xf9));
+		gameDetails[12].setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
 		pershighscore.add(gameDetails[12], javax.swing.JLayeredPane.DEFAULT_LAYER);
 		
 		gameDetails[13] = new JLabel(); //Uhrzeit Datum
@@ -841,9 +846,10 @@ public class Menu extends JFrame implements MouseMotionListener {
 		
 		gameDetails[15] = new JLabel(); //Uhrzeit Datum
 		gameDetails[15].setText("6 / 12");
-		gameDetails[15].setFont(new Font("Corbel",Font.BOLD,15));
-		gameDetails[15].setBounds(725, 575, 200, 30);
+		gameDetails[15].setFont(new Font("Corbel",Font.BOLD,14));
+		gameDetails[15].setBounds(710, 575, 50, 30);
 		gameDetails[15].setForeground(new Color(0xf9,0xf9,0xf9));
+		gameDetails[15].setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
 		pershighscore.add(gameDetails[15], javax.swing.JLayeredPane.DEFAULT_LAYER);
 		
 		gameDetails[16] = new JLabel(); //Uhrzeit Datum
