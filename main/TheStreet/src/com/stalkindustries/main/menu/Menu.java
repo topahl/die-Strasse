@@ -601,7 +601,7 @@ public class Menu extends JFrame implements MouseMotionListener {
         JScrollBar sb = scrollpane.getVerticalScrollBar();
         sb.setPreferredSize(new Dimension(30,0));
         sb.setBackground(new Color(0,0,0,0));
-        scrollpane.setBounds(50, 350, 700, 300);
+        scrollpane.setBounds(50, 300, 700, 340);
         highscore.add(scrollpane, javax.swing.JLayeredPane.DEFAULT_LAYER);
         
 		//load level icons for Highscore List
