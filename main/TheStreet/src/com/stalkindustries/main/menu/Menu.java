@@ -1261,22 +1261,24 @@ public class Menu extends JFrame implements MouseMotionListener {
 	
 	public void updatePersHighscore(){  
 		int selectionId = persHighscoreList.getSelectedIndex();
-		ArrayList<String> score=(ArrayList<String>) persHighscoreList.getModel().getElementAt(selectionId);
-		for (int i=0; i<=16; i++){
-			gameDetails[i].setVisible(true);
+		if(selectionId != -1){
+			ArrayList<String> score=(ArrayList<String>) persHighscoreList.getModel().getElementAt(selectionId);
+			for (int i=0; i<=16; i++){
+				gameDetails[i].setVisible(true);
+			}
+			gameDetails[0].setIcon(new ImageIcon(levelicons.get(score.get(9))));
+			gameDetails[1].setText(score.get(0)+" - "+score.get(1).substring(0,score.get(1).length()-3)+" Uhr");
+			gameDetails[2].setText(score.get(2));
+			gameDetails[4].setText(score.get(5));
+			gameDetails[6].setIcon(new ImageIcon(createPrivateScoreBar(1d, score.get(3).equals("JA")?0d:1d)));
+			gameDetails[7].setText(score.get(3));
+			gameDetails[10].setIcon(new ImageIcon(createPrivateScoreBar(Double.parseDouble(score.get(4))/100, 0.25d)));
+			gameDetails[9].setText(score.get(4)+"%");
+			gameDetails[13].setIcon(new ImageIcon(createPrivateScoreBar(Double.parseDouble(score.get(6))/100, 0.25d)));
+			gameDetails[12].setText(score.get(6)+"%");
+			gameDetails[16].setIcon(new ImageIcon(createPrivateScoreBar(Double.parseDouble(score.get(7))/Double.parseDouble(score.get(8)), 0.25d)));
+			gameDetails[15].setText(score.get(7)+" / "+score.get(8));
 		}
-		gameDetails[0].setIcon(new ImageIcon(levelicons.get(score.get(9))));
-		gameDetails[1].setText(score.get(0)+" - "+score.get(1).substring(0,score.get(1).length()-3)+" Uhr");
-		gameDetails[2].setText(score.get(2));
-		gameDetails[4].setText(score.get(5));
-		gameDetails[6].setIcon(new ImageIcon(createPrivateScoreBar(1d, score.get(3).equals("JA")?0d:1d)));
-		gameDetails[7].setText(score.get(3));
-		gameDetails[10].setIcon(new ImageIcon(createPrivateScoreBar(Double.parseDouble(score.get(4))/100, 0.25d)));
-		gameDetails[9].setText(score.get(4)+"%");
-		gameDetails[13].setIcon(new ImageIcon(createPrivateScoreBar(Double.parseDouble(score.get(6))/100, 0.25d)));
-		gameDetails[12].setText(score.get(6)+"%");
-		gameDetails[16].setIcon(new ImageIcon(createPrivateScoreBar(Double.parseDouble(score.get(7))/Double.parseDouble(score.get(8)), 0.25d)));
-		gameDetails[15].setText(score.get(7)+" / "+score.get(8));
 	}
 	
 	public void mouseMoved(MouseEvent e) {}
