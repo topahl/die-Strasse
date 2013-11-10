@@ -44,10 +44,12 @@ public class ControlMenu implements IControl, ListSelectionListener {
 			mainmenu.showLayer(Menu.LAYERCREDITS);
 		if(funktion.equals("create"))
 			this.createUser();
-		if(funktion.equals("use")) {
+		if(funktion.equals("use")) 
 			this.changeCurrentUser();
-		}
-		
+		if(funktion.equals("alleScores")) 
+			mainmenu.showLayer(Menu.LAYERHIGHSCORE);
+		if(funktion.equals("meineScores")) 
+			mainmenu.showLayer(Menu.LAYERPERSHIGHSCORE);
 		if(funktion.equals("tutorialBack")) {
 			mainmenu.tutorialBack();
 		}
