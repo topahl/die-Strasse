@@ -23,6 +23,7 @@ import javax.imageio.ImageIO;
 import javax.swing.BorderFactory;
 import javax.swing.DefaultListModel;
 import javax.swing.GroupLayout;
+import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -68,7 +69,7 @@ public class Menu extends JFrame implements MouseMotionListener {
 	private JLabel tutorialTitel = new JLabel();
 	private JTextArea tutorialBeschreibung = new JTextArea();
 	private JLabel tutorialOverlay = new JLabel();
-	private JLabel[] gameDetails = new JLabel[14];
+	private JLabel[] gameDetails = new JLabel[18];
 	private JList persHighscoreList;
 	private int tutorialPage = 0;
 	
@@ -725,15 +726,124 @@ public class Menu extends JFrame implements MouseMotionListener {
 		
 		gameDetails[0] = new JLabel();  //Land
 		gameDetails[0].setIcon(new ImageIcon(levelicons.get("russland")));
-		gameDetails[0].setBounds(405, 280, 200, 45);
+		gameDetails[0].setBounds(405, 290, 200, 45);
 		pershighscore.add(gameDetails[0], javax.swing.JLayeredPane.DEFAULT_LAYER);
 		
 		gameDetails[1] = new JLabel(); //Uhrzeit Datum
 		gameDetails[1].setText("20.09.2013 - 23:41 Uhr");
 		gameDetails[1].setFont(new Font("Corbel",Font.BOLD,20));
-		gameDetails[1].setBounds(405, 315, 200, 30);
+		gameDetails[1].setBounds(405, 325, 200, 30);
 		gameDetails[1].setForeground(new Color(0xf9,0xf9,0xf9));
 		pershighscore.add(gameDetails[1], javax.swing.JLayeredPane.DEFAULT_LAYER);
+		
+		gameDetails[2] = new JLabel(); //Uhrzeit Datum
+		gameDetails[2].setText("189.03");
+		gameDetails[2].setFont(new Font("Corbel",Font.BOLD,40));
+		gameDetails[2].setBounds(650, 295, 200, 50);
+		gameDetails[2].setForeground(new Color(0xf9,0xf9,0xf9));
+		pershighscore.add(gameDetails[2], javax.swing.JLayeredPane.DEFAULT_LAYER);
+		
+		gameDetails[3] = new JLabel(); //Uhrzeit Datum
+		gameDetails[3].setText("Spielminuten");
+		gameDetails[3].setFont(new Font("Corbel",Font.BOLD,20));
+		gameDetails[3].setBounds(405, 375, 200, 30);
+		gameDetails[3].setForeground(new Color(0xf9,0xf9,0xf9));
+		pershighscore.add(gameDetails[3], javax.swing.JLayeredPane.DEFAULT_LAYER);
+		
+		gameDetails[4] = new JLabel(); //Uhrzeit Datum
+		gameDetails[4].setText("1826");
+		gameDetails[4].setFont(new Font("Corbel",Font.BOLD,20));
+		gameDetails[4].setBounds(720, 375, 200, 30);
+		gameDetails[4].setForeground(new Color(0xf9,0xf9,0xf9));
+		pershighscore.add(gameDetails[4], javax.swing.JLayeredPane.DEFAULT_LAYER);
+		
+		gameDetails[5] = new JLabel(); //Uhrzeit Datum
+		gameDetails[5].setText("Terrorist festgenommen");
+		gameDetails[5].setFont(new Font("Corbel",Font.BOLD,20));
+		gameDetails[5].setBounds(405, 425, 250, 30);
+		gameDetails[5].setForeground(new Color(0xf9,0xf9,0xf9));
+		pershighscore.add(gameDetails[5], javax.swing.JLayeredPane.DEFAULT_LAYER);
+		
+		gameDetails[7] = new JLabel(); //Uhrzeit Datum
+		gameDetails[7].setText("Ja");
+		gameDetails[7].setFont(new Font("Corbel",Font.BOLD,15));
+		gameDetails[7].setBounds(745, 425, 200, 30);
+		gameDetails[7].setForeground(new Color(0xf9,0xf9,0xf9));
+		pershighscore.add(gameDetails[7], javax.swing.JLayeredPane.DEFAULT_LAYER);
+		
+		gameDetails[6] = new JLabel(); //Uhrzeit Datum7
+		gameDetails[6].setIcon(new ImageIcon (Ressources.ingamebutton.getSubimage(951, 225, 129, 15)));
+		gameDetails[6].setFont(new Font("Corbel",Font.BOLD,20));
+		gameDetails[6].setBounds(635, 425, 200, 30);
+		gameDetails[6].setForeground(new Color(0xf9,0xf9,0xf9));
+		pershighscore.add(gameDetails[6], javax.swing.JLayeredPane.DEFAULT_LAYER);
+		
+		gameDetails[8] = new JLabel(); //Uhrzeit Datum
+		gameDetails[8].setText("Max. Misstrauen");
+		gameDetails[8].setFont(new Font("Corbel",Font.BOLD,20));
+		gameDetails[8].setBounds(405, 475, 200, 30);
+		gameDetails[8].setForeground(new Color(0xf9,0xf9,0xf9));
+		pershighscore.add(gameDetails[8], javax.swing.JLayeredPane.DEFAULT_LAYER);
+		
+		gameDetails[9] = new JLabel(); //Uhrzeit Datum
+		gameDetails[9].setText("21,9 %");
+		gameDetails[9].setFont(new Font("Corbel",Font.BOLD,15));
+		gameDetails[9].setBounds(715, 475, 200, 30);
+		gameDetails[9].setForeground(new Color(0xf9,0xf9,0xf9));
+		pershighscore.add(gameDetails[9], javax.swing.JLayeredPane.DEFAULT_LAYER);
+		
+		gameDetails[10] = new JLabel(); //Uhrzeit Datum
+		gameDetails[10].setIcon(new ImageIcon (Ressources.ingamebutton.getSubimage(951, 225, 129, 15)));
+		gameDetails[10].setFont(new Font("Corbel",Font.BOLD,20));
+		gameDetails[10].setBounds(635, 475, 200, 30);
+		gameDetails[10].setForeground(new Color(0xf9,0xf9,0xf9));
+		pershighscore.add(gameDetails[10], javax.swing.JLayeredPane.DEFAULT_LAYER);
+		
+		gameDetails[11] = new JLabel(); //Uhrzeit Datum
+		gameDetails[11].setText("Überwachungswert");
+		gameDetails[11].setFont(new Font("Corbel",Font.BOLD,20));
+		gameDetails[11].setBounds(405, 525, 200, 30);
+		gameDetails[11].setForeground(new Color(0xf9,0xf9,0xf9));
+		pershighscore.add(gameDetails[11], javax.swing.JLayeredPane.DEFAULT_LAYER);
+		
+		gameDetails[12] = new JLabel(); //Uhrzeit Datum
+		gameDetails[12].setText("91.7 %");
+		gameDetails[12].setFont(new Font("Corbel",Font.BOLD,15));
+		gameDetails[12].setBounds(715, 525, 200, 30);
+		gameDetails[12].setForeground(new Color(0xf9,0xf9,0xf9));
+		pershighscore.add(gameDetails[12], javax.swing.JLayeredPane.DEFAULT_LAYER);
+		
+		gameDetails[13] = new JLabel(); //Uhrzeit Datum
+		gameDetails[13].setIcon(new ImageIcon (Ressources.ingamebutton.getSubimage(951, 225, 129, 15)));
+		gameDetails[13].setFont(new Font("Corbel",Font.BOLD,20));
+		gameDetails[13].setBounds(635, 525, 200, 30);
+		gameDetails[13].setForeground(new Color(0xf9,0xf9,0xf9));
+		pershighscore.add(gameDetails[13], javax.swing.JLayeredPane.DEFAULT_LAYER);
+		
+		gameDetails[14] = new JLabel(); //Uhrzeit Datum
+		gameDetails[14].setText("Anzahl entdeckter Events");
+		gameDetails[14].setFont(new Font("Corbel",Font.BOLD,20));
+		gameDetails[14].setBounds(405, 575, 250, 30);
+		gameDetails[14].setForeground(new Color(0xf9,0xf9,0xf9));
+		pershighscore.add(gameDetails[14], javax.swing.JLayeredPane.DEFAULT_LAYER);
+		
+		gameDetails[15] = new JLabel(); //Uhrzeit Datum
+		gameDetails[15].setText("6 / 12");
+		gameDetails[15].setFont(new Font("Corbel",Font.BOLD,15));
+		gameDetails[15].setBounds(725, 575, 200, 30);
+		gameDetails[15].setForeground(new Color(0xf9,0xf9,0xf9));
+		pershighscore.add(gameDetails[15], javax.swing.JLayeredPane.DEFAULT_LAYER);
+		
+		gameDetails[16] = new JLabel(); //Uhrzeit Datum
+		gameDetails[16].setIcon(new ImageIcon (Ressources.ingamebutton.getSubimage(951, 225, 129, 15)));
+		gameDetails[16].setFont(new Font("Corbel",Font.BOLD,20));
+		gameDetails[16].setBounds(635, 575, 200, 30);
+		gameDetails[16].setForeground(new Color(0xf9,0xf9,0xf9));
+		pershighscore.add(gameDetails[16], javax.swing.JLayeredPane.DEFAULT_LAYER);
+		
+		
+		
+		
 		
 		//Eigene Bestenliste
 		persHighscoreList = new JList();
