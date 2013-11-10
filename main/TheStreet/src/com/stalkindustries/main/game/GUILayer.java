@@ -1016,7 +1016,7 @@ public class GUILayer extends JFrame implements MouseMotionListener {
 	 */
 	public void updateUeberwachung() {
 		String s = (float) Math.round(this.simulation
-				.calc_ueberwachung_in_street() * 100) / 100 + "%";
+				.calcUeberwachungsstatusInStreet() * 100) / 100 + "%";
 		this.anzeigeStatusUeberwachung.setText(s);
 	}
 
@@ -1292,7 +1292,7 @@ public class GUILayer extends JFrame implements MouseMotionListener {
 
 		//Spielzeit und Tagesablauf berechnen alle 4 Steps
 		if (this.stepcounter % 4 == 0) {
-			this.simulation.calc_spielzeit();
+			this.simulation.calcSpielzeit();
 			this.updateTime(); // Zeichne Spiel
 			this.simulation.tagesablauf();
 		}
@@ -1522,7 +1522,7 @@ public class GUILayer extends JFrame implements MouseMotionListener {
 			this.informationsbalken[1].setSize((int)(-1.66*misstrauen),19);
 			this.informationsbalken[0].setSize(0,19);
 		}
-		this.informationsbalken[2].setSize((int)(simulation.calc_ueberwachung_in_street()*1.66),19);
+		this.informationsbalken[2].setSize((int)(simulation.calcUeberwachungsstatusInStreet()*1.66),19);
 	}
 	
 	/**
