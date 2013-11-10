@@ -43,7 +43,7 @@ public class Erwachsene extends Person{
 	}
 	
 	
-	public boolean isHat_arbeit() {
+	public boolean isHatArbeit() {
 		return hatArbeit;
 	}
 }

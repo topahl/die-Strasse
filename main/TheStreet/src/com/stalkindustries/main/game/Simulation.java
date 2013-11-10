@@ -11,7 +11,6 @@ import com.stalkindustries.main.TheStreet;
 public class Simulation {
 	
 	private int[][] beziehungsmatrix;
-	//private int[] location_raster; nicht mehr benötigt
 	private ArrayList<Person> people = new ArrayList<Person>(); 
 	private Agent agent = new Agent(0,"");
 	private int spielTag=1;
@@ -433,7 +432,7 @@ public class Simulation {
 					if (this.people.get(i) instanceof Erwachsene){
 						
 						//Zuerst werden die Erwachsenen untersucht, die Arbeit haben
-						if (((Erwachsene)people.get(i)).isHat_arbeit()){
+						if (((Erwachsene)people.get(i)).isHatArbeit()){
 							if (this.spielStunde==8 && (this.people.get(i).getZeitverzogerung() + this.spielMinute) == 60){ // Zur Arbeit gehen
 								calcWeg(this.people.get(i), 'E');
 							}
