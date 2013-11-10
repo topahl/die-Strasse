@@ -1331,6 +1331,9 @@ public class GUILayer extends JFrame implements MouseMotionListener {
 		int hausposx = 0;
 		int hausposy = 0;
 		
+		hausposx= getSimulation().getHouses().get((int)(getSimulation().getAgent().getLocationId()-48-1)).getPosX() + Ressources.RASTERHEIGHT;
+		hausposy= getSimulation().getHouses().get((int)(getSimulation().getAgent().getLocationId()-48-1)).getPosY() + Ressources.RASTERHEIGHT;
+
 		if (getSimulation().getAgent().getMussWuseln().equals("Wanze+") || getSimulation().getAgent().getMussWuseln().equals("Wanzer+") ||
 			getSimulation().getAgent().getMussWuseln().equals("Hacken+") || getSimulation().getAgent().getMussWuseln().equals("Hackenr+")){
 			step = 30/7;
@@ -1343,9 +1346,7 @@ public class GUILayer extends JFrame implements MouseMotionListener {
 		}
 		
 		
-		hausposx= getSimulation().getHouses().get((int)(getSimulation().getAgent().getLocationId()-48-1)).getPosX() + Ressources.RASTERHEIGHT;
-		hausposy= getSimulation().getHouses().get((int)(getSimulation().getAgent().getLocationId()-48-1)).getPosY() + Ressources.RASTERHEIGHT;
-
+		
 		if (step!=0){
 			switch (step=getSimulation().getAgent().getMoves().size()/step){
 			case 0: 
@@ -1384,6 +1385,9 @@ public class GUILayer extends JFrame implements MouseMotionListener {
 					this.fortschrittsstatus.setVisible(true);
 					break;
 			default:
+					this.fortschrittsstatus.setBounds(hausposx, hausposy, 45, 45);
+					this.fortschrittsstatus.setIcon(new ImageIcon(fortschrittskreis[0]));
+					this.fortschrittsstatus.setVisible(true);
 					break;
 			}
 		}
