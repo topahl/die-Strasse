@@ -655,10 +655,10 @@ public class Menu extends JFrame implements MouseMotionListener {
 		
 		//Button
 		Button meineScoresButton = new Button(this.control,
-		Ressources.menuButton.getSubimage(0, 740, 315, 70),
-		Ressources.menuButton.getSubimage(315, 740, 313, 70),
-		Ressources.menuButton.getSubimage(2 * 315, 740, 315, 70),
-		Ressources.menuButton.getSubimage(3 * 315, 740, 315, 70),
+		Ressources.menuButton.getSubimage(0, 745, 315, 70),
+		Ressources.menuButton.getSubimage(315, 745, 313, 70),
+		Ressources.menuButton.getSubimage(2 * 315, 745, 315, 70),
+		Ressources.menuButton.getSubimage(3 * 315, 745, 315, 70),
 		"meineScores", Ressources.RASTERHEIGHT, 3 * Ressources.RASTERHEIGHT - 10, this);
 		highscore.add(meineScoresButton, javax.swing.JLayeredPane.DEFAULT_LAYER);
 		buttons.put("meineScores", meineScoresButton);
@@ -714,10 +714,10 @@ public class Menu extends JFrame implements MouseMotionListener {
 		
 		//Button
 		Button alleScoresButton = new Button(this.control,
-		Ressources.menuButton.getSubimage(0, 810, 315, 70),
-		Ressources.menuButton.getSubimage(315, 810, 313, 70),
-		Ressources.menuButton.getSubimage(2 * 315, 810, 315, 70),
-		Ressources.menuButton.getSubimage(3 * 315, 810, 315, 70),
+		Ressources.menuButton.getSubimage(0, 815, 315, 70),
+		Ressources.menuButton.getSubimage(315, 815, 313, 70),
+		Ressources.menuButton.getSubimage(2 * 315, 815, 315, 70),
+		Ressources.menuButton.getSubimage(3 * 315, 815, 315, 70),
 		"alleScores", Ressources.RASTERHEIGHT, 3 * Ressources.RASTERHEIGHT - 10, this);
 		pershighscore.add(alleScoresButton, javax.swing.JLayeredPane.DEFAULT_LAYER);
 		buttons.put("alleScores", alleScoresButton);
