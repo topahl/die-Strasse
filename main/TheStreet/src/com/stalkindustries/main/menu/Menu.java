@@ -637,6 +637,46 @@ public class Menu extends JFrame implements MouseMotionListener {
 			
 		list.setModel(model);
 
+		
+		//Label header
+		JLabel headerLabel = new JLabel();
+		headerLabel.setText("Bestenliste - Top 100");
+		headerLabel.setFont(new Font("Corbel",Font.BOLD,30));
+		headerLabel.setForeground(new Color(0xf9, 0xf9, 0xf9));
+		headerLabel.setBounds(60, 270, 400, 50);
+		highscore.add(headerLabel, javax.swing.JLayeredPane.DEFAULT_LAYER);
+		
+		
+		//Label für Tabellenüberschriften
+		
+		JLabel levelLabel = new JLabel();
+		levelLabel.setText("Level");
+		levelLabel.setFont(new Font("Corbel",Font.BOLD,22));
+		levelLabel.setForeground(new Color(0xf9, 0xf9, 0xf9));
+		levelLabel.setBounds(98, 305, 100, 50);
+		highscore.add(levelLabel, javax.swing.JLayeredPane.DEFAULT_LAYER);
+		
+		JLabel scoreLabel = new JLabel();
+		scoreLabel.setText("Score");
+		scoreLabel.setFont(new Font("Corbel",Font.BOLD,22));
+		scoreLabel.setForeground(new Color(0xf9, 0xf9, 0xf9));
+		scoreLabel.setBounds(300, 305, 100, 50);
+		highscore.add(scoreLabel, javax.swing.JLayeredPane.DEFAULT_LAYER);
+		
+		JLabel benutzerLabel = new JLabel();
+		benutzerLabel.setText("Benutzer");
+		benutzerLabel.setFont(new Font("Corbel",Font.BOLD,22));
+		benutzerLabel.setForeground(new Color(0xf9, 0xf9, 0xf9));
+		benutzerLabel.setBounds(365, 305, 100, 50);
+		highscore.add(benutzerLabel, javax.swing.JLayeredPane.DEFAULT_LAYER);
+		
+		JLabel datumLabel = new JLabel();
+		datumLabel.setText("Datum");
+		datumLabel.setFont(new Font("Corbel",Font.BOLD,22));
+		datumLabel.setForeground(new Color(0xf9, 0xf9, 0xf9));
+		datumLabel.setBounds(570, 305, 100, 50);
+		highscore.add(datumLabel, javax.swing.JLayeredPane.DEFAULT_LAYER);
+		
 		generateStandardSubPageElements(highscore, "Highscores", "Sehen Sie hier die Auswertung Ihrer Spiele und vergleichen Sie Ihr Ergebnis mit dem von anderen Spielern.");
 	}
 	
