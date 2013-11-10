@@ -128,13 +128,13 @@ public class Control implements IControl {
 	private void clickRemoveFernglas() {
 		int currentHouse = Integer.parseInt(lastFunktioncode.substring(4,5))-1 ;
 		closeWindow("fensterhaus"); 
-		guilayer.getSimulation().calcWeg(guilayer.getSimulation().get_agent(), (char)(guilayer.getSimulation().get_agent().get_haus_id()+48+1));
+		guilayer.getSimulation().calcWeg(guilayer.getSimulation().getAgent(), (char)(guilayer.getSimulation().getAgent().get_haus_id()+48+1));
 		//guilayer.getSimulation().getHouses().get(currentHouse).getUeberwachungsmodule().remove("Fernglas");
 //		guilayer.getSimulation().get_agent().setMussWuseln("Fernglas");
 //		guilayer.getSimulation().berechne_weg(null, guilayer.getSimulation().get_agent(), (char)(currentHouse+1+48));
 	//	guilayer.getSimulation().getHouses().get(currentHouse).setUeberwachungsWert(0,3);
-		guilayer.getSimulation().setWieeeeschteAktion(true);
-		guilayer.getSimulation().get_agent().setMussWuseln(currentHouse+"Fernglasr");
+		guilayer.getSimulation().setWieschteAktion(true);
+		guilayer.getSimulation().getAgent().setMussWuseln(currentHouse+"Fernglasr");
 		
 	}
 
@@ -144,9 +144,9 @@ public class Control implements IControl {
 		int currentHouse = Integer.parseInt(lastFunktioncode.substring(4,5))-1 ;
 		closeWindow("fensterhaus"); 
 		guilayer.getButtonsMap().get("nachHause").setEnabled(true);
-		guilayer.getSimulation().get_agent().setMussWuseln("Hackenr");
-		guilayer.getSimulation().calcWeg(guilayer.getSimulation().get_agent(), (char)(currentHouse+1+48));
-		guilayer.getSimulation().setWieeeeschteAktion(true);
+		guilayer.getSimulation().getAgent().setMussWuseln("Hackenr");
+		guilayer.getSimulation().calcWeg(guilayer.getSimulation().getAgent(), (char)(currentHouse+1+48));
+		guilayer.getSimulation().setWieschteAktion(true);
 	}
 
 
@@ -155,9 +155,9 @@ public class Control implements IControl {
 		int currentHouse = Integer.parseInt(lastFunktioncode.substring(4,5))-1 ;
 		closeWindow("fensterhaus"); 
 		guilayer.getButtonsMap().get("nachHause").setEnabled(true);
-		guilayer.getSimulation().get_agent().setMussWuseln("Kamerar");
-		guilayer.getSimulation().calcWeg(guilayer.getSimulation().get_agent(), (char)(currentHouse+1+48));
-		guilayer.getSimulation().setWieeeeschteAktion(true);
+		guilayer.getSimulation().getAgent().setMussWuseln("Kamerar");
+		guilayer.getSimulation().calcWeg(guilayer.getSimulation().getAgent(), (char)(currentHouse+1+48));
+		guilayer.getSimulation().setWieschteAktion(true);
 	}
 
 
@@ -166,9 +166,9 @@ public class Control implements IControl {
 		int currentHouse = Integer.parseInt(lastFunktioncode.substring(4,5))-1 ;
 		closeWindow("fensterhaus"); 
 		guilayer.getButtonsMap().get("nachHause").setEnabled(true);
-		guilayer.getSimulation().get_agent().setMussWuseln("Wanzer");
-		guilayer.getSimulation().calcWeg(guilayer.getSimulation().get_agent(), (char)(currentHouse+1+48));
-		guilayer.getSimulation().setWieeeeschteAktion(true);
+		guilayer.getSimulation().getAgent().setMussWuseln("Wanzer");
+		guilayer.getSimulation().calcWeg(guilayer.getSimulation().getAgent(), (char)(currentHouse+1+48));
+		guilayer.getSimulation().setWieschteAktion(true);
 	}
 
 
@@ -194,81 +194,81 @@ public class Control implements IControl {
 		closeWindow("beschwichtigen");
 		
 		// hausid von 1-9, get_haus_id 0-8 => Deswegen plus 1
-		if (hausid != guilayer.getSimulation().get_agent().get_haus_id()+1){
+		if (hausid != guilayer.getSimulation().getAgent().get_haus_id()+1){
 		
 		if(lastFunktioncode.equals("aktionKuchen")){
-			for (int i=0; i<guilayer.getSimulation().get_people().size(); i++){
-				if (guilayer.getSimulation().get_people().get(i).get_location_id()== (char)(hausid+48) && 
-						guilayer.getSimulation().get_people().get(i).getCurrentMove()=='n'){
+			for (int i=0; i<guilayer.getSimulation().getPeople().size(); i++){
+				if (guilayer.getSimulation().getPeople().get(i).get_location_id()== (char)(hausid+48) && 
+						guilayer.getSimulation().getPeople().get(i).getCurrentMove()=='n'){
 					if (!soAtHome){
 						soAtHome = true;
 						stehenBleiben.add('s');
-						guilayer.getSimulation().get_people().get(i).setMoves(stehenBleiben);
-						guilayer.getSimulation().get_agent().setMussWuseln(i+"Kuchen");
-						if (guilayer.getSimulation().get_agent().get_location_id() != (char)(hausid+48)){
-							guilayer.getSimulation().calcWeg(guilayer.getSimulation().get_agent(), (char)(hausid+48));
+						guilayer.getSimulation().getPeople().get(i).setMoves(stehenBleiben);
+						guilayer.getSimulation().getAgent().setMussWuseln(i+"Kuchen");
+						if (guilayer.getSimulation().getAgent().get_location_id() != (char)(hausid+48)){
+							guilayer.getSimulation().calcWeg(guilayer.getSimulation().getAgent(), (char)(hausid+48));
 						}
 						//guilayer.getSimulation().berechne_weg(guilayer.getSimulation().get_agent(), (char)(hausid+48));
 						guilayer.getButtonsMap().get("nachHause").setEnabled(true);
-						guilayer.getSimulation().setWieeeeschteAktion(false);
+						guilayer.getSimulation().setWieschteAktion(false);
 					}	
 				}
 			}
 		}
 			
 		if(lastFunktioncode.equals("aktionUnterhalten")){
-			for (int i=0; i<guilayer.getSimulation().get_people().size(); i++){
-				if (guilayer.getSimulation().get_people().get(i).get_location_id()== (char)(hausid+48) &&
-						guilayer.getSimulation().get_people().get(i).getCurrentMove()=='n'){
+			for (int i=0; i<guilayer.getSimulation().getPeople().size(); i++){
+				if (guilayer.getSimulation().getPeople().get(i).get_location_id()== (char)(hausid+48) &&
+						guilayer.getSimulation().getPeople().get(i).getCurrentMove()=='n'){
 					if (!soAtHome){
 						soAtHome = true;
 						stehenBleiben.add('s');
-						guilayer.getSimulation().get_people().get(i).setMoves(stehenBleiben);
-						guilayer.getSimulation().get_agent().setMussWuseln(i+"Unterhalten");
-						if (guilayer.getSimulation().get_agent().get_location_id() != (char)(hausid+48)){
-							guilayer.getSimulation().calcWeg(guilayer.getSimulation().get_agent(), (char)(hausid+48));
+						guilayer.getSimulation().getPeople().get(i).setMoves(stehenBleiben);
+						guilayer.getSimulation().getAgent().setMussWuseln(i+"Unterhalten");
+						if (guilayer.getSimulation().getAgent().get_location_id() != (char)(hausid+48)){
+							guilayer.getSimulation().calcWeg(guilayer.getSimulation().getAgent(), (char)(hausid+48));
 						}
 						guilayer.getButtonsMap().get("nachHause").setEnabled(true);
-						guilayer.getSimulation().setWieeeeschteAktion(false);
+						guilayer.getSimulation().setWieschteAktion(false);
 					}	
 				}
 			}
 		}
 			
 		if(lastFunktioncode.equals("aktionFlirten")){
-			for (int i=0; i<guilayer.getSimulation().get_people().size(); i++){
-				if (guilayer.getSimulation().get_people().get(i).get_location_id()== (char)(hausid+48) &&
-						guilayer.getSimulation().get_people().get(i).getCurrentMove()=='n' &&
-						guilayer.getSimulation().get_people().get(i) instanceof Erwachsene){
+			for (int i=0; i<guilayer.getSimulation().getPeople().size(); i++){
+				if (guilayer.getSimulation().getPeople().get(i).get_location_id()== (char)(hausid+48) &&
+						guilayer.getSimulation().getPeople().get(i).getCurrentMove()=='n' &&
+						guilayer.getSimulation().getPeople().get(i) instanceof Erwachsene){
 					if (!soAtHome){
 						soAtHome = true;
 						stehenBleiben.add('s');
-						guilayer.getSimulation().get_people().get(i).setMoves(stehenBleiben);
-						guilayer.getSimulation().get_agent().setMussWuseln(i+"Flirten");
-						if (guilayer.getSimulation().get_agent().get_location_id() != (char)(hausid+48)){
-							guilayer.getSimulation().calcWeg(guilayer.getSimulation().get_agent(), (char)(hausid+48));
+						guilayer.getSimulation().getPeople().get(i).setMoves(stehenBleiben);
+						guilayer.getSimulation().getAgent().setMussWuseln(i+"Flirten");
+						if (guilayer.getSimulation().getAgent().get_location_id() != (char)(hausid+48)){
+							guilayer.getSimulation().calcWeg(guilayer.getSimulation().getAgent(), (char)(hausid+48));
 						}
 						guilayer.getButtonsMap().get("nachHause").setEnabled(true);
-						guilayer.getSimulation().setWieeeeschteAktion(false);
+						guilayer.getSimulation().setWieschteAktion(false);
 					}	
 				}
 			}
 		}
 			
 		if(lastFunktioncode.equals("aktionHand")){
-			for (int i=0; i<guilayer.getSimulation().get_people().size(); i++){
-				if (guilayer.getSimulation().get_people().get(i).get_location_id()== (char)(hausid+48) &&
-						guilayer.getSimulation().get_people().get(i).getCurrentMove()=='n'){
+			for (int i=0; i<guilayer.getSimulation().getPeople().size(); i++){
+				if (guilayer.getSimulation().getPeople().get(i).get_location_id()== (char)(hausid+48) &&
+						guilayer.getSimulation().getPeople().get(i).getCurrentMove()=='n'){
 					if (!soAtHome){
 						soAtHome = true;
 						stehenBleiben.add('s');
-						guilayer.getSimulation().get_people().get(i).setMoves(stehenBleiben);
-						guilayer.getSimulation().get_agent().setMussWuseln(i+"Hand");
-						if (guilayer.getSimulation().get_agent().get_location_id() != (char)(hausid+48)){
-							guilayer.getSimulation().calcWeg(guilayer.getSimulation().get_agent(), (char)(hausid+48));
+						guilayer.getSimulation().getPeople().get(i).setMoves(stehenBleiben);
+						guilayer.getSimulation().getAgent().setMussWuseln(i+"Hand");
+						if (guilayer.getSimulation().getAgent().get_location_id() != (char)(hausid+48)){
+							guilayer.getSimulation().calcWeg(guilayer.getSimulation().getAgent(), (char)(hausid+48));
 						}
 						guilayer.getButtonsMap().get("nachHause").setEnabled(true);
-						guilayer.getSimulation().setWieeeeschteAktion(false);
+						guilayer.getSimulation().setWieschteAktion(false);
 					}	
 				}
 			}
@@ -284,10 +284,10 @@ public class Control implements IControl {
 				}	
 			}
 			if (!istVorhanden){
-				guilayer.getSimulation().calcWeg(guilayer.getSimulation().get_agent(), (char)(hausid+48));
-				guilayer.getSimulation().get_agent().setMussWuseln("Wanze");
+				guilayer.getSimulation().calcWeg(guilayer.getSimulation().getAgent(), (char)(hausid+48));
+				guilayer.getSimulation().getAgent().setMussWuseln("Wanze");
 				guilayer.getButtonsMap().get("nachHause").setEnabled(true);
-				guilayer.getSimulation().setWieeeeschteAktion(true);
+				guilayer.getSimulation().setWieschteAktion(true);
 			}
 			istVorhanden = false;
 		}
@@ -301,10 +301,10 @@ public class Control implements IControl {
 				}
 			}
 			if (!istVorhanden){
-				guilayer.getSimulation().calcWeg(guilayer.getSimulation().get_agent(), (char)(hausid+48));
-				guilayer.getSimulation().get_agent().setMussWuseln("Kamera");
+				guilayer.getSimulation().calcWeg(guilayer.getSimulation().getAgent(), (char)(hausid+48));
+				guilayer.getSimulation().getAgent().setMussWuseln("Kamera");
 				guilayer.getButtonsMap().get("nachHause").setEnabled(true);
-				guilayer.getSimulation().setWieeeeschteAktion(true);
+				guilayer.getSimulation().setWieschteAktion(true);
 			}
 			istVorhanden = false;
 		}
@@ -318,10 +318,10 @@ public class Control implements IControl {
 				}
 			}
 			if (!istVorhanden){
-				guilayer.getSimulation().calcWeg(guilayer.getSimulation().get_agent(), (char)(hausid+48));
-				guilayer.getSimulation().get_agent().setMussWuseln("Hacken");
+				guilayer.getSimulation().calcWeg(guilayer.getSimulation().getAgent(), (char)(hausid+48));
+				guilayer.getSimulation().getAgent().setMussWuseln("Hacken");
 				guilayer.getButtonsMap().get("nachHause").setEnabled(true);
-				guilayer.getSimulation().setWieeeeschteAktion(true);
+				guilayer.getSimulation().setWieschteAktion(true);
 			}
 			istVorhanden = false;
 		}
@@ -334,9 +334,9 @@ public class Control implements IControl {
 				}
 			}
 			if (!istVorhanden){
-				guilayer.getSimulation().calcWeg(guilayer.getSimulation().get_agent(), (char)(guilayer.getSimulation().get_agent().get_haus_id()+48+1));
-				guilayer.getSimulation().setWieeeeschteAktion(true);
-				guilayer.getSimulation().get_agent().setMussWuseln(hausid+"Fernglas");
+				guilayer.getSimulation().calcWeg(guilayer.getSimulation().getAgent(), (char)(guilayer.getSimulation().getAgent().get_haus_id()+48+1));
+				guilayer.getSimulation().setWieschteAktion(true);
+				guilayer.getSimulation().getAgent().setMussWuseln(hausid+"Fernglas");
 			}
 			istVorhanden = false;
 		}
@@ -346,11 +346,11 @@ public class Control implements IControl {
 		if(lastFunktioncode.equals("aktionrazzia")){
 			boolean festgenommen = false;
 			if (this.guilayer.getSimulation().getHouses().get(hausid-1).getUeberwachungsstatus() > 80){
-				for(int i=0;i<this.guilayer.getSimulation().get_people().size();i++){
+				for(int i=0;i<this.guilayer.getSimulation().getPeople().size();i++){
 					//checken, wer in dem ausgewählten Haus wohnt
-					if(this.guilayer.getSimulation().get_people().get(i).get_haus_id() == hausid-1){
+					if(this.guilayer.getSimulation().getPeople().get(i).get_haus_id() == hausid-1){
 						//checken, ob der Terrorist in dem ausgewählten Haus wohnt
-						if(this.guilayer.getSimulation().get_people().get(i) instanceof Terrorist){
+						if(this.guilayer.getSimulation().getPeople().get(i) instanceof Terrorist){
 							festgenommen = true;
 						}
 					}
@@ -423,7 +423,7 @@ public class Control implements IControl {
 		if (guilayer.getButtonsMap().get("beschwichtigen").isEnabled()){
 			guilayer.getButtonsMap().get("beschwichtigen").setEnabled(false);
 		} else {
-			if (guilayer.getSimulation().getSpiel_stunde()<2 || guilayer.getSimulation().getSpiel_stunde()>6){
+			if (guilayer.getSimulation().getSpielStunde()<2 || guilayer.getSimulation().getSpielStunde()>6){
 				guilayer.getButtonsMap().get("beschwichtigen").setEnabled(true);
 			}
 		}
@@ -437,7 +437,7 @@ public class Control implements IControl {
 		if (guilayer.getButtonsMap().get("nachHause").isEnabled()){
 			guilayer.getButtonsMap().get("nachHause").setEnabled(false);
 		} else {
-			if ((char)(guilayer.getSimulation().get_agent().get_haus_id()+1+48) != guilayer.getSimulation().get_agent().get_location_id()){
+			if ((char)(guilayer.getSimulation().getAgent().get_haus_id()+1+48) != guilayer.getSimulation().getAgent().get_location_id()){
 				guilayer.getButtonsMap().get("nachHause").setEnabled(true);
 			}
 		}
@@ -543,13 +543,13 @@ public class Control implements IControl {
 		closeWindow("fensterhaus"); 
 		closeWindow("spionage");
 		closeWindow("beschwichtigen");
-		guilayer.getSimulation().get_agent().setMussWuseln("");
+		guilayer.getSimulation().getAgent().setMussWuseln("");
 		guilayer.getButtonsMap().get("nachHause").setEnabled(false);
-		guilayer.getSimulation().calcWeg(guilayer.getSimulation().get_agent(), (char)(guilayer.getSimulation().get_agent().get_haus_id()+1+48));
-		if (!guilayer.getSimulation().isWieeeeschteAktion()){
-			for (int i=0; i<guilayer.getSimulation().get_people().size(); i++){
-				if (guilayer.getSimulation().get_people().get(i).getCurrentMove()=='s'){
-					guilayer.getSimulation().get_people().get(i).setMoves(new Stack());
+		guilayer.getSimulation().calcWeg(guilayer.getSimulation().getAgent(), (char)(guilayer.getSimulation().getAgent().get_haus_id()+1+48));
+		if (!guilayer.getSimulation().isWieschteAktion()){
+			for (int i=0; i<guilayer.getSimulation().getPeople().size(); i++){
+				if (guilayer.getSimulation().getPeople().get(i).getCurrentMove()=='s'){
+					guilayer.getSimulation().getPeople().get(i).setMoves(new Stack());
 				}
 			}
 		}
@@ -597,37 +597,37 @@ public class Control implements IControl {
 		guilayer.getMousefollower().setIcon(new ImageIcon (Ressources.ingamebutton.getSubimage(0, (39)*6, 39, 39)));
 		guilayer.getMousefollower().setVisible(true);
 		closeWindow("beschwichtigen");
-		guilayer.getSimulation().setWieeeeschteAktion(false);
+		guilayer.getSimulation().setWieschteAktion(false);
 	}
 	
 	private void clickUnterhalten() {
 		guilayer.getMousefollower().setIcon(new ImageIcon (Ressources.ingamebutton.getSubimage(0, (39)*7, 39, 39)));
 		guilayer.getMousefollower().setVisible(true);
 		closeWindow("beschwichtigen");
-		guilayer.getSimulation().setWieeeeschteAktion(false);
+		guilayer.getSimulation().setWieschteAktion(false);
 	}
 	
 	private void clickFlirten() {
 		guilayer.getMousefollower().setIcon(new ImageIcon (Ressources.ingamebutton.getSubimage(0, (39)*8, 39, 39)));
 		guilayer.getMousefollower().setVisible(true);
 		closeWindow("beschwichtigen");
-		guilayer.getSimulation().setWieeeeschteAktion(false);
+		guilayer.getSimulation().setWieschteAktion(false);
 	}
 
 	private void clickHand() {
 		guilayer.getMousefollower().setIcon(new ImageIcon (Ressources.ingamebutton.getSubimage(0, (39)*9, 39, 39)));
 		guilayer.getMousefollower().setVisible(true);
 		closeWindow("beschwichtigen");
-		guilayer.getSimulation().setWieeeeschteAktion(false);
+		guilayer.getSimulation().setWieschteAktion(false);
 	}
 
 	private void clickParkBeschwichtigen() {
 		//kein Icon, da Einsatzort (Park) vorgegeben
 		closeWindow("beschwichtigen");
-		guilayer.getSimulation().calcWeg(guilayer.getSimulation().get_agent(), 'P');
-		guilayer.getSimulation().get_agent().setMussWuseln("Park");
+		guilayer.getSimulation().calcWeg(guilayer.getSimulation().getAgent(), 'P');
+		guilayer.getSimulation().getAgent().setMussWuseln("Park");
 		guilayer.getButtonsMap().get("nachHause").setEnabled(true);
-		guilayer.getSimulation().setWieeeeschteAktion(false);
+		guilayer.getSimulation().setWieschteAktion(false);
 	}
 	
 

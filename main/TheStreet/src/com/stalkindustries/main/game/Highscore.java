@@ -41,17 +41,17 @@ public class Highscore {
 	 */
     public void calcHighscoreOfAgent(){
         //set Spielzeit
-                int min = this.simulation.getSpiel_minute();
-                int h = this.simulation.getSpiel_stunde();
-                int tag = this.simulation.getSpiel_tag();
+                int min = this.simulation.getSpielMinute();
+                int h = this.simulation.getSpielStunde();
+                int tag = this.simulation.getSpielTag();
                 this.spielzeit = min + h*60 + (tag-1)*24*60 - 420;//-420, weil wir um 7 Uhr morgens anfangen
         
         //Misstrauen Max
         this.misstrauen_max = this.simulation.getMisstrauenMax();
         
         //Events
-                for(int i=0;i<this.simulation.get_people().size();i++){
-                    if(this.simulation.get_people().get(i).getEvent().size() == 4)
+                for(int i=0;i<this.simulation.getPeople().size();i++){
+                    if(this.simulation.getPeople().get(i).getEvent().size() == 4)
                         this.events++;
                 }
         
@@ -65,7 +65,7 @@ public class Highscore {
             this.wissenswert = tmp/fragen.size();        //zwischen 0 und 100
         }
         
-        this.highscore = this.wissenswert - this.misstrauen_max - this.spielzeit/8640 + 100*this.events/this.simulation.get_people().size();
+        this.highscore = this.wissenswert - this.misstrauen_max - this.spielzeit/8640 + 100*this.events/this.simulation.getPeople().size();
         
         if(this.festgenommen)
             this.highscore += 300-70*Math.log(this.spielzeit/8640);
@@ -169,7 +169,7 @@ public class Highscore {
 	    	 fw.append( System.getProperty("line.separator") );
 	    	 fw.write("Wissenswert: "+this.wissenswert);
 	    	 fw.append( System.getProperty("line.separator") );
-	    	 fw.write("Anzahl entdeckter Events: "+this.events+" von "+this.simulation.get_people().size());
+	    	 fw.write("Anzahl entdeckter Events: "+this.events+" von "+this.simulation.getPeople().size());
 	    	 fw.append( System.getProperty("line.separator") ); 
 	    	 fw.write("Level: "+this.levelname);
 	    	 fw.append( System.getProperty("line.separator") );

@@ -89,7 +89,7 @@ public class GUILayer extends JFrame implements MouseMotionListener {
 		this.timer = new Timer(Ressources.GAMESPEED, new OSTimer(this));
 		this.timer.setCoalesce(false);
 		this.timer.start(); 
-		this.highscore = new Highscore(this.simulation,this.quiz,this.simulation.get_agent(),levelname);
+		this.highscore = new Highscore(this.simulation,this.quiz,this.simulation.getAgent(),levelname);
 	}
 
 
@@ -98,7 +98,7 @@ public class GUILayer extends JFrame implements MouseMotionListener {
 	 * Beenden: das Spiel stoppen und Fenster schließen
 	 */
 	public void endGame() {
-		TheStreet.loadMenu(simulation.get_agent().getName());
+		TheStreet.loadMenu(simulation.getAgent().getName());
 		this.timer.stop();
 		this.dispose();
 		//TODO auf Auswertungsmenü weiterleiten
@@ -170,7 +170,7 @@ public class GUILayer extends JFrame implements MouseMotionListener {
 	 */
 	private void initSpielanzeigen() {
 		// Tag malen
-		String s = "Tag " + this.simulation.getSpiel_tag();
+		String s = "Tag " + this.simulation.getSpielTag();
 		this.anzeigeTag.setText(s);
 		this.anzeigeTag.setBounds(1004 + Ressources.ZEROPOS.width, 636 + Ressources.ZEROPOS.height, 100, 37);
 		this.anzeigeTag.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
@@ -180,7 +180,7 @@ public class GUILayer extends JFrame implements MouseMotionListener {
 		this.baseLayer.add(this.anzeigeTag, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
 		// Uhr malen
-		s = this.simulation.getSpielzeit_as_string();
+		s = this.simulation.getSpielzeitAsString();
 		this.anzeigeZeit.setText(s);
 		this.anzeigeZeit.setBounds(1010 + Ressources.ZEROPOS.width, 669 + Ressources.ZEROPOS.height, 100, 37);
 		this.anzeigeZeit.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
@@ -924,7 +924,7 @@ public class GUILayer extends JFrame implements MouseMotionListener {
 
 		// Simulation benötigt die Information von allen Bewohnern (ohne Agent)
 		for (int i = 0; i < this.humans.size(); i++) {
-			this.simulation.set_people((Person) this.humans.get(i));
+			this.simulation.setPeople((Person) this.humans.get(i));
 		}
 
 		// Agent hinzufügen
@@ -936,7 +936,7 @@ public class GUILayer extends JFrame implements MouseMotionListener {
 		this.humans.get(mensch_cnt).teleport(spawnPersonX[0], spawnPersonY[0]);
 		this.humans.get(mensch_cnt).setHomePosX(spawnPersonX[0]);
 		this.humans.get(mensch_cnt).setHomePosY(spawnPersonY[0]);
-		this.simulation.set_agent((Agent) mensch);
+		this.simulation.setAgent((Agent) mensch);
 		this.initHaus(agent_house_nr, true, spawnPersonX[0], spawnPersonY[0]);
 	}
 
@@ -975,9 +975,9 @@ public class GUILayer extends JFrame implements MouseMotionListener {
 					location_raster.get(y).get(x).charAt(0));
 		}
 		//Update for Agent
-		x = (getSimulation().get_agent().getPosX() + 2 * Ressources.RASTERHEIGHT - Ressources.ZEROPOS.width) / Ressources.RASTERHEIGHT - 2;
-		y = (getSimulation().get_agent().getPosY() + 2 * Ressources.RASTERHEIGHT - Ressources.ZEROPOS.height)/ Ressources.RASTERHEIGHT - 2;
-		getSimulation().get_agent().set_location_id(location_raster.get(y).get(x).charAt(0));
+		x = (getSimulation().getAgent().getPosX() + 2 * Ressources.RASTERHEIGHT - Ressources.ZEROPOS.width) / Ressources.RASTERHEIGHT - 2;
+		y = (getSimulation().getAgent().getPosY() + 2 * Ressources.RASTERHEIGHT - Ressources.ZEROPOS.height)/ Ressources.RASTERHEIGHT - 2;
+		getSimulation().getAgent().set_location_id(location_raster.get(y).get(x).charAt(0));
 	}
 
 	
@@ -988,11 +988,11 @@ public class GUILayer extends JFrame implements MouseMotionListener {
 	 */
 	public void updateTime() {
 		// Tag malen
-		String s = "Tag " + this.simulation.getSpiel_tag();
+		String s = "Tag " + this.simulation.getSpielTag();
 		this.anzeigeTag.setText(s);
 
 		// Uhr malen
-		s = this.simulation.getSpielzeit_as_string();
+		s = this.simulation.getSpielzeitAsString();
 		this.anzeigeZeit.setText(s);
 	}
 
@@ -1184,7 +1184,7 @@ public class GUILayer extends JFrame implements MouseMotionListener {
 		//TODO etwas besseres Verfahren ausdenken
 		//Quizaufruf 
 		//int zeitpunkt = (int) (Math.random() * 1000);
-		if(this.stepcounter % (2000) == 0 && ((getSimulation().getSpiel_tag()==1 && getSimulation().getSpiel_stunde()>7) || getSimulation().getSpiel_tag()>1)) {
+		if(this.stepcounter % (2000) == 0 && ((getSimulation().getSpielTag()==1 && getSimulation().getSpielStunde()>7) || getSimulation().getSpielTag()>1)) {
 			quiz.starteQuiz();
 			getMousefollower().setVisible(false);
 			buttons.get("pause").setEnabled(false);
@@ -1225,8 +1225,8 @@ public class GUILayer extends JFrame implements MouseMotionListener {
 		
 
 		//Nacht-Modus aktivieren / deaktivieren				//Fragen an Sven
-		int stunde = this.simulation.getSpiel_stunde();
-		int minute = this.simulation.getSpiel_minute();
+		int stunde = this.simulation.getSpielStunde();
+		int minute = this.simulation.getSpielMinute();
 		float farbteil1 = 0.05f;
 		float farbteil2 = 0.01f;
 		if(stunde == 21){
@@ -1242,10 +1242,10 @@ public class GUILayer extends JFrame implements MouseMotionListener {
 			buttons.get("aktionUnterhalten").setEnabled(false);
 			buttons.get("aktionHand").setEnabled(false);
 			
-			if (!getSimulation().isWieeeeschteAktion() && !control.getLastFunktioncode().equals("parkBeschwichtigen")){
+			if (!getSimulation().isWieschteAktion() && !control.getLastFunktioncode().equals("parkBeschwichtigen")){
 				getMousefollower().setVisible(false);
-				if (!getSimulation().get_agent().getMussWuseln().equals("Park")){
-					getSimulation().get_agent().setMussWuseln("");
+				if (!getSimulation().getAgent().getMussWuseln().equals("Park")){
+					getSimulation().getAgent().setMussWuseln("");
 				}
 				control.setLastFunktioncode("");
 			}
@@ -1253,8 +1253,8 @@ public class GUILayer extends JFrame implements MouseMotionListener {
 		if (stunde == 2){
 			buttons.get("beschwichtigen").setEnabled(false);
 			control.closeWindow("beschwichtigen");
-			if (getSimulation().get_agent().getMussWuseln().equals("Park")){
-				getSimulation().get_agent().setMussWuseln("");
+			if (getSimulation().getAgent().getMussWuseln().equals("Park")){
+				getSimulation().getAgent().setMussWuseln("");
 			}
 		}
 		if (stunde == 6) {
@@ -1301,24 +1301,24 @@ public class GUILayer extends JFrame implements MouseMotionListener {
 		for (int i = 0; i < this.humans.size(); i++) {
 			this.humans.get(i).step();
 		}
-		if (getSimulation().get_agent().getCurrentMove()!= 'n' &&
-				(int)(getSimulation().get_agent().get_location_id()-48)>=1 && (int)(getSimulation().get_agent().get_location_id()-48)<=9 &&
-				getSimulation().isWieeeeschteAktion()){
+		if (getSimulation().getAgent().getCurrentMove()!= 'n' &&
+				(int)(getSimulation().getAgent().get_location_id()-48)>=1 && (int)(getSimulation().getAgent().get_location_id()-48)<=9 &&
+				getSimulation().isWieschteAktion()){
 			drawFortschrittsbalken();
 		} else{
 			this.fortschrittsstatus.setVisible(false);
 		}
 		
 		
-		if (getSimulation().get_agent().getCurrentMove()=='n' && !getSimulation().get_agent().getMussWuseln().isEmpty()){
-			getSimulation().doSomethingAfterAgentAktion();
+		if (getSimulation().getAgent().getCurrentMove()=='n' && !getSimulation().getAgent().getMussWuseln().isEmpty()){
+			getSimulation().doSomethingAfterAgentAction();
 		}
 		
 		//durchgeführte Beschwichtigungen um 0Uhr zurücksetzen
-		if(this.simulation.getSpiel_stunde() == 0 && this.simulation.getSpiel_minute() == 0){
-			for(int i=0;i<this.simulation.get_people().size();i++){
+		if(this.simulation.getSpielStunde() == 0 && this.simulation.getSpielMinute() == 0){
+			for(int i=0;i<this.simulation.getPeople().size();i++){
 				for(int j=0;j<Ressources.NUMBERBESCHWICHTIGENACTIONS;j++){
-					this.simulation.get_people().get(i).set_durchgefuehrteBeschwichtigungen(j, 0);
+					this.simulation.getPeople().get(i).set_durchgefuehrteBeschwichtigungen(j, 0);
 				}
 			}
 		}
@@ -1332,23 +1332,23 @@ public class GUILayer extends JFrame implements MouseMotionListener {
 		int hausposx = 0;
 		int hausposy = 0;
 		
-		if (getSimulation().get_agent().getMussWuseln().equals("Wanze+") || getSimulation().get_agent().getMussWuseln().equals("Wanzer+") ||
-			getSimulation().get_agent().getMussWuseln().equals("Hacken+") || getSimulation().get_agent().getMussWuseln().equals("Hackenr+")){
+		if (getSimulation().getAgent().getMussWuseln().equals("Wanze+") || getSimulation().getAgent().getMussWuseln().equals("Wanzer+") ||
+			getSimulation().getAgent().getMussWuseln().equals("Hacken+") || getSimulation().getAgent().getMussWuseln().equals("Hackenr+")){
 			step = 30/7;
 		}
-		if (getSimulation().get_agent().getMussWuseln().equals("Kamera+") || getSimulation().get_agent().getMussWuseln().equals("Kamerar+")){
+		if (getSimulation().getAgent().getMussWuseln().equals("Kamera+") || getSimulation().getAgent().getMussWuseln().equals("Kamerar+")){
 			step = 45/7;
 		}
-		if (getSimulation().get_agent().getMussWuseln().contains("Fernglas+") || getSimulation().get_agent().getMussWuseln().contains("Fernglasr+")){
+		if (getSimulation().getAgent().getMussWuseln().contains("Fernglas+") || getSimulation().getAgent().getMussWuseln().contains("Fernglasr+")){
 			step = 15/7;
 		}
 		
 		
-		hausposx= getSimulation().getHouses().get((int)(getSimulation().get_agent().get_location_id()-48-1)).getPosX() + Ressources.RASTERHEIGHT;
-		hausposy= getSimulation().getHouses().get((int)(getSimulation().get_agent().get_location_id()-48-1)).getPosY() + Ressources.RASTERHEIGHT;
+		hausposx= getSimulation().getHouses().get((int)(getSimulation().getAgent().get_location_id()-48-1)).getPosX() + Ressources.RASTERHEIGHT;
+		hausposy= getSimulation().getHouses().get((int)(getSimulation().getAgent().get_location_id()-48-1)).getPosY() + Ressources.RASTERHEIGHT;
 
 		if (step!=0){
-			switch (step=getSimulation().get_agent().getMoves().size()/step){
+			switch (step=getSimulation().getAgent().getMoves().size()/step){
 			case 0: 
 					this.fortschrittsstatus.setBounds(hausposx, hausposy, 45, 45);
 					this.fortschrittsstatus.setIcon(new ImageIcon(fortschrittskreis[6]));
