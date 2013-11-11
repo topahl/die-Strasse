@@ -26,7 +26,9 @@ public class Simulation {
 	}
 	
 	
-	//Beschwerden an Miri
+	/**
+	 * @author Miriam
+	 */
 	void initialisiereBeziehungsmatrix(){
 		int tmp;
 		this.beziehungsmatrix = new int[this.people.size()][this.people.size()];
@@ -66,7 +68,9 @@ public class Simulation {
 	
 	
 	
-	//Beschwerden an Sven und Miri
+	/**
+	 * @author Miriam
+	 */
 	void calcMisstrauen(){
 		if(this.spielStunde > 5 || this.spielStunde < 2){
 			//misstrauen[] ist eine Hilfvariable, die später die später die neuen Werte enthält und sie wird benötigt, dass nicht die echten Werte verändert werden, bevor alle berechnet wurden
@@ -113,15 +117,20 @@ public class Simulation {
 		}
 	}
 	
-	//Support: Tobi
+	/**
+	 * @author Tobias
+	 */
 		public void updatePosition(){
 			for(int i=0;i<people.size();i++){
 				people.get(i).step();
 			}
 		}
 	
-	//Beschwerden an Miri
-	//Mittelwert des Misstrauens der einzelnen Personen
+		
+		/**
+		 * Mittelwert des Misstrauens der einzelnen Personen
+		 * @author Miriam
+		 */
 	public double calcMisstrauenInStreet(){
 		float misstrauen = 0;
 		for(int i=0;i<this.people.size();i++){
@@ -133,7 +142,9 @@ public class Simulation {
 	}
 	
 	
-	//Beschwerden Miri
+	/**
+	 * @author Miriam
+	 */
 	public void calcMisstrauenNachBeschwichtigenInPark(){
 		for(int i=0;i<this.people.size();i++){
 			//Checken, ob sich noch jemand im Park befindet
@@ -149,8 +160,11 @@ public class Simulation {
 		}
 	}
 	
-	//Beschwerden an Miri
-	//Beschwerden an Miri
+	
+	
+	/**
+	 * @author Miriam
+	 */
     public void calcMisstrauenNachBeschwichtigen(int actionId, Person person){
         int zufall=0;
         int risiko;
@@ -226,8 +240,9 @@ public class Simulation {
     }
 	
 	
-	//TODO
-	//Beschwerden an Miri
+    /**
+	 * @author Miriam
+	 */
 	public void calcMisstrauenNachUeberwachung(int hausId){
 		//Risiko berechnen
 		//Risiko ist abhängig von der Uhrzeit, d.h.tagsüber ist das Risiko höher als nachts
@@ -278,7 +293,9 @@ public class Simulation {
 	}
 	
 	
-	//Beschwerden Miri
+	/**
+	 * @author Miriam
+	 */
 	public void agentBetrittFremdesHaus(){
 		//wenn sich der Agent in irgendeinem Haus befindet
 		if((int)(getAgent().getLocationId())-48 >= 1 && (int)(getAgent().getLocationId())-48 <= 9){
@@ -293,8 +310,10 @@ public class Simulation {
 	}	
 	
 	
-	//Beschwerden Miri
-	//während ein Haus überwacht wird, macht sich bei den Bewohnern ein Unwohlsein breit und sie werden mehr misstrauisch
+	/**
+	 * während ein Haus überwacht wird, macht sich bei den Bewohnern ein Unwohlsein breit und sie werden mehr misstrauisch
+	 * @author Miriam
+	 */
 	public void calcMisstrauenDuringUeberwachung(){
 		for(int i=0;i<this.people.size();i++){
 			// wenn Überwachungsmodule in dem Haus, in dem die Person lebt, installiert wurden
@@ -310,8 +329,10 @@ public class Simulation {
 	}
 	
 	
-	//Beschwerden Miri
-	//Allen Häusern den Überwachungsstatus updaten
+	/**
+	 * Allen Häusern den Überwachungsstatus updaten
+	 * @author Miriam
+	 */
 	public void updateUeberwachungsstatus(){
 		float ueberwachungswert=0;
 		
@@ -343,8 +364,10 @@ public class Simulation {
 		}
 	}
 	
-	//Beschwerden Miri
-	//Mittelwert der Überwachungsstati der einzelnen Häuser
+	/**
+	 * Mittelwert der Überwachungsstati der einzelnen Häuser
+	 * @author Miriam
+	 */
 	public float calcUeberwachungsstatusInStreet(){
 		float ueberwachung = 0;
 		for(int i=0;i<this.houses.size();i++){
@@ -358,7 +381,9 @@ public class Simulation {
 
 	
 	
-	// Support Tiki
+	/**
+	 * @author Martika
+	 */
 	void calcSpielzeit(){
 		this.spielMinute++;
 		if (this.spielMinute==60){
@@ -372,7 +397,9 @@ public class Simulation {
 	}
 	
 	
-	//Support Tiki
+	/**
+	 * @author Martika
+	 */
 	public void tagesablauf(){
 		char locationId ='0';
 		int hausId = 0;
@@ -495,61 +522,18 @@ public class Simulation {
 	} 	
 	
 	
-	//Support Tiki
-	private Point calcParkeingang(ArrayList<ArrayList<String>> location_ids){
-		int parkCounter=0;
-		
-		for (int i = 1; i<15; i++){
-			for (int j = 1; j<24; j++){
-				if (location_ids.get(i).get(j).equals("P")){
-					if (valuesInRange(j, i+1)){
-						if (location_ids.get(i+1).get(j).equals("P") || location_ids.get(i+1).get(j).equals("X")){
-							parkCounter++;
-						}
-					}
-					if (valuesInRange(j, i-1)){
-						if (location_ids.get(i-1).get(j).equals("P") || location_ids.get(i-1).get(j).equals("X")){
-							parkCounter++;
-						}
-					}
-					if (valuesInRange(j+1, i)){
-						if (location_ids.get(i).get(j+1).equals("P") || location_ids.get(i).get(j+1).equals("X")){
-							parkCounter++;
-						}
-					}
-					if (valuesInRange(j-1, i)){
-						if (location_ids.get(i).get(j-1).equals("P") || location_ids.get(i).get(j-1).equals("X")){
-							parkCounter++;
-						}
-					}
-					
-				}
-				if (parkCounter == 3){
-					return new Point (i,j);
-				} else{
-					parkCounter=0;
-				}
-			}
-		}		
-		return null;
-	}
 	
-	
-	
-	//Support Tiki
+	/**
+	 * @author Martika
+	 */
 	public void calcWeg(Mensch mensch, char zielLoc){
 		
 		char locationId;				
 		ArrayList<ArrayList<String>> locationIds;
 		Stack<Character> neuerWeg = new Stack<Character>();
-//		Point parkeingang = new Point();
 		
 		locationId = mensch.getLocationId();			
 		locationIds = Ressources.getLocation_ids();
-		
-//		if (zielLoc == 'P'){
-//			parkeingang = calcParkeingang(locationIds);
-//		}
 		
 		//Aktuelle Position des Männchens wird auf 0 gesetzt
 		if (zielLoc != locationId || zielLoc!='P'){
@@ -577,7 +561,9 @@ public class Simulation {
 	}
 	
 	
-	//Support Tiki
+	/**
+	 * @author Martika
+	 */
 	private Stack<Character> calcWegInRasterkarte(ArrayList<ArrayList<String>> location_ids, Mensch mensch, char zielloc){
 		
 		Stack<Character> neuer_weg = new Stack<Character>();
@@ -696,7 +682,10 @@ public class Simulation {
 		return neuer_weg;
 	}
 	
-	//Support Tiki
+
+	/**
+	 * @author Martika
+	 */
 	private Stack<Character> fuelleStackWeg(Character zielLoc, Mensch mensch, ArrayList<ArrayList<String>> locationIds, int counter, int xPosCurrent, int yPosCurrent) {
 		Stack<Character> neuerWeg = new Stack<Character>();
 		
@@ -801,7 +790,10 @@ public class Simulation {
 		return neuerWeg;
 	}
 
-	//Support Tiki
+
+	/**
+	 * @author Martika
+	 */
 	private Stack<Character>fuelleStackFuerHomeposition( Mensch mensch, int xPosCurrent, int yPosCurrent) {
 		Stack<Character> neuerWeg = new Stack<Character>();
 
@@ -838,7 +830,9 @@ public class Simulation {
 	}
 
 	
-	//Support Tiki
+	/**
+	 * @author Martika
+	 */
 	private ArrayList<ArrayList<String>> rasterkarteInitialisieren(ArrayList<ArrayList<String>> locationIds, String zielLocation, char locationId) {
 		for (int i=0; i<locationIds.size(); i++){
 			for (int j=0; j<locationIds.get(i).size(); j++){
@@ -867,7 +861,9 @@ public class Simulation {
 	}
 	
 	
-	//Support Tiki
+	/**
+	 * @author Martika
+	 */
 	private void fuelleStackRumwuseln(int doTimes) {
 		Stack<Character> neuerWeg = new Stack<Character>();
 		ArrayList<ArrayList<String>> locationIds;
@@ -948,7 +944,9 @@ public class Simulation {
 	}
 	
 	
-	//Support Tiki
+	/**
+	 * @author Martika
+	 */
 	public void doSomethingAfterAgentAction(){
 		int personId =0;
 		
@@ -1118,7 +1116,9 @@ public class Simulation {
 	}
 	
 	
-	//Support Tiki
+	/**
+	 * @author Martika
+	 */
 	private void calcColouredPeople (int hausid){
 		for (int i = 0; i<getPeople().size(); i++){
 			if (getPeople().get(i).getHausId() == hausid && !getPeople().get(i).getIstFarbig()){
@@ -1129,7 +1129,9 @@ public class Simulation {
 	}
 	
 	
-	//Support Tiki
+	/**
+	 * @author Martika
+	 */
 	private boolean valuesInRange(int x, int y){
 		if (x>=0 && x<Ressources.MAPWIDTH/Ressources.RASTERHEIGHT && 
 				y>=0 && y<Ressources.MAPHEIGHT/Ressources.RASTERHEIGHT){
@@ -1141,7 +1143,9 @@ public class Simulation {
 	
 	
 
-	//Support Tiki
+	/**
+	 * @author Martika
+	 */
 	public boolean calcGameOver(){
 		if (calcMisstrauenInStreet()>=90.0){
 			return true;
@@ -1198,6 +1202,9 @@ public class Simulation {
 	}
 
 	
+	/**
+	 * @author Martika
+	 */
 	public String getSpielzeitAsString() {
 		String zeit="";
 		zeit = String.valueOf(this.spielStunde);
