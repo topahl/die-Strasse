@@ -19,7 +19,7 @@ public class Erwachsene extends Person{
 		else
 			this.hatArbeit = true;
 		
-		setSize(Ressources.RASTERHEIGHT, Ressources.RASTERHEIGHT);		//Sven weis jetzt wie das funktioniert
+		setSize(Ressources.RASTERHEIGHT, Ressources.RASTERHEIGHT);	
 		aussehen = new int[3];
 		aussehen[0]= (int)(Math.random()*Ressources.TORSOCNT+1); //Körperbau
 		aussehen[1]= (int)(Math.random()*10+1); //Hautfarbe
@@ -28,8 +28,11 @@ public class Erwachsene extends Person{
 		farbeZeigen();
 		}
 
-	public void farbeZeigen (){		//wenn farbeZeigen==1 dann wird Sie gezeigt sonst muss farbeZeigen ==0 sein. 
-													//Fragen an Sven
+	
+	/**
+	 * @author Sven
+	 */
+	public void farbeZeigen (){
 		tempSprite = new BufferedImage(Ressources.RASTERHEIGHT*2, Ressources.RASTERHEIGHT*2, BufferedImage.TYPE_INT_ARGB);
 		Graphics2D g2d = tempSprite.createGraphics();
 		g2d.drawImage(adults.getSubimage(Ressources.RASTERHEIGHT*2*aussehen[0], (this.hausId+1)*Ressources.RASTERHEIGHT*2*(istFarbig?1:0), Ressources.RASTERHEIGHT*2, Ressources.RASTERHEIGHT*2) ,0,0 , null); //Körperbau

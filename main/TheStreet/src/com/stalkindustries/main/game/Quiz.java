@@ -92,7 +92,9 @@ public class Quiz {
 		this.quizWindow.add(this.zeit, javax.swing.JLayeredPane.DEFAULT_LAYER);
 	}
 	
-	//Beschwerden Miri
+	/**
+	 * @author Miriam
+	 */
 	public void analyzeAntwort(String antwort){
 		int antwortnr = (int)antwort.charAt(0)-61;
 		int richtigkeit = Integer.parseInt(this.quizFragen.get(this.quizStart).get(antwortnr));
@@ -103,7 +105,10 @@ public class Quiz {
 		this.running = false;
 	}
 	
-	//Beschwerden Miri
+	
+	/**
+	 * @author Miriam
+	 */
 	public void calcMisstrauenAfterQuiz(){
 		
 		gui.getButtonsMap().get("pause").setEnabled(true);
@@ -136,6 +141,7 @@ public class Quiz {
 			((Person)this.gui.getHumans().get(i)).updateSchatten();
 		}
 	}
+	
 	/**
 	 * @author Tobias
 	 */

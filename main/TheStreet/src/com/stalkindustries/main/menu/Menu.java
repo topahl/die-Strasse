@@ -599,7 +599,7 @@ public class Menu extends JFrame implements MouseMotionListener {
 	
 	/**
 	 * Init Highscore
-	 * @author Tobias
+	 * @author Tobias, Martika(Labels)
 	 */
 	@SuppressWarnings("rawtypes")
 	private void initHighscore() {
@@ -723,7 +723,7 @@ public class Menu extends JFrame implements MouseMotionListener {
 	}
 	
 	/**
-	 * @author Tobias
+	 * @author Tobias, Martika(Labels)
 	 */
 	private void initPersHighscore(){
 		pershighscore = new JLayeredPane();
@@ -809,7 +809,7 @@ public class Menu extends JFrame implements MouseMotionListener {
 		gameDetails[6].setForeground(new Color(0xf9,0xf9,0xf9));
 		pershighscore.add(gameDetails[6], javax.swing.JLayeredPane.DEFAULT_LAYER);
 		
-		gameDetails[8] = new JLabel(); //Uhrzeit Datum
+		gameDetails[8] = new JLabel(); //Uhrzeit Datum //TODO texte anpassen
 		gameDetails[8].setText("Max. Misstrauen");
 		gameDetails[8].setFont(new Font("Corbel",Font.BOLD,20));
 		gameDetails[8].setBounds(405, 475, 200, 30);
@@ -917,25 +917,9 @@ public class Menu extends JFrame implements MouseMotionListener {
 	 * @author Martika
 	 */
 	public void resetPersHighscore(){
-		gameDetails[0].setVisible(false);
-		gameDetails[1].setVisible(false);
-		gameDetails[2].setVisible(false);
-		gameDetails[3].setVisible(false);
-		gameDetails[4].setVisible(false);
-		gameDetails[5].setVisible(false);
-		gameDetails[6].setVisible(false);
-		gameDetails[7].setVisible(false);
-		gameDetails[8].setVisible(false);
-		gameDetails[9].setVisible(false);
-		gameDetails[10].setVisible(false);
-		gameDetails[11].setVisible(false);
-		gameDetails[12].setVisible(false);
-		gameDetails[13].setVisible(false);
-		gameDetails[14].setVisible(false);
-		gameDetails[15].setVisible(false);
-		gameDetails[16].setVisible(false);
-//		gameDetails[1].setText("Wählen Sie einen Spielstand aus");
-		
+		for (int i = 0; i<=16; i++){
+			gameDetails[i].setVisible(false);
+		}
 	}
 	
 	
@@ -1259,6 +1243,9 @@ public class Menu extends JFrame implements MouseMotionListener {
 		return currentUser.getText();
 	}
 	
+	/**
+	 * @author Tobias + Martika(labels Visible setzen)
+	 */
 	public void updatePersHighscore(){  
 		int selectionId = persHighscoreList.getSelectedIndex();
 		if(selectionId != -1){

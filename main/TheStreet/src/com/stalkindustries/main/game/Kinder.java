@@ -19,8 +19,11 @@ public class Kinder extends Person {
 		
 		farbeZeigen();
 	}
-	public void farbeZeigen (){		//wenn farbeZeigen==1 dann wird Sie gezeigt sonst muss farbeZeigen ==0 sein. 
-													//Fragen an Sven
+	
+	/**
+	 * @author Sven
+	 */
+	public void farbeZeigen (){		 
 		tempSprite = new BufferedImage(Ressources.RASTERHEIGHT*2, Ressources.RASTERHEIGHT*2, BufferedImage.TYPE_INT_ARGB);
 		Graphics2D g2d = tempSprite.createGraphics();
 		g2d.drawImage(infants.getSubimage(Ressources.RASTERHEIGHT*2*aussehen[0], (this.hausId+1)*Ressources.RASTERHEIGHT*2*(istFarbig?1:0), Ressources.RASTERHEIGHT*2, Ressources.RASTERHEIGHT*2) ,0,0 , null); //Körperbau

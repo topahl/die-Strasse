@@ -11,11 +11,9 @@ import javax.swing.JLayeredPane;
 import com.stalkindustries.main.Button;
 import com.stalkindustries.main.IControl;
 
-//Kreiert vom unglaublichen Stephan
-//auf Basis von Tobias unglaublicher Arbeit
 /**
  * 
- * @author Tobias, Stephan, Tiki
+ * @author Tobias, Stephan, Martika
  *
  */
 public class Control implements IControl {
@@ -42,7 +40,7 @@ public class Control implements IControl {
 	/**
 	 * Call wird von Button bei Klick aufgerufen
 	 * Anhand des "Namens" entsprechende Funktion aufrufen
-	 * TODO Funktionalität komplett testen
+	 * @author Tobias & Martika
 	 */
 	public void call(String funktion) {
 	
@@ -124,22 +122,21 @@ public class Control implements IControl {
 		lastFunktioncode = funktion;
 	}
 
-	
+	/**
+	 * @author Martika
+	 */
 	private void clickRemoveFernglas() {
 		int currentHouse = Integer.parseInt(lastFunktioncode.substring(4,5))-1 ;
 		closeWindow("fensterhaus"); 
 		guilayer.getSimulation().calcWeg(guilayer.getSimulation().getAgent(), (char)(guilayer.getSimulation().getAgent().getHausId()+48+1));
-		//guilayer.getSimulation().getHouses().get(currentHouse).getUeberwachungsmodule().remove("Fernglas");
-//		guilayer.getSimulation().get_agent().setMussWuseln("Fernglas");
-//		guilayer.getSimulation().berechne_weg(null, guilayer.getSimulation().get_agent(), (char)(currentHouse+1+48));
-	//	guilayer.getSimulation().getHouses().get(currentHouse).setUeberwachungsWert(0,3);
 		guilayer.getSimulation().setWieschteAktion(true);
 		guilayer.getSimulation().getAgent().setMussWuseln(currentHouse+"Fernglasr");
-		
 	}
 
 
-
+	/**
+	 * @author Martika
+	 */
 	private void clickRemoveHacken() {
 		int currentHouse = Integer.parseInt(lastFunktioncode.substring(4,5))-1 ;
 		closeWindow("fensterhaus"); 
@@ -150,7 +147,9 @@ public class Control implements IControl {
 	}
 
 
-
+	/**
+	 * @author Martika
+	 */
 	private void clickRemoveKamera() {
 		int currentHouse = Integer.parseInt(lastFunktioncode.substring(4,5))-1 ;
 		closeWindow("fensterhaus"); 
@@ -161,7 +160,9 @@ public class Control implements IControl {
 	}
 
 
-
+	/**
+	 * @author Martika
+	 */
 	private void clickRemoveWanze() {
 		int currentHouse = Integer.parseInt(lastFunktioncode.substring(4,5))-1 ;
 		closeWindow("fensterhaus"); 
@@ -173,8 +174,6 @@ public class Control implements IControl {
 
 
 
-
-
 	private void quizAntwort(String antwort){ //antwort=A || B || C
 		this.quiz.analyzeAntwort(antwort);
 		this.quiz.calcMisstrauenAfterQuiz();
@@ -183,8 +182,8 @@ public class Control implements IControl {
 	
 	/**
 	 * Klicks auf Häuser abfangen
+	 * @author Martika & Miriam(Razzia)
 	 */
-
 	private void clickHaus(int hausid) {
 		Stack<Character> stehenBleiben = new Stack<Character>();
 		boolean istVorhanden = false;
@@ -208,7 +207,6 @@ public class Control implements IControl {
 						if (guilayer.getSimulation().getAgent().getLocationId() != (char)(hausid+48)){
 							guilayer.getSimulation().calcWeg(guilayer.getSimulation().getAgent(), (char)(hausid+48));
 						}
-						//guilayer.getSimulation().berechne_weg(guilayer.getSimulation().get_agent(), (char)(hausid+48));
 						guilayer.getButtonsMap().get("nachHause").setEnabled(true);
 						guilayer.getSimulation().setWieschteAktion(false);
 					}	
@@ -273,8 +271,6 @@ public class Control implements IControl {
 				}
 			}
 		}
-//			
-//		if(lastFunktioncode.equals("aktionParkBeschwichtigen"))
 
 		if(lastFunktioncode.equals("aktionWanze")){
 			for (int i=0; i<guilayer.getSimulation().getHouses().get(hausid-1).getUeberwachungsmodule().size(); i++){
@@ -342,7 +338,6 @@ public class Control implements IControl {
 		}
 		
 		
-		//Beschwerden Miri
 		if(lastFunktioncode.equals("aktionrazzia")){
 			boolean festgenommen = false;
 			if (this.guilayer.getSimulation().getHouses().get(hausid-1).getUeberwachungsstatus() > 80){
@@ -415,6 +410,7 @@ public class Control implements IControl {
 	
 	/**
 	 * Spiel pausieren
+	 * @author Martika, Tobias
 	 */
 	public void clickPause() {
 		//Pause-Funktion von GUILayer aufrufen
@@ -471,6 +467,7 @@ public class Control implements IControl {
 	/**
 	 * Ingame-Fenster schließen
 	 * @param fensterName Bezeichnung des Fensters
+	 * @author Tobias
 	 */
 	public void closeWindow(String fensterName) {
 		JLayeredPane frame = guilayer.getWindow(fensterName);
@@ -539,6 +536,9 @@ public class Control implements IControl {
 		}
 	}
 
+	/**
+	 * @author Martika
+	 */
 	private void clickNachhause() {
 		closeWindow("fensterhaus"); 
 		closeWindow("spionage");
@@ -566,7 +566,7 @@ public class Control implements IControl {
 	
 	
 	/**
-	 * Klicks auf Aktionen
+	 * @author Martika
 	 */
 	private void clickWanzen() {
 		guilayer.getMousefollower().setIcon(new ImageIcon (Ressources.ingamebutton.getSubimage(0, 0, 39, 39)));
@@ -574,25 +574,36 @@ public class Control implements IControl {
 		closeWindow("spionage");
 	}
 	
+	/**
+	 * @author Martika
+	 */
 	private void clickKamera() {
 		guilayer.getMousefollower().setIcon(new ImageIcon (Ressources.ingamebutton.getSubimage(0, 39, 39, 39)));
 		guilayer.getMousefollower().setVisible(true);
 		closeWindow("spionage");
 	}
 	
+	/**
+	 * @author Martika
+	 */
 	private void clickHacken() {
 		guilayer.getMousefollower().setIcon(new ImageIcon (Ressources.ingamebutton.getSubimage(0, (39)*2, 39, 39)));
 		guilayer.getMousefollower().setVisible(true);
 		closeWindow("spionage");
 	}
 	
+	/**
+	 * @author Martika
+	 */
 	private void clickFernglas() {
 		guilayer.getMousefollower().setIcon(new ImageIcon (Ressources.ingamebutton.getSubimage(0, (39)*3, 39, 39)));
 		guilayer.getMousefollower().setVisible(true);
 		closeWindow("spionage");
 	}
 	
-	
+	/**
+	 * @author Martika
+	 */
 	private void clickKuchen() {
 		guilayer.getMousefollower().setIcon(new ImageIcon (Ressources.ingamebutton.getSubimage(0, (39)*6, 39, 39)));
 		guilayer.getMousefollower().setVisible(true);
@@ -600,6 +611,9 @@ public class Control implements IControl {
 		guilayer.getSimulation().setWieschteAktion(false);
 	}
 	
+	/**
+	 * @author Martika
+	 */
 	private void clickUnterhalten() {
 		guilayer.getMousefollower().setIcon(new ImageIcon (Ressources.ingamebutton.getSubimage(0, (39)*7, 39, 39)));
 		guilayer.getMousefollower().setVisible(true);
@@ -607,6 +621,9 @@ public class Control implements IControl {
 		guilayer.getSimulation().setWieschteAktion(false);
 	}
 	
+	/**
+	 * @author Martika
+	 */
 	private void clickFlirten() {
 		guilayer.getMousefollower().setIcon(new ImageIcon (Ressources.ingamebutton.getSubimage(0, (39)*8, 39, 39)));
 		guilayer.getMousefollower().setVisible(true);
@@ -614,6 +631,9 @@ public class Control implements IControl {
 		guilayer.getSimulation().setWieschteAktion(false);
 	}
 
+	/**
+	 * @author Martika
+	 */
 	private void clickHand() {
 		guilayer.getMousefollower().setIcon(new ImageIcon (Ressources.ingamebutton.getSubimage(0, (39)*9, 39, 39)));
 		guilayer.getMousefollower().setVisible(true);
@@ -621,6 +641,9 @@ public class Control implements IControl {
 		guilayer.getSimulation().setWieschteAktion(false);
 	}
 
+	/**
+	 * @author Martika
+	 */
 	private void clickParkBeschwichtigen() {
 		//kein Icon, da Einsatzort (Park) vorgegeben
 		closeWindow("beschwichtigen");
@@ -653,6 +676,7 @@ public class Control implements IControl {
 	/**
 	 * Zeigt die Hausinformation für ein Haus an
 	 * @param hausnr Hausnummer des Hases welches angezeigt werden soll
+	 * @author Tobias, Martika(ifabfrage, ob Personen schon überwacht werden)
 	 */
 	private void showHouseInfo(int hausnr){
 		JLayeredPane hausinfo = guilayer.getWindow("fensterhaus");
@@ -687,14 +711,6 @@ public class Control implements IControl {
 		informationen[9].setSize((int)(guilayer.getSimulation().getHouses().get(hausnr).getUeberwachungsstatus()*1.66), 19);
 	}
 
-	
-//	public int getHouseId(){
-//		return this.house_id;
-//	}
-//	
-//	public void setHouseId(int hous_id){
-//		this.house_id = hous_id;
-//	}
 	
 	public String getLastFunktioncode(){
 		return this.lastFunktioncode;

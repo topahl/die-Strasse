@@ -19,6 +19,9 @@ public abstract class Person extends Mensch {
 	static private int lastId=-1;
 		
 	
+	/**
+	 * @author Martika
+	 */
 	public abstract void farbeZeigen();
 	
 	

@@ -14,6 +14,9 @@ public class Map extends JLabel{
 	private int height;
 	BufferedImage karte;	
 	
+	/**
+	 * @author Miriam, Tobias
+	 */
 	public Map(String name, int agentenhaus){
 		try {
 			karte= ImageIO.read(new File(Ressources.HOMEDIR+"res\\level\\"+name+"\\"+name+"_map.png"));
@@ -25,7 +28,6 @@ public class Map extends JLabel{
 		height=karte.getHeight();
 		width=karte.getWidth();
 		
-		//Beschwerden Miri
 		//Hausnummern zeichnen
 		Graphics2D g2d = this.karte.createGraphics();
 		for(int i=0;i<Ressources.NUMBERHOUSES;i++){

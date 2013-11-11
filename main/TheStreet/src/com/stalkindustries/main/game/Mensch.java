@@ -43,7 +43,9 @@ public abstract class Mensch extends JLabel {
 	}
 		
 
-	//Support: Tobi
+	/**
+	 * @author Tobias & Martika
+	 */
 	public void step(){
 		
 		if((posX-Ressources.ZEROPOS.width)%45==0&&(posY-Ressources.ZEROPOS.height)%45==0){
@@ -129,11 +131,10 @@ public abstract class Mensch extends JLabel {
 	}
 	
 	
-	//Support: Tobi
 	public int getPosX() {
 		return posX;
 	}
-	//Support: Tobi
+	
 	public int getPosY() {
 		return posY;
 	}

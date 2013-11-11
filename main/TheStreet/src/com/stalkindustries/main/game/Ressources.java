@@ -143,7 +143,9 @@ public class Ressources {
 	}
 	
 	
-	//Beschwerden an Sven und Miri
+	/**
+	 * @author Miriam & Sven
+	 */
 		public static ArrayList<ArrayList<String>> readFromCsv(String dateiName){
 			ArrayList<ArrayList<String>> list_of_lists = new ArrayList<ArrayList<String>>();
 			
