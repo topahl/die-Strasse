@@ -95,12 +95,12 @@ public class GUILayer extends JFrame implements MouseMotionListener {
 
 	/**
 	 * Beenden: das Spiel stoppen und Fenster schließen
+	 * @author Miriam
 	 */
 	public void endGame() {
 		TheStreet.loadMenu(simulation.getAgent().getName());
 		this.timer.stop();
 		this.dispose();
-		//TODO auf Auswertungsmenü weiterleiten
 	}
 
 
@@ -947,7 +947,7 @@ public class GUILayer extends JFrame implements MouseMotionListener {
 	 * @param agentenhaus Ist dieses Haus das Agentenhaus?
 	 * @param x X-Position des Hauses
 	 * @param y Y-Position des Hauses
-	 * @author Miri
+	 * @author Miriam
 	 */
 	private void initHaus(int hausnr, boolean agentenhaus, int x, int y) {
 		this.haus = new Haus(hausnr, agentenhaus, x, y);
@@ -1157,7 +1157,7 @@ public class GUILayer extends JFrame implements MouseMotionListener {
 	
 	/**
 	 * Step steuert den zeitlichen Ablauf des Spieles und triggert die Simulation und Updates im Spielfenster
-	 * @author Miri, Tobias, Tiki
+	 * @author Miriam, Tobias, Martika
 	 */
 	public void step() {
 		this.updateLocationID();
@@ -1336,6 +1336,10 @@ public class GUILayer extends JFrame implements MouseMotionListener {
 		this.stepcounter++;
 	}
 
+	
+	/**
+	 * @author Martika
+	 */
 	private void drawFortschrittsbalken() {
 		int step=0;
 		int hausposx = 0;

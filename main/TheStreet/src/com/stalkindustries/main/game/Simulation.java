@@ -8,6 +8,10 @@ import javax.swing.BorderFactory;
 
 import com.stalkindustries.main.TheStreet;
 
+
+/**
+ * @author Hauptsächlich Miriam & Martika
+ */
 public class Simulation {
 	
 	private int[][] beziehungsmatrix;
