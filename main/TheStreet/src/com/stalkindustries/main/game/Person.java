@@ -20,6 +20,7 @@ public abstract class Person extends Mensch {
 		
 	
 	/**
+	 * Menschen werden in ihrer Hausfarbe angezeigt
 	 * @author Martika
 	 */
 	public abstract void farbeZeigen();

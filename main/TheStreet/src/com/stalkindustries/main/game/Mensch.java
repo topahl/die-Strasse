@@ -53,6 +53,7 @@ public abstract class Mensch extends JLabel {
 				if (moves.peek()!='s'){
 					currentMove=moves.pop();
 				}else{
+					//Person muss noch stehen bleiben und auf agenten warten
 					currentMove = 's';
 				}
 			}
@@ -98,8 +99,6 @@ public abstract class Mensch extends JLabel {
 		}
 		
 		
-		
-		
 		setLocation(posX,posY); //no repaint needed
 		
 		
@@ -114,16 +113,6 @@ public abstract class Mensch extends JLabel {
 		}
 	}
 	
-	
-	//TODO entfernen?!
-	private void updateLocationRaster(){
-		//weißt Bewohnern eine Location-ID zu
-		//--> man weiß nun, wo sie sich grob befinden, d.h.
-		//wenn sich Person in bestimmtem Haus befindet, dann ist Location-Id = Haus-Id
-		//Schule --> Location-ID = Schule-ID
-		//Park --> Location-Id = Park-ID
-		//einkaufen, arbeiten, ... --> Location-Id = 42
-	}
 	
 	public void teleport(int x, int y){
 		this.posX = x;

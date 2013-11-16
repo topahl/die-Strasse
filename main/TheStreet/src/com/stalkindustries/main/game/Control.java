@@ -202,6 +202,7 @@ public class Control implements IControl {
 					if (!soAtHome){
 						soAtHome = true;
 						stehenBleiben.add('s');
+						//ausgewählte Person bekommt einen Stack zugewiesen, sodass er sich nicht bewegen darf
 						guilayer.getSimulation().getPeople().get(i).setMoves(stehenBleiben);
 						guilayer.getSimulation().getAgent().setMussWuseln(i+"Kuchen");
 						if (guilayer.getSimulation().getAgent().getLocationId() != (char)(hausid+48)){
@@ -224,6 +225,7 @@ public class Control implements IControl {
 					if (!soAtHome){
 						soAtHome = true;
 						stehenBleiben.add('s');
+						//ausgewählte Person bekommt einen Stack zugewiesen, sodass er sich nicht bewegen darf
 						guilayer.getSimulation().getPeople().get(i).setMoves(stehenBleiben);
 						guilayer.getSimulation().getAgent().setMussWuseln(i+"Unterhalten");
 						if (guilayer.getSimulation().getAgent().getLocationId() != (char)(hausid+48)){
@@ -247,6 +249,7 @@ public class Control implements IControl {
 					if (!soAtHome){
 						soAtHome = true;
 						stehenBleiben.add('s');
+						//ausgewählte Person bekommt einen Stack zugewiesen, sodass er sich nicht bewegen darf
 						guilayer.getSimulation().getPeople().get(i).setMoves(stehenBleiben);
 						guilayer.getSimulation().getAgent().setMussWuseln(i+"Flirten");
 						if (guilayer.getSimulation().getAgent().getLocationId() != (char)(hausid+48)){
@@ -269,6 +272,7 @@ public class Control implements IControl {
 					if (!soAtHome){
 						soAtHome = true;
 						stehenBleiben.add('s');
+						//ausgewählte Person bekommt einen Stack zugewiesen, sodass er sich nicht bewegen darf
 						guilayer.getSimulation().getPeople().get(i).setMoves(stehenBleiben);
 						guilayer.getSimulation().getAgent().setMussWuseln(i+"Hand");
 						if (guilayer.getSimulation().getAgent().getLocationId() != (char)(hausid+48)){
@@ -393,7 +397,7 @@ public class Control implements IControl {
 	
 	/**
 	 * Mousefollower updaten
-	 * @author Tiki
+	 * @author Martika
 	 */
 	@Override
 	public void mousePresent(String funktion, boolean isPresent) {
@@ -470,8 +474,6 @@ public class Control implements IControl {
 				guilayer.getButtonsMap().get("Haus"+i).setEnabled(true);
 			}
 		}
-		
-
 				
 		closeWindow("spionage");
 		closeWindow("beschwichtigen");
@@ -553,6 +555,7 @@ public class Control implements IControl {
 	}
 
 	/**
+	 * Agent geht nach Hause
 	 * @author Martika
 	 */
 	private void clickNachhause() {
@@ -565,6 +568,7 @@ public class Control implements IControl {
 		if (!guilayer.getSimulation().isWieschteAktion()){
 			for (int i=0; i<guilayer.getSimulation().getPeople().size(); i++){
 				if (guilayer.getSimulation().getPeople().get(i).getCurrentMove()=='s'){
+					//Person darf sich wieder bewegen, sollte man einen Kuchen vorbeibringen wollen
 					guilayer.getSimulation().getPeople().get(i).setMoves(new Stack());
 				}
 			}

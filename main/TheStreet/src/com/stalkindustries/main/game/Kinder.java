@@ -10,7 +10,7 @@ public class Kinder extends Person {
 	public Kinder(int house_id, ArrayList<String> event){
 		super(house_id,event);
 		this.hausId=house_id;
-		setSize(Ressources.RASTERHEIGHT, Ressources.RASTERHEIGHT);			//Sven weis jetzt wie das funktioniert
+		setSize(Ressources.RASTERHEIGHT, Ressources.RASTERHEIGHT);
 		aussehen = new int[3];
 		aussehen[0]= (int)(Math.random()*Ressources.TORSOCNT+1); //Körperbau
 		aussehen[1]= (int)(Math.random()*10+1); //Hautfarbe
