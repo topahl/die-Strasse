@@ -120,7 +120,7 @@ public class Quiz {
 		}
 		//wenn Antwort so richtig falsch war
 		else if(this.beantwortet.get(this.beantwortet.size()-1) < 50){
-			misstrauen = 20;	//TODO misstrauenswerte überprüfen
+			misstrauen = 20;	
 		}
 		//wenn Antwort nur teilweise falsch war
 		else{

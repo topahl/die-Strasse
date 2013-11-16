@@ -247,24 +247,6 @@ public class Ressources {
 		return new_csv;
 	}
 	
-	//TODO: entfernen
-	public static ArrayList<ArrayList<String>> randomizeGags(){
-		ArrayList<ArrayList<String>> gags = new ArrayList<ArrayList<String>>();
-		ArrayList<ArrayList<String>> gags_input = copyCsv(livetickergags);
-		ArrayList<String> tmp;
-		int start = (int)(Math.random()*livetickergags.size());
-		int step = (int)(Math.random()*(livetickergags.size()-2)+1);
-		
-		for(int i=0;i<gags_input.size();i++){
-			tmp = new ArrayList<String>();
-			tmp.add(gags_input.get(start).get(0));
-			gags_input.remove(start);
-			start = (start+step)%gags_input.size();
-			gags.add(tmp);
-		}
-		
-		return gags;
-	}
 	
 	public static ArrayList<ArrayList<String>> randomizeLists(ArrayList<ArrayList<String>> input){
 		ArrayList<ArrayList<String>> output = new ArrayList<ArrayList<String>>();

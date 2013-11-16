@@ -296,12 +296,6 @@ public class GUILayer extends JFrame implements MouseMotionListener {
 		Button button;
 		
 		
-		//TODO Belehrung entfernen
-		//So Leute... bitte alle Komponenten zu einem bestimmten Fenster
-		//Direkt hintereinander in einem Codeabschnitt angeben!
-		//Man findet sonst nix wieder ... :)
-		
-		
 		//---
 		//Quiz
 		//---
@@ -659,29 +653,6 @@ public class GUILayer extends JFrame implements MouseMotionListener {
 			this.baseLayer.add(button, javax.swing.JLayeredPane.DEFAULT_LAYER);
 			this.buttons.put(buttonNamesAktionsleiste[i], button);
 		}
-		
-
-		// Kleine Buttons TODO entfernen bei Code Cleanup am Schluss - solange bitte nicht löschen!
-		/*buttonSize = 39;
-		buttonSliceX = 0;
-		buttonSliceY = buttonSize;
-
-		String[] buttonNamesSmall = { "smallWanze", "smallKamera",
-				"smallHacken", "smallFernglas", "smallParkSpionage",
-				"small6Spionage", "smallKuchen", "smallUnterhalten",
-				"smallFlirten", "smallHand", "smallParkBeschwichtigen",
-				"small6Beschwichtigen", "smallNachhause", "smallRazzia",
-				"smallQuizA", "smallQuizB", "smallQuizC" };
-		for (int i = 0; i < buttonNamesSmall.length; i++) {
-			button = new Button(this.control,
-					Ressources.ingamebutton.getSubimage(buttonSliceX, i * buttonSliceY, buttonSize, buttonSize),
-					Ressources.ingamebutton.getSubimage(buttonSliceX + buttonSize, i * buttonSliceY, buttonSize, buttonSize),
-					Ressources.ingamebutton.getSubimage(buttonSliceX + 2 * buttonSize, i * buttonSliceY, buttonSize, buttonSize),
-					Ressources.ingamebutton.getSubimage(buttonSliceX + 3 * buttonSize, i * buttonSliceY, buttonSize, buttonSize),
-					buttonNamesSmall[i], Ressources.ZEROPOS.width - 39, 0 + i * buttonSize, this);
-			this.baseLayer.add(button, javax.swing.JLayeredPane.DEFAULT_LAYER);
-			this.buttons.put(buttonNamesSmall[i], button);
-		}*/
 	}
 
 

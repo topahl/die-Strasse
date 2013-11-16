@@ -110,18 +110,6 @@ public class Menu extends JFrame implements MouseMotionListener {
 	public void setCurrentUser(String user) {
 		currentUser.setText(user);
 	}
-
-	
-	
-	//TODO was zum Geier macht diese Methode?
-	/**
-	 * Setzt das JLabel mit angemeldetem Benutzer neu
-	 * @param currentUser Label mit angemeldetem Benutzer
-	 */
-	public void setCurrentUser(JLabel currentUser) {
-		this.currentUser = currentUser;
-	}
-
 	
 	
 	/**
@@ -647,10 +635,8 @@ public class Menu extends JFrame implements MouseMotionListener {
     				}
     			}
     		} catch (FileNotFoundException e) {
-    			// TODO Auto-generated catch block
     			e.printStackTrace();
     		} catch (IOException e) {
-    			// TODO Auto-generated catch block
     			e.printStackTrace();
     		}
         }
@@ -772,7 +758,7 @@ public class Menu extends JFrame implements MouseMotionListener {
 		gameDetails[2].setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
 		pershighscore.add(gameDetails[2], javax.swing.JLayeredPane.DEFAULT_LAYER);
 		
-		gameDetails[3] = new JLabel();
+		gameDetails[3] = new JLabel(); //Spielminutenlabel
 		gameDetails[3].setText("Spielminuten");
 		gameDetails[3].setFont(new Font("Corbel",Font.BOLD,20));
 		gameDetails[3].setBounds(405, 375, 200, 30);
@@ -787,14 +773,14 @@ public class Menu extends JFrame implements MouseMotionListener {
 		gameDetails[4].setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
 		pershighscore.add(gameDetails[4], javax.swing.JLayeredPane.DEFAULT_LAYER);
 		
-		gameDetails[5] = new JLabel(); 
+		gameDetails[5] = new JLabel(); //Terrorist festgenommen label
 		gameDetails[5].setText("Terrorist festgenommen");
 		gameDetails[5].setFont(new Font("Corbel",Font.BOLD,20));
 		gameDetails[5].setBounds(405, 425, 250, 30);
 		gameDetails[5].setForeground(new Color(0xf9,0xf9,0xf9));
 		pershighscore.add(gameDetails[5], javax.swing.JLayeredPane.DEFAULT_LAYER);
 		
-		gameDetails[7] = new JLabel(); //Terrorist
+		gameDetails[7] = new JLabel(); //Terrorist festgenommenboolean
 		gameDetails[7].setText("Nein");
 		gameDetails[7].setFont(new Font("Corbel",Font.BOLD,14));
 		gameDetails[7].setBounds(710, 425, 50, 30);
@@ -809,14 +795,14 @@ public class Menu extends JFrame implements MouseMotionListener {
 		gameDetails[6].setForeground(new Color(0xf9,0xf9,0xf9));
 		pershighscore.add(gameDetails[6], javax.swing.JLayeredPane.DEFAULT_LAYER);
 		
-		gameDetails[8] = new JLabel(); //Uhrzeit Datum //TODO texte anpassen
+		gameDetails[8] = new JLabel(); //Max Misstrauen Label
 		gameDetails[8].setText("Max. Misstrauen");
 		gameDetails[8].setFont(new Font("Corbel",Font.BOLD,20));
 		gameDetails[8].setBounds(405, 475, 200, 30);
 		gameDetails[8].setForeground(new Color(0xf9,0xf9,0xf9));
 		pershighscore.add(gameDetails[8], javax.swing.JLayeredPane.DEFAULT_LAYER);
 		
-		gameDetails[9] = new JLabel(); //Uhrzeit Datum
+		gameDetails[9] = new JLabel(); //Max Misstrauen Prozentwert
 		gameDetails[9].setText("121,9 %");
 		gameDetails[9].setFont(new Font("Corbel",Font.BOLD,14));
 		gameDetails[9].setBounds(710, 475, 50, 30);
@@ -824,21 +810,21 @@ public class Menu extends JFrame implements MouseMotionListener {
 		gameDetails[9].setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
 		pershighscore.add(gameDetails[9], javax.swing.JLayeredPane.DEFAULT_LAYER);
 		
-		gameDetails[10] = new JLabel(); //Uhrzeit Datum
+		gameDetails[10] = new JLabel(); //Max Misstrauen Balken
 		gameDetails[10].setIcon(new ImageIcon (Ressources.ingamebutton.getSubimage(951, 225, 129, 15)));
 		gameDetails[10].setFont(new Font("Corbel",Font.BOLD,20));
 		gameDetails[10].setBounds(635, 475, 200, 30);
 		gameDetails[10].setForeground(new Color(0xf9,0xf9,0xf9));
 		pershighscore.add(gameDetails[10], javax.swing.JLayeredPane.DEFAULT_LAYER);
 		
-		gameDetails[11] = new JLabel(); //Uhrzeit Datum
+		gameDetails[11] = new JLabel(); //Wissenswert Label
 		gameDetails[11].setText("Wissenswert");
 		gameDetails[11].setFont(new Font("Corbel",Font.BOLD,20));
 		gameDetails[11].setBounds(405, 525, 200, 30);
 		gameDetails[11].setForeground(new Color(0xf9,0xf9,0xf9));
 		pershighscore.add(gameDetails[11], javax.swing.JLayeredPane.DEFAULT_LAYER);
 		
-		gameDetails[12] = new JLabel(); //Uhrzeit Datum
+		gameDetails[12] = new JLabel(); //Wissenswert Prozentwert
 		gameDetails[12].setText("191.7 %");
 		gameDetails[12].setFont(new Font("Corbel",Font.BOLD,14));
 		gameDetails[12].setBounds(710, 525, 50, 30);
@@ -846,21 +832,21 @@ public class Menu extends JFrame implements MouseMotionListener {
 		gameDetails[12].setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
 		pershighscore.add(gameDetails[12], javax.swing.JLayeredPane.DEFAULT_LAYER);
 		
-		gameDetails[13] = new JLabel(); //Uhrzeit Datum
+		gameDetails[13] = new JLabel(); //Wissenswert Balken
 		gameDetails[13].setIcon(new ImageIcon (Ressources.ingamebutton.getSubimage(951, 225, 129, 15)));
 		gameDetails[13].setFont(new Font("Corbel",Font.BOLD,20));
 		gameDetails[13].setBounds(635, 525, 200, 30);
 		gameDetails[13].setForeground(new Color(0xf9,0xf9,0xf9));
 		pershighscore.add(gameDetails[13], javax.swing.JLayeredPane.DEFAULT_LAYER);
 		
-		gameDetails[14] = new JLabel(); //Uhrzeit Datum
+		gameDetails[14] = new JLabel(); //Anzahl entdeckter Events Label
 		gameDetails[14].setText("Anzahl entdeckter Events");
 		gameDetails[14].setFont(new Font("Corbel",Font.BOLD,20));
 		gameDetails[14].setBounds(405, 575, 250, 30);
 		gameDetails[14].setForeground(new Color(0xf9,0xf9,0xf9));
 		pershighscore.add(gameDetails[14], javax.swing.JLayeredPane.DEFAULT_LAYER);
 		
-		gameDetails[15] = new JLabel(); //Uhrzeit Datum
+		gameDetails[15] = new JLabel(); //Anzahl entdeckter Events Wert
 		gameDetails[15].setText("6 / 12");
 		gameDetails[15].setFont(new Font("Corbel",Font.BOLD,14));
 		gameDetails[15].setBounds(710, 575, 50, 30);
@@ -868,7 +854,7 @@ public class Menu extends JFrame implements MouseMotionListener {
 		gameDetails[15].setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
 		pershighscore.add(gameDetails[15], javax.swing.JLayeredPane.DEFAULT_LAYER);
 		
-		gameDetails[16] = new JLabel(); //Uhrzeit Datum
+		gameDetails[16] = new JLabel(); //Anzahl entdeckter Events Balken
 		gameDetails[16].setIcon(new ImageIcon (Ressources.ingamebutton.getSubimage(951, 225, 129, 15)));
 		gameDetails[16].setFont(new Font("Corbel",Font.BOLD,20));
 		gameDetails[16].setBounds(635, 575, 200, 30);
@@ -1171,10 +1157,8 @@ public class Menu extends JFrame implements MouseMotionListener {
 				}
 			}
 		} catch (FileNotFoundException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		DefaultListModel model = new DefaultListModel();

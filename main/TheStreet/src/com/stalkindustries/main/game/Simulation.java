@@ -54,20 +54,6 @@ public class Simulation {
 				}
 			}
 		}
-		//TODO entfernen?!
-//		//symmetrische Matrix
-//		for(int i=0;i<this.people.size();i++){
-//			for(int j=i+1;j<this.people.size();j++){
-//				tmp = (int)(Math.random()*(10))+1;
-//				this.beziehungsmatrix[i][j] = tmp;
-//				this.beziehungsmatrix[j][i] = tmp;
-//				if(this.people.get(i).get_haus_id() == this.people.get(j).get_haus_id()){ //Person in einem Haushalt sind besser miteinander befreundet
-//					tmp = (10-tmp)/2;
-//					this.beziehungsmatrix[i][j] += tmp;
-//					this.beziehungsmatrix[j][i] += tmp;
-//				}
-//			}
-//		}
 	}
 	
 	
@@ -267,7 +253,7 @@ public class Simulation {
 			//für alle Personen, die noch im Haus sind, das Misstrauen neu berechnen
 			if((int)(this.people.get(i).getLocationId())-48 == hausId){
 				if(risiko>2)	//wenn das risiko kleiner ist, hat man Glück und man wird nicht erwicht
-					this.people.get(i).setMisstrauen(this.people.get(i).getMisstrauen()+6); //TODO: den Wert 50 testen ... eventuell erhöhen
+					this.people.get(i).setMisstrauen(this.people.get(i).getMisstrauen()+6); 
 			}
 			//Checken, ob sich jemand in einer epsilon-Umgebung um das Haus befindet, in das eingebrochen werden soll
 			//--> 1. Epsilon-Umgebung aufspannen (ist eine relative eckige :-D)

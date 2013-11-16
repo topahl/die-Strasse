@@ -90,8 +90,7 @@ public class ControlMenu implements IControl, ListSelectionListener {
 
 	@Override
 	public void mousePresent(String funktion, boolean isPresent) {
-		// TODO do nothing
-		
+		// do nothing
 	}
 	/**
 	 *@author Tobias
