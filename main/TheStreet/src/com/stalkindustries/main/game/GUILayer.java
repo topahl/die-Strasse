@@ -70,6 +70,7 @@ public class GUILayer extends JFrame implements MouseMotionListener {
 	/**
 	 * Konstruktor - steuert die Initialisierung aller GUI-Elemente
 	 * @param agentname 
+	 * @param levelname
 	 */
 	public GUILayer(String levelname, String agentname) {
 		
@@ -1192,7 +1193,6 @@ public class GUILayer extends JFrame implements MouseMotionListener {
 			quiz.step();
 		}
 		
-		//Beschwerden Miri
 		//Liveticker
 		if(this.stepcounter%tickerHaufigkeit == 0){
 			this.generateLiveTicker();
@@ -1211,15 +1211,6 @@ public class GUILayer extends JFrame implements MouseMotionListener {
 				tickerStep -= tmp;
 				this.newsticker.setLocation((int)tickerStep,0);
 			}
-//			int tmp = tickerHaufigkeit/(this.tickerTextSize-(Ressources.MAPWIDTH-120));
-//			if(tmp == 0)
-//				tmp = 3;
-//			else
-//				tmp = 2;
-//			if((this.stepcounter)%2 == 0){
-//				tickerStep -= tmp;
-//				this.newsticker.setLocation((int)tickerStep,0);
-//			}
 		}
 		
 		//Unwohlsein durch installierte Überwachungsmodule
@@ -1233,7 +1224,7 @@ public class GUILayer extends JFrame implements MouseMotionListener {
 		}
 		
 
-		//Nacht-Modus aktivieren / deaktivieren				//Fragen an Sven
+		//Nacht-Modus aktivieren / deaktivieren		
 		int stunde = this.simulation.getSpielStunde();
 		int minute = this.simulation.getSpielMinute();
 		float farbteil1 = 0.05f;
@@ -1246,6 +1237,7 @@ public class GUILayer extends JFrame implements MouseMotionListener {
 				this.overlayNacht.setBackground(new Color(0, 0, farbteil1*minute, farbteil2*minute));
 				this.repaint();	
 			}
+			//Ab 21 Uhr darf man als Agent kein fremder Haus mehr besuchen
 			buttons.get("aktionKuchen").setEnabled(false);
 			buttons.get("aktionFlirten").setEnabled(false);
 			buttons.get("aktionUnterhalten").setEnabled(false);
@@ -1260,6 +1252,7 @@ public class GUILayer extends JFrame implements MouseMotionListener {
 			}
 		}
 		if (stunde == 2){
+			//Nachts darf man gar nicht beschwichtigen
 			buttons.get("beschwichtigen").setEnabled(false);
 			control.closeWindow("beschwichtigen");
 			if (getSimulation().getAgent().getMussWuseln().equals("Park")){
@@ -1338,6 +1331,7 @@ public class GUILayer extends JFrame implements MouseMotionListener {
 
 	
 	/**
+	 * Wenn der Agent am wuseln ist wird durch einen Fortschrittsbalken angezeigt wie weit der Agent schon ist
 	 * @author Martika
 	 */
 	private void drawFortschrittsbalken() {
@@ -1350,15 +1344,14 @@ public class GUILayer extends JFrame implements MouseMotionListener {
 
 		if (getSimulation().getAgent().getMussWuseln().equals("Wanze+") || getSimulation().getAgent().getMussWuseln().equals("Wanzer+") ||
 			getSimulation().getAgent().getMussWuseln().equals("Hacken+") || getSimulation().getAgent().getMussWuseln().equals("Hackenr+")){
-			step = 30/7;
+			step = 30/7; //hier wird zweimal gewuselt
 		}
 		if (getSimulation().getAgent().getMussWuseln().equals("Kamera+") || getSimulation().getAgent().getMussWuseln().equals("Kamerar+")){
-			step = 45/7;
+			step = 45/7; //hier wird dreimal gewuselt
 		}
 		if (getSimulation().getAgent().getMussWuseln().contains("Fernglas+") || getSimulation().getAgent().getMussWuseln().contains("Fernglasr+")){
-			step = 15/7;
+			step = 15/7; //hier wird einmal gewuselt
 		}
-		
 		
 		
 		if (step!=0){
