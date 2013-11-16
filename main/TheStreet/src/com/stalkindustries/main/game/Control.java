@@ -212,6 +212,9 @@ public class Control implements IControl {
 					}	
 				}
 			}
+			if (!soAtHome){
+				guilayer.showDialogMessage("Das klappt nicht!", "In Haus "+ hausid + " ist keiner zu Hause", false, true);
+			}
 		}
 			
 		if(lastFunktioncode.equals("aktionUnterhalten")){
@@ -230,6 +233,9 @@ public class Control implements IControl {
 						guilayer.getSimulation().setWieschteAktion(false);
 					}	
 				}
+			}
+			if (!soAtHome){
+				guilayer.showDialogMessage("Das klappt nicht!", "In Haus "+ hausid + " ist keiner zu Hause", false, true);
 			}
 		}
 			
@@ -251,6 +257,9 @@ public class Control implements IControl {
 					}	
 				}
 			}
+			if (!soAtHome){
+				guilayer.showDialogMessage("Das klappt nicht!", "In Haus "+ hausid + " ist kein Erwachsener zu Hause", false, true);
+			}
 		}
 			
 		if(lastFunktioncode.equals("aktionHand")){
@@ -270,12 +279,16 @@ public class Control implements IControl {
 					}	
 				}
 			}
+			if (!soAtHome){
+				guilayer.showDialogMessage("Das klappt nicht!", "In Haus "+ hausid + " ist keiner zu Hause", false, true);
+			}
 		}
 
 		if(lastFunktioncode.equals("aktionWanze")){
 			for (int i=0; i<guilayer.getSimulation().getHouses().get(hausid-1).getUeberwachungsmodule().size(); i++){
 				if (guilayer.getSimulation().getHouses().get(hausid-1).getUeberwachungsmodule().get(i).equals("Wanze")){
 					istVorhanden=true;
+					guilayer.showDialogMessage("Das klappt nicht!", "Dieses Spionagetool wurde in Haus "+ hausid + " schon installiert", false, true);
 					break;
 				}	
 			}
@@ -293,6 +306,7 @@ public class Control implements IControl {
 			for (int i=0; i<guilayer.getSimulation().getHouses().get(hausid-1).getUeberwachungsmodule().size(); i++){
 				if (guilayer.getSimulation().getHouses().get(hausid-1).getUeberwachungsmodule().get(i).equals("Kamera")){
 					istVorhanden=true;
+					guilayer.showDialogMessage("Das klappt nicht!", "Dieses Spionagetool wurde in Haus "+ hausid + " schon installiert", false, true);
 					break;
 				}
 			}
@@ -310,6 +324,7 @@ public class Control implements IControl {
 			for (int i=0; i<guilayer.getSimulation().getHouses().get(hausid-1).getUeberwachungsmodule().size(); i++){
 				if (guilayer.getSimulation().getHouses().get(hausid-1).getUeberwachungsmodule().get(i).equals("Hacken")){
 					istVorhanden=true;
+					guilayer.showDialogMessage("Das klappt nicht!", "Dieses Spionagetool wurde in Haus "+ hausid + " schon installiert", false, true);
 					break;
 				}
 			}
@@ -326,6 +341,7 @@ public class Control implements IControl {
 			for (int i=0; i<guilayer.getSimulation().getHouses().get(hausid-1).getUeberwachungsmodule().size(); i++){
 				if (guilayer.getSimulation().getHouses().get(hausid-1).getUeberwachungsmodule().get(i).equals("Fernglas")){
 					istVorhanden=true;
+					guilayer.showDialogMessage("Das klappt nicht!", "Dieses Spionagetool wurde in Haus "+ hausid + " schon installiert", false, true);
 					break;
 				}
 			}

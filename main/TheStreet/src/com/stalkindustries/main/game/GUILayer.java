@@ -1554,7 +1554,7 @@ public class GUILayer extends JFrame implements MouseMotionListener {
 	 * @param ueberschrift String für die Überschrift
 	 * @param beschreibung String für den Beschreibungstext
 	 * @param cancelButton true falls cancel Button angezeigt werden soll
-	 * @param acceptButton true faalls accept button angezeigt werden soll
+	 * @param acceptButton true falls accept button angezeigt werden soll
 	 */
 	public void showDialogMessage(String ueberschrift, String beschreibung, boolean cancelButton, boolean acceptButton){
 		dialogText.setText(beschreibung);
