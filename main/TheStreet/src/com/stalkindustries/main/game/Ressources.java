@@ -38,7 +38,7 @@ public class Ressources {
 	public static BufferedImage[] tutorial;
 	
 	public static final String HOMEDIR = defaultDirectory();
-	public static int NUMBERHOUSES;
+	public static int NUMBERHOUSES;	//Anzahl der Häuser in der Straße
 	public static final int NUMBERBESCHWICHTIGENACTIONS = 4; // Zahl ist grad nur Dummywert
 	public static int AUSGEWAEHLTESLAND = 1; //TODO dynamisch ausgewähltes Land reinschreiben
 	
@@ -63,13 +63,6 @@ public class Ressources {
 	
 	
 	static{
-		//Initialisierung der location_ids
-		
-//		russian_names = read_from_csv("src\\com\\stalkindustries\\data\\russland_namen.csv");
-//		arabian_names = read_from_csv("src\\com\\stalkindustries\\data\\saudiarabien_quizfragen.csv");
-//		russian_quiz = read_from_csv("src\\com\\stalkindustries\\data\\russland_quizfragen.csv");
-//		arabian_quiz = read_from_csv("src\\com\\stalkindustries\\data\\saudiarabien_quizfragen.csv");
-		
 		SCREEN=Toolkit.getDefaultToolkit().getScreenSize();
 		ZEROPOS = new Dimension();	//zeropos berechnen -> Koordinatenverschiebung
 		ZEROPOS.setSize((SCREEN.getWidth()/2)-(MAPWIDTH/2),(SCREEN.getHeight()/2)-(MAPHEIGHT/2));
@@ -145,6 +138,7 @@ public class Ressources {
 	
 	/**
 	 * @author Miriam & Sven
+	 * zum Einlesen einer CSV-Datei
 	 */
 		public static ArrayList<ArrayList<String>> readFromCsv(String dateiName){
 			ArrayList<ArrayList<String>> list_of_lists = new ArrayList<ArrayList<String>>();
@@ -176,6 +170,10 @@ public class Ressources {
 		}
 		
 		
+		/**
+		 * @author Miriam 
+		 * ermittelt, wie viele Häuser sich in der Straße befinden und setzt die statische Variable NUMBERHOUSES auf diesen Wert
+		 */
 	private static void setNumberOfHouses(){
 		int houses=0;
 		
@@ -192,23 +190,21 @@ public class Ressources {
 	}
 	
 		
+	/**
+	 * @author Miriam 
+	 * gibt alle IDs, die in dem Locationraster eingelesen werden zurück (d.h. die Werte, die sagen, wo sich etwas wie Häuser, etc. auf der Karte befinden)
+	 */
 	public static ArrayList<ArrayList<String>> getLocation_ids() {
-//		ArrayList<ArrayList<String>> loc_ids = new ArrayList<ArrayList<String>>();
-//		ArrayList<String>tmp;
-//		
-//		for(int i=0;i<location_ids.size();i++){
-//			tmp = new ArrayList<String>();
-//			for(int j=0;j<location_ids.get(i).size();j++){
-//				tmp.add(location_ids.get(i).get(j));
-//			}
-//			loc_ids.add(tmp);
-//		}
 		ArrayList<ArrayList<String>> loc_ids;
 		loc_ids = copyCsv(location_ids);
 		return loc_ids;
 	}
 	
 	
+	/**
+	 * @author Miriam 
+	 * gibt alle Namen der ausgewählten Map zurück
+	 */
 	public static ArrayList<ArrayList<String>> getNames() {
 		ArrayList<ArrayList<String>> namen;
 		namen = copyCsv(names);
@@ -216,24 +212,41 @@ public class Ressources {
 	}
 	
 	
+	/**
+	 * @author Miriam 
+	 * gibt alle Quizfragen und Antworten der ausgewählten Map zurück
+	 */
 	public static ArrayList<ArrayList<String>> getQuiz() {
 		ArrayList<ArrayList<String>> quiz;
 		quiz = copyCsv(quizfragen);
 		return quiz;
 	}
 	
+	/**
+	 * @author Miriam 
+	 * gibt alle Events zurück, die der Schwerverbrecher haben kann
+	 */
 	public static ArrayList<ArrayList<String>> getEvilEvents() {
 		ArrayList<ArrayList<String>> evil;
 		evil = copyCsv(evilevents);
 		return evil;
 	}
 	
+	
+	/**
+	 * @author Miriam 
+	 * gibt alle Events zurück, die die normale Bevölkerung haben kann
+	 */
 	public static ArrayList<ArrayList<String>> getNormalEvents() {
 		ArrayList<ArrayList<String>> normal;
 		normal = copyCsv(normalevents);
 		return normal;
 	}	
 	
+	/**
+	 * @author Miriam 
+	 * kopiert den Inhalt einer vorher eingelesenen CSV-Datei um in new_csv
+	 */
 	public static ArrayList<ArrayList<String>> copyCsv(ArrayList<ArrayList<String>> input){
 		ArrayList<ArrayList<String>> new_csv = new ArrayList<ArrayList<String>>();
 		
@@ -248,6 +261,10 @@ public class Ressources {
 	}
 	
 	
+	/**
+	 * @author Miriam 
+	 * hierbei wird die Reihenfolge der Elemente vertauscht, um beispielsweise die Newstickerevents durchzumischen
+	 */
 	public static ArrayList<ArrayList<String>> randomizeLists(ArrayList<ArrayList<String>> input){
 		ArrayList<ArrayList<String>> output = new ArrayList<ArrayList<String>>();
 		ArrayList<String> tmp;
@@ -256,8 +273,6 @@ public class Ressources {
 		int step = (int)(Math.random()*(listsize-2)+1);
 		
 		for(int i=0;i<listsize;i++){
-			//tmp = new ArrayList<String>();
-			//tmp.add(input.get(start).get(0));
 			tmp = input.get(start);
 			input.remove(start);
 			if(input.size() != 0)
@@ -269,9 +284,14 @@ public class Ressources {
 	}
 	
 	
+	/**
+	 * @author Miriam 
+	 * getter Methode für Livetickergags
+	 */
 	public static ArrayList<ArrayList<String>> getLiveTickerGags(){
 		return livetickergags;
 	}
+	
 	
 	private static String defaultDirectory()
 	{
