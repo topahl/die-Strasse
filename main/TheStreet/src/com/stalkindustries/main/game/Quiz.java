@@ -32,6 +32,10 @@ public class Quiz {
 	}
 	
 
+	/**
+	 * Quiz anzeigen und Counter starten
+	 * @author Miriam, Tobias
+	 */
 	public void starteQuiz(){
 		//Frage setzen
 		this.frage.setText(this.quizFragen.get(this.quizStart).get(0));
@@ -93,20 +97,22 @@ public class Quiz {
 	}
 	
 	/**
+	 * analysieren, ob gegebene Antwort richtig war
 	 * @author Miriam
 	 */
 	public void analyzeAntwort(String antwort){
 		int antwortnr = (int)antwort.charAt(0)-61;
 		int richtigkeit = Integer.parseInt(this.quizFragen.get(this.quizStart).get(antwortnr));
 		this.beantwortet.add(richtigkeit);
-		if(richtigkeit == 100)
+		if(richtigkeit == 100)	//richtig beantwortete Fragen, sollen nicht nochmal kommen
 			this.quizFragen.remove(this.quizStart);
-		this.quizStart = (this.quizStart + this.quizStep)%this.quizFragen.size();
+		this.quizStart = (this.quizStart + this.quizStep)%this.quizFragen.size();//zum nächsten Element in der Quizliste gehen
 		this.running = false;
 	}
 	
 	
 	/**
+	 * Misstrauen nach der Beantwortung der Frage neu berechnen
 	 * @author Miriam
 	 */
 	public void calcMisstrauenAfterQuiz(){
@@ -114,7 +120,7 @@ public class Quiz {
 		gui.getButtonsMap().get("pause").setEnabled(true);
 		
 		int misstrauen = 0;
-		//nur wenn die Antwort nicht zu 100% richtig war
+		//nur wenn die Antwort zu 100% richtig war
 		if(this.beantwortet.get(this.beantwortet.size()-1) == 100){
 			misstrauen = -5;
 		}
