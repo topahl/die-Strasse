@@ -35,10 +35,10 @@ public class Map extends JLabel{
 				for(int k=1;k<Ressources.getLocation_ids().get(j).size()-1;k++){
 					if(Ressources.getLocation_ids().get(j).get(k).charAt(0) ==("" + (i+1)).charAt(0)){	
 						if(Ressources.getLocation_ids().get(j+1).get(k).charAt(0) == ("" + (i+1)).charAt(0) && Ressources.getLocation_ids().get(j-1).get(k).charAt(0) == ("" + (i+1)).charAt(0) && Ressources.getLocation_ids().get(j).get(k+1).charAt(0) == ("" + (i+1)).charAt(0) && Ressources.getLocation_ids().get(j).get(k-1).charAt(0) == ("" + (i+1)).charAt(0)) {
-							if(i == agentenhaus){
+							if(i == agentenhaus){ //wenn Agentenhaus, dann einen Bundesadler zeichnen
 								g2d.drawImage(Ressources.zahlen.getSubimage(10*Ressources.RASTERHEIGHT, 0, Ressources.RASTERHEIGHT, Ressources.RASTERHEIGHT),k*Ressources.RASTERHEIGHT,j*Ressources.RASTERHEIGHT, null);
 							}
-							else
+							else	//wenn normales Haus, dann einfach Hausnummer zeichnen
 								g2d.drawImage(Ressources.zahlen.getSubimage((i+1)*Ressources.RASTERHEIGHT, 0, Ressources.RASTERHEIGHT, Ressources.RASTERHEIGHT),k*Ressources.RASTERHEIGHT,j*Ressources.RASTERHEIGHT, null);
 						}
 					}
