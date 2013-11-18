@@ -575,6 +575,10 @@ public class Control implements IControl {
 		}
 	}
 	
+	/**
+	 * Agent möchte einen Haushalt festnehmen
+	 * @author Miriam 
+	 */
 	private void clickRazzia() {
 		closeWindow("fensterhaus"); 
 		closeWindow("spionage");
