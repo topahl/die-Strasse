@@ -227,11 +227,6 @@ public class GUILayer extends JFrame implements MouseMotionListener {
 
 		
 		//Newsticker
-//		this.newsticker.setBounds(Ressources.ZEROPOS.width +15, Ressources.ZEROPOS.height, Ressources.MAPWIDTH-120, Ressources.RASTERHEIGHT+2);
-//		this.newsticker.setFont(new Font("Corbel", Font.BOLD, 16));
-//		this.newsticker.setForeground(new java.awt.Color(249, 249, 249));
-//		this.newsticker.setVisible(true);
-//		this.baseLayer.add(this.newsticker, javax.swing.JLayeredPane.DEFAULT_LAYER);
 		this.newsticker.setBounds(0, 0, 2000, 2000);
 		this.newsticker.setFont(new Font("Corbel", Font.BOLD, 16));
 		this.newsticker.setForeground(new java.awt.Color(249, 249, 249));
@@ -739,7 +734,7 @@ public class GUILayer extends JFrame implements MouseMotionListener {
 
 
 	/**
-	 * Generieren der Menschen und Teleport in die Häuser
+	 * Generieren der Menschen+Agent und Teleport in die Häuser
 	 * @author Miri
 	 * @param agentname 
 	 */
@@ -757,11 +752,10 @@ public class GUILayer extends JFrame implements MouseMotionListener {
 		}
 
 		int people_per_house;
-		int number_of_adults;
-		int number_of_children;
+		int number_of_adults;	//bezogen auf einen Haushalt
+		int number_of_children;	//bezogen auf einen Haushalt
 
-		// erster Erscheinungspunkt einer Person in einem Haus --> jedes Haus
-		// hat einen
+		// erster Erscheinungspunkt einer Person in einem Haus --> jedes Haus hat einen
 		int spawnHausX[] = new int[Ressources.NUMBERHOUSES];
 		int spawnHausY[] = new int[Ressources.NUMBERHOUSES];
 
@@ -775,7 +769,7 @@ public class GUILayer extends JFrame implements MouseMotionListener {
 		Mensch mensch; // Hilfsvariable zum Zwischenspeichern
 
 		// Spawnpunkte initialisieren
-		// immer linke obere Ecke in einem Haus
+		// immer mit linke obere Ecke in einem Haus
 		ArrayList<ArrayList<String>> location_raster = Ressources
 				.getLocation_ids();
 		for (int haus = 0; haus < Ressources.NUMBERHOUSES; haus++) {
@@ -802,6 +796,8 @@ public class GUILayer extends JFrame implements MouseMotionListener {
 			// für jedes Haus die Familie erstellen
 			familien_cnt = 0;
 			// für ein Haus die Spawnpunkte festlegen
+			// die Spawnpunkte der einzelnen Personen sind auch deren
+			// Punkte, zu denen sie immer wieder zurückkehren
 			spawnPersonX[0] = spawnHausX[i];
 			spawnPersonY[0] = spawnHausY[i];
 			spawnPersonX[1] = spawnHausX[i] + Ressources.RASTERHEIGHT;
@@ -816,15 +812,17 @@ public class GUILayer extends JFrame implements MouseMotionListener {
 				people_per_house = (int) (Math.random() * 4) + 1;
 				// wie viele Menschen in einem Haus wohnen sollen
 				if (i == house_of_terrorist) {
-					// Terrorist muss kann kein Kind sein
+					// Schwerverbrecher darf kann kein Kind sein
 					number_of_adults = 1 + (int) (Math.random() * people_per_house);
 					
-					//Evil Event
+					//Evil Event dem Schwerverbrecher zuweisen
 					int id = (int)(Math.random()*Ressources.getEvilEvents().size());
-					mensch = new Terrorist(i,this.includeHaus(Ressources.getEvilEvents().get(id),i));	
+					mensch = new Terrorist(i,this.includeHaus(Ressources.getEvilEvents().get(id),i));	//Schwerverbrecher initialisieren
 					System.out.println(mensch_cnt+". "+this.includeHaus(Ressources.getEvilEvents().get(id),i).get(0));	//TODO: System.out.... entfernen
 					
-					this.humans.add(mensch);
+					this.humans.add(mensch);	//den Menschen den Schwerverbrecher hinzufügen
+					
+					//Schwerverbrecher auf Map zeichnen
 					this.baseLayer.add(mensch,
 							javax.swing.JLayeredPane.DEFAULT_LAYER);
 					this.humans.get(mensch_cnt).teleport(
@@ -834,13 +832,16 @@ public class GUILayer extends JFrame implements MouseMotionListener {
 							spawnPersonX[familien_cnt]);
 					this.humans.get(mensch_cnt).setHomePosY(
 							spawnPersonY[familien_cnt]);
+					
 					mensch_cnt++;
 					familien_cnt++;
 
 					// übrige Erwachsene setzen
 					for (int j = 0; j < number_of_adults - 1; j++) {
-						mensch = new Erwachsene(i,this.includeHaus(Ressources.getNormalEvents().get(mensch_cnt),i));
+						mensch = new Erwachsene(i,this.includeHaus(Ressources.getNormalEvents().get(mensch_cnt),i));	//Erwachsenen initialisieren
 						this.humans.add(mensch);
+						
+						//Erwachsenen zeichnen
 						this.baseLayer.add(mensch,
 								javax.swing.JLayeredPane.DEFAULT_LAYER);
 						this.humans.get(mensch_cnt).teleport(
@@ -850,14 +851,17 @@ public class GUILayer extends JFrame implements MouseMotionListener {
 								spawnPersonX[familien_cnt]);
 						this.humans.get(mensch_cnt).setHomePosY(
 								spawnPersonY[familien_cnt]);
+						
 						mensch_cnt++;
 						familien_cnt++;
 					}
 				} else {
-					// in jedem Haushalt muss mindestens ein Erwachsener leben
+					// in jedem Haushalt muss mindestens ein Erwachsener leben --> +1
 					number_of_adults = (int) (Math.random() * people_per_house) + 1;
 					for (int j = 0; j < number_of_adults; j++) {
 						mensch = new Erwachsene(i,this.includeHaus(Ressources.getNormalEvents().get(mensch_cnt),i));
+						
+						//Erwachsene zeichnen
 						this.humans.add(mensch);
 						this.baseLayer.add(mensch,
 								javax.swing.JLayeredPane.DEFAULT_LAYER);
@@ -868,6 +872,7 @@ public class GUILayer extends JFrame implements MouseMotionListener {
 								spawnPersonX[familien_cnt]);
 						this.humans.get(mensch_cnt).setHomePosY(
 								spawnPersonY[familien_cnt]);
+						
 						mensch_cnt++;
 						familien_cnt++;
 					}
@@ -876,6 +881,8 @@ public class GUILayer extends JFrame implements MouseMotionListener {
 				number_of_children = people_per_house - number_of_adults;
 				for (int j = 0; j < number_of_children; j++) {
 					mensch = new Kinder(i,this.includeHaus(Ressources.getNormalEvents().get(mensch_cnt),i));
+					
+					//Kinder zeichnen
 					this.humans.add(mensch);
 					this.baseLayer.add(mensch,
 							javax.swing.JLayeredPane.DEFAULT_LAYER);
@@ -886,11 +893,12 @@ public class GUILayer extends JFrame implements MouseMotionListener {
 							spawnPersonX[familien_cnt]);
 					this.humans.get(mensch_cnt).setHomePosY(
 							spawnPersonY[familien_cnt]);
+					
 					mensch_cnt++;
 					familien_cnt++;
 				}
 				
-			} this.initHaus(i, false, spawnHausX[i], spawnHausY[i]);
+			} this.initHaus(i, false, spawnHausX[i], spawnHausY[i]);	//nachdem alle Familienmitglieder erstellt wurden, wird dan Haus initialisiert
 		}
 
 		// Simulation benötigt die Information von allen Bewohnern (ohne Agent)
@@ -916,7 +924,7 @@ public class GUILayer extends JFrame implements MouseMotionListener {
 	/**
 	 * Erzeugung eines Hauses
 	 * @param hausnr Haus-ID
-	 * @param agentenhaus Ist dieses Haus das Agentenhaus?
+	 * @param agentenhaus: true->hier wohnt der Agent, false->hier wohnt eine einheimische Familie
 	 * @param x X-Position des Hauses
 	 * @param y Y-Position des Hauses
 	 * @author Miriam
@@ -929,7 +937,7 @@ public class GUILayer extends JFrame implements MouseMotionListener {
 
 	
 	/**
-	 * LocationID einer Person bei jedem Step updaten
+	 * LocationID einer Person bei jedem Step updaten, d.h. herausfinden, wo sich eine Person gerade auf der Map befindet
 	 * @author Miri
 	 */
 	private void updateLocationID() {
@@ -1006,6 +1014,9 @@ public class GUILayer extends JFrame implements MouseMotionListener {
 	}
 	
 	/**
+	 * Hausnummer in ein Event includieren
+	 * input: String, in dem das %-Zeichen durch die Hausnummer ersetzt werden muss
+	 * i: Hausid --> man muss für die Hausnummer noch 1 draufaddieren
 	 * @author Miriam
 	 */
 	public ArrayList<String> includeHaus(ArrayList<String> input, int i){
@@ -1017,21 +1028,24 @@ public class GUILayer extends JFrame implements MouseMotionListener {
 	}
 	
 	/**
+	 * randomisierten Namen/Hausnummer in ein Event includieren --> nur für Livetickergags
+	 * input: String, bei dem $1 und $2 irgendein Name eingesetzt, bei $M ein Männername, bei $W ein Frauenname 
+	 * und bei % eine randimisierte Hausnummer eingesetzt wird
 	 * @author Miriam
 	 */
 	public String includeNames(String input){	
 		String frau = "";
 		String mann = "";
 		int index = (int)(Math.random()*(this.humans.size()-1));
-		if(((Person)this.humans.get(index)).getGeschlecht() == 2){
-			while(((Person)this.humans.get(index)).getGeschlecht() != 1){
+		if(((Person)this.humans.get(index)).getGeschlecht() == 2){	//wenn es sich um eine Frau handelt
+			while(((Person)this.humans.get(index)).getGeschlecht() != 1){	//wird nun ein Mann gesucht
 				frau = this.humans.get(index).getName();
 				index = (int)(Math.random()*(this.humans.size()-1));
 			}
 			mann = this.humans.get(index).getName();
 		}
-		else{
-			while(((Person)this.humans.get(index)).getGeschlecht() != 2){
+		else{														//wenn es sich um einen Mann handelt
+			while(((Person)this.humans.get(index)).getGeschlecht() != 2){ //wird nun eine Frau gesucht
 				mann = this.humans.get(index).getName();
 				index = (int)(Math.random()*(this.humans.size()-1));
 			}
@@ -1043,10 +1057,10 @@ public class GUILayer extends JFrame implements MouseMotionListener {
 		String hausnr = String.valueOf((int)(Math.random()*Ressources.NUMBERHOUSES)+1);
 		String egal1 = this.humans.get((int)(Math.random()*this.humans.size()-1)).getName();
 		String egal2 = this.humans.get((int)(Math.random()*this.humans.size()-1)).getName();
-		while(egal1.equals(egal2))
+		while(egal1.equals(egal2))	//dafür sorgen, dass bei Strings nicht identisch sind
 			egal2 = this.humans.get((int)(Math.random()*this.humans.size()-1)).getName();
 			
-		String output="";
+		String output="";	//nun die Zeichen durch die generierten Strings ersetzen 
 				if(input.contains("$1")){
 					output = input.replace("$1",egal1);
 					input = output;
@@ -1071,6 +1085,8 @@ public class GUILayer extends JFrame implements MouseMotionListener {
 		}
 	
 	/**
+	 * liefert einen zufälligen Livertickergag zurück, bei dem vor der Rückgabe noch Namen und Häuser
+	 * zufällig eingefügt werden
 	 * @author Miriam
 	 */
 	public String getLiveTickerGags(){
@@ -1082,48 +1098,48 @@ public class GUILayer extends JFrame implements MouseMotionListener {
 	}
 	
 	/**
+	 * Beenden des Spiels
 	 * @author Miriam
 	 */
 	public void stopGame(){
 		this.control.clickPause();
 		this.buttons.get("pause").setEnabled(false);
-		//this.callHighscore();
 	}
 	
 	
 	/**
+	 * Ausgabe der personenbezogenen Events im Liveticker
 	 * @author Miriam
 	 */
 	private void generateLiveTicker(){
-		boolean b = false;
-		int zufall = (int)(Math.random()*5);
+		boolean b = false;	//Hilfvariable dafür, ob das Event entdeckt wurde, oder ob der Zufall es verhindert hat
+		int zufall = (int)(Math.random()*5);	//Wahscheinlichkeit, dass ein Event überhaupt entdeckt wird
 		//alle Personen auf Events überprüfen
 		for(int i=0;i<this.humans.size()-1;i++){	
-			if(this.humans.get(i) instanceof Person){
-				//wenn das Event noch nicht aufgetaucht ist
+			if(this.humans.get(i) instanceof Person){ //Agenten ausschließen
+				//wenn das Event noch nicht aufgetaucht ist, hat das Event eine Länge von 3, danach eine Länge von 4
+				// und jedes Event soll ja nur einmal auftauchen
 				if(((Person)this.humans.get(i)).getEvent().size() == 3){
 					//wenn der Überwachungswert des Hauses hoch genug ist, um das Event zu entdecken
 					if(this.simulation.getHouses().get(this.humans.get(i).getHausId()).getUeberwachungsstatus() >= Integer.valueOf(((Person)this.humans.get(i)).getEvent().get(2))){
 						if(zufall == 1){
-							b = true;
+							b = true;	//Event wird aufgedeckt
+							//Event in Newsticker zeichnen und das Event farblisch hervorheben (mit rot)
 							this.newsticker.setForeground(new java.awt.Color(249, 50, 50));
 							this.newsticker.setText(((Person)this.humans.get(i)).getEvent().get(0));
-							((Person)this.humans.get(i)).addStringToEvent("used");
+							((Person)this.humans.get(i)).addStringToEvent("used"); //nun hat das Event die Länge 4
 							break;
 						}
 					}
 				}
 			}
 		}
-		if(!b){
+		if(!b){ //es wird kein personenbezogenes Event angezeigt --> nur ein Newstickergag anzeigen in Schriftfarbe schwarz
 			this.newsticker.setForeground(new java.awt.Color(249, 249, 249));
 			this.newsticker.setText(this.getLiveTickerGags());
 		}
 		this.tickerTextSize = this.newsticker.getGraphics().getFontMetrics().stringWidth(this.newsticker.getText());
 		this.newsticker.setBounds(0, 0, this.tickerTextSize+5, Ressources.RASTERHEIGHT+2);
-		tickerStep = 0;
-		if(this.tickerTextSize > Ressources.MAPWIDTH-120)
-			tickerStep = 50;
 	}
 	
 	
@@ -1164,7 +1180,7 @@ public class GUILayer extends JFrame implements MouseMotionListener {
 			quiz.step();
 		}
 		
-		//Liveticker
+		//Newsticker
 		if(this.stepcounter%tickerHaufigkeit == 0){
 			this.generateLiveTicker();
 		}
@@ -1184,7 +1200,8 @@ public class GUILayer extends JFrame implements MouseMotionListener {
 			}
 		}
 		
-		//Unwohlsein durch installierte Überwachungsmodule
+		//Unwohlsein durch installierte Überwachungsmodule,
+		//d.h. wenn ein Haus überwacht wird, dann fühlt es sich kontinuierlich unwohl
 		if(this.stepcounter%1000 == 0){
 			this.simulation.calcMisstrauenDuringUeberwachung();
 		}
@@ -1288,6 +1305,8 @@ public class GUILayer extends JFrame implements MouseMotionListener {
 		}
 		
 		//durchgeführte Beschwichtigungen um 0Uhr zurücksetzen
+		//bewirkt, dass man z.B. nur immer einmal am Tag einen Kuchen vorbeibringen kann
+		//alles andere wäre doch sehr auffällig
 		if(this.simulation.getSpielStunde() == 0 && this.simulation.getSpielMinute() == 0){
 			for(int i=0;i<this.simulation.getPeople().size();i++){
 				for(int j=0;j<Ressources.NUMBERBESCHWICHTIGENACTIONS;j++){
@@ -1537,14 +1556,21 @@ public class GUILayer extends JFrame implements MouseMotionListener {
 		return dialogÜberschrift.getText();
 	}
 	
-	//Beschwerden Miri
+	/**
+	 * berechnet nach Beendigung des Spiels den Highscore und exportiert die Ergebnisse in 
+	 * die User-Datei und in die Gesamtscores
+	 * @author Miriam 
+	 */
 	public void callHighscore(){
 		this.highscore.calcHighscoreOfAgent();
 		this.highscore.exportIntoUser();
 		this.highscore.exportIntoScores();
 	}
 	
-	//Beschwerden Miri
+	/**
+	 * gibt Referenz auf die Highscoreinstanz zurück, nicht auf den Wert selbst!!!
+	 * @author Miriam 
+	 */
 	public Highscore getHighscore(){
 		return this.highscore;
 	}
