@@ -65,10 +65,8 @@ public abstract class Person extends Mensch {
 		this.istFarbig=false;
 				
 
-		//Person einen Namen geben
-		//this.name = Ressources.getNames().get((int)(Math.random()*Ressources.getNames().size())).get(this.geschlecht-1);	
+		//Person einen Namen geben	
 		this.setName(Ressources.getNames().get((int)(Math.random()*Ressources.getNames().size())).get(this.geschlecht-1));
-		//System.out.println(this.name);
 	}
 	
 	public double getMisstrauen(){
