@@ -31,6 +31,8 @@ public class Simulation {
 	
 	
 	/**
+	 * Initialiseren der Beziehungsmatrix, d.h. jeder bekommt randomisiert zugewiesen,
+	 * wie sehr er mit jemand anderem befreundet ist
 	 * @author Miriam
 	 */
 	void initialisiereBeziehungsmatrix(){
@@ -40,13 +42,15 @@ public class Simulation {
 			for(int j=0;j<this.people.size();j++)
 				this.beziehungsmatrix[i][j] = 0;
 		
-		//asymmetrisch
+		//asymmetrische Beziehungsmatrix
 		for(int i=0;i<this.people.size();i++){
 			for(int j=0;j<this.people.size();j++){
 				if(i!=j){
 					tmp = (int)(Math.random()*(10))+1;
 					this.beziehungsmatrix[i][j] = tmp;
-					if(this.people.get(i).getHausId() == this.people.get(j).getHausId()){ //Person in einem Haushalt sind besser miteinander befreundet
+					
+					//wenn Menschen im gleichen Haus wohnen, dann verstehen sie sich automatisch besser
+					if(this.people.get(i).getHausId() == this.people.get(j).getHausId()){ 
 						tmp = (10-tmp)/2;
 						this.beziehungsmatrix[i][j] += tmp;
 						this.beziehungsmatrix[j][i] += tmp;
@@ -59,9 +63,11 @@ public class Simulation {
 	
 	
 	/**
+	 * Misstrauensberechnung durch kontinuierliche gegenseitige Beeinflussung
 	 * @author Miriam
 	 */
 	void calcMisstrauen(){
+		//nachts beim Schlafen beeinflussen sich die Menschen nicht gegenseitig
 		if(this.spielStunde > 5 || this.spielStunde < 2){
 			//misstrauen[] ist eine Hilfvariable, die später die später die neuen Werte enthält und sie wird benötigt, dass nicht die echten Werte verändert werden, bevor alle berechnet wurden
 			double[] misstrauen = new double[people.size()];
@@ -75,6 +81,7 @@ public class Simulation {
 			//jede Person kann theoretisch wieder von jeder anderen beeinflusst werden
 			for(int i=0;i<this.people.size();i++){
 				//wenn sich Person dort befindet, wo sie auch beeinflusst werden kann
+				//z.B. im Park oder im Haus oder Kinder in der Schule
 				if((int)(this.people.get(i).getLocationId())-48+1 != 0 && (int)(this.people.get(i).getLocationId())-48+1 != 'X' && (int)(this.people.get(i).getLocationId())-48+1 != 'E'){
 					for(int j=0;j<this.people.size();j++){
 						//eine Person kann sich nicht selbst beeinflussen
@@ -133,6 +140,7 @@ public class Simulation {
 	
 	
 	/**
+	 * Misstrauen neu berechnen, nachdem der Agent im Park beschwichtigt hat
 	 * @author Miriam
 	 */
 	public void calcMisstrauenNachBeschwichtigenInPark(){
@@ -153,6 +161,7 @@ public class Simulation {
 	
 	
 	/**
+	 * Misstrauen nach einer Beschwichtigenaktion des Agenten neu berechnen
 	 * @author Miriam
 	 */
     public void calcMisstrauenNachBeschwichtigen(int actionId, Person person){
@@ -173,13 +182,11 @@ public class Simulation {
                         if(zufall == 0)
                             zufall = -1;
                     }
-//                    else
-//                        zufall = (int)(Math.random()*(misstrauen/10));
                 }
         
         //Risiko einer Beschwichtigenaktion steigt, je häufiger man sie ausführt
         risiko = person.getDurchgefuehrteBeschwichtigungen(actionId);
-        if(actionId == 0 || actionId == 2 || actionId == 3){    //Kuchen, Flirten, Helfen
+        if(actionId == 0 || actionId == 2 || actionId == 3){    //Kuchen, Flirten und Helfen dürfen nur einmal pro Tag bei der gleichen Person gemacht werden 
             if(risiko == 0){
                 if(zufall > 5)
                     zufall *= (-1);
@@ -197,7 +204,7 @@ public class Simulation {
                     zufall *= (-3);
             }
         }
-        else if(actionId == 1){    //bei Haus vorbeigehen, um zu reden
+        else if(actionId == 1){    //bei Haus vorbeigehen, um zu reden, darf ohne negative Folgen 3mal am Tag gemacht werden
             if(risiko <= 3)
                 if(zufall >= 0)
                     zufall *= (-3);
@@ -231,6 +238,7 @@ public class Simulation {
 	
 	
     /**
+     * Berechnet, ob Agent beim Einbrechen erwicht wurde und wie sich das auf das Misstrauen der Bewohner und Nachbarn auswirkt
 	 * @author Miriam
 	 */
 	public void calcMisstrauenNachUeberwachung(int hausId){
@@ -244,9 +252,11 @@ public class Simulation {
 			risiko = (int)(Math.random()*15); 
 		}
 		
+		//Mittelpunkt des Hauses bestimmen 
 		int mittelpunktX = this.houses.get(hausId-1).getPosX()+3*Ressources.RASTERHEIGHT/2;
 		int mittelpunktY = this.houses.get(hausId-1).getPosY()+3*Ressources.RASTERHEIGHT/2;
-		int epsilon = 200;	
+		
+		int epsilon = 200;	//in diesem Radius (Epsilon-Umgebung) um das Haus, kann man von Nachbarn erwicht werden
 		
 		for(int i=0;i<this.people.size();i++){
 			//Checken, ob sich noch jemand in dem Haus befindet
@@ -256,8 +266,7 @@ public class Simulation {
 					this.people.get(i).setMisstrauen(this.people.get(i).getMisstrauen()+6); 
 			}
 			//Checken, ob sich jemand in einer epsilon-Umgebung um das Haus befindet, in das eingebrochen werden soll
-			//--> 1. Epsilon-Umgebung aufspannen (ist eine relative eckige :-D)
-			//-->Mittelpunkt vom Haus bestimmen
+			//--> 1. Epsilon-Umgebung um Hausmittelpunkt aufspannen (ist eine relative eckige Umgebung :-D)
 			else{
 				// wenn sich eine Person in der Epsilon-Umgebung befindet
 				if(this.people.get(i).getPosX() >= mittelpunktX-epsilon && this.people.get(i).getPosX() <= mittelpunktX+epsilon && this.people.get(i).getPosY() >= mittelpunktY-epsilon && this.people.get(i).getPosY() <= mittelpunktY+epsilon && this.people.get(i).getLocationId()!='E'){
@@ -284,6 +293,8 @@ public class Simulation {
 	
 	
 	/**
+	 * zum Aufrufen der Misstrauensmethoden, hierbei wird unterschieden, ob der Agent beim Betrete
+	 * des Hauses beschwichtigen oder spionieren will
 	 * @author Miriam
 	 */
 	public void agentBetrittFremdesHaus(){
@@ -363,7 +374,7 @@ public class Simulation {
 		for(int i=0;i<this.houses.size();i++){
 			ueberwachung += this.houses.get(i).getUeberwachungsstatus();
 		}
-		ueberwachung = ueberwachung/(this.houses.size()-1);
+		ueberwachung = ueberwachung/(this.houses.size()-1);	//Agentenhaus ausgenommen
 		
 		return ueberwachung;
 	}
