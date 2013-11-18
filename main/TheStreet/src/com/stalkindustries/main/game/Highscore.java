@@ -11,6 +11,10 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 
+/**
+ * @author Miriam
+ */
+
 public class Highscore {
 	private double highscore = 0d;
 	private double wissenswert = 0d;
@@ -25,6 +29,7 @@ public class Highscore {
 	
 	
 	/**
+	 * Konstruktor von Highscore
 	 * @author Miriam
 	 */
 	public Highscore(Simulation simulation, Quiz quiz, Agent agent, String levelname){
@@ -35,6 +40,7 @@ public class Highscore {
 	}
 	
 	/**
+	 * den Highscrore des aktuellen Benutzers berechnen
 	 * @author Miriam
 	 */
     public void calcHighscoreOfAgent(){
@@ -47,7 +53,7 @@ public class Highscore {
         //Misstrauen Max
         this.misstrauenMax = this.simulation.getMisstrauenMax();
         
-        //Events
+        //Anzahl der entdeckten Events berechnen
                 for(int i=0;i<this.simulation.getPeople().size();i++){
                     if(this.simulation.getPeople().get(i).getEvent().size() == 4)
                         this.events++;
@@ -65,22 +71,28 @@ public class Highscore {
         
         this.highscore = this.wissenswert - this.misstrauenMax - this.spielzeit/8640 + 100*this.events/this.simulation.getPeople().size();
         
-              
+        //wenn man den Schwerverbrecher festgenommen hat, dann bekommt man einen Bonus
+        //dieser Bonus wird aber mit der Zeit immer geringer
         if(this.festgenommen)
         	if(this.spielzeit/8640 <= 1)
         		this.highscore += 300;
         	else
         		this.highscore += 300-70*Math.log(this.spielzeit/8640);
         
+        //Werte auf 2 Nachkommastellen runden
         this.highscore = Double.valueOf(Math.round(this.highscore*100)/100.00);
         this.misstrauenMax = Double.valueOf(Math.round(this.misstrauenMax*100)/100.00);
         this.wissenswert = Double.valueOf(Math.round(this.wissenswert*100)/100.00);
         
+        //wenn total schlecht war und einen negativen Highscore erreicht hat, dann wird er 
+        //automatisch auf 0 gesetzt, da 0 unser kleinster Highscore ist
         if(this.highscore < 0)
             this.highscore = 0;
     }
 	
     /**
+     * zum Einlesen des angegebenen Files
+     * entweder die Score-Dateien, oder die User-Dateien
 	 * @author Miriam
 	 */
 	public ArrayList<String> getFile(String dateiName){
@@ -99,6 +111,7 @@ public class Highscore {
 	}
 	
 	/**
+	 * Export der Highscoredaten in die Scoredateien der einzelnen Level
 	 * @author Miriam
 	 */
 	public void exportIntoScores(){
@@ -117,16 +130,18 @@ public class Highscore {
 			}		
 		
 	    //Beschreiben der Datei levelname.bnd
-		ArrayList<String> filearray = this.getFile(Ressources.HOMEDIR+"res\\user\\"+this.levelname+".bnd");
+		ArrayList<String> filearray = this.getFile(Ressources.HOMEDIR+"res\\user\\"+this.levelname+".bnd"); //Daten aus Datei holen, falls sie schon existiert
 		Writer fw = null;
 	     try
 	     {
 	    	 fw = new FileWriter(Ressources.HOMEDIR+"res\\user\\"+this.levelname+".bnd");
+	    	 //alte Daten in Datei schreiben
 	    	 for(int i=0;i<filearray.size();i++){
 	  	       fw.write(filearray.get(i));
 		       fw.append( System.getProperty("line.separator") ); 
 	    	 }
 	    	 
+	    	 //neue Daten anhängen
 	    	 fw.write(this.agent.getName()+": "+this.highscore +":");
 	    	 String now = new SimpleDateFormat(" dd.MM.yyyy : HH.mm.ss").format(new Date());
 	    	 fw.write(now);
@@ -143,6 +158,7 @@ public class Highscore {
 	}
 	
 	/**
+	 * Benutzerspezifische Auswertung erstellen oder erweitern
 	 * @author Miriam
 	 */
 	public void exportIntoUser(){
@@ -158,10 +174,13 @@ public class Highscore {
 	     try
 	     {
 	    	 fw = new FileWriter(Ressources.HOMEDIR+"res\\user\\"+this.agent.getName()+".usr");
+	    	 //alte Daten in Datei schreiben
 	    	 for(int i=0;i<file.size();i++){
 	  	       fw.write(file.get(i));
 		       fw.append( System.getProperty("line.separator") ); 
 	    	 }
+	    	 
+	    	 //neue Daten anhängen
 	    	 String now = new SimpleDateFormat("dd.MM.yyyy HH:mm:ss").format(new Date());
 	    	 fw.write(now);
 	    	 fw.append( System.getProperty("line.separator") );
