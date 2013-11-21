@@ -24,13 +24,12 @@ public class ControlMenu implements IControl, ListSelectionListener {
 	public ControlMenu(Menu mainmenu) {
 		this.mainmenu=mainmenu;
 	}
-	
+
 	/**
 	 * @author Tobias
 	 * @see IControl#call(String)
 	 */
 	public void call(String funktion) {
-		System.out.println("You pressed: "+funktion);
 		if(funktion.startsWith("level:"))		//level:*
 			beginGame(funktion);
 		if(funktion.equals("beenden"))			//beenden
@@ -42,7 +41,7 @@ public class ControlMenu implements IControl, ListSelectionListener {
 		if(funktion.equals("profil"))			//profil
 			openProfil();
 		if(funktion.equals("highscore"))		//highscore
-			mainmenu.showLayer(Menu.LAYERHIGHSCORE);
+			openHighscore();
 		if(funktion.equals("tutorial"))			//tutorial
 			mainmenu.showLayer(Menu.LAYERTUTORIAL);
 		if(funktion.equals("credits"))			//credits
@@ -64,14 +63,25 @@ public class ControlMenu implements IControl, ListSelectionListener {
 	/**
 	 * @author Tobias
 	 * Sicherheitsabfrage, ob sich der Benutzer schon angemeldet hat. 
-	 * Zugriff auf Levelauswahl nur als angemeldete Benutzer
+	 * Zugriff auf Levelauswahl nur als angemeldeter Benutzer
 	 */
 	private void pressedStart() {
 		if(mainmenu.getCurrentUser()!= "")
 			mainmenu.showLayer(Menu.LAYERLEVEL);
 		else
 			openProfil();
-		
+	}
+	
+	/**
+	 * @author Stephan
+	 * Sicherheitsabfrage, ob sich der Benutzer schon angemeldet hat. 
+	 * Zugriff auf Highscore nur als angemeldeter Benutzer
+	 */
+	private void openHighscore() {
+		if(mainmenu.getCurrentUser()!= "")
+			mainmenu.showLayer(Menu.LAYERHIGHSCORE);
+		else
+			openProfil();
 	}
 	
 	/**
