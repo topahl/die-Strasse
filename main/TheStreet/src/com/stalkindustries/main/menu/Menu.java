@@ -1193,9 +1193,10 @@ public class Menu extends JFrame implements MouseMotionListener {
      * 
      * @param valuePercent Prozentuale anzeige des Balkens
      * @param thresholdPercent Schwellwert von rotem zu grünem Balken
+     * @param turnColors Verdreht die balken für rot und grün
      * @return Bild mit kompletter Leiste mit Hintergrung
      */
-    private BufferedImage createPrivateScoreBar(double valuePercent, double thresholdPercent){
+    private BufferedImage createPrivateScoreBar(double valuePercent, double thresholdPercent, boolean turnColors){
     	BufferedImage output = new BufferedImage(135,20,BufferedImage.TYPE_INT_ARGB); 
     	
     	Graphics2D g2d = output.createGraphics();
@@ -1204,10 +1205,18 @@ public class Menu extends JFrame implements MouseMotionListener {
     		valuePercent=1d;
     	if(valuePercent<=0.008d)
     		valuePercent=0.008d;
-    	if(valuePercent>thresholdPercent)
-    		g2d.drawImage(Ressources.ingamebutton.getSubimage(948, 222, (int)(valuePercent*135), 20),0,0,null);
-    	else
-    		g2d.drawImage(Ressources.ingamebutton.getSubimage(948, 201, (int)(valuePercent*135), 20),0,0,null);
+    	if(!turnColors){
+	    	if(valuePercent>thresholdPercent)
+	    		g2d.drawImage(Ressources.ingamebutton.getSubimage(948, 222, (int)(valuePercent*135), 20),0,0,null);
+	    	else
+	    		g2d.drawImage(Ressources.ingamebutton.getSubimage(948, 201, (int)(valuePercent*135), 20),0,0,null);
+    	}
+    	else{
+	    	if(valuePercent>thresholdPercent)
+	    		g2d.drawImage(Ressources.ingamebutton.getSubimage(948, 201, (int)(valuePercent*135), 20),0,0,null);
+	    	else
+	    		g2d.drawImage(Ressources.ingamebutton.getSubimage(948, 222, (int)(valuePercent*135), 20),0,0,null);
+    	}
     	return output;
     }
     
@@ -1244,13 +1253,13 @@ public class Menu extends JFrame implements MouseMotionListener {
 			gameDetails[1].setText(score.get(0)+" - "+score.get(1).substring(0,score.get(1).length()-3)+" Uhr");
 			gameDetails[2].setText(score.get(2));
 			gameDetails[4].setText(score.get(5));
-			gameDetails[6].setIcon(new ImageIcon(createPrivateScoreBar(1d, score.get(3).equals("JA")?0d:1d)));
+			gameDetails[6].setIcon(new ImageIcon(createPrivateScoreBar(1d, score.get(3).equals("JA")?0d:1d ,false)));
 			gameDetails[7].setText(score.get(3));
-			gameDetails[10].setIcon(new ImageIcon(createPrivateScoreBar(Double.parseDouble(score.get(4))/100, 0.25d)));
+			gameDetails[10].setIcon(new ImageIcon(createPrivateScoreBar(Double.parseDouble(score.get(4))/100, 0.25d,true)));
 			gameDetails[9].setText(score.get(4)+"%");
-			gameDetails[13].setIcon(new ImageIcon(createPrivateScoreBar(Double.parseDouble(score.get(6))/100, 0.25d)));
+			gameDetails[13].setIcon(new ImageIcon(createPrivateScoreBar(Double.parseDouble(score.get(6))/100, 0.25d,false)));
 			gameDetails[12].setText(score.get(6)+"%");
-			gameDetails[16].setIcon(new ImageIcon(createPrivateScoreBar(Double.parseDouble(score.get(7))/Double.parseDouble(score.get(8)), 0.25d)));
+			gameDetails[16].setIcon(new ImageIcon(createPrivateScoreBar(Double.parseDouble(score.get(7))/Double.parseDouble(score.get(8)), 0.25d,false)));
 			gameDetails[15].setText(score.get(7)+" / "+score.get(8));
 		}
 	}

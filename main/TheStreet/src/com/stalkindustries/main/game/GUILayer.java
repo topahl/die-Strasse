@@ -19,9 +19,7 @@ import com.stalkindustries.main.Button;
 import com.stalkindustries.main.TheStreet;
 
 /**
- * 
  * @author Alle haben mitgewirkt
- *
  */
 public class GUILayer extends JFrame implements MouseMotionListener {
 
@@ -69,8 +67,8 @@ public class GUILayer extends JFrame implements MouseMotionListener {
 	
 	/**
 	 * Konstruktor - steuert die Initialisierung aller GUI-Elemente
-	 * @param agentname 
-	 * @param levelname
+	 * @param agentname Name des spielenden Agenten
+	 * @param levelname Name des Levels welches geladen werden soll
 	 */
 	public GUILayer(String levelname, String agentname) {
 		
@@ -252,6 +250,7 @@ public class GUILayer extends JFrame implements MouseMotionListener {
 	
 	/**
 	 * Levelkarte laden und einfügen
+	 * @author Tobias
 	 */
 	private void initMap(String levelname) {
 		// Karte laden

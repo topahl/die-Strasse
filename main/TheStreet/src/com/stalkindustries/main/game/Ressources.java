@@ -42,7 +42,10 @@ public class Ressources {
 	public static final int NUMBERBESCHWICHTIGENACTIONS = 4; // Zahl ist grad nur Dummywert
 	public static int AUSGEWAEHLTESLAND = 1; //TODO dynamisch ausgewähltes Land reinschreiben
 	
-	 
+	 /**
+	  * @param levelname
+	  * @author Tobias
+	  */
 	public static void loadLevelInfomration(String levelname){
 		location_ids=readFromCsv(Ressources.HOMEDIR+"res\\level\\"+levelname+"\\"+levelname+"_map.csv");
 		names = readFromCsv(Ressources.HOMEDIR+"res\\level\\"+levelname+"\\"+levelname+"_namen.csv");
