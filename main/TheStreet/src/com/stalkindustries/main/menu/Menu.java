@@ -71,7 +71,8 @@ public class Menu extends JFrame implements MouseMotionListener {
 	private JTextArea tutorialBeschreibung = new JTextArea();
 	private JLabel tutorialOverlay = new JLabel();
 	private JLabel[] gameDetails = new JLabel[18];
-	private JList persHighscoreList;
+	@SuppressWarnings("rawtypes")
+	private JList persHighscoreList; //Notwendig um eine Kompatibilität für JDK 1.6 & 1.7 zu ermöglichen
 	private int tutorialPage = 0;
 	
 	
@@ -89,7 +90,7 @@ public class Menu extends JFrame implements MouseMotionListener {
 	
 	
 	/**
-	 * Konstruktor des Menus mit Spielername
+	 * Konstruktor des Menus mit Spielernamen, falls das Spiel gerade beendet wird und der Benutzer noch angemeldet ist
 	 * @param playername Angemeldeter Benutzer
 	 * @author Tobias
 	 */
@@ -106,6 +107,7 @@ public class Menu extends JFrame implements MouseMotionListener {
 	/**
 	 * Setzt aktuell angemeldeten Benutzer neu
 	 * @param user benutzername
+	 * @author Tobias
 	 */
 	public void setCurrentUser(String user) {
 		currentUser.setText(user);
@@ -167,7 +169,7 @@ public class Menu extends JFrame implements MouseMotionListener {
         setBackground(Color.black);
         
 		
-		//call Login screen
+		//call Login screen 
         control.openProfil();
         
 
@@ -602,7 +604,7 @@ public class Menu extends JFrame implements MouseMotionListener {
         list.setFont(new Font("Corbel",Font.BOLD,20));
         HighscoreTableRenderer renderer = new HighscoreTableRenderer();
         list.setCellRenderer(renderer);
-        renderer.addIcons(levelicons);
+        renderer.setIcons(levelicons);
         JScrollPane scrollpane = new Scrollbar(this.control); 
         scrollpane.setViewportView(list);
         scrollpane.getViewport().setOpaque(false);
@@ -887,7 +889,7 @@ public class Menu extends JFrame implements MouseMotionListener {
         sb.setBackground(new Color(0,0,0,0));
         scrollpane.setBounds(50, 300, 315, 315);
         pershighscore.add(scrollpane, javax.swing.JLayeredPane.DEFAULT_LAYER);
-    	renderer.addIcons(levelicons);
+    	renderer.setIcons(levelicons);
         
     	JLabel listbackground = new JLabel();
     	listbackground.setIcon(new ImageIcon(Ressources.menuButton.getSubimage(0, 955, 335, 350)));

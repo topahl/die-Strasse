@@ -15,7 +15,12 @@ import javax.swing.JLabel;
 import javax.swing.JList;
 import javax.swing.JPanel;
 import javax.swing.GroupLayout.Alignment;
-
+/**
+ * Spezieller Renderer um die geordnete Anzeige von Icons und diversen Textelementen in einer JList zu ermöglichen.
+ *	Hier speziell für die Personelle Highscoretabelle. 
+ * @author Tobias
+ *
+ */
 public class PersHighscoreTableRenderer extends DefaultListCellRenderer {
 	  private static final long serialVersionUID = -7799441088157759804L;
 	    private JLabel land;
@@ -63,12 +68,21 @@ public class PersHighscoreTableRenderer extends DefaultListCellRenderer {
 	        );
 	    }
 
-	    
-	    public void addIcons(HashMap<String,BufferedImage> icons){
+	    /**
+	     * Setzt die Hashmap für den Zugriff auf die Flaggen Icons.
+	     * @param icons Hashmap mit Flaggen Icons
+	     * @author Tobias
+	     */
+	    public void setIcons(HashMap<String,BufferedImage> icons){
 	    	this.icons = icons;
 	    }
 	    
-	    @Override
+	    
+	    /**
+	     * @author Tobias
+	     */
+	    @SuppressWarnings({ "rawtypes", "unchecked" }) //Notwendig um eine Kompatibilität für JDK 1.6 & 1.7 zu ermöglichen
+		@Override
 	    public Component getListCellRendererComponent(
 	            JList list,
 	            Object value,
@@ -93,6 +107,12 @@ public class PersHighscoreTableRenderer extends DefaultListCellRenderer {
 
 	        return pane;
 	    }
+	    
+	    /**
+	     * Setzt die Farbe der Elemente entsprechend der Selektion.
+	     * @param comp Komponente die eingefärbt werden soll.
+	     * @param selected <i>true</i> wenn die Komponente ausgewählt ist, sonst <i>false</i>
+	     */
 	    private void setColors(JComponent comp, boolean selected){
 	    	if(selected){
 	    		comp.setBackground(backgroundSelectionColor);

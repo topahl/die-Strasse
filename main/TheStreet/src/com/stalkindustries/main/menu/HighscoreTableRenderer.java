@@ -13,14 +13,13 @@ import javax.swing.GroupLayout.Alignment;
 import javax.swing.ImageIcon;
 import javax.swing.JComponent;
 import javax.swing.JLabel;
-import javax.swing.JLayeredPane;
 import javax.swing.JList;
 import javax.swing.JPanel;
 
-/**
- * 
+/** 
  * @author Tobias
- *	A Render for a row in the List
+ *	Spezieller Renderer um die geordnete Anzeige von Icons und diversen Textelementen in einer JList zu ermöglichen.
+ *	Hier speziell für die Highscoretabelle. 
  */
 public class HighscoreTableRenderer extends DefaultListCellRenderer {
 
@@ -43,7 +42,6 @@ public class HighscoreTableRenderer extends DefaultListCellRenderer {
     public HighscoreTableRenderer() {
  	
     	pane= new JPanel();
-    	
     	
         nummer = new JLabel();
         nummer.setOpaque(true);
@@ -82,19 +80,29 @@ public class HighscoreTableRenderer extends DefaultListCellRenderer {
         );
     }
 
-    
-    public void addIcons(HashMap<String,BufferedImage> icons){
+    /**
+     * Setzt die Hashmap für den Zugriff auf die Flaggen Icons.
+     * @param icons Hashmap mit Flaggen Icons
+     * @author Tobias
+     */
+    public void setIcons(HashMap<String,BufferedImage> icons){
     	this.icons = icons;
     }
     
-    @Override
+
+    /**
+     * @author Tobias
+     */
+    @SuppressWarnings({ "unchecked", "rawtypes" })//Notwendig um eine Kompatibilität für JDK 1.6 & 1.7 zu ermöglichen
+	@Override
     public Component getListCellRendererComponent(
             JList list,
             Object value,
             int index,
             boolean selected,
             boolean expanded) {
-    		
+    	
+    	//Daten der verschiedenen Textelemente eintragen
     	ArrayList<String> values = (ArrayList<String>) value;
         nummer.setText((index+1)+".");
         this.setColors(nummer, selected);
@@ -112,11 +120,16 @@ public class HighscoreTableRenderer extends DefaultListCellRenderer {
         this.setColors(date, selected);
         
         
-        
         this.setColors(pane, selected);
-
         return pane;
     }
+    
+    
+    /**
+     * Setzt die Farbe der Elemente entsprechend der Selektion.
+     * @param comp Komponente die eingefärbt werden soll.
+     * @param selected <i>true</i> wenn die Komponente ausgewählt ist, sonst <i>false</i>
+     */
     private void setColors(JComponent comp, boolean selected){
     	if(selected){
     		comp.setBackground(backgroundSelectionColor);
