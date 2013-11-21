@@ -921,20 +921,21 @@ public class Menu extends JFrame implements MouseMotionListener {
         ArrayList<String> levels=readAvaidableLevel();
         for(int i=0;i<levels.size();i++){
         	if(i>3)
+        		//Es existiert kein Scrollbalken und dementsprechend können nur 4 Level angezeigt werden
         		break;
         	try {
     			BufferedImage loader = ImageIO.read(new File(Ressources.HOMEDIR+"res\\level\\"+levels.get(i)+"\\"+levels.get(i)+"_slice_menu.png"));
-    			BufferedImage iconnormal = new BufferedImage(312,134, BufferedImage.TYPE_INT_ARGB);
-    			BufferedImage iconhover = new BufferedImage(312,134, BufferedImage.TYPE_INT_ARGB);
+    			BufferedImage iconnormal = new BufferedImage(312,136, BufferedImage.TYPE_INT_ARGB);
+    			BufferedImage iconhover = new BufferedImage(312,136, BufferedImage.TYPE_INT_ARGB);
     			Graphics2D g2d = iconhover.createGraphics();
     			g2d.drawImage(loader.getSubimage(0, 0, 312, 134), 0, 0, null);
-    			g2d.drawImage(Ressources.menuButton.getSubimage(0, 0, 312, 135), 0, 0, null);
+    			g2d.drawImage(Ressources.menuButton.getSubimage(0, 0, 312, 136), 0, 0, null);
     			g2d.dispose();
     			
     			g2d = iconnormal.createGraphics();
     			g2d.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 0.5f));
     			g2d.drawImage(loader.getSubimage(0, 0, 312, 134), 0, 0, null);
-    			g2d.drawImage(Ressources.menuButton.getSubimage(0, 0, 312, 135), 0, 0, null);
+    			g2d.drawImage(Ressources.menuButton.getSubimage(0, 0, 312, 136), 0, 0, null);
     			g2d.dispose();
     			
     			Button button = new Button(control,iconnormal,iconhover,iconnormal,iconnormal,"level:"+levels.get(i), 45+((i/2)*360),180+((i%2)*200), this);
