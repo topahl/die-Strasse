@@ -55,9 +55,9 @@ public class GUILayer extends JFrame implements MouseMotionListener {
 	private JLabel overlayNacht = new JLabel();
 	private JLabel spionageBeschr = new JLabel();
 	private JLabel beschwichtigenBeschr = new JLabel();
-	private JLabel[] hausinformationen = new JLabel[10]; //Titelfeld, 4Personenbilder, 4 Namen, Leiste Überwachungsstatus
-	private JLabel[] informationsbalken = new JLabel[3]; //Misstrauen positiv, Misstrauen Negativ, Überwachung
-	private JLabel dialogÜberschrift = new JLabel(); //Überschrift, Beschreibungstext
+	private JLabel[] hausinformationen = new JLabel[10]; //Titelfeld, 4Personenbilder, 4 Namen, Leiste Ã¼berwachungsstatus
+	private JLabel[] informationsbalken = new JLabel[3]; //Misstrauen positiv, Misstrauen Negativ, Ã¼berwachung
+	private JLabel dialogueberschrift = new JLabel(); //Ã¼berschrift, Beschreibungstext
 	private JTextArea dialogText = new JTextArea();
 	private JLabel newsticker = new JLabel();
 	private JLabel fortschrittsstatus = new JLabel(); //Statusanzeige der Agentenaktion;
@@ -93,7 +93,7 @@ public class GUILayer extends JFrame implements MouseMotionListener {
 
 
 	/**
-	 * Beenden: das Spiel stoppen und Fenster schließen
+	 * Beenden: das Spiel stoppen und Fenster schlieÃŸen
 	 * @author Miriam
 	 */
 	public void endGame() {
@@ -129,7 +129,7 @@ public class GUILayer extends JFrame implements MouseMotionListener {
 		//Ingame Fenster initialisieren
 		this.initIngameFenster();
 
-		//Buttons auf Häusern erzeugen
+		//Buttons auf Hï¿½usern erzeugen
 		this.initButtonsHaeuser();
 
 		//Buttons im Spielfenster erzeugen
@@ -138,7 +138,7 @@ public class GUILayer extends JFrame implements MouseMotionListener {
 		//Spiel-Statusanzeigen und Aktionsleisten-Grafik erzeugen
 		this.initSpielanzeigen();
 
-		//Menschen erzeugen und in Häuser beamen
+		//Menschen erzeugen und in Hï¿½user beamen
 		this.initHumans(agentname);
 
 		//Levelkarte laden
@@ -187,7 +187,7 @@ public class GUILayer extends JFrame implements MouseMotionListener {
 		this.anzeigeZeit.setVisible(true);
 		this.baseLayer.add(this.anzeigeZeit, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
-		// Misstrauensanzeige in der Straße
+		// Misstrauensanzeige in der Straï¿½e
 		s = "0.0%";
 		this.anzeigeStatusMisstrauen.setText(s);
 		this.anzeigeStatusMisstrauen.setBounds(713 + Ressources.ZEROPOS.width, 638 + Ressources.ZEROPOS.height, 183, 37);
@@ -197,7 +197,7 @@ public class GUILayer extends JFrame implements MouseMotionListener {
 		this.anzeigeStatusMisstrauen.setVisible(true);
 		this.baseLayer.add(this.anzeigeStatusMisstrauen, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
-		// Überwachungsanzeige in der Straße
+		// ï¿½berwachungsanzeige in der Straï¿½e
 		this.anzeigeStatusUeberwachung.setText(s);
 		this.anzeigeStatusUeberwachung.setBounds(713 + Ressources.ZEROPOS.width, 677 + Ressources.ZEROPOS.height, 183, 37);
 		this.anzeigeStatusUeberwachung.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
@@ -206,7 +206,7 @@ public class GUILayer extends JFrame implements MouseMotionListener {
 		this.anzeigeStatusUeberwachung.setVisible(true);
 		this.baseLayer.add(this.anzeigeStatusUeberwachung, javax.swing.JLayeredPane.DEFAULT_LAYER);
 		
-		//Überwachung Balken
+		//ï¿½berwachung Balken
 
 		informationsbalken[2]=new JLabel();
 		informationsbalken[2].setIcon(new ImageIcon(Ressources.ingamebutton.getSubimage(948, 158, 179, 20)));
@@ -232,7 +232,7 @@ public class GUILayer extends JFrame implements MouseMotionListener {
 		this.liveTickerLayer.add(this.newsticker, javax.swing.JLayeredPane.DEFAULT_LAYER);
 		
 		
-		// Ingame Menübars
+		// Ingame Menï¿½bars
 		this.overlayMenubar.setIcon(new ImageIcon(Ressources.menubars));
 		this.overlayMenubar.setBounds(Ressources.ZEROPOS.width, Ressources.ZEROPOS.height, Ressources.MAPWIDTH, Ressources.MAPHEIGHT);
 		this.baseLayer.add(this.overlayMenubar, javax.swing.JLayeredPane.DEFAULT_LAYER);
@@ -249,7 +249,7 @@ public class GUILayer extends JFrame implements MouseMotionListener {
 	
 	
 	/**
-	 * Levelkarte laden und einfügen
+	 * Levelkarte laden und einfï¿½gen
 	 * @author Tobias
 	 */
 	private void initMap(String levelname) {
@@ -267,10 +267,10 @@ public class GUILayer extends JFrame implements MouseMotionListener {
 	 * @author Tiki
 	 */
 	private void initMouseListener() {
-		// MouseMotionListener für die kleinen Icons die die Maus verfolgen
+		// MouseMotionListener fï¿½r die kleinen Icons die die Maus verfolgen
 		this.addMouseMotionListener(this);
 
-		// MousefollowerIcon wenn man eine Aktion tätigt
+		// MousefollowerIcon wenn man eine Aktion tï¿½tigt
 		this.overlayMousefollower.setBounds(15, 225, 39, 39);
 		this.overlayMousefollower.setVisible(false);
 		this.overlayMousefollower.setIcon(new ImageIcon(Ressources.ingamebutton.getSubimage(0, 0, 39, 39)));
@@ -285,7 +285,7 @@ public class GUILayer extends JFrame implements MouseMotionListener {
 	 */
 	private void initIngameFenster() {
 
-		//Dummys für Erzeugung
+		//Dummys fï¿½r Erzeugung
 		JLabel label; 
 		Button button;
 		
@@ -332,7 +332,7 @@ public class GUILayer extends JFrame implements MouseMotionListener {
 		this.fensterHaus.setBounds(Ressources.ZEROPOS.width+(Ressources.MAPWIDTH-460)/2, Ressources.ZEROPOS.height+(Ressources.MAPHEIGHT-327)/2,460, 327);
 		this.baseLayer.add(this.fensterHaus, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
-		//Schließen-Button Hausinfo
+		//Schlieï¿½en-Button Hausinfo
 		button = new Button(this.control,
 				Ressources.ingamebutton.getSubimage(948, 90, 27, 27),
 				Ressources.ingamebutton.getSubimage(975, 90, 27, 27),
@@ -351,7 +351,7 @@ public class GUILayer extends JFrame implements MouseMotionListener {
 		hausinformationen[0].setBounds(12, 12, 200, 30);
 		this.fensterHaus.add(hausinformationen[0], javax.swing.JLayeredPane.DEFAULT_LAYER);
 		
-		//Überwachungsbalken
+		//ï¿½berwachungsbalken
 		hausinformationen[9]=new JLabel();
 		hausinformationen[9].setIcon(new ImageIcon(Ressources.ingamebutton.getSubimage(948, 158, 179, 20)));
 		hausinformationen[9].setBounds(237, 133, 166, 19);
@@ -383,7 +383,7 @@ public class GUILayer extends JFrame implements MouseMotionListener {
 		this.fensterHaus.add(label, javax.swing.JLayeredPane.DEFAULT_LAYER);
 		
 		label = new JLabel();
-		label.setText("Überwachung");
+		label.setText("ï¿½berwachung");
 		label.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
 		label.setFont(new Font("Corbel", Font.BOLD, 20));
 		label.setForeground(new java.awt.Color(0xf9, 0xf9, 0xf9));
@@ -441,7 +441,7 @@ public class GUILayer extends JFrame implements MouseMotionListener {
 		this.fensterBeschwichtigen.setBounds(Ressources.ZEROPOS.width + 10, Ressources.ZEROPOS.height + 390, 248, 232);
 		this.baseLayer.add(this.fensterBeschwichtigen, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
-		// Schließen-Button Beschwichtigen
+		// Schlieï¿½en-Button Beschwichtigen
 		button = new Button(this.control,
 				Ressources.ingamebutton.getSubimage(948, 90, 27, 27),
 				Ressources.ingamebutton.getSubimage(975, 90, 27, 27),
@@ -493,7 +493,7 @@ public class GUILayer extends JFrame implements MouseMotionListener {
 		this.fensterSpionage.setBounds(Ressources.ZEROPOS.width + 90, Ressources.ZEROPOS.height + 390, 248, 235);
 		this.baseLayer.add(this.fensterSpionage, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
-		//Schließen-Button Spionage
+		//Schlieï¿½en-Button Spionage
 		button = new Button(this.control,
 				Ressources.ingamebutton.getSubimage(948, 90, 27, 27),
 				Ressources.ingamebutton.getSubimage(975, 90, 27, 27),
@@ -544,17 +544,17 @@ public class GUILayer extends JFrame implements MouseMotionListener {
 									 248, 235);
 		this.baseLayer.add(this.fensterDialog, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
-		// Überschrift des Dialogfensters
-		dialogÜberschrift.setText("Überschrift");
-		dialogÜberschrift.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-		dialogÜberschrift.setFont(new Font("Corbel", Font.BOLD, 25));
-		dialogÜberschrift.setForeground(new java.awt.Color(0x1f, 0x1f, 0x1f));
-		dialogÜberschrift.setBounds(12, 12, 200, 30); 
-		this.fensterDialog.add(dialogÜberschrift, javax.swing.JLayeredPane.DEFAULT_LAYER);
+		// ï¿½berschrift des Dialogfensters
+		dialogueberschrift.setText("ï¿½berschrift");
+		dialogueberschrift.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+		dialogueberschrift.setFont(new Font("Corbel", Font.BOLD, 25));
+		dialogueberschrift.setForeground(new java.awt.Color(0x1f, 0x1f, 0x1f));
+		dialogueberschrift.setBounds(12, 12, 200, 30); 
+		this.fensterDialog.add(dialogueberschrift, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
 		
         dialogText.setLineWrap(true);
-        dialogText.setText("Text des Dialogfeldes als Test der Länge und so.");
+        dialogText.setText("Text des Dialogfeldes als Test der Lï¿½nge und so.");
         dialogText.setWrapStyleWord(true);
         dialogText.setFocusCycleRoot(true);
         dialogText.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
@@ -619,12 +619,12 @@ public class GUILayer extends JFrame implements MouseMotionListener {
 			this.buttons.put(buttonNamesPauseExit[i], button);
 		}
 
-		//Statusanzeige für den Fortschritt einer Aktion
+		//Statusanzeige fï¿½r den Fortschritt einer Aktion
 //		this.fortschrittsstatus.setBounds(Ressources.ZEROPOS.width+400, Ressources.ZEROPOS.height +642, 45, 45);
 //		this.fortschrittsstatus.setIcon(new ImageIcon(fortschrittskreis[2]));
 		this.baseLayer.add(fortschrittsstatus, javax.swing.JLayeredPane.DEFAULT_LAYER);
 		this.fortschrittsstatus.setVisible(false);
-		// Große Buttons
+		// Groï¿½e Buttons
 		buttonSize = 66;
 
 		// Buttons Aktionsleiste
@@ -652,7 +652,7 @@ public class GUILayer extends JFrame implements MouseMotionListener {
 
 
 	/**
-	 * Erzeugung der unsichtbaren Buttons über den Häusern
+	 * Erzeugung der unsichtbaren Buttons ï¿½ber den Hï¿½usern
 	 * Nummeriert von 1-9
 	 * @author Sven
 	 */
@@ -698,10 +698,10 @@ public class GUILayer extends JFrame implements MouseMotionListener {
 
 
 	/**
-	 * Erzeugt Aktionsfenster für Spionage und Beschwichtigen
+	 * Erzeugt Aktionsfenster fï¿½r Spionage und Beschwichtigen
 	 * @param fenster Fenster-Objekt
 	 * @param buttonSliceX Start-X-Position auf der Button Slicemap
-	 * @param buttonNames String-Array mit zugehörigen Aktionscodes der Buttons
+	 * @param buttonNames String-Array mit zugehï¿½rigen Aktionscodes der Buttons
 	 * @author Stephan
 	 */
 	private void initButtonsAktionsfenster(JLayeredPane fenster, int buttonSliceX, String[] buttonNames) {
@@ -733,13 +733,13 @@ public class GUILayer extends JFrame implements MouseMotionListener {
 
 
 	/**
-	 * Generieren der Menschen+Agent und Teleport in die Häuser
+	 * Generieren der Menschen+Agent und Teleport in die Hï¿½user
 	 * @author Miri
 	 * @param agentname 
 	 */
 	private void initHumans(String agentname) {
 		// jeweils dem Agenten und dem Schwerverbrecher eine Hausnummer generieren
-		// und dafür sorgen, dass sie ungleich sind
+		// und dafï¿½r sorgen, dass sie ungleich sind
 		int house_of_terrorist = (int) (Math.random() * Ressources.NUMBERHOUSES);
 		int agent_house_nr = (int) (Math.random() * Ressources.NUMBERHOUSES);
 		if (agent_house_nr == house_of_terrorist) {
@@ -772,7 +772,7 @@ public class GUILayer extends JFrame implements MouseMotionListener {
 		ArrayList<ArrayList<String>> location_raster = Ressources
 				.getLocation_ids();
 		for (int haus = 0; haus < Ressources.NUMBERHOUSES; haus++) {
-			// für jedes Haus die Location in der Map herausfinden
+			// fï¿½r jedes Haus die Location in der Map herausfinden
 			for (int i = 0; i < location_raster.size(); i++) { // y-Achse
 				for (int j = 0; j < location_raster.get(i).size(); j++) { // x-Achse
 					// das erste 45er-Pixel, das man von dem Haus findet, wird
@@ -792,11 +792,11 @@ public class GUILayer extends JFrame implements MouseMotionListener {
 		}
 
 		for (int i = 0; i < Ressources.NUMBERHOUSES; i++) {
-			// für jedes Haus die Familie erstellen
+			// fï¿½r jedes Haus die Familie erstellen
 			familien_cnt = 0;
-			// für ein Haus die Spawnpunkte festlegen
+			// fï¿½r ein Haus die Spawnpunkte festlegen
 			// die Spawnpunkte der einzelnen Personen sind auch deren
-			// Punkte, zu denen sie immer wieder zurückkehren
+			// Punkte, zu denen sie immer wieder zurï¿½ckkehren
 			spawnPersonX[0] = spawnHausX[i];
 			spawnPersonY[0] = spawnHausY[i];
 			spawnPersonX[1] = spawnHausX[i] + Ressources.RASTERHEIGHT;
@@ -806,7 +806,7 @@ public class GUILayer extends JFrame implements MouseMotionListener {
 			spawnPersonX[3] = spawnHausX[i];
 			spawnPersonY[3] = spawnHausY[i] + Ressources.RASTERHEIGHT;
 
-			// Agent wird als letztes hinzugefügt
+			// Agent wird als letztes hinzugefï¿½gt
 			if (i != agent_house_nr) {
 				people_per_house = (int) (Math.random() * 4) + 1;
 				// wie viele Menschen in einem Haus wohnen sollen
@@ -819,7 +819,7 @@ public class GUILayer extends JFrame implements MouseMotionListener {
 					mensch = new Terrorist(i,this.includeHaus(Ressources.getEvilEvents().get(id),i));	//Schwerverbrecher initialisieren
 					System.out.println(mensch_cnt+". "+this.includeHaus(Ressources.getEvilEvents().get(id),i).get(0));	//TODO: System.out.... entfernen
 					
-					this.humans.add(mensch);	//den Menschen den Schwerverbrecher hinzufügen
+					this.humans.add(mensch);	//den Menschen den Schwerverbrecher hinzufï¿½gen
 					
 					//Schwerverbrecher auf Map zeichnen
 					this.baseLayer.add(mensch,
@@ -835,7 +835,7 @@ public class GUILayer extends JFrame implements MouseMotionListener {
 					mensch_cnt++;
 					familien_cnt++;
 
-					// übrige Erwachsene setzen
+					// ï¿½brige Erwachsene setzen
 					for (int j = 0; j < number_of_adults - 1; j++) {
 						mensch = new Erwachsene(i,this.includeHaus(Ressources.getNormalEvents().get(mensch_cnt),i));	//Erwachsenen initialisieren
 						this.humans.add(mensch);
@@ -900,12 +900,12 @@ public class GUILayer extends JFrame implements MouseMotionListener {
 			} this.initHaus(i, false, spawnHausX[i], spawnHausY[i]);	//nachdem alle Familienmitglieder erstellt wurden, wird dan Haus initialisiert
 		}
 
-		// Simulation benötigt die Information von allen Bewohnern (ohne Agent)
+		// Simulation benï¿½tigt die Information von allen Bewohnern (ohne Agent)
 		for (int i = 0; i < this.humans.size(); i++) {
 			this.simulation.setPeople((Person) this.humans.get(i));
 		}
 
-		// Agent hinzufügen
+		// Agent hinzufï¿½gen
 		spawnPersonX[0] = spawnHausX[agent_house_nr];
 		spawnPersonY[0] = spawnHausY[agent_house_nr];
 		mensch = new Agent(agent_house_nr,agentname);
@@ -989,7 +989,7 @@ public class GUILayer extends JFrame implements MouseMotionListener {
 	
 	
 	/**
-	 * Überwachungsstatus in der Spielfenster-Aktionsleiste updaten 
+	 * ï¿½berwachungsstatus in der Spielfenster-Aktionsleiste updaten 
 	 * @author Miri
 	 */
 	public void updateUeberwachung() {
@@ -1001,7 +1001,7 @@ public class GUILayer extends JFrame implements MouseMotionListener {
 	
 	
 	/**
-	 * Pausiert das Spiel wenn es läuft, und setzt es fort, wenn es pausiert ist
+	 * Pausiert das Spiel wenn es lï¿½uft, und setzt es fort, wenn es pausiert ist
 	 * @author Stephan
 	 */
 	public void updateTimerStatus() {
@@ -1015,7 +1015,7 @@ public class GUILayer extends JFrame implements MouseMotionListener {
 	/**
 	 * Hausnummer in ein Event includieren
 	 * input: String, in dem das %-Zeichen durch die Hausnummer ersetzt werden muss
-	 * i: Hausid --> man muss für die Hausnummer noch 1 draufaddieren
+	 * i: Hausid --> man muss fï¿½r die Hausnummer noch 1 draufaddieren
 	 * @author Miriam
 	 */
 	public ArrayList<String> includeHaus(ArrayList<String> input, int i){
@@ -1027,8 +1027,8 @@ public class GUILayer extends JFrame implements MouseMotionListener {
 	}
 	
 	/**
-	 * randomisierten Namen/Hausnummer in ein Event includieren --> nur für Livetickergags
-	 * input: String, bei dem $1 und $2 irgendein Name eingesetzt, bei $M ein Männername, bei $W ein Frauenname 
+	 * randomisierten Namen/Hausnummer in ein Event includieren --> nur fï¿½r Livetickergags
+	 * input: String, bei dem $1 und $2 irgendein Name eingesetzt, bei $M ein Mï¿½nnername, bei $W ein Frauenname 
 	 * und bei % eine randimisierte Hausnummer eingesetzt wird
 	 * @author Miriam
 	 */
@@ -1056,7 +1056,7 @@ public class GUILayer extends JFrame implements MouseMotionListener {
 		String hausnr = String.valueOf((int)(Math.random()*Ressources.NUMBERHOUSES)+1);
 		String egal1 = this.humans.get((int)(Math.random()*this.humans.size()-1)).getName();
 		String egal2 = this.humans.get((int)(Math.random()*this.humans.size()-1)).getName();
-		while(egal1.equals(egal2))	//dafür sorgen, dass bei Strings nicht identisch sind
+		while(egal1.equals(egal2))	//dafï¿½r sorgen, dass bei Strings nicht identisch sind
 			egal2 = this.humans.get((int)(Math.random()*this.humans.size()-1)).getName();
 			
 		String output="";	//nun die Zeichen durch die generierten Strings ersetzen 
@@ -1084,8 +1084,8 @@ public class GUILayer extends JFrame implements MouseMotionListener {
 		}
 	
 	/**
-	 * liefert einen zufälligen Livertickergag zurück, bei dem vor der Rückgabe noch Namen und Häuser
-	 * zufällig eingefügt werden
+	 * liefert einen zufï¿½lligen Livertickergag zurï¿½ck, bei dem vor der Rï¿½ckgabe noch Namen und Hï¿½user
+	 * zufï¿½llig eingefï¿½gt werden
 	 * @author Miriam
 	 */
 	public String getLiveTickerGags(){
@@ -1111,22 +1111,22 @@ public class GUILayer extends JFrame implements MouseMotionListener {
 	 * @author Miriam
 	 */
 	private void generateLiveTicker(){
-		boolean b = false;	//Hilfvariable dafür, ob das Event entdeckt wurde, oder ob der Zufall es verhindert hat
-		int zufall = (int)(Math.random()*5);	//Wahscheinlichkeit, dass ein Event überhaupt entdeckt wird
-		//alle Personen auf Events überprüfen
+		boolean b = false;	//Hilfvariable dafï¿½r, ob das Event entdeckt wurde, oder ob der Zufall es verhindert hat
+		int zufall = (int)(Math.random()*5);	//Wahscheinlichkeit, dass ein Event ï¿½berhaupt entdeckt wird
+		//alle Personen auf Events ï¿½berprï¿½fen
 		for(int i=0;i<this.humans.size()-1;i++){	
-			if(this.humans.get(i) instanceof Person){ //Agenten ausschließen
-				//wenn das Event noch nicht aufgetaucht ist, hat das Event eine Länge von 3, danach eine Länge von 4
+			if(this.humans.get(i) instanceof Person){ //Agenten ausschlieï¿½en
+				//wenn das Event noch nicht aufgetaucht ist, hat das Event eine Lï¿½nge von 3, danach eine Lï¿½nge von 4
 				// und jedes Event soll ja nur einmal auftauchen
 				if(((Person)this.humans.get(i)).getEvent().size() == 3){
-					//wenn der Überwachungswert des Hauses hoch genug ist, um das Event zu entdecken
+					//wenn der ï¿½berwachungswert des Hauses hoch genug ist, um das Event zu entdecken
 					if(this.simulation.getHouses().get(this.humans.get(i).getHausId()).getUeberwachungsstatus() >= Integer.valueOf(((Person)this.humans.get(i)).getEvent().get(2))){
 						if(zufall == 1){
 							b = true;	//Event wird aufgedeckt
 							//Event in Newsticker zeichnen und das Event farblisch hervorheben (mit rot)
 							this.newsticker.setForeground(new java.awt.Color(249, 50, 50));
 							this.newsticker.setText(((Person)this.humans.get(i)).getEvent().get(0));
-							((Person)this.humans.get(i)).addStringToEvent("used"); //nun hat das Event die Länge 4
+							((Person)this.humans.get(i)).addStringToEvent("used"); //nun hat das Event die Lï¿½nge 4
 							break;
 						}
 					}
@@ -1151,7 +1151,7 @@ public class GUILayer extends JFrame implements MouseMotionListener {
 		
 		
 		if(this.stepcounter%5==0){
-			//zeichne neuen Überwachungs und Misstrauenswertwert
+			//zeichne neuen ï¿½berwachungs und Misstrauenswertwert
 			this.updateUeberwachung();
 			this.updateBalken();
 			getSimulation().updateUeberwachungsstatus();
@@ -1160,7 +1160,7 @@ public class GUILayer extends JFrame implements MouseMotionListener {
 			if(this.simulation.calcGameOver()){
 				this.stopGame();
 				if (getSimulation().calcMisstrauenInStreet()>=90.0){
-					this.showDialogMessage("Verloren", "Die Bevölkerung wurde zu misstrauisch. Ihre Identität wurde enttarnt.", false, false);
+					this.showDialogMessage("Verloren", "Die Bevï¿½lkerung wurde zu misstrauisch. Ihre Identitï¿½t wurde enttarnt.", false, false);
 				}
 				this.showDialogMessage("Verloren", "Der Schwerverbrecher ist geflohen.", false, false);
 			}
@@ -1199,13 +1199,13 @@ public class GUILayer extends JFrame implements MouseMotionListener {
 			}
 		}
 		
-		//Unwohlsein durch installierte Überwachungsmodule,
-		//d.h. wenn ein Haus überwacht wird, dann fühlt es sich kontinuierlich unwohl
+		//Unwohlsein durch installierte ï¿½berwachungsmodule,
+		//d.h. wenn ein Haus ï¿½berwacht wird, dann fï¿½hlt es sich kontinuierlich unwohl
 		if(this.stepcounter%1000 == 0){
 			this.simulation.calcMisstrauenDuringUeberwachung();
 		}
 		
-		//Misstrauen bei Überwachungsaktion
+		//Misstrauen bei ï¿½berwachungsaktion
 		if(this.stepcounter%(Ressources.GAMESPEED/2) == 0){
 			getSimulation().agentBetrittFremdesHaus();
 		}
@@ -1286,7 +1286,7 @@ public class GUILayer extends JFrame implements MouseMotionListener {
 			this.simulation.tagesablauf();
 		}
 
-		// Update der Personen - Step ausführen
+		// Update der Personen - Step ausfï¿½hren
 		for (int i = 0; i < this.humans.size(); i++) {
 			this.humans.get(i).step();
 		}
@@ -1303,9 +1303,9 @@ public class GUILayer extends JFrame implements MouseMotionListener {
 			getSimulation().doSomethingAfterAgentAction();
 		}
 		
-		//durchgeführte Beschwichtigungen um 0Uhr zurücksetzen
+		//durchgefï¿½hrte Beschwichtigungen um 0Uhr zurï¿½cksetzen
 		//bewirkt, dass man z.B. nur immer einmal am Tag einen Kuchen vorbeibringen kann
-		//alles andere wäre doch sehr auffällig
+		//alles andere wï¿½re doch sehr auffï¿½llig
 		if(this.simulation.getSpielStunde() == 0 && this.simulation.getSpielMinute() == 0){
 			for(int i=0;i<this.simulation.getPeople().size();i++){
 				for(int j=0;j<Ressources.NUMBERBESCHWICHTIGENACTIONS;j++){
@@ -1419,7 +1419,7 @@ public class GUILayer extends JFrame implements MouseMotionListener {
 	
 	
 	/**
-	 * Gibt die HashMap der Buttons zurück
+	 * Gibt die HashMap der Buttons zurï¿½ck
 	 * @return Hashmap der Ingame-Buttons
 	 * @author Stephan
 	 */
@@ -1430,7 +1430,7 @@ public class GUILayer extends JFrame implements MouseMotionListener {
 	
 	
 	/**
-	 * Gibt das passende Fenster zurück
+	 * Gibt das passende Fenster zurï¿½ck
 	 * @param window Name des Fensters
 	 * @return Fenster-Objekt
 	 * @author Tobi
@@ -1450,8 +1450,8 @@ public class GUILayer extends JFrame implements MouseMotionListener {
 	}
 
 	/**
-	 * Lifert das Jlabel für den Beschreibungstext im Aktionsfenster
-	 * @param window String für das Fenster
+	 * Lifert das Jlabel fï¿½r den Beschreibungstext im Aktionsfenster
+	 * @param window String fï¿½r das Fenster
 	 * @return jLabel des Beschreibungstext
 	 */
 	public JLabel getBeschreibung(String window){
@@ -1463,7 +1463,7 @@ public class GUILayer extends JFrame implements MouseMotionListener {
 	}
 
 	/**
-	 * Gibt Mousefollower zurück
+	 * Gibt Mousefollower zurï¿½ck
 	 * @return Mousefollower JLabel (Grafik)
 	 */
 	public JLabel getMousefollower() {
@@ -1471,7 +1471,7 @@ public class GUILayer extends JFrame implements MouseMotionListener {
 	}
 	
 	/**
-	 * Gibt Simulationsobjekt zurück
+	 * Gibt Simulationsobjekt zurï¿½ck
 	 * @return Simulation
 	 */
 	public Simulation getSimulation(){
@@ -1480,7 +1480,7 @@ public class GUILayer extends JFrame implements MouseMotionListener {
 	
 	
 	/**
-	 * ActionListener für bewegte Maus
+	 * ActionListener fï¿½r bewegte Maus
 	 * @author Tiki
 	 */
 	@Override
@@ -1492,16 +1492,16 @@ public class GUILayer extends JFrame implements MouseMotionListener {
 	
 	
 	/**
-	 * ActionListener für Drag & Drop der Maus
+	 * ActionListener fï¿½r Drag & Drop der Maus
 	 * @author Tiki
 	 */
 	@Override
 	public void mouseDragged(MouseEvent e) {
-		// do nothing; notwendig für implements MouseMotion (Interface)
+		// do nothing; notwendig fï¿½r implements MouseMotion (Interface)
 	}
 	
 	/**
-	 * ArrayList der Menschen zurückggeben
+	 * ArrayList der Menschen zurï¿½ckggeben
 	 * @return ArrayList Mensch
 	 */
 	public ArrayList<Mensch> getHumans(){
@@ -1513,7 +1513,7 @@ public class GUILayer extends JFrame implements MouseMotionListener {
 	}
 	
 	/**
-	 * Erneuert die Balekn, die das Misstrauen und die Überwachung anzeigen
+	 * Erneuert die Balekn, die das Misstrauen und die ï¿½berwachung anzeigen
 	 * @author Tobias
 	 */
 	public void updateBalken(){
@@ -1530,17 +1530,17 @@ public class GUILayer extends JFrame implements MouseMotionListener {
 	}
 	
 	/**
-	 * Zeigt ein Dialogfenster mit überschrift und Beschribung an.
-	 * <b>Die Überschrift muss identifizierend sein, um die clickEvents zuordnen zu können</b>
+	 * Zeigt ein Dialogfenster mit ï¿½berschrift und Beschribung an.
+	 * <b>Die ï¿½berschrift muss identifizierend sein, um die clickEvents zuordnen zu kï¿½nnen</b>
 	 * @author Tobias
-	 * @param ueberschrift String für die Überschrift
-	 * @param beschreibung String für den Beschreibungstext
+	 * @param ueberschrift String fï¿½r die ï¿½berschrift
+	 * @param beschreibung String fï¿½r den Beschreibungstext
 	 * @param cancelButton true falls cancel Button angezeigt werden soll
 	 * @param acceptButton true falls accept button angezeigt werden soll
 	 */
 	public void showDialogMessage(String ueberschrift, String beschreibung, boolean cancelButton, boolean acceptButton){
 		dialogText.setText(beschreibung);
-		dialogÜberschrift.setText(ueberschrift);
+		dialogueberschrift.setText(ueberschrift);
 		fensterDialog.setEnabled(true);
 		fensterDialog.setVisible(true);
 		buttons.get("dialogAccept").setLocation(cancelButton?40:90, 132);
@@ -1552,7 +1552,7 @@ public class GUILayer extends JFrame implements MouseMotionListener {
 	}
 	
 	public String getDialogUeberschrift(){
-		return dialogÜberschrift.getText();
+		return dialogueberschrift.getText();
 	}
 	
 	/**
@@ -1567,7 +1567,7 @@ public class GUILayer extends JFrame implements MouseMotionListener {
 	}
 	
 	/**
-	 * gibt Referenz auf die Highscoreinstanz zurück, nicht auf den Wert selbst!!!
+	 * gibt Referenz auf die Highscoreinstanz zurÃ¼ck, nicht auf den Wert selbst!!!
 	 * @author Miriam 
 	 */
 	public Highscore getHighscore(){
