@@ -371,7 +371,7 @@ public class Menu extends JFrame implements MouseMotionListener {
         
         beschreibung = new JTextArea();
         beschreibung.setLineWrap(true);
-        beschreibung.setText("The Street ist entstanden als Projekt im Modul Software Engineering bei Eckard Kruse an der DHBW Mannheim.\n(TINF12AI-BC, WS 2013/2014)");
+        beschreibung.setText("The Street ist entstanden als Projekt im Modul Software Engineering bei Eckhard Kruse an der DHBW Mannheim.\n(TINF12AI-BC, WS 2013/2014)");
         beschreibung.setWrapStyleWord(true);
         beschreibung.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         beschreibung.setFocusable(false);
