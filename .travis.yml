@@ -1,0 +1,7 @@
+language: java
+script: "mvn -f main/TheStreet/pom.xml test"
+jdk:
+  - oraclejdk8
+  - oraclejdk7
+  - openjdk7
+  - openjdk6
